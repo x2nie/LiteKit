@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="fpGUI">
+    <module name="fpg_hyperlink">
+      <short>A label component that can launch a web browser</short>
+	  <descr><printshort id="fpg_hyperlink"/>. This component acts like a link found in a web page. You can assign a
+target URL and if the user clicks on the component, it will launch a web browser
+using the target URL as destination.</descr>
+      <element name="TfpgHyperlink">
+        <short>A <var>TfpgCustomLabel</var> descendant that implements hyperlink support</short>
+        <descr>This is a class to implement a hyperlink. Of course, such as all 
+the other fpGUI components it is cross platform (Windows, Linux) but its 
+behaviour can be different because of the the way the browser is called. Under Windows the 
+ShellExecute Windows API is used, so you can have any web compliant URL as the
+hyperlink target. For example, the typical http:// hyperlink but also a 
+mailto: link will work. Under Linux you can only use the typical http:// hyperlink.
+</descr>
+      </element>
+      <element name="TfpgHyperlink.URL">
+        <short>String type property that contains the hyperlink target.</short>
+      </element>
+      <element name="TfpgHyperlink.FontDesc">
+        <short>Standard font for this component is Arial-8:antialias=true:underline</short>
+      </element>
+      <element name="TfpgHyperlink.HandleLMouseDown">
+        <short>This overriden procedure intercepts left mouse keydown, call its inherited method and run GoHyperLink method to jump hyperlink. </short>
+      </element>
+      <element name="TfpgHyperlink.GoHyperLink">
+        <short>Jump to hyperlink.</short>
+      </element>
+      <element name="TfpgHyperlink.Autosize">
+        <short>Its default is True, so the hyperlink width is automatically determined.</short>
+      </element>
+      <element name="TfpgHyperlink.Text">
+        <short>Text description for the hyperlink.</short>
+        <descr>It can be different from the URL target and more descriptive.</descr>
+      </element>
+      <element name="TfpgHyperlink.TextColor">
+        <short>Color of Text property.</short>
+      </element>
+      <element name="TfpgHyperlink.HotTrackFont">
+        <short>This property is the type of font when mouse is over the hyperlink</short>
+      </element>
+      <element name="TfpgHyperlink.HotTrackColor">
+        <short>Same as HotTrackFont but for TextColor property when the mouse is over the hyperlink.</short>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

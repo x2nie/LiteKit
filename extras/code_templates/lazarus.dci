@@ -1,0 +1,115 @@
+[fpguiapp | fpGUI template application]
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Classes, fpg_main, fpg_form;
+
+type
+  TMainForm = class(TfpgForm)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+{ TMainForm }
+
+constructor TMainForm.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  WindowTitle := 'My Title';
+  WindowPosition := wpUser;
+  SetPosition(100, 100, 300, 200);
+end;
+
+
+procedure MainProc;
+var
+  frm: TMainForm;
+begin
+  fpgApplication.Initialize;
+  frm := TMainForm.Create(nil);
+  try
+    frm.Show;
+    fpgApplication.Run;
+  finally
+    frm.Free;
+  end;
+end;
+
+begin
+  MainProc;
+end.
+
+[fpguiapp2 | fpGUI with UI Designer template application]
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Classes, fpg_main, fpg_form;
+
+type
+
+  TMainForm = class(TfpgForm)
+  private
+    {@VFD_HEAD_BEGIN: MainForm}
+    {@VFD_HEAD_END: MainForm}
+  public
+    procedure AfterCreate; override;
+  end;
+
+{@VFD_NEWFORM_DECL}
+
+
+
+{@VFD_NEWFORM_IMPL}
+
+procedure TMainForm.AfterCreate;
+begin
+  {%region 'Auto-generated GUI code' -fold}
+  {@VFD_BODY_BEGIN: MainForm}
+  Name := 'MainForm';
+  SetPosition(316, 186, 300, 250);
+  WindowTitle := 'MainForm';
+
+  {@VFD_BODY_END: MainForm}
+  {%endregion}
+end;
+
+
+procedure MainProc;
+var
+  frm: TMainForm;
+begin
+  fpgApplication.Initialize;
+  frm := TMainForm.Create(nil);
+  try
+    frm.Show;
+    fpgApplication.Run;
+  finally
+    frm.Free;
+  end;
+end;
+
+begin
+  MainProc;
+end.
+
+[fpguihdr | fpGUI unit header]
+{
+    fpGUI  -  Free Pascal GUI Toolkit
+
+    Copyright (C) 2006 - 2009 See the file AUTHORS.txt, included in this
+    distribution, for details of the copyright.
+
+    See the file COPYING.modifiedLGPL, included in this distribution,
+    for details about redistributing fpGUI.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+    Description:
+      |.
+}
+
+

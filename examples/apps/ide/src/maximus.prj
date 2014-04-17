@@ -1,0 +1,250 @@
+[projectoptions]
+mainfile=${PROJECTNAME}.lpr
+targetfile=${PROJECTNAME}${EXEEXT}
+messageoutputfile=
+makecommand=${COMPILER}
+makedir=
+unitdirs=6
+ ${FPGUI_DIR}/src/corelib/
+ ${FPGUI_DIR}/src/gui/
+ ${FPGUI_DIR}/src/corelib/x11/
+ ${FPGUI_DIR}/src/corelib/gdi/
+ ${FPGUI_DIR}/src/
+ ${FPGUI_DIR}/lib/${TargetCPU}-${TargetOS}/
+unitpref=-Fu
+incpref=-Fi
+libpref=-Fl
+objpref=-Fo
+targpref=-o
+befcommand=0
+aftcommand=0
+makeoptions=5
+ -l -Mobjfpc -Sh
+ -gl -O-
+ -B
+ -O2 -XX -Xs -CX
+ -FUunits/${TargetCPU}-${TargetOS}/
+codetemplatedirs=1
+ ${TEMPLATEDIR}
+toolmenus=2
+ fpGUI &UI Designer
+ fpGUI &DocView
+toolfiles=2
+ ${FPGUI_DIR}/uidesigner/units/${TargetCPU}-${TargetOS}/uidesigner
+ ${FPGUI_DIR}/docview/src/units/${TargetCPU}-${TargetOS}/docview
+toolparams=2
+ ${CURSOURCEFILE}
+ ${HelpPath} -k ${cursword}
+fontnames=0
+scriptbeforecopy=
+scriptaftercopy=
+newprojectfiles=4
+ ${TEMPLATEDIR}/fpgui_single_unit/project.pas
+ ${TEMPLATEDIR}fpgui/units/i386-linux/placeholder.txt
+ ${TEMPLATEDIR}fpgui/units/i386-win32/placeholder.txt
+ ${TEMPLATEDIR}fpgui/units/x86_64-linux/placeholder.txt
+newprojectfilesdest=4
+ ${%PROJECTNAME%}.pas
+ ${%PROJECTDIR%}units/i386-linux/placeholder.txt
+ ${%PROJECTDIR%}units/i386-win32/placeholder.txt
+ ${%PROJECTDIR%}units/x86_64-linux/placeholder.txt
+newfinames=3
+ Program
+ Unit
+ Textfile
+newfifilters=3
+ "*.pas" "*.pp"
+ "*.pas" "*.pp"
+ 
+newfiexts=3
+ pas
+ pas
+ 
+newfisources=3
+ ${TEMPLATEDIR}default/program.pas
+ ${TEMPLATEDIR}default/unit.pas
+ 
+newfonames=2
+ Mainform
+ Simple Form
+newfonamebases=2
+ 
+ 
+newfosources=2
+ ${TEMPLATEDIR}fpgui/mainform.pas
+ ${TEMPLATEDIR}fpgui/simpleform.pas
+newfoforms=2
+ 
+ 
+copymessages=0
+closemessages=1
+checkmethods=1
+usercolors=30
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+ 0
+usercolorcomment=30
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+settingsfile=maximus.prj
+settingseditor=0
+settingsdebugger=0
+settingsstorage=1
+settingsautoload=1
+settingsautosave=1
+modulenames=0
+moduletypes=0
+modulefiles=0
+befcommandon=0
+makeoptionson=5
+ 63
+ 31
+ 34
+ 32
+ 63
+aftcommandon=0
+unitdirson=6
+ 65537
+ 131102
+ 196616
+ 196614
+ 65566
+ 65566
+macroon=6
+ 1
+ 3
+ 6
+ 4
+ 63
+ 63
+macronames=6
+ TargetCPU
+ TargetOS
+ TargetCPU
+ TargetOS
+ FPGUI_DIR
+ HelpPath
+macrovalues=6
+ x86_64
+ linux
+ i386
+ win32
+ /home/graemeg/programming/fpgui
+ /home/graemeg/programming/FPC_Docs/inf/
+macrogroup=1
+groupcomments=6
+ Linux 64-bit
+ Linux 32-bit
+ Windows 32-bit
+ 
+ 
+ 
+toolsave=1
+ -1
+toolhide=1
+ 0
+toolparse=1
+ 0
+fontalias=0
+fontancestors=0
+fontheights=0
+fontwidths=0
+fontoptions=0
+fontxscales=0
+expandprojectfilemacros=4
+ 1
+ -1
+ -1
+ -1
+loadprojectfile=4
+ 1
+ 0
+ 0
+ 0
+newinheritedforms=2
+ 0
+ 0
+sigsettings=27
+ 1,1,T,F
+ 3,3,T,F
+ 4,4,T,F
+ 6,6,T,F
+ 7,7,T,F
+ 8,8,T,F
+ 9,9,T,F
+ 10,10,T,F
+ 11,11,T,F
+ 12,12,T,F
+ 13,13,T,F
+ 15,15,T,F
+ 16,16,T,F
+ 17,17,F,F
+ 18,18,T,F
+ 19,19,T,F
+ 20,20,T,F
+ 21,21,T,F
+ 22,22,T,F
+ 23,23,T,F
+ 24,24,T,F
+ 25,25,T,F
+ 26,26,T,F
+ 27,27,T,F
+ 28,28,T,F
+ 29,29,T,F
+ 30,30,T,F
+defaultmake=4

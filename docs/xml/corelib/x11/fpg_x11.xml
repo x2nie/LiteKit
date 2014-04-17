@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+<package name="fpGUI">
+
+
+<module name="fpg_x11">
+<short>Implements support for the X11 graphics systems</short>
+<descr><printshort id="fpg_x11"/>. This backend is used by Linux, UNIX, *BSD,
+OpenSolaris and Mac OS X systems at the moment.</descr>
+
+
+<element name="TfpgX11Window">
+<short>Implements XLib specific windowing functionality</short>
+<descr></descr>
+</element>
+
+
+</module>
+
+</package>
+</fpdoc-descriptions>

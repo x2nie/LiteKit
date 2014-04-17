@@ -1,0 +1,31 @@
+
+ Setting up for Integrated Help under your IDE
+ =============================================
+
+
+INF help using DocView (preferred)
+----------------------------------
+
+Please see the website for detailed instructions on how to do this.
+
+  htpp://fpgui.sourceforge.net/docview_ide_integration.shtml
+
+
+
+HTML help using Lazarus IDE
+---------------------------
+
+For the Integrated Help to work, the fpGUIHelpIntegration package has been
+setup to find the help in the /docs/html directory.
+
+Installation:
+
+  1) Open fpGUIHelpIntegration.lpk package with Lazarus.
+
+  2) Click Compile
+
+  3) Click Install
+
+
+
+                 ==============[  END  ]===============

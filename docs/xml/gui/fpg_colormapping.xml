@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+  <package name="fpGUI">
+    <module name="fpg_colormapping">
+      <short>This unit contains some color conversion/mapping functions.</short>
+      <descr/>
+      <element name="RGBToHSV">
+        <short>Map RGB colorspace to HSV colorspace.</short>
+        <descr><p>This function converts a RGB (Red, Green, Blue) colorspace value to 
+HSV (Hue, Saturation, Value) colorspace. The parameters have specific value ranges as
+listed below.</p>
+<dl>
+<dt><i>Hue</i></dt>
+<dd>The Hue range is from 0 - 1535. In that range, the primary colors are mapped to the following values. Red = 0. Green = 512 and Blue = 1024.</dd>
+<dt><i>Saturation</i></dt>
+<dd>The Saturation value range is from 0.0 - 1.0. Grey (no color) = 0. Maximum color = 1.0.</dd>
+<dt><i>Value</i></dt>
+<dd>The Value value range is from 0.0 to 1.0. Black being 0 and maximum brightness being 1.0.</dd>
+</dl>
+        </descr>
+      </element>
+      <element name="HSVToRGB">
+        <short>Map HSV colorspace to RGB colorspace.</short>
+        <seealso>
+          <link id="fpg_colormapping.RGBToHSV">RGBToHSV</link>
+        </seealso>
+      </element>
+    </module>
+  </package>
+</fpdoc-descriptions>

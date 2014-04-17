@@ -30,7 +30,7 @@
     </RunParams>
     <RequiredPackages Count="2">
       <Item1>
-        <PackageName Value="fpgui_toolkit"/>
+        <PackageName Value="Laz_lq_runtime"/>
       </Item1>
       <Item2>
         <PackageName Value="guitestrunner_fpgui"/>

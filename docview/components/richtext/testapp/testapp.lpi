@@ -37,7 +37,7 @@
         <PackageName Value="fpgui_richtext"/>
       </Item1>
       <Item2>
-        <PackageName Value="fpgui_toolkit"/>
+        <PackageName Value="Laz_lq_runtime"/>
       </Item2>
     </RequiredPackages>
     <Units Count="1">

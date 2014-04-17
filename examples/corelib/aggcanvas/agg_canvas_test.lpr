@@ -1,11 +1,11 @@
 {
-  fpGUI  -  Free Pascal GUI Toolkit
+  LiteKit  -  Free Pascal GUI Toolkit
 
   Copyright (C) 2006 - 2013 See the file AUTHORS.txt, included in this
   distribution, for details of the copyright.
 
   See the file COPYING.modifiedLGPL, included in this distribution,
-  for details about redistributing fpGUI.
+  for details about redistributing LiteKit.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,7 +16,7 @@
     class. In this demo the AggPas TAgg2D canvas does all the painting.
 
     *** IMPORTANT ***
-      For this demo to work, the fpGUI Toolkit MUST be compiled with
+      For this demo to work, the LiteKit Toolkit MUST be compiled with
       the AggCanvas compiler define enabled.
 }
 
@@ -357,7 +357,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(357, 214, 500, 400);
-  WindowTitle := 'fpGUI with AGG-powered Canvas test';
+  WindowTitle := 'LiteKit with AGG-powered Canvas test';
   Hint := '';
   WindowPosition := wpOneThirdDown;
   OnKeyPress := @FormKeyPressed;

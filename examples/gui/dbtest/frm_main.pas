@@ -151,7 +151,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(225, 208, 417, 315);
-  WindowTitle := 'fpGUI DB controls test';
+  WindowTitle := 'LiteKit DB controls test';
   WindowPosition := wpScreenCenter;
   Sizeable := False;
 

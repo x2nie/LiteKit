@@ -20,11 +20,11 @@
     This unit adds a new project type to the Lazarus IDE.
 
     New Project Type:
-      fpGUI Application - A Free Pascal program for fpGUI Toolkit.
+      LiteKit Application - A Free Pascal program for LiteKit Toolkit.
       
 }
 
-unit fpGUILazIDEIntf;
+unit LiteKitLazIDEIntf;
 
 {$mode objfpc}{$H+}
 
@@ -46,7 +46,7 @@ type
   
 
 var
-  ProjectDescriptorfpGUIApplication: TlqUIApplicationDescriptor;
+  ProjectDescriptorLiteKitApplication: TlqUIApplicationDescriptor;
 
 procedure Register;
 
@@ -56,8 +56,8 @@ implementation
 
 procedure Register;
 begin
-  ProjectDescriptorfpGUIApplication := TlqUIApplicationDescriptor.Create;
-  RegisterProjectDescriptor(ProjectDescriptorfpGUIApplication);
+  ProjectDescriptorLiteKitApplication := TlqUIApplicationDescriptor.Create;
+  RegisterProjectDescriptor(ProjectDescriptorLiteKitApplication);
 end;
 
 
@@ -66,12 +66,12 @@ end;
 constructor TlqUIApplicationDescriptor.Create;
 begin
   inherited Create;
-  Name := 'fpGUI Application';
+  Name := 'LiteKit Application';
 end;
 
 function TlqUIApplicationDescriptor.GetLocalizedName: string;
 begin
-  Result := 'fpGUI Toolkit Application';
+  Result := 'LiteKit Toolkit Application';
 end;
 
 function TlqUIApplicationDescriptor.GetLocalizedDescription: string;
@@ -79,8 +79,8 @@ var
   le: string;
 begin
   le := System.LineEnding;
-  Result := 'fpGUI Toolkit Application'+le+le
-           +'An application based on the fpGUI Toolkit.'+le
+  Result := 'LiteKit Toolkit Application'+le+le
+           +'An application based on the LiteKit Toolkit.'+le
            +'The program file is automatically maintained by Lazarus.';
 end;
 
@@ -173,7 +173,7 @@ end;
 {
 function TlqUIApplicationDescriptor.CreateStartFiles(AProject: TLazProject): TModalResult;
 begin
-  LazarusIDE.DoNewEditorFile(FileDescriptorfpGUIUnit,'','',
+  LazarusIDE.DoNewEditorFile(FileDescriptorLiteKitUnit,'','',
                          [nfIsPartOfProject,nfOpenInEditor,nfCreateDefaultSrc]);
   Result:=mrOK;
 end;

@@ -30,7 +30,7 @@ interface
   The FreeType font engine is recommended, even under Windows - simply
   because it has more functionality and generates better looking text. If
   enabled under Windows, your application will require the freetype.dll
-  though. The freetype.dll is included in the fpGUI repository for your
+  though. The freetype.dll is included in the LiteKit repository for your
   convenience. }
 
 {.$DEFINE AGG2D_USE_FREETYPE }

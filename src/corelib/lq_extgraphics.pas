@@ -1,19 +1,19 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      This unit adds extra drawing routines to fpGUI. It unit originally
-      came from the Lazarus Component Library (LCL) and was ported to fpGUI.
+      This unit adds extra drawing routines to LiteKit. It unit originally
+      came from the Lazarus Component Library (LCL) and was ported to LiteKit.
 }
 
 unit lq_extgraphics;

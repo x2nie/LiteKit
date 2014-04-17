@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -148,8 +148,8 @@ begin
   writeln('Translation file = ' +Dir + BaseAppName + Ext);
   {$ENDIF}
 
-  // We use one translation file for all fpGUI Toolkit related text and one
-  // translation file for all fpGUI based application text
+  // We use one translation file for all LiteKit Toolkit related text and one
+  // translation file for all LiteKit based application text
 //  if BaseAppName = 'fpgui' then
 //    TranslateUnitResourceStrings('',
 //      Dir + BaseAppName + Ext, Lang, FallbackLang)

@@ -115,7 +115,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(278, 186, 600, 312);
-  WindowTitle := 'fpGUI Wu Anti-Aliased Line test';
+  WindowTitle := 'LiteKit Wu Anti-Aliased Line test';
   WindowPosition := wpScreenCenter;
   Sizeable := False;
 

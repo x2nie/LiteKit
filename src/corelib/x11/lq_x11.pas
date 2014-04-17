@@ -1,18 +1,18 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2011 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      This unit implements X11 / Xlib support for fpGUI.
+      This unit implements X11 / Xlib support for LiteKit.
 }
 
 unit lq_x11;
@@ -591,7 +591,7 @@ begin
     p := p^.Next;
   end;
   {$IFDEF DEBUG}
-  writeln('fpGUI/X11: FindWindowByHandle failed to find <', IntToHex(wh, 9), '>');
+  writeln('LiteKit/X11: FindWindowByHandle failed to find <', IntToHex(wh, 9), '>');
   {$ENDIF}
   Result := nil;
 end;
@@ -611,7 +611,7 @@ begin
     p := p^.Next;
   end;
   {$IFDEF DEBUG}
-  writeln('fpGUI/X11: FindWindowByBackupHandle failed to find <', IntToHex(wh, 9), '>');
+  writeln('LiteKit/X11: FindWindowByBackupHandle failed to find <', IntToHex(wh, 9), '>');
   {$ENDIF}
   Result := nil;
 end;
@@ -1167,7 +1167,7 @@ begin
             lMimeChoice := lMimeList[0]
           else
             {$NOTE We need to replace this message with a resouce string }
-            raise Exception.Create('fpGUI/X11: no mime types available for DND operation');
+            raise Exception.Create('LiteKit/X11: no mime types available for DND operation');
 
           { TODO: We need to populate the Source parameter. }
           if Assigned(Drag) then
@@ -1379,7 +1379,7 @@ begin
     FDisplay := XOpenDisplay('');
 
   if FDisplay = nil then
-    raise Exception.Create('fpGUI-X11: Could not open the display. Is your X11 server running?');
+    raise Exception.Create('LiteKit-X11: Could not open the display. Is your X11 server running?');
 
   Terminated := False;
   DefaultScreen     := XDefaultScreen(Display);
@@ -1549,7 +1549,7 @@ var
   procedure ReportLostWindow(const event: TXEvent);
   begin
     {$IFDEF DEBUG}
-    writeln('fpGUI/X11: ', GetXEventName(event._type), ' can''t find <',
+    writeln('LiteKit/X11: ', GetXEventName(event._type), ' can''t find <',
         IntToHex(event.xany.window, 9), '>');
     {$ENDIF}
   end;
@@ -2099,7 +2099,7 @@ begin
         end;
 
     else
-      WriteLn('fpGUI/X11: Unhandled X11 event received: ', GetXEventName(ev._type));
+      WriteLn('LiteKit/X11: Unhandled X11 event received: ', GetXEventName(ev._type));
   end;
 end;
 
@@ -2212,7 +2212,7 @@ begin
     mask, @attr);
 
   if wh = 0 then
-    raise Exception.Create('fpGUI/X11: Failed to create window ' + ClassName);
+    raise Exception.Create('LiteKit/X11: Failed to create window ' + ClassName);
 
   FWinHandle := wh;
   FBackupWinHandle := wh;
@@ -3686,7 +3686,7 @@ begin
     XSetSelectionOwner(xapplication.Display, xapplication.XdndSelection, FSource.WinHandle, CurrentTime);
     win := XGetSelectionOwner(xapplication.Display, xapplication.XdndSelection);
     if win <> FSource.WinHandle then
-      raise Exception.Create('fpGUI/X11: Application failed to aquire selection owner status');
+      raise Exception.Create('LiteKit/X11: Application failed to aquire selection owner status');
 
     InitializeMimeTypesToAtoms;
     if FMimeData.Count > 3 then

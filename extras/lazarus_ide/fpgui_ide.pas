@@ -7,13 +7,13 @@ unit fpgui_ide;
 interface
 
 uses
-  fpGUILazIDEIntf, LazarusPackageIntf;
+  LiteKitLazIDEIntf, LazarusPackageIntf;
 
 implementation
 
 procedure Register;
 begin
-  RegisterUnit('fpGUILazIDEIntf',@fpGUILazIDEIntf.Register);
+  RegisterUnit('LiteKitLazIDEIntf',@LiteKitLazIDEIntf.Register);
 end;
 
 initialization

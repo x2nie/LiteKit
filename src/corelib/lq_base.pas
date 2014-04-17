@@ -1,18 +1,18 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      The Big Bang starts here!  The starting unit for fpGUI.
+      The Big Bang starts here!  The starting unit for LiteKit.
 }
 
 unit lq_base;
@@ -84,11 +84,11 @@ type
 
   TlqEditBorderStyle = (ebsNone, ebsDefault, ebsSingle);
 
-  // in case we wanted to trap any fpGUI specific exceptions
-  EfpGUIException = class(Exception);
+  // in case we wanted to trap any LiteKit specific exceptions
+  ELiteKitException = class(Exception);
 
   // For providing user feedback. No need to display backtrace information
-  EfpGUIUserFeedbackException = class(EfpGUIException);
+  ELiteKitUserFeedbackException = class(ELiteKitException);
 
 
 
@@ -97,7 +97,7 @@ const
   MOUSE_RIGHT      = 3;
   MOUSE_MIDDLE     = 2;
 
-  // Platform independent messages used by fpGUI (TlqWidget)
+  // Platform independent messages used by LiteKit (TlqWidget)
   FPGM_PAINT       = 1;
   FPGM_ACTIVATE    = 2;
   FPGM_DEACTIVATE  = 3;
@@ -2550,7 +2550,7 @@ var
 begin
   Result := False;
   if not fpgFileExists(GetHelpViewer) then
-    raise EfpGUIUserFeedbackException.Create(rsfailedtofindhelpviewer);
+    raise ELiteKitUserFeedbackException.Create(rsfailedtofindhelpviewer);
   p := TProcess.Create(nil);
   try
     if fpgFileExists(HelpFile) then
@@ -2578,7 +2578,7 @@ var
 begin
   Result := False;
   if not fpgFileExists(GetHelpViewer) then
-    raise EfpGUIUserFeedbackException.Create(rsfailedtofindhelpviewer);
+    raise ELiteKitUserFeedbackException.Create(rsfailedtofindhelpviewer);
   p := TProcess.Create(nil);
   try
     if fpgFileExists(HelpFile) then

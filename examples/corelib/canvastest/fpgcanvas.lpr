@@ -232,7 +232,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(357, 214, 500, 400);
-  WindowTitle := 'fpGUI Canvas Test';
+  WindowTitle := 'LiteKit Canvas Test';
   Hint := '';
   WindowPosition := wpOneThirdDown;
   OnPaint := @FormPaint;

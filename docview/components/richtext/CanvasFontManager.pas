@@ -58,7 +58,7 @@ type
   end;
 
 
-// Get the font attributes of a fpGUI font
+// Get the font attributes of a LiteKit font
 function GeTlquiFontAttributes(const AFont: TlqFont): TFontAttributes;
 function GeTlquiFont(const AFontNameSize: string; const Attrs: TFontAttributes): TlqFont;
 procedure ApplyFontAttributes(var AFontDesc: string; const Attrs: TFontAttributes);
@@ -220,7 +220,7 @@ begin
 
   ApplyFontAttributes(FontDesc, Attributes);
 
-  // if nothing found, use default font of fpGUI
+  // if nothing found, use default font of LiteKit
   if FontDesc = '' then
     FontDesc := fpgApplication.DefaultFont.FontDesc;
 end;

@@ -755,7 +755,7 @@ begin
   Result := true;
 end;
 
-// TODO: Rewrite this to work with fpGUI and AnsiString/TlqString
+// TODO: Rewrite this to work with LiteKit and AnsiString/TlqString
 function CopyPlainTextToBuffer( StartP: PChar;
                                 EndP: PChar;
                                 Buffer: PChar;

@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2012 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -190,7 +190,7 @@ type
 
 
   { This is very basic for now, just to remind us of theming support. Later we
-    will rework this to use a Style Manager like the previous fpGUI.
+    will rework this to use a Style Manager like the previous LiteKit.
     Also support Bitmap based styles for easier theme implementations. }
   TlqStyle = class(TObject)
   public
@@ -1574,7 +1574,7 @@ begin
 
   fpgCreateStandardImages;
 
-  // This will process Application and fpGUI Toolkit translation (*.po) files
+  // This will process Application and LiteKit Toolkit translation (*.po) files
   TranslateResourceStrings(ApplicationName, ExtractFilePath(ParamStr(0)), '');
   SetupLocalizationStrings;
   CreateHintWindow;

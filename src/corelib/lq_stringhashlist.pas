@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -15,7 +15,7 @@
       This file was originally part of the Lazarus Component Library (LCL).
       Thanks to Markus Waldenburg.
 
-      Ported this unit to fpGUI by Graeme Geldenhuys.
+      Ported this unit to LiteKit by Graeme Geldenhuys.
       TStringHashList is supposed to be faster than FPC's TFPObjectHashTable.
       This unit is used in lq_pofile unit.
 }

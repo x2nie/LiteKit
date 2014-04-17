@@ -1,10 +1,10 @@
 {
-    fpGUI IDE - Maximus
+    LiteKit IDE - Maximus
 
     Copyright (C) 2012 - 2013 Graeme Geldenhuys
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -12,8 +12,8 @@
 
     Description:
       Maximus IDE is an example application, to showcase a bit more of
-      what fpGUI can do in a larger project. It also ties in a lot of
-      various fpGUI widgets and framework functionality.
+      what LiteKit can do in a larger project. It also ties in a lot of
+      various LiteKit widgets and framework functionality.
 }
 
 unit frm_main;
@@ -355,8 +355,8 @@ end;
 
 procedure TMainForm.miAboutIDE(Sender: TObject);
 begin
-  TlqMessageDialog.Information('About fpGUI IDE',
-      'fpGUI IDE version ' + FPGUI_VERSION + LineEnding + LineEnding
+  TlqMessageDialog.Information('About LiteKit IDE',
+      'LiteKit IDE version ' + FPGUI_VERSION + LineEnding + LineEnding
       + 'Created by Graeme Geldenhuys' + LineEnding
       + 'Compiled with FPC ' + FPCVersion);
 end;
@@ -1234,7 +1234,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(310, 206, 638, 428);
-  WindowTitle := 'fpGUI IDE - %s';
+  WindowTitle := 'LiteKit IDE - %s';
   Hint := '';
   WindowPosition := wpOneThirdDown;
   MinWidth := 580;
@@ -1624,8 +1624,8 @@ begin
   begin
     Name := 'mnuTools';
     SetPosition(476, 182, 172, 20);
-    AddMenuItem('fpGUI UI Designer...', 'F12', nil);
-    AddMenuItem('fpGUI DocView...', rsKeyCtrl+'F1', nil);
+    AddMenuItem('LiteKit UI Designer...', 'F12', nil);
+    AddMenuItem('LiteKit DocView...', rsKeyCtrl+'F1', nil);
   end;
 
   mnuSettings := TlqPopupMenu.Create(self);
@@ -1643,8 +1643,8 @@ begin
     SetPosition(476, 224, 172, 20);
     AddMenuItem('Contents...', '', nil);
     AddMenuItem('-', '', nil);
-    AddMenuItem('About fpGUI Toolkit...', '', @miAbouTlquiClicked);
-    AddMenuItem('About fpGUI IDE...', '', @miAboutIDE);
+    AddMenuItem('About LiteKit Toolkit...', '', @miAbouTlquiClicked);
+    AddMenuItem('About LiteKit IDE...', '', @miAboutIDE);
   end;
 
   {@VFD_BODY_END: MainForm}

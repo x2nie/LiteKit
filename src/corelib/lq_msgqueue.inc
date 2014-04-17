@@ -1,6 +1,6 @@
 {%mainunit lq_main.pas}
 
-// fpGUI internal message queue implementation
+// LiteKit internal message queue implementation
 
 type
   // a simlpe linked list implementation
@@ -134,7 +134,7 @@ begin
       p^.Params  := aparams;
     end
     else
-      raise Exception.Create('THE fpGUI MESSAGE QUEUE IS FULL.');
+      raise Exception.Create('THE LiteKit MESSAGE QUEUE IS FULL.');
   finally
     fpgApplication.Unlock;
   end;
@@ -158,7 +158,7 @@ begin
       p^.Stop    := False;
     end
     else
-      raise Exception.Create('THE fpGUI MESSAGE QUEUE IS FULL.');
+      raise Exception.Create('THE LiteKit MESSAGE QUEUE IS FULL.');
   finally
     fpgApplication.Unlock;
   end;

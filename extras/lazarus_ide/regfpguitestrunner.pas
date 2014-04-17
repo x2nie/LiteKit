@@ -22,7 +22,7 @@ Type
   end;
   
 var
-  fpGUIFTestRunnerProjectDescriptor : TlqUITestRunnerProjectDescriptor;
+  LiteKitFTestRunnerProjectDescriptor : TlqUITestRunnerProjectDescriptor;
   
 procedure Register;
 
@@ -35,8 +35,8 @@ uses FPCUnitLazIDEIntf;
 procedure Register;
 
 begin
-  fpGUIFTestRunnerProjectDescriptor:=TlqUITestRunnerProjectDescriptor.Create;
-  RegisterProjectDescriptor(fpGUIFTestRunnerProjectDescriptor);
+  LiteKitFTestRunnerProjectDescriptor:=TlqUITestRunnerProjectDescriptor.Create;
+  RegisterProjectDescriptor(LiteKitFTestRunnerProjectDescriptor);
 end;
 
 { TlqUITestRunnerProjectDescriptor }
@@ -44,7 +44,7 @@ end;
 constructor TlqUITestRunnerProjectDescriptor.Create;
 begin
   inherited Create;
-  Name:='FPCUnit fpGUI Application';
+  Name:='FPCUnit LiteKit Application';
 end;
     
 function TlqUITestRunnerProjectDescriptor.GetLocalizedName: string;
@@ -54,7 +54,7 @@ end;
 
 function TlqUITestRunnerProjectDescriptor.GetLocalizedDescription: string;
 begin
-  Result:='FPCUnit test runner application using a fpGUI front-end';
+  Result:='FPCUnit test runner application using a LiteKit front-end';
 end;
 
 function TlqUITestRunnerProjectDescriptor.InitProject(AProject: TLazProject

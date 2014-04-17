@@ -424,7 +424,7 @@ begin
 //  UTF8Insert('ö', edit2.Text, 15);
 
   // left to right and right to left text in one
-  // fpGUI doesn't handle this correctly yet.
+  // LiteKit doesn't handle this correctly yet.
   // See http://www.catch22.net/tuts/editor18.asp  for how it needs to display and work
 //    edit2.Text := 'HelloيُساوِيWorld';
 

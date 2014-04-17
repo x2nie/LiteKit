@@ -70,7 +70,7 @@ end;
 constructor TMainForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  WindowTitle := 'fpGUI Timer test';
+  WindowTitle := 'LiteKit Timer test';
   WindowPosition := wpScreenCenter;
   Width := 400;
   Height := 250;

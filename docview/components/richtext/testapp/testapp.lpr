@@ -79,7 +79,7 @@ begin
   inherited Create(AOwner);
   FImageList := TlqImageList.Create;
 
-  { make copies of standard fpGUI images, and add them to our imagelist }
+  { make copies of standard LiteKit images, and add them to our imagelist }
   img_ref := fpgImages.GetImage('stdimg.folderhome');
   img := img_ref.ImageFromSource;
   FImageList.AddImage(img);

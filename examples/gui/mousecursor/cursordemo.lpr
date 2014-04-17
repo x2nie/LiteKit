@@ -55,7 +55,7 @@ begin
     Alignment := taCenter;
     FontDesc := '#Label2';
     Hint := '';
-    Text := 'Available mouse cursors in fpGUI';
+    Text := 'Available mouse cursors in LiteKit';
   end;
 
   Panel1 := TlqPanel.Create(self);

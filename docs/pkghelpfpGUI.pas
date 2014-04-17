@@ -1,4 +1,4 @@
-unit pkghelpfpGUI;
+unit pkghelpLiteKit;
 
 {$mode objfpc}{$H+}
 
@@ -15,13 +15,13 @@ procedure Register;
 begin
  // for Online help files
 {
-  RegisterFPDocHTMLHelpForPackage('fpGUI Help','fpGUI Help Database',
-              'http://opensoft.homeip.net/fpgui/docs/','fpGUI');
+  RegisterFPDocHTMLHelpForPackage('LiteKit Help','LiteKit Help Database',
+              'http://opensoft.homeip.net/fpgui/docs/','LiteKit');
 }
  // for local help files
- RegisterFPDocHTMLHelpForPackage('fpGUI Help','fpGUI Help Database',
-             'file://$PkgDir(fpGUIHelpIntegration)/html','fpGUIHelpIntegration', '../src');
-//             'file://$PkgDir(fpGUI)/html','fpGUI','../src');
+ RegisterFPDocHTMLHelpForPackage('LiteKit Help','LiteKit Help Database',
+             'file://$PkgDir(LiteKitHelpIntegration)/html','LiteKitHelpIntegration', '../src');
+//             'file://$PkgDir(LiteKit)/html','LiteKit','../src');
 
 end;
 

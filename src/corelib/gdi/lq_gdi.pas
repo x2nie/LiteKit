@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2012 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -347,7 +347,7 @@ var
 {$INCLUDE lq_keys_gdi.inc}
 
 {$IFDEF wince}
-// A few tweaks to get fpGUI working on the Symbol MC1000 WinCE 4.2
+// A few tweaks to get LiteKit working on the Symbol MC1000 WinCE 4.2
 // *** Need to fix the hack in procedure TlqWindowImpl.DoAllocateWindowHandle
 
 const
@@ -951,7 +951,7 @@ begin
               WM_RBUTTONDOWN:
                   begin
                     {$IFDEF DEBUG}
-                    SendDebug('fpGUI/GDI: ' + w.ClassName + ': MouseButtonDown event');
+                    SendDebug('LiteKit/GDI: ' + w.ClassName + ': MouseButtonDown event');
                     {$ENDIF}
                     // This is temporary and we should try and move it to
                     // the UI Designer code instead.
@@ -1128,7 +1128,7 @@ begin
           {$IFDEF DEBUG}
           SendDebug(w.ClassName + ': WM_TIMECHANGE');
           {$ENDIF}
-          writeln('fpGUI/GDI: ' + w.ClassName + ': WM_TIMECHANGE');
+          writeln('LiteKit/GDI: ' + w.ClassName + ': WM_TIMECHANGE');
           fpgResetAllTimers;
         end;
 
@@ -1451,7 +1451,7 @@ begin
         lMimeChoice := lMimeList[0]
       else
         {$NOTE We need to replace this message with a resouce string }
-        raise Exception.Create('fpGUI/GDI: no mime types available for DND operation');
+        raise Exception.Create('LiteKit/GDI: no mime types available for DND operation');
 
       lDropAction := TranslateToFPGDropAction(Effect);
       if Assigned(wg.OnDragEnter) then

@@ -152,7 +152,7 @@ begin
   ShowMessage(cAppName
       + #10
       + #10 + 'Written by Graeme Geldenhuys - 2007'
-      + #10 + 'Using the ' + fpGUIName + ' v' + fpGUI_Version
+      + #10 + 'Using the ' + LiteKitName + ' v' + LiteKit_Version
       ,'About');
 end;
 
@@ -210,7 +210,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(346, 279, 650, 402);
-  WindowTitle := 'fpGUI Documentation Editor';
+  WindowTitle := 'LiteKit Documentation Editor';
   WindowPosition := wpScreenCenter;
 
   menubar := TlqMenuBar.Create(self);

@@ -49,7 +49,7 @@ constructor TMainForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   SetPosition(100, 100, 256, 256);
-  WindowTitle := 'fpGUI Bitmap Test';
+  WindowTitle := 'LiteKit Bitmap Test';
   WindowPosition := wpOneThirdDown;
   Sizeable := False;
   OnPaint := @FormPaint;

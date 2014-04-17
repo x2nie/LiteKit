@@ -94,7 +94,7 @@ begin
   frm.Height      := 300;
   frm.MinWidth    := 250;
   frm.MinHeight   := 150;
-  frm.WindowTitle := 'fpGUI Align Example';
+  frm.WindowTitle := 'LiteKit Align Example';
   frm.Show;
 
   fpgApplication.Run;

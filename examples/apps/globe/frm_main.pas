@@ -205,7 +205,7 @@ begin
       + 'The arrow keys rotate the globe up,down,left and right' + LineEnding
       + LineEnding
       + 'F1:  Shows this help' + LineEnding
-      + 'F11: About fpGUI Toolkit' + LineEnding
+      + 'F11: About LiteKit Toolkit' + LineEnding
       + 'F12: About this program');
     frm.ShowModal;
   finally
@@ -215,7 +215,7 @@ end;
 
 procedure TMainForm.miHelpAbout(Sender: TObject);
 begin
-  ShowMessage('fpGUI Globe written by Graeme Geldenhuys - 2010', 'About...', True);
+  ShowMessage('LiteKit Globe written by Graeme Geldenhuys - 2010', 'About...', True);
 end;
 
 procedure TMainForm.miHelpAbouTlqui(Sender: TObject);
@@ -307,7 +307,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(357, 219, 363, 430);
-  WindowTitle := 'fpGUI Globe';
+  WindowTitle := 'LiteKit Globe';
   Hint := '';
   ShowHint := True;
   WindowPosition := wpOneThirdDown;
@@ -355,7 +355,7 @@ begin
     SetPosition(248, 76, 120, 20);
     AddMenuItem('Keyboard Shortcuts...', 'F1', @btnHelpClicked);
     AddMenuItem('-', '', nil);
-    AddMenuItem('About fpGUI Toolkit...', 'F11', @miHelpAbouTlqui);
+    AddMenuItem('About LiteKit Toolkit...', 'F11', @miHelpAbouTlqui);
     AddMenuItem('About...', 'F12', @miHelpAbout);
   end;
 

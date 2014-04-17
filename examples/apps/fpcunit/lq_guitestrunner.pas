@@ -6,7 +6,7 @@ interface
 
 uses
   SysUtils, Classes,
-  // fpGUI toolkit
+  // LiteKit toolkit
   lq_base, lq_main, lq_edit, lq_widget, lq_form, lq_label, lq_button,
   lq_listbox, lq_memo, lq_combobox, lq_basegrid, lq_grid,
   lq_dialogs, lq_checkbox, lq_tree, lq_trackbar, lq_progressbar,

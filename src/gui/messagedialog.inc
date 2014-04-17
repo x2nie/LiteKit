@@ -1,18 +1,18 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2012 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      This unit contains the Message Dialog used throughout fpGUI Toolkit.
+      This unit contains the Message Dialog used throughout LiteKit Toolkit.
 }
 
 {%mainunit lq_dialogs.pas}
@@ -238,7 +238,7 @@ begin
   if ATitle = '' then
   begin
     case DialogType of
-      mtAbout:        SetWindowTitle(Format(rsAbout, [fpGUIName]));
+      mtAbout:        SetWindowTitle(Format(rsAbout, [LiteKitName]));
       mtError:        SetWindowTitle(rsError);
       mtWarning:      SetWindowTitle(rsWarning);
       mtConfirmation: SetWindowTitle(rsConfirmation);
@@ -384,25 +384,25 @@ begin
   try
     dlg.FDialogType := mtAbout;
     if ATitle = '' then
-      dlg.WindowTitle := Format(rsAbout, [fpGUIName])
+      dlg.WindowTitle := Format(rsAbout, [LiteKitName])
     else
       dlg.WindowTitle := ATitle;
     dlg.Buttons := [mbOK];
     dlg.DefaultButton := mbOK;
     dlg.Text := dlg.WindowTitle;
     dlg.InformativeText := LineEnding + LineEnding
-                           + 'This program uses ' + fpGUIName + ' version ' + fpGUI_Version + '.'
+                           + 'This program uses ' + LiteKitName + ' version ' + LiteKit_Version + '.'
                            + LineEnding + LineEnding
-                           + fpGUIName + ' is intended for Open Source and Commercial applications. fpGUI '
+                           + LiteKitName + ' is intended for Open Source and Commercial applications. LiteKit '
                            + 'uses the LGPL 2 license with a static linking exception - the same as the Free '
                            + 'Pascal Compiler''s RTL.'
                            + LineEnding + LineEnding
-                           + 'fpGUI is an Object Pascal toolkit for cross-platform application development. '
+                           + 'LiteKit is an Object Pascal toolkit for cross-platform application development. '
                            + 'It provides single-source portability across Linux, MS Windows, FreeBSD, '
                            + 'OpenSolaris and embedded operating systems like Embedded Linux and Windows CE.'
                            + LineEnding + LineEnding
-                           + 'For more information, see the ' + fpGUIName + ' website at: '
-                           + fpGUIWebsite;
+                           + 'For more information, see the ' + LiteKitName + ' website at: '
+                           + LiteKitWebsite;
     dlg.PrepareLayout;
     dlg.ShowModal;
   finally

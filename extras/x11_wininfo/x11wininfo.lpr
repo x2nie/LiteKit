@@ -185,7 +185,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(334, 226, 300, 309);
-  WindowTitle := 'fpGUI Window Information';
+  WindowTitle := 'LiteKit Window Information';
   WindowPosition := wpUser;
 
   Button1 := TlqButton.Create(self);

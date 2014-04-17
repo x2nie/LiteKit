@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  // fpGUI
+  // LiteKit
   lq_base, lq_main, lq_form, lq_button,
   lq_label, lq_trackbar, lq_animation;
 

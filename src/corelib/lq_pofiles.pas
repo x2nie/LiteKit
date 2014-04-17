@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -86,7 +86,7 @@ type
 
 
 var
-  SystemCharSetIsUTF8: Boolean = True;// the fpGUI interfaces expect UTF-8 as default
+  SystemCharSetIsUTF8: Boolean = True;// the LiteKit interfaces expect UTF-8 as default
  // if you don't use UTF-8, install a proper widestring manager and set this
  // to false. You're on your own then!
 
@@ -161,7 +161,7 @@ begin
   Result := False;
   ToolkitOnly := False;
 
-  // build correct filename for fpGUI Toolkit translations.
+  // build correct filename for LiteKit Toolkit translations.
   lPath := fpgExtractFilePath(AFilename);
   lFile := fpgExtractFileName(AFilename);
   lPos := Pos('.', lFile);
@@ -190,7 +190,7 @@ begin
     else
     begin
       po := TPOFile.Create(AFilename);
-      // Now append fpGUI translations
+      // Now append LiteKit translations
       po.AppendFile(lFile);
     end;
     try
@@ -415,7 +415,7 @@ var
   s: string;
   f: TStream;
 begin
-  // Now fpGUI translation
+  // Now LiteKit translation
   if (AFilename = '') or (not fpgFileExists(AFilename)) then
     Exit;
   f := TFileStream.Create(AFilename, fmOpenRead or fmShareDenyNone);

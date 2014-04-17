@@ -2,20 +2,20 @@
 This source is only used to compile and install the package.
  }
 
-unit fpGUIHelpIntegration; 
+unit LiteKitHelpIntegration; 
 
 interface
 
 uses
-  pkghelpfpGUI, LazarusPackageIntf; 
+  pkghelpLiteKit, LazarusPackageIntf; 
 
 implementation
 
 procedure Register; 
 begin
-  RegisterUnit('pkghelpfpGUI', @pkghelpfpGUI.Register); 
+  RegisterUnit('pkghelpLiteKit', @pkghelpLiteKit.Register); 
 end; 
 
 initialization
-  RegisterPackage('fpGUIHelpIntegration', @Register); 
+  RegisterPackage('LiteKitHelpIntegration', @Register); 
 end.

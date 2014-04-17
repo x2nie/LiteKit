@@ -49,7 +49,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
 	Name := 'MainForm';
 	SetPosition(351, 159, 555, 321);
-	WindowTitle := 'fpGUI''s MDI Demo';
+	WindowTitle := 'LiteKit''s MDI Demo';
 	Hint := '';
 
 	MainBar := TlqMenuBar.Create(self);

@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2011 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -92,7 +92,7 @@ begin
   FHotTrackColor  := clBlue;
   TextColor       := clBlue;
   FUrl            := 'http://opensoft.homeip.net/fpgui/';
-  FText           := 'fpGUI website';
+  FText           := 'LiteKit website';
   FHTFont         := 'Arial-8:antialias=true:underline:bold';
   FontDesc        := 'Arial-8:antialias=true:underline';
 end;

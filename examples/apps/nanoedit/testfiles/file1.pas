@@ -74,7 +74,7 @@ begin
   {@VFD_BODY_BEGIN: MainFrom}
   SetPosition(327, 283, 500, 348);
   WindowPosition := wpScreenCenter;
-  WindowTitle := 'fpGUI nanoedit';
+  WindowTitle := 'LiteKit nanoedit';
 
   menu := TlqMenuBar.Create(self);
   with menu do

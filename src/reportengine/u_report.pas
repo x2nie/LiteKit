@@ -1,11 +1,11 @@
 {
-  fpGUI  -  Free Pascal GUI Toolkit
+  LiteKit  -  Free Pascal GUI Toolkit
 
   Copyright (C) 2006 - 2012 See the file AUTHORS.txt, included in this
   distribution, for details of the copyright.
 
   See the file COPYING.modifiedLGPL, included in this distribution,
-  for details about redistributing fpGUI.
+  for details about redistributing LiteKit.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -2738,7 +2738,7 @@ begin
       TempImage := fpgImages.GetImage(ImgFileName);
       Scale := 1;
       RefImage := ImageNames.Add(IntToStr(Scale) + ImgFileName);
-      { Clone the image because we don't want to free fpGUI registered images,
+      { Clone the image because we don't want to free LiteKit registered images,
         because they could be used by other widgets or areas of the application. }
       Image := TempImage.ImageFromSource;
       Images.Add(Image);

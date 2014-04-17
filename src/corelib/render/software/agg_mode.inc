@@ -39,7 +39,7 @@
  {$ENDIF}
 {$ENDIF }
 
-{$Warning fpGUI supports other *nix flavours too (FreeBSD, Solaris etc), so this
+{$Warning LiteKit supports other *nix flavours too (FreeBSD, Solaris etc), so this
    needs to be extended at some point. }
 
 {$IFDEF LINUX }

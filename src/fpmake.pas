@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (c) 2006 - 2012 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -23,7 +23,7 @@
       - To find out more about what fpmake can do and see some help
              fpmake --help
 
-      - Build and install fpGUI
+      - Build and install LiteKit
              fpmake install
 
         Note that if you installed FPC in a non-standard location on you
@@ -55,7 +55,7 @@ begin
     P.Author := 'Graeme Geldenhuys';
     P.Email := 'graemeg@gmail.com';
     P.License := 'LGPL with linking exception';
-    P.Description := 'fpGUI Toolkit - a custom written GUI toolkit for Free Pascal.';
+    P.Description := 'LiteKit Toolkit - a custom written GUI toolkit for Free Pascal.';
 
 //    P.Dependencies.Add('fcl');
     { Fill in more package details here }
@@ -146,7 +146,7 @@ begin
       T.Dependencies.AddInclude('lq_msgqueue.inc');
     T := P.Targets.AddUnit('lq_stringhashlist.pas');
     T := P.Targets.AddUnit('lq_widget.pas');
-//    T := P.Targets.AddUnit('lq_strings.pas');    // this unit is not used in fpGUI
+//    T := P.Targets.AddUnit('lq_strings.pas');    // this unit is not used in LiteKit
     T := P.Targets.AddUnit('lq_wuline.pas');
     T := P.Targets.AddUnit('lq_extinterpolation.pas');
     T := P.Targets.AddUnit('lq_pofiles.pas');

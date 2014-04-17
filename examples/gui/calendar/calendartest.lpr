@@ -187,7 +187,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(362, 186, 372, 340);
-  WindowTitle := 'fpGUI Calendar Test';
+  WindowTitle := 'LiteKit Calendar Test';
   Hint := '';
   WindowPosition := wpUser;
 

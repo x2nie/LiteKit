@@ -282,7 +282,7 @@ uses
   ;
 
 const
-  cLongName   = 'fpGUI Documentation Viewer';
+  cLongName   = 'LiteKit Documentation Viewer';
   cShortName  = 'DocView';
   cCreatedBy  = 'Created by Graeme Geldenhuys';
   cVersion    = 'Version ' + FPGUI_VERSION;
@@ -2703,7 +2703,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(602, 274, 654, 386);
-  WindowTitle := 'fpGUI Documentation Viewer';
+  WindowTitle := 'LiteKit Documentation Viewer';
   Hint := '';
   ShowHint := True;
   WindowPosition := wpUser;
@@ -3257,7 +3257,7 @@ begin
     AddMenuItem('Help using DocView', rsKeyCtrl+'F1', @miHelpUsingDocView);
     AddMenuItem('Command line parameters', rsKeyCtrl+rsKeyShift+'F1', @miHelpCmdLineParams);
     AddSeparator;
-    AddMenuItem('About fpGUI Toolkit...', '', @miHelpAbouTlqui);
+    AddMenuItem('About LiteKit Toolkit...', '', @miHelpAbouTlqui);
     AddMenuItem('Product Information...', '', @miHelpProdInfoClicked);
   end;
 

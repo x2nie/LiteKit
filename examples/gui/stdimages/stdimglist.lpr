@@ -23,7 +23,7 @@ type
 procedure TMainForm.AfterCreate;
 begin
   SetPosition(100,100,700,500);
-  WindowTitle := 'fpGUI Standard Image Listing';
+  WindowTitle := 'LiteKit Standard Image Listing';
   WindowPosition := wpOneThirdDown;
   MinWidth := 200;
   MinHeight := 100;

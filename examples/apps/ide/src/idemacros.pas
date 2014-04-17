@@ -1,10 +1,10 @@
 {
-    fpGUI IDE - Maximus
+    LiteKit IDE - Maximus
 
     Copyright (C) 2012 - 2013 Graeme Geldenhuys
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -110,9 +110,9 @@ var
 begin
   o := TIDEMacro.Create(cMacro_FPCSrcDir, '', 'FPC source directory');
   Add(o);
-  o := TIDEMacro.Create(cMacro_FPGuiDir, '', 'fpGUI root directory');
+  o := TIDEMacro.Create(cMacro_FPGuiDir, '', 'LiteKit root directory');
   Add(o);
-  o := TIDEMacro.Create(cMacro_FPGuiLibDir, cMacro_FPGuiDir+'lib/'+cMacro_Target+'/', 'fpGUI compiled library directory');
+  o := TIDEMacro.Create(cMacro_FPGuiLibDir, cMacro_FPGuiDir+'lib/'+cMacro_Target+'/', 'LiteKit compiled library directory');
   Add(o);
   o := TIDEMacro.Create(cMacro_SyntaxDefDir, cMacro_FPGuiDir+'examples/apps/fpgide/syntaxdefs/', 'Editor syntax highlighter definitions');
   Add(o);

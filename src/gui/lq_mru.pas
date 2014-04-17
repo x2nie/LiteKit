@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,7 +45,7 @@ type
     procedure   ItemsChange(Sender: TObject);
     procedure   ClearParentMenu;
   protected
-    // this never gets called without a Form Streaming class, which fpGUI doesn't use
+    // this never gets called without a Form Streaming class, which LiteKit doesn't use
     procedure   Loaded; override;
     procedure   Notification(AComponent: TComponent; Operation: TOperation); override;
     procedure   DoClick(Sender: TObject);

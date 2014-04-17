@@ -228,7 +228,7 @@ begin
   {@VFD_BODY_BEGIN: MainFrom}
   Name := 'MainFrom';
   SetPosition(326, 207, 717, 410);
-  WindowTitle := 'fpGUI nanoedit';
+  WindowTitle := 'LiteKit nanoedit';
   Hint := '';
   WindowPosition := wpScreenCenter;
   OnShow  := @FormShow;

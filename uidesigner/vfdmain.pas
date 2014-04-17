@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -323,7 +323,7 @@ end;
 procedure TMainDesigner.CreateWindows;
 begin
   frmMain := TfrmMain.Create(nil);
-  frmMain.WindowTitle := 'fpGUI Designer v' + program_version;
+  frmMain.WindowTitle := 'LiteKit Designer v' + program_version;
   frmMain.Show;
 
   frmProperties := TfrmProperties.Create(nil);
@@ -460,7 +460,7 @@ begin
   s := ExtractFileName(FEditedFileName);
   if s = '' then
     s := '[new]';
-  frmMain.WindowTitle := 'fpGUI Designer v' + program_version + ' - ' + s;
+  frmMain.WindowTitle := 'LiteKit Designer v' + program_version + ' - ' + s;
 end;
 
 procedure TMainDesigner.LoadDefaults;

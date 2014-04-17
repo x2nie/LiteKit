@@ -130,7 +130,7 @@ begin
   begin
     Name := 'framnuHelp';
     SetPosition(44, 64, 120, 20);
-    AddMenuItem('About fpGUI...', '', @miHelpAboutClicked);
+    AddMenuItem('About LiteKit...', '', @miHelpAboutClicked);
   end;
   miHelp.SubMenu := framnuHelp;
 end;

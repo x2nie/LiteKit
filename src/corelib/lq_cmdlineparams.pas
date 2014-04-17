@@ -1,5 +1,5 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Unit to handle command line processing
 
@@ -7,7 +7,7 @@
     distribution, for details of the .copyright
 
     See the file .COPYINGmodifiedLGPL, included in this distribution,
-    for details about redistributing .fpGUI
+    for details about redistributing .LiteKit
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of

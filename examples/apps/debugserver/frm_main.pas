@@ -1,11 +1,11 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2013 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -313,7 +313,7 @@ begin
   {@VFD_BODY_BEGIN: MainForm}
   Name := 'MainForm';
   SetPosition(353, 245, 486, 313);
-  WindowTitle := 'fpGUI''s Debug Server';
+  WindowTitle := 'LiteKit''s Debug Server';
   Hint := '';
   ShowHint := True;
 
@@ -383,7 +383,7 @@ begin
   begin
     Name := 'mnuHelp';
     SetPosition(260, 152, 120, 24);
-    AddMenuItem('About fpGUI...', '', @miHelpAbouTlqui);
+    AddMenuItem('About LiteKit...', '', @miHelpAbouTlqui);
     AddMenuItem('Product Information...', 'F1', @miHelpProductInformation);
   end;
 

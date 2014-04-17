@@ -1,18 +1,18 @@
 {
-    fpGUI  -  Free Pascal GUI Toolkit
+    LiteKit  -  Free Pascal GUI Toolkit
 
     Copyright (C) 2006 - 2010 See the file AUTHORS.txt, included in this
     distribution, for details of the copyright.
 
     See the file COPYING.modifiedLGPL, included in this distribution,
-    for details about redistributing fpGUI.
+    for details about redistributing LiteKit.
 
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      Essential classes used by the fpGUI Designer
+      Essential classes used by the LiteKit Designer
 }
 
 unit newformdesigner;
@@ -201,7 +201,7 @@ begin
     SetPosition(12, 16, 255, 31);
     FontDesc := 'Arial-20';
     Hint := '';
-    Text := 'fpGUI UI Designer';
+    Text := 'LiteKit UI Designer';
   end;
 
   lblVersion := TlqLabel.Create(self);
@@ -433,7 +433,7 @@ begin
   begin
     Name := 'helpmenu';
     SetPosition(328, 52, 120, 20);
-    AddMenuItem('About fpGUI Toolkit...', '', @miHelpAboutGUI);
+    AddMenuItem('About LiteKit Toolkit...', '', @miHelpAboutGUI);
     AddMenuItem('Product Information...', '', @miHelpAboutClick);
   end;
 

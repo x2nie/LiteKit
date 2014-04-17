@@ -30,7 +30,7 @@
   Description:
       generateincfiles will generate the lang_<langID>.inc files in the
       src/corelib/ directory. The include files are used when changing the
-      default language of fpGUI.
+      default language of LiteKit.
 
 }
 
@@ -203,24 +203,24 @@ begin
   BaseDir := ParamStr(1);
   if not DirectoryExists(BaseDir) then
   begin
-    writeln('ERROR: fpGUI base directory <'+BaseDir+'> does not exist.');
+    writeln('ERROR: LiteKit base directory <'+BaseDir+'> does not exist.');
     Exit; //==>
   end;
-  // Does it look like the fpGUI base directory? We do three simple tests.
+  // Does it look like the LiteKit base directory? We do three simple tests.
   if not FileExists(BaseDir + PathDelim + 'AUTHORS.txt') then
   begin
-    writeln('ERROR: <'+BaseDir+'> directory does not look like the fpGUI base directory.');
+    writeln('ERROR: <'+BaseDir+'> directory does not look like the LiteKit base directory.');
     Exit; //==>
   end;
   if not DirectoryExists(BaseDir + cLang) then
   begin
-    writeln('ERROR: <'+BaseDir+'> directory does not look like the fpGUI base directory.');
+    writeln('ERROR: <'+BaseDir+'> directory does not look like the LiteKit base directory.');
     writeln('       The ' + cLang + ' directory is missing.');
     Exit; //==>
   end;
   if not DirectoryExists(BaseDir + cCoreLib) then
   begin
-    writeln('ERROR: <'+BaseDir+'> directory does not look like the fpGUI base directory.');
+    writeln('ERROR: <'+BaseDir+'> directory does not look like the LiteKit base directory.');
     writeln('       The ' + cCoreLib + ' directory is missing.');
     Exit; //==>
   end;

@@ -45,9 +45,9 @@ implementation
 uses
   project
   ,process
-  ,fpg_base
-  ,fpg_iniutils
-  ,fpg_utils
+  ,lq_base
+  ,lq_iniutils
+  ,lq_utils
   ,ideconst
   ,idemacros
   ;

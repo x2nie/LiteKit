@@ -24,17 +24,17 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_widget,
-  fpg_form,
-  fpg_label,
-  fpg_edit,
-  fpg_button,
-  fpg_combobox,
-  fpg_trackbar,
-  fpg_checkbox,
-  fpg_panel,
-  fpg_tree;
+  lq_base,
+  lq_widget,
+  lq_form,
+  lq_label,
+  lq_edit,
+  lq_button,
+  lq_combobox,
+  lq_trackbar,
+  lq_checkbox,
+  lq_panel,
+  lq_tree;
 
 type
 
@@ -142,9 +142,9 @@ type
 implementation
 
 uses
-  fpg_main,
-  fpg_iniutils,
-  fpg_constants,
+  lq_main,
+  lq_iniutils,
+  lq_constants,
   vfdprops; // used to get Object Inspector defaults
 
 const

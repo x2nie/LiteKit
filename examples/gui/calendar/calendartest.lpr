@@ -7,9 +7,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_popupcalendar, fpg_edit,
-  fpg_button, fpg_label, fpg_popupwindow, fpg_combobox, fpg_checkbox,
-  fpg_panel, dateutils;
+  lq_base, lq_main, lq_form, lq_popupcalendar, lq_edit,
+  lq_button, lq_label, lq_popupwindow, lq_combobox, lq_checkbox,
+  lq_panel, dateutils;
 
 type
   TMainForm = class(TfpgForm)

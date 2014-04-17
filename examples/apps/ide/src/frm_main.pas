@@ -23,9 +23,9 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_menu, fpg_panel,
-  fpg_button, fpg_splitter, fpg_tab, fpg_memo, fpg_label, fpg_grid,
-  fpg_tree, fpg_textedit, fpg_mru, synregexpr,
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_menu, lq_panel,
+  lq_button, lq_splitter, lq_tab, lq_memo, lq_label, lq_grid,
+  lq_tree, lq_textedit, lq_mru, synregexpr,
   filemonitor;
 
 type
@@ -150,18 +150,18 @@ implementation
 
 uses
   process
-  ,fpg_iniutils
-  ,fpg_dialogs
-  ,fpg_utils
-  ,fpg_stringutils
-  ,fpg_constants
-  ,fpg_widget
+  ,lq_iniutils
+  ,lq_dialogs
+  ,lq_utils
+  ,lq_stringutils
+  ,lq_constants
+  ,lq_widget
   ,frm_configureide
   ,frm_projectoptions
   ,frm_debug
   ,frm_procedurelist
   ,frm_find
-  ,fpg_basegrid
+  ,lq_basegrid
   ,ideconst
   ,idemacros
   ,Project

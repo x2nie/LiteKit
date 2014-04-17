@@ -7,11 +7,11 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_memo,
-  fpg_button;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_memo,
+  lq_button;
 
 type
 

@@ -7,8 +7,8 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, fpg_base, fpg_main, fpg_form, fpg_mdi, frm_child,
-  fpg_menu, fpg_panel;
+  Classes, SysUtils, lq_base, lq_main, lq_form, lq_mdi, frm_child,
+  lq_menu, lq_panel;
 
 type
 

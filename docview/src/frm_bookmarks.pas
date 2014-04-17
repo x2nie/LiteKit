@@ -7,11 +7,11 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_listbox,
-  fpg_button,
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_listbox,
+  lq_button,
   HelpBookmark;
 
 type
@@ -56,7 +56,7 @@ type
 implementation
 
 uses
-  fpg_dialogs;
+  lq_dialogs;
 
 {@VFD_NEWFORM_IMPL}
 

@@ -28,8 +28,8 @@ interface
 uses
   Classes,
   db,
-  fpg_widget,
-  fpg_label{, fpg_edit};
+  lq_widget,
+  {lq_label, fpg_edit};
   
 type
 

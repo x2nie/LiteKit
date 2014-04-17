@@ -41,32 +41,32 @@ var
 implementation
 
 uses
-  fpg_main,
+  lq_main,
   vfddesigner,
-  fpg_widget,
-  fpg_form,
-  fpg_label,
-  fpg_edit,
-  fpg_button,
-  fpg_listbox,
-  fpg_memo,
-  fpg_combobox,
-  fpg_grid,
-  fpg_checkbox,
-  fpg_panel,
-  fpg_tree,
-  fpg_radiobutton,
-  fpg_listview,
-  fpg_trackbar,
-  fpg_menu,
-  fpg_progressbar,
-  fpg_tab,
-  fpg_popupcalendar,
-  fpg_gauge,
-  fpg_editbtn,
-  fpg_ColorWheel,
-  fpg_splitter,
-  fpg_hyperlink,
+  lq_widget,
+  lq_form,
+  lq_label,
+  lq_edit,
+  lq_button,
+  lq_listbox,
+  lq_memo,
+  lq_combobox,
+  lq_grid,
+  lq_checkbox,
+  lq_panel,
+  lq_tree,
+  lq_radiobutton,
+  lq_listview,
+  lq_trackbar,
+  lq_menu,
+  lq_progressbar,
+  lq_tab,
+  lq_popupcalendar,
+  lq_gauge,
+  lq_editbtn,
+  lq_colorwheel,
+  lq_splitter,
+  lq_hyperlink,
   vfdpropeditgrid,
   vfdmain;
 
@@ -128,7 +128,7 @@ begin
   FVFDWidgets.Add(awc);
 end;
 
-{$I icons.inc}
+{$I icons.}
 
 procedure LoadIcons;
 begin

@@ -24,13 +24,13 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_widget,
+  lq_base,
+  lq_main,
+  lq_widget,
   vfdwidgetclass,
-  fpg_edit,
-  fpg_button,
-  fpg_combobox;
+  lq_edit,
+  lq_button,
+  lq_combobox;
 
 type
 
@@ -176,7 +176,7 @@ uses
   TypInfo,
   vfdformparser,
   vfdeditors,
-  fpg_dialogs;
+  lq_dialogs;
 
 
 procedure EditStringList(sl: TStringList);

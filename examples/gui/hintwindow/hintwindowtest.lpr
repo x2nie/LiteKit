@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_label, fpg_edit, fpg_button,
-  fpg_radiobutton, fpg_listbox, fpg_checkbox, fpg_panel, fpg_hint;
+  lq_base, lq_main, lq_form, lq_label, lq_edit, lq_button,
+  lq_radiobutton, lq_listbox, lq_checkbox, lq_panel, lq_hint;
 
 type
   { A very simple custom hint window. }

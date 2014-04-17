@@ -5,7 +5,7 @@ unit tcTreeview;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testregistry, fpg_tree;
+  Classes, SysUtils, fpcunit, testregistry, lq_tree;
 
 type
 

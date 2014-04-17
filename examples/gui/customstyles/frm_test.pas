@@ -5,9 +5,9 @@ unit frm_test;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_widget,
-  fpg_form, fpg_edit, fpg_label, fpg_button, fpg_menu,
-  fpg_memo;
+  SysUtils, Classes, lq_base, lq_main, lq_widget,
+  lq_form, lq_edit, lq_label, lq_button, lq_menu,
+  lq_memo;
 
 type
 
@@ -42,7 +42,7 @@ type
 implementation
 
 uses
-  fpg_stylemanager;
+  lq_stylemanager;
 
 {@VFD_NEWFORM_IMPL}
 

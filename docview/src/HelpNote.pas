@@ -5,7 +5,7 @@ unit HelpNote;
 interface
 
 uses
-  Classes, fpg_base, HelpTopic;
+  Classes, lq_base, HelpTopic;
 
 type
   { Simple data object store information about help note and position of note }

@@ -5,12 +5,12 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_edit,
-  fpg_widget, fpg_form, fpg_label, fpg_button,
-  fpg_listbox, fpg_memo, fpg_combobox, fpg_basegrid, fpg_grid,
-  fpg_dialogs, fpg_checkbox, fpg_tree, fpg_trackbar,
-  fpg_progressbar, fpg_radiobutton, fpg_tab, fpg_menu,
-  fpg_panel, fpg_popupcalendar, fpg_gauge, fpg_editcombo;
+  SysUtils, Classes, lq_base, lq_main, lq_edit,
+  lq_widget, lq_form, lq_label, lq_button,
+  lq_listbox, lq_memo, lq_combobox, lq_basegrid, lq_grid,
+  lq_dialogs, lq_checkbox, lq_tree, lq_trackbar,
+  lq_progressbar, lq_radiobutton, lq_tab, lq_menu,
+  lq_panel, lq_popupcalendar, lq_gauge, lq_editcombo;
 
 type
 

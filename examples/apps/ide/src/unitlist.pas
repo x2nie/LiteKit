@@ -21,7 +21,7 @@ unit UnitList;
 interface
 
 uses
-  Classes, SysUtils, fpg_base;
+  Classes, SysUtils, lq_base;
 
 type
   TUnit = class(TObject)
@@ -58,7 +58,7 @@ type
 implementation
 
 uses
-  fpg_utils;
+  lq_utils;
 
 { TUnitList }
 

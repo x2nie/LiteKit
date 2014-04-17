@@ -21,7 +21,7 @@ unit frm_debug;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_tab, fpg_grid;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_tab, lq_grid;
 
 type
 

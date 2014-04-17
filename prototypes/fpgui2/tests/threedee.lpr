@@ -11,7 +11,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpg_main, frm_threedee;
+  Classes, lq_main, frm_threedee;
 
 
 procedure MainProc;

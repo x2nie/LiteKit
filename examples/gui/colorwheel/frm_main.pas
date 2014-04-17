@@ -5,10 +5,10 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_widget,
-  fpg_edit, fpg_form, fpg_label, fpg_button,
-  fpg_dialogs, fpg_menu, fpg_checkbox,
-  fpg_panel, fpg_ColorWheel;
+  SysUtils, Classes, lq_base, lq_main, lq_widget,
+  lq_edit, lq_form, lq_label, lq_button,
+  lq_dialogs, lq_menu, lq_checkbox,
+  lq_panel, lq_colorwheel;
 
 type
 

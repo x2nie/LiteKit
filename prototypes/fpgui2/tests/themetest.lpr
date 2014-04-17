@@ -8,17 +8,17 @@ uses
   {$ENDIF}{$ENDIF}
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_scrollbar,
-  fpg_button,
-  fpg_label,
-  fpg_imgfmt_bmp,
-  fpg_extinterpolation,
-  fpg_trackbar,
-  fpg_styler,
-  fpg_dialogs;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_scrollbar,
+  lq_button,
+  lq_label,
+  lq_imgfmt_bmp,
+  lq_extinterpolation,
+  lq_trackbar,
+  lq_styler,
+  lq_dialogs;
 
 type
   { Note:

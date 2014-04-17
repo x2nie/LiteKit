@@ -4,7 +4,7 @@ program nanoedit;
 {$ifdef mswindows} {$apptype gui} {$endif}
 
 uses
-  Classes, fpg_main, mainfrm;
+  Classes, lq_main, mainfrm;
 
 
 procedure MainProc;

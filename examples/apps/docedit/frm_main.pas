@@ -11,16 +11,16 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_button,
-  fpg_edit,
-  fpg_label,
-  fpg_menu,
-  fpg_memo,
-  fpg_tree,
-  fpg_panel,
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_button,
+  lq_edit,
+  lq_label,
+  lq_menu,
+  lq_memo,
+  lq_tree,
+  lq_panel,
   dom, XMLWrite, XMLRead, contnrs, model;
 
 type
@@ -63,8 +63,8 @@ type
 implementation
 
 uses
-  fpg_dialogs,
-  fpg_constants,
+  lq_dialogs,
+  lq_constants,
   frm_options;
   
   

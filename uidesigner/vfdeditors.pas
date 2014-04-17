@@ -24,10 +24,10 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_widget,
-  fpg_label,
-  fpg_button,
-  fpg_memo,
+  lq_widget,
+  lq_label,
+  lq_button,
+  lq_memo,
   vfdforms;
 
 type
@@ -49,8 +49,8 @@ type
 implementation
 
 uses
-  fpg_base,
-  fpg_main;
+  lq_base,
+  lq_main;
 
 { TItemEditorForm }
 

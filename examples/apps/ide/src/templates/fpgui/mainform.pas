@@ -7,9 +7,9 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form;
+  lq_base,
+  lq_main,
+  lq_form;
 
 type
 

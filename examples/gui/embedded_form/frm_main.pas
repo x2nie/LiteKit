@@ -6,8 +6,8 @@ interface
 
 uses
   SysUtils, Classes,
-  fpg_base, fpg_main, fpg_form, fpg_panel, fpg_button,
-  fpg_checkbox, fra_test, fpg_menu;
+  lq_base, lq_main, lq_form, lq_panel, lq_button,
+  lq_checkbox, fra_test, lq_menu;
 
 type
 
@@ -40,7 +40,7 @@ type
 implementation
 
 uses
-  fpg_widget, fpg_dialogs;
+  lq_widget, lq_dialogs;
 
 
 var

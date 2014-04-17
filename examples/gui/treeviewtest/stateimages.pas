@@ -7,7 +7,7 @@ procedure InitializeCustomImages;
 implementation
 
 uses
-  fpg_main;
+  lq_main;
 
 Const
   usr_state0 : Array[0..821] of byte = (

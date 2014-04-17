@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, dateutils,
-  fpg_main, fpg_base,
-  fpg_form, fpg_panel, fpg_button, fpg_basegrid, fpg_editcombo, fpg_checkbox, fpg_radiobutton,
+  lq_main, lq_base,
+  lq_form, lq_panel, lq_button, lq_basegrid, lq_editcombo, lq_checkbox, lq_radiobutton,
   u_editgrid;
 
 type

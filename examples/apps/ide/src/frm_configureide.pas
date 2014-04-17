@@ -21,9 +21,9 @@ unit frm_configureide;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_button, fpg_editbtn,
-  fpg_label, fpg_tab, fpg_edit, fpg_grid, fpg_listbox, idemacros, fpg_combobox,
-  fpg_checkbox, fpg_panel;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_button, lq_editbtn,
+  lq_label, lq_tab, lq_edit, lq_grid, lq_listbox, idemacros, lq_combobox,
+  lq_checkbox, lq_panel;
 
 type
   TConfigureIDEForm = class(TfpgForm)
@@ -99,9 +99,9 @@ procedure DisplayConfigureIDE;
 implementation
 
 uses
-  fpg_dialogs
-  ,fpg_iniutils
-  ,fpg_widget
+  lq_dialogs
+  ,lq_iniutils
+  ,lq_widget
   ,ideconst
   ;
 

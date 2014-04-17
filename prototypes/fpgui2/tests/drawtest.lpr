@@ -7,10 +7,10 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_imgfmt_bmp;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_imgfmt_bmp;
   
 type
 

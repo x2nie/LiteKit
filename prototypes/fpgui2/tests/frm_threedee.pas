@@ -10,9 +10,9 @@ unit frm_threedee;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_edit,
-  fpg_widget, fpg_form, fpg_label, fpg_button, fpg_dialogs,
-  fpg_checkbox, fpg_trackbar, fpg_progressbar, fpg_menu;
+  SysUtils, Classes, lq_base, lq_main, lq_edit,
+  lq_widget, lq_form, lq_label, lq_button, lq_dialogs,
+  lq_checkbox, lq_trackbar, lq_progressbar, lq_menu;
 
 type
 
@@ -66,8 +66,8 @@ type
 implementation
 
 uses
-  fpg_stringutils,
-  fpg_imgfmt_bmp;
+  lq_stringutils,
+  lq_imgfmt_bmp;
   
 const
   clM2DarkBlue = $187EC0;

@@ -5,7 +5,7 @@ unit nvNullObjects;
 interface
 
 uses
-  contnrs, Classes, SysUtils, fpg_main;
+  contnrs, Classes, SysUtils, lq_main;
 
 type
   EHelpBitmapException = class(Exception);

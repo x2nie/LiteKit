@@ -7,16 +7,16 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_basegrid,
-  fpg_customgrid,
-  fpg_grid,
-  fpg_edit,
-  fpg_combobox,
-  fpg_editcombo,
-  fpg_checkbox,
-  fpg_popupcalendar;
+  lq_base,
+  lq_main,
+  lq_basegrid,
+  lq_customgrid,
+  lq_grid,
+  lq_edit,
+  lq_combobox,
+  lq_editcombo,
+  lq_checkbox,
+  lq_popupcalendar;
 
 type
 
@@ -393,7 +393,7 @@ function CreateEditGrid(AOwner: TComponent; x, y, w, h: Tfpgcoord; AColumnCount:
 implementation
 
 uses
-  fpg_stringutils;
+  lq_stringutils;
 
 function CreateEditGrid(AOwner: TComponent; x, y, w, h: TfpgCoord; AColumnCount: integer = 0): TfpgEditGrid;
 begin

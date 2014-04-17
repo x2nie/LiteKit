@@ -5,9 +5,9 @@ unit frm_configuration;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_tab, fpg_button,
-  fpg_label, fpg_edit, fpg_panel, fpg_combobox, fpg_listbox, fpg_checkbox,
-  fpg_editbtn, fpg_radiobutton;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_tab, lq_button,
+  lq_label, lq_edit, lq_panel, lq_combobox, lq_listbox, lq_checkbox,
+  lq_editbtn, lq_radiobutton;
 
 type
 
@@ -69,7 +69,7 @@ procedure ShowConfigForm;
 implementation
 
 uses
-  fpg_dialogs, SettingsUnit, dvConstants;
+  lq_dialogs, SettingsUnit, dvConstants;
 
 procedure ShowConfigForm;
 var

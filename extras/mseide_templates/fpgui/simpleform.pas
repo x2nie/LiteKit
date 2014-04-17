@@ -5,7 +5,7 @@ unit ${%UNITNAME%};
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form;
+  SysUtils, Classes, lq_base, lq_main, lq_form;
 
 type
 

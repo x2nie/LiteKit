@@ -5,7 +5,7 @@ unit dvHelpers;
 interface
 
 uses
-  Classes, SysUtils, fpg_base;
+  Classes, SysUtils, lq_base;
 
 
 function GetOwnHelpFileName: String;
@@ -22,7 +22,7 @@ function SearchPath( PathEnvVar: TfpgString; Filename: TfpgString; var FilenameF
 implementation
 
 uses
-  fpg_utils
+  lq_utils
   ,dvConstants
   ,nvUtilities
   ;

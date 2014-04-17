@@ -23,7 +23,7 @@ interface
 
 uses
   Classes
-  ,fpg_base
+  ,lq_base
   ;
 
 const

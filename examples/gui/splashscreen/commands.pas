@@ -9,8 +9,8 @@ unit commands;
 interface
 
 uses
-  fpg_command_intf,
-  fpg_memo;
+  lq_command_intf,
+  lq_memo;
   
 type
   // non reference counted interface
@@ -52,7 +52,7 @@ type
 implementation
 
 uses
-  SysUtils, fpg_main, frm_main, frm_splashscreen;
+  SysUtils, lq_main, frm_main, frm_splashscreen;
 
 { TNullInterfacedObject }
 

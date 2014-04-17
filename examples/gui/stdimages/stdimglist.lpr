@@ -4,7 +4,7 @@ program stdimglist;
 
 uses
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_imgfmt_bmp, fpg_button, u_reportimages;
+  lq_base, lq_main, lq_form, lq_imgfmt_bmp, lq_button, u_reportimages;
 
 type
 

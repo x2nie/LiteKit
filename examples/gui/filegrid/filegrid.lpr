@@ -8,12 +8,12 @@ uses
   {$ENDIF}{$ENDIF}
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_grid,
-  fpg_checkbox,
-  fpg_button;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_grid,
+  lq_checkbox,
+  lq_button;
 
 type
 

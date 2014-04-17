@@ -5,9 +5,9 @@ unit frmMain;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main,
-  fpg_widget, fpg_form, fpg_label, fpg_button,
-  fpg_listbox, fpg_combobox, fpg_dialogs, fpg_checkbox;
+  SysUtils, Classes, lq_base, lq_main,
+  lq_widget, lq_form, lq_label, lq_button,
+  lq_listbox, lq_combobox, lq_dialogs, lq_checkbox;
 
 type
 

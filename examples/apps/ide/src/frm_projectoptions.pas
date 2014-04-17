@@ -21,9 +21,9 @@ unit frm_projectoptions;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_button, fpg_label,
-  fpg_tab, fpg_editbtn, fpg_checkbox, fpg_grid, fpg_basegrid,
-  fpg_combobox, fpg_edit, idemacros;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_button, lq_label,
+  lq_tab, lq_editbtn, lq_checkbox, lq_grid, lq_basegrid,
+  lq_combobox, lq_edit, idemacros;
 
 type
 
@@ -117,9 +117,9 @@ procedure DisplayProjectOptions;
 implementation
 
 uses
-  fpg_iniutils
-  ,fpg_dialogs
-  ,fpg_widget
+  lq_iniutils
+  ,lq_dialogs
+  ,lq_widget
   ,Project
   ,ideconst
   ,ideutils

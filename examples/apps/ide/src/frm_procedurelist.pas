@@ -21,9 +21,9 @@ unit frm_procedurelist;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_panel, fpg_label,
-  fpg_edit, fpg_combobox, fpg_basegrid, fpg_grid, fpg_imagelist,
-  pparser, pastree, fpg_textedit;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_panel, lq_label,
+  lq_edit, lq_combobox, lq_basegrid, lq_grid, lq_imagelist,
+  pparser, pastree, lq_textedit;
 
 type
 
@@ -117,8 +117,8 @@ uses
   ,mPasLex
   ,ideutils
   ,dbugintf
-  ,fpg_utils
-  ,fpg_imgfmt_bmp
+  ,lq_utils
+  ,lq_imgfmt_bmp
   ;
 
 const
@@ -130,7 +130,7 @@ const
   SParseStatistics = 'Procedures processed in %g seconds';
 
 
-{$I proclistimages.inc}
+{$I proclistimages.}
 
 
 function DisplayProcedureList(const AFilename: TfpgString; var AEditor: TfpgTextEdit): boolean;

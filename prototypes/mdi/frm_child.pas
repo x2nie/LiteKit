@@ -5,8 +5,8 @@ unit frm_child;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_button, fpg_edit,
-  fpg_checkbox, fpg_radiobutton, fpg_gauge, fpg_mdi, fpg_panel, fpg_trackbar;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_button, lq_edit,
+  lq_checkbox, lq_radiobutton, lq_gauge, lq_mdi, lq_panel, lq_trackbar;
 
 type
 

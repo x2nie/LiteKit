@@ -8,8 +8,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_button, fpg_grid, fpg_panel,
-  fpg_label, fpg_edit, fpg_stdimages, fpg_checkbox;
+  lq_base, lq_main, lq_form, lq_button, lq_grid, lq_panel,
+  lq_label, lq_edit, lq_stdimages, lq_checkbox;
 
 type
   TMainForm = class(TfpgForm)

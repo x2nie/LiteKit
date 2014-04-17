@@ -25,15 +25,15 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_widget,
-  fpg_form,
-  fpg_dialogs,
-  fpg_listbox,
-  fpg_memo,
-  fpg_combobox,
-  fpg_menu,
+  lq_base,
+  lq_main,
+  lq_widget,
+  lq_form,
+  lq_dialogs,
+  lq_listbox,
+  lq_memo,
+  lq_combobox,
+  lq_menu,
   vfdresizer,
   vfdforms,
   vfdeditors,
@@ -145,7 +145,7 @@ uses
   vfdmain,
   vfdutils,
   TypInfo,
-  fpg_tree;
+  lq_tree;
 
 const
   cEditOrder: array[TfpgEditMode] of string = ('Widget Order', 'Tab Order');

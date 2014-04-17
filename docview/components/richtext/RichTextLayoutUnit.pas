@@ -12,7 +12,7 @@ Uses
   CanvasFontManager,
   RichTextDocumentUnit,
   RichTextStyleUnit,
-  fpg_imagelist,
+  lq_imagelist,
   contnrs;
 
 Type
@@ -129,7 +129,7 @@ uses
   SysUtils,
   ACLStringUtility,
   nvUtilities,
-  fpg_main;
+  lq_main;
 
 
 { TLayoutLineList }

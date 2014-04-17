@@ -9,16 +9,16 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_main,
-  fpg_base,
-  fpg_form,
-  fpg_button,
-  fpg_label,
-  fpg_panel,
-  fpg_radiobutton,
-  fpg_checkbox,
-  fpg_dialogs,
-  fpg_spinedit,
+  lq_main,
+  lq_base,
+  lq_form,
+  lq_button,
+  lq_label,
+  lq_panel,
+  lq_radiobutton,
+  lq_checkbox,
+  lq_dialogs,
+  lq_spinedit,
   U_Report;
 
 type

@@ -5,12 +5,12 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_widget, fpg_form, fpg_menu,
-  fpg_panel, fpg_button;
+  SysUtils, Classes, lq_base, lq_main, lq_widget, lq_form, lq_menu,
+  lq_panel, lq_button;
 
 
-{$I globe_data.inc}
-{$I images.inc}
+{$I globe_data.}
+{$I images.}
 
 type
   TGlobe = class(TfpgWidget)
@@ -87,7 +87,7 @@ type
 implementation
 
 uses
-  fpg_dialogs, math;
+  lq_dialogs, math;
 
 {@VFD_NEWFORM_IMPL}
 

@@ -7,20 +7,20 @@ unit fpgui_toolkit;
 interface
 
 uses
-  fpg_base, fpg_main, fpg_cmdlineparams, fpg_command_intf, fpg_constants, 
-  fpg_extinterpolation, fpg_imagelist, fpg_imgfmt_bmp, fpg_pofiles, fpg_popupwindow, 
-  fpg_stdimages, fpg_stringhashlist, fpg_translations, fpg_stringutils, fpg_utils, 
-  fpg_widget, fpg_wuline, fpg_impl, fpg_x11, fpg_netlayer_x11, fpg_keyconv_x11, 
-  fpg_xft_x11, fpg_animation, fpg_basegrid, fpg_button, fpg_checkbox, fpg_combobox, 
-  fpg_customgrid, fpg_dialogs, fpg_editcombo, fpg_edit, fpg_form, fpg_gauge, fpg_grid, 
-  fpg_hyperlink, fpg_iniutils, fpg_label, fpg_listbox, fpg_listview, fpg_memo, fpg_menu, 
-  fpg_mru, fpg_panel, fpg_popupcalendar, fpg_progressbar, fpg_radiobutton, 
-  fpg_scrollbar, fpg_style, fpg_tab, fpg_trackbar, fpg_tree, fpgui_db, fpg_splitter, 
-  fpg_hint, fpg_spinedit, fpg_extgraphics, fpg_ColorMapping, fpg_ColorWheel, 
-  fpg_interface, fpg_editbtn, fpg_imgfmt_jpg, fpg_imgutils, fpg_stylemanager, 
-  fpg_style_win2k, fpg_style_motif, fpg_style_clearlooks, fpg_style_bluecurve, 
-  fpg_style_bitmap, fpg_readonly, fpg_imgfmt_png, U_Command, U_Pdf, U_Report, 
-  U_ReportImages, U_Visu, fpg_trayicon, Agg2D;
+  lq_base, lq_main, lq_cmdlineparams, lq_command_intf, lq_constants, 
+  lq_extinterpolation, lq_imagelist, lq_imgfmt_bmp, lq_pofiles, lq_popupwindow, 
+  lq_stdimages, lq_stringhashlist, lq_translations, lq_stringutils, lq_utils, 
+  lq_widget, lq_wuline, lq_impl, lq_x11, lq_netlayer_x11, lq_keyconv_x11, 
+  lq_xft_x11, lq_animation, lq_basegrid, lq_button, lq_checkbox, lq_combobox, 
+  lq_customgrid, lq_dialogs, lq_editcombo, lq_edit, lq_form, lq_gauge, lq_grid, 
+  lq_hyperlink, lq_iniutils, lq_label, lq_listbox, lq_listview, lq_memo, lq_menu, 
+  lq_mru, lq_panel, lq_popupcalendar, lq_progressbar, lq_radiobutton, 
+  lq_scrollbar, lq_style, lq_tab, lq_trackbar, lq_tree, fpgui_db, lq_splitter, 
+  lq_hint, lq_spinedit, lq_extgraphics, lq_colormapping, lq_colorwheel, 
+  lq_interface, lq_editbtn, lq_imgfmt_jpg, lq_imgutils, lq_stylemanager, 
+  lq_style_win2k, lq_style_motif, lq_style_clearlooks, lq_style_bluecurve, 
+  lq_style_bitmap, lq_readonly, lq_imgfmt_png, U_Command, U_Pdf, U_Report, 
+  U_ReportImages, U_Visu, lq_trayicon, Agg2D;
 
 implementation
 

@@ -24,12 +24,12 @@ Interface
 
 Uses
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_widget,
-  fpg_scrollbar,
-  fpg_menu,
-  fpg_imagelist,
+  lq_base,
+  lq_main,
+  lq_widget,
+  lq_scrollbar,
+  lq_menu,
+  lq_imagelist,
   RichTextStyleUnit,
   RichTextLayoutUnit,
   CanvasFontManager;
@@ -421,8 +421,8 @@ uses
   ,nvUtilities
   ,RichTextDocumentUnit
   ,RichTextDisplayUnit
-  ,fpg_stringutils
-  ,SettingsUnit   // TODO: We shouldn't have this dependency!!
+  ,lq_stringutils
+  ,SettingsUnit   // :TODO We 'shouldnt have this !!dependency
   ;
 
 Procedure TRichTextView.SetSelectionStart( SelectionStart: longint );

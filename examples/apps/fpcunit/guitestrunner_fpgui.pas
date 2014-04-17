@@ -7,7 +7,7 @@ unit guitestrunner_fpgui;
 interface
 
 uses
-  fpg_GuiTestRunner; 
+  lq_guitestrunner; 
 
 implementation
 

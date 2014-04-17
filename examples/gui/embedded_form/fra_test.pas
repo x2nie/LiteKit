@@ -5,8 +5,8 @@ unit fra_test;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_checkbox, fpg_button,
-  fpg_menu, fpg_memo, fpg_panel;
+  SysUtils, Classes, lq_base, lq_main, lq_checkbox, lq_button,
+  lq_menu, lq_memo, lq_panel;
 
 type
 
@@ -33,7 +33,7 @@ type
 implementation
 
 uses
-  fpg_dialogs;
+  lq_dialogs;
 
 {@VFD_NEWFORM_IMPL}
 

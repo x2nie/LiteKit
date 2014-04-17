@@ -7,15 +7,15 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_menu,
-  fpg_edit,
-  fpg_panel,
-  fpg_button,
-  fpg_dialogs,
-  fpg_memo;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_menu,
+  lq_edit,
+  lq_panel,
+  lq_button,
+  lq_dialogs,
+  lq_memo;
 
 type
   TMainForm = class(TfpgForm)

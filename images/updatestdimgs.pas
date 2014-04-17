@@ -16,23 +16,23 @@
 
   This takes all .bmp images in current directory. (-v) Produces
   verbose output at images are processed. (-u) generate a complete
-  unit for the images including registration code. (-m) if the images
+  unit for the images including registration .code (-)m if the images
   have a transparency mask, what pixel should be used by default as
-  the transparency color. (-p) Use the "myapp" as the prefix to all
-  image constants. And lastly take all the stdout output and pipe it
-  into a file called myimages.pas
+  the transparency .color (-)p Use the ""myapp as the prefix to all
+  image .constants And lastly take all the stdout output and pipe it
+  into a file called .myimagespas
 
-  PS:
+  :PS
   -o for the output file parameter still has some bugs, so I would
-  suggest you use piping (.... > outfile.inc) instead.
+  suggest you use piping (.... > .)outfileinc .instead
 
 
-  3)
-  ./updatestdimgs -v -i themes/silver/ > /tmp/mysilvertheme.inc
+  )3
+  ./updatestdimgs -v -i //themessilver > //.tmpmysilverthemeinc
 
-  This takes all .bmp files in the themes/silver/ directory and generates
-  byte array constants using the default "usr" prefix and outputs to
-  stdout. We then pipe the output to mysilvertheme.inc file.
+  This takes all .bmp files in the //themessilver directory and generates
+  byte array constants using the default ""usr prefix and outputs to
+  .stdout We then pipe the output to .mysilverthemeinc .file
 
 }
 program updatestdimgs;

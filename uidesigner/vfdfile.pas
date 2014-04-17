@@ -25,8 +25,8 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_utils;
+  lq_base,
+  lq_utils;
 
 type
   TVFDFileBlock = class
@@ -66,7 +66,7 @@ type
 implementation
 
 uses
-  fpg_iniutils,
+  lq_iniutils,
   vfdutils;
 
 const

@@ -5,8 +5,8 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_memo, fpg_menu,
-  fpg_button, fpg_editbtn, fpg_label;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_memo, lq_menu,
+  lq_button, lq_editbtn, lq_label;
 
 type
 
@@ -40,7 +40,7 @@ type
 implementation
 
 uses
-  fpg_utils;
+  lq_utils;
 
 {@VFD_NEWFORM_IMPL}
 

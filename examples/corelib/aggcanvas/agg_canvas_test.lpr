@@ -26,13 +26,13 @@ program agg_canvas_test;
 
 uses
   Classes, SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_imgfmt_bmp, 
-  fpg_widget,
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_imgfmt_bmp, 
+  lq_widget,
   Agg2D,
-  fpg_dialogs;
+  lq_dialogs;
 
 
 type

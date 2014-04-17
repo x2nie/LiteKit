@@ -5,10 +5,10 @@ unit frm_main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_panel, fpg_tab,
-  fpg_tree, fpg_splitter, fpg_menu, fpg_button, fpg_listbox,
-  fpg_label, fpg_edit, fpg_radiobutton, fpg_progressbar, fpg_imagelist,
-  fpg_imgfmt_bmp, fpg_combobox,
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_panel, lq_tab,
+  lq_tree, lq_splitter, lq_menu, lq_button, lq_listbox,
+  lq_label, lq_edit, lq_radiobutton, lq_progressbar, lq_imagelist,
+  lq_imgfmt_bmp, lq_combobox,
   HelpFile, RichTextView, HelpTopic, HelpBookmark;
 
 type
@@ -258,12 +258,12 @@ type
 implementation
 
 uses
-  fpg_dialogs
-  ,fpg_constants
-  ,fpg_iniutils
-  ,fpg_cmdlineparams
-  ,fpg_utils
-  ,fpg_stringutils
+  lq_dialogs
+  ,lq_constants
+  ,lq_iniutils
+  ,lq_cmdlineparams
+  ,lq_utils
+  ,lq_stringutils
   ,nvUtilities
   ,ACLStringUtility
   ,TextSearchQuery
@@ -287,9 +287,9 @@ const
   cCreatedBy  = 'Created by Graeme Geldenhuys';
   cVersion    = 'Version ' + FPGUI_VERSION;
 
-{$I arrows.inc}
-{$I missing.inc}
-{$I images.inc}
+{$I arrows.}
+{$I missing.}
+{$I images.}
 
 {@VFD_NEWFORM_IMPL}
 
@@ -710,7 +710,7 @@ var
 begin
   s :=  cShortName + '  -  ' + cLongName + LineEnding + LineEnding
       + cCreatedBy + LineEnding
-      + cVersion + '  -  ' +  {$I %date%} + ' ' + {$I %time%};
+      + cVersion + '  -  ' +  {$I %%}date + ' ' + {$I %%};
 
   TfpgMessageDialog.Information('Product Information', s);
 end;

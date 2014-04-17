@@ -28,15 +28,15 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_panel,
-  fpg_label,
-  fpg_button,
-  fpg_edit,
-  fpg_dialogs,
-  fpg_scrollbar,
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_panel,
+  lq_label,
+  lq_button,
+  lq_edit,
+  lq_dialogs,
+  lq_scrollbar,
   U_Report;
 
 type
@@ -107,7 +107,7 @@ var
 implementation
 
 uses
-  fpg_constants,
+  lq_constants,
   U_Command,
   U_ReportImages;
 

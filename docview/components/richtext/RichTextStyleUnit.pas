@@ -5,7 +5,7 @@ Unit RichTextStyleUnit;
 Interface
 
 uses
-  Classes, fpg_base, fpg_main, CanvasFontManager, RichTextDocumentUnit;
+  Classes, lq_base, lq_main, CanvasFontManager, RichTextDocumentUnit;
 
 type
   TTextDrawStyle = record

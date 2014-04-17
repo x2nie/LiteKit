@@ -21,7 +21,7 @@ unit Project;
 interface
 
 uses
-  Classes, SysUtils, UnitList, fpg_base, fpg_iniutils;
+  Classes, SysUtils, UnitList, lq_base, lq_iniutils;
 
 type
   TBooleanGrid = array of array of Boolean;
@@ -77,7 +77,7 @@ implementation
 uses
   ideconst
   ,ideutils
-  ,fpg_utils
+  ,lq_utils
   ,idemacros
   ;
 

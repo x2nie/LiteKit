@@ -8,7 +8,7 @@ unit nvUtilities;
 interface
 
 uses
-  Classes, SysUtils, fpg_base;
+  Classes, SysUtils, lq_base;
 
 const
  { TODO -oGraeme : Should this change to LineEnding (platfrom dependent) }
@@ -92,8 +92,8 @@ var
 implementation
 
 uses
-  fpg_utils
-  ,fpg_main
+  lq_utils
+  ,lq_main
   ,ACLStringUtility
   ,dvconstants
   ;

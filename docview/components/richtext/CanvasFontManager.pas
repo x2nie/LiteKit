@@ -6,9 +6,9 @@ interface
 
 uses
   Classes
-  ,fpg_base
-  ,fpg_main
-  ,fpg_widget
+  ,lq_base
+  ,lq_main
+  ,lq_widget
   ;
 
 Const
@@ -70,7 +70,7 @@ uses
   SysUtils
   ,ACLStringUtility
   ,nvUtilities
-  ,fpg_stringutils
+  ,lq_stringutils
   ,SettingsUnit
   ;
 

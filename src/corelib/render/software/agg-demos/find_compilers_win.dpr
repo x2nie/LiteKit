@@ -33,7 +33,7 @@ uses
  agg_conv_stroke ,
  file_utils_ ;
 
-{$I ..\agg_mode.inc }
+{$I ....\agg_mode.inc }
 {$I- }
 type
  src_key = record

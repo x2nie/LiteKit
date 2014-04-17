@@ -24,11 +24,11 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_widget,
-  fpg_dialogs,
-  fpg_constants,
+  lq_base,
+  lq_main,
+  lq_widget,
+  lq_dialogs,
+  lq_constants,
   vfdprops,
   vfdforms,
   vfddesigner,
@@ -86,8 +86,8 @@ implementation
 
 uses
   vfdformparser,
-  fpg_iniutils,
-  fpg_utils;
+  lq_iniutils,
+  lq_utils;
 
 var
   DefaultPasExt : String = '.pas';

@@ -98,8 +98,8 @@ uses
     {$I agg_platform_x11.inc}
   {$ENDIF}
 
-  fpg_base,
-  fpg_main;
+  lq_base,
+  lq_main;
 
 { GLOBAL VARIABLES & CONSTANTS }
 const
@@ -358,10 +358,10 @@ type
   {$undef uses_implementation}
   {$undef agg_platform_implementation}
     {$IFDEF WINDOWS}
-      {$I agg_platform_gdi.inc}
+      {$I agg_platform_gdi.}
     {$ENDIF}
     {$IFDEF UNIX}
-      {$I agg_platform_x11.inc}
+      {$I agg_platform_x11.}
     {$ENDIF}
 
     // ------ TfpgCanvasBase implementation requirements ---------
@@ -658,7 +658,7 @@ uses
   {$IFDEF UNIX}
     {$I agg_platform_x11.inc}
   {$ENDIF}
-  fpg_stringutils;
+  lq_stringutils;
 
 { LOCAL VARIABLES & CONSTANTS }
 var
@@ -1177,10 +1177,10 @@ end;
 {$undef uses_implementation}
 {$define agg_platform_implementation}
 {$IFDEF WINDOWS}
-  {$I agg_platform_gdi.inc}
+  {$I agg_platform_gdi.}
 {$ENDIF}
 {$IFDEF UNIX}
-  {$I agg_platform_x11.inc}
+  {$I agg_platform_x11.}
 {$ENDIF}
 
 

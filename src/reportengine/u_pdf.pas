@@ -29,7 +29,7 @@ uses
   Classes,
   SysUtils,
   StrUtils,
-  fpg_base;
+  lq_base;
 
 type
   TPdfObjet = class(TObject)
@@ -331,10 +331,10 @@ var
 implementation
 
 uses
-  fpg_main,
-  fpg_dialogs,
-  fpg_utils,
-  fpg_constants,
+  lq_main,
+  lq_dialogs,
+  lq_utils,
+  lq_constants,
   U_Report,
   U_Command;
 

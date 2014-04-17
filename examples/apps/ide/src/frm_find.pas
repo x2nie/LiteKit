@@ -22,14 +22,14 @@ interface
 
 uses
   SysUtils, Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_label,
-  fpg_edit,
-  fpg_button,
-  fpg_checkbox,
-  fpg_textedit;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_label,
+  lq_edit,
+  lq_button,
+  lq_checkbox,
+  lq_textedit;
 
 type
 

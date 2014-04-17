@@ -9,7 +9,7 @@ uses
 
 const
   langtabledata:
-    {$I atstable.inc}
+    {$I atstable.}
 
 type
 

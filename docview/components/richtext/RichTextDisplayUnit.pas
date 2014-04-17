@@ -36,8 +36,8 @@ Implementation
 uses
   SysUtils
   ,RichTextDocumentUnit
-  ,fpg_base
-  ,fpg_main
+  ,lq_base
+  ,lq_main
   ,nvUtilities
   ;
 

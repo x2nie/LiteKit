@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_button, fpg_label;
+  lq_base, lq_main, lq_form, lq_button, lq_label;
 
 type
   TMainForm = class(TfpgForm)

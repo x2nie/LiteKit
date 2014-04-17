@@ -5,8 +5,8 @@ unit main;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_panel, fpg_button,
-  fpg_radiobutton, fpg_dialogs, fpg_imgfmt_jpg;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_panel, lq_button,
+  lq_radiobutton, lq_dialogs, lq_imgfmt_jpg;
 
 type
 

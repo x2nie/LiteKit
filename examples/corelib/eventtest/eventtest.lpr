@@ -7,9 +7,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_widget;
+  lq_base,
+  lq_main,
+  lq_widget;
   
 
 const

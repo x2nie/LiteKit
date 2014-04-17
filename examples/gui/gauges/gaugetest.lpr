@@ -7,17 +7,17 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, Sysutils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_button,
-  fpg_progressbar,
-  fpg_trackbar,
-  fpg_label,
-  fpg_imgfmt_bmp,
-  fpg_edit,
-  fpg_panel,
-  fpg_gauge;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_button,
+  lq_progressbar,
+  lq_trackbar,
+  lq_label,
+  lq_imgfmt_bmp,
+  lq_edit,
+  lq_panel,
+  lq_gauge;
 
 type
 

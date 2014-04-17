@@ -4,8 +4,8 @@ program listviewtest;
 
 uses
   Classes, sysutils,
-  fpg_base, fpg_main, fpg_listview, fpg_form, fpg_button, fpg_edit,
-  fpg_checkbox, fpg_splitter, fpg_panel, fpg_imagelist, fpg_stringutils;
+  lq_base, lq_main, lq_listview, lq_form, lq_button, lq_edit,
+  lq_checkbox, lq_splitter, lq_panel, lq_imagelist, lq_stringutils;
   
 type
 

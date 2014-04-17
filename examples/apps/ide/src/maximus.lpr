@@ -22,10 +22,10 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Classes, fpg_base, fpg_main, frm_main, frm_configureide, ideconst, idemacros,
+  Classes, lq_base, lq_main, frm_main, frm_configureide, ideconst, idemacros,
   frm_debug, project, unitlist, frm_projectoptions, ideutils, builderthread,
   ideimages, stringhelpers, frm_procedurelist, mPasLex, filemonitor, SynRegExpr,
-  fpg_textedit, frm_find, Sha1;
+  lq_textedit, frm_find, Sha1;
 
 
 procedure MainProc;

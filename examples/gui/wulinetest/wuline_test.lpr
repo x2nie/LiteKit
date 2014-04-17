@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_form, fpg_button, math,
-  fpg_imgfmt_bmp, fpg_wuline, fpg_panel, fpg_radiobutton;
+  lq_base, lq_main, lq_form, lq_button, math,
+  lq_imgfmt_bmp, lq_wuline, lq_panel, lq_radiobutton;
 
 type
 

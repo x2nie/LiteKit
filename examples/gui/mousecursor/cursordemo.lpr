@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpg_base, fpg_main, fpg_form, fpg_panel, fpg_label;
+  Classes, lq_base, lq_main, lq_form, lq_panel, lq_label;
 
 type
 

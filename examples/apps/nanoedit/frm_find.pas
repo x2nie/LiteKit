@@ -5,9 +5,9 @@ unit frm_find;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_label,
-  fpg_edit, fpg_button, fpg_checkbox, fpg_panel, fpg_radiobutton,
-  fpg_textedit;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_label,
+  lq_edit, lq_button, lq_checkbox, lq_panel, lq_radiobutton,
+  lq_textedit;
 
 type
 

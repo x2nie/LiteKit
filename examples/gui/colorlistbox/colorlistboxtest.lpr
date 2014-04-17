@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpg_main, frmMain;
+  Classes, lq_main, frmMain;
 
 
 procedure MainProc;

@@ -29,12 +29,12 @@ uses
   Classes,
   SysUtils,
   StrUtils,
-  fpg_base,
-  fpg_main,
-  fpg_dialogs,
-  fpg_utils,
-  fpg_imgfmt_bmp,
-  fpg_imgfmt_jpg,
+  lq_base,
+  lq_main,
+  lq_dialogs,
+  lq_utils,
+  lq_imgfmt_bmp,
+  lq_imgfmt_jpg,
   U_Command,
   U_Pdf;
 
@@ -490,7 +490,7 @@ const
 implementation
 
 uses
-  fpg_constants,
+  lq_constants,
   U_Visu;
 
 const

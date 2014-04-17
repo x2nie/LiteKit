@@ -71,14 +71,14 @@ interface
 uses
   SysUtils
   ,Classes
-  ,fpg_base
-  ,fpg_main
-  ,fpg_form
-  ,fpg_button
-  ,fpg_panel
-  ,fpg_menu
-  ,fpg_basegrid
-  ,fpg_grid
+  ,lq_base
+  ,lq_main
+  ,lq_form
+  ,lq_button
+  ,lq_panel
+  ,lq_menu
+  ,lq_basegrid
+  ,lq_grid
   ,simpleipc
   ,dbugmsg
   ;
@@ -132,12 +132,12 @@ implementation
 
 uses
   dateutils
-  ,fpg_dialogs
+  ,lq_dialogs
   ;
 
 
-{$I images.inc}
-{$I state_images.inc}
+{$I images.}
+{$I state_images.}
 
 {@VFD_NEWFORM_IMPL}
 

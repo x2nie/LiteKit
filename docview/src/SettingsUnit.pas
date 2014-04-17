@@ -10,8 +10,8 @@ interface
 Uses
   Classes
   ,contnrs
-  ,fpg_base
-  ,fpg_main
+  ,lq_base
+  ,lq_main
   ,CanvasFontManager
   ,HelpFile
   ;
@@ -112,7 +112,7 @@ Implementation
 
 Uses
   SysUtils
-  ,fpg_iniutils
+  ,lq_iniutils
   ,ACLStringUtility
   ,nvUtilities
   ;

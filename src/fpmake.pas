@@ -43,7 +43,7 @@ program fpmake;
 uses sysutils, fpmkunit;
 
 const
-  {$I VERSION_FILE.inc}
+  {$I VERSIONFILE_.}
 
 var
   T: TTarget;

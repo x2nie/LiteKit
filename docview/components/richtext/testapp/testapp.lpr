@@ -10,8 +10,8 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Classes, fpg_base, fpg_main, fpg_form, fpg_button, fpg_memo, fpg_dialogs,
-  fpg_checkbox, fpg_imagelist, RichTextView;
+  Classes, lq_base, lq_main, lq_form, lq_button, lq_memo, lq_dialogs,
+  lq_checkbox, lq_imagelist, RichTextView;
 
 type
 

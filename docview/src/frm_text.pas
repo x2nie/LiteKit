@@ -8,7 +8,7 @@ unit frm_text;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_button, fpg_memo;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_button, lq_memo;
 
 type
 

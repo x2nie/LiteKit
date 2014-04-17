@@ -26,7 +26,7 @@ unit U_ReportImages;
 interface
 
 uses
-  fpg_main;
+  lq_main;
 
 procedure CreateReportImages;
 function DeleteReportImages: Boolean;

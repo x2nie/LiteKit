@@ -9,8 +9,8 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, SysUtils, fpg_main, fpg_form, fpg_edit, fpg_button, fpg_label,
-  fpg_memo, fpg_checkbox, fpg_radiobutton, fpg_widget, fpg_panel, fpg_menu;
+  Classes, SysUtils, lq_main, lq_form, lq_edit, lq_button, lq_label,
+  lq_memo, lq_checkbox, lq_radiobutton, lq_widget, lq_panel, lq_menu;
 
 type
 
@@ -288,4 +288,4 @@ end;
 begin
   MainProc;
 end.
-
+

@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes,
-  fpg_base, fpg_main, fpg_guitestrunner, tcTreeview;
+  lq_base, lq_main, lq_guitestrunner, tcTreeview;
 
 procedure MainProc;
 

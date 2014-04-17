@@ -13,7 +13,7 @@ uses
  file_utils_ ,
  Carbon ;
  
-{$I ../agg_mode.inc }
+{$I ..../agg_mode.inc }
 
 type
  src_key = record

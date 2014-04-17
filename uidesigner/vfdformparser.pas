@@ -25,10 +25,10 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_widget,
-  fpg_form,
+  lq_base,
+  lq_main,
+  lq_widget,
+  lq_form,
   vfddesigner,
   vfdwidgetclass,
   vfdwidgets;

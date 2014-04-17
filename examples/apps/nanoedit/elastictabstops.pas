@@ -5,7 +5,7 @@ unit elastictabstops;
 interface
 
 uses
-  Classes, SysUtils, fpg_memo;
+  Classes, SysUtils, lq_memo;
   
 type
 

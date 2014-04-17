@@ -29,7 +29,7 @@ procedure RegisterIDEImages;
 implementation
 
 uses
-  fpg_main;
+  lq_main;
 
 const
   ide_gutter_vertical : Array[0..437] of byte = (

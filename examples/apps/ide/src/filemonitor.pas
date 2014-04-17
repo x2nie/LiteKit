@@ -21,7 +21,7 @@ unit filemonitor;
 interface
 
 uses
-  Classes, SysUtils, fpg_main, fpg_base, contnrs;
+  Classes, SysUtils, lq_main, lq_base, contnrs;
 
 type
 
@@ -83,7 +83,7 @@ type
 implementation
 
 uses
-  fpg_utils,
+  lq_utils,
   sha1;
 
 function ReadFileDate(const AFileName: string): TDateTime;

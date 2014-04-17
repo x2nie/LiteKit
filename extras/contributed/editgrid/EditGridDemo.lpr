@@ -5,7 +5,7 @@ program EditGridDemo;
 uses
   Classes,fpgui_toolkit
   { you can add units after this },
-  fpg_main, u_demo, u_editgrid;
+  lq_main, u_demo, u_editgrid;
 
 procedure MainProc;
 begin

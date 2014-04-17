@@ -39,7 +39,7 @@ unit mystyle;
 interface
 
 uses
-  Classes, SysUtils, fpg_main, fpg_base;
+  Classes, SysUtils, lq_main, lq_base;
 
 type
 
@@ -59,7 +59,7 @@ type
 implementation
 
 uses
-  fpg_stylemanager
+  lq_stylemanager
   ;
 
 { TMyStyle }

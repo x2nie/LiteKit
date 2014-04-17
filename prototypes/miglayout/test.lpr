@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpg_main, fpg_form, fpg_label,
+  Classes, lq_main, lq_form, lq_label,
   gui_miglayout,
   gui_mig_lc,
   gui_mig_constraintparser,

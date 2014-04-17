@@ -7,13 +7,13 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes, SysUtils,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_dialogs,
-  fpg_button,
-  fpg_edit,
-  fpg_label;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_dialogs,
+  lq_button,
+  lq_edit,
+  lq_label;
 
 
 type

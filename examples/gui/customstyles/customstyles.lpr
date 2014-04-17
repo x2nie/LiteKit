@@ -35,9 +35,9 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes
-  ,fpg_main
-  ,fpg_cmdlineparams
-  ,fpg_stylemanager
+  ,lq_main
+  ,lq_cmdlineparams
+  ,lq_stylemanager
   ,frm_test
   ,mystyle
   ;

@@ -24,13 +24,13 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_widget,
-  fpg_form,
-  fpg_label,
-  fpg_edit,
-  fpg_button,
-  fpg_memo,
-  fpg_checkbox;
+  lq_widget,
+  lq_form,
+  lq_label,
+  lq_edit,
+  lq_button,
+  lq_memo,
+  lq_checkbox;
 
 
 procedure SetWidgetText(wg: TfpgWidget; txt: string);
@@ -42,8 +42,8 @@ function Ind(const ACount: integer): string;
 implementation
 
 uses
-  fpg_base,
-  fpg_iniutils,
+  lq_base,
+  lq_iniutils,
   strutils;
 
 var

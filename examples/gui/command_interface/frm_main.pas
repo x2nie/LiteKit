@@ -11,12 +11,12 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_main,
-  fpg_form,
-  fpg_button,
-  fpg_memo,
-  fpg_menu;
+  lq_base,
+  lq_main,
+  lq_form,
+  lq_button,
+  lq_memo,
+  lq_menu;
 
 type
 
@@ -40,7 +40,7 @@ type
 implementation
 
 uses
-  fpg_command_intf,
+  lq_command_intf,
   commands;
 
 {@VFD_NEWFORM_IMPL}

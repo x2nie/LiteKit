@@ -7,8 +7,8 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Classes,
-  fpg_main, fpg_base, fpg_widget, fpg_form, fpg_tab, fpg_button,
-  fpg_label, fpg_edit, fpg_checkbox, fpg_combobox;
+  lq_main, lq_base, lq_widget, lq_form, lq_tab, lq_button,
+  lq_label, lq_edit, lq_checkbox, lq_combobox;
 
 type
   TMainForm = class(TfpgForm)

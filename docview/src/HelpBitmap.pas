@@ -26,7 +26,7 @@ unit HelpBitmap;
 interface
 
 uses
-  Classes, SysUtils, fpg_main,
+  Classes, SysUtils, lq_main,
   IPFFileFormatUnit;
 
 type
@@ -96,7 +96,7 @@ uses
   nvUtilities,
   Math,
   LZWDecompress,
-  fpg_imgfmt_bmp;
+  lq_imgfmt_bmp;
 
 const
   BFT_bMAP =$4d62; // 'bM'

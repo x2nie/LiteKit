@@ -5,9 +5,9 @@ unit mainfrm;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main,
-  fpg_form, fpg_button, fpg_menu, fpg_textedit, fpg_panel,
-  fpg_label;
+  SysUtils, Classes, lq_base, lq_main,
+  lq_form, lq_button, lq_menu, lq_textedit, lq_panel,
+  lq_label;
 
 type
 
@@ -50,7 +50,7 @@ implementation
 
 uses
   elastictabstops,
-  fpg_dialogs,
+  lq_dialogs,
   frm_find;
 
 {@VFD_NEWFORM_IMPL}

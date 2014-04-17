@@ -28,8 +28,8 @@ interface
 uses
   Classes,
   SysUtils,
-  fpg_base,
-  fpg_main,
+  lq_base,
+  lq_main,
   U_Pdf;
 
 type

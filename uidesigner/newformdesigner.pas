@@ -24,18 +24,18 @@ interface
 uses
   SysUtils,
   Classes,
-  fpg_base,
-  fpg_widget,
-  fpg_form,
-  fpg_label,
-  fpg_button,
-  fpg_edit,
-  fpg_listbox,
-  fpg_memo,
-  fpg_combobox,
-  fpg_menu,
-  fpg_mru,
-  fpg_hyperlink,
+  lq_base,
+  lq_widget,
+  lq_form,
+  lq_label,
+  lq_button,
+  lq_edit,
+  lq_listbox,
+  lq_memo,
+  lq_combobox,
+  lq_menu,
+  lq_mru,
+  lq_hyperlink,
   vfdwidgetclass,
   vfdwidgets;
 
@@ -171,14 +171,14 @@ var
 implementation
 
 uses
-  fpg_main,
+  lq_main,
   vfdmain,
-  fpg_iniutils,
-  fpg_dialogs;
+  lq_iniutils,
+  lq_dialogs;
 
 
 // Anchor images
-{$I anchors.inc}
+{$I anchors.}
 
 
 {@VFD_NEWFORM_IMPL}
@@ -274,7 +274,7 @@ begin
   frm := TfrmAbout.Create(nil);
   try
     frm.lblVersion.Text := Format(frm.lblVersion.Text, [program_version]);
-    frm.lblCompiled.Text := Format(frm.lblCompiled.Text, [ {$I %date%} + ' ' + {$I %time%}]);
+    frm.lblCompiled.Text := Format(frm.lblCompiled.Text, [ {$I %%}date + ' ' + {$I %%}]);
     frm.ShowModal;
   finally
     frm.Free;

@@ -5,8 +5,8 @@ unit frm_splashscreen;
 interface
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_form, fpg_panel,
-  fpg_label;
+  SysUtils, Classes, lq_base, lq_main, lq_form, lq_panel,
+  lq_label;
 
 type
   TSplashForm = class(TfpgForm)

@@ -7,7 +7,7 @@ Interface
 
 uses
   Classes
-  ,fpg_base
+  ,lq_base
   ;
 
 type
@@ -162,7 +162,7 @@ Implementation
 uses
   SysUtils
   ,ACLStringUtility
-  ,fpg_stringutils
+  ,lq_stringutils
   ;
 
 const

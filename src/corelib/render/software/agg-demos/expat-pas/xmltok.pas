@@ -599,8 +599,8 @@ const
 
        isUtf8 :#1;
        isUtf16:#0 );
-  type_:({$I asciitab.inc}
-         {$I utf8tab.inc});
+  type_:({$I asciitab.}
+         {$I utf8tab.});
 
  {$IFDEF XML_MIN_SIZE }
   byteType   :sb_byteType;
@@ -643,8 +643,8 @@ const
 
        isUtf8 :#1;
        isUtf16:#0 );
-  type_:({$I asciitab_bt_colon_.inc}
-         {$I utf8tab.inc});
+  type_:({$I asciitab_bt_colon_.}
+         {$I utf8tab.});
 
  {$IFDEF XML_MIN_SIZE }
   byteType   :sb_byteType;
@@ -686,8 +686,8 @@ const
 
        isUtf8 :#1;
        isUtf16:#0 );
-  type_:({$I iasciitab.inc}
-         {$I utf8tab.inc});
+  type_:({$I iasciitab.}
+         {$I utf8tab.});
 
  {$IFDEF XML_MIN_SIZE }
   byteType   :sb_byteType;
@@ -730,8 +730,8 @@ const
 
        isUtf8 :#1;
        isUtf16:#0 );
-  type_:({$I iasciitab_bt_colon_.inc}
-         {$I utf8tab.inc});
+  type_:({$I iasciitab_bt_colon_.}
+         {$I utf8tab.});
 
  {$IFDEF XML_MIN_SIZE }
   byteType   :sb_byteType;

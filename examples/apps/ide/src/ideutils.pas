@@ -23,8 +23,8 @@ interface
 uses
   Classes
   ,SysUtils
-  ,fpg_base
-  ,fpg_widget
+  ,lq_base
+  ,lq_widget
   ;
 
 
@@ -83,11 +83,11 @@ procedure CheckGridModifyKeyPresses(Sender: TObject; var KeyCode: word; var Shif
 implementation
 
 uses
-  fpg_form
-  ,fpg_memo
-  ,fpg_grid
-  ,fpg_main
-  ,fpg_utils
+  lq_form
+  ,lq_memo
+  ,lq_grid
+  ,lq_main
+  ,lq_utils
   ,dbugintf
   ;
 

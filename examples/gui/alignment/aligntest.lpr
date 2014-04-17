@@ -4,7 +4,7 @@ program aligntest;
 
 uses
   Classes, SysUtils,
-  fpg_base, fpg_main, fpg_widget, fpg_form, fpg_label;
+  lq_base, lq_main, lq_widget, lq_form, lq_label;
 
 type
   TMainForm = class(TfpgForm)

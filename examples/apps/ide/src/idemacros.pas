@@ -23,8 +23,8 @@ interface
 uses
   Classes
   ,SysUtils
-  ,fpg_base
-  ,fpg_main
+  ,lq_base
+  ,lq_main
   ;
 
 type
@@ -68,7 +68,7 @@ implementation
 
 uses
   ideconst
-  ,fpg_iniutils;
+  ,lq_iniutils;
 
 var
   uIDEMacroList: TIDEMacroList;

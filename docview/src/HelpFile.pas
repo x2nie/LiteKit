@@ -9,7 +9,7 @@ interface
 uses
   Classes
   ,SysUtils
-  ,fpg_imagelist
+  ,lq_imagelist
   ,IPFFileFormatUnit
   ,HelpTopic
   ,HelpBitmap

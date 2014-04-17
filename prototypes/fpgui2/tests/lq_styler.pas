@@ -40,7 +40,7 @@ uses
   
   
 type
-  TfpgPrimitiveElement = (
+  TlqPrimitiveElement = (
       peFocusRectangle,                // The focus rectangle
       pePanel,                         // Generic bevel of a panel
       pePanelButton,                   // Panel are of standard button
@@ -65,7 +65,7 @@ type
       );
       
       
-  TfpgControlElement = (
+  TlqControlElement = (
       cePushButton,                    // The Bevel, Label and FocusRect
       cePushButtonBevel,
       cePushButtonLabel,
@@ -86,7 +86,7 @@ type
       );
       
       
-  TfpgStyleOptionEnum = (
+  TlqStyleOptionEnum = (
       soDefault,
       soFocusRect,
       soButton,
@@ -99,7 +99,7 @@ type
       );
       
       
-  TfpgStateItem = (
+  TlqStateItem = (
       stNone,
       stActive,
       stReadOnly,
@@ -109,10 +109,10 @@ type
       stHasFocus,
       stEnabled
       );
-  TfpgState = set of TfpgStateItem;
+  TlqState = set of TlqStateItem;
   
   
-  TfpgStandardPixmap = (
+  TlqStandardPixmap = (
       spMessageBoxInformation,
       spMessageBoxCritical,
       spMessageBoxError,
@@ -141,33 +141,33 @@ type
   
       
   // Just a data class
-  TfpgStyleOption = class(TObject)
+  TlqStyleOption = class(TObject)
   private
-    FRect: TfpgRect;
-    FState: TfpgState;
-    FStyleOption: TfpgStyleOptionEnum;
+    FRect: TlqRect;
+    FState: TlqState;
+    FStyleOption: TlqStyleOptionEnum;
   public
-    property  StyleOption: TfpgStyleOptionEnum read FStyleOption write FStyleOption;
-    property  Rect: TfpgRect read FRect write FRect;
-    property  State: TfpgState read FState write FState;
+    property  StyleOption: TlqStyleOptionEnum read FStyleOption write FStyleOption;
+    property  Rect: TlqRect read FRect write FRect;
+    property  State: TlqState read FState write FState;
   end;
   
   
-  TfpgButtonFeatures = set of (bfNone, bfFlat, bfDefault, bfEmbedded);
+  TlqButtonFeatures = set of (bfNone, bfFlat, bfDefault, bfEmbedded);
 
   // Button specific options
-  TfpgButtonStyleOption = class(TfpgStyleOption)
+  TlqButtonStyleOption = class(TlqStyleOption)
   private
-    FButtonFeatures: TfpgButtonFeatures;
+    FButtonFeatures: TlqButtonFeatures;
   public
-    property  ButtonFeatures: TfpgButtonFeatures read FButtonFeatures write FButtonFeatures;
+    property  ButtonFeatures: TlqButtonFeatures read FButtonFeatures write FButtonFeatures;
   end;
   
   
-  TfpgBaseStyle = class(TObject)
+  TlqBaseStyle = class(TObject)
   public
-    procedure   DrawControl(element: TfpgControlElement; const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget = nil); virtual; abstract;
-    procedure   DrawPrimitive(element: TfpgPrimitiveElement; const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget = nil); virtual; abstract;
+    procedure   DrawControl(element: TlqControlElement; const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget = nil); virtual; abstract;
+    procedure   DrawPrimitive(element: TlqPrimitiveElement; const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget = nil); virtual; abstract;
   end;
   
   
@@ -177,35 +177,35 @@ type
   
 
   // This class encapsulates the common look and feel of the GUI
-  TfpgCommonStyle = class(TfpgBaseStyle)
+  TlqCommonStyle = class(TlqBaseStyle)
   public
-    procedure DrawControl(element: TfpgControlElement; const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget=nil); override;
-    procedure DrawPrimitive(element: TfpgPrimitiveElement; const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget=nil); override;
+    procedure DrawControl(element: TlqControlElement; const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget=nil); override;
+    procedure DrawPrimitive(element: TlqPrimitiveElement; const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget=nil); override;
   end;
   
   
   // The Windows 2000 look
-  TfpgWin2000Style = class(TfpgCommonStyle)
+  TlqWin2000Style = class(TlqCommonStyle)
   end;
   
   
-  TfpgWinXPStyle = class(TfpgCommonStyle)
+  TlqWinXPStyle = class(TlqCommonStyle)
   end;
   
   
   // This class provides a widgte style similar to the classic BlueCurve theme
   // originally created by Red Hat.
-  TfpgBlueCurveStyle = class(TfpgCommonStyle)
+  TlqBlueCurveStyle = class(TlqCommonStyle)
   end;
   
   
   // This class provides a widget style similar to GNOME
-  TfpgClearLookStyle = class(TfpgCommonStyle)
+  TlqClearLookStyle = class(TlqCommonStyle)
   end;
 
 
   // For the die-hard unix fans!
-  TfpgMotifStyle = class(TfpgCommonStyle)
+  TlqMotifStyle = class(TlqCommonStyle)
   end;
 
 
@@ -215,12 +215,12 @@ uses
   lq_button
   ;
 
-{ TfpgCommonStyle }
+{ TlqCommonStyle }
 
-procedure TfpgCommonStyle.DrawControl(element: TfpgControlElement;
-    const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget);
+procedure TlqCommonStyle.DrawControl(element: TlqControlElement;
+    const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget);
 var
-  r: TfpgRect;
+  r: TlqRect;
   dx, dy: integer;
   offset: integer;
 begin
@@ -229,11 +229,11 @@ begin
     cePushButtonBevel:
         begin
           {$IFDEF DEBUG}
-          writeln('TfpgCommonStyle.DrawControl: cePushButtonBevel');
+          writeln('TlqCommonStyle.DrawControl: cePushButtonBevel');
           {$ENDIF}
           r.SetRect(option.Rect.Left, option.Rect.Top, option.Rect.Width, option.Rect.Height);
           
-          if bfDefault in TfpgButtonStyleOption(option).ButtonFeatures then
+          if bfDefault in TlqButtonStyleOption(option).ButtonFeatures then
           begin
             Canvas.SetColor(clBlack);
             Canvas.SetLineStyle(1, lsSolid);
@@ -248,7 +248,7 @@ begin
           // Left and Top (outer)
           if stLowered in option.State then
           begin
-            if bfEmbedded in TfpgButtonStyleOption(option).ButtonFeatures then
+            if bfEmbedded in TlqButtonStyleOption(option).ButtonFeatures then
               Canvas.SetColor(clHilite1)
             else
               Canvas.SetColor(clShadow2);
@@ -261,7 +261,7 @@ begin
           // Right and Bottom (outer)
           if stLowered in option.State then
           begin
-            if bfEmbedded in TfpgButtonStyleOption(option).ButtonFeatures then
+            if bfEmbedded in TlqButtonStyleOption(option).ButtonFeatures then
               Canvas.SetColor(clHilite1)
             else
               Canvas.SetColor(clShadow2);
@@ -274,7 +274,7 @@ begin
           // Right and Bottom (inner)
           if stLowered in option.State then
           begin
-            if bfEmbedded in TfpgButtonStyleOption(option).ButtonFeatures then
+            if bfEmbedded in TlqButtonStyleOption(option).ButtonFeatures then
               Canvas.SetColor(clButtonFace)
             else
               Canvas.SetColor(clHilite1);
@@ -288,33 +288,33 @@ begin
     cePushButtonLabel:
         begin
           {$IFDEF DEBUG}
-          writeln('TfpgCommonStyle.DrawControl: cePushButtonLabel');
+          writeln('TlqCommonStyle.DrawControl: cePushButtonLabel');
           {$ENDIF}
           r.SetRect(option.Rect.Left, option.Rect.Top, option.Rect.Width, option.Rect.Height);
 //          InflateRect(r, -3, -3); { same size as used in the focus rectangle }
 
-          Canvas.SetTextColor(TfpgButton(widget).TextColor);
-          Canvas.SetFont(TfpgButton(widget).Font);
+          Canvas.SetTextColor(TlqButton(widget).TextColor);
+          Canvas.SetFont(TlqButton(widget).Font);
           Canvas.SetClipRect(r);
 
-//          if stLowered in TfpgButtonStyleOption(option).State then
+//          if stLowered in TlqButtonStyleOption(option).State then
 //            offset := 1
 //          else
 //            offset := 0;
 
-          Canvas.DrawText(r, TfpgButton(widget).Text);
+          Canvas.DrawText(r, TlqButton(widget).Text);
 //          Canvas.DrawString(tx+offset, ty+offset, Text, Enabled);
         end;  { cePushButtonLabel }
   end;
 end;
 
-procedure TfpgCommonStyle.DrawPrimitive(element: TfpgPrimitiveElement;
-    const option: TfpgStyleOption; canvas: TfpgCanvas; widget: TfpgWidget);
+procedure TlqCommonStyle.DrawPrimitive(element: TlqPrimitiveElement;
+    const option: TlqStyleOption; canvas: TlqCanvas; widget: TlqWidget);
 var
-  r: TfpgRect;
-  oldColor: TfpgColor;
+  r: TlqRect;
+  oldColor: TlqColor;
   oldLineWidth: integer;
-  oldLineStyle: TfpgLineStyle;
+  oldLineStyle: TlqLineStyle;
 begin
   // Do common things here. It's going to be a huge case statement. This design
   // allows us to add new controls or elements without having to instantly
@@ -323,7 +323,7 @@ begin
     peFocusRectangle:
         begin
           {$IFDEF DEBUG}
-          writeln('TfpgCommonStyle.DrawPrimitive: peFocusRectangle');
+          writeln('TlqCommonStyle.DrawPrimitive: peFocusRectangle');
           {$ENDIF}
           if stHasFocus in option.State then
           begin
@@ -347,7 +347,7 @@ begin
     peIndicatorRadioButton:
         begin      // just an example!!!!!!!!
           {$IFDEF DEBUG}
-          writeln('TfpgCommonStyle.DrawPrimitive: peIndicatorRadioButton');
+          writeln('TlqCommonStyle.DrawPrimitive: peIndicatorRadioButton');
           {$ENDIF}
           Canvas.SetColor(clShadow1);
           Canvas.DrawArc(option.Rect.Left, option.Rect.Top, option.Rect.Width, option.Rect.Height, 0, 180);

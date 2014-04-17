@@ -28,9 +28,9 @@ uses
   lq_base,
   lq_main;
 
-procedure ReadImage_BMP(img: TfpgImage; bmp: Pointer; bmpsize: longword);
-function  LoadImage_BMP(const AFileName: TfpgString): TfpgImage;
-function  CreateImage_BMP(bmp: Pointer; bmpsize: longword): TfpgImage;
+procedure ReadImage_BMP(img: TlqImage; bmp: Pointer; bmpsize: longword);
+function  LoadImage_BMP(const AFileName: TlqString): TlqImage;
+function  CreateImage_BMP(bmp: Pointer; bmpsize: longword): TlqImage;
 
 
 implementation
@@ -45,16 +45,16 @@ type
 {$IFEND}
 
 
-procedure ReadImage_OS2BMP(img: TfpgImage; bmp: Pointer; bmpsize: longword); forward;
+procedure ReadImage_OS2BMP(img: TlqImage; bmp: Pointer; bmpsize: longword); forward;
 
 
-function CreateImage_BMP(bmp: Pointer; bmpsize: longword): TfpgImage;
+function CreateImage_BMP(bmp: Pointer; bmpsize: longword): TlqImage;
 begin
-  Result := TfpgImage.Create;
+  Result := TlqImage.Create;
   ReadImage_BMP(Result, bmp, bmpsize);
 end;
 
-function LoadImage_BMP(const AFileName: TfpgString): TfpgImage;
+function LoadImage_BMP(const AFileName: TlqString): TlqImage;
 var
   AFile: file of char;
   AImageData: Pointer;
@@ -72,7 +72,7 @@ begin
   GetMem(AImageData, AImageDataSize);
   try
     BlockRead(AFile, AImageData^, AImageDataSize);
-    Result := TfpgImage.Create;
+    Result := TlqImage.Create;
     ReadImage_BMP(Result, AImageData, AImageDataSize);
   finally
     CloseFile(AFile);
@@ -122,7 +122,7 @@ type
  // The lines stored bottom-up
 
 
-procedure ReadImage_BMP(img: TfpgImage; bmp: Pointer; bmpsize: longword);
+procedure ReadImage_BMP(img: TlqImage; bmp: Pointer; bmpsize: longword);
 var
   bh: PBMPHeaderRec;
   ih: PBMPInfoHeaderRec;
@@ -358,7 +358,7 @@ type
   end;
 
 
-procedure ReadImage_OS2BMP(img: TfpgImage; bmp: Pointer; bmpsize: longword);
+procedure ReadImage_OS2BMP(img: TlqImage; bmp: Pointer; bmpsize: longword);
 var
   bh: ^INFBITMAPHEADER;
   p: PByte;

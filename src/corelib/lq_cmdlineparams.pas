@@ -16,7 +16,7 @@
 
 { TODO : Make sure Unicode parameter handling is supported. }
 
-unit fpg_cmdlineparams;
+unit lq_cmdlineparams;
 
 {$mode objfpc}{$H+}
 
@@ -30,7 +30,7 @@ const
 
 type
 
-  TfpgCommandLineParams = class(TObject)
+  TlqCommandLineParams = class(TObject)
   private
     FsParams: string;
     FslParams: TStringList;
@@ -57,7 +57,7 @@ type
 
 
 // Singleton
-function gCommandLineParams: TfpgCommandLineParams;
+function gCommandLineParams: TlqCommandLineParams;
 
 
 implementation
@@ -66,37 +66,37 @@ uses
   SysUtils;
 
 var
-  uCommandLineParams: TfpgCommandLineParams;
+  uCommandLineParams: TlqCommandLineParams;
 
 // Singleton
-function gCommandLineParams: TfpgCommandLineParams;
+function gCommandLineParams: TlqCommandLineParams;
 begin
   if uCommandLineParams = nil then
-    uCommandLineParams := TfpgCommandLineParams.Create;
+    uCommandLineParams := TlqCommandLineParams.Create;
   result := uCommandLineParams;
 end;
 
-{ TfpgCommandLineParams }
+{ TlqCommandLineParams }
 
-constructor TfpgCommandLineParams.Create;
+constructor TlqCommandLineParams.Create;
 begin
   inherited;
   FslParams := TStringList.Create;
   ReadParams;
 end;
 
-destructor TfpgCommandLineParams.destroy;
+destructor TlqCommandLineParams.destroy;
 begin
   FslParams.Free;
   inherited;
 end;
 
-function TfpgCommandLineParams.GetParam(const AParam: string): string;
+function TlqCommandLineParams.GetParam(const AParam: string): string;
 begin
   result := FslParams.Values[ upperCase(AParam)];
 end;
 
-function TfpgCommandLineParams.IsParam(const AParam: string): boolean;
+function TlqCommandLineParams.IsParam(const AParam: string): boolean;
 var
   i: integer;
 begin
@@ -109,7 +109,7 @@ begin
   end;
 end;
 
-function TfpgCommandLineParams.IsParam(const AParams: array of string): boolean;
+function TlqCommandLineParams.IsParam(const AParams: array of string): boolean;
 var
   i: integer;
 begin
@@ -122,7 +122,7 @@ begin
     end;
 end;
 
-procedure TfpgCommandLineParams.ReadParams;
+procedure TlqCommandLineParams.ReadParams;
 var
   i: integer;
   j: integer;
@@ -155,7 +155,7 @@ begin
   end;
 end;
 
-function TfpgCommandLineParams.StrTran(AValue, ADel, AIns: string): string;
+function TlqCommandLineParams.StrTran(AValue, ADel, AIns: string): string;
 var
   i: integer;
   sToChange: string;
@@ -172,7 +172,7 @@ begin
   result := result + sToChange;
 end;
 
-function TfpgCommandLineParams.NumToken(const AValue, AToken: string): integer;
+function TlqCommandLineParams.NumToken(const AValue, AToken: string): integer;
 var
   i, iCount: integer;
   lsValue: string;
@@ -193,7 +193,7 @@ begin
   result := iCount + 1;
 end;
 
-function TfpgCommandLineParams.Token(const AValue, AToken: string;
+function TlqCommandLineParams.Token(const AValue, AToken: string;
     const APos: integer): string;
 var
   i, iCount, iNumToken: integer;
@@ -235,7 +235,7 @@ begin
   end;
 end;
 
-function TfpgCommandLineParams.WordExtract(const AInput: string;
+function TlqCommandLineParams.WordExtract(const AInput: string;
     const APos: integer; const ADelims: string): string;
 var
   iStart: integer;
@@ -261,7 +261,7 @@ begin
   end;
 end;
 
-function TfpgCommandLineParams.WordPosition(const AN: integer;
+function TlqCommandLineParams.WordPosition(const AN: integer;
     const AStr: string; ADelims: string): integer;
 var
   lCount: integer;
@@ -301,7 +301,7 @@ begin
   end;
 end;
 
-function TfpgCommandLineParams.ExtractChar(const AValue: string;
+function TlqCommandLineParams.ExtractChar(const AValue: string;
     const APos: integer): char;
 var
   lResult: string;
@@ -315,7 +315,7 @@ begin
   result := lResult[1];
 end;
 
-function TfpgCommandLineParams.StripLeadingDelims(const AStrToProcess: string;
+function TlqCommandLineParams.StripLeadingDelims(const AStrToProcess: string;
     ADelims: string): string;
 var
   i: integer;
@@ -348,7 +348,7 @@ begin
 end;
 
 // Strip any trailing ADelims
-function TfpgCommandLineParams.StripTrailingDelims(const AStrToProcess: string;
+function TlqCommandLineParams.StripTrailingDelims(const AStrToProcess: string;
     ADelims: string): string;
 var
   i: integer;
@@ -380,7 +380,7 @@ begin
 end;
 
 // Given a set of word delimiters, return number of words in S
-function TfpgCommandLineParams.WordCount(const AStrToProcess: string;
+function TlqCommandLineParams.WordCount(const AStrToProcess: string;
     ADelims: string): integer;
 var
   i: integer;
@@ -420,7 +420,7 @@ begin
 end;
 
 // Is AChr in the string AStr ?
-function TfpgCommandLineParams.CharInStr(const AChr: char; const AStr: string): boolean;
+function TlqCommandLineParams.CharInStr(const AChr: char; const AStr: string): boolean;
 begin
   result := pos(AChr, AStr) <> 0;
 end;

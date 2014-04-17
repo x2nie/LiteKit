@@ -33,21 +33,21 @@ uses
 
 type
 
-  TFindForm = class(TfpgForm)
+  TFindForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: FindForm}
-    Label1: TfpgLabel;
-    edtFindText: TfpgEdit;
-    chkReplace: TfpgCheckBox;
-    edtReplaceText: TfpgEdit;
-    Label2: TfpgLabel;
-    chkCaseSensitive: TfpgCheckBox;
-    chkWholeWord: TfpgCheckBox;
-    chkGlobalScope: TfpgCheckBox;
-    chkSearchBackwards: TfpgCheckBox;
-    btnCancel: TfpgButton;
-    btnFind: TfpgButton;
-    btnHelp: TfpgButton;
+    Label1: TlqLabel;
+    edtFindText: TlqEdit;
+    chkReplace: TlqCheckBox;
+    edtReplaceText: TlqEdit;
+    Label2: TlqLabel;
+    chkCaseSensitive: TlqCheckBox;
+    chkWholeWord: TlqCheckBox;
+    chkGlobalScope: TlqCheckBox;
+    chkSearchBackwards: TlqCheckBox;
+    btnCancel: TlqButton;
+    btnFind: TlqButton;
+    btnHelp: TlqButton;
     {@VFD_HEAD_END: FindForm}
     procedure chkReplaceChanged(Sender: TObject);
     procedure edtFindTextKeyPressed(Sender: TObject; var KeyCode: Word; var ShiftState: TShiftState; var Consumed: Boolean);
@@ -55,13 +55,13 @@ type
     procedure AfterCreate; override;
   end;
 
-procedure DisplayFindForm(var AFindText: TfpgString; var AOptions: TfpgFindOptions; var ABackward: Boolean);
+procedure DisplayFindForm(var AFindText: TlqString; var AOptions: TlqFindOptions; var ABackward: Boolean);
 
 {@VFD_NEWFORM_DECL}
 
 implementation
 
-procedure DisplayFindForm(var AFindText: TfpgString; var AOptions: TfpgFindOptions; var ABackward: Boolean);
+procedure DisplayFindForm(var AFindText: TlqString; var AOptions: TlqFindOptions; var ABackward: Boolean);
 var
   frm: TFindForm;
 begin
@@ -121,7 +121,7 @@ begin
   WindowTitle := 'Find';
   Hint := '';
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -131,7 +131,7 @@ begin
     Text := 'Text to find:';
   end;
 
-  edtFindText := TfpgEdit.Create(self);
+  edtFindText := TlqEdit.Create(self);
   with edtFindText do
   begin
     Name := 'edtFindText';
@@ -145,7 +145,7 @@ begin
     OnKeyPress := @edtFindTextKeyPressed;
   end;
 
-  chkReplace := TfpgCheckBox.Create(self);
+  chkReplace := TlqCheckBox.Create(self);
   with chkReplace do
   begin
     Name := 'chkReplace';
@@ -157,7 +157,7 @@ begin
     OnChange := @chkReplaceChanged;
   end;
 
-  edtReplaceText := TfpgEdit.Create(self);
+  edtReplaceText := TlqEdit.Create(self);
   with edtReplaceText do
   begin
     Name := 'edtReplaceText';
@@ -171,7 +171,7 @@ begin
     Text := '';
   end;
 
-  Label2 := TfpgLabel.Create(self);
+  Label2 := TlqLabel.Create(self);
   with Label2 do
   begin
     Name := 'Label2';
@@ -181,7 +181,7 @@ begin
     Text := 'Options';
   end;
 
-  chkCaseSensitive := TfpgCheckBox.Create(self);
+  chkCaseSensitive := TlqCheckBox.Create(self);
   with chkCaseSensitive do
   begin
     Name := 'chkCaseSensitive';
@@ -192,7 +192,7 @@ begin
     Text := 'Case Sensitive';
   end;
 
-  chkWholeWord := TfpgCheckBox.Create(self);
+  chkWholeWord := TlqCheckBox.Create(self);
   with chkWholeWord do
   begin
     Name := 'chkWholeWord';
@@ -203,7 +203,7 @@ begin
     Text := 'Whole Words Only';
   end;
 
-  chkGlobalScope := TfpgCheckBox.Create(self);
+  chkGlobalScope := TlqCheckBox.Create(self);
   with chkGlobalScope do
   begin
     Name := 'chkGlobalScope';
@@ -214,7 +214,7 @@ begin
     Text := 'Global Scope';
   end;
 
-  chkSearchBackwards := TfpgCheckBox.Create(self);
+  chkSearchBackwards := TlqCheckBox.Create(self);
   with chkSearchBackwards do
   begin
     Name := 'chkSearchBackwards';
@@ -225,7 +225,7 @@ begin
     Text := 'Search backwards';
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -239,7 +239,7 @@ begin
     TabOrder := 10;
   end;
 
-  btnFind := TfpgButton.Create(self);
+  btnFind := TlqButton.Create(self);
   with btnFind do
   begin
     Name := 'btnFind';
@@ -253,7 +253,7 @@ begin
     TabOrder := 11;
   end;
 
-  btnHelp := TfpgButton.Create(self);
+  btnHelp := TlqButton.Create(self);
   with btnHelp do
   begin
     Name := 'btnHelp';

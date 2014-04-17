@@ -14,30 +14,30 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    lblName1: TfpgLabel;
-    edtText: TfpgEdit;
-    chbPasswd: TfpgCheckBox;
-    lblName2: TfpgLabel;
-    l_integervalue: TfpgLabel;
-    lblName3: TfpgLabel;
-    l_floatvalue: TfpgLabel;
-    lblName4: TfpgLabel;
-    l_currvalue: TfpgLabel;
-    edtInteger: TfpgEditInteger;
-    edtFloat: TfpgEditFloat;
-    edtCurrency: TfpgEditCurrency;
-    btnQuit: TfpgButton;
-    rbPoint: TfpgRadioButton;
-    rbComma: TfpgRadioButton;
-    chbSpace: TfpgCheckBox;
-    chbFloatDec: TfpgCheckBox;
-    chbFloatFixDec: TfpgCheckBox;
-    chbLimit: TfpgCheckBox;
-    lbNegativeColor: TfpgColorListBox;
-    lblNegativeColor: TfpgLabel;
+    lblName1: TlqLabel;
+    edtText: TlqEdit;
+    chbPasswd: TlqCheckBox;
+    lblName2: TlqLabel;
+    l_integervalue: TlqLabel;
+    lblName3: TlqLabel;
+    l_floatvalue: TlqLabel;
+    lblName4: TlqLabel;
+    l_currvalue: TlqLabel;
+    edtInteger: TlqEditInteger;
+    edtFloat: TlqEditFloat;
+    edtCurrency: TlqEditCurrency;
+    btnQuit: TlqButton;
+    rbPoint: TlqRadioButton;
+    rbComma: TlqRadioButton;
+    chbSpace: TlqCheckBox;
+    chbFloatDec: TlqCheckBox;
+    chbFloatFixDec: TlqCheckBox;
+    chbLimit: TlqCheckBox;
+    lbNegativeColor: TlqColorListBox;
+    lblNegativeColor: TlqLabel;
     {@VFD_HEAD_END: MainForm}
     procedure btnQuitClicked(Sender: TObject);
     procedure rbClicked(Sender: TObject);
@@ -66,8 +66,8 @@ end;
 
 procedure TMainForm.rbClicked(Sender: TObject);
 begin
-  if Sender is TfpgRadioButton then
-    case (Sender as TfpgRadioButton).tag of
+  if Sender is TlqRadioButton then
+    case (Sender as TlqRadioButton).tag of
       0:
         begin
           edtFloat.CustomDecimalSeparator := '.';
@@ -211,7 +211,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -221,7 +221,7 @@ begin
     Text := 'Text Edit';
   end;
 
-  edtText := TfpgEdit.Create(self);
+  edtText := TlqEdit.Create(self);
   with edtText do
   begin
     Name := 'edtText';
@@ -233,7 +233,7 @@ begin
     Text := 'Hello World!';
   end;
 
-  chbPasswd := TfpgCheckBox.Create(self);
+  chbPasswd := TlqCheckBox.Create(self);
   with chbPasswd do
   begin
     Name := 'chbPasswd';
@@ -245,7 +245,7 @@ begin
     OnChange := @chbPasswdChanged;
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -255,7 +255,7 @@ begin
     Text := 'Integer Edit';
   end;
 
-  l_integervalue := TfpgLabel.Create(self);
+  l_integervalue := TlqLabel.Create(self);
   with l_integervalue do
   begin
     Name := 'l_integervalue';
@@ -265,7 +265,7 @@ begin
     Text := '';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -275,7 +275,7 @@ begin
     Text := 'Float Edit';
   end;
 
-  l_floatvalue := TfpgLabel.Create(self);
+  l_floatvalue := TlqLabel.Create(self);
   with l_floatvalue do
   begin
     Name := 'l_floatvalue';
@@ -285,7 +285,7 @@ begin
     Text := '';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -295,7 +295,7 @@ begin
     Text := 'Currency Edit';
   end;
 
-  l_currvalue := TfpgLabel.Create(self);
+  l_currvalue := TlqLabel.Create(self);
   with l_currvalue do
   begin
     Name := 'l_currvalue';
@@ -305,7 +305,7 @@ begin
     Text := '';
   end;
 
-  edtInteger := TfpgEditInteger.Create(self);
+  edtInteger := TlqEditInteger.Create(self);
   with edtInteger do
   begin
     Name := 'edtInteger';
@@ -317,7 +317,7 @@ begin
     OnChange := @edtIntegerChange;
   end;
 
-  edtFloat := TfpgEditFloat.Create(self);
+  edtFloat := TlqEditFloat.Create(self);
   with edtFloat do
   begin
     Name := 'edtFloat';
@@ -330,7 +330,7 @@ begin
     OnChange := @edtFloatChange;
   end;
 
-  edtCurrency := TfpgEditCurrency.Create(self);
+  edtCurrency := TlqEditCurrency.Create(self);
   with edtCurrency do
   begin
     Name := 'edtCurrency';
@@ -342,7 +342,7 @@ begin
     OnChange := @edtCurrencyChange;
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -356,7 +356,7 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  rbPoint := TfpgRadioButton.Create(self);
+  rbPoint := TlqRadioButton.Create(self);
   with rbPoint do
   begin
     Name := 'rbPoint';
@@ -371,7 +371,7 @@ begin
     OnChange := @rbClicked;
   end;
 
-  rbComma := TfpgRadioButton.Create(self);
+  rbComma := TlqRadioButton.Create(self);
   with rbComma do
   begin
     Name := 'rbComma';
@@ -385,7 +385,7 @@ begin
     OnChange := @rbClicked;
   end;
 
-  chbSpace := TfpgCheckBox.Create(self);
+  chbSpace := TlqCheckBox.Create(self);
   with chbSpace do
   begin
     Name := 'chbSpace';
@@ -397,7 +397,7 @@ begin
     OnChange := @chbSpaceChange;
   end;
 
-  chbFloatDec := TfpgCheckBox.Create(self);
+  chbFloatDec := TlqCheckBox.Create(self);
   with chbFloatDec do
   begin
     Name := 'chbFloatDec';
@@ -409,7 +409,7 @@ begin
     OnChange := @chbFloatDecChange;
   end;
 
-  chbFloatFixDec := TfpgCheckBox.Create(self);
+  chbFloatFixDec := TlqCheckBox.Create(self);
   with chbFloatFixDec do
   begin
     Name := 'chbFloatFixDec';
@@ -421,7 +421,7 @@ begin
     OnChange := @chbFloatFixDecChange;
   end;
 
-  chbLimit := TfpgCheckBox.Create(self);
+  chbLimit := TlqCheckBox.Create(self);
   with chbLimit do
   begin
     Name := 'chbLimit';
@@ -433,7 +433,7 @@ begin
     OnChange := @chbLimitChange;
   end;
 
-  lbNegativeColor := TfpgColorListBox.Create(self);
+  lbNegativeColor := TlqColorListBox.Create(self);
   with lbNegativeColor do
   begin
     Name := 'lbNegativeColor';
@@ -445,7 +445,7 @@ begin
     OnChange := @lbChange;
   end;
 
-  lblNegativeColor := TfpgLabel.Create(self);
+  lblNegativeColor := TlqLabel.Create(self);
   with lblNegativeColor do
   begin
     Name := 'lblNegativeColor';

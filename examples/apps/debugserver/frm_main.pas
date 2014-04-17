@@ -84,22 +84,22 @@ uses
   ;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    MainMenu: TfpgMenuBar;
-    Bevel1: TfpgBevel;
-    grdMessages: TfpgStringGrid;
-    mnuFile: TfpgPopupMenu;
-    mnuEdit: TfpgPopupMenu;
-    mnuHelp: TfpgPopupMenu;
-    btnQuit: TfpgButton;
-    Bevel2: TfpgBevel;
-    btnPause: TfpgButton;
-    btnStart: TfpgButton;
-    btnClear: TfpgButton;
+    MainMenu: TlqMenuBar;
+    Bevel1: TlqBevel;
+    grdMessages: TlqStringGrid;
+    mnuFile: TlqPopupMenu;
+    mnuEdit: TlqPopupMenu;
+    mnuHelp: TlqPopupMenu;
+    btnQuit: TlqButton;
+    Bevel2: TlqBevel;
+    btnPause: TlqButton;
+    btnStart: TlqButton;
+    btnClear: TlqButton;
     {@VFD_HEAD_END: MainForm}
-    miPause: TfpgMenuItem;
+    miPause: TlqMenuItem;
     FIPCSrv: TSimpleIPCServer;
     FPaused: Boolean;
     FAddAtBottom: Boolean;
@@ -114,12 +114,12 @@ type
     procedure   ShowMessageWindow;
     procedure   miPauseClicked(Sender: TObject);
     procedure   miFileQuit(Sender: TObject);
-    procedure   miHelpAboutFPGui(Sender: TObject);
+    procedure   miHelpAbouTlqui(Sender: TObject);
     procedure   miHelpProductInformation(Sender: TObject);
     procedure   btnClearClicked(Sender: TObject);
     procedure   btnPauseClicked(Sender: TObject);
     procedure   btnStartClicked(Sender: TObject);
-    procedure   GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure   GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -160,9 +160,9 @@ begin
 end;
 
 procedure TMainForm.GridDrawCell(Sender: TObject; const ARow, ACol: Integer;
-  const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+  const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
-  img: TfpgImage;
+  img: TlqImage;
   i: integer;
   dx: integer;
 begin
@@ -271,14 +271,14 @@ begin
   Close;
 end;
 
-procedure TMainForm.miHelpAboutFPGui(Sender: TObject);
+procedure TMainForm.miHelpAbouTlqui(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui;
+  TlqMessageDialog.AbouTlqui;
 end;
 
 procedure TMainForm.miHelpProductInformation(Sender: TObject);
 begin
-  TfpgMessageDialog.Information('Product Information', WindowTitle + LineEnding + 'Written by Graeme Geldenhuys - 2010');
+  TlqMessageDialog.Information('Product Information', WindowTitle + LineEnding + 'Written by Graeme Geldenhuys - 2010');
 end;
 
 constructor TMainForm.Create(AOwner: TComponent);
@@ -317,7 +317,7 @@ begin
   Hint := '';
   ShowHint := True;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -325,7 +325,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  Bevel1 := TfpgBevel.Create(self);
+  Bevel1 := TlqBevel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -336,7 +336,7 @@ begin
     Shape := bsBottomLine;
   end;
 
-  grdMessages := TfpgStringGrid.Create(self);
+  grdMessages := TlqStringGrid.Create(self);
   with grdMessages do
   begin
     Name := 'grdMessages';
@@ -356,7 +356,7 @@ begin
     OnDrawCell  := @GridDrawCell;
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';
@@ -366,7 +366,7 @@ begin
     AddMenuItem('Quit', '', @miFileQuit);
   end;
 
-  mnuEdit := TfpgPopupMenu.Create(self);
+  mnuEdit := TlqPopupMenu.Create(self);
   with mnuEdit do
   begin
     Name := 'mnuEdit';
@@ -378,16 +378,16 @@ begin
     AddMenuItem('Preferences...', '', nil).Enabled := False;
   end;
 
-  mnuHelp := TfpgPopupMenu.Create(self);
+  mnuHelp := TlqPopupMenu.Create(self);
   with mnuHelp do
   begin
     Name := 'mnuHelp';
     SetPosition(260, 152, 120, 24);
-    AddMenuItem('About fpGUI...', '', @miHelpAboutFPGui);
+    AddMenuItem('About fpGUI...', '', @miHelpAbouTlqui);
     AddMenuItem('Product Information...', 'F1', @miHelpProductInformation);
   end;
 
-  btnQuit := TfpgButton.Create(Bevel1);
+  btnQuit := TlqButton.Create(Bevel1);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -404,7 +404,7 @@ begin
     OnClick := @miFileQuit;
   end;
 
-  Bevel2 := TfpgBevel.Create(Bevel1);
+  Bevel2 := TlqBevel.Create(Bevel1);
   with Bevel2 do
   begin
     Name := 'Bevel2';
@@ -414,7 +414,7 @@ begin
     Shape := bsLeftLine;
   end;
 
-  btnPause := TfpgButton.Create(Bevel1);
+  btnPause := TlqButton.Create(Bevel1);
   with btnPause do
   begin
     Name := 'btnPause';
@@ -433,7 +433,7 @@ begin
     OnClick :=@btnPauseClicked;
   end;
 
-  btnStart := TfpgButton.Create(Bevel1);
+  btnStart := TlqButton.Create(Bevel1);
   with btnStart do
   begin
     Name := 'btnStart';
@@ -451,7 +451,7 @@ begin
     Enabled := False;
   end;
 
-  btnClear := TfpgButton.Create(Bevel1);
+  btnClear := TlqButton.Create(Bevel1);
   with btnClear do
   begin
     Name := 'btnClear';

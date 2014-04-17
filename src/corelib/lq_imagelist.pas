@@ -35,45 +35,45 @@ type
 
   EItemExists = class(Exception);
 
-  TfpgImageList = class;  // forward declaration
+  TlqImageList = class;  // forward declaration
   
 
-  TfpgImageItem = class(TObject)
+  TlqImageItem = class(TObject)
   private
-    FImage: TfpgImage;
+    FImage: TlqImage;
     FIndex: integer;
-    FImageList: TfpgImageList;
-    procedure   SetImageList(AImageList: TfpgImageList);
+    FImageList: TlqImageList;
+    procedure   SetImageList(AImageList: TlqImageList);
     procedure   SetIndex(AIndex: integer);
-    procedure   SetImage(AImage: TfpgImage);
+    procedure   SetImage(AImage: TlqImage);
   public
     constructor Create; overload;
-    constructor Create(AImageList: TfpgImageList; AIndex: integer; AImage: TfpgImage); overload;
-    constructor Create(AFileName: TfpgString; AIndex: integer); overload;
+    constructor Create(AImageList: TlqImageList; AIndex: integer; AImage: TlqImage); overload;
+    constructor Create(AFileName: TlqString; AIndex: integer); overload;
     destructor  Destroy; override;
     property    Index: integer read FIndex write SetIndex;
-    property    Image: TfpgImage read FImage write SetImage;
-    property    ImageList: TfpgImageList read FImageList write SetImageList;
-    procedure   LoadFromFile(AFileName: TfpgString);
+    property    Image: TlqImage read FImage write SetImage;
+    property    ImageList: TlqImageList read FImageList write SetImageList;
+    procedure   LoadFromFile(AFileName: TlqString);
   end;
 
 
-  TfpgImageList = class(TObject)
+  TlqImageList = class(TObject)
   private
     FList: TList;
     function    GetFListIndex(AIndex: Integer): Integer;
-    function    GetItem(AIndex: integer): TfpgImageItem;
-    procedure   SetItem(AIndex: integer; AItem: TfpgImageItem);
+    function    GetItem(AIndex: integer): TlqImageItem;
+    procedure   SetItem(AIndex: integer; AItem: TlqImageItem);
     function    GetCount: integer;
   public
     constructor Create;
     destructor  Destroy; override;
-    procedure   AddItemFromFile(AFileName: TfpgString; AIndex: integer = -1);
-    procedure   AddImage(AImage: TfpgImage; AIndex: integer = -1);
+    procedure   AddItemFromFile(AFileName: TlqString; AIndex: integer = -1);
+    procedure   AddImage(AImage: TlqImage; AIndex: integer = -1);
     procedure   RemoveIndex(AIndex: integer);
     function    GetMaxItem: integer;
     procedure   Clear;
-    property    Items[AIndex: integer]: TfpgImageItem read GetItem write SetItem; default;
+    property    Items[AIndex: integer]: TlqImageItem read GetItem write SetItem; default;
     property    Count: integer read GetCount;
   end;
 
@@ -85,38 +85,38 @@ uses
   lq_imgfmt_bmp,
   lq_utils;
 
-{ TfpgImageList }
+{ TlqImageList }
 
-function TfpgImageList.GetFListIndex(AIndex: Integer): Integer;
+function TlqImageList.GetFListIndex(AIndex: Integer): Integer;
 var
   i: integer;
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageList.GetFListIndex');
+  writeln('TlqImageList.GetFListIndex');
   {$ENDIF}
   result := -1;
   for i := 0 to FList.Count - 1 do
-    if TfpgImageItem(FList[i]).Index = AIndex then
+    if TlqImageItem(FList[i]).Index = AIndex then
     begin
       result := i;
       Break;  //==>
     end;
 end;
 
-function TfpgImageList.GetItem(AIndex: integer): TfpgImageItem;
+function TlqImageList.GetItem(AIndex: integer): TlqImageItem;
 var
   AFindIndex: integer;
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageList.GetItem');
+  writeln('TlqImageList.GetItem');
   {$ENDIF}
   result := nil;
   AFindIndex := GetFListIndex(AIndex);
   if AFindIndex > -1 then
-    result := TfpgImageItem(FList[AFindIndex]);
+    result := TlqImageItem(FList[AFindIndex]);
 end;
 
-procedure TfpgImageList.SetItem(AIndex: integer; AItem: TfpgImageItem);
+procedure TlqImageList.SetItem(AIndex: integer; AItem: TlqImageItem);
 begin
   if AItem = nil then
     Exit; //==>
@@ -129,38 +129,38 @@ begin
   FList.Add(AItem);
 end;
 
-function TfpgImageList.GetCount: integer;
+function TlqImageList.GetCount: integer;
 begin
   Result := FList.Count;
 end;
 
-constructor TfpgImageList.Create;
+constructor TlqImageList.Create;
 begin
   FList := TList.Create;
 end;
 
-destructor TfpgImageList.Destroy;
+destructor TlqImageList.Destroy;
 var
   i: integer;
 begin
   for i := FList.Count-1 downto 0 do
-    TfpgImageItem(FList[i]).Destroy;  // frees images
+    TlqImageItem(FList[i]).Destroy;  // frees images
   FList.Destroy;
   inherited Destroy
 end;
 
-procedure TfpgImageList.AddItemFromFile(AFileName: TfpgString; AIndex: integer);
+procedure TlqImageList.AddItemFromFile(AFileName: TlqString; AIndex: integer);
 var
-  AImageItem: TfpgImageItem;
+  AImageItem: TlqImageItem;
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageList.AddItemFromFile');
+  writeln('TlqImageList.AddItemFromFile');
   {$ENDIF}
   
   if not fpgFileExists(AFileName) then
     Exit; //==>
   
-  AImageItem := TfpgImageItem.Create;
+  AImageItem := TlqImageItem.Create;
   AImageItem.LoadFromFile(AFileName);
   if AIndex > -1 then
     Items[AIndex] := AImageItem
@@ -171,11 +171,11 @@ begin
   end;
 end;
 
-procedure TfpgImageList.AddImage(AImage: TfpgImage; AIndex: integer);
+procedure TlqImageList.AddImage(AImage: TlqImage; AIndex: integer);
 var
-  AImageItem: TfpgImageItem;
+  AImageItem: TlqImageItem;
 begin
-  AImageItem := TfpgImageItem.Create;
+  AImageItem := TlqImageItem.Create;
   AImageItem.Image := AImage;
   if AIndex > -1 then
     Items[AIndex] := AImageItem
@@ -186,37 +186,37 @@ begin
   end;
 end;
 
-procedure TfpgImageList.RemoveIndex(AIndex: integer);
+procedure TlqImageList.RemoveIndex(AIndex: integer);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageList.RemoveIndex');
+  writeln('TlqImageList.RemoveIndex');
   {$ENDIF}
   AIndex := GetFListIndex(AIndex);
   if AIndex <> -1 then
   begin
-    TfpgImageItem(FList[AIndex]).Destroy;
+    TlqImageItem(FList[AIndex]).Destroy;
     FList.Delete(AIndex);
   end;
 end;
 
-function TfpgImageList.GetMaxItem: integer;
+function TlqImageList.GetMaxItem: integer;
 var
   i: integer;
 begin
   result := -1;
   for i := 0 to FList.Count - 1 do
-    if TfpgImageItem(FList[i]).Index > result then
-      result := TfpgImageItem(FList[i]).Index;
+    if TlqImageItem(FList[i]).Index > result then
+      result := TlqImageItem(FList[i]).Index;
 end;
 
-procedure TfpgImageList.Clear;
+procedure TlqImageList.Clear;
 begin
   FList.Clear;
 end;
 
-{ TfpgImageItem }
+{ TlqImageItem }
 
-procedure TfpgImageItem.SetImageList(AImageList: TfpgImageList);
+procedure TlqImageItem.SetImageList(AImageList: TlqImageList);
 begin
   if AImageList = nil then
   begin
@@ -231,10 +231,10 @@ begin
   end;
 end;
 
-procedure TfpgImageItem.SetIndex(AIndex: integer);
+procedure TlqImageItem.SetIndex(AIndex: integer);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageItem.SetIndex');
+  writeln('TlqImageItem.SetIndex');
   {$ENDIF}
   if AIndex <> FIndex then
   begin
@@ -244,23 +244,23 @@ begin
   end;
 end;
 
-procedure TfpgImageItem.SetImage(AImage: TfpgImage);
+procedure TlqImageItem.SetImage(AImage: TlqImage);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageItem.SetImage');
+  writeln('TlqImageItem.SetImage');
   {$ENDIF}
   FImage := AImage;
 end;
 
-constructor TfpgImageItem.Create;
+constructor TlqImageItem.Create;
 begin
   ImageList := nil;
   FIndex    := -1;
   FImage    := nil;
 end;
 
-constructor TfpgImageItem.Create(AImageList: TfpgImageList; AIndex: integer;
-    AImage: TfpgImage);
+constructor TlqImageItem.Create(AImageList: TlqImageList; AIndex: integer;
+    AImage: TlqImage);
 begin
   if AImageList = nil then
     Exit; //==>
@@ -270,26 +270,26 @@ begin
   ImageList   := AImageList;
 end;
 
-constructor TfpgImageItem.Create(AFileName: TfpgString; AIndex: integer);
+constructor TlqImageItem.Create(AFileName: TlqString; AIndex: integer);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageItem.Create(', AFileName, ',', AIndex, ')');
+  writeln('TlqImageItem.Create(', AFileName, ',', AIndex, ')');
   {$ENDIF}
   Index := AIndex;
   LoadFromFile(AFileName);
 end;
 
-destructor TfpgImageItem.Destroy;
+destructor TlqImageItem.Destroy;
 begin
   if FImage <> nil then
      FImage.Free;
   inherited Destroy;
 end;
 
-procedure TfpgImageItem.LoadFromFile(AFileName: TfpgString);
+procedure TlqImageItem.LoadFromFile(AFileName: TlqString);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgImageItem.LoadFromFile');
+  writeln('TlqImageItem.LoadFromFile');
   {$ENDIF}
   if FImage <> nil then
     FImage.Destroy;

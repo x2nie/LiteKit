@@ -10,21 +10,21 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Grid1: TfpgStringGrid;
-    btnQuit: TfpgButton;
-    Label1: TfpgLabel;
+    Grid1: TlqStringGrid;
+    btnQuit: TlqButton;
+    Label1: TlqLabel;
     {@VFD_HEAD_END: MainForm}
-    FCellEdit: TfpgEdit;
-    FFocusRect: TfpgRect;
-    FLastGrid: TfpgStringGrid; // reference only
-    procedure SetupCellEdit(AGrid: TfpgStringGrid);
+    FCellEdit: TlqEdit;
+    FFocusRect: TlqRect;
+    FLastGrid: TlqStringGrid; // reference only
+    procedure SetupCellEdit(AGrid: TlqStringGrid);
     procedure CellEditExit(Sender: TObject);
     procedure CellEditKeypressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure GridKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
-    procedure GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure ButtonQuitClicked(Sender: TObject);
   public
     procedure AfterCreate; override;
@@ -41,7 +41,7 @@ procedure TMainForm.GridKeyPressed(Sender: TObject; var KeyCode: word;
 begin
   if (KeyCode = keyInsert) and (ssCtrl in ShiftState) then
   begin
-    TfpgStringGrid(Sender).RowCount := TfpgStringGrid(Sender).RowCount + 1;
+    TlqStringGrid(Sender).RowCount := TlqStringGrid(Sender).RowCount + 1;
     Consumed := True;
     Exit;
   end;
@@ -49,13 +49,13 @@ begin
   if (KeyCode = keyF2) or (KeyCode = keyReturn) then
   begin
     // we need to edit the cell contents
-    SetupCellEdit(TfpgStringGrid(Sender));
+    SetupCellEdit(TlqStringGrid(Sender));
     Consumed := True;
   end;
 end;
 
 procedure TMainForm.GridDrawCell(Sender: TObject; const ARow, ACol: Integer;
-  const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+  const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 begin
   if (gdSelected in AFlags) then
   begin
@@ -68,7 +68,7 @@ begin
   Close;
 end;
 
-procedure TMainForm.SetupCellEdit(AGrid: TfpgStringGrid);
+procedure TMainForm.SetupCellEdit(AGrid: TlqStringGrid);
 var
   pt: TPoint;
 begin
@@ -76,7 +76,7 @@ begin
     FCellEdit.Free;
 
   FLastGrid := AGrid;
-  FCellEdit := TfpgEdit.Create(FLastGrid.Parent);
+  FCellEdit := TlqEdit.Create(FLastGrid.Parent);
   pt.X := FLastGrid.Left + FFocusRect.Left;
   pt.Y := FLastGrid.Top + FFocusRect.Top;
   with FCellEdit do
@@ -117,7 +117,7 @@ begin
   WindowTitle := 'Editable StringGrid Demo';
   Hint := '';
 
-  Grid1 := TfpgStringGrid.Create(self);
+  Grid1 := TlqStringGrid.Create(self);
   with Grid1 do
   begin
     Name := 'Grid1';
@@ -137,7 +137,7 @@ begin
     OnDrawCell  := @GridDrawCell;
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -152,7 +152,7 @@ begin
     OnClick  := @ButtonQuitClicked;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';

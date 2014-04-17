@@ -33,8 +33,8 @@ uses
   lq_checkbox;
 
 
-procedure SetWidgetText(wg: TfpgWidget; txt: string);
-function GetWidgetText(wg: TfpgWidget; out txt: string): boolean;
+procedure SetWidgetText(wg: TlqWidget; txt: string);
+function GetWidgetText(wg: TlqWidget; out txt: string): boolean;
 { generates a string based on Indentation Style specified in UI Designer }
 function Ind(const ACount: integer): string;
 
@@ -47,40 +47,40 @@ uses
   strutils;
 
 var
-  IndentCharacters: array[0..1] of TfpgString = ('  ', #9);
+  IndentCharacters: array[0..1] of TlqString = ('  ', #9);
 
 
-procedure SetWidgetText(wg: TfpgWidget; txt: string);
+procedure SetWidgetText(wg: TlqWidget; txt: string);
 begin
-  if wg is TfpgForm then
-    TfpgForm(wg).WindowTitle  := txt
-  else if wg is TfpgLabel then
-    TfpgLabel(wg).Text        := txt
-  else if wg is TfpgEdit then
-    TfpgEdit(wg).Text         := txt
-  else if wg is TfpgMemo then
-    TfpgMemo(wg).Text         := txt
-  else if wg is TfpgButton then
-    TfpgButton(wg).Text       := txt
-  else if wg is TfpgCheckBox then
-    TfpgCheckBox(wg).Text     := txt;
+  if wg is TlqForm then
+    TlqForm(wg).WindowTitle  := txt
+  else if wg is TlqLabel then
+    TlqLabel(wg).Text        := txt
+  else if wg is TlqEdit then
+    TlqEdit(wg).Text         := txt
+  else if wg is TlqMemo then
+    TlqMemo(wg).Text         := txt
+  else if wg is TlqButton then
+    TlqButton(wg).Text       := txt
+  else if wg is TlqCheckBox then
+    TlqCheckBox(wg).Text     := txt;
 end;
 
-function GetWidgetText(wg: TfpgWidget; out txt: string): boolean;
+function GetWidgetText(wg: TlqWidget; out txt: string): boolean;
 begin
   Result := True;
-  if wg is TfpgForm then
-    txt := TfpgForm(wg).WindowTitle
-  else if wg is TfpgLabel then
-    txt    := TfpgLabel(wg).Text
-  else if wg is TfpgEdit then
-    txt    := TfpgEdit(wg).Text
-  else if wg is TfpgMemo then
-    txt    := TfpgMemo(wg).Text
-  else if wg is TfpgButton then
-    txt    := TfpgButton(wg).Text
-  else if wg is TfpgCheckBox then
-    txt    := TfpgCheckBox(wg).Text
+  if wg is TlqForm then
+    txt := TlqForm(wg).WindowTitle
+  else if wg is TlqLabel then
+    txt    := TlqLabel(wg).Text
+  else if wg is TlqEdit then
+    txt    := TlqEdit(wg).Text
+  else if wg is TlqMemo then
+    txt    := TlqMemo(wg).Text
+  else if wg is TlqButton then
+    txt    := TlqButton(wg).Text
+  else if wg is TlqCheckBox then
+    txt    := TlqCheckBox(wg).Text
   else
   begin
     Result := False;

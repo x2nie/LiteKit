@@ -38,16 +38,16 @@ type
   
   TElasticTabstopsDocFilter = class(TObject)
   private
-    FMemo: TfpgMemo;
+    FMemo: TlqMemo;
     FTabMultiples: integer;
     FTabMinimum: integer;
     FTabPadding: integer;
     FMaxTabstops: integer;
   protected
-    property    Memo: TfpgMemo read FMemo;
+    property    Memo: TlqMemo read FMemo;
     function    CalcTabWidth(TextWidthInTab: integer): integer;
   public
-    constructor Create(AMemo: TfpgMemo);
+    constructor Create(AMemo: TlqMemo);
     procedure   StretchTabstops;
     property    MaxTabstops: integer read FMaxTabstops write FMaxTabstops;
   end;
@@ -89,7 +89,7 @@ begin
   Result := w;
 end;
 
-constructor TElasticTabstopsDocFilter.Create(AMemo: TfpgMemo);
+constructor TElasticTabstopsDocFilter.Create(AMemo: TlqMemo);
 begin
   FMemo := AMemo;
   // tabstops are at least 32 pixels plus 8 pixels of padding

@@ -12,25 +12,25 @@ uses
   lq_label, lq_edit, lq_stdimages, lq_checkbox;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Bevel1: TfpgPanel;
-    Grid1: TfpgStringGrid;
-    Button1: TfpgButton;
-    btnClear: TfpgButton;
-    MyDragSourceLabel: TfpgLabel;
-    Edit1: TfpgEdit;
-    Label1: TfpgLabel;
-    Label2: TfpgLabel;
-    Label3: TfpgLabel;
-    chkAcceptDrops: TfpgCheckBox;
-    chkAccept: TfpgCheckBox;
+    Bevel1: TlqPanel;
+    Grid1: TlqStringGrid;
+    Button1: TlqButton;
+    btnClear: TlqButton;
+    MyDragSourceLabel: TlqLabel;
+    Edit1: TlqEdit;
+    Label1: TlqLabel;
+    Label2: TlqLabel;
+    Label3: TlqLabel;
+    chkAcceptDrops: TlqCheckBox;
+    chkAccept: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure CheckAcceptDropsChanged(Sender: TObject);
     procedure Edit1DragDrop(Sender, Source: TObject; X, Y: integer; AData: variant);
-    procedure Edit1DragEnter(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TfpgString; var ADropAction: TfpgDropAction; var Accept: Boolean);
-    procedure Bevel1DragEnter(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TfpgString; var ADropAction: TfpgDropAction; var Accept: Boolean);
+    procedure Edit1DragEnter(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TlqString; var ADropAction: TlqDropAction; var Accept: Boolean);
+    procedure Bevel1DragEnter(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TlqString; var ADropAction: TlqDropAction; var Accept: Boolean);
     procedure Bevel1DragLeave(Sender: TObject);
     procedure PanelDragDrop(Sender, Source: TObject; X, Y: integer; AData: variant);
     procedure Button1Clicked(Sender: TObject);
@@ -59,8 +59,8 @@ begin
 end;
 
 procedure TMainForm.Edit1DragEnter(Sender, Source: TObject;
-  AMimeList: TStringList; var AMimeChoice: TfpgString;
-  var ADropAction: TfpgDropAction; var Accept: Boolean);
+  AMimeList: TStringList; var AMimeChoice: TlqString;
+  var ADropAction: TlqDropAction; var Accept: Boolean);
 var
   s: string;
 begin
@@ -78,8 +78,8 @@ begin
 end;
 
 procedure TMainForm.Bevel1DragEnter(Sender, Source: TObject;
-  AMimeList: TStringList; var AMimeChoice: TfpgString;
-  var ADropAction: TfpgDropAction; var Accept: Boolean);
+  AMimeList: TStringList; var AMimeChoice: TlqString;
+  var ADropAction: TlqDropAction; var Accept: Boolean);
 var
   i: integer;
   s: string;
@@ -127,11 +127,11 @@ end;
 
 procedure TMainForm.LabelDragStartDetected(Sender: TObject);
 var
-  m: TfpgMimeData;
-  d: TfpgDrag;
+  m: TlqMimeData;
+  d: TlqDrag;
   v: variant;
 begin
-  m := TfpgMimeData.Create;
+  m := TlqMimeData.Create;
 
   { via convenience properties }
   m.Text := 'My name is Earl';
@@ -140,13 +140,13 @@ begin
 //  m.SetData('text/plain', 'My name is Earl');
 //  m.SetData('text/html', 'My name is <b>Earl</b>');
 
-  { tell TfpgDrag who is the Source of the drag }
-  d := TfpgDrag.Create(Sender as TfpgWindow);
+  { tell TlqDrag who is the Source of the drag }
+  d := TlqDrag.Create(Sender as TlqWindow);
 
-  { TfpgDrag now takes ownership of TfpgMimeData }
+  { TlqDrag now takes ownership of TlqMimeData }
   d.MimeData := m;
 
-  { TfpgDrag instance will be freed later when DND action is completed }
+  { TlqDrag instance will be freed later when DND action is completed }
   d.Execute([daCopy]);
 end;
 
@@ -173,7 +173,7 @@ begin
   Hint := '';
   DNDEnabled := True;
 
-  Bevel1 := TfpgPanel.Create(self);
+  Bevel1 := TlqPanel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -193,13 +193,13 @@ begin
     OnDragDrop  := @PanelDragDrop;
   end;
 
-  Grid1 := TfpgStringGrid.Create(self);
+  Grid1 := TlqStringGrid.Create(self);
   with Grid1 do
   begin
     Name := 'Grid1';
     SetPosition(8, 224, 496, 167);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('#', 20, taLeftJustify);
     AddColumn('MIME Type', 190, taLeftJustify);
     AddColumn('Data', 250, taLeftJustify);
@@ -211,7 +211,7 @@ begin
     TabOrder := 2;
   end;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -226,7 +226,7 @@ begin
     OnClick :=@Button1Clicked;
   end;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -241,13 +241,13 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  MyDragSourceLabel := TfpgLabel.Create(self);
+  MyDragSourceLabel := TlqLabel.Create(self);
   with MyDragSourceLabel do
   begin
     Name := 'MyDragSourceLabel';
     SetPosition(28, 20, 84, 40);
     Alignment := taCenter;
-    BackgroundColor := TfpgColor($67D47A);
+    BackgroundColor := TlqColor($67D47A);
     FontDesc := '#Label1';
     Hint := '';
     Layout := tlCenter;
@@ -255,7 +255,7 @@ begin
     OnDragStartDetected := @LabelDragStartDetected;
   end;
 
-  Edit1 := TfpgEdit.Create(self);
+  Edit1 := TlqEdit.Create(self);
   with Edit1 do
   begin
     Name := 'Edit1';
@@ -270,7 +270,7 @@ begin
     OnDragDrop  := @Edit1DragDrop;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -280,7 +280,7 @@ begin
     Text := 'Accepts ''text/html''';
   end;
 
-  Label2 := TfpgLabel.Create(self);
+  Label2 := TlqLabel.Create(self);
   with Label2 do
   begin
     Name := 'Label2';
@@ -290,7 +290,7 @@ begin
     Text := 'Accepts ''text/plain''';
   end;
 
-  Label3 := TfpgLabel.Create(self);
+  Label3 := TlqLabel.Create(self);
   with Label3 do
   begin
     Name := 'Label3';
@@ -300,7 +300,7 @@ begin
     Text := 'Available drop formats';
   end;
 
-  chkAcceptDrops := TfpgCheckBox.Create(self);
+  chkAcceptDrops := TlqCheckBox.Create(self);
   with chkAcceptDrops do
   begin
     Name := 'chkAcceptDrops';
@@ -313,7 +313,7 @@ begin
     OnChange :=@CheckAcceptDropsChanged;
   end;
 
-  chkAccept := TfpgCheckBox.Create(self);
+  chkAccept := TlqCheckBox.Create(self);
   with chkAccept do
   begin
     Name := 'chkAccept';

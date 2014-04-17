@@ -7,14 +7,14 @@ uses
   lq_base, lq_main, lq_widget, lq_form, lq_label;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    lblTop: array[1..3] of TfpgLabel;
-    lblBottom: array[1..3] of TfpgLabel;
-    lblLeft: array[1..3] of TfpgLabel;
-    lblRight: array[1..3] of TfpgLabel;
-    lblClient: TfpgLabel;
-    lblNone: TfpgLabel;
+    lblTop: array[1..3] of TlqLabel;
+    lblBottom: array[1..3] of TlqLabel;
+    lblLeft: array[1..3] of TlqLabel;
+    lblRight: array[1..3] of TlqLabel;
+    lblClient: TlqLabel;
+    lblNone: TlqLabel;
   public
     procedure AfterCreate; override;
   end;
@@ -27,7 +27,7 @@ var
   x: integer;
   y: integer;
   n: integer;
-  ColorArray: array[1..3] of TfpgColor;
+  ColorArray: array[1..3] of TlqColor;
 begin
   x := 10;
   y := 10;

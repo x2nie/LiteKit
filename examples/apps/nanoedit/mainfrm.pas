@@ -11,22 +11,22 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainFrom}
-    menu: TfpgMenuBar;
-    mnuFile: TfpgPopupMenu;
-    mnuEdit: TfpgPopupMenu;
-    mnuSearch: TfpgPopupMenu;
-    memEditor: TfpgTextEdit;
-    btnGO: TfpgButton;
-    bevStatusBar: TfpgBevel;
-    lblStatusText: TfpgLabel;
+    menu: TlqMenuBar;
+    mnuFile: TlqPopupMenu;
+    mnuEdit: TlqPopupMenu;
+    mnuSearch: TlqPopupMenu;
+    memEditor: TlqTextEdit;
+    btnGO: TlqButton;
+    bevStatusBar: TlqBevel;
+    lblStatusText: TlqLabel;
     {@VFD_HEAD_END: MainFrom}
-    FTextToFind: TfpgString;
-    FFindOptions: TfpgFindOptions;
+    FTextToFind: TlqString;
+    FFindOptions: TlqFindOptions;
     FIsForward: boolean;
-    FFilename: TfpgString;
+    FFilename: TlqString;
     procedure FormShow(Sender: TObject);
     procedure miOpenClick(Sender: TObject);
     procedure miSaveClick(Sender: TObject);
@@ -73,9 +73,9 @@ end;
 
 procedure TMainForm.miOpenClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if dlg.RunOpenFile then
     begin
@@ -89,9 +89,9 @@ end;
 
 procedure TMainForm.miSaveClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if FFilename <> '' then
       dlg.FileName := FFilename;
@@ -106,9 +106,9 @@ end;
 
 procedure TMainForm.miSaveAsClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if FFilename <> '' then
       dlg.FileName := FFilename;
@@ -233,7 +233,7 @@ begin
   WindowPosition := wpScreenCenter;
   OnShow  := @FormShow;
 
-  menu := TfpgMenuBar.Create(self);
+  menu := TlqMenuBar.Create(self);
   with menu do
   begin
     Name := 'menu';
@@ -241,7 +241,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';
@@ -253,7 +253,7 @@ begin
     AddMenuItem('Quit', 'Ctrl+Q', @miQuitClick);
   end;
 
-  mnuEdit := TfpgPopupMenu.Create(self);
+  mnuEdit := TlqPopupMenu.Create(self);
   with mnuEdit do
   begin
     Name := 'mnuEdit';
@@ -263,7 +263,7 @@ begin
     AddMenuItem('Paste', 'Ctrl+V', @miPasteClicked);
   end;
 
-  mnuSearch := TfpgPopupMenu.Create(self);
+  mnuSearch := TlqPopupMenu.Create(self);
   with mnuSearch do
   begin
     Name := 'mnuSearch';
@@ -275,7 +275,7 @@ begin
     AddMenuItem('Go to line...', 'Ctrl+G', @miGoToLineClick);
   end;
 
-  memEditor := TfpgTextEdit.Create(self);
+  memEditor := TlqTextEdit.Create(self);
   with memEditor do
   begin
     Name := 'memEditor';
@@ -286,7 +286,7 @@ begin
     RightEdge := True;
   end;
 
-  btnGO := TfpgButton.Create(self);
+  btnGO := TlqButton.Create(self);
   with btnGO do
   begin
     Name := 'btnGO';
@@ -299,7 +299,7 @@ begin
     OnClick := @btnGOClick;
   end;
 
-  bevStatusBar := TfpgBevel.Create(self);
+  bevStatusBar := TlqBevel.Create(self);
   with bevStatusBar do
   begin
     Name := 'bevStatusBar';
@@ -309,7 +309,7 @@ begin
     Style := bsLowered;
   end;
 
-  lblStatusText := TfpgLabel.Create(bevStatusBar);
+  lblStatusText := TlqLabel.Create(bevStatusBar);
   with lblStatusText do
   begin
     Name := 'lblStatusText';

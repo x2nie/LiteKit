@@ -181,7 +181,7 @@ type
                    '{$mode objfpc}{$H+}'              +LineEnding+LineEnding+
                    'interface'                        +LineEnding+LineEnding+
                    'uses'                             +LineEnding+
-                   '  fpg_main;'                      +LineEnding+LineEnding+
+                   '  lq_main;'                      +LineEnding+LineEnding+
                    'procedure InitializeCustomImages;'+LineEnding+LineEnding+
                    'implementation';
       AssignFile(f, FOutputFile);

@@ -13,7 +13,7 @@ uses
 {$I images.}
 
 type
-  TGlobe = class(TfpgWidget)
+  TGlobe = class(TlqWidget)
   private
     FShowGrid: boolean;
     FGridStep: integer;
@@ -41,25 +41,25 @@ type
   end;
 
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    MainMenu: TfpgMenuBar;
+    MainMenu: TlqMenuBar;
     Globe1: TGlobe;
-    pmFile: TfpgPopupMenu;
-    pmView: TfpgPopupMenu;
-    pmHelp: TfpgPopupMenu;
-    StatusPanel: TfpgPanel;
-    Bevel1: TfpgBevel;
-    btnQuit: TfpgButton;
-    btnGrid: TfpgButton;
-    btnZoomIn: TfpgButton;
-    btnZoomOut: TfpgButton;
-    btnHelp: TfpgButton;
-    Bevel2: TfpgBevel;
-    Bevel3: TfpgBevel;
+    pmFile: TlqPopupMenu;
+    pmView: TlqPopupMenu;
+    pmHelp: TlqPopupMenu;
+    StatusPanel: TlqPanel;
+    Bevel1: TlqBevel;
+    btnQuit: TlqButton;
+    btnGrid: TlqButton;
+    btnZoomIn: TlqButton;
+    btnZoomOut: TlqButton;
+    btnHelp: TlqButton;
+    Bevel2: TlqBevel;
+    Bevel3: TlqBevel;
     {@VFD_HEAD_END: MainForm}
-    miShowGrid: TfpgMenuItem;
+    miShowGrid: TlqMenuItem;
     FShowGrid: boolean;
     FWfi: integer;
     FWth: integer;
@@ -71,7 +71,7 @@ type
     procedure miZoomOutClicked(Sender: TObject);
     procedure btnHelpClicked(Sender: TObject);
     procedure miHelpAbout(Sender: TObject);
-    procedure miHelpAboutFPGui(Sender: TObject);
+    procedure miHelpAbouTlqui(Sender: TObject);
     procedure UpdateStatus;
     procedure MoveWest;
     procedure MoveEast;
@@ -144,7 +144,7 @@ begin
     keyF11:
         begin
           Consumed := True;
-          miHelpAboutFPGui(nil);
+          miHelpAbouTlqui(nil);
         end;
     keyF12:
         begin
@@ -189,9 +189,9 @@ end;
 
 procedure TMainForm.btnHelpClicked(Sender: TObject);
 var
-  frm: TfpgMessageBox;
+  frm: TlqMessageBox;
 begin
-  frm := TfpgMessageBox.Create(nil);
+  frm := TlqMessageBox.Create(nil);
   try
     frm.WindowTitle := 'Keyboard Help';
     frm.CentreText := False;
@@ -218,15 +218,15 @@ begin
   ShowMessage('fpGUI Globe written by Graeme Geldenhuys - 2010', 'About...', True);
 end;
 
-procedure TMainForm.miHelpAboutFPGui(Sender: TObject);
+procedure TMainForm.miHelpAbouTlqui(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui('');
+  TlqMessageDialog.AbouTlqui('');
 end;
 
 procedure TMainForm.UpdateStatus;
 var
   fi, th: integer;
-  ew, ns: TfpgString;
+  ew, ns: TlqString;
 begin
   if FWth >= 0 then
   begin
@@ -312,7 +312,7 @@ begin
   ShowHint := True;
   WindowPosition := wpOneThirdDown;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -329,7 +329,7 @@ begin
     //    OnKeyPress := @FormKeyPressed;
   end;
 
-  pmFile := TfpgPopupMenu.Create(self);
+  pmFile := TlqPopupMenu.Create(self);
   with pmFile do
   begin
     Name := 'pmFile';
@@ -337,7 +337,7 @@ begin
     AddMenuItem('&Quit', 'Q', @miFileQuitClicked);
   end;
 
-  pmView := TfpgPopupMenu.Create(self);
+  pmView := TlqPopupMenu.Create(self);
   with pmView do
   begin
     Name := 'pmView';
@@ -348,18 +348,18 @@ begin
     AddMenuItem('Zoom Out', '', @miZoomOutClicked);
   end;
 
-  pmHelp := TfpgPopupMenu.Create(self);
+  pmHelp := TlqPopupMenu.Create(self);
   with pmHelp do
   begin
     Name := 'pmHelp';
     SetPosition(248, 76, 120, 20);
     AddMenuItem('Keyboard Shortcuts...', 'F1', @btnHelpClicked);
     AddMenuItem('-', '', nil);
-    AddMenuItem('About fpGUI Toolkit...', 'F11', @miHelpAboutFPGui);
+    AddMenuItem('About fpGUI Toolkit...', 'F11', @miHelpAbouTlqui);
     AddMenuItem('About...', 'F12', @miHelpAbout);
   end;
 
-  StatusPanel := TfpgPanel.Create(self);
+  StatusPanel := TlqPanel.Create(self);
   with StatusPanel do
   begin
     Name := 'StatusPanel';
@@ -372,7 +372,7 @@ begin
     Text := 'Ready.';
   end;
 
-  Bevel1 := TfpgBevel.Create(self);
+  Bevel1 := TlqBevel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -383,7 +383,7 @@ begin
     Shape := bsBottomLine;
   end;
 
-  btnQuit := TfpgButton.Create(Bevel1);
+  btnQuit := TlqButton.Create(Bevel1);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -401,7 +401,7 @@ begin
     OnClick := @miFileQuitClicked;
   end;
 
-  btnGrid := TfpgButton.Create(Bevel1);
+  btnGrid := TlqButton.Create(Bevel1);
   with btnGrid do
   begin
     Name := 'btnGrid';
@@ -421,7 +421,7 @@ begin
     OnClick := @miShowGridClicked;
   end;
 
-  btnZoomIn := TfpgButton.Create(Bevel1);
+  btnZoomIn := TlqButton.Create(Bevel1);
   with btnZoomIn do
   begin
     Name := 'btnZoomIn';
@@ -439,7 +439,7 @@ begin
     OnClick := @miZoomInClicked;
   end;
 
-  btnZoomOut := TfpgButton.Create(Bevel1);
+  btnZoomOut := TlqButton.Create(Bevel1);
   with btnZoomOut do
   begin
     Name := 'btnZoomOut';
@@ -457,7 +457,7 @@ begin
     OnClick := @miZoomOutClicked;
   end;
 
-  btnHelp := TfpgButton.Create(Bevel1);
+  btnHelp := TlqButton.Create(Bevel1);
   with btnHelp do
   begin
     Name := 'btnHelp';
@@ -475,7 +475,7 @@ begin
     OnClick := @btnHelpClicked;
   end;
 
-  Bevel2 := TfpgBevel.Create(Bevel1);
+  Bevel2 := TlqBevel.Create(Bevel1);
   with Bevel2 do
   begin
     Name := 'Bevel2';
@@ -485,7 +485,7 @@ begin
     Shape := bsLeftLine;
   end;
 
-  Bevel3 := TfpgBevel.Create(Bevel1);
+  Bevel3 := TlqBevel.Create(Bevel1);
   with Bevel3 do
   begin
     Name := 'Bevel3';
@@ -579,7 +579,7 @@ procedure TGlobe.DrawGrid;
 var
   temp: integer;
 begin
-  Canvas.Color := TfpgColor($8080FF); // clGray;
+  Canvas.Color := TlqColor($8080FF); // clGray;
   Canvas.SetLineStyle(0, lsDash);
   { Parallels }
   temp := Wfi;

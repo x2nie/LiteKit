@@ -41,15 +41,15 @@ uses
 
 type
 
-  TfpgBaseEdit = class(TfpgWidget)
+  TlqBaseEdit = class(TlqWidget)
   private
     FAutoSelect: Boolean;
     FHideSelection: Boolean;
-    FPopupMenu: TfpgPopupMenu;
-    FDefaultPopupMenu: TfpgPopupMenu;
+    FPopupMenu: TlqPopupMenu;
+    FDefaultPopupMenu: TlqPopupMenu;
     FText: string;
     FPasswordMode: Boolean;
-    FBorderStyle: TfpgEditBorderStyle;
+    FBorderStyle: TlqEditBorderStyle;
     FOnChange: TNotifyEvent;
     FMaxLength: integer;
     FSelecting: Boolean;
@@ -62,9 +62,9 @@ type
     // function    PointToCharPos(x, y: integer): integer;
     procedure   DeleteSelection;
     procedure   DoCopy;
-    procedure   DoPaste(const AText: TfpgString);
+    procedure   DoPaste(const AText: TlqString);
     procedure   SetAutoSelect(const AValue: Boolean);
-    procedure   SetBorderStyle(const AValue: TfpgEditBorderStyle);
+    procedure   SetBorderStyle(const AValue: TlqEditBorderStyle);
     procedure   SetHideSelection(const AValue: Boolean);
     procedure   SetPasswordMode(const AValue: boolean);
     function    GetFontDesc: string;
@@ -81,7 +81,7 @@ type
     procedure   SetReadOnly(const AValue: Boolean);
     procedure   SetAutoSize(const AValue: Boolean);
   protected
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FSideMargin: integer;
     FHeightMargin: integer;
     FMouseDragPos: integer;
@@ -91,7 +91,7 @@ type
     FCursorPx: integer;  // Caret position (pixels)
     FTextOffset: integer;
     FDrawOffset: integer;
-    FVisibleText: TfpgString;
+    FVisibleText: TlqString;
     FVisSelStartPx: integer;
     FVisSelEndPx: integer;
     function    GetMarginAdjustment: integer; virtual;
@@ -99,8 +99,8 @@ type
     procedure   DoOnChange; virtual;
     procedure   ShowDefaultPopupMenu(const x, y: integer; const shiftstate: TShiftState); virtual;
     procedure   HandlePaint; override;
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -114,13 +114,13 @@ type
     function    GetDrawText: String;
     property    AutoSelect: Boolean read FAutoSelect write SetAutoSelect default True;
     property    AutoSize: Boolean read FAutoSize write SetAutoSize default False;
-    property    BorderStyle: TfpgEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
+    property    BorderStyle: TlqEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
     property    FontDesc: String read GetFontDesc write SetFontDesc;
     property    HideSelection: Boolean read FHideSelection write SetHideSelection default True;
     property    IgnoreMouseCursor: Boolean read FIgnoreMouseCursor write FIgnoreMouseCursor default False;
     property    MaxLength: Integer read FMaxLength write FMaxLength;
     property    PasswordMode: Boolean read FPasswordMode write SetPasswordMode default False;
-    property    PopupMenu: TfpgPopupMenu read FPopupMenu write FPopupMenu;
+    property    PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
     property    ReadOnly: Boolean read FReadOnly write SetReadOnly default False;
     property    Text: String read FText write SetText;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
@@ -128,21 +128,21 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     function    SelectionText: string;
-    function    GetClientRect: TfpgRect; override;
+    function    GetClientRect: TlqRect; override;
     procedure   SelectAll;
     procedure   Clear;
     procedure   ClearSelection;
     procedure   CopyToClipboard;
     procedure   CutToClipboard;
-    procedure   InsertAtCursorPos(const AText: TfpgString);
+    procedure   InsertAtCursorPos(const AText: TlqString);
     procedure   PasteFromClipboard;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
     property    SideMargin: integer read FSideMargin write SetSideMargin default 3;
     property    HeightMargin: integer read FHeightMargin write SetHeightMargin default 2;
   end;
 
 
-  TfpgBaseTextEdit = class(TfpgBaseEdit)
+  TlqBaseTextEdit = class(TlqBaseEdit)
   private
     FExtraHint: string;
     procedure   SetExtraHint(const AValue: string);
@@ -154,7 +154,7 @@ type
   end;
 
 
-  TfpgEdit = class(TfpgBaseTextEdit)
+  TlqEdit = class(TlqBaseTextEdit)
   public
     property    PopupMenu;  // UI Designer doesn't fully support it yet
   published
@@ -195,43 +195,43 @@ type
   end;
 
 
-  TfpgBaseNumericEdit = class(TfpgBaseEdit)
+  TlqBaseNumericEdit = class(TlqBaseEdit)
   private
     FDecimals: integer;
-    FOldColor: TfpgColor;
+    FOldColor: TlqColor;
     FAlignment: TAlignment;
-    FDecimalseparator: TfpgChar;
-    FNegativeColor: TfpgColor;
-    FThousandSeparator: TfpgChar;
+    FDecimalseparator: TlqChar;
+    FNegativeColor: TlqColor;
+    FThousandSeparator: TlqChar;
     FShowThousand: boolean;
     FMaxLimit: boolean;
     FMinLimit: boolean;
     procedure   AdjustTextOffset(UsePxCursorPos: boolean); override;
     procedure   AdjustDrawingInfo; override;
-    procedure   SetOldColor(const AValue: TfpgColor);
+    procedure   SetOldColor(const AValue: TlqColor);
     procedure   SetAlignment(const AValue: TAlignment);
-    procedure   SetDecimalSeparator(const AValue: TfpgChar);
-    procedure   SetNegativeColor(const AValue: TfpgColor);
-    procedure   SetThousandSeparator(const AValue: TfpgChar);
+    procedure   SetDecimalSeparator(const AValue: TlqChar);
+    procedure   SetNegativeColor(const AValue: TlqColor);
+    procedure   SetThousandSeparator(const AValue: TlqChar);
     procedure   SetShowThousand;
     procedure   AdjustColorForNegativeValues;
   protected
     procedure   DoOnChange; override;
     function    GetMarginAdjustment: integer; override;
     procedure   HandlePaint; override;
-    procedure   SetTextColor(const AValue: TfpgColor); override;
+    procedure   SetTextColor(const AValue: TlqColor); override;
     procedure   FormatEdit; virtual;
     procedure   Justify; virtual; // to implement in derived classes
-    property    OldColor: TfpgColor read FOldColor write SetOldColor;
+    property    OldColor: TlqColor read FOldColor write SetOldColor;
     property    Alignment: TAlignment read FAlignment write SetAlignment default taRightJustify;
     property    AutoSelect;
     property    BackgroundColor default clBoxColor;
     property    BorderStyle;
     {Someone likes to use English operating system but localized decimal and thousand separators
      Still to implement !!}
-    property    CustomDecimalSeparator: TfpgChar read FDecimalseparator write SetDecimalSeparator;
-    property    CustomThousandSeparator: TfpgChar read FThousandSeparator write SetThousandSeparator;
-    property    NegativeColor: TfpgColor read FNegativeColor write SetNegativeColor default clRed;
+    property    CustomDecimalSeparator: TlqChar read FDecimalseparator write SetDecimalSeparator;
+    property    CustomThousandSeparator: TlqChar read FThousandSeparator write SetThousandSeparator;
+    property    NegativeColor: TlqColor read FNegativeColor write SetNegativeColor default clRed;
     property    HideSelection;
     property    TabOrder;
     property    ShowThousand: boolean read FShowThousand write FShowThousand default False;
@@ -244,7 +244,7 @@ type
   end;
 
 
-  TfpgEditInteger = class(TfpgBaseNumericEdit)
+  TlqEditInteger = class(TlqBaseNumericEdit)
   private
     FMaxValue: integer;
     FMinValue: integer;
@@ -253,7 +253,7 @@ type
     procedure   SetValue(const AValue: integer); virtual;
     procedure   SetMaxValue(const AValue: integer); virtual;
     procedure   SetMinValue(const AValue: integer); virtual;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleSetFocus; override;
     procedure   HandleKillFocus; override;
     procedure   HandlePaint; override;
@@ -287,7 +287,7 @@ type
   end;
 
 
-  TfpgEditFloat = class(TfpgBaseNumericEdit)
+  TlqEditFloat = class(TlqBaseNumericEdit)
   private
     FFixedDecimals: integer;
     FMaxValue: extended;
@@ -299,7 +299,7 @@ type
     procedure   SetMinValue(const AValue: extended); virtual;
     procedure   SetDecimals(const AValue: integer);
     procedure   SetFixedDecimals(const AValue: integer);
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleSetFocus; override;
     procedure   HandleKillFocus; override;
     procedure   HandlePaint; override;
@@ -336,7 +336,7 @@ type
   end;
 
 
-  TfpgEditCurrency = class(TfpgBaseNumericEdit)
+  TlqEditCurrency = class(TlqBaseNumericEdit)
   private
     FMaxValue: Currency;
     FMinValue: Currency;
@@ -346,7 +346,7 @@ type
     procedure   SetMaxValue(const AValue: Currency); virtual;
     procedure   SetMinValue(const AValue: Currency); virtual;
     procedure   SetDecimals(AValue: integer);
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleSetFocus; override;
     procedure   HandleKillFocus; override;
@@ -382,16 +382,16 @@ type
   end;
 
 
-function CreateEdit(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgEdit;
+function CreateEdit(AOwner: TComponent; x, y, w, h: TlqCoord): TlqEdit;
 
-function CreateEditInteger(AOwner: TComponent; x, y, w, h: TfpgCoord;
-    AShowThousand: boolean= True): TfpgEditInteger;
+function CreateEditInteger(AOwner: TComponent; x, y, w, h: TlqCoord;
+    AShowThousand: boolean= True): TlqEditInteger;
 
-function CreateEditFloat(AOwner: TComponent; x, y, w, h: TfpgCoord;
-    AShowThousand: boolean= True; ADecimals: Integer= -1; AFixedDecimals: integer= -1): TfpgEditFloat;
+function CreateEditFloat(AOwner: TComponent; x, y, w, h: TlqCoord;
+    AShowThousand: boolean= True; ADecimals: Integer= -1; AFixedDecimals: integer= -1): TlqEditFloat;
 
-function CreateEditCurrency(AOwner: TComponent; x, y, w, h: TfpgCoord;
-    AShowThousand: boolean= True; ADecimals: Integer= 2): TfpgEditCurrency;
+function CreateEditCurrency(AOwner: TComponent; x, y, w, h: TlqCoord;
+    AShowThousand: boolean= True; ADecimals: Integer= 2): TlqEditCurrency;
 
 
 implementation
@@ -411,77 +411,77 @@ const
 
   cPasswordChar = #$E2#$97#$8F;    // U+25CF BLACK CIRCLE
 
-function CreateEdit(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgEdit;
+function CreateEdit(AOwner: TComponent; x, y, w, h: TlqCoord): TlqEdit;
 begin
-  Result       := TfpgEdit.Create(AOwner);
+  Result       := TlqEdit.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   if w > 0 then
     Result.Width := w;
-  if h < TfpgEdit(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
-    Result.Height := TfpgEdit(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
+  if h < TlqEdit(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
+    Result.Height := TlqEdit(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
   else
     Result.Height:= h;
   Result.UpdateWindowPosition;
 end;
 
-function CreateEditInteger(AOwner: TComponent; x, y, w, h: TfpgCoord; AShowThousand: boolean= True): TfpgEditInteger;
+function CreateEditInteger(AOwner: TComponent; x, y, w, h: TlqCoord; AShowThousand: boolean= True): TlqEditInteger;
 begin
-  Result       := TfpgEditInteger.Create(AOwner);
+  Result       := TlqEditInteger.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   Result.Width := w;
   Result.ShowThousand:= AShowThousand;
-  if h < TfpgEditInteger(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
-    Result.Height := TfpgEditInteger(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
+  if h < TlqEditInteger(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
+    Result.Height := TlqEditInteger(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
   else
     Result.Height:= h;
   Result.UpdateWindowPosition;
 end;
 
-function CreateEditFloat(AOwner: TComponent; x, y, w, h: TfpgCoord; AShowThousand: boolean= True;
-         ADecimals: Integer= -1; AFixedDecimals: integer= -1): TfpgEditFloat;
+function CreateEditFloat(AOwner: TComponent; x, y, w, h: TlqCoord; AShowThousand: boolean= True;
+         ADecimals: Integer= -1; AFixedDecimals: integer= -1): TlqEditFloat;
 begin
-  Result       := TfpgEditFloat.Create(AOwner);
+  Result       := TlqEditFloat.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   Result.Width := w;
   Result.ShowThousand:= AShowThousand;
   Result.Decimals := ADecimals;
   Result.FixedDecimals := AFixedDecimals;
-  if h < TfpgEditFloat(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
-    Result.Height := TfpgEditFloat(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
+  if h < TlqEditFloat(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
+    Result.Height := TlqEditFloat(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
   else
     Result.Height:= h;
   Result.UpdateWindowPosition;
 end;
 
-function CreateEditCurrency(AOwner: TComponent; x, y, w, h: TfpgCoord; AShowThousand: boolean= True;
-         ADecimals: Integer= 2): TfpgEditCurrency;
+function CreateEditCurrency(AOwner: TComponent; x, y, w, h: TlqCoord; AShowThousand: boolean= True;
+         ADecimals: Integer= 2): TlqEditCurrency;
 begin
-  Result          := TfpgEditCurrency.Create(AOwner);
+  Result          := TlqEditCurrency.Create(AOwner);
   Result.Left     := x;
   Result.Top      := y;
   Result.Width    := w;
   Result.ShowThousand:= AShowThousand;
   Result.Decimals := ADecimals;
-  if h < TfpgEditCurrency(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
-    Result.Height := TfpgEditCurrency(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
+  if h < TlqEditCurrency(Result).FFont.Height + 4 + (Result.FHeightMargin * 2) then
+    Result.Height := TlqEditCurrency(Result).FFont.Height + 4 + (Result.FHeightMargin * 2)
   else
     Result.Height:= h;
   Result.UpdateWindowPosition;
 end;
 
 
-{ TfpgBaseEdit }
+{ TlqBaseEdit }
 
-procedure TfpgBaseEdit.Adjust(UsePxCursorPos: boolean = false);
+procedure TlqBaseEdit.Adjust(UsePxCursorPos: boolean = false);
 begin
   AdjustTextOffset(False);
   AdjustDrawingInfo;
 end;
 
-procedure TfpgBaseEdit.AdjustTextOffset(UsePxCursorPos: boolean);
+procedure TlqBaseEdit.AdjustTextOffset(UsePxCursorPos: boolean);
 {If UsePxCursorPos then determines FCursorPos from FCursorPx (that holds mouse pointer coordinates)
  Calculates exact FCursorPx (relative to the widget bounding box) from FCursorPos
  Calculates FTextOffset based on FCursorPx}
@@ -495,7 +495,7 @@ var
   ptw: integer;
   dpos: integer;  // helps to pass through an utf-8 string quickly
   VisibleWidth: integer; // width of the edit field minus side margins
-  r: TfpgRect;
+  r: TlqRect;
 begin
   if UsePxCursorPos then
   begin
@@ -551,7 +551,7 @@ begin
   FCursorPx := tw - FTextOffset + FSideMargin;
 end;
 
-procedure TfpgBaseEdit.AdjustDrawingInfo;
+procedure TlqBaseEdit.AdjustDrawingInfo;
 // Calculates FVisSelStartPx, FVisSelEndPx, FVisibleText, FDrawOffset
 var
   vtstartbyte, vtendbyte: integer; // visible characters' start/end in utf-8 string, bytes
@@ -631,7 +631,7 @@ begin
   FDrawOffset := FTextOffset - FDrawOffset;
 end;
 
-{function TfpgBaseEdit.PointToCharPos(x, y: integer): integer;
+{function TlqBaseEdit.PointToCharPos(x, y: integer): integer;
 var
   n: integer;
   cx: integer; // character X position
@@ -667,7 +667,7 @@ begin
   end;
 end;}
 
-procedure TfpgBaseEdit.SetBorderStyle(const AValue: TfpgEditBorderStyle);
+procedure TlqBaseEdit.SetBorderStyle(const AValue: TlqEditBorderStyle);
 begin
   if FBorderStyle = AValue then
     Exit; //==>
@@ -675,7 +675,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseEdit.SetHideSelection(const AValue: Boolean);
+procedure TlqBaseEdit.SetHideSelection(const AValue: Boolean);
 begin
   if FHideSelection = AValue then
     Exit;
@@ -683,11 +683,11 @@ begin
 end;
 
 // paint selection rectangle
-procedure TfpgBaseEdit.DrawSelection;
+procedure TlqBaseEdit.DrawSelection;
 var
-  lcolor: TfpgColor;
-  rs: TfpgRect;
-  r: TfpgRect;
+  lcolor: TlqColor;
+  rs: TlqRect;
+  r: TlqRect;
 begin
   r := Canvas.GetClipRect;  // contains adjusted size based on borders
 
@@ -711,9 +711,9 @@ begin
   Canvas.ClearClipRect;
 end;
 
-procedure TfpgBaseEdit.HandlePaint;
+procedure TlqBaseEdit.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   rect: TRect;
 begin
   Canvas.ClearClipRect;
@@ -742,16 +742,16 @@ begin
   Canvas.SetFont(FFont);
 end;
 
-procedure TfpgBaseEdit.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqBaseEdit.HandleResize(awidth, aheight: TlqCoord);
 begin
   inherited HandleResize(awidth, aheight);
   AdjustDrawingInfo;
 end;
 
-procedure TfpgBaseEdit.HandleKeyChar(var AText: TfpgChar;
+procedure TlqBaseEdit.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: Boolean);
 var
-  s: TfpgChar;
+  s: TlqChar;
   prevval: string;
 begin
   prevval   := Text;
@@ -784,7 +784,7 @@ begin
   inherited HandleKeyChar(AText, shiftstate, consumed);
 end;
 
-procedure TfpgBaseEdit.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseEdit.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 var
   hasChanged: boolean;
 
@@ -934,7 +934,7 @@ begin
     RePaint;
 end;
 
-procedure TfpgBaseEdit.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseEdit.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   fpgApplication.HideHint;
   inherited HandleLMouseDown(x, y, shiftstate);
@@ -953,7 +953,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseEdit.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseEdit.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
   if Assigned(PopupMenu) then
@@ -962,7 +962,7 @@ begin
     ShowDefaultPopupMenu(x, y, ShiftState);
 end;
 
-procedure TfpgBaseEdit.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqBaseEdit.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   cp: integer;
 begin
@@ -983,7 +983,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseEdit.HandleDoubleClick(x, y: integer; button: word; shiftstate: TShiftState);
+procedure TlqBaseEdit.HandleDoubleClick(x, y: integer; button: word; shiftstate: TShiftState);
 begin
   // button is always Mouse_Left, but lets leave this test here for good measure
   if button = MOUSE_LEFT then
@@ -992,7 +992,7 @@ begin
     inherited;
 end;
 
-procedure TfpgBaseEdit.HandleMouseEnter;
+procedure TlqBaseEdit.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   if (csDesigning in ComponentState) then
@@ -1001,7 +1001,7 @@ begin
     MouseCursor := mcIBeam;
 end;
 
-procedure TfpgBaseEdit.HandleMouseExit;
+procedure TlqBaseEdit.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   if (csDesigning in ComponentState) then
@@ -1009,27 +1009,27 @@ begin
   MouseCursor := mcDefault;
 end;
 
-procedure TfpgBaseEdit.HandleSetFocus;
+procedure TlqBaseEdit.HandleSetFocus;
 begin
   inherited HandleSetFocus;
   if AutoSelect then
     SelectAll;
 end;
 
-procedure TfpgBaseEdit.HandleKillFocus;
+procedure TlqBaseEdit.HandleKillFocus;
 begin
   inherited HandleKillFocus;
   if AutoSelect then
     FSelOffset := 0;
 end;
 
-procedure TfpgBaseEdit.HandleHide;
+procedure TlqBaseEdit.HandleHide;
 begin
   fpgCaret.UnSetCaret (Canvas);
   inherited;
 end;
 
-function TfpgBaseEdit.GetDrawText: string;
+function TlqBaseEdit.GetDrawText: string;
 var
   i: integer;
 begin
@@ -1042,7 +1042,7 @@ begin
   end;
 end;
 
-constructor TfpgBaseEdit.Create(AOwner: TComponent);
+constructor TlqBaseEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFont               := fpgGetFont('#Edit1');  // owned object !
@@ -1072,7 +1072,7 @@ begin
   FOnChange           := nil;
 end;
 
-destructor TfpgBaseEdit.Destroy;
+destructor TlqBaseEdit.Destroy;
 begin
   if Assigned(FDefaultPopupMenu) then
     FDefaultPopupMenu.Free;
@@ -1080,7 +1080,7 @@ begin
   inherited Destroy;
 end;
 
-function TfpgBaseEdit.SelectionText: string;
+function TlqBaseEdit.SelectionText: string;
 begin
   if FSelOffset <> 0 then
   begin
@@ -1095,7 +1095,7 @@ begin
     Result := '';
 end;
 
-procedure TfpgBaseEdit.SetPasswordMode (const AValue: boolean );
+procedure TlqBaseEdit.SetPasswordMode (const AValue: boolean );
 begin
   if FPasswordMode = AValue then
     Exit; //==>
@@ -1104,12 +1104,12 @@ begin
   RePaint;
 end;
 
-function TfpgBaseEdit.GetFontDesc: string;
+function TlqBaseEdit.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgBaseEdit.SetFontDesc(const AValue: string);
+procedure TlqBaseEdit.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
@@ -1131,10 +1131,10 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseEdit.SetText(const AValue: string);
+procedure TlqBaseEdit.SetText(const AValue: string);
 var
   s: string;
-  prevval: TfpgString;
+  prevval: TlqString;
 begin
   if FText = AValue then
     Exit;
@@ -1164,7 +1164,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseEdit.SetSideMargin(const AValue: integer);
+procedure TlqBaseEdit.SetSideMargin(const AValue: integer);
 begin
   if (FSideMargin = AValue) or (AValue <= 0) then
     Exit; //=>
@@ -1172,7 +1172,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEdit.SetHeightMargin(const AValue: integer);
+procedure TlqBaseEdit.SetHeightMargin(const AValue: integer);
 begin
   if (FHeightMargin = AValue) or (AValue <= 0) then
     Exit; //=>
@@ -1188,37 +1188,37 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEdit.DefaultPopupCut(Sender: TObject);
+procedure TlqBaseEdit.DefaultPopupCut(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   CutToClipboard;
 end;
 
-procedure TfpgBaseEdit.DefaultPopupCopy(Sender: TObject);
+procedure TlqBaseEdit.DefaultPopupCopy(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   CopyToClipboard;
 end;
 
-procedure TfpgBaseEdit.DefaultPopupPaste(Sender: TObject);
+procedure TlqBaseEdit.DefaultPopupPaste(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   PasteFromClipboard;
 end;
 
-procedure TfpgBaseEdit.DefaultPopupClearAll(Sender: TObject);
+procedure TlqBaseEdit.DefaultPopupClearAll(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   Clear;
 end;
 
-procedure TfpgBaseEdit.DefaultPopupInsertFromCharmap(Sender: TObject);
+procedure TlqBaseEdit.DefaultPopupInsertFromCharmap(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   if ReadOnly then
     Exit;
@@ -1227,16 +1227,16 @@ begin
     DoPaste(s);
 end;
 
-procedure TfpgBaseEdit.SetDefaultPopupMenuItemsState;
+procedure TlqBaseEdit.SetDefaultPopupMenuItemsState;
 var
   i: integer;
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
   for i := 0 to FDefaultPopupMenu.ComponentCount-1 do
   begin
-    if FDefaultPopupMenu.Components[i] is TfpgMenuItem then
+    if FDefaultPopupMenu.Components[i] is TlqMenuItem then
     begin
-      itm := TfpgMenuItem(FDefaultPopupMenu.Components[i]);
+      itm := TlqMenuItem(FDefaultPopupMenu.Components[i]);
       // enabled/disable menu items
       if itm.Name = ipmCut then
         itm.Enabled := (not ReadOnly) and (FSelOffset <> 0)
@@ -1252,14 +1252,14 @@ begin
   end;
 end;
 
-procedure TfpgBaseEdit.SetReadOnly(const AValue: Boolean);
+procedure TlqBaseEdit.SetReadOnly(const AValue: Boolean);
 begin
   if FReadOnly = AValue then exit;
   FReadOnly := AValue;
   RePaint;
 end;
 
-procedure TfpgBaseEdit.SetAutoSize(const AValue: Boolean);
+procedure TlqBaseEdit.SetAutoSize(const AValue: Boolean);
 var
   r: TRect;
 begin
@@ -1274,25 +1274,25 @@ begin
   end;
 end;
 
-function TfpgBaseEdit.GetMarginAdjustment: integer;
+function TlqBaseEdit.GetMarginAdjustment: integer;
 begin
   Result := FSideMargin;
 end;
 
-procedure TfpgBaseEdit.DoOnChange;
+procedure TlqBaseEdit.DoOnChange;
 begin
   if Assigned(FOnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgBaseEdit.ShowDefaultPopupMenu(const x, y: integer;
+procedure TlqBaseEdit.ShowDefaultPopupMenu(const x, y: integer;
   const shiftstate: TShiftState);
 var
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
   if not Assigned(FDefaultPopupMenu) then
   begin
-    FDefaultPopupMenu := TfpgPopupMenu.Create(nil);
+    FDefaultPopupMenu := TlqPopupMenu.Create(nil);
     itm := FDefaultPopupMenu.AddMenuItem(rsCut, '', @DefaultPopupCut);
     itm.Name := ipmCut;
     itm := FDefaultPopupMenu.AddMenuItem(rsCopy, '', @DefaultPopupCopy);
@@ -1311,9 +1311,9 @@ begin
   FDefaultPopupMenu.ShowAt(self, x, y);
 end;
 
-procedure TfpgBaseEdit.DeleteSelection;
+procedure TlqBaseEdit.DeleteSelection;
 var
-  prevval: TfpgString;
+  prevval: TlqString;
 begin
   if ReadOnly then
     Exit;
@@ -1337,17 +1337,17 @@ begin
     DoOnChange;
 end;
 
-procedure TfpgBaseEdit.DoCopy;
+procedure TlqBaseEdit.DoCopy;
 begin
   if FSelOffset = 0 then
     Exit; //==>
   fpgClipboard.Text := SelectionText;
 end;
 
-procedure TfpgBaseEdit.DoPaste(const AText: TfpgString);
+procedure TlqBaseEdit.DoPaste(const AText: TlqString);
 var
   s: string;
-  prevval: TfpgString;
+  prevval: TlqString;
 begin
   if ReadOnly then
     Exit;
@@ -1371,14 +1371,14 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEdit.SetAutoSelect(const AValue: Boolean);
+procedure TlqBaseEdit.SetAutoSelect(const AValue: Boolean);
 begin
   if FAutoSelect = AValue then
     Exit; //==>
   FAutoSelect := AValue;
 end;
 
-procedure TfpgBaseEdit.SelectAll;
+procedure TlqBaseEdit.SelectAll;
 begin
   FSelecting  := True;
   FSelStart   := 0;
@@ -1388,24 +1388,24 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEdit.Clear;
+procedure TlqBaseEdit.Clear;
 begin
   Text := '';
 end;
 
-procedure TfpgBaseEdit.ClearSelection;
+procedure TlqBaseEdit.ClearSelection;
 begin
   DeleteSelection;
   Adjust;
   RePaint;
 end;
 
-procedure TfpgBaseEdit.CopyToClipboard;
+procedure TlqBaseEdit.CopyToClipboard;
 begin
   DoCopy;
 end;
 
-procedure TfpgBaseEdit.CutToClipboard;
+procedure TlqBaseEdit.CutToClipboard;
 begin
   DoCopy;
   DeleteSelection;
@@ -1413,13 +1413,13 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseEdit.InsertAtCursorPos(const AText: TfpgString);
+procedure TlqBaseEdit.InsertAtCursorPos(const AText: TlqString);
 begin
   if AText <> '' then
     DoPaste(AText);
 end;
 
-function TfpgBaseEdit.GetClientRect: TfpgRect;
+function TlqBaseEdit.GetClientRect: TlqRect;
 begin
   case BorderStyle of
     ebsNone:      Result := inherited GetClientRect;
@@ -1428,16 +1428,16 @@ begin
   end;
 end;
 
-procedure TfpgBaseEdit.PasteFromClipboard;
+procedure TlqBaseEdit.PasteFromClipboard;
 begin
   DoPaste(fpgClipboard.Text);
 end;
 
-{ TfpgBaseTextEdit }
+{ TlqBaseTextEdit }
 
-procedure TfpgBaseTextEdit.HandlePaint;
+procedure TlqBaseTextEdit.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   inherited HandlePaint;
   r := Canvas.GetClipRect;    // contains adjusted size based on borders
@@ -1470,13 +1470,13 @@ begin
   end;
 end;
 
-constructor TfpgBaseTextEdit.Create(AOwner: TComponent);
+constructor TlqBaseTextEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FExtraHint := '';
 end;
 
-procedure TfpgBaseTextEdit.SetExtraHint(const AValue: string);
+procedure TlqBaseTextEdit.SetExtraHint(const AValue: string);
 begin
   if FExtraHint = AValue then
     Exit; //==>
@@ -1484,9 +1484,9 @@ begin
   Repaint;
 end;
 
-{ TfpgBaseNumericEdit }
+{ TlqBaseNumericEdit }
 
-procedure TfpgBaseNumericEdit.AdjustTextOffset(UsePxCursorPos: boolean);
+procedure TlqBaseNumericEdit.AdjustTextOffset(UsePxCursorPos: boolean);
 {If UsePxCursorPos then determines FCursorPos from FCursorPx (that holds mouse pointer coordinates)
  Calculates exact FCursorPx (relative to the widget bounding box) from FCursorPos
  Calculates FTextOffset based on FCursorPx}
@@ -1500,7 +1500,7 @@ var
   ptw: integer;
   dpos: integer;  // helps to pass through an utf-8 string quickly
   VisibleWidth: integer; // width of the edit field minus side margins
-  r: TfpgRect;
+  r: TlqRect;
 begin
   if UsePxCursorPos then
   begin
@@ -1566,7 +1566,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseNumericEdit.AdjustDrawingInfo;
+procedure TlqBaseNumericEdit.AdjustDrawingInfo;
 // Calculates FVisSelStartPx, FVisSelEndPx, FVisibleText, FDrawOffset
 var
   vtstartbyte, vtendbyte: integer; // visible characters' start/end in utf-8 string, bytes
@@ -1581,7 +1581,7 @@ var
   pdp: integer;   // dpos on the previous step
   vstart, vend: integer;    // visible area start and end, pixels
   slstart, slend: integer;  // selection start and end, pixels
-  r: TfpgRect;
+  r: TlqRect;
 begin
   vstart  := FSideMargin;
   vend    := FWidth - FSideMargin;
@@ -1658,25 +1658,25 @@ begin
   FDrawOffset := FTextOffset - FDrawOffset;
 end;
 
-procedure TfpgBaseNumericEdit.SetOldColor(const AValue: TfpgColor);
+procedure TlqBaseNumericEdit.SetOldColor(const AValue: TlqColor);
 begin
   if FOldColor=AValue then exit;
   FOldColor:=AValue;
 end;
 
-procedure TfpgBaseNumericEdit.SetAlignment(const AValue: TAlignment);
+procedure TlqBaseNumericEdit.SetAlignment(const AValue: TAlignment);
 begin
   if FAlignment=AValue then exit;
   FAlignment:=AValue;
 end;
 
-procedure TfpgBaseNumericEdit.SetDecimalSeparator(const AValue: TfpgChar);
+procedure TlqBaseNumericEdit.SetDecimalSeparator(const AValue: TlqChar);
 begin
   if FDecimalseparator=AValue then exit;
   FDecimalseparator:=AValue;
 end;
 
-procedure TfpgBaseNumericEdit.SetNegativeColor(const AValue: TfpgColor);
+procedure TlqBaseNumericEdit.SetNegativeColor(const AValue: TlqColor);
 begin
   if FNegativeColor=AValue then exit;
   FNegativeColor:=AValue;
@@ -1684,13 +1684,13 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseNumericEdit.SetThousandSeparator(const AValue: TfpgChar);
+procedure TlqBaseNumericEdit.SetThousandSeparator(const AValue: TlqChar);
 begin
   if FThousandSeparator=AValue then exit;
   FThousandSeparator:=AValue;
 end;
 
-procedure TfpgBaseNumericEdit.SetShowThousand;
+procedure TlqBaseNumericEdit.SetShowThousand;
 var
   i,long: integer;
   txt, texte, decimal: string;
@@ -1782,7 +1782,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseNumericEdit.AdjustColorForNegativeValues;
+procedure TlqBaseNumericEdit.AdjustColorForNegativeValues;
 begin
   // Colour negative number
   if LeftStr(Text,1) = '-' then
@@ -1791,27 +1791,27 @@ begin
     FTextColor := OldColor;
 end;
 
-procedure TfpgBaseNumericEdit.DoOnChange;
+procedure TlqBaseNumericEdit.DoOnChange;
 begin
   AdjustColorForNegativeValues;
   inherited DoOnChange;
 end;
 
-function TfpgBaseNumericEdit.GetMarginAdjustment: integer;
+function TlqBaseNumericEdit.GetMarginAdjustment: integer;
 begin
   // Due to numeric edits being right aligned, the margin is negative
   Result := -FSideMargin;
 end;
 
-procedure TfpgBaseNumericEdit.Justify;
+procedure TlqBaseNumericEdit.Justify;
 begin
   //based on Alignment property this method will align the derived edit correctly.
 end;
 
-procedure TfpgBaseNumericEdit.HandlePaint;
+procedure TlqBaseNumericEdit.HandlePaint;
 var
-  x: TfpgCoord;
-  r: TfpgRect;
+  x: TlqCoord;
+  r: TlqRect;
 begin
   inherited HandlePaint;
 
@@ -1843,7 +1843,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseNumericEdit.SetTextColor(const AValue: TfpgColor);
+procedure TlqBaseNumericEdit.SetTextColor(const AValue: TlqColor);
 begin
   if FTextColor = AValue then
     Exit; //==>
@@ -1854,13 +1854,13 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseNumericEdit.FormatEdit;
+procedure TlqBaseNumericEdit.FormatEdit;
 begin
   SetShowThousand;
   AdjustColorForNegativeValues;
 end;
 
-constructor TfpgBaseNumericEdit.Create(AOwner: TComponent);
+constructor TlqBaseNumericEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FAlignment := taRightJustify;
@@ -1872,9 +1872,9 @@ begin
   FMinLimit := False;
 end;
 
-{ TfpgEditInteger }
+{ TlqEditInteger }
 
-function TfpgEditInteger.GetValue: integer;
+function TlqEditInteger.GetValue: integer;
 var
   txt: string;
 begin
@@ -1934,7 +1934,7 @@ begin
   end;
 end;
 
-procedure TfpgEditInteger.SetValue(const AValue: integer);
+procedure TlqEditInteger.SetValue(const AValue: integer);
 begin
   if not FMaxLimit and not FMinLimit then
     try
@@ -1965,7 +1965,7 @@ begin
    end;
 end;
 
-procedure TfpgEditInteger.SetMaxValue(const AValue: integer);
+procedure TlqEditInteger.SetMaxValue(const AValue: integer);
 begin
   if AValue > FMinValue then
     FMaxValue:= AValue
@@ -1974,7 +1974,7 @@ begin
   FMaxLimit:= True;
 end;
 
-procedure TfpgEditInteger.SetMinValue(const AValue: integer);
+procedure TlqEditInteger.SetMinValue(const AValue: integer);
 begin
   if AValue < FMaxValue then
     FMinValue:= AValue
@@ -1983,7 +1983,7 @@ begin
   FMinLimit:= True;
 end;
 
-procedure TfpgEditInteger.HandleKeyChar(var AText: TfpgChar;
+procedure TlqEditInteger.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: Boolean);
 var
   n: integer;
@@ -2002,7 +2002,7 @@ begin
       SetValue(FMinValue);
 end;
 
-procedure TfpgEditInteger.HandleSetFocus;
+procedure TlqEditInteger.HandleSetFocus;
 begin
   try
     if GetValue = 0 then
@@ -2016,7 +2016,7 @@ begin
   inherited HandleSetFocus;
 end;
 
-procedure TfpgEditInteger.HandleKillFocus;
+procedure TlqEditInteger.HandleKillFocus;
 begin
   try
     Text := IntToStr(GetValue);
@@ -2028,7 +2028,7 @@ begin
   inherited HandleKillFocus;
 end;
 
-procedure TfpgEditInteger.HandlePaint;
+procedure TlqEditInteger.HandlePaint;
 begin
   inherited HandlePaint;
   // To make it more visible in the UI Designer
@@ -2039,16 +2039,16 @@ begin
   end;
 end;
 
-constructor TfpgEditInteger.Create(AOwner: TComponent);
+constructor TlqEditInteger.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FShowThousand := True;
   FDecimals := 0;
 end;
 
-{ TfpgEditFloat }
+{ TlqEditFloat }
 
-function TfpgEditFloat.GetValue: extended;
+function TlqEditFloat.GetValue: extended;
 var
   txt: string;
 begin
@@ -2123,7 +2123,7 @@ begin
   end;
 end;
 
-procedure TfpgEditFloat.SetValue(const AValue: extended);
+procedure TlqEditFloat.SetValue(const AValue: extended);
 begin
   if not FMaxLimit and not FMinLimit then
     try
@@ -2166,7 +2166,7 @@ begin
   end;
 end;
 
-procedure TfpgEditFloat.SetMaxValue(const AValue: extended);
+procedure TlqEditFloat.SetMaxValue(const AValue: extended);
 begin
   if AValue > FMinValue then
     FMaxValue:= AValue
@@ -2175,7 +2175,7 @@ begin
   FMaxLimit := True;
 end;
 
-procedure TfpgEditFloat.SetMinValue(const AValue: extended);
+procedure TlqEditFloat.SetMinValue(const AValue: extended);
 begin
   if AValue < FMaxValue then
     FMinValue:= AValue
@@ -2184,7 +2184,7 @@ begin
   FMinLimit := True;
 end;
 
-procedure TfpgEditFloat.SetDecimals(const AValue: integer);
+procedure TlqEditFloat.SetDecimals(const AValue: integer);
 begin
   if AValue < -1 then
     Exit; // =>
@@ -2195,7 +2195,7 @@ begin
   end;
 end;
 
-procedure TfpgEditFloat.SetFixedDecimals(const AValue: integer);
+procedure TlqEditFloat.SetFixedDecimals(const AValue: integer);
 begin
   if AValue < -1 then
     Exit; // =>
@@ -2206,7 +2206,7 @@ begin
   end;
 end;
 
-procedure TfpgEditFloat.HandleKeyChar(var AText: TfpgChar;
+procedure TlqEditFloat.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: Boolean);
 var
   n: integer;
@@ -2226,7 +2226,7 @@ begin
       SetValue(FMinValue);
 end;
 
-procedure TfpgEditFloat.HandleSetFocus;
+procedure TlqEditFloat.HandleSetFocus;
 begin
   try
     if GetValue = 0 then
@@ -2249,7 +2249,7 @@ begin
   inherited HandleSetFocus;
 end;
 
-procedure TfpgEditFloat.HandleKillFocus;
+procedure TlqEditFloat.HandleKillFocus;
 begin
   try
     fText := FloatToStr(GetValue);
@@ -2268,7 +2268,7 @@ begin
   inherited HandleKillFocus;
 end;
 
-procedure TfpgEditFloat.HandlePaint;
+procedure TlqEditFloat.HandlePaint;
 begin
   inherited HandlePaint;
   // To make it more visible in the UI Designer
@@ -2279,7 +2279,7 @@ begin
   end;
 end;
 
-constructor TfpgEditFloat.Create(AOwner: TComponent);
+constructor TlqEditFloat.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FDecimals := -1;
@@ -2287,9 +2287,9 @@ begin
   FShowThousand := True;
 end;
 
-{ TfpgEditCurrency }
+{ TlqEditCurrency }
 
-function TfpgEditCurrency.GetValue: Currency;
+function TlqEditCurrency.GetValue: Currency;
 var
   txt: string;
 begin
@@ -2348,7 +2348,7 @@ begin
     Result := 0;
 end;
 
-procedure TfpgEditCurrency.SetValue(const AValue: Currency);
+procedure TlqEditCurrency.SetValue(const AValue: Currency);
 begin
   if not FMaxLimit and not FMinLimit then
     try
@@ -2379,7 +2379,7 @@ begin
    end;
 end;
 
-procedure TfpgEditCurrency.SetMaxValue(const AValue: Currency);
+procedure TlqEditCurrency.SetMaxValue(const AValue: Currency);
 begin
   if AValue > FMinValue then
     FMaxValue:= AValue
@@ -2388,7 +2388,7 @@ begin
   FMaxLimit:= True;
 end;
 
-procedure TfpgEditCurrency.SetMinValue(const AValue: Currency);
+procedure TlqEditCurrency.SetMinValue(const AValue: Currency);
 begin
   if AValue < FMaxValue then
     FMinValue:= AValue
@@ -2397,7 +2397,7 @@ begin
   FMinLimit:= True;
 end;
 
-procedure TfpgEditCurrency.SetDecimals(AValue: integer);
+procedure TlqEditCurrency.SetDecimals(AValue: integer);
 begin
   if (AValue < 0) or (AValue > 4) then
     Exit; // =>
@@ -2405,7 +2405,7 @@ begin
     FDecimals := AValue
 end;
 
-procedure TfpgEditCurrency.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
+procedure TlqEditCurrency.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
 begin
   case keycode of
     keyReturn, keyPEnter, keyTab:
@@ -2427,7 +2427,7 @@ begin
   inherited HandleKeyPress(keycode,shiftstate,consumed);
 end;
 
-procedure TfpgEditCurrency.HandleKeyChar(var AText: TfpgChar;
+procedure TlqEditCurrency.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: Boolean);
 var
   n: integer;
@@ -2447,7 +2447,7 @@ begin
       SetValue(FMinValue);
 end;
 
-procedure TfpgEditCurrency.HandleSetFocus;
+procedure TlqEditCurrency.HandleSetFocus;
 begin
   try
     if GetValue = 0 then
@@ -2461,7 +2461,7 @@ begin
   inherited HandleSetFocus;
 end;
 
-procedure TfpgEditCurrency.HandleKillFocus;
+procedure TlqEditCurrency.HandleKillFocus;
 begin
   try
     Text := FloatToStrF(GetValue, ffFixed, -1, FDecimals);
@@ -2473,7 +2473,7 @@ begin
   inherited HandleKillFocus;
 end;
 
-procedure TfpgEditCurrency.HandlePaint;
+procedure TlqEditCurrency.HandlePaint;
 begin
   inherited HandlePaint;
   // To make it more visible in the UI Designer
@@ -2484,7 +2484,7 @@ begin
   end;
 end;
 
-constructor TfpgEditCurrency.Create(AOwner: TComponent);
+constructor TlqEditCurrency.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FDecimals := 2;

@@ -27,78 +27,78 @@ uses
 
 type
 
-  TProjectOptionsForm = class(TfpgForm)
+  TProjectOptionsForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: ProjectOptionsForm}
-    btnCancel: TfpgButton;
-    btnOK: TfpgButton;
-    pcOptions: TfpgPageControl;
-    tsCompiler: TfpgTabSheet;
-    tsDebugger: TfpgTabSheet;
-    tsMacros: TfpgTabSheet;
-    tsOther: TfpgTabSheet;
-    Label1: TfpgLabel;
-    edtMainFile: TfpgFileNameEdit;
-    Label2: TfpgLabel;
-    edtTargetFile: TfpgFileNameEdit;
-    edtMakeCommand: TfpgFileNameEdit;
-    Label3: TfpgLabel;
-    edtMakeDir: TfpgDirectoryEdit;
-    Label4: TfpgLabel;
-    Label5: TfpgLabel;
-    FilenameEdit4: TfpgFileNameEdit;
-    CheckBox1: TfpgCheckBox;
-    Label6: TfpgLabel;
-    cbDefaultMakeCol: TfpgComboBox;
-    pcCompiler: TfpgPageControl;
-    TabSheet1: TfpgTabSheet;
-    TabSheet2: TfpgTabSheet;
-    grdCompilerMakeOptions: TfpgStringGrid;
-    grdCompilerDirs: TfpgStringGrid;
-    Label11: TfpgLabel;
-    Label7: TfpgLabel;
-    FilenameEdit5: TfpgFileNameEdit;
-    Label8: TfpgLabel;
-    Edit1: TfpgEdit;
-    CheckBox2: TfpgCheckBox;
-    CheckBox3: TfpgCheckBox;
-    CheckBox4: TfpgCheckBox;
-    PageControl1: TfpgPageControl;
-    TabSheet3: TfpgTabSheet;
-    TabSheet4: TfpgTabSheet;
-    TabSheet5: TfpgTabSheet;
-    TabSheet6: TfpgTabSheet;
-    TabSheet7: TfpgTabSheet;
-    grdDebugSrcDirs: TfpgStringGrid;
-    btnShowCmdLine: TfpgButton;
-    edtUnitOutputDir: TfpgDirectoryEdit;
-    Label9: TfpgLabel;
-    Label10: TfpgLabel;
-    grdMacroGroup: TfpgStringGrid;
-    Label12: TfpgLabel;
-    grdUserMacros: TfpgStringGrid;
+    btnCancel: TlqButton;
+    btnOK: TlqButton;
+    pcOptions: TlqPageControl;
+    tsCompiler: TlqTabSheet;
+    tsDebugger: TlqTabSheet;
+    tsMacros: TlqTabSheet;
+    tsOther: TlqTabSheet;
+    Label1: TlqLabel;
+    edtMainFile: TlqFileNameEdit;
+    Label2: TlqLabel;
+    edtTargetFile: TlqFileNameEdit;
+    edtMakeCommand: TlqFileNameEdit;
+    Label3: TlqLabel;
+    edtMakeDir: TlqDirectoryEdit;
+    Label4: TlqLabel;
+    Label5: TlqLabel;
+    FilenameEdit4: TlqFileNameEdit;
+    CheckBox1: TlqCheckBox;
+    Label6: TlqLabel;
+    cbDefaultMakeCol: TlqComboBox;
+    pcCompiler: TlqPageControl;
+    TabSheet1: TlqTabSheet;
+    TabSheet2: TlqTabSheet;
+    grdCompilerMakeOptions: TlqStringGrid;
+    grdCompilerDirs: TlqStringGrid;
+    Label11: TlqLabel;
+    Label7: TlqLabel;
+    FilenameEdit5: TlqFileNameEdit;
+    Label8: TlqLabel;
+    Edit1: TlqEdit;
+    CheckBox2: TlqCheckBox;
+    CheckBox3: TlqCheckBox;
+    CheckBox4: TlqCheckBox;
+    PageControl1: TlqPageControl;
+    TabSheet3: TlqTabSheet;
+    TabSheet4: TlqTabSheet;
+    TabSheet5: TlqTabSheet;
+    TabSheet6: TlqTabSheet;
+    TabSheet7: TlqTabSheet;
+    grdDebugSrcDirs: TlqStringGrid;
+    btnShowCmdLine: TlqButton;
+    edtUnitOutputDir: TlqDirectoryEdit;
+    Label9: TlqLabel;
+    Label10: TlqLabel;
+    grdMacroGroup: TlqStringGrid;
+    Label12: TlqLabel;
+    grdUserMacros: TlqStringGrid;
     {@VFD_HEAD_END: ProjectOptionsForm}
-    FCellEdit: TfpgEdit;
-    FFocusRect: TfpgRect;
-    FLastGrid: TfpgStringGrid; // reference only
+    FCellEdit: TlqEdit;
+    FFocusRect: TlqRect;
+    FLastGrid: TlqStringGrid; // reference only
     // so we can get correct hints, but still undo with the Cancel button
     FInternalMacroList: TIDEMacroList;
     procedure btnShowCmdLineClicked(Sender: TObject);
     procedure CellEditExit(Sender: TObject);
     procedure CellEditKeypressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
-    procedure grdCompilerDirsDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure grdCompilerDirsDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure grdCompilerDirsKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure grdCompilerMakeOptionsKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
-    procedure grdCompilerMakeOptionsDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure grdCompilerMakeOptionsDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure grdCompilerMakeOptionsClicked(Sender: TObject);
     procedure grdCompilerDirsClicked(Sender: TObject);
     procedure grdUserMacrosClicked(Sender: TObject);
-    procedure grdUserMacrosDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure grdUserMacrosDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure grdMacroGroupCanSelectCell(Sender: TObject; const ARow, ACol: Integer; var ACanSelect: boolean);
-    procedure BeforeShowHint(Sender: TObject; var AHint: TfpgString);
+    procedure BeforeShowHint(Sender: TObject; var AHint: TlqString);
     procedure LoadSettings;
     procedure SaveSettings;
-    procedure SetupCellEdit(AGrid: TfpgStringGrid);
+    procedure SetupCellEdit(AGrid: TlqStringGrid);
     procedure CleanupCompilerMakeOptionsGrid;
     procedure CleanupCompilerDirs;
     procedure CleanupUserMacrosGrid;
@@ -127,7 +127,7 @@ uses
 
 type
   // Used to get access to the Protected properties
-  TDirectoryEditFriend = class(TfpgDirectoryEdit);
+  TDirectoryEditFriend = class(TlqDirectoryEdit);
 
 
 procedure DisplayProjectOptions;
@@ -152,7 +152,7 @@ end;
 
 procedure TProjectOptionsForm.btnShowCmdLineClicked(Sender: TObject);
 var
-  c: TfpgString;
+  c: TlqString;
   b: integer;
 begin
   // build compilation string
@@ -165,7 +165,7 @@ begin
   except
     on E: Exception do
     begin
-      TfpgMessageDialog.Critical('', E.Message);
+      TlqMessageDialog.Critical('', E.Message);
       Exit;
     end;
   end;
@@ -189,10 +189,10 @@ begin
 end;
 
 procedure TProjectOptionsForm.grdCompilerDirsDrawCell(Sender: TObject;
-  const ARow, ACol: Integer; const ARect: TfpgRect;
-  const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+  const ARow, ACol: Integer; const ARect: TlqRect;
+  const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   if ACol = 5 then
   begin
@@ -234,7 +234,7 @@ begin
   if Consumed then
     Exit;
 
-  if TfpgStringGrid(Sender).FocusCol < 10 then
+  if TlqStringGrid(Sender).FocusCol < 10 then
   begin
     if (KeyCode = keySpace) then
     begin
@@ -242,12 +242,12 @@ begin
       Consumed := True;
     end;
   end
-  else if TfpgStringGrid(Sender).FocusCol = 10 then
+  else if TlqStringGrid(Sender).FocusCol = 10 then
   begin
     if (KeyCode = keyF2) or (KeyCode = keyReturn) then
     begin
       // we need to edit the cell contents
-      SetupCellEdit(TfpgStringGrid(Sender));
+      SetupCellEdit(TlqStringGrid(Sender));
       Consumed := True;
     end;
   end;
@@ -260,7 +260,7 @@ begin
   if Consumed then
     Exit;
 
-  if TfpgStringGrid(Sender).FocusCol < 6 then
+  if TlqStringGrid(Sender).FocusCol < 6 then
   begin
     if (KeyCode = keySpace) then
     begin
@@ -268,22 +268,22 @@ begin
       Consumed := True;
     end;
   end
-  else if TfpgStringGrid(Sender).FocusCol = 6 then
+  else if TlqStringGrid(Sender).FocusCol = 6 then
   begin
     if (KeyCode = keyF2) or (KeyCode = keyReturn) then
     begin
       // we need to edit the cell contents
-      SetupCellEdit(TfpgStringGrid(Sender));
+      SetupCellEdit(TlqStringGrid(Sender));
       Consumed := True;
     end;
   end;
 end;
 
 procedure TProjectOptionsForm.grdCompilerMakeOptionsDrawCell(Sender: TObject;
-  const ARow, ACol: Integer; const ARect: TfpgRect;
-  const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+  const ARow, ACol: Integer; const ARect: TlqRect;
+  const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   if (gdSelected in AFlags) and (ACol = 6) then
   begin
@@ -311,16 +311,16 @@ procedure TProjectOptionsForm.grdCompilerMakeOptionsClicked(Sender: TObject);
 var
   r, c: integer;
 begin
-  if TfpgStringGrid(Sender).RowCount = 0 then
-    TfpgStringGrid(Sender).RowCount := 1;
-  r := TfpgStringGrid(Sender).FocusRow;
-  c := TfpgStringGrid(Sender).FocusCol;
+  if TlqStringGrid(Sender).RowCount = 0 then
+    TlqStringGrid(Sender).RowCount := 1;
+  r := TlqStringGrid(Sender).FocusRow;
+  c := TlqStringGrid(Sender).FocusCol;
   if c < 6 then   // checkbox area
   begin
-    if TfpgStringGrid(Sender).Cells[c, r] = '' then
-      TfpgStringGrid(Sender).Cells[c, r] := cCheck
+    if TlqStringGrid(Sender).Cells[c, r] = '' then
+      TlqStringGrid(Sender).Cells[c, r] := cCheck
     else
-      TfpgStringGrid(Sender).Cells[c, r] := '';
+      TlqStringGrid(Sender).Cells[c, r] := '';
   end;
 end;
 
@@ -328,16 +328,16 @@ procedure TProjectOptionsForm.grdCompilerDirsClicked(Sender: TObject);
 var
   r, c: integer;
 begin
-  if TfpgStringGrid(Sender).RowCount = 0 then
-    TfpgStringGrid(Sender).RowCount := 1;
-  r := TfpgStringGrid(Sender).FocusRow;
-  c := TfpgStringGrid(Sender).FocusCol;
+  if TlqStringGrid(Sender).RowCount = 0 then
+    TlqStringGrid(Sender).RowCount := 1;
+  r := TlqStringGrid(Sender).FocusRow;
+  c := TlqStringGrid(Sender).FocusCol;
   if c < 10 then   // checkbox area
   begin
-    if TfpgStringGrid(Sender).Cells[c, r] = '' then
-      TfpgStringGrid(Sender).Cells[c, r] := cCheck
+    if TlqStringGrid(Sender).Cells[c, r] = '' then
+      TlqStringGrid(Sender).Cells[c, r] := cCheck
     else
-      TfpgStringGrid(Sender).Cells[c, r] := '';
+      TlqStringGrid(Sender).Cells[c, r] := '';
   end;
 end;
 
@@ -345,24 +345,24 @@ procedure TProjectOptionsForm.grdUserMacrosClicked(Sender: TObject);
 var
   r, c: integer;
 begin
-  if TfpgStringGrid(Sender).RowCount = 0 then
-    TfpgStringGrid(Sender).RowCount := 1;
-  r := TfpgStringGrid(Sender).FocusRow;
-  c := TfpgStringGrid(Sender).FocusCol;
+  if TlqStringGrid(Sender).RowCount = 0 then
+    TlqStringGrid(Sender).RowCount := 1;
+  r := TlqStringGrid(Sender).FocusRow;
+  c := TlqStringGrid(Sender).FocusCol;
   if c < 6 then   // checkbox area
   begin
-    if TfpgStringGrid(Sender).Cells[c, r] = '' then
-      TfpgStringGrid(Sender).Cells[c, r] := cCheck
+    if TlqStringGrid(Sender).Cells[c, r] = '' then
+      TlqStringGrid(Sender).Cells[c, r] := cCheck
     else
-      TfpgStringGrid(Sender).Cells[c, r] := '';
+      TlqStringGrid(Sender).Cells[c, r] := '';
   end;
 end;
 
 procedure TProjectOptionsForm.grdUserMacrosDrawCell(Sender: TObject;
-  const ARow, ACol: Integer; const ARect: TfpgRect;
-  const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+  const ARow, ACol: Integer; const ARect: TlqRect;
+  const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   if (gdSelected in AFlags) and (ACol = 6) then
   begin
@@ -392,17 +392,17 @@ begin
   ACanSelect := ACol > 0;
 end;
 
-procedure TProjectOptionsForm.BeforeShowHint(Sender: TObject; var AHint: TfpgString);
+procedure TProjectOptionsForm.BeforeShowHint(Sender: TObject; var AHint: TlqString);
 var
-  s: TfpgString;
-  c: TfpgWidget;
+  s: TlqString;
+  c: TlqWidget;
 begin
-  if Sender is TfpgWidget then
-    c := TfpgWidget(Sender)
+  if Sender is TlqWidget then
+    c := TlqWidget(Sender)
   else
     Exit;    // should never occur, but lets just be safe
 
-  if (c.Name = 'FEdit') and ((c.Parent is TfpgDirectoryEdit) or (c.Parent is TfpgFileNameEdit)) then
+  if (c.Name = 'FEdit') and ((c.Parent is TlqDirectoryEdit) or (c.Parent is TlqFileNameEdit)) then
   begin
     if c.Parent <> nil then
       c := c.Parent
@@ -411,15 +411,15 @@ begin
   end;
 
   // controls that may contain macros
-  if c is TfpgDirectoryEdit then
-    s := TfpgDirectoryEdit(c).Directory
-  else if c is TfpgFileNameEdit then
-    s := TfpgFileNameEdit(c).FileName
-  else if c is TfpgEdit then
-    s := TfpgEdit(c).Text
-  else if c is TfpgStringGrid then
+  if c is TlqDirectoryEdit then
+    s := TlqDirectoryEdit(c).Directory
+  else if c is TlqFileNameEdit then
+    s := TlqFileNameEdit(c).FileName
+  else if c is TlqEdit then
+    s := TlqEdit(c).Text
+  else if c is TlqStringGrid then
   begin
-    s := TfpgStringGrid(c).Cells[TfpgStringGrid(c).FocusCol, TfpgStringGrid(c).FocusRow];
+    s := TlqStringGrid(c).Cells[TlqStringGrid(c).FocusCol, TlqStringGrid(c).FocusRow];
     if s = cCheck then
       s := '';
   end;
@@ -517,7 +517,7 @@ begin
   end;
 end;
 
-procedure TProjectOptionsForm.SetupCellEdit(AGrid: TfpgStringGrid);
+procedure TProjectOptionsForm.SetupCellEdit(AGrid: TlqStringGrid);
 var
   pt: TPoint;
 begin
@@ -525,7 +525,7 @@ begin
     FCellEdit.Free;
 
   FLastGrid := AGrid;
-  FCellEdit := TfpgEdit.Create(FLastGrid.Parent);
+  FCellEdit := TlqEdit.Create(FLastGrid.Parent);
   pt.X := FLastGrid.Left + FFocusRect.Left;
   pt.Y := FLastGrid.Top + FFocusRect.Top;
   with FCellEdit do
@@ -604,7 +604,7 @@ begin
   Hint := '';
   ShowHint := True;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -618,7 +618,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -632,7 +632,7 @@ begin
     TabOrder := 2;
   end;
 
-  pcOptions := TfpgPageControl.Create(self);
+  pcOptions := TlqPageControl.Create(self);
   with pcOptions do
   begin
     Name := 'pcOptions';
@@ -643,7 +643,7 @@ begin
     TabOrder := 3;
   end;
 
-  tsCompiler := TfpgTabSheet.Create(pcOptions);
+  tsCompiler := TlqTabSheet.Create(pcOptions);
   with tsCompiler do
   begin
     Name := 'tsCompiler';
@@ -651,7 +651,7 @@ begin
     Text := 'Compiler';
   end;
 
-  tsDebugger := TfpgTabSheet.Create(pcOptions);
+  tsDebugger := TlqTabSheet.Create(pcOptions);
   with tsDebugger do
   begin
     Name := 'tsDebugger';
@@ -659,7 +659,7 @@ begin
     Text := 'Debugger';
   end;
 
-  tsMacros := TfpgTabSheet.Create(pcOptions);
+  tsMacros := TlqTabSheet.Create(pcOptions);
   with tsMacros do
   begin
     Name := 'tsMacros';
@@ -667,7 +667,7 @@ begin
     Text := 'Macros';
   end;
 
-  tsOther := TfpgTabSheet.Create(pcOptions);
+  tsOther := TlqTabSheet.Create(pcOptions);
   with tsOther do
   begin
     Name := 'tsOther';
@@ -675,7 +675,7 @@ begin
     Text := 'Other';
   end;
 
-  Label1 := TfpgLabel.Create(tsCompiler);
+  Label1 := TlqLabel.Create(tsCompiler);
   with Label1 do
   begin
     Name := 'Label1';
@@ -685,7 +685,7 @@ begin
     Text := 'Main file';
   end;
 
-  edtMainFile := TfpgFileNameEdit.Create(tsCompiler);
+  edtMainFile := TlqFileNameEdit.Create(tsCompiler);
   with edtMainFile do
   begin
     Name := 'edtMainFile';
@@ -699,7 +699,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label2 := TfpgLabel.Create(tsCompiler);
+  Label2 := TlqLabel.Create(tsCompiler);
   with Label2 do
   begin
     Name := 'Label2';
@@ -709,7 +709,7 @@ begin
     Text := 'Target file (-o)';
   end;
 
-  edtTargetFile := TfpgFileNameEdit.Create(tsCompiler);
+  edtTargetFile := TlqFileNameEdit.Create(tsCompiler);
   with edtTargetFile do
   begin
     Name := 'edtTargetFile';
@@ -723,7 +723,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtMakeCommand := TfpgFileNameEdit.Create(tsCompiler);
+  edtMakeCommand := TlqFileNameEdit.Create(tsCompiler);
   with edtMakeCommand do
   begin
     Name := 'edtMakeCommand';
@@ -737,7 +737,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label3 := TfpgLabel.Create(tsCompiler);
+  Label3 := TlqLabel.Create(tsCompiler);
   with Label3 do
   begin
     Name := 'Label3';
@@ -747,7 +747,7 @@ begin
     Text := 'Make command';
   end;
 
-  edtMakeDir := TfpgDirectoryEdit.Create(tsCompiler);
+  edtMakeDir := TlqDirectoryEdit.Create(tsCompiler);
   with edtMakeDir do
   begin
     Name := 'edtMakeDir';
@@ -760,7 +760,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label4 := TfpgLabel.Create(tsCompiler);
+  Label4 := TlqLabel.Create(tsCompiler);
   with Label4 do
   begin
     Name := 'Label4';
@@ -770,7 +770,7 @@ begin
     Text := 'Make directory';
   end;
 
-  Label5 := TfpgLabel.Create(tsCompiler);
+  Label5 := TlqLabel.Create(tsCompiler);
   with Label5 do
   begin
     Name := 'Label5';
@@ -781,7 +781,7 @@ begin
     Enabled := False;
   end;
 
-  FilenameEdit4 := TfpgFileNameEdit.Create(tsCompiler);
+  FilenameEdit4 := TlqFileNameEdit.Create(tsCompiler);
   with FilenameEdit4 do
   begin
     Name := 'FilenameEdit4';
@@ -794,7 +794,7 @@ begin
     Enabled := False;
   end;
 
-  CheckBox1 := TfpgCheckBox.Create(tsCompiler);
+  CheckBox1 := TlqCheckBox.Create(tsCompiler);
   with CheckBox1 do
   begin
     Name := 'CheckBox1';
@@ -805,7 +805,7 @@ begin
     Text := 'Copy messages to file';
   end;
 
-  Label6 := TfpgLabel.Create(tsCompiler);
+  Label6 := TlqLabel.Create(tsCompiler);
   with Label6 do
   begin
     Name := 'Label6';
@@ -815,7 +815,7 @@ begin
     Text := 'Default make column on Run';
   end;
 
-  cbDefaultMakeCol := TfpgComboBox.Create(tsCompiler);
+  cbDefaultMakeCol := TlqComboBox.Create(tsCompiler);
   with cbDefaultMakeCol do
   begin
     Name := 'cbDefaultMakeCol';
@@ -832,7 +832,7 @@ begin
     FocusItem := 0;
   end;
 
-  pcCompiler := TfpgPageControl.Create(tsCompiler);
+  pcCompiler := TlqPageControl.Create(tsCompiler);
   with pcCompiler do
   begin
     Name := 'pcCompiler';
@@ -843,7 +843,7 @@ begin
     TabOrder := 9;
   end;
 
-  TabSheet1 := TfpgTabSheet.Create(pcCompiler);
+  TabSheet1 := TlqTabSheet.Create(pcCompiler);
   with TabSheet1 do
   begin
     Name := 'TabSheet1';
@@ -851,7 +851,7 @@ begin
     Text := 'Make options';
   end;
 
-  TabSheet2 := TfpgTabSheet.Create(pcCompiler);
+  TabSheet2 := TlqTabSheet.Create(pcCompiler);
   with TabSheet2 do
   begin
     Name := 'TabSheet2';
@@ -859,7 +859,7 @@ begin
     Text := 'Directories';
   end;
 
-  grdCompilerMakeOptions := TfpgStringGrid.Create(TabSheet1);
+  grdCompilerMakeOptions := TlqStringGrid.Create(TabSheet1);
   with grdCompilerMakeOptions do
   begin
     Name := 'grdCompilerMakeOptions';
@@ -884,7 +884,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  grdCompilerDirs := TfpgStringGrid.Create(TabSheet2);
+  grdCompilerDirs := TlqStringGrid.Create(TabSheet2);
   with grdCompilerDirs do
   begin
     Name := 'grdCompilerDirs';
@@ -915,7 +915,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label11 := TfpgLabel.Create(TabSheet2);
+  Label11 := TlqLabel.Create(TabSheet2);
   with Label11 do
   begin
     Name := 'Label11';
@@ -925,7 +925,7 @@ begin
     Text := 'Unit (-Fu), Include (-Fi), Library (-Fl) and Object (-Fo) directories';
   end;
 
-  Label7 := TfpgLabel.Create(tsDebugger);
+  Label7 := TlqLabel.Create(tsDebugger);
   with Label7 do
   begin
     Name := 'Label7';
@@ -935,7 +935,7 @@ begin
     Text := 'Debug command';
   end;
 
-  FilenameEdit5 := TfpgFileNameEdit.Create(tsDebugger);
+  FilenameEdit5 := TlqFileNameEdit.Create(tsDebugger);
   with FilenameEdit5 do
   begin
     Name := 'FilenameEdit5';
@@ -948,7 +948,7 @@ begin
     TabOrder := 2;
   end;
 
-  Label8 := TfpgLabel.Create(tsDebugger);
+  Label8 := TlqLabel.Create(tsDebugger);
   with Label8 do
   begin
     Name := 'Label8';
@@ -958,7 +958,7 @@ begin
     Text := 'Debug options';
   end;
 
-  Edit1 := TfpgEdit.Create(tsDebugger);
+  Edit1 := TlqEdit.Create(tsDebugger);
   with Edit1 do
   begin
     Name := 'Edit1';
@@ -971,7 +971,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  CheckBox2 := TfpgCheckBox.Create(tsDebugger);
+  CheckBox2 := TlqCheckBox.Create(tsDebugger);
   with CheckBox2 do
   begin
     Name := 'CheckBox2';
@@ -982,7 +982,7 @@ begin
     Text := 'Activate on Break';
   end;
 
-  CheckBox3 := TfpgCheckBox.Create(tsDebugger);
+  CheckBox3 := TlqCheckBox.Create(tsDebugger);
   with CheckBox3 do
   begin
     Name := 'CheckBox3';
@@ -993,7 +993,7 @@ begin
     Text := 'Stop on Exception';
   end;
 
-  CheckBox4 := TfpgCheckBox.Create(tsDebugger);
+  CheckBox4 := TlqCheckBox.Create(tsDebugger);
   with CheckBox4 do
   begin
     Name := 'CheckBox4';
@@ -1004,7 +1004,7 @@ begin
     Text := 'Show Console on Run';
   end;
 
-  PageControl1 := TfpgPageControl.Create(tsDebugger);
+  PageControl1 := TlqPageControl.Create(tsDebugger);
   with PageControl1 do
   begin
     Name := 'PageControl1';
@@ -1014,7 +1014,7 @@ begin
     TabOrder := 8;
   end;
 
-  TabSheet3 := TfpgTabSheet.Create(PageControl1);
+  TabSheet3 := TlqTabSheet.Create(PageControl1);
   with TabSheet3 do
   begin
     Name := 'TabSheet3';
@@ -1022,7 +1022,7 @@ begin
     Text := 'Source directories';
   end;
 
-  TabSheet4 := TfpgTabSheet.Create(PageControl1);
+  TabSheet4 := TlqTabSheet.Create(PageControl1);
   with TabSheet4 do
   begin
     Name := 'TabSheet4';
@@ -1030,7 +1030,7 @@ begin
     Text := 'Defines';
   end;
 
-  TabSheet5 := TfpgTabSheet.Create(PageControl1);
+  TabSheet5 := TlqTabSheet.Create(PageControl1);
   with TabSheet5 do
   begin
     Name := 'TabSheet5';
@@ -1038,7 +1038,7 @@ begin
     Text := 'Signals';
   end;
 
-  TabSheet6 := TfpgTabSheet.Create(PageControl1);
+  TabSheet6 := TlqTabSheet.Create(PageControl1);
   with TabSheet6 do
   begin
     Name := 'TabSheet6';
@@ -1046,7 +1046,7 @@ begin
     Text := 'Exceptions';
   end;
 
-  TabSheet7 := TfpgTabSheet.Create(PageControl1);
+  TabSheet7 := TlqTabSheet.Create(PageControl1);
   with TabSheet7 do
   begin
     Name := 'TabSheet7';
@@ -1054,7 +1054,7 @@ begin
     Text := 'Target';
   end;
 
-  grdDebugSrcDirs := TfpgStringGrid.Create(TabSheet3);
+  grdDebugSrcDirs := TlqStringGrid.Create(TabSheet3);
   with grdDebugSrcDirs do
   begin
     Name := 'grdDebugSrcDirs';
@@ -1069,7 +1069,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnShowCmdLine := TfpgButton.Create(tsCompiler);
+  btnShowCmdLine := TlqButton.Create(tsCompiler);
   with btnShowCmdLine do
   begin
     Name := 'btnShowCmdLine';
@@ -1082,7 +1082,7 @@ begin
     OnClick :=@btnShowCmdLineClicked;
   end;
 
-  edtUnitOutputDir := TfpgDirectoryEdit.Create(tsCompiler);
+  edtUnitOutputDir := TlqDirectoryEdit.Create(tsCompiler);
   with edtUnitOutputDir do
   begin
     Name := 'edtUnitOutputDir';
@@ -1095,7 +1095,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label9 := TfpgLabel.Create(tsCompiler);
+  Label9 := TlqLabel.Create(tsCompiler);
   with Label9 do
   begin
     Name := 'Label9';
@@ -1105,7 +1105,7 @@ begin
     Text := 'Unit output directory (-FU)';
   end;
 
-  Label10 := TfpgLabel.Create(tsMacros);
+  Label10 := TlqLabel.Create(tsMacros);
   with Label10 do
   begin
     Name := 'Label10';
@@ -1116,7 +1116,7 @@ begin
     Text := 'Active Group';
   end;
 
-  grdMacroGroup := TfpgStringGrid.Create(tsMacros);
+  grdMacroGroup := TlqStringGrid.Create(tsMacros);
   with grdMacroGroup do
   begin
     Name := 'grdMacroGroup';
@@ -1143,7 +1143,7 @@ begin
     OnCanSelectCell := @grdMacroGroupCanSelectCell;
   end;
 
-  Label12 := TfpgLabel.Create(tsMacros);
+  Label12 := TlqLabel.Create(tsMacros);
   with Label12 do
   begin
     Name := 'Label12';
@@ -1154,7 +1154,7 @@ begin
     Text := 'User defined macros';
   end;
 
-  grdUserMacros := TfpgStringGrid.Create(tsMacros);
+  grdUserMacros := TlqStringGrid.Create(tsMacros);
   with grdUserMacros do
   begin
     Name := 'grdUserMacros';

@@ -12,12 +12,12 @@ function GetOwnHelpFileName: String;
 // Given a filename, which may or may not contain a path or extension,
 // finds the actual file. This can involve searching
 // the help and bookshelf paths.
-function FindHelpFile(const AFilename: TfpgString): TfpgString;
+function FindHelpFile(const AFilename: TlqString): TlqString;
 
-function SearchHelpPaths( const Filename: TfpgString; var ResultFilename: TfpgString; const IncludeAppDir: boolean ): boolean;
+function SearchHelpPaths( const Filename: TlqString; var ResultFilename: TlqString; const IncludeAppDir: boolean ): boolean;
 
-function GetApplicationDir: TfpgString;
-function SearchPath( PathEnvVar: TfpgString; Filename: TfpgString; var FilenameFound: string ): boolean;
+function GetApplicationDir: TlqString;
+function SearchPath( PathEnvVar: TlqString; Filename: TlqString; var FilenameFound: string ): boolean;
 
 implementation
 
@@ -39,10 +39,10 @@ begin
 end;
 
 // Given a "filename" which may include a path, find it in various paths and extensions
-function FindHelpFile(const AFilename: TfpgString): TfpgString;
+function FindHelpFile(const AFilename: TlqString): TlqString;
 var
-  AlternativeFileName: TfpgString;
-  lFilename: TfpgString;
+  AlternativeFileName: TlqString;
+  lFilename: TlqString;
 begin
   lFilename := AFilename;
   if lFileName = OWN_HELP_MARKER then
@@ -111,8 +111,8 @@ begin
 //  Result := AFileName;
 end;
 
-Function SearchHelpPaths( const Filename: TfpgString;
-                          var ResultFilename: TfpgString;
+Function SearchHelpPaths( const Filename: TlqString;
+                          var ResultFilename: TlqString;
                           const IncludeAppDir: boolean ): boolean;
 begin
   Result := SearchPath( HelpPathEnvironmentVar,
@@ -133,15 +133,15 @@ begin
 
 end;
 
-function GetApplicationDir: TfpgString;
+function GetApplicationDir: TlqString;
 begin
   Result := fpgExtractFilePath(ParamStr(0));
 end;
 
-function SearchPath( PathEnvVar: TfpgString; Filename: TfpgString; var FilenameFound: string ): boolean;
+function SearchPath( PathEnvVar: TlqString; Filename: TlqString; var FilenameFound: string ): boolean;
 var
   lFilename: string;
-  lDir: TfpgString;
+  lDir: TlqString;
   fl: TStrings;
   i: integer;
 begin

@@ -11,11 +11,11 @@ type
   { Simple data object store information about help note and position of note }
   THelpNote = class(TObject)
   public
-    Text: TfpgString;
+    Text: TlqString;
     Topic: TTopic;
     InsertPoint: longint;
     // calculated
-    InsertText: TfpgString;
+    InsertText: TlqString;
     constructor Create;
     destructor  Destroy; override;
   end;

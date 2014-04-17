@@ -1,18 +1,18 @@
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
 
-  TfpgPromptUserDialog = class(TfpgBaseDialog)
+  TlqPromptUserDialog = class(TlqBaseDialog)
   private
-    lblTitle: TfpgLabel;
-    lblTitlePw: TfpgLabel;
-    function    GetUserID: TfpgString;
-    function    GetUserPassword: TfpgString;
-    procedure SetUserID(const AValue: TfpgString);
+    lblTitle: TlqLabel;
+    lblTitlePw: TlqLabel;
+    function    GetUserID: TlqString;
+    function    GetUserPassword: TlqString;
+    procedure SetUserID(const AValue: TlqString);
   protected
-    edUserID: TfpgEdit;
-    edPassword: TfpgEdit;
+    edUserID: TlqEdit;
+    edPassword: TlqEdit;
     procedure   btnOKClick(Sender: TObject); override;
   public
     constructor Create(AOwner: TComponent); override;
@@ -20,23 +20,23 @@
     // Subclass will have to override and implement it. By default it returns True.
     function    Authenticate: boolean; virtual;
     procedure   Wiggle(const Seconds: integer = 1; const MovingPixels: integer = 5; const aSleep: integer = 75);
-    property    UserID: TfpgString read GetUserID write SetUserID;
-    property    Password: TfpgString read GetUserPassword;
+    property    UserID: TlqString read GetUserID write SetUserID;
+    property    Password: TlqString read GetUserPassword;
   end;
 
 
-  TfpgPromptUserDbDialog = class(TfpgPromptUserDialog)
+  TlqPromptUserDbDialog = class(TlqPromptUserDialog)
   private
-    lblDatabases: TfpgLabel;
+    lblDatabases: TlqLabel;
   protected
     aStringList: TStringList;
-    cbDatabases: TfpgComboBox;
-    function    GetSelectedDatabase: TfpgString; virtual;
+    cbDatabases: TlqComboBox;
+    function    GetSelectedDatabase: TlqString; virtual;
     procedure   PopulateComboDb; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Database: TfpgString read GetSelectedDatabase;
+    property    Database: TlqString read GetSelectedDatabase;
   end;
 
 
@@ -47,30 +47,30 @@
 {$IFDEF read_implementation}
 
 
-{ TfpgPromptUserDialog }
+{ TlqPromptUserDialog }
 
-function TfpgPromptUserDialog.GetUserID: TfpgString;
+function TlqPromptUserDialog.GetUserID: TlqString;
 begin
   Result := edUserID.Text;
 end;
 
-function TfpgPromptUserDialog.GetUserPassword: TfpgString;
+function TlqPromptUserDialog.GetUserPassword: TlqString;
 begin
   Result := edPassword.Text;
 end;
 
-procedure TfpgPromptUserDialog.SetUserID(const AValue: TfpgString);
+procedure TlqPromptUserDialog.SetUserID(const AValue: TlqString);
 begin
   edUserID.Text := AValue;
 end;
 
-procedure TfpgPromptUserDialog.btnOKClick(Sender: TObject);
+procedure TlqPromptUserDialog.btnOKClick(Sender: TObject);
 begin
   if Authenticate then
     inherited btnOKClick(Sender);
 end;
 
-constructor TfpgPromptUserDialog.Create(AOwner: TComponent);
+constructor TlqPromptUserDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   // reset dimensions
@@ -101,12 +101,12 @@ begin
   btnCancel.TabOrder    := 4;
 end;
 
-function TfpgPromptUserDialog.Authenticate: boolean;
+function TlqPromptUserDialog.Authenticate: boolean;
 begin
   Result := True;
 end;
 
-procedure TfpgPromptUserDialog.Wiggle(const Seconds: integer; const MovingPixels: integer; const aSleep: integer);
+procedure TlqPromptUserDialog.Wiggle(const Seconds: integer; const MovingPixels: integer; const aSleep: integer);
 var
   MyTime: TDateTime;
 begin
@@ -123,14 +123,14 @@ begin
   until SecondsBetween(Now, MyTime) >= Seconds;
 end;
 
-{ TfpgPromptUserDbDialog }
+{ TlqPromptUserDbDialog }
 
-function TfpgPromptUserDbDialog.GetSelectedDatabase: TfpgString;
+function TlqPromptUserDbDialog.GetSelectedDatabase: TlqString;
 begin
   Result := cbDatabases.Text;
 end;
 
-constructor TfpgPromptUserDbDialog.Create(AOwner: TComponent);
+constructor TlqPromptUserDbDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   // reset dimensions
@@ -162,13 +162,13 @@ begin
   PopulateComboDb;
 end;
 
-destructor TfpgPromptUserDbDialog.Destroy;
+destructor TlqPromptUserDbDialog.Destroy;
 begin
   aStringList.Free;
   inherited Destroy;
 end;
 
-procedure TfpgPromptUserDbDialog.PopulateComboDb;
+procedure TlqPromptUserDbDialog.PopulateComboDb;
 begin
   // do nothing. Derived classe will implement it
 end;

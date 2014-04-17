@@ -66,7 +66,7 @@ type
   end;
   
 
-  TElement = class(TDocNode)        // eg: TfpgWindow  or  TfpgWindow.Create
+  TElement = class(TDocNode)        // eg: TlqWindow  or  TlqWindow.Create
   end;
 
 

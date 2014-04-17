@@ -13,21 +13,21 @@ uses
 type
   { TfrmSplitterTest }
 
-  TfrmSplitterTest = class(TfpgForm)
+  TfrmSplitterTest = class(TlqForm)
   private
     procedure CheckBoxChanged(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: frmSplitterTest}
-    lstChoice: TfpgListBox;
-    spl1: TfpgSplitter;
-    mmSource: TfpgMemo;
-    spl2: TfpgSplitter;
-    mmDest: TfpgMemo;
-    pnlName1: TfpgPanel;
-    spl3: TfpgSplitter;
-    pbName1: TfpgProgressBar;
-    spl4: TfpgSplitter;
-    cbShowGrabBar: TfpgCheckBox;
+    lstChoice: TlqListBox;
+    spl1: TlqSplitter;
+    mmSource: TlqMemo;
+    spl2: TlqSplitter;
+    mmDest: TlqMemo;
+    pnlName1: TlqPanel;
+    spl3: TlqSplitter;
+    pbName1: TlqProgressBar;
+    spl4: TlqSplitter;
+    cbShowGrabBar: TlqCheckBox;
     {@VFD_HEAD_END: frmSplitterTest}
     procedure AfterCreate; override;
   end;
@@ -48,7 +48,7 @@ begin
   SetPosition(292, 184, 553, 290);
   WindowTitle := 'Splitter Demo';
 
-  lstChoice := TfpgListBox.Create(self);
+  lstChoice := TlqListBox.Create(self);
   with lstChoice do
   begin
     Name := 'lstChoice';
@@ -60,7 +60,7 @@ begin
     Align := alLeft;
   end;
 
-  spl1 := TfpgSplitter.Create(self);
+  spl1 := TlqSplitter.Create(self);
   with spl1 do
   begin
     Name := 'spl1';
@@ -68,7 +68,7 @@ begin
     Align := alLeft;
   end;
 
-  mmSource := TfpgMemo.Create(self);
+  mmSource := TlqMemo.Create(self);
   with mmSource do
   begin
     Name := 'mmSource';
@@ -80,7 +80,7 @@ begin
     Align := alTop;
   end;
 
-  spl2 := TfpgSplitter.Create(self);
+  spl2 := TlqSplitter.Create(self);
   with spl2 do
   begin
     Name := 'spl2';
@@ -88,7 +88,7 @@ begin
     Align := alTop;
   end;
 
-  pnlName1 := TfpgPanel.Create(self);
+  pnlName1 := TlqPanel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
@@ -97,7 +97,7 @@ begin
     Align := alRight;
   end;
   
-  cbShowGrabBar := TfpgCheckBox.Create(pnlName1);
+  cbShowGrabBar := TlqCheckBox.Create(pnlName1);
   with cbShowGrabBar do
   begin
     Name := 'cbShowGrabBar';
@@ -107,7 +107,7 @@ begin
     OnChange :=@CheckBoxChanged;
   end;
 
-  spl3 := TfpgSplitter.Create(self);
+  spl3 := TlqSplitter.Create(self);
   with spl3 do
   begin
     Name := 'spl3';
@@ -115,7 +115,7 @@ begin
     Align := alRight;
   end;
 
-  pbName1 := TfpgProgressBar.Create(self);
+  pbName1 := TlqProgressBar.Create(self);
   with pbName1 do
   begin
     Name := 'pbName1';
@@ -124,7 +124,7 @@ begin
     Align := alBottom;
   end;
 
-  spl4 := TfpgSplitter.Create(self);
+  spl4 := TlqSplitter.Create(self);
   with spl4 do
   begin
     Name := 'spl4';
@@ -132,7 +132,7 @@ begin
     Align := alBottom;
   end;
 
-  mmDest := TfpgMemo.Create(self);
+  mmDest := TlqMemo.Create(self);
   with mmDest do
   begin
     Name := 'mmDest';

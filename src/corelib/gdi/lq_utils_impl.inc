@@ -1,21 +1,21 @@
-{%mainunit fpg_utils.pas}
+{%mainunit lq_utils.pas}
 
 uses
-  Shellapi, Windows, fpg_constants, fpg_stringutils;
+  Shellapi, Windows, lq_constants, lq_stringutils;
   
 // GDI specific implementations of encoding functions
 
-function fpgToOSEncoding(aString: TfpgString): string;
+function fpgToOSEncoding(aString: TlqString): string;
 begin
   Result := Utf8ToAnsi(aString);
 end;
 
-function fpgFromOSEncoding(aString: string): TfpgString;
+function fpgFromOSEncoding(aString: string): TlqString;
 begin
   Result := AnsiToUtf8(aString);
 end;
 
-procedure fpgOpenURL(const aURL: TfpgString);
+procedure fpgOpenURL(const aURL: TlqString);
 begin
   try
     {$IFNDEF wince}
@@ -26,7 +26,7 @@ begin
   end;
 end;
 
-function fpgFileSize(const AFilename: TfpgString): integer;
+function fpgFileSize(const AFilename: TlqString): integer;
 var
   FindData: TWIN32FindDataW;
   FindHandle: THandle;

@@ -12,31 +12,31 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Button1: TfpgButton;
-    ColorWheel1: TfpgColorWheel;
-    ValueBar1: TfpgValueBar;
-    Bevel1: TfpgBevel;
-    Label1: TfpgLabel;
-    Label2: TfpgLabel;
-    Label3: TfpgLabel;
-    edH: TfpgEdit;
-    edS: TfpgEdit;
-    edV: TfpgEdit;
-    Label4: TfpgLabel;
-    Label5: TfpgLabel;
-    Label6: TfpgLabel;
-    edR: TfpgEdit;
-    edG: TfpgEdit;
-    edB: TfpgEdit;
-    Label7: TfpgLabel;
-    Label8: TfpgLabel;
-    Bevel2: TfpgBevel;
-    Label9: TfpgLabel;
-    chkCrossHair: TfpgCheckBox;
-    chkBGColor: TfpgCheckBox;
+    Button1: TlqButton;
+    ColorWheel1: TlqColorWheel;
+    ValueBar1: TlqValueBar;
+    Bevel1: TlqBevel;
+    Label1: TlqLabel;
+    Label2: TlqLabel;
+    Label3: TlqLabel;
+    edH: TlqEdit;
+    edS: TlqEdit;
+    edV: TlqEdit;
+    Label4: TlqLabel;
+    Label5: TlqLabel;
+    Label6: TlqLabel;
+    edR: TlqEdit;
+    edG: TlqEdit;
+    edB: TlqEdit;
+    Label7: TlqLabel;
+    Label8: TlqLabel;
+    Bevel2: TlqBevel;
+    Label9: TlqLabel;
+    chkCrossHair: TlqCheckBox;
+    chkBGColor: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     FViaRGB: Boolean; // to prevent recursive changes
     procedure btnQuitClicked(Sender: TObject);
@@ -68,7 +68,7 @@ end;
 procedure TMainForm.RGBChanged(Sender: TObject);
 var
   rgb: TFPColor;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   FViaRGB := True;  // revent recursive updates
   rgb.Red := StrToInt(edR.Text);
@@ -123,7 +123,7 @@ end;
 procedure TMainForm.UpdateRGBComponents;
 var
   rgb: TFPColor;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   c := ValueBar1.SelectedColor;
   rgb := fpgColorToFPColor(c);
@@ -140,7 +140,7 @@ begin
   WindowTitle := 'ColorWheel test app';
   WindowPosition := wpUser;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -154,14 +154,14 @@ begin
     OnClick  := @btnQuitClicked;
   end;
 
-  ColorWheel1 := TfpgColorWheel.Create(self);
+  ColorWheel1 := TlqColorWheel.Create(self);
   with ColorWheel1 do
   begin
     Name := 'ColorWheel1';
     SetPosition(20, 20, 272, 244);
   end;
 
-  ValueBar1 := TfpgValueBar.Create(self);
+  ValueBar1 := TlqValueBar.Create(self);
   with ValueBar1 do
   begin
     Name := 'ValueBar1';
@@ -169,14 +169,14 @@ begin
     OnChange  := @ColorChanged;
   end;
 
-  Bevel1 := TfpgBevel.Create(self);
+  Bevel1 := TlqBevel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
     SetPosition(20, 288, 76, 56);
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -187,7 +187,7 @@ begin
     Text := 'Hue';
   end;
 
-  Label2 := TfpgLabel.Create(self);
+  Label2 := TlqLabel.Create(self);
   with Label2 do
   begin
     Name := 'Label2';
@@ -198,7 +198,7 @@ begin
     Text := 'Sat';
   end;
 
-  Label3 := TfpgLabel.Create(self);
+  Label3 := TlqLabel.Create(self);
   with Label3 do
   begin
     Name := 'Label3';
@@ -209,7 +209,7 @@ begin
     Text := 'Val';
   end;
 
-  edH := TfpgEdit.Create(self);
+  edH := TlqEdit.Create(self);
   with edH do
   begin
     Name := 'edH';
@@ -220,7 +220,7 @@ begin
     BackgroundColor := clWindowBackground;
   end;
 
-  edS := TfpgEdit.Create(self);
+  edS := TlqEdit.Create(self);
   with edS do
   begin
     Name := 'edS';
@@ -231,7 +231,7 @@ begin
     BackgroundColor := clWindowBackground;
   end;
 
-  edV := TfpgEdit.Create(self);
+  edV := TlqEdit.Create(self);
   with edV do
   begin
     Name := 'edV';
@@ -242,7 +242,7 @@ begin
     BackgroundColor := clWindowBackground;
   end;
 
-  Label4 := TfpgLabel.Create(self);
+  Label4 := TlqLabel.Create(self);
   with Label4 do
   begin
     Name := 'Label4';
@@ -253,7 +253,7 @@ begin
     Text := 'Red';
   end;
 
-  Label5 := TfpgLabel.Create(self);
+  Label5 := TlqLabel.Create(self);
   with Label5 do
   begin
     Name := 'Label5';
@@ -264,7 +264,7 @@ begin
     Text := 'Green';
   end;
 
-  Label6 := TfpgLabel.Create(self);
+  Label6 := TlqLabel.Create(self);
   with Label6 do
   begin
     Name := 'Label6';
@@ -275,7 +275,7 @@ begin
     Text := 'Blue';
   end;
 
-  edR := TfpgEdit.Create(self);
+  edR := TlqEdit.Create(self);
   with edR do
   begin
     Name := 'edR';
@@ -286,7 +286,7 @@ begin
     OnExit  := @RGBChanged;
   end;
 
-  edG := TfpgEdit.Create(self);
+  edG := TlqEdit.Create(self);
   with edG do
   begin
     Name := 'edG';
@@ -297,7 +297,7 @@ begin
     OnExit := @RGBChanged;
   end;
 
-  edB := TfpgEdit.Create(self);
+  edB := TlqEdit.Create(self);
   with edB do
   begin
     Name := 'edB';
@@ -308,7 +308,7 @@ begin
     OnExit := @RGBChanged;
   end;
 
-  Label7 := TfpgLabel.Create(self);
+  Label7 := TlqLabel.Create(self);
   with Label7 do
   begin
     Name := 'Label7';
@@ -318,7 +318,7 @@ begin
     Text := 'ColorWheel';
   end;
 
-  Label8 := TfpgLabel.Create(self);
+  Label8 := TlqLabel.Create(self);
   with Label8 do
   begin
     Name := 'Label8';
@@ -328,7 +328,7 @@ begin
     Text := 'ValueBar';
   end;
 
-  Bevel2 := TfpgBevel.Create(self);
+  Bevel2 := TlqBevel.Create(self);
   with Bevel2 do
   begin
     Name := 'Bevel2';
@@ -336,7 +336,7 @@ begin
     Style := bsLowered;
   end;
 
-  Label9 := TfpgLabel.Create(self);
+  Label9 := TlqLabel.Create(self);
   with Label9 do
   begin
     Name := 'Label9';
@@ -347,7 +347,7 @@ begin
     Text := 'Custom Options';
   end;
 
-  chkCrossHair := TfpgCheckBox.Create(self);
+  chkCrossHair := TlqCheckBox.Create(self);
   with chkCrossHair do
   begin
     Name := 'chkCrossHair';
@@ -358,7 +358,7 @@ begin
     OnChange  := @chkCrossHairChange;
   end;
 
-  chkBGColor := TfpgCheckBox.Create(self);
+  chkBGColor := TlqCheckBox.Create(self);
   with chkBGColor do
   begin
     Name := 'chkBGColor';

@@ -45,7 +45,7 @@ type
     procedure   ParseFormProperties;
     procedure   ParseFormWidgets;
     procedure   NextLine;
-    function    ReadWGProperty(propline: string; wg: TfpgWidget; wgc: TVFDWidgetClass): boolean;
+    function    ReadWGProperty(propline: string; wg: TlqWidget; wgc: TVFDWidgetClass): boolean;
   public
     constructor Create(const FormName, FormHead, FormBody: string);
     destructor  Destroy; override;
@@ -248,7 +248,7 @@ var
   ns: string;
 begin
   SkipSpaces(s);
-  GetIdentifier(s);    // extract 'TfpgColor' identifier
+  GetIdentifier(s);    // extract 'TlqColor' identifier
   CheckSymbol(s, '(');
   SkipSpaces(s);
   ns := '';
@@ -303,7 +303,7 @@ var
   s: string;
   ident: string;
   wgname, wgclass, wgclassuc, wgparent: string;
-  pwg, wg: TfpgWidget;
+  pwg, wg: TlqWidget;
   wgother: string;
   wd: TWidgetDesigner;
   wgc: TVFDWidgetClass;
@@ -408,7 +408,7 @@ begin
   end;
 end;
 
-function TVFDFormParser.ReadWGProperty(propline: string; wg: TfpgWidget; wgc: TVFDWidgetClass): boolean;
+function TVFDFormParser.ReadWGProperty(propline: string; wg: TlqWidget; wgc: TVFDWidgetClass): boolean;
 var
   s: string;
   n: integer;
@@ -463,7 +463,7 @@ begin
   end
   else if ident = 'WINDOWTITLE' then
   begin
-    lok := (wg is TfpgForm);
+    lok := (wg is TlqForm);
     if lok then
     begin
       lok := CheckSymbol(s, ':=');
@@ -473,7 +473,7 @@ begin
         lok  := CheckSymbol(s, ';');
       end;
       if lok then
-        TfpgForm(wg).WindowTitle := sval;
+        TlqForm(wg).WindowTitle := sval;
     end;
   end
   else if ident = 'SETPOSITION' then

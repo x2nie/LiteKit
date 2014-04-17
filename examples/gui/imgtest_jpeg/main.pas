@@ -10,18 +10,18 @@ uses
 
 type
 
-  TfrmMain = class(TfpgForm)
+  TfrmMain = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: frmMain}
-    Panel1: TfpgPanel;
-    RadioButton1: TfpgRadioButton;
-    RadioButton2: TfpgRadioButton;
-    RadioButton3: TfpgRadioButton;
-    RadioButton4: TfpgRadioButton;
-    Button1: TfpgButton;
-    Button2: TfpgButton;
+    Panel1: TlqPanel;
+    RadioButton1: TlqRadioButton;
+    RadioButton2: TlqRadioButton;
+    RadioButton3: TlqRadioButton;
+    RadioButton4: TlqRadioButton;
+    Button1: TlqButton;
+    Button2: TlqButton;
     {@VFD_HEAD_END: frmMain}
-    FImage: TfpgImage;
+    FImage: TlqImage;
     FImageName: string;
     SizeSelect: integer;
     procedure Btn1Click(Sender: TObject);
@@ -52,7 +52,7 @@ begin
   WindowPosition := wpOneThirdDown;
   Hint := '';
 
-  Panel1 := TfpgPanel.Create(self);
+  Panel1 := TlqPanel.Create(self);
   with Panel1 do
   begin
     Name := 'Panel1';
@@ -62,7 +62,7 @@ begin
     Text := '';
   end;
 
-  RadioButton1 := TfpgRadioButton.Create(Panel1);
+  RadioButton1 := TlqRadioButton.Create(Panel1);
   with RadioButton1 do
   begin
     Name := 'RadioButton1';
@@ -77,7 +77,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  RadioButton2 := TfpgRadioButton.Create(Panel1);
+  RadioButton2 := TlqRadioButton.Create(Panel1);
   with RadioButton2 do
   begin
     Name := 'RadioButton2';
@@ -91,7 +91,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  RadioButton3 := TfpgRadioButton.Create(Panel1);
+  RadioButton3 := TlqRadioButton.Create(Panel1);
   with RadioButton3 do
   begin
     Name := 'RadioButton3';
@@ -105,7 +105,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  RadioButton4 := TfpgRadioButton.Create(Panel1);
+  RadioButton4 := TlqRadioButton.Create(Panel1);
   with RadioButton4 do
   begin
     Name := 'RadioButton4';
@@ -119,7 +119,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -132,7 +132,7 @@ begin
     OnClick:=@Btn1Click;
   end;
 
-  Button2 := TfpgButton.Create(self);
+  Button2 := TlqButton.Create(self);
   with Button2 do
   begin
     Name := 'Button2';
@@ -171,9 +171,9 @@ end;
   
 procedure TfrmMain.Btn1Click(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     dlg.Filter := 'JPEG Image (*.jpg)|*.jpg';
     if dlg.RunOpenFile then
@@ -198,8 +198,8 @@ end;
 
 procedure TfrmMain.rbChanged(Sender: TObject);
 begin
-  if Sender is TfpgRadioButton then
-    SizeSelect := TfpgRadioButton(Sender).Tag;
+  if Sender is TlqRadioButton then
+    SizeSelect := TlqRadioButton(Sender).Tag;
   LoadImage;
 end;
     

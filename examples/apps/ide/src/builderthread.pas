@@ -66,8 +66,8 @@ const
   BufSize = 1024; //4096;
 var
   p: TProcess;
-  c: TfpgString;
-  unitdir: TfpgString;
+  c: TlqString;
+  unitdir: TlqString;
   Buf: string;
   Count: integer;
   i: integer;

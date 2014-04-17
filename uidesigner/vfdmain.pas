@@ -115,13 +115,13 @@ var
   n, m: integer;
   bl, bl2: TVFDFileBlock;
   fname: string;
-  afiledialog: TfpgFileDialog;
+  afiledialog: TlqFileDialog;
 begin
   fname := EditedFileName;
 
   if Sender <> maindsgn then
   begin
-    afiledialog          := TfpgFileDialog.Create(nil);
+    afiledialog          := TlqFileDialog.Create(nil);
     afiledialog.Filename := EditedFilename;
     afiledialog.WindowTitle := 'Open form file';
     afiledialog.Filter   := 'Pascal source files (*.pp;*.pas;*.inc;*.dpr;*.lpr)|*.pp;*.pas;*.inc;*.dpr;*.lpr|All Files (*)|*';
@@ -176,7 +176,7 @@ var
   fdata: string;
   ff: file;
   fname, uname: string;
-  aFileDialog: TfpgFileDialog;
+  aFileDialog: TlqFileDialog;
 begin
   fname := EditedFileName;
 
@@ -184,7 +184,7 @@ begin
     fname := EditedFileName
   else
   begin
-    afiledialog          := TfpgFileDialog.Create(nil);
+    afiledialog          := TlqFileDialog.Create(nil);
     afiledialog.Filename := EditedFilename;
     afiledialog.WindowTitle := 'Save form source';
     afiledialog.Filter   := 'Pascal source files (*.pp;*.pas;*.inc;*.dpr;*.lpr)|*.pp;*.pas;*.inc;*.dpr;*.lpr|All Files (*)|*';
@@ -302,7 +302,7 @@ begin
     begin
       if DoesNameAlreadyExist(nfrm.edName.Text) then
       begin
-        TfpgMessageDialog.Critical('Name Conflict','The form name already exists in the current unit, please try again');
+        TlqMessageDialog.Critical('Name Conflict','The form name already exists in the current unit, please try again');
         exit;
       end;
       fd := TFormDesigner.Create;

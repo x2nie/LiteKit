@@ -20,17 +20,17 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnOpenFile: TfpgButton;
-    btnSaveFile: TfpgButton;
-    edFilename: TfpgEdit;
-    btnQuit: TfpgButton;
-    btnName1: TfpgButton;
-    btnName2: TfpgButton;
-    btnUserPrompt: TfpgButton;
-    btnUserInput: TfpgButton;
+    btnOpenFile: TlqButton;
+    btnSaveFile: TlqButton;
+    edFilename: TlqEdit;
+    btnQuit: TlqButton;
+    btnName1: TlqButton;
+    btnName2: TlqButton;
+    btnUserPrompt: TlqButton;
+    btnUserInput: TlqButton;
     {@VFD_HEAD_END: MainForm}
     procedure   btnQuitClick(Sender: TObject);
     procedure   btnOpenFileClick(Sender: TObject);
@@ -44,18 +44,18 @@ type
   end;
   
 
-  TMyDBLoginDlg = class(TfpgPromptUserDbDialog)
+  TMyDBLoginDlg = class(TlqPromptUserDbDialog)
   private
-    function    GetDatabase: TfpgString;
+    function    GetDatabase: TlqString;
   protected
     procedure   PopulateComboDb; override;
   public
-    property    Database: TfpgString read GetDatabase;
+    property    Database: TlqString read GetDatabase;
   end;
 
 { TMyDBLoginDlg }
 
-function TMyDBLoginDlg.GetDatabase: TfpgString;
+function TMyDBLoginDlg.GetDatabase: TlqString;
 begin
   if cbDatabases.FocusItem = -1 then
     Result := '<nothing selected>'
@@ -90,7 +90,7 @@ begin
     dlg.WindowTitle := 'Sample Login';
     if dlg.ShowModal = mrOK then
     begin
-      TfpgMessageDialog.Information('User Results',
+      TlqMessageDialog.Information('User Results',
           'User=' + dlg.UserID + #13 +
           'Pass=' + dlg.Password +  #13 +
           'Database=' + dlg.Database, [mbOK]);
@@ -103,7 +103,7 @@ end;
 
 procedure TMainForm.btnUserInputClicked(Sender: TObject);
 var
-  lAnswer: TfpgString;
+  lAnswer: TlqString;
 begin
   if fpgInputQuery('Caption here', 'And the prompt goes here', lAnswer) then
     ShowMessage(Format('User entered <%s>', [lAnswer]));
@@ -116,9 +116,9 @@ end;
 
 procedure TMainForm.btnOpenFileClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     // defines 3 filters (All Files, Object Pascal and Lazarus Project)
     dlg.Filter := 'All Files (*)|*|Object Pascal (*.pas;*.lpr;*.pp)|*.pas;*.lpr;*.pp|Lazarus Project (*.lpi)|*.lpi';
@@ -131,9 +131,9 @@ end;
 
 procedure TMainForm.btnSaveFileClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if edFilename.Text <> '' then
       dlg.Filename := edFilename.Text;
@@ -151,11 +151,11 @@ end;
 
 procedure TMainForm.btnMessageDlgClick(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui('My title here');
-  TfpgMessageDialog.Critical('Something Critical...', 'And this is where the text goes.', mbAbortRetryIgnore, mbAbort);
-  TfpgMessageDialog.Warning('Some Warning...', 'And this is where the text goes.', mbYesNoCancel, mbNo);
-  TfpgMessageDialog.Information('Some Information...', 'And this is where the text goes.', [mbOK], mbNoButton);
-  TfpgMessageDialog.Question('Some Question...', 'Did everything work okay?', mbYesNo, mbNoButton);
+  TlqMessageDialog.AbouTlqui('My title here');
+  TlqMessageDialog.Critical('Something Critical...', 'And this is where the text goes.', mbAbortRetryIgnore, mbAbort);
+  TlqMessageDialog.Warning('Some Warning...', 'And this is where the text goes.', mbYesNoCancel, mbNo);
+  TlqMessageDialog.Information('Some Information...', 'And this is where the text goes.', [mbOK], mbNoButton);
+  TlqMessageDialog.Question('Some Question...', 'Did everything work okay?', mbYesNo, mbNoButton);
 end;
 
 procedure TMainForm.AfterCreate;
@@ -169,7 +169,7 @@ begin
   MinWidth := 300;
   MinHeight := 135;
 
-  btnOpenFile := TfpgButton.Create(self);
+  btnOpenFile := TlqButton.Create(self);
   with btnOpenFile do
   begin
     Name := 'btnOpenFile';
@@ -182,7 +182,7 @@ begin
     OnClick := @btnOpenFileClick;
   end;
 
-  btnSaveFile := TfpgButton.Create(self);
+  btnSaveFile := TlqButton.Create(self);
   with btnSaveFile do
   begin
     Name := 'btnSaveFile';
@@ -195,7 +195,7 @@ begin
     OnClick := @btnSaveFileClick;
   end;
 
-  edFilename := TfpgEdit.Create(self);
+  edFilename := TlqEdit.Create(self);
   with edFilename do
   begin
     Name := 'edFilename';
@@ -208,7 +208,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -222,7 +222,7 @@ begin
     OnClick := @btnQuitClick;
   end;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -235,7 +235,7 @@ begin
     OnClick := @btnMessageBoxClick;
   end;
 
-  btnName2 := TfpgButton.Create(self);
+  btnName2 := TlqButton.Create(self);
   with btnName2 do
   begin
     Name := 'btnName2';
@@ -248,7 +248,7 @@ begin
     OnClick := @btnMessageDlgClick;
   end;
 
-  btnUserPrompt := TfpgButton.Create(self);
+  btnUserPrompt := TlqButton.Create(self);
   with btnUserPrompt do
   begin
     Name := 'btnUserPrompt';
@@ -261,7 +261,7 @@ begin
     OnClick := @btnUserPromptClick;
   end;
 
-  btnUserInput := TfpgButton.Create(self);
+  btnUserInput := TlqButton.Create(self);
   with btnUserInput do
   begin
     Name := 'btnUserInput';

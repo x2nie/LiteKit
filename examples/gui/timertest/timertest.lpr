@@ -10,16 +10,16 @@ uses
   lq_base, lq_main, lq_form, lq_button, lq_label;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    btnClose: TfpgButton;
-    btnStopStart: TfpgButton;
-    timer1: TfpgTimer;
-    timer2: TfpgTimer;
-    timer3: TfpgTimer;
-    lblTimer1: TfpgLabel;
-    lblTimer2: TfpgLabel;
-    lblTimer3: TfpgLabel;
+    btnClose: TlqButton;
+    btnStopStart: TlqButton;
+    timer1: TlqTimer;
+    timer2: TlqTimer;
+    timer3: TlqTimer;
+    lblTimer1: TlqLabel;
+    lblTimer2: TlqLabel;
+    lblTimer3: TlqLabel;
     cnt1: integer;
     cnt2: integer;
     procedure   MyTimer1(Sender: TObject);
@@ -96,15 +96,15 @@ begin
   lblTimer3.Height    := lblTimer3.Font.Height;
   lblTimer3.Width     := 150;
 
-  timer1          := TfpgTimer.Create(50);
+  timer1          := TlqTimer.Create(50);
   timer1.OnTimer  := @MyTimer1;
   timer1.Enabled  := True;
 
-  timer2          := TfpgTimer.Create(200);
+  timer2          := TlqTimer.Create(200);
   timer2.OnTimer  := @MyTimer2;
   timer2.Enabled  := True;
 
-  timer3          := TfpgTimer.Create(1000);
+  timer3          := TlqTimer.Create(1000);
   timer3.OnTimer  := @MyTimer3;
   timer3.Enabled  := True;
 end;

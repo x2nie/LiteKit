@@ -23,7 +23,7 @@ type
   TEditType = (etNone, etText, etInteger, etFloat, etCurrency, etComboBox, etEditCombo, etCheckBox, etCalendar);
   TEditing =(edNone, edRow, edColumn);
 
-  TfpgColumnData = class(TObject)
+  TlqColumnData = class(TObject)
   private
     FMaxSet: boolean;
     FMinSet: boolean;
@@ -34,28 +34,28 @@ type
     property    MinSet: boolean read FminSet write FminSet;
   end;
 
-  TfpgNumericColumn = class(TfpgColumnData)
+  TlqNumericColumn = class(TlqColumnData)
   private
     FMaxLimit: boolean;
     FMinLimit: boolean;
     FDecimals: integer;
-    FDecimalSeparator: TfpgChar;
-    FThousandSeparator: TfpgChar;
+    FDecimalSeparator: TlqChar;
+    FThousandSeparator: TlqChar;
     FShowThousand: boolean;
-    FNegativeColor: TfpgColor;
+    FNegativeColor: TlqColor;
   public
     constructor Create;
     destructor  Destroy; override;
     property    MaxLimit: boolean read FMaxLimit write FMaxLimit;
     property    MinLimit: boolean read FMinLimit write FMinLimit;
     property    Decimals: integer read FDecimals write FDecimals;
-    property    DecimalSeparator: TfpgChar read FDecimalSeparator write FDecimalSeparator;
-    property    ThousandSeparator: TfpgChar read FThousandSeparator write FThousandSeparator;
+    property    DecimalSeparator: TlqChar read FDecimalSeparator write FDecimalSeparator;
+    property    ThousandSeparator: TlqChar read FThousandSeparator write FThousandSeparator;
     property    ShowThousand: boolean read FShowThousand write FShowThousand;
-    property    NegativeColor: TfpgColor read FNegativeColor write FNegativeColor;
+    property    NegativeColor: TlqColor read FNegativeColor write FNegativeColor;
   end;
 
-  TfpgIntegerColumn = class(TfpgNumericColumn)
+  TlqIntegerColumn = class(TlqNumericColumn)
   private
     FMaxVal: integer;
     FMinVal: integer;
@@ -66,7 +66,7 @@ type
     property    MinVal: integer read FMinVal write FMinVal;
   end;
 
-  TfpgFloatColumn = class(TfpgNumericColumn)
+  TlqFloatColumn = class(TlqNumericColumn)
   private
     FMaxVal: extended;
     FMinVal: extended;
@@ -79,7 +79,7 @@ type
     property    FixedDecimals: integer read FFixedDecimals write FFixedDecimals;
   end;
 
-  TfpgCurrencyColumn = class(TfpgNumericColumn)
+  TlqCurrencyColumn = class(TlqNumericColumn)
   private
     FMaxVal: currency;
     FMinVal: currency;
@@ -90,7 +90,7 @@ type
     property    MinVal: currency read FMinVal write FMinVal;
   end;
 
-  TfpgComboBoxColumn = class(TfpgColumnData)
+  TlqComboBoxColumn = class(TlqColumnData)
   private
     FItems: TStringList;
     FDropDownCount: integer;
@@ -101,7 +101,7 @@ type
     property    DropDownCount: integer read FDropDownCount write FDropDownCount;
   end;
 
-  TfpgEditComboColumn = class(TfpgColumnData)
+  TlqEditComboColumn = class(TlqColumnData)
   private
     FItems: TStringList;
     FAutoComplete: boolean;
@@ -116,7 +116,7 @@ type
     property    DropDownCount: integer read FDropDownCount write FDropDownCount;
   end;
 
-  TfpgCheckBoxColumn = class(TfpgColumnData)
+  TlqCheckBoxColumn = class(TlqColumnData)
   private
     FChecked: string;
     FUnchecked: string;
@@ -133,7 +133,7 @@ type
     FDate: TDateTime;
   end;
 
-  TfpgCalendarColumn = class(TfpgColumnData)
+  TlqCalendarColumn = class(TlqColumnData)
   private
     FDatesList: TList;
     FGridDateFormat: string;
@@ -143,8 +143,8 @@ type
     FMinDate: TDateTime;
     FWeeklyHoliday: integer;
     FWeekStartDay: integer;
-    FDayColor: TfpgColor;
-    FHolidayColor: TfpgColor;
+    FDayColor: TlqColor;
+    FHolidayColor: TlqColor;
     FSingleClickSelect: boolean;
   public
     constructor Create;
@@ -157,32 +157,32 @@ type
     property    MinDate: TDateTime read FMinDate write FMinDate;
     property    WeeklyHoliday: integer read FWeeklyHoliday write FWeeklyHoliday;
     property    WeekStartDay: integer read FWeekStartDay write FWeekStartDay;
-    property    DayColor: TfpgColor read FDayColor write FDayColor;
-    property    HolidayColor: TfpgColor read FHolidayColor write FHolidayColor;
+    property    DayColor: TlqColor read FDayColor write FDayColor;
+    property    HolidayColor: TlqColor read FHolidayColor write FHolidayColor;
     property    SingleClickSelect: boolean read FSingleClickSelect write FSingleClickSelect;
   end;
 
-  TfpgEditColumn = class(TfpgStringColumn)
+  TlqEditColumn = class(TlqStringColumn)
   private
     FEditType: TEditType;
-    FData: TfpgColumnData;
+    FData: TlqColumnData;
   public
     property    EditType: TEditType read FEditType write FEditType;
-    property    Data: TfpgColumnData read FData write FData;
+    property    Data: TlqColumnData read FData write FData;
   end;
 
-  TfpgCustomEditgrid = class(TfpgCustomStringGrid)
+  TlqCustomEditgrid = class(TlqCustomStringGrid)
   private
     FDates: TDates;
-    FCellEditText: TFpgEdit;
-    FCellEditInteger: TFpgEditInteger;
-    FCellEditFloat: TFpgEditFloat;
-    FCellEditCurrency: TFpgEditCurrency;
-    FCellComboBox: TfpgComboBox;
-    FCellEditCombo: TfpgEditCombo;
-    FCellCheckBox: TfpgCheckBox;
-    FCellCalendar: TfpgCalendarCombo;
-    FFocusRect: TfpgRect;
+    FCellEditText: TlqEdit;
+    FCellEditInteger: TlqEditInteger;
+    FCellEditFloat: TlqEditFloat;
+    FCellEditCurrency: TlqEditCurrency;
+    FCellComboBox: TlqComboBox;
+    FCellEditCombo: TlqEditCombo;
+    FCellCheckBox: TlqCheckBox;
+    FCellCalendar: TlqCalendarCombo;
+    FFocusRect: TlqRect;
     FEditing: boolean;
     FEditWay: TEditing;
     procedure   EditGridFocusChange(Sender: TObject; ARow,ACol: integer);
@@ -190,11 +190,11 @@ type
         const AMousePos: TPoint);
     procedure   EditGridMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState;
         const AMousePos: TPoint);
-    procedure   EditGridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect;
-        const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure   EditGridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect;
+        const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     function    GetColumnEditType(AIndex: integer): TEditType;
-    function    GetTextColor(AIndex: integer): TfpgColor;
-    procedure   SetTextColor(AIndex: integer; const AValue: TfpgColor);
+    function    GetTextColor(AIndex: integer): TlqColor;
+    procedure   SetTextColor(AIndex: integer; const AValue: TlqColor);
     procedure   SetEditCell;
     procedure   CloseEditCell;
     procedure   SetReturnWay;
@@ -208,14 +208,14 @@ type
     procedure   SetNumericMinLimit(AIndex: integer; const AValue: boolean);
     function    GetNumericDecimals(AIndex: integer): integer;
     procedure   SetNumericDecimals(AIndex: integer; const AValue: integer);
-    function    GetNumericDecimalSeparator(AIndex: integer): TfpgChar;
-    procedure   SetNumericDecimalSeparator(AIndex: integer; const AValue: TfpgChar);
-    function    GetNumericThousandSeparator(AIndex: integer): TfpgChar;
-    procedure   SetNumericThousandSeparator(AIndex: integer; const AValue: TfpgChar);
+    function    GetNumericDecimalSeparator(AIndex: integer): TlqChar;
+    procedure   SetNumericDecimalSeparator(AIndex: integer; const AValue: TlqChar);
+    function    GetNumericThousandSeparator(AIndex: integer): TlqChar;
+    procedure   SetNumericThousandSeparator(AIndex: integer; const AValue: TlqChar);
     function    GetNumericShowThousand(AIndex: integer): boolean;
     procedure   SetNumericShowThousand(AIndex: integer; const AValue: boolean);
-    function    GetNumericNegativeColor(AIndex: integer): TfpgColor;
-    procedure   SetNumericNegativeColor(AIndex: integer; const AValue: TfpgColor);
+    function    GetNumericNegativeColor(AIndex: integer): TlqColor;
+    procedure   SetNumericNegativeColor(AIndex: integer; const AValue: TlqColor);
     procedure   IniIntegerCell;
     procedure   FCellEditIntegerKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
         var Consumed: boolean);
@@ -283,32 +283,32 @@ type
     procedure   SetWeeklyHoliday(AIndex: integer; const AValue: integer);
     function    GetWeekStartDay(AIndex: integer): integer;
     procedure   SetWeekStartDay(AIndex: integer; const AValue: integer);
-    function    GetDayColor(AIndex: integer): TfpgColor;
-    procedure   SetDayColor(AIndex: integer; const AValue: TfpgColor);
-    function    GetHolidayColor(AIndex: integer): TfpgColor;
-    procedure   SetHolidayColor(AIndex: integer; const AValue: TfpgColor);
+    function    GetDayColor(AIndex: integer): TlqColor;
+    procedure   SetDayColor(AIndex: integer; const AValue: TlqColor);
+    function    GetHolidayColor(AIndex: integer): TlqColor;
+    procedure   SetHolidayColor(AIndex: integer; const AValue: TlqColor);
     function    GetSingleClickSelect(AIndex: integer): boolean;
     procedure   SetSingleClickSelect(AIndex: integer; const AValue: boolean);
   protected
-    function    GetColumns(AIndex: Integer): TfpgEditColumn; reintroduce;
-    procedure   DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState); override;
+    function    GetColumns(AIndex: Integer): TlqEditColumn; reintroduce;
+    procedure   DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
-    property    Columns[AIndex: Integer]: TfpgEditColumn read GetColumns;
+    property    Columns[AIndex: Integer]: TlqEditColumn read GetColumns;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     property    EditWay: TEditing read FEditWay write FEditWay;
     function    AddColumn(ATitle: string; AWidth: integer; AEditType: TEditType = etNone;
-        AAlignment: TAlignment = taLeftJustify; AbackgroundColor: TfpgColor = clDefault; ATextColor: TfpgColor = clDefault): TfpgEditColumn; overload;
+        AAlignment: TAlignment = taLeftJustify; AbackgroundColor: TlqColor = clDefault; ATextColor: TlqColor = clDefault): TlqEditColumn; overload;
     property    ColumnEditType[AIndex: integer]: TEditType read GetColumnEditType;
-    property    TextColor[AIndex: integer]: TfpgColor read GetTextColor write SetTextColor;
+    property    TextColor[AIndex: integer]: TlqColor read GetTextColor write SetTextColor;
     property    NumericMaxLimit[AIndex: integer]: boolean read GetNumericMaxLimit write SetNumericMaxLimit;
     property    NumericMinLimit[AIndex: integer]: boolean read GetNumericMinLimit write SetNumericMinLimit;
     property    NumericDecimals[AIndex: integer]: integer read GetNumericDecimals write SetNumericDecimals;
-    property    NumericDecimalSeparator[AIndex: integer]: TfpgChar read GetNumericDecimalSeparator write SetNumericDecimalSeparator;
-    property    NumericThousandSeparator[AIndex: integer]: TfpgChar read GetNumericThousandSeparator write SetNumericThousandSeparator;
+    property    NumericDecimalSeparator[AIndex: integer]: TlqChar read GetNumericDecimalSeparator write SetNumericDecimalSeparator;
+    property    NumericThousandSeparator[AIndex: integer]: TlqChar read GetNumericThousandSeparator write SetNumericThousandSeparator;
     property    NumericShowThousand[AIndex: integer]: boolean read GetNumericShowThousand write SetNumericShowThousand;
-    property    NumericNegativeColor[AIndex: integer]: Tfpgcolor read GetNumericNegativeColor write SetNumericNegativeColor;
+    property    NumericNegativeColor[AIndex: integer]: Tlqcolor read GetNumericNegativeColor write SetNumericNegativeColor;
     property    MaxIntValue[AIndex: integer]: integer read GetMaxIntValue write SetMaxIntValue;
     property    MinIntValue[AIndex: integer]: integer read GetMinIntValue write SetMinIntValue;
     property    MaxFloatValue[AIndex: integer]: extended read GetMaxFloatValue write SetMaxFloatValue;
@@ -334,12 +334,12 @@ type
     property    MinDate[AIndex: integer]: TDateTime read GetMinDate write SetMinDate;
     property    WeeklyHoliday[AIndex: integer]: integer read GetWeeklyHoliday write SetWeeklyHoliday;
     property    WeekStartDay[AIndex: integer]: integer read GetWeekStartDay write SetWeekStartDay;
-    property    DayColor[AIndex: integer]: TfpgColor read GetDayColor write SetDayColor;
-    property    HolidayColor[AIndex: integer]: TfpgColor read GetHolidayColor write SetHolidayColor;
+    property    DayColor[AIndex: integer]: TlqColor read GetDayColor write SetDayColor;
+    property    HolidayColor[AIndex: integer]: TlqColor read GetHolidayColor write SetHolidayColor;
     property    SingleClickSelect[AIndex: integer]: boolean read GetSingleClickSelect write SetSingleClickSelect;
    end;
 
-  TfpgEditGrid = class(TfpgCustomEditgrid)
+  TlqEditGrid = class(TlqCustomEditgrid)
   public
     property    Font;
   published
@@ -388,16 +388,16 @@ type
     property    OnShowHint;
   end;
 
-function CreateEditGrid(AOwner: TComponent; x, y, w, h: Tfpgcoord; AColumnCount: integer = 0): TfpgEditGrid;
+function CreateEditGrid(AOwner: TComponent; x, y, w, h: Tlqcoord; AColumnCount: integer = 0): TlqEditGrid;
 
 implementation
 
 uses
   lq_stringutils;
 
-function CreateEditGrid(AOwner: TComponent; x, y, w, h: TfpgCoord; AColumnCount: integer = 0): TfpgEditGrid;
+function CreateEditGrid(AOwner: TComponent; x, y, w, h: TlqCoord; AColumnCount: integer = 0): TlqEditGrid;
 begin
-  Result  := TfpgEditGrid.Create(AOwner);
+  Result  := TlqEditGrid.Create(AOwner);
   Result.Left         := x;
   Result.Top          := y;
   Result.Width        := w;
@@ -405,19 +405,19 @@ begin
   Result.ColumnCount  := AColumnCount;
 end;
 
-constructor TfpgColumnData.Create;
+constructor TlqColumnData.Create;
 begin
   inherited Create;
   FMaxSet := False;
   FMinSet := False;
 end;
 
-destructor TfpgColumnData.Destroy;
+destructor TlqColumnData.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgNumericColumn.Create;
+constructor TlqNumericColumn.Create;
 begin
   inherited Create;
   FMaxLimit := False;
@@ -428,24 +428,24 @@ begin
   FShowThousand := True;
 end;
 
-destructor TfpgNumericColumn.Destroy;
+destructor TlqNumericColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgIntegerColumn.Create;
+constructor TlqIntegerColumn.Create;
 begin
   inherited Create;
   FMaxVal := 0;
   FMinVal := 0;
 end;
 
-destructor TfpgIntegerColumn.Destroy;
+destructor TlqIntegerColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgFloatColumn.Create;
+constructor TlqFloatColumn.Create;
 begin
   inherited Create;
   FMaxVal := 0;
@@ -453,64 +453,64 @@ begin
   FFixedDecimals := -1;
 end;
 
-destructor TfpgFloatColumn.Destroy;
+destructor TlqFloatColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgCurrencyColumn.Create;
+constructor TlqCurrencyColumn.Create;
 begin
   inherited Create;
   FMaxVal := 0;
   FMinVal := 0;
 end;
 
-destructor TfpgCurrencyColumn.Destroy;
+destructor TlqCurrencyColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgComboBoxColumn.Create;
+constructor TlqComboBoxColumn.Create;
 begin
   inherited Create;
   FItems := TStringList.Create;
 end;
 
-destructor TfpgComboBoxColumn.Destroy;
+destructor TlqComboBoxColumn.Destroy;
 begin
   FItems.Free;
   inherited Destroy;
 end;
 
-constructor TfpgEditComboColumn.Create;
+constructor TlqEditComboColumn.Create;
 begin
   inherited Create;
   FItems := TStringList.Create;
 end;
 
-destructor TfpgEditComboColumn.Destroy;
+destructor TlqEditComboColumn.Destroy;
 begin
   FItems.Free;
   inherited Destroy;
 end;
 
-constructor TfpgCheckBoxColumn.Create;
+constructor TlqCheckBoxColumn.Create;
 begin
   inherited Create;
 end;
 
-destructor TfpgCheckBoxColumn.Destroy;
+destructor TlqCheckBoxColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-constructor TfpgCalendarColumn.Create;
+constructor TlqCalendarColumn.Create;
 begin
   inherited Create;
   FDatesList:= TList.Create;
 end;
 
-destructor TfpgCalendarColumn.Destroy;
+destructor TlqCalendarColumn.Destroy;
 var
   i: integer;
 begin
@@ -521,12 +521,12 @@ begin
   FDatesList.Free;
 end;
 
-procedure TfpgCustomEditGrid.EditGridFocusChange(Sender: TObject; ARow,ACol: integer);
+procedure TlqCustomEditGrid.EditGridFocusChange(Sender: TObject; ARow,ACol: integer);
 begin
   CloseEditCell;
 end;
 
-procedure TfpgCustomEditGrid.EditGridDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState;
+procedure TlqCustomEditGrid.EditGridDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState;
         const AMousePos: TPoint);
 var
   lCol, lRow: integer;
@@ -553,17 +553,17 @@ begin
   FEditing := True;
 end;
 
-procedure TfpgCustomEditGrid.EditGridMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState;
+procedure TlqCustomEditGrid.EditGridMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState;
         const AMousePos: TPoint);
 begin
   CloseEditCell;
 end;
 
-procedure TfpgCustomEditGrid.EditGridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect;
-    const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+procedure TlqCustomEditGrid.EditGridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect;
+    const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
   Txt, Deci: string;
-  tSeparator,dseparator: TfpgChar;
+  tSeparator,dseparator: TlqChar;
 begin
   case Columns[Acol].EditType of
     etInteger:
@@ -571,14 +571,14 @@ begin
         if Copy(Cells[ACol, ARow],1,1) = '-' then
         begin
           Txt:= UTF8Copy(Cells[ACol, ARow],2,Pred(UTF8Length(Cells[ACol, ARow])));
-          Canvas.TextColor:= TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).NegativeColor;
+          Canvas.TextColor:= TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).NegativeColor;
         end
         else
           Txt:= Cells[ACol, ARow];
         if UTF8Length(Txt)> 3 then
         begin
-          tSeparator:= TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).ThousandSeparator;
-          if TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).ShowThousand then
+          tSeparator:= TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).ThousandSeparator;
+          if TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).ShowThousand then
           begin
             if UTF8Pos(tSeparator,Txt) = 0 then
             begin
@@ -604,17 +604,17 @@ begin
         if Copy(Cells[ACol, ARow],1,1) = '-' then
         begin
           Txt:= UTF8Copy(Cells[ACol, ARow],2,Pred(UTF8Length(Cells[ACol, ARow])));
-          Canvas.TextColor:= TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).NegativeColor;
+          Canvas.TextColor:= TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).NegativeColor;
         end
         else
           Txt:= Cells[ACol, ARow];
-        dSeparator:= TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).DecimalSeparator;
+        dSeparator:= TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).DecimalSeparator;
         if UTF8Pos(dSeparator,Txt) > 0 then
           Deci:= Copy(Cells[ACol, ARow], UTF8Pos(dSeparator,Txt), UTF8Length(Cells[ACol, ARow]) - Pred(UTF8Pos(dSeparator,Txt)));
         if (UTF8Length(Txt) - UTF8Length(Deci)) > 3 then
         begin
-          tSeparator:= TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).ThousandSeparator;
-          if TfpgNumericColumn(TfpgEditColumn(Columns[ACol]).Data).ShowThousand then
+          tSeparator:= TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).ThousandSeparator;
+          if TlqNumericColumn(TlqEditColumn(Columns[ACol]).Data).ShowThousand then
           begin
             if UTF8Pos(tSeparator,Txt) = 0 then
             begin
@@ -638,22 +638,22 @@ begin
   end;
 end;
 
-function TfpgCustomEditGrid.GetColumnEditType(AIndex: integer): TEditType;
+function TlqCustomEditGrid.GetColumnEditType(AIndex: integer): TEditType;
 begin
-  Result := TfpgEditColumn(Columns[AIndex]).EditType;
+  Result := TlqEditColumn(Columns[AIndex]).EditType;
 end;
 
-function TfpgCustomEditGrid.GetTextColor(AIndex: integer): TfpgColor;
+function TlqCustomEditGrid.GetTextColor(AIndex: integer): TlqColor;
 begin
-  Result := TfpgEditColumn(Columns[AIndex]).TextColor;
+  Result := TlqEditColumn(Columns[AIndex]).TextColor;
 end;
 
-procedure TfpgCustomEditGrid.SetTextColor(AIndex: integer; const AValue: TfpgColor);
+procedure TlqCustomEditGrid.SetTextColor(AIndex: integer; const AValue: TlqColor);
 begin
-  TfpgEditColumn(Columns[AIndex]).TextColor := AValue;
+  TlqEditColumn(Columns[AIndex]).TextColor := AValue;
 end;
 
-procedure TfpgCustomEditGrid.SetEditCell;
+procedure TlqCustomEditGrid.SetEditCell;
 begin
   case Columns[FocusCol].EditType of
     etText:
@@ -675,7 +675,7 @@ begin
   end;
 end;
 
-procedure TfpgCustomEditGrid.CloseEditCell;
+procedure TlqCustomEditGrid.CloseEditCell;
 var
   i: integer;
 begin
@@ -732,7 +732,7 @@ begin
     end;
 end;
 
-procedure TfpgCustomEditGrid.SetReturnWay;
+procedure TlqCustomEditGrid.SetReturnWay;
 begin
   case FEditWay of
     edNone:
@@ -753,7 +753,7 @@ begin
     SetEditCell;
 end;
 
-procedure TfpgCustomEditGrid.SetTabWay(ShiftState: TShiftState);
+procedure TlqCustomEditGrid.SetTabWay(ShiftState: TShiftState);
 begin
   if ssShift in ShiftState then
   begin
@@ -767,13 +767,13 @@ begin
   SetFocus;
 end;
 
-procedure TfpgCustomEditGrid.IniTextCell;
+procedure TlqCustomEditGrid.IniTextCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellEditText) then
     FCellEditText.Free;
-  FCellEditText := TfpgEdit.Create(Self.Parent);
+  FCellEditText := TlqEdit.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellEditText do
@@ -788,7 +788,7 @@ begin
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellEditTextKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellEditTextKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
           var Consumed: boolean);
 begin
   if FCellEditText.Visible then
@@ -816,83 +816,83 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetNumericMaxLimit(AIndex: integer): boolean;
+function TlqCustomEditGrid.GetNumericMaxLimit(AIndex: integer): boolean;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxLimit;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).MaxLimit;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericMaxLimit(AIndex: integer; const AValue: boolean);
+procedure TlqCustomEditGrid.SetNumericMaxLimit(AIndex: integer; const AValue: boolean);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxLimit := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).MaxLimit := AValue;
 end;
 
-function TfpgCustomEditGrid.GetNumericMinLimit(AIndex: integer): boolean;
+function TlqCustomEditGrid.GetNumericMinLimit(AIndex: integer): boolean;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).MinLimit;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).MinLimit;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericMinLimit(AIndex: integer; const AValue: boolean);
+procedure TlqCustomEditGrid.SetNumericMinLimit(AIndex: integer; const AValue: boolean);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).MinLimit := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).MinLimit := AValue;
 end;
 
-function TfpgCustomEditGrid.GetNumericDecimals(AIndex: integer): integer;
+function TlqCustomEditGrid.GetNumericDecimals(AIndex: integer): integer;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).Decimals;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).Decimals;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericDecimals(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetNumericDecimals(AIndex: integer; const AValue: integer);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).Decimals := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).Decimals := AValue;
 end;
 
-function TfpgCustomEditGrid.GetNumericDecimalSeparator(AIndex: integer): TfpgChar;
+function TlqCustomEditGrid.GetNumericDecimalSeparator(AIndex: integer): TlqChar;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).DecimalSeparator;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).DecimalSeparator;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericDecimalSeparator(AIndex: integer; const AValue: TfpgChar);
+procedure TlqCustomEditGrid.SetNumericDecimalSeparator(AIndex: integer; const AValue: TlqChar);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).DecimalSeparator := AValue
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).DecimalSeparator := AValue
 end;
 
-function TfpgCustomEditGrid.GetNumericThousandSeparator(AIndex: integer): TfpgChar;
+function TlqCustomEditGrid.GetNumericThousandSeparator(AIndex: integer): TlqChar;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).ThousandSeparator;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).ThousandSeparator;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericThousandSeparator(AIndex: integer; const AValue: TfpgChar);
+procedure TlqCustomEditGrid.SetNumericThousandSeparator(AIndex: integer; const AValue: TlqChar);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).ThousandSeparator := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).ThousandSeparator := AValue;
 end;
 
-function TfpgCustomEditGrid.GetNumericShowThousand(AIndex: integer): boolean;
+function TlqCustomEditGrid.GetNumericShowThousand(AIndex: integer): boolean;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).ShowThousand;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).ShowThousand;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericShowThousand(AIndex: integer; const AValue: boolean);
+procedure TlqCustomEditGrid.SetNumericShowThousand(AIndex: integer; const AValue: boolean);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).ShowThousand := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).ShowThousand := AValue;
 end;
 
-function TfpgCustomEditGrid.GetNumericNegativeColor(AIndex: integer): TfpgColor;
+function TlqCustomEditGrid.GetNumericNegativeColor(AIndex: integer): TlqColor;
 begin
-  Result := TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).NegativeColor;
+  Result := TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).NegativeColor;
 end;
 
-procedure TfpgCustomEditGrid.SetNumericNegativeColor(AIndex: integer; const AValue: TfpgColor);
+procedure TlqCustomEditGrid.SetNumericNegativeColor(AIndex: integer; const AValue: TlqColor);
 begin
-  TfpgNumericColumn(TfpgEditColumn(Columns[AIndex]).Data).NegativeColor := AValue;
+  TlqNumericColumn(TlqEditColumn(Columns[AIndex]).Data).NegativeColor := AValue;
 end;
 
-procedure TfpgCustomEditGrid.IniIntegerCell;
+procedure TlqCustomEditGrid.IniIntegerCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellEditInteger) then
     FCellEditInteger.Free;
-  FCellEditInteger := TfpgEditInteger.Create(Self.Parent);
+  FCellEditInteger := TlqEditInteger.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellEditInteger do
@@ -902,19 +902,19 @@ begin
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
     Text := Cells[FocusCol, FocusRow];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MaxSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MaxSet then
       MaxValue := MaxIntValue[Focuscol];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MinSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MinSet then
       MinValue := MinIntValue[FocusCol];
-    CustomThousandSeparator := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
-    ShowThousand := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ShowThousand;
-    NegativeColor := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).NegativeColor;
+    CustomThousandSeparator := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
+    ShowThousand := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ShowThousand;
+    NegativeColor := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).NegativeColor;
     OnKeyPress := @FCellEditIntegerKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellEditIntegerKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellEditIntegerKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellEditInteger.Visible then
@@ -942,14 +942,14 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetMaxIntValue(AIndex: integer): integer;
+function TlqCustomEditGrid.GetMaxIntValue(AIndex: integer): integer;
 begin
-  Result := TfpgIntegerColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxVal;
+  Result := TlqIntegerColumn(TlqEditColumn(Columns[AIndex]).Data).MaxVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMaxIntValue(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetMaxIntValue(AIndex: integer; const AValue: integer);
 begin
-  with TfpgIntegerColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqIntegerColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue > MinVal then
       MaxVal := AValue
@@ -959,14 +959,14 @@ begin
   end;
 end;
 
-function TfpgCustomEditGrid.GetMinIntValue(AIndex: integer): integer;
+function TlqCustomEditGrid.GetMinIntValue(AIndex: integer): integer;
 begin
-  Result := TfpgIntegerColumn(TfpgEditColumn(Columns[AIndex]).Data).MinVal;
+  Result := TlqIntegerColumn(TlqEditColumn(Columns[AIndex]).Data).MinVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMinIntValue(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetMinIntValue(AIndex: integer; const AValue: integer);
 begin
-  with TfpgIntegerColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqIntegerColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue < MaxVal then
       MinVal := AValue
@@ -976,13 +976,13 @@ begin
   end;
 end;
 
-procedure TfpgCustomEditGrid.IniFloatCell;
+procedure TlqCustomEditGrid.IniFloatCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellEditFloat) then
     FCellEditFloat.Free;
-  FCellEditFloat := TfpgEditFloat.Create(Self.Parent);
+  FCellEditFloat := TlqEditFloat.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellEditFloat do
@@ -992,21 +992,21 @@ begin
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
     Text := Cells[FocusCol, FocusRow];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MaxSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MaxSet then
       MaxValue := MaxFloatValue[Focuscol];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MinSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MinSet then
       MinValue := MinFloatValue[FocusCol];
-    Decimals := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).Decimals;
-    FixedDecimals := TfpgFloatColumn(TfpgEditColumn(Columns[FocusCol]).Data).FixedDecimals;
-    CustomDecimalSeparator := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).DecimalSeparator;
-    CustomThousandSeparator := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
-    ShowThousand := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ShowThousand;
+    Decimals := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).Decimals;
+    FixedDecimals := TlqFloatColumn(TlqEditColumn(Columns[FocusCol]).Data).FixedDecimals;
+    CustomDecimalSeparator := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).DecimalSeparator;
+    CustomThousandSeparator := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
+    ShowThousand := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ShowThousand;
     OnKeyPress := @FCellEditFloatKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellEditFloatKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellEditFloatKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellEditFloat.Visible then
@@ -1056,14 +1056,14 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetMaxFloatValue(AIndex: integer): extended;
+function TlqCustomEditGrid.GetMaxFloatValue(AIndex: integer): extended;
 begin
-  Result := TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxVal;
+  Result := TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data).MaxVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMaxFloatValue(AIndex: integer; const AValue: extended);
+procedure TlqCustomEditGrid.SetMaxFloatValue(AIndex: integer; const AValue: extended);
 begin
-  with TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue > MinVal then
       MaxVal := AValue
@@ -1073,14 +1073,14 @@ begin
   end;
 end;
 
-function TfpgCustomEditGrid.GetMinFloatValue(AIndex: integer): extended;
+function TlqCustomEditGrid.GetMinFloatValue(AIndex: integer): extended;
 begin
-  Result := TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data).MinVal;
+  Result := TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data).MinVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMinFloatValue(AIndex: integer; const AValue: extended);
+procedure TlqCustomEditGrid.SetMinFloatValue(AIndex: integer; const AValue: extended);
 begin
-  with TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue < MaxVal then
       MinVal := AValue
@@ -1090,23 +1090,23 @@ begin
   end;
 end;
 
-function TfpgCustomEditGrid.GetFloatFixedDecimals(AIndex: integer): integer;
+function TlqCustomEditGrid.GetFloatFixedDecimals(AIndex: integer): integer;
 begin
-  Result := TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data).FFixedDecimals;
+  Result := TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data).FFixedDecimals;
 end;
 
-procedure TfpgCustomEditGrid.SetFloatFixedDecimals(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetFloatFixedDecimals(AIndex: integer; const AValue: integer);
 begin
-  TfpgFloatColumn(TfpgEditColumn(Columns[AIndex]).Data).FFixedDecimals := AValue;
+  TlqFloatColumn(TlqEditColumn(Columns[AIndex]).Data).FFixedDecimals := AValue;
 end;
 
-procedure TfpgCustomEditGrid.IniCurrencyCell;
+procedure TlqCustomEditGrid.IniCurrencyCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellEditCurrency) then
     FCellEditCurrency.Free;
-  FCellEditCurrency := TfpgEditCurrency.Create(Self.Parent);
+  FCellEditCurrency := TlqEditCurrency.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellEditCurrency do
@@ -1116,19 +1116,19 @@ begin
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
     Text := Cells[FocusCol, FocusRow];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MaxSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MaxSet then
       MaxValue := MaxCurrValue[Focuscol];
-    if TfpgColumnData(TfpgEditColumn(Columns[FocusCol]).Data).MinSet then
+    if TlqColumnData(TlqEditColumn(Columns[FocusCol]).Data).MinSet then
       MinValue := MinCurrValue[FocusCol];
-    CustomDecimalSeparator := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).DecimalSeparator;
-    CustomThousandSeparator := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
-    ShowThousand := TfpgNumericColumn(TfpgEditColumn(Columns[FocusCol]).Data).ShowThousand;
+    CustomDecimalSeparator := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).DecimalSeparator;
+    CustomThousandSeparator := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ThousandSeparator;
+    ShowThousand := TlqNumericColumn(TlqEditColumn(Columns[FocusCol]).Data).ShowThousand;
     OnKeyPress := @FCellEditCurrencyKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellEditCurrencyKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellEditCurrencyKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellEditCurrency.Visible then
@@ -1156,14 +1156,14 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetMaxCurrValue(AIndex: integer): currency;
+function TlqCustomEditGrid.GetMaxCurrValue(AIndex: integer): currency;
 begin
-  Result := TfpgCurrencyColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxVal;
+  Result := TlqCurrencyColumn(TlqEditColumn(Columns[AIndex]).Data).MaxVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMaxCurrValue(AIndex: integer; const AValue: currency);
+procedure TlqCustomEditGrid.SetMaxCurrValue(AIndex: integer; const AValue: currency);
 begin
-  with TfpgCurrencyColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqCurrencyColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue > MinVal then
       MaxVal := AValue
@@ -1173,14 +1173,14 @@ begin
   end;
 end;
 
-function TfpgCustomEditGrid.GetMinCurrValue(AIndex: integer): currency;
+function TlqCustomEditGrid.GetMinCurrValue(AIndex: integer): currency;
 begin
-  Result := TfpgCurrencyColumn(TfpgEditColumn(Columns[AIndex]).Data).MinVal;
+  Result := TlqCurrencyColumn(TlqEditColumn(Columns[AIndex]).Data).MinVal;
 end;
 
-procedure TfpgCustomEditGrid.SetMinCurrValue(AIndex: integer; const AValue: currency);
+procedure TlqCustomEditGrid.SetMinCurrValue(AIndex: integer; const AValue: currency);
 begin
-  with TfpgCurrencyColumn(TfpgEditColumn(Columns[AIndex]).Data) do
+  with TlqCurrencyColumn(TlqEditColumn(Columns[AIndex]).Data) do
   begin
     if AValue < MaxVal then
       MinVal := AValue
@@ -1190,14 +1190,14 @@ begin
   end;
 end;
 
-procedure TfpgCustomEditGrid.IniComboBoxCell;
+procedure TlqCustomEditGrid.IniComboBoxCell;
 var
   Pt: TPoint;
   i: integer;
 begin
   if Assigned(FCellComboBox) then
     FCellComboBox.Free;
-  FCellComboBox := TfpgComboBox.Create(Self.Parent);
+  FCellComboBox := TlqComboBox.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellComboBox do
@@ -1206,17 +1206,17 @@ begin
     SetPosition(Pt.X, Pt.Y, FFocusRect.Width, FFocusRect.Height);
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
-    Items.Assign(TfpgComboBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).FItems);
+    Items.Assign(TlqComboBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).FItems);
     for i := 0 to Pred(Items.Count) do
       if Items[i] = Cells[FocusCol, FocusRow] then
         Text := Items[i];
-    DropDownCount := TfpgComboBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).DropDownCount;
+    DropDownCount := TlqComboBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).DropDownCount;
     OnKeyPress := @FCellComboBoxKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellComboBoxKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellComboBoxKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellComboBox.Visible then
@@ -1244,24 +1244,24 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetComboBoxDropDownCount(AIndex: integer): integer;
+function TlqCustomEditGrid.GetComboBoxDropDownCount(AIndex: integer): integer;
 begin
-  Result := TfpgComboBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).DropDownCount;
+  Result := TlqComboBoxColumn(TlqEditColumn(Columns[AIndex]).Data).DropDownCount;
 end;
 
-procedure TfpgCustomEditGrid.SetComboBoxDropDownCount(AIndex: integer; AValue: integer);
+procedure TlqCustomEditGrid.SetComboBoxDropDownCount(AIndex: integer; AValue: integer);
 begin
-  TfpgComboBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).DropDownCount := AValue;
+  TlqComboBoxColumn(TlqEditColumn(Columns[AIndex]).Data).DropDownCount := AValue;
 end;
 
-procedure TfpgCustomEditGrid.IniEditComboCell;
+procedure TlqCustomEditGrid.IniEditComboCell;
 var
   Pt: TPoint;
   i: integer;
 begin
   if Assigned(FCellEditCombo) then
     FCellEditCombo.Free;
-  FCellEditCombo := TfpgEditCombo.Create(Self.Parent);
+  FCellEditCombo := TlqEditCombo.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellEditCombo do
@@ -1270,19 +1270,19 @@ begin
     SetPosition(Pt.X, Pt.Y, FFocusRect.Width, FFocusRect.Height);
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
-    Items.Assign(TfpgEditComboColumn(TfpgEditColumn(Columns[FocusCol]).Data).FItems);
+    Items.Assign(TlqEditComboColumn(TlqEditColumn(Columns[FocusCol]).Data).FItems);
     for i := 0 to Pred(Items.Count) do
       if Items[i] = Cells[FocusCol, FocusRow] then
         Text := Items[i];
-    AutoCompletion := TfpgEditComboColumn(TfpgEditColumn(Columns[FocusCol]).Data).AutoComplete;
-    AllowNew := TfpgEditComboColumn(TfpgEditColumn(Columns[FocusCol]).Data).AllowNew;
-    DropDownCount := TfpgEditComboColumn(TfpgEditColumn(Columns[FocusCol]).Data).DropDownCount;
+    AutoCompletion := TlqEditComboColumn(TlqEditColumn(Columns[FocusCol]).Data).AutoComplete;
+    AllowNew := TlqEditComboColumn(TlqEditColumn(Columns[FocusCol]).Data).AllowNew;
+    DropDownCount := TlqEditComboColumn(TlqEditColumn(Columns[FocusCol]).Data).DropDownCount;
     OnKeyPress := @FCellEditComboKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellEditComboKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellEditComboKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellEditCombo.Visible then
@@ -1291,7 +1291,7 @@ begin
         begin
           Cells[FocusCol, FocusRow] := FCellEditCombo.Text;
           if (AllowNew[FocusCol] = anAsk) or (AllowNew[FocusCol] = anYes) then
-            TfpgEditComboColumn(TfpgEditColumn(Columns[FocusCol]).Data).FItems.Add(FCellEditCombo.Text);
+            TlqEditComboColumn(TlqEditColumn(Columns[FocusCol]).Data).FItems.Add(FCellEditCombo.Text);
           FCellEditCombo.Text:= '';
           FCellEditCombo.Visible := False;
           SetReturnWay;
@@ -1312,43 +1312,43 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetAutoComplete(AIndex: integer): boolean;
+function TlqCustomEditGrid.GetAutoComplete(AIndex: integer): boolean;
 begin
-  Result := TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).AutoComplete;
+  Result := TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).AutoComplete;
 end;
 
-procedure TfpgCustomEditGrid.SetAutoComplete(AIndex: integer; const AValue: boolean);
+procedure TlqCustomEditGrid.SetAutoComplete(AIndex: integer; const AValue: boolean);
 begin
-  TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).AutoComplete := AValue;
+  TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).AutoComplete := AValue;
 end;
 
-function TfpgCustomEditGrid.GetAllowNew(AIndex: integer): TAllowNew;
+function TlqCustomEditGrid.GetAllowNew(AIndex: integer): TAllowNew;
 begin
-  Result := TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).AllowNew;
+  Result := TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).AllowNew;
 end;
 
-procedure TfpgCustomEditGrid.SetAllowNew(AIndex: integer; AValue: TAllowNew);
+procedure TlqCustomEditGrid.SetAllowNew(AIndex: integer; AValue: TAllowNew);
 begin
-  TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).AllowNew := AValue;
+  TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).AllowNew := AValue;
 end;
 
-function TfpgCustomEditGrid.GetEditComboDropDownCount(AIndex: integer): integer;
+function TlqCustomEditGrid.GetEditComboDropDownCount(AIndex: integer): integer;
 begin
-  Result := TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).DropDownCount;
+  Result := TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).DropDownCount;
 end;
 
-procedure TfpgCustomEditGrid.SetEditComboDropDownCount(AIndex: integer; AValue: integer);
+procedure TlqCustomEditGrid.SetEditComboDropDownCount(AIndex: integer; AValue: integer);
 begin
-  TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).DropDownCount := AValue;
+  TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).DropDownCount := AValue;
 end;
 
-procedure TfpgCustomEditGrid.IniCheckBoxCell;
+procedure TlqCustomEditGrid.IniCheckBoxCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellCheckBox) then
     FCellCheckBox.Free;
-  FCellCheckBox := TfpgCheckBox.Create(Self.Parent);
+  FCellCheckBox := TlqCheckBox.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellCheckBox do
@@ -1357,17 +1357,17 @@ begin
     SetPosition(Pt.X, Pt.Y, FFocusRect.Width, FFocusRect.Height);
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
-    if Cells[FocusCol, FocusRow] = TfpgCheckBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).CheckedText then
+    if Cells[FocusCol, FocusRow] = TlqCheckBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).CheckedText then
       FCellCheckBox.Checked:= True
     else
       FCellCheckBox.Checked:= False;
-    Text := TfpgCheckBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).BoxText;
+    Text := TlqCheckBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).BoxText;
     OnKeyPress := @FCellCheckBoxKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellCheckBoxKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellCheckBoxKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellCheckBox.Visible then
@@ -1375,9 +1375,9 @@ begin
       KeyReturn, KeyPEnter:
         begin
           if FCellCheckBox.Checked then
-            Cells[FocusCol, FocusRow] := TfpgCheckBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).CheckedText
+            Cells[FocusCol, FocusRow] := TlqCheckBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).CheckedText
           else
-            Cells[FocusCol, FocusRow] := TfpgCheckBoxColumn(TfpgEditColumn(Columns[FocusCol]).Data).UncheckedText;
+            Cells[FocusCol, FocusRow] := TlqCheckBoxColumn(TlqEditColumn(Columns[FocusCol]).Data).UncheckedText;
           FCellCheckBox.Text:= '';
           FCellCheckBox.Visible := False;
           SetReturnWay;
@@ -1398,43 +1398,43 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetBoxCheckedText(AIndex: integer): string;
+function TlqCustomEditGrid.GetBoxCheckedText(AIndex: integer): string;
 begin
-  Result := TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).CheckedText;
+  Result := TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).CheckedText;
 end;
 
-procedure TfpgCustomEditGrid.SetBoxCheckedText(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.SetBoxCheckedText(AIndex: integer; const AValue: string);
 begin
-  TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).CheckedText := AValue;
+  TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).CheckedText := AValue;
 end;
 
-function TfpgCustomEditGrid.GetBoxUncheckedText(AIndex: integer): string;
+function TlqCustomEditGrid.GetBoxUncheckedText(AIndex: integer): string;
 begin
-  Result := TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).UncheckedText;
+  Result := TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).UncheckedText;
 end;
 
-procedure TfpgCustomEditGrid.SetBoxUncheckedText(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.SetBoxUncheckedText(AIndex: integer; const AValue: string);
 begin
-  TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).UncheckedText := AValue;
+  TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).UncheckedText := AValue;
 end;
 
-function TfpgCustomEditGrid.GetBoxDisplayText(AIndex: integer): string;
+function TlqCustomEditGrid.GetBoxDisplayText(AIndex: integer): string;
 begin
-  Result := TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).BoxText;
+  Result := TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).BoxText;
 end;
 
-procedure TfpgCustomEditGrid.SetBoxDisplayText(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.SetBoxDisplayText(AIndex: integer; const AValue: string);
 begin
-  TfpgCheckBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).BoxText := AValue;
+  TlqCheckBoxColumn(TlqEditColumn(Columns[AIndex]).Data).BoxText := AValue;
 end;
 
-procedure TfpgCustomEditGrid.IniCalendarCell;
+procedure TlqCustomEditGrid.IniCalendarCell;
 var
   Pt: TPoint;
 begin
   if Assigned(FCellCalendar) then
     FCellCalendar.Free;
-  FCellCalendar := TfpgCalendarCombo.Create(Self.Parent);
+  FCellCalendar := TlqCalendarCombo.Create(Self.Parent);
   Pt.X := Left + FFocusRect.Left;
   Pt.Y := Top + FFocusRect.Top;
   with FCellCalendar do
@@ -1443,26 +1443,26 @@ begin
     SetPosition(Pt.X, Pt.Y, FFocusRect.Width, FFocusRect.Height);
     BorderStyle := ebsSingle;
     FontDesc := '#Grid';
-    DateFormat := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).CalendarDateFormat;
-    DateValue:= TDates(TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).FDatesList[FocusRow]).FDate;
-    WeeklyHoliday := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).WeeklyHoliday;
-    WeekStartDay := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).WeekStartDay;
-    DayColor := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).DayColor;
-    HolidayColor := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).HolidayColor;
-    SingleClickSelect := TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data).SingleClickSelect;
+    DateFormat := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).CalendarDateFormat;
+    DateValue:= TDates(TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).FDatesList[FocusRow]).FDate;
+    WeeklyHoliday := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).WeeklyHoliday;
+    WeekStartDay := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).WeekStartDay;
+    DayColor := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).DayColor;
+    HolidayColor := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).HolidayColor;
+    SingleClickSelect := TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data).SingleClickSelect;
     OnKeyPress := @FCellCalendarKeyPress;
     SetFocus;
   end;
 end;
 
-procedure TfpgCustomEditGrid.FCellCalendarKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
+procedure TlqCustomEditGrid.FCellCalendarKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
     var Consumed: boolean);
 begin
   if FCellCalendar.Visible then
     case KeyCode of
       KeyReturn, KeyPEnter:
         begin
-          with TfpgCalendarColumn(TfpgEditColumn(Columns[FocusCol]).Data) do
+          with TlqCalendarColumn(TlqEditColumn(Columns[FocusCol]).Data) do
           begin
             TDates(FDatesList[FocusRow]).FDate := FCellCalendar.DateValue;
             Cells[FocusCol, FocusRow] := FormatDateTime(GridDateFormat, TDates(FDatesList[FocusRow]).FDate);
@@ -1487,144 +1487,144 @@ begin
     end;
 end;
 
-function TfpgCustomEditGrid.GetDates(AIndex: integer): TDateTime;
+function TlqCustomEditGrid.GetDates(AIndex: integer): TDateTime;
 begin
-  Result := TDates(TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DatesList[Succ(FocusRow)]).FDate;
+  Result := TDates(TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DatesList[Succ(FocusRow)]).FDate;
 end;
 
-procedure TfpgCustomEditGrid.SetDates(AIndex: integer; const AValue: TDateTime);
+procedure TlqCustomEditGrid.SetDates(AIndex: integer; const AValue: TDateTime);
 begin
   FDates  := TDates.Create;
   FDates.FDate:= AValue;
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DatesList.Add(FDates);
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DatesList.Add(FDates);
 end;
 
-function TfpgCustomEditGrid.GetDatesList(AIndex: integer): TList;
+function TlqCustomEditGrid.GetDatesList(AIndex: integer): TList;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DatesList;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DatesList;
 end;
 
-procedure TfpgCustomEditGrid.SetDatesList(AIndex: integer; const AValue: TList);
+procedure TlqCustomEditGrid.SetDatesList(AIndex: integer; const AValue: TList);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DatesList := AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DatesList := AValue;
 end;
 
-function TfpgCustomEditGrid.GetGridDateFormat(AIndex: integer): string;
+function TlqCustomEditGrid.GetGridDateFormat(AIndex: integer): string;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).GridDateFormat;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).GridDateFormat;
 end;
 
-procedure TfpgCustomEditGrid.SetGridDateFormat(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.SetGridDateFormat(AIndex: integer; const AValue: string);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).GridDateFormat:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).GridDateFormat:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetCalendarDateFormat(AIndex: integer): string;
+function TlqCustomEditGrid.GetCalendarDateFormat(AIndex: integer): string;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).CalendarDateFormat;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).CalendarDateFormat;
 end;
 
-procedure TfpgCustomEditGrid.SetCalendarDateFormat(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.SetCalendarDateFormat(AIndex: integer; const AValue: string);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).CalendarDateFormat:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).CalendarDateFormat:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetDateValue(AIndex: integer): TDateTime;
+function TlqCustomEditGrid.GetDateValue(AIndex: integer): TDateTime;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DateValue;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DateValue;
 end;
 
-procedure TfpgCustomEditGrid.SetDateValue(AIndex: integer; const AValue: TDateTime);
+procedure TlqCustomEditGrid.SetDateValue(AIndex: integer; const AValue: TDateTime);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DateValue:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DateValue:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetMaxDate(AIndex: integer): TDateTime;
+function TlqCustomEditGrid.GetMaxDate(AIndex: integer): TDateTime;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxDate;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).MaxDate;
 end;
 
-procedure TfpgCustomEditGrid.SetMaxdate(AIndex: integer; const AValue: TDateTime);
+procedure TlqCustomEditGrid.SetMaxdate(AIndex: integer; const AValue: TDateTime);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).MaxDate:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).MaxDate:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetMinDate(AIndex: integer): TDateTime;
+function TlqCustomEditGrid.GetMinDate(AIndex: integer): TDateTime;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).MinDate;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).MinDate;
 end;
 
-procedure TfpgCustomEditGrid.SetMinDate(AIndex: integer; const AValue: TDateTime);
+procedure TlqCustomEditGrid.SetMinDate(AIndex: integer; const AValue: TDateTime);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).MinDate:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).MinDate:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetWeeklyHoliday(AIndex: integer): integer;
+function TlqCustomEditGrid.GetWeeklyHoliday(AIndex: integer): integer;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).WeeklyHoliday;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).WeeklyHoliday;
 end;
 
-procedure TfpgCustomEditGrid.SetWeeklyHoliday(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetWeeklyHoliday(AIndex: integer; const AValue: integer);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).WeeklyHoliday:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).WeeklyHoliday:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetWeekStartDay(AIndex: integer): integer;
+function TlqCustomEditGrid.GetWeekStartDay(AIndex: integer): integer;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).WeekStartDay;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).WeekStartDay;
 end;
 
-procedure TfpgCustomEditGrid.SetWeekStartDay(AIndex: integer; const AValue: integer);
+procedure TlqCustomEditGrid.SetWeekStartDay(AIndex: integer; const AValue: integer);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).WeekStartDay:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).WeekStartDay:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetDayColor(AIndex: integer): TfpgColor;
+function TlqCustomEditGrid.GetDayColor(AIndex: integer): TlqColor;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DayColor;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DayColor;
 end;
 
-procedure TfpgCustomEditGrid.SetDayColor(AIndex: integer; const AValue: TfpgColor);
+procedure TlqCustomEditGrid.SetDayColor(AIndex: integer; const AValue: TlqColor);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).DayColor:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).DayColor:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetHolidayColor(AIndex: integer): TfpgColor;
+function TlqCustomEditGrid.GetHolidayColor(AIndex: integer): TlqColor;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).HolidayColor;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).HolidayColor;
 end;
 
-procedure TfpgCustomEditGrid.SetHolidayColor(AIndex: integer; const AValue: TfpgColor);
+procedure TlqCustomEditGrid.SetHolidayColor(AIndex: integer; const AValue: TlqColor);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).HolidayColor:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).HolidayColor:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetSingleClickSelect(AIndex: integer): boolean;
+function TlqCustomEditGrid.GetSingleClickSelect(AIndex: integer): boolean;
 begin
-  Result := TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).SingleClickSelect;
+  Result := TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).SingleClickSelect;
 end;
 
-procedure TfpgCustomEditGrid.SetSingleClickSelect(AIndex: integer; const AValue: boolean);
+procedure TlqCustomEditGrid.SetSingleClickSelect(AIndex: integer; const AValue: boolean);
 begin
-  TfpgCalendarColumn(TfpgEditColumn(Columns[AIndex]).Data).SingleClickSelect:= AValue;
+  TlqCalendarColumn(TlqEditColumn(Columns[AIndex]).Data).SingleClickSelect:= AValue;
 end;
 
-function TfpgCustomEditGrid.GetColumns(AIndex: Integer): TfpgEditColumn;
+function TlqCustomEditGrid.GetColumns(AIndex: Integer): TlqEditColumn;
 begin
   if (AIndex < 0) or (AIndex > ColumnCount-1) then
     Result := nil
   else
-    Result := TfpgEditColumn(FColumns.Items[AIndex]);
+    Result := TlqEditColumn(FColumns.Items[AIndex]);
 end;
 
-procedure TfpgCustomEditGrid.DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState);
+procedure TlqCustomEditGrid.DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState);
 begin
   inherited DrawCell(ARow, ACol, ARect, AFlags);
   if (gdSelected in AFlags) then
     FFocusRect:= ARect;
 end;
 
-procedure TfpgCustomEditGrid.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqCustomEditGrid.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 var
   i: integer;
 begin
@@ -1641,8 +1641,8 @@ begin
           if Columns[i].EditType = etCalendar then
           begin
             FDates:= TDates.Create;
-            FDates.FDate:= TfpgCalendarColumn(TfpgEditColumn(Columns[i]).Data).DateValue;
-            TfpgCalendarColumn(TfpgEditColumn(Columns[i]).Data).FDatesList.Add(FDates);
+            FDates.FDate:= TlqCalendarColumn(TlqEditColumn(Columns[i]).Data).DateValue;
+            TlqCalendarColumn(TlqEditColumn(Columns[i]).Data).FDatesList.Add(FDates);
           end;
       keyDelete:
         if RowCount > 0 then
@@ -1690,7 +1690,7 @@ begin
   end;
 end;
 
-constructor TfpgCustomEditGrid.Create(AOwner: TComponent);
+constructor TlqCustomEditGrid.Create(AOwner: TComponent);
 begin
   inherited create(AOwner);
   OnDoubleClick := @EditGridDoubleClick;
@@ -1701,34 +1701,34 @@ begin
   FEditWay := edNone;
 end;
 
-destructor TfpgCustomEditGrid.Destroy;
+destructor TlqCustomEditGrid.Destroy;
 begin
   inherited Destroy;
 end;
 
-function TfpgCustomEditGrid.AddColumn(ATitle: string; AWidth: integer; AEditType: TEditType = etNone;
-        AAlignment: TAlignment = taLeftJustify; AbackgroundColor: TfpgColor = clDefault; ATextColor: TfpgColor = clDefault): TfpgEditColumn;
+function TlqCustomEditGrid.AddColumn(ATitle: string; AWidth: integer; AEditType: TEditType = etNone;
+        AAlignment: TAlignment = taLeftJustify; AbackgroundColor: TlqColor = clDefault; ATextColor: TlqColor = clDefault): TlqEditColumn;
 begin
   Updating;
-  Result := TfpgEditColumn(inherited AddColumn(ATitle, AWidth, AAlignment, ABackgroundColor, ATextColor));
+  Result := TlqEditColumn(inherited AddColumn(ATitle, AWidth, AAlignment, ABackgroundColor, ATextColor));
   with Result do
   begin
     FEditType := AEditType;
     case FEditType of
       etInteger:
-        Result.FData:= TfpgIntegerColumn.Create;
+        Result.FData:= TlqIntegerColumn.Create;
       etFloat:
-        Result.FData:= TfpgFloatColumn.Create;
+        Result.FData:= TlqFloatColumn.Create;
       etCurrency:
-        Result.FData:= TfpgCurrencyColumn.Create;
+        Result.FData:= TlqCurrencyColumn.Create;
       etComboBox:
-        Result.FData:= TfpgComboBoxColumn.Create;
+        Result.FData:= TlqComboBoxColumn.Create;
       etEditCombo:
-        Result.FData:= TfpgEditComboColumn.Create;
+        Result.FData:= TlqEditComboColumn.Create;
       etCheckBox:
-        Result.FData:= TfpgCheckBoxColumn.Create;
+        Result.FData:= TlqCheckBoxColumn.Create;
       etCalendar:
-        Result.FData := TfpgCalendarColumn.Create;
+        Result.FData := TlqCalendarColumn.Create;
       else
         Result.FData:= nil;
     end;
@@ -1738,14 +1738,14 @@ begin
     Updated;
 end;
 
-procedure TfpgCustomEditGrid.AddComboItem(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.AddComboItem(AIndex: integer; const AValue: string);
 begin
-  TfpgComboBoxColumn(TfpgEditColumn(Columns[AIndex]).Data).FItems.Add(AValue);
+  TlqComboBoxColumn(TlqEditColumn(Columns[AIndex]).Data).FItems.Add(AValue);
 end;
 
-procedure TfpgCustomEditGrid.AddEditComboItem(AIndex: integer; const AValue: string);
+procedure TlqCustomEditGrid.AddEditComboItem(AIndex: integer; const AValue: string);
 begin
-  TfpgEditComboColumn(TfpgEditColumn(Columns[AIndex]).Data).FItems.Add(AValue);
+  TlqEditComboColumn(TlqEditColumn(Columns[AIndex]).Data).FItems.Add(AValue);
 end;
 
 end.

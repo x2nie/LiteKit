@@ -12,33 +12,33 @@
 
 
 {$ifdef uses_implementation}
-  fpg_gdi,
+  lq_gdi,
 {$endif}
 
 
 {$ifdef agg_platform_implementation}
 type
   // to get access to protected methods (seeing that FPC doesn't support Friend-classes)
-  TImageHack = class(TfpgImage);
+  TImageHack = class(TlqImage);
 
-procedure TAgg2D.DoPutBufferToScreen(x, y, w, h: TfpgCoord);
+procedure TAgg2D.DoPutBufferToScreen(x, y, w, h: TlqCoord);
 var
   srcdc: HDC;
   destdc: HDC;
 begin
-  if TfpgWindow(FWindow).WinHandle <= 0 then
+  if TlqWindow(FWindow).WinHandle <= 0 then
   begin
     debugln('    no winhandle available');
     exit;
   end;
 
   FImg.UpdateImage;
-  destdc := Windows.GetDC(TfpgWindow(FWindow).WinHandle);
+  destdc := Windows.GetDC(TlqWindow(FWindow).WinHandle);
   srcdc := CreateCompatibleDC(fpgApplication.Display);
   SelectObject(srcdc, TImageHack(FImg).BMPHandle);
   BitBlt(destdc, x, y, w, h, srcdc, 0, 0, SRCCOPY);
   DeleteDC(srcdc);
-  ReleaseDC(TfpgWindow(FWindow).WinHandle, destdc);
+  ReleaseDC(TlqWindow(FWindow).WinHandle, destdc);
 
 (*
   if (dvc_width <> bmp_width ) or

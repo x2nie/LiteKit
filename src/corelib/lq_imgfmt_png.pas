@@ -29,11 +29,11 @@ uses
   FPImage,
   FPReadPNG;
 
-function LoadImage_PNG(const AFileName: TfpgString): TfpgImage; overload;
-function LoadImage_PNG(AStream: TStream): TfpgImage; overload;
-function LoadImage_PNG(const AImageData: Pointer; const AImageDataSize: LongWord): TfpgImage; overload;
-function LoadImage_PNG(AInstance: THandle; const AResName: String; AResType: PChar): TfpgImage; overload;
-function LoadImage_PNGcrop(const AMaxWidth, AMaxHeight: integer; const AFileName: TfpgString): TfpgImage;
+function LoadImage_PNG(const AFileName: TlqString): TlqImage; overload;
+function LoadImage_PNG(AStream: TStream): TlqImage; overload;
+function LoadImage_PNG(const AImageData: Pointer; const AImageDataSize: LongWord): TlqImage; overload;
+function LoadImage_PNG(AInstance: THandle; const AResName: String; AResType: PChar): TlqImage; overload;
+function LoadImage_PNGcrop(const AMaxWidth, AMaxHeight: integer; const AFileName: TlqString): TlqImage;
 
 
 implementation
@@ -41,11 +41,11 @@ implementation
 uses
   lq_utils;
 
-function FPImageToFPG(ASource: TFPCustomImage): TfpgImage;
+function FPImageToFPG(ASource: TFPCustomImage): TlqImage;
 var
   i, j: integer;
   colorA: TFPColor;   // struct Red, Green, Blue, Alpha: word
-  colorB: TfpgColor;  // ONE long 32-bit-word
+  colorB: TlqColor;  // ONE long 32-bit-word
   xlocal, ylocal: integer;
 begin
   Result := nil;
@@ -53,7 +53,7 @@ begin
 
   xlocal := ASource.Width;
   ylocal := ASource.Height;
-  Result := TfpgImage.Create;
+  Result := TlqImage.Create;
   Result.AllocateImage(32, xlocal, ylocal); // 32=colordepth
   for i := 0 to ylocal - 1 do
     for j := 0 to xlocal - 1 do
@@ -65,7 +65,7 @@ begin
   Result.UpdateImage;
 end;
 
-function LoadImage_PNG(const AFileName: TfpgString): TfpgImage;
+function LoadImage_PNG(const AFileName: TlqString): TlqImage;
 var
   imga: TFPCustomImage;
 begin
@@ -86,7 +86,7 @@ begin
   end;
 end;
 
-function LoadImage_PNG(AStream: TStream): TfpgImage;
+function LoadImage_PNG(AStream: TStream): TlqImage;
 var
   imga: TFPMemoryImage;
   reader: TFPReaderPNG;
@@ -115,7 +115,7 @@ begin
   end;
 end;
 
-function LoadImage_PNG(const AImageData: Pointer; const AImageDataSize: LongWord): TfpgImage;
+function LoadImage_PNG(const AImageData: Pointer; const AImageDataSize: LongWord): TlqImage;
 var
   s: TMemoryStream;
 begin
@@ -128,7 +128,7 @@ begin
   end;
 end;
 
-function LoadImage_PNG(AInstance: THandle; const AResName: String; AResType: PChar): TfpgImage;
+function LoadImage_PNG(AInstance: THandle; const AResName: String; AResType: PChar): TlqImage;
 var
   res: TResourceStream;
 begin
@@ -141,13 +141,13 @@ begin
   end;
 end;
 
-function LoadImage_PNGcrop(const AMaxWidth, AMaxHeight: integer; const AFileName: TfpgString): TfpgImage;
+function LoadImage_PNGcrop(const AMaxWidth, AMaxHeight: integer; const AFileName: TlqString): TlqImage;
 var
   i, j: integer;
   colorA: TFPColor;   // struct Red, Green, Blue, Alpha: word
-  colorB: TfpgColor;  // ONE long 32-bit-word
+  colorB: TlqColor;  // ONE long 32-bit-word
   imga: TFPCustomImage;
-  imgb: TfpgImage;
+  imgb: TlqImage;
   xlocal, ylocal: integer;
 begin
   Result := nil;
@@ -174,7 +174,7 @@ begin
       ylocal := AMaxHeight
     else
       ylocal := imga.Height;
-    imgb := TfpgImage.Create;
+    imgb := TlqImage.Create;
     imgb.AllocateImage(32, xlocal, ylocal); // 32=colordepth
     for i := 0 to ylocal - 1 do
       for j := 0 to xlocal - 1 do

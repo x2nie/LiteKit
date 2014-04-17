@@ -43,16 +43,16 @@ uses
 
 type
 
-  TMyStyle = class(TfpgStyle)
+  TMyStyle = class(TlqStyle)
   public
     constructor Create; override;
     { General }
-    procedure   DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord); override;
+    procedure   DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord); override;
     { Buttons }
-    procedure   DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags); override;
+    procedure   DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags); override;
     { Menus }
-    procedure   DrawMenuRow(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgMenuItemFlags); override;
-    procedure   DrawMenuBar(ACanvas: TfpgCanvas; r: TfpgRect; ABackgroundColor: TfpgColor); override;
+    procedure   DrawMenuRow(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqMenuItemFlags); override;
+    procedure   DrawMenuBar(ACanvas: TlqCanvas; r: TlqRect; ABackgroundColor: TlqColor); override;
   end;
 
 
@@ -67,12 +67,12 @@ uses
 constructor TMyStyle.Create;
 begin
   inherited Create;
-  fpgSetNamedColor(clWindowBackground, TfpgColor($eeeeec));
+  fpgSetNamedColor(clWindowBackground, TlqColor($eeeeec));
 end;
 
-procedure TMyStyle.DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord);
+procedure TMyStyle.DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
   ACanvas.SetColor(clShadow1);
@@ -80,15 +80,15 @@ begin
   ACanvas.DrawRectangle(r);
 end;
 
-procedure TMyStyle.DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags);
+procedure TMyStyle.DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
 
   if btfIsDefault in AFlags then
   begin
-    ACanvas.SetColor(TfpgColor($7b7b7b));
+    ACanvas.SetColor(TlqColor($7b7b7b));
     ACanvas.SetLineStyle(1, lsSolid);
     ACanvas.DrawRectangle(r);
     InflateRect(r, -1, -1);
@@ -106,7 +106,7 @@ begin
 
   // outer rectangle
   ACanvas.SetLineStyle(1, lsSolid);
-  ACanvas.SetColor(TfpgColor($a6a6a6));
+  ACanvas.SetColor(TlqColor($a6a6a6));
   ACanvas.DrawRectangle(r);
 
   // so we don't paint over the border
@@ -114,32 +114,32 @@ begin
   // now paint the face of the button
   if (btfIsPressed in AFlags) then
   begin
-    ACanvas.GradientFill(r, TfpgColor($cccccc), TfpgColor($e4e4e4), gdVertical);
+    ACanvas.GradientFill(r, TlqColor($cccccc), TlqColor($e4e4e4), gdVertical);
   end
   else
   begin
-    ACanvas.GradientFill(r, TfpgColor($fafafa), TfpgColor($e2e2e2), gdVertical);
-    ACanvas.SetColor(TfpgColor($cccccc));
+    ACanvas.GradientFill(r, TlqColor($fafafa), TlqColor($e2e2e2), gdVertical);
+    ACanvas.SetColor(TlqColor($cccccc));
     ACanvas.DrawLine(r.Right, r.Top, r.Right, r.Bottom);   // right
     ACanvas.DrawLine(r.Right, r.Bottom, r.Left, r.Bottom);   // bottom
   end;
 end;
 
-procedure TMyStyle.DrawMenuRow(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgMenuItemFlags);
+procedure TMyStyle.DrawMenuRow(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqMenuItemFlags);
 begin
   inherited DrawMenuRow(ACanvas, r, AFlags);
   if (mifSelected in AFlags) and not (mifSeparator in AFlags) then
-    ACanvas.GradientFill(r, TfpgColor($fec475), TfpgColor($fb9d24), gdVertical);
+    ACanvas.GradientFill(r, TlqColor($fec475), TlqColor($fb9d24), gdVertical);
 end;
 
-procedure TMyStyle.DrawMenuBar(ACanvas: TfpgCanvas; r: TfpgRect; ABackgroundColor: TfpgColor);
+procedure TMyStyle.DrawMenuBar(ACanvas: TlqCanvas; r: TlqRect; ABackgroundColor: TlqColor);
 var
-  FLightColor: TfpgColor;
-  FDarkColor: TfpgColor;
+  FLightColor: TlqColor;
+  FDarkColor: TlqColor;
 begin
   // a possible future theme option
-  FLightColor := TfpgColor($f0ece3);  // color at top of menu bar
-  FDarkColor  := TfpgColor($beb8a4);  // color at bottom of menu bar
+  FLightColor := TlqColor($f0ece3);  // color at top of menu bar
+  FDarkColor  := TlqColor($beb8a4);  // color at bottom of menu bar
   ACanvas.GradientFill(r, FLightColor, FDarkColor, gdVertical);
 
   // inner bottom line

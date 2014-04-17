@@ -10,23 +10,23 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    Panel1: TfpgPanel;
-    Panel2: TfpgPanel;
-    Panel3: TfpgPanel;
-    Panel4: TfpgPanel;
-    Panel5: TfpgPanel;
-    Panel6: TfpgPanel;
-    Panel7: TfpgPanel;
-    Panel8: TfpgPanel;
-    Panel9: TfpgPanel;
-    Panel10: TfpgPanel;
-    Panel11: TfpgPanel;
-    Panel12: TfpgPanel;
-    Panel13: TfpgPanel;
-    Label1: TfpgLabel;
+    Panel1: TlqPanel;
+    Panel2: TlqPanel;
+    Panel3: TlqPanel;
+    Panel4: TlqPanel;
+    Panel5: TlqPanel;
+    Panel6: TlqPanel;
+    Panel7: TlqPanel;
+    Panel8: TlqPanel;
+    Panel9: TlqPanel;
+    Panel10: TlqPanel;
+    Panel11: TlqPanel;
+    Panel12: TlqPanel;
+    Panel13: TlqPanel;
+    Label1: TlqLabel;
     {@VFD_HEAD_END: MainForm}
     procedure AfterCreate; override;
   end;
@@ -47,7 +47,7 @@ begin
   Hint := '';
   WindowPosition := wpOneThirdDown;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -58,7 +58,7 @@ begin
     Text := 'Available mouse cursors in fpGUI';
   end;
 
-  Panel1 := TfpgPanel.Create(self);
+  Panel1 := TlqPanel.Create(self);
   with Panel1 do
   begin
     Name := 'Panel1';
@@ -69,7 +69,7 @@ begin
     MouseCursor := mcDefault;
   end;
 
-  Panel2 := TfpgPanel.Create(self);
+  Panel2 := TlqPanel.Create(self);
   with Panel2 do
   begin
     Name := 'Panel2';
@@ -80,7 +80,7 @@ begin
     MouseCursor := mcArrow;
   end;
 
-  Panel3 := TfpgPanel.Create(self);
+  Panel3 := TlqPanel.Create(self);
   with Panel3 do
   begin
     Name := 'Panel3';
@@ -91,7 +91,7 @@ begin
     MouseCursor := mcCross;
   end;
 
-  Panel4 := TfpgPanel.Create(self);
+  Panel4 := TlqPanel.Create(self);
   with Panel4 do
   begin
     Name := 'Panel4';
@@ -102,7 +102,7 @@ begin
     MouseCursor := mcIBeam;
   end;
 
-  Panel5 := TfpgPanel.Create(self);
+  Panel5 := TlqPanel.Create(self);
   with Panel5 do
   begin
     Name := 'Panel5';
@@ -113,7 +113,7 @@ begin
     MouseCursor := mcSizeEW;
   end;
 
-  Panel6 := TfpgPanel.Create(self);
+  Panel6 := TlqPanel.Create(self);
   with Panel6 do
   begin
     Name := 'Panel6';
@@ -124,7 +124,7 @@ begin
     MouseCursor := mcSizeNS;
   end;
 
-  Panel7 := TfpgPanel.Create(self);
+  Panel7 := TlqPanel.Create(self);
   with Panel7 do
   begin
     Name := 'Panel7';
@@ -135,7 +135,7 @@ begin
     MouseCursor := mcSizeNWSE;
   end;
 
-  Panel8 := TfpgPanel.Create(self);
+  Panel8 := TlqPanel.Create(self);
   with Panel8 do
   begin
     Name := 'Panel8';
@@ -146,7 +146,7 @@ begin
     MouseCursor := mcSizeNESW;
   end;
 
-  Panel9 := TfpgPanel.Create(self);
+  Panel9 := TlqPanel.Create(self);
   with Panel9 do
   begin
     Name := 'Panel9';
@@ -157,7 +157,7 @@ begin
     MouseCursor := mcSizeSWNE;
   end;
 
-  Panel10 := TfpgPanel.Create(self);
+  Panel10 := TlqPanel.Create(self);
   with Panel10 do
   begin
     Name := 'Panel10';
@@ -168,7 +168,7 @@ begin
     MouseCursor := mcSizeSENW;
   end;
 
-  Panel11 := TfpgPanel.Create(self);
+  Panel11 := TlqPanel.Create(self);
   with Panel11 do
   begin
     Name := 'Panel11';
@@ -179,7 +179,7 @@ begin
     MouseCursor := mcMove;
   end;
 
-  Panel12 := TfpgPanel.Create(self);
+  Panel12 := TlqPanel.Create(self);
   with Panel12 do
   begin
     Name := 'Panel12';
@@ -190,7 +190,7 @@ begin
     MouseCursor := mcHourGlass;
   end;
 
-  Panel13 := TfpgPanel.Create(self);
+  Panel13 := TlqPanel.Create(self);
   with Panel13 do
   begin
     Name := 'Panel13';

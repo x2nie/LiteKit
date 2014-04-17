@@ -28,21 +28,21 @@ uses
  ;
 
 type
-  TfpgOnChangeReadOnlyEvent = procedure(pSender: TObject; pReadOnly: boolean) of object;
-  TfpgOnProcessEvent = procedure(pSender: TObject; var pReadOnly, pProcess: boolean) of object;
-  TfpgOnProcessFrmEvent = procedure(pFrame: TComponent; var pProcessDetails: boolean) of object;
-  TfpgOnGetParentEvent = procedure(var pParent: TComponent) of object;
+  TlqOnChangeReadOnlyEvent = procedure(pSender: TObject; pReadOnly: boolean) of object;
+  TlqOnProcessEvent = procedure(pSender: TObject; var pReadOnly, pProcess: boolean) of object;
+  TlqOnProcessFrmEvent = procedure(pFrame: TComponent; var pProcessDetails: boolean) of object;
+  TlqOnGetParentEvent = procedure(var pParent: TComponent) of object;
 
 
-  TfpgReadOnly = class(TComponent)
+  TlqReadOnly = class(TComponent)
   private
     FReadOnly: boolean;
-    FOnChange: TfpgOnChangeReadOnlyEvent;
-    FOnProcess: TfpgOnProcessEvent;
+    FOnChange: TlqOnChangeReadOnlyEvent;
+    FOnProcess: TlqOnProcessEvent;
     FEnabled: boolean;
-    FOnProcessFrm: TfpgOnProcessFrmEvent;
+    FOnProcessFrm: TlqOnProcessFrmEvent;
     FProcessContainer: boolean;
-    FOnGetParent: TfpgOnGetParentEvent;
+    FOnGetParent: TlqOnGetParentEvent;
     procedure   SetEnabled(const AValue: boolean);
   protected
     function    GetReadOnly: boolean; virtual;
@@ -55,10 +55,10 @@ type
     property    ReadOnly: boolean read GetReadOnly write SetReadOnly default false;
     property    Enabled: boolean read FEnabled write SetEnabled default false;
     property    ProcessContainer: boolean read FProcessContainer write FProcessContainer default false;
-    property    OnChange: TfpgOnChangeReadOnlyEvent read FOnChange write FOnChange;
-    property    OnProcess: TfpgOnProcessEvent read FOnProcess write FOnProcess;
-    property    OnProcessFrm: TfpgOnProcessFrmEvent read FOnProcessFrm write FOnProcessFrm;
-    property    OnGetParent: TfpgOnGetParentEvent read FOnGetParent write FOnGetParent;
+    property    OnChange: TlqOnChangeReadOnlyEvent read FOnChange write FOnChange;
+    property    OnProcess: TlqOnProcessEvent read FOnProcess write FOnProcess;
+    property    OnProcessFrm: TlqOnProcessFrmEvent read FOnProcessFrm write FOnProcessFrm;
+    property    OnGetParent: TlqOnGetParentEvent read FOnGetParent write FOnGetParent;
   end;
 
 
@@ -71,9 +71,9 @@ uses
   ,TypInfo
   ;
 
-{ TfpgReadOnly }
+{ TlqReadOnly }
 
-constructor TfpgReadOnly.Create(AOwner: TComponent);
+constructor TlqReadOnly.Create(AOwner: TComponent);
 begin
   inherited;
   FReadOnly := false;
@@ -81,13 +81,13 @@ begin
   FProcessContainer := false;
 end;
 
-function TfpgReadOnly.GetParentForm: TComponent;
+function TlqReadOnly.GetParentForm: TComponent;
 begin
   result := self;
   while true do
   begin
-    if (result is TfpgForm) and
-      ((result.Owner is TfpgApplication) or
+    if (result is TlqForm) and
+      ((result.Owner is TlqApplication) or
       (result.Owner = nil)) then
       Break; //==>
     result := result.Owner;
@@ -96,12 +96,12 @@ begin
     FOnGetParent(result);
 end;
 
-function TfpgReadOnly.GetReadOnly: boolean;
+function TlqReadOnly.GetReadOnly: boolean;
 begin
   Result := FReadOnly;
 end;
 
-procedure TfpgReadOnly.SetComponentsReadOnly(pReadOnly: boolean);
+procedure TlqReadOnly.SetComponentsReadOnly(pReadOnly: boolean);
   procedure _SetComponentsReadOnly(pParent: TComponent);
   var
     i: integer;
@@ -124,7 +124,7 @@ procedure TfpgReadOnly.SetComponentsReadOnly(pReadOnly: boolean);
         if lProcess then
           SetOrdProp(lComponent, 'ReadOnly', Ord(lReadOnly));
       end;
-      if (lComponent is TfpgWidget) and TfpgWidget(lComponent).IsContainer then
+      if (lComponent is TlqWidget) and TlqWidget(lComponent).IsContainer then
       begin
         lProcess := FProcessContainer; // Now lProcess is: can I go Deep?
         if Assigned(FOnProcessFrm) then
@@ -138,12 +138,12 @@ begin
   _SetComponentsReadOnly(GetParentForm);
 end;
 
-procedure TfpgReadOnly.SetEnabled(const AValue: boolean);
+procedure TlqReadOnly.SetEnabled(const AValue: boolean);
 begin
   FEnabled := AValue;
 end;
 
-procedure TfpgReadOnly.SetReadOnly(const AValue: boolean);
+procedure TlqReadOnly.SetReadOnly(const AValue: boolean);
 begin
   if not FEnabled then
     Exit; //==>

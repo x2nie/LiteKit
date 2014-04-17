@@ -11,43 +11,43 @@ uses
 
 type
 
-  TConfigurationForm = class(TfpgForm)
+  TConfigurationForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: ConfigurationForm}
-    pcSettings: TfpgPageControl;
-    btnSave: TfpgButton;
-    btnCancel: TfpgButton;
-    tsGeneral: TfpgTabSheet;
-    tsFontsColor: TfpgTabSheet;
-    tsIndex: TfpgTabSheet;
-    Label1: TfpgLabel;
-    Label2: TfpgLabel;
-    pnlSearchHighlight: TfpgPanel;
-    pnlNotesColor: TfpgPanel;
-    lblIndexStyle: TfpgLabel;
-    lblSearchDirs: TfpgLabel;
-    btnSearchDirAdd: TfpgButton;
-    lbSearchDirs: TfpgListBox;
-    btnSearchDirDelete: TfpgButton;
-    chkEscapeIPFSymbols: TfpgCheckBox;
-    chkStartupHelp: TfpgCheckBox;
-    chkOpenTOC: TfpgCheckBox;
-    btnColorHighlight: TfpgButton;
-    btnColorNotes: TfpgButton;
-    btnResetColors: TfpgButton;
-    edtFixedFont: TfpgFontEdit;
-    edtNormalFont: TfpgFontEdit;
-    rbIndexOrig: TfpgRadioButton;
-    rbIndexAlpha: TfpgRadioButton;
-    rbIndexBoth: TfpgRadioButton;
-    lblScrollDistance: TfpgLabel;
-    edtScrollDistance: TfpgEditInteger;
-    lblPixels: TfpgLabel;
+    pcSettings: TlqPageControl;
+    btnSave: TlqButton;
+    btnCancel: TlqButton;
+    tsGeneral: TlqTabSheet;
+    tsFontsColor: TlqTabSheet;
+    tsIndex: TlqTabSheet;
+    Label1: TlqLabel;
+    Label2: TlqLabel;
+    pnlSearchHighlight: TlqPanel;
+    pnlNotesColor: TlqPanel;
+    lblIndexStyle: TlqLabel;
+    lblSearchDirs: TlqLabel;
+    btnSearchDirAdd: TlqButton;
+    lbSearchDirs: TlqListBox;
+    btnSearchDirDelete: TlqButton;
+    chkEscapeIPFSymbols: TlqCheckBox;
+    chkStartupHelp: TlqCheckBox;
+    chkOpenTOC: TlqCheckBox;
+    btnColorHighlight: TlqButton;
+    btnColorNotes: TlqButton;
+    btnResetColors: TlqButton;
+    edtFixedFont: TlqFontEdit;
+    edtNormalFont: TlqFontEdit;
+    rbIndexOrig: TlqRadioButton;
+    rbIndexAlpha: TlqRadioButton;
+    rbIndexBoth: TlqRadioButton;
+    lblScrollDistance: TlqLabel;
+    edtScrollDistance: TlqEditInteger;
+    lblPixels: TlqLabel;
     {@VFD_HEAD_END: ConfigurationForm}
-    btnHelp: TfpgButton;
+    btnHelp: TlqButton;
     procedure ConfigurationFormShow(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
-    procedure PageControl1Change(Sender: TObject; NewActiveSheet: TfpgTabSheet);
+    procedure PageControl1Change(Sender: TObject; NewActiveSheet: TlqTabSheet);
     procedure btnCancelClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnSearchDirAddClicked(Sender: TObject);
@@ -99,7 +99,7 @@ begin
 end;
 
 procedure TConfigurationForm.PageControl1Change(Sender: TObject;
-  NewActiveSheet: TfpgTabSheet);
+  NewActiveSheet: TlqTabSheet);
 begin
   if NewActiveSheet = tsGeneral then
   begin
@@ -125,7 +125,7 @@ end;
 
 procedure TConfigurationForm.btnSearchDirAddClicked(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := SelectDirDialog('');
   if s <> '' then
@@ -223,7 +223,7 @@ begin
   MinWidth := 513;
   MinHeight := 398;
 
-  pcSettings := TfpgPageControl.Create(self);
+  pcSettings := TlqPageControl.Create(self);
   with pcSettings do
   begin
     Name := 'pcSettings';
@@ -234,7 +234,7 @@ begin
     OnChange := @PageControl1Change;
   end;
 
-  btnSave := TfpgButton.Create(self);
+  btnSave := TlqButton.Create(self);
   with btnSave do
   begin
     Name := 'btnSave';
@@ -248,7 +248,7 @@ begin
     OnClick := @btnSaveClick;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -262,7 +262,7 @@ begin
     OnClick := @btnCancelClick;
   end;
 
-  tsGeneral := TfpgTabSheet.Create(pcSettings);
+  tsGeneral := TlqTabSheet.Create(pcSettings);
   with tsGeneral do
   begin
     Name := 'tsGeneral';
@@ -270,7 +270,7 @@ begin
     Text := 'General';
   end;
 
-  tsFontsColor := TfpgTabSheet.Create(pcSettings);
+  tsFontsColor := TlqTabSheet.Create(pcSettings);
   with tsFontsColor do
   begin
     Name := 'tsFontsColor';
@@ -278,7 +278,7 @@ begin
     Text := 'Fonts & Color';
   end;
 
-  tsIndex := TfpgTabSheet.Create(pcSettings);
+  tsIndex := TlqTabSheet.Create(pcSettings);
   with tsIndex do
   begin
     Name := 'tsIndex';
@@ -286,7 +286,7 @@ begin
     Text := 'Index';
   end;
 
-  Label1 := TfpgLabel.Create(tsFontsColor);
+  Label1 := TlqLabel.Create(tsFontsColor);
   with Label1 do
   begin
     Name := 'Label1';
@@ -297,7 +297,7 @@ begin
     Text := 'Normal Font';
   end;
 
-  Label2 := TfpgLabel.Create(tsFontsColor);
+  Label2 := TlqLabel.Create(tsFontsColor);
   with Label2 do
   begin
     Name := 'Label2';
@@ -308,7 +308,7 @@ begin
     Text := 'Fixed Font';
   end;
 
-  pnlSearchHighlight := TfpgPanel.Create(tsFontsColor);
+  pnlSearchHighlight := TlqPanel.Create(tsFontsColor);
   with pnlSearchHighlight do
   begin
     Name := 'pnlSearchHighlight';
@@ -319,7 +319,7 @@ begin
     Text := 'Search Highlight Color';
   end;
 
-  pnlNotesColor := TfpgPanel.Create(tsFontsColor);
+  pnlNotesColor := TlqPanel.Create(tsFontsColor);
   with pnlNotesColor do
   begin
     Name := 'pnlNotesColor';
@@ -330,7 +330,7 @@ begin
     Text := 'Notes/Annotations Color';
   end;
 
-  lblIndexStyle := TfpgLabel.Create(tsIndex);
+  lblIndexStyle := TlqLabel.Create(tsIndex);
   with lblIndexStyle do
   begin
     Name := 'lblIndexStyle';
@@ -340,7 +340,7 @@ begin
     Text := 'Index style';
   end;
 
-  lblSearchDirs := TfpgLabel.Create(tsGeneral);
+  lblSearchDirs := TlqLabel.Create(tsGeneral);
   with lblSearchDirs do
   begin
     Name := 'lblSearchDirs';
@@ -350,7 +350,7 @@ begin
     Text := 'Search directories';
   end;
 
-  btnSearchDirAdd := TfpgButton.Create(tsGeneral);
+  btnSearchDirAdd := TlqButton.Create(tsGeneral);
   with btnSearchDirAdd do
   begin
     Name := 'btnSearchDirAdd';
@@ -363,7 +363,7 @@ begin
     OnClick :=@btnSearchDirAddClicked;
   end;
 
-  lbSearchDirs := TfpgListBox.Create(tsGeneral);
+  lbSearchDirs := TlqListBox.Create(tsGeneral);
   with lbSearchDirs do
   begin
     Name := 'lbSearchDirs';
@@ -374,7 +374,7 @@ begin
     Items.Duplicates := dupIgnore;
   end;
 
-  btnSearchDirDelete := TfpgButton.Create(tsGeneral);
+  btnSearchDirDelete := TlqButton.Create(tsGeneral);
   with btnSearchDirDelete do
   begin
     Name := 'btnSearchDirDelete';
@@ -386,7 +386,7 @@ begin
     TabOrder := 4;
   end;
 
-  chkEscapeIPFSymbols := TfpgCheckBox.Create(tsGeneral);
+  chkEscapeIPFSymbols := TlqCheckBox.Create(tsGeneral);
   with chkEscapeIPFSymbols do
   begin
     Name := 'chkEscapeIPFSymbols';
@@ -398,7 +398,7 @@ begin
     Text := 'Escape symbols when saving topics as IPF text';
   end;
 
-  chkStartupHelp := TfpgCheckBox.Create(tsGeneral);
+  chkStartupHelp := TlqCheckBox.Create(tsGeneral);
   with chkStartupHelp do
   begin
     Name := 'chkStartupHelp';
@@ -411,7 +411,7 @@ begin
     Text := 'Show DocView help at startup if no files opened';
   end;
 
-  chkOpenTOC := TfpgCheckBox.Create(tsGeneral);
+  chkOpenTOC := TlqCheckBox.Create(tsGeneral);
   with chkOpenTOC do
   begin
     Name := 'chkOpenTOC';
@@ -423,7 +423,7 @@ begin
     Text := 'Open files with contents expanded';
   end;
 
-  btnColorHighlight := TfpgButton.Create(tsFontsColor);
+  btnColorHighlight := TlqButton.Create(tsFontsColor);
   with btnColorHighlight do
   begin
     Name := 'btnColorHighlight';
@@ -436,7 +436,7 @@ begin
     OnClick := @btnSearchHighlightClicked;
   end;
 
-  btnColorNotes := TfpgButton.Create(tsFontsColor);
+  btnColorNotes := TlqButton.Create(tsFontsColor);
   with btnColorNotes do
   begin
     Name := 'btnColorNotes';
@@ -449,7 +449,7 @@ begin
     OnClick := @btnNotesColorClicked;
   end;
 
-  btnResetColors := TfpgButton.Create(tsFontsColor);
+  btnResetColors := TlqButton.Create(tsFontsColor);
   with btnResetColors do
   begin
     Name := 'btnResetColors';
@@ -463,7 +463,7 @@ begin
     OnClick := @ResetColorsButtonOnClick;
   end;
 
-  edtFixedFont := TfpgFontEdit.Create(tsFontsColor);
+  edtFixedFont := TlqFontEdit.Create(tsFontsColor);
   with edtFixedFont do
   begin
     Name := 'edtFixedFont';
@@ -474,7 +474,7 @@ begin
     TabOrder := 14;
   end;
 
-  edtNormalFont := TfpgFontEdit.Create(tsFontsColor);
+  edtNormalFont := TlqFontEdit.Create(tsFontsColor);
   with edtNormalFont do
   begin
     Name := 'edtNormalFont';
@@ -485,7 +485,7 @@ begin
     TabOrder := 13;
   end;
 
-  rbIndexOrig := TfpgRadioButton.Create(tsIndex);
+  rbIndexOrig := TlqRadioButton.Create(tsIndex);
   with rbIndexOrig do
   begin
     Name := 'rbIndexOrig';
@@ -497,7 +497,7 @@ begin
     Text := 'File Only (only entries specified in file)';
   end;
 
-  rbIndexAlpha := TfpgRadioButton.Create(tsIndex);
+  rbIndexAlpha := TlqRadioButton.Create(tsIndex);
   with rbIndexAlpha do
   begin
     Name := 'rbIndexAlpha';
@@ -509,7 +509,7 @@ begin
     Text := 'Alphabetical listing of topics';
   end;
 
-  rbIndexBoth := TfpgRadioButton.Create(tsIndex);
+  rbIndexBoth := TlqRadioButton.Create(tsIndex);
   with rbIndexBoth do
   begin
     Name := 'rbIndexBoth';
@@ -521,7 +521,7 @@ begin
     Text := 'Both';
   end;
 
-  lblScrollDistance := TfpgLabel.Create(tsGeneral);
+  lblScrollDistance := TlqLabel.Create(tsGeneral);
   with lblScrollDistance do
   begin
     Name := 'lblScrollDistance';
@@ -531,7 +531,7 @@ begin
     Text := 'Mouse Wheel Scroll Distance';
   end;
 
-  edtScrollDistance := TfpgEditInteger.Create(tsGeneral);
+  edtScrollDistance := TlqEditInteger.Create(tsGeneral);
   with edtScrollDistance do
   begin
     Name := 'edtScrollDistance';
@@ -542,7 +542,7 @@ begin
     Value := 0;
   end;
 
-  lblPixels := TfpgLabel.Create(tsGeneral);
+  lblPixels := TlqLabel.Create(tsGeneral);
   with lblPixels do
   begin
     Name := 'lblPixels';
@@ -558,7 +558,7 @@ begin
   // always reset pagecotrol
   pcSettings.ActivePageIndex := 0;
 
-  //btnHelp := TfpgButton.Create(self);
+  //btnHelp := TlqButton.Create(self);
   //with btnHelp do
   //begin
   //  Name := 'btnHelp';

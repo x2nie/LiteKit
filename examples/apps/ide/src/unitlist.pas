@@ -26,13 +26,13 @@ uses
 type
   TUnit = class(TObject)
   private
-    FFilename: TfpgString;
+    FFilename: TlqString;
     FOpened: Boolean;
-    function GetUnitName: TfpgString;
+    function GetUnitName: TlqString;
   public
     constructor Create;
-    property FileName: TfpgString read FFilename write FFilename;
-    property UnitName: TfpgString read GetUnitName;
+    property FileName: TlqString read FFilename write FFilename;
+    property UnitName: TlqString read GetUnitName;
     property Opened: Boolean read FOpened write FOpened;
   end;
 
@@ -46,8 +46,8 @@ type
     constructor Create;
     destructor  Destroy; override;
     function    Count: integer;
-    function    FindByName(const AUnitName: TfpgString): TUnit;
-    function    FileExists(const AFilename: TfpgString): Boolean;
+    function    FindByName(const AUnitName: TlqString): TUnit;
+    function    FileExists(const AFilename: TlqString): Boolean;
     procedure   Add(NewUnit: TUnit);
     procedure   Clear;
     procedure   Delete(AIndex: integer);
@@ -90,7 +90,7 @@ begin
   Result := FList.Count;
 end;
 
-function TUnitList.FindByName(const AUnitName: TfpgString): TUnit;
+function TUnitList.FindByName(const AUnitName: TlqString): TUnit;
 var
   l: Integer;
   r: Integer;
@@ -115,7 +115,7 @@ begin
   Result := nil;
 end;
 
-function TUnitList.FileExists(const AFilename: TfpgString): Boolean;
+function TUnitList.FileExists(const AFilename: TlqString): Boolean;
 var
   i: integer;
 begin
@@ -171,7 +171,7 @@ end;
 
 { TUnit }
 
-function TUnit.GetUnitName: TfpgString;
+function TUnit.GetUnitName: TlqString;
 begin
   Result := fpgExtractFileName(Filename);
 end;

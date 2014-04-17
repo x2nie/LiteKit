@@ -52,8 +52,8 @@ procedure ProfileEvent(const AString: string);
 // Return AFilename's size in bytes
 function GetFileSize(const AFilename: string): integer;
 
-function IsDigit(const AChar: TfpgChar): boolean;
-function IsAlpha(const AChar: TfpgChar): boolean;
+function IsDigit(const AChar: TlqChar): boolean;
+function IsAlpha(const AChar: TlqChar): boolean;
 function Between( const Value: longint; const Limit1: longint; const Limit2: longint ): boolean;
 
 
@@ -230,16 +230,16 @@ begin
   Result := fpgFileSize(AFilename);
 end;
 
-function IsDigit(const AChar: TfpgChar): boolean;
+function IsDigit(const AChar: TlqChar): boolean;
 begin
   { TODO -oGraeme -cunicode : Not utf-8 compliant. }
   Result := ( AChar>='0' ) and ( AChar<='9' );
   //Result := TCharacter.IsDigit(AChar);
 end;
 
-function IsAlpha(const AChar: TfpgChar): boolean;
+function IsAlpha(const AChar: TlqChar): boolean;
 var
-  UppercaseC: TfpgChar;
+  UppercaseC: TlqChar;
 Begin
   { TODO -oGraeme -cunicode : Not utf-8 compliant. }
   UppercaseC := UpperCase( AChar );

@@ -31,15 +31,15 @@ uses
 
 type
 
-  TfpgBaseImgAnim = class(TfpgWidget)
+  TlqBaseImgAnim = class(TlqWidget)
   private
     FFrameCount: integer;
-    FImageFilename: TfpgString;
-    FImage: TfpgImage;
+    FImageFilename: TlqString;
+    FImage: TlqImage;
     FInterval: integer;
-    FTimer: TfpgTimer;
+    FTimer: TlqTimer;
     FPos: integer;
-    FImageWidth: TfpgCoord;
+    FImageWidth: TlqCoord;
     FTransparent: Boolean;
     procedure   InternalTimerFired(Sender: TObject);
     procedure   SetAnimPosition(const AValue: integer);
@@ -48,10 +48,10 @@ type
   protected
     procedure   HandlePaint; override;
     procedure   SetEnabled(const AValue: boolean); override;
-    procedure   SetImageFilename(const AValue: TfpgString); virtual;
+    procedure   SetImageFilename(const AValue: TlqString); virtual;
     //
     property    Interval: integer read FInterval write SetInterval default 50;
-    property    ImageFileName: TfpgString read FImageFilename write SetImageFilename;
+    property    ImageFileName: TlqString read FImageFilename write SetImageFilename;
     property    IsTransparent: Boolean read FTransparent write FTransparent default True;
     property    FrameCount: integer read FFrameCount write FFrameCount default 4;
     property    Position: integer read FPos write SetAnimPosition default 0;
@@ -61,7 +61,7 @@ type
   end;
 
 
-  TfpgImgAnim = class(TfpgBaseImgAnim)
+  TlqImgAnim = class(TlqBaseImgAnim)
   public
     property    Position;
   published
@@ -83,9 +83,9 @@ uses
   lq_utils;
 
 
-{ TfpgBaseImgAnim }
+{ TlqBaseImgAnim }
 
-procedure TfpgBaseImgAnim.InternalTimerFired(Sender: TObject);
+procedure TlqBaseImgAnim.InternalTimerFired(Sender: TObject);
 begin
   Repaint;
   inc(FPos);
@@ -93,7 +93,7 @@ begin
     FPos := 0;
 end;
 
-procedure TfpgBaseImgAnim.SetAnimPosition(const AValue: integer);
+procedure TlqBaseImgAnim.SetAnimPosition(const AValue: integer);
 begin
   if FTimer.Enabled then
     Exit; // ignore position because animation is running
@@ -104,7 +104,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseImgAnim.SetInterval(const AValue: integer);
+procedure TlqBaseImgAnim.SetInterval(const AValue: integer);
 begin
   if FInterval = AValue then
     Exit; //==>
@@ -113,13 +113,13 @@ begin
   RecalcImageWidth;
 end;
 
-procedure TfpgBaseImgAnim.RecalcImageWidth;
+procedure TlqBaseImgAnim.RecalcImageWidth;
 begin
   FImageWidth := FImage.Width div FrameCount;
   FPos := 0;
 end;
 
-procedure TfpgBaseImgAnim.HandlePaint;
+procedure TlqBaseImgAnim.HandlePaint;
 begin
   if (FImageFilename = '') or (FImage = nil) then
     Exit; //==>
@@ -129,14 +129,14 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TfpgBaseImgAnim.SetEnabled(const AValue: boolean);
+procedure TlqBaseImgAnim.SetEnabled(const AValue: boolean);
 begin
   inherited SetEnabled(AValue);
   if not (csDesigning in ComponentState) then
     FTimer.Enabled := FEnabled;
 end;
 
-procedure TfpgBaseImgAnim.SetImageFilename(const AValue: TfpgString);
+procedure TlqBaseImgAnim.SetImageFilename(const AValue: TlqString);
 begin
   if FImageFilename = AValue then
     Exit; //==>
@@ -161,7 +161,7 @@ begin
   Repaint;
 end;
 
-constructor TfpgBaseImgAnim.Create(AOwner: TComponent);
+constructor TlqBaseImgAnim.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FPos          := 0;
@@ -171,11 +171,11 @@ begin
   FEnabled      := False;
   FTransparent  := True;
 
-  FTimer := TfpgTimer.Create(FInterval);
+  FTimer := TlqTimer.Create(FInterval);
   FTimer.OnTimer := @InternalTimerFired;
 end;
 
-destructor TfpgBaseImgAnim.Destroy;
+destructor TlqBaseImgAnim.Destroy;
 begin
   FTimer.Enabled := False;
   FTimer.Free;

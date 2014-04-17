@@ -12,7 +12,7 @@ uses
 
 type
   { A very simple custom hint window. }
-  TMyHintWindow = class(TfpgHintWindow)
+  TMyHintWindow = class(TlqHintWindow)
   private
     procedure   FormPaint(Sender: TObject);
   public
@@ -21,9 +21,9 @@ type
 
 
   { test application main form }
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    function  GetHintWnd: TfpgHintWindow;
+    function  GetHintWnd: TlqHintWindow;
     procedure btnQuitClicked(Sender: TObject);
     procedure rbClicked(Sender: TObject);
     procedure lbChange(Sender: TObject);
@@ -61,57 +61,57 @@ type
     procedure chbCustomHintChanged(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    lblName1: TfpgLabel;
-    edtText: TfpgEdit;
-    chbPasswd: TfpgCheckBox;
-    lblName2: TfpgLabel;
-    l_integervalue: TfpgLabel;
-    lblName3: TfpgLabel;
-    l_floatvalue: TfpgLabel;
-    lblName4: TfpgLabel;
-    l_currvalue: TfpgLabel;
-    edtInteger: TfpgEditInteger;
-    edtFloat: TfpgEditFloat;
-    edtCurrency: TfpgEditCurrency;
-    btnQuit: TfpgButton;
-    rbPoint: TfpgRadioButton;
-    rbComma: TfpgRadioButton;
-    chbSpace: TfpgCheckBox;
-    chbFloatDec: TfpgCheckBox;
-    lbNegativeColor: TfpgColorListBox;
-    lblNegativeColor: TfpgLabel;
-    p_border: TfpgPanel;
-    rb_border_1: TfpgRadioButton;
-    rb_border_2: TfpgRadioButton;
-    rb_border_3: TfpgRadioButton;
-    rb_border_5: TfpgRadioButton;
-    p_margin: TfpgPanel;
-    rb_margin_1: TfpgRadioButton;
-    rb_margin_2: TfpgRadioButton;
-    rb_margin_3: TfpgRadioButton;
-    rb_margin_5: TfpgRadioButton;
-    p_time: TfpgPanel;
-    rb_time_1: TfpgRadioButton;
-    rb_time_2: TfpgRadioButton;
-    rb_time_3: TfpgRadioButton;
-    rb_time_5: TfpgRadioButton;
-    p_color: TfpgPanel;
-    rb_color_black: TfpgRadioButton;
-    rb_color_red: TfpgRadioButton;
-    rb_color_green: TfpgRadioButton;
-    rb_color_blue: TfpgRadioButton;
-    p_bgcolor: TfpgPanel;
-    rb_bgcolor_yellow: TfpgRadioButton;
-    rb_bgcolor_white: TfpgRadioButton;
-    rb_bgcolor_green: TfpgRadioButton;
-    rb_bgcolor_blue: TfpgRadioButton;
-    p_shadowcolor: TfpgPanel;
-    cbShadow: TfpgCheckBox;
-    rb_shadowcolor_gray: TfpgRadioButton;
-    rb_shadowcolor_black: TfpgRadioButton;
-    chbShowHint: TfpgCheckBox;
-    chbAppShowHint: TfpgCheckBox;
-    chbCustomHint: TfpgCheckBox;
+    lblName1: TlqLabel;
+    edtText: TlqEdit;
+    chbPasswd: TlqCheckBox;
+    lblName2: TlqLabel;
+    l_integervalue: TlqLabel;
+    lblName3: TlqLabel;
+    l_floatvalue: TlqLabel;
+    lblName4: TlqLabel;
+    l_currvalue: TlqLabel;
+    edtInteger: TlqEditInteger;
+    edtFloat: TlqEditFloat;
+    edtCurrency: TlqEditCurrency;
+    btnQuit: TlqButton;
+    rbPoint: TlqRadioButton;
+    rbComma: TlqRadioButton;
+    chbSpace: TlqCheckBox;
+    chbFloatDec: TlqCheckBox;
+    lbNegativeColor: TlqColorListBox;
+    lblNegativeColor: TlqLabel;
+    p_border: TlqPanel;
+    rb_border_1: TlqRadioButton;
+    rb_border_2: TlqRadioButton;
+    rb_border_3: TlqRadioButton;
+    rb_border_5: TlqRadioButton;
+    p_margin: TlqPanel;
+    rb_margin_1: TlqRadioButton;
+    rb_margin_2: TlqRadioButton;
+    rb_margin_3: TlqRadioButton;
+    rb_margin_5: TlqRadioButton;
+    p_time: TlqPanel;
+    rb_time_1: TlqRadioButton;
+    rb_time_2: TlqRadioButton;
+    rb_time_3: TlqRadioButton;
+    rb_time_5: TlqRadioButton;
+    p_color: TlqPanel;
+    rb_color_black: TlqRadioButton;
+    rb_color_red: TlqRadioButton;
+    rb_color_green: TlqRadioButton;
+    rb_color_blue: TlqRadioButton;
+    p_bgcolor: TlqPanel;
+    rb_bgcolor_yellow: TlqRadioButton;
+    rb_bgcolor_white: TlqRadioButton;
+    rb_bgcolor_green: TlqRadioButton;
+    rb_bgcolor_blue: TlqRadioButton;
+    p_shadowcolor: TlqPanel;
+    cbShadow: TlqCheckBox;
+    rb_shadowcolor_gray: TlqRadioButton;
+    rb_shadowcolor_black: TlqRadioButton;
+    chbShowHint: TlqCheckBox;
+    chbAppShowHint: TlqCheckBox;
+    chbCustomHint: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure AfterCreate; override;
   end;
@@ -121,9 +121,9 @@ type
 
 {@VFD_NEWFORM_IMPL}
 
-function TMainForm.GetHintWnd: TfpgHintWindow;
+function TMainForm.GetHintWnd: TlqHintWindow;
 begin
-  Result := TfpgHintWindow(fpgApplication.HintWindow);
+  Result := TlqHintWindow(fpgApplication.HintWindow);
 end;
 
 procedure TMainForm.btnQuitClicked(Sender: TObject);
@@ -133,8 +133,8 @@ end;
 
 procedure TMainForm.rbClicked(Sender: TObject);
 begin
-  if Sender is TfpgRadioButton then
-    case (Sender as TfpgRadioButton).tag of
+  if Sender is TlqRadioButton then
+    case (Sender as TlqRadioButton).tag of
       0:
         begin
           edtFloat.CustomDecimalSeparator := '.';
@@ -376,7 +376,7 @@ begin
   if chbCustomHint.Checked then
     HintWindowClass := TMyHintWindow
   else
-    HintWindowClass := TfpgHintWindow;
+    HintWindowClass := TlqHintWindow;
   fpgApplication.RecreateHintWindow;
 end;
 
@@ -388,7 +388,7 @@ begin
   WindowTitle := 'Edit components';
   WindowPosition := wpScreenCenter;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -397,7 +397,7 @@ begin
     Text := 'Text Edit';
   end;
 
-  edtText := TfpgEdit.Create(self);
+  edtText := TlqEdit.Create(self);
   with edtText do
   begin
     Name := 'edtText';
@@ -414,7 +414,7 @@ begin
             'generic edit control. The end.';
   end;
 
-  chbPasswd := TfpgCheckBox.Create(self);
+  chbPasswd := TlqCheckBox.Create(self);
   with chbPasswd do
   begin
     Name := 'chbPasswd';
@@ -425,7 +425,7 @@ begin
     OnChange :=@chbPasswdChanged;
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -434,7 +434,7 @@ begin
     Text := 'Integer Edit';
   end;
   
-  l_integervalue := TfpgLabel.Create(self);
+  l_integervalue := TlqLabel.Create(self);
   with l_integervalue do
   begin
     Name := 'l_integervalue';
@@ -443,7 +443,7 @@ begin
     Text := '';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -452,7 +452,7 @@ begin
     Text := 'Float Edit';
   end;
 
-  l_floatvalue := TfpgLabel.Create(self);
+  l_floatvalue := TlqLabel.Create(self);
   with l_floatvalue do
   begin
     Name := 'l_floatvalue';
@@ -461,7 +461,7 @@ begin
     Text := '';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -470,7 +470,7 @@ begin
     Text := 'Currency Edit';
   end;
 
-  l_currvalue := TfpgLabel.Create(self);
+  l_currvalue := TlqLabel.Create(self);
   with l_currvalue do
   begin
     Name := 'l_currvalue';
@@ -479,7 +479,7 @@ begin
     Text := '';
   end;
 
-  edtInteger := TfpgEditInteger.Create(self);
+  edtInteger := TlqEditInteger.Create(self);
   with edtInteger do
   begin
     Name := 'edtInteger';
@@ -490,7 +490,7 @@ begin
     Hint := 'integer edit control';
   end;
 
-  edtFloat := TfpgEditFloat.Create(self);
+  edtFloat := TlqEditFloat.Create(self);
   with edtFloat do
   begin
     Name := 'edtFloat';
@@ -501,7 +501,7 @@ begin
     Hint := 'float edit control';
   end;
 
-  edtCurrency := TfpgEditCurrency.Create(self);
+  edtCurrency := TlqEditCurrency.Create(self);
   with edtCurrency do
   begin
     Name := 'edtCurrency';
@@ -514,7 +514,7 @@ begin
     Hint := 'currency edit control';
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -527,7 +527,7 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  rbPoint := TfpgRadioButton.Create(self);
+  rbPoint := TlqRadioButton.Create(self);
   with rbPoint do
   begin
     Name := 'rbPoint';
@@ -541,7 +541,7 @@ begin
     OnChange := @rbClicked;
   end;
 
-  rbComma := TfpgRadioButton.Create(self);
+  rbComma := TlqRadioButton.Create(self);
   with rbComma do
   begin
     Name := 'rbComma';
@@ -554,7 +554,7 @@ begin
     OnChange := @rbClicked;
   end;
 
-  chbSpace := TfpgCheckBox.Create(self);
+  chbSpace := TlqCheckBox.Create(self);
   with chbSpace do
   begin
     Name := 'chbSpace';
@@ -564,7 +564,7 @@ begin
     OnChange := @chbSpaceChange;
   end;
   
-  chbFloatDec := TfpgCheckBox.Create(Self);
+  chbFloatDec := TlqCheckBox.Create(Self);
   with chbFloatDec do
   begin
     Name := 'chbFloatDec';
@@ -574,7 +574,7 @@ begin
     OnChange := @chbFloatDecChange;
   end;
   
-  lbNegativeColor := TfpgColorListBox.Create(self);
+  lbNegativeColor := TlqColorListBox.Create(self);
   with lbNegativeColor do
   begin
     Name := 'lbNegativeColor';
@@ -583,7 +583,7 @@ begin
     OnChange := @lbChange;
   end;
 
-  lblNegativeColor := TfpgLabel.Create(self);
+  lblNegativeColor := TlqLabel.Create(self);
   with lblNegativeColor do
   begin
     Name := 'lblNegativeColor';
@@ -592,7 +592,7 @@ begin
     Text := 'Choose color for negative num.';
   end;
   
-  p_border := TfpgPanel.Create(self);
+  p_border := TlqPanel.Create(self);
   with p_border do
   begin
     name := 'p_border';
@@ -615,7 +615,7 @@ begin
   rb_border_5 := CreateRadioButton(p_border,80,50,'5 pixels');
   rb_border_5.OnChange:= @rb_border_5Change;
 
-  p_margin := TfpgPanel.Create(self);
+  p_margin := TlqPanel.Create(self);
   with p_margin do
   begin
     name := 'p_margin';
@@ -638,7 +638,7 @@ begin
   rb_margin_5 := CreateRadioButton(p_margin,80,50,'5 pixels');
   rb_margin_5.OnChange:= @rb_margin_5Change;
 
-  p_time := TfpgPanel.Create(self);
+  p_time := TlqPanel.Create(self);
   with p_time do
   begin
     name := 'p_time';
@@ -661,7 +661,7 @@ begin
   rb_time_5.OnChange:= @rb_time_5Change;
   rb_time_5.Checked:= True;
 
-  p_color := TfpgPanel.Create(self);
+  p_color := TlqPanel.Create(self);
   with p_color do
   begin
     name := 'p_color';
@@ -684,7 +684,7 @@ begin
   rb_color_blue := CreateRadioButton(p_color,80,50,'Blue');
   rb_color_blue.OnChange:= @rb_color_blueChange;
 
-  p_bgcolor := TfpgPanel.Create(self);
+  p_bgcolor := TlqPanel.Create(self);
   with p_bgcolor do
   begin
     name := 'p_bgcolor';
@@ -707,7 +707,7 @@ begin
   rb_bgcolor_blue := CreateRadioButton(p_bgcolor,80,50,'Blue');
   rb_bgcolor_blue.OnChange:= @rb_bgcolor_blueChange;
 
-  p_shadowcolor := TfpgPanel.Create(self);
+  p_shadowcolor := TlqPanel.Create(self);
   with p_shadowcolor do
   begin
     name := 'p_shadowcolor';
@@ -752,8 +752,8 @@ end;
 { Not so efficient, but good enough for this demo }
 procedure TMyHintWindow.FormPaint(Sender: TObject);
 var
-  img: TfpgImage;
-  r: TfpgRect;
+  img: TlqImage;
+  r: TlqRect;
 begin
   r := GetClientRect;
   InflateRect(r, -Border, -Border);

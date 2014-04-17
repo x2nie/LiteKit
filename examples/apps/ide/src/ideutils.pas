@@ -30,12 +30,12 @@ uses
 
 
 // Set the Screen.Cursor to crHourGlass until the interface goes out of scope
-function TempHourGlassCursor(var AWidget: TfpgWidget): IInterface;
+function TempHourGlassCursor(var AWidget: TlqWidget): IInterface;
 
 
 function tiNumToken(const AValue, AToken: string): integer;
 function tiToken(const AValue, AToken: string; const APos: integer): string;
-procedure ShowString(const AString: TfpgString; const AHeading: TfpgString);
+procedure ShowString(const AString: TlqString; const AHeading: TlqString);
 
 // Extract the file extension from FileName and return it in all UPPERCASE.
 function ExtractUpperFileExt(const FileName: string): string;
@@ -112,13 +112,13 @@ type
   TTempHourClassCursor = class(TInterfacedObject, IInterface)
   private
     FOldCursor: TMouseCursor;
-    FWidget: TfpgWidget;
+    FWidget: TlqWidget;
   public
-    constructor Create(var AWidget: TfpgWidget);
+    constructor Create(var AWidget: TlqWidget);
     destructor Destroy; override;
   end;
 
-constructor TTempHourClassCursor.Create(var AWidget: TfpgWidget);
+constructor TTempHourClassCursor.Create(var AWidget: TlqWidget);
 begin
   inherited Create;
   FOldCursor := AWidget.MouseCursor;
@@ -134,7 +134,7 @@ end;
 
 
 
-function TempHourGlassCursor(var AWidget: TfpgWidget): IInterface;
+function TempHourGlassCursor(var AWidget: TlqWidget): IInterface;
 begin
   Result := TTempHourClassCursor.Create(AWidget) as IInterface;
 end;
@@ -201,13 +201,13 @@ begin
   end;
 end;
 
-procedure ShowString(const AString: TfpgString; const AHeading: TfpgString);
+procedure ShowString(const AString: TlqString; const AHeading: TlqString);
 var
-  lForm: TfpgForm;
-  lMemo: TfpgMemo;
+  lForm: TlqForm;
+  lMemo: TlqMemo;
 begin
-  lForm := TfpgForm.Create(nil);
-  lMemo := TfpgMemo.Create(lForm);
+  lForm := TlqForm.Create(nil);
+  lMemo := TlqMemo.Create(lForm);
   try
     lForm.WindowTitle := AHeading;
     lForm.Width       := 450;
@@ -411,10 +411,10 @@ end;
 procedure CheckGridModifyKeyPresses(Sender: TObject; var KeyCode: word;
     var ShiftState: TShiftState; var Consumed: boolean);
 var
-  grd: TfpgStringGrid;
+  grd: TlqStringGrid;
   r: integer;
 begin
-  grd := TfpgStringGrid(Sender);
+  grd := TlqStringGrid(Sender);
   if (KeyCode = keyInsert) and (ssCtrl in ShiftState) then
   begin
     grd.RowCount := grd.RowCount + 1;

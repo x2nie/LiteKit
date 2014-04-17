@@ -15,27 +15,27 @@
       This unit contains the Message Dialog used throughout fpGUI Toolkit.
 }
 
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
 type
 
-  TfpgMessageDialog = class(TfpgForm)
+  TlqMessageDialog = class(TlqForm)
   private
     FInformativeText: TStringList;
     FText: string;
-    FButtons: TfpgMsgDlgButtons;
-    FDefaultButton: TfpgMsgDlgBtn;
-    FDialogType: TfpgMsgDlgType;
+    FButtons: TlqMsgDlgButtons;
+    FDefaultButton: TlqMsgDlgBtn;
+    FDialogType: TlqMsgDlgType;
     FButtonList: TList; // pointers to buttons
     FMaxLineWidth: Integer;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FTextY: Integer;
     FLineHeight: Integer;
     function    GetInformativeText: string;
-    procedure   SetButtons(const AValue: TfpgMsgDlgButtons);
-    procedure   SetDefaultButton(const AValue: TfpgMsgDlgBtn);
+    procedure   SetButtons(const AValue: TlqMsgDlgButtons);
+    procedure   SetDefaultButton(const AValue: TlqMsgDlgBtn);
     procedure   SetInformativeText(const AValue: string);
     procedure   SetText(const AValue: string);
     procedure   pnlIconPaint(Sender: TObject);
@@ -51,27 +51,27 @@ type
     procedure   PrepareLayout;
   public
     {@VFD_HEAD_BEGIN: fpgMessageDialog}
-    lblName1: TfpgLabel;
-    pnlIcon: TfpgBevel;
+    lblName1: TlqLabel;
+    pnlIcon: TlqBevel;
     {@VFD_HEAD_END: fpgMessageDialog}
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     procedure   AfterCreate; override;
     class procedure About(const ATitle: string; const AText: string);
-    class procedure AboutFPGui(const ATitle: string = '');
+    class procedure AbouTlqui(const ATitle: string = '');
     { ACloseButton is when the user cancels the dialog via the Esc key or the X window button }
-    class function Critical(const ATitle: string; const AText: string; AButtons: TfpgMsgDlgButtons = [mbOK]; ADefaultButton: TfpgMsgDlgBtn = mbNoButton; ACloseButton: TfpgMsgDlgBtn = mbCancel): TfpgMsgDlgBtn;
+    class function Critical(const ATitle: string; const AText: string; AButtons: TlqMsgDlgButtons = [mbOK]; ADefaultButton: TlqMsgDlgBtn = mbNoButton; ACloseButton: TlqMsgDlgBtn = mbCancel): TlqMsgDlgBtn;
     { ACloseButton is when the user cancels the dialog via the Esc key or the X window button }
-    class function Information(const ATitle: string; const AText: string; AButtons: TfpgMsgDlgButtons = [mbOK]; ADefaultButton: TfpgMsgDlgBtn = mbNoButton; ACloseButton: TfpgMsgDlgBtn = mbCancel): TfpgMsgDlgBtn;
+    class function Information(const ATitle: string; const AText: string; AButtons: TlqMsgDlgButtons = [mbOK]; ADefaultButton: TlqMsgDlgBtn = mbNoButton; ACloseButton: TlqMsgDlgBtn = mbCancel): TlqMsgDlgBtn;
     { ACloseButton is when the user cancels the dialog via the Esc key or the X window button }
-    class function Question(const ATitle: string; const AText: string; AButtons: TfpgMsgDlgButtons = [mbYes, mbNo]; ADefaultButton: TfpgMsgDlgBtn = mbNo; ACloseButton: TfpgMsgDlgBtn = mbCancel): TfpgMsgDlgBtn;
+    class function Question(const ATitle: string; const AText: string; AButtons: TlqMsgDlgButtons = [mbYes, mbNo]; ADefaultButton: TlqMsgDlgBtn = mbNo; ACloseButton: TlqMsgDlgBtn = mbCancel): TlqMsgDlgBtn;
     { ACloseButton is when the user cancels the dialog via the Esc key or the X window button }
-    class function Warning(const ATitle: string; const AText: string; AButtons: TfpgMsgDlgButtons = [mbOK]; ADefaultButton: TfpgMsgDlgBtn = mbNoButton; ACloseButton: TfpgMsgDlgBtn = mbCancel): TfpgMsgDlgBtn;
+    class function Warning(const ATitle: string; const AText: string; AButtons: TlqMsgDlgButtons = [mbOK]; ADefaultButton: TlqMsgDlgBtn = mbNoButton; ACloseButton: TlqMsgDlgBtn = mbCancel): TlqMsgDlgBtn;
     property    InformativeText: string read GetInformativeText write SetInformativeText;
     property    Text: string read FText write SetText;
-    property    Buttons: TfpgMsgDlgButtons read FButtons write SetButtons;
-    property    DefaultButton: TfpgMsgDlgBtn read FDefaultButton write SetDefaultButton;
-    property    DialogType: TfpgMsgDlgType read FDialogType;
+    property    Buttons: TlqMsgDlgButtons read FButtons write SetButtons;
+    property    DefaultButton: TlqMsgDlgBtn read FDefaultButton write SetDefaultButton;
+    property    DialogType: TlqMsgDlgType read FDialogType;
   end;
 
 
@@ -81,9 +81,9 @@ type
 
 {$IFDEF read_implementation}
 
-{ TfpgMessageDialog }
+{ TlqMessageDialog }
 
-procedure TfpgMessageDialog.SetInformativeText(const AValue: string);
+procedure TlqMessageDialog.SetInformativeText(const AValue: string);
 var
   outw: integer;
 begin
@@ -95,14 +95,14 @@ begin
   Height := lblName1.Bottom + (FLineHeight*FInformativeText.Count) + FTextY + 35;
 end;
 
-procedure TfpgMessageDialog.SetButtons(const AValue: TfpgMsgDlgButtons);
+procedure TlqMessageDialog.SetButtons(const AValue: TlqMsgDlgButtons);
 begin
   if FButtons = AValue then
     Exit; //==>
   FButtons := AValue;
 end;
 
-function TfpgMessageDialog.GetInformativeText: string;
+function TlqMessageDialog.GetInformativeText: string;
 begin
   if Assigned(FInformativeText) then
     Result := FInformativeText.Text
@@ -110,7 +110,7 @@ begin
     Result := '';
 end;
 
-procedure TfpgMessageDialog.SetDefaultButton(const AValue: TfpgMsgDlgBtn);
+procedure TlqMessageDialog.SetDefaultButton(const AValue: TlqMsgDlgBtn);
 begin
   if FDefaultButton = AValue then
     Exit; //==>
@@ -118,7 +118,7 @@ begin
   // Remember to check if button exists in FButtons
 end;
 
-procedure TfpgMessageDialog.SetText(const AValue: string);
+procedure TlqMessageDialog.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit; //==>
@@ -126,31 +126,31 @@ begin
   lblName1.Text := FText;
 end;
 
-procedure TfpgMessageDialog.pnlIconPaint(Sender: TObject);
+procedure TlqMessageDialog.pnlIconPaint(Sender: TObject);
 var
-  wg: TfpgBevel;
+  wg: TlqBevel;
 begin
-  wg := TfpgBevel(Sender);
+  wg := TlqBevel(Sender);
   wg.Visible := False;
 end;
 
-procedure TfpgMessageDialog.PrepareIcon;
+procedure TlqMessageDialog.PrepareIcon;
 begin
   // do nothing yet
 end;
 
-procedure TfpgMessageDialog.PrepareText;
+procedure TlqMessageDialog.PrepareText;
 begin
   { todo: Implement this correctly }
 //  Height := 150;
 end;
 
-procedure TfpgMessageDialog.PrepareButtons;
+procedure TlqMessageDialog.PrepareButtons;
 const
   cSpacing = 4;
 var
   i: integer;
-  b: TfpgButton;
+  b: TlqButton;
   lcount: integer;
   lwidth: integer;
   ltop: integer;
@@ -160,7 +160,7 @@ var
 
   function GetButtonCount: integer;
   var
-    i: TfpgMsgDlgBtn;
+    i: TlqMsgDlgBtn;
   begin
     Result := 0;
 
@@ -182,12 +182,12 @@ var
     end;
 
     // if we got here, try all known buttons.
-    for i := Low(TfpgMsgDlgBtn) to High(TfpgMsgDlgBtn) do
+    for i := Low(TlqMsgDlgBtn) to High(TlqMsgDlgBtn) do
     begin
       if i in Buttons then
       begin
         inc(Result);
-        { TODO : How could we improve this to stay in sync with TfpgModalResult values
+        { TODO : How could we improve this to stay in sync with TlqModalResult values
           like mrOK, mrCancel etc... }
         sl.Add(cMsgDlgBtnText[i] + '=' + IntToStr(Ord(i)));
         if i = DefaultButton then
@@ -204,10 +204,10 @@ begin
   // create buttons
   for i := 0 to lcount-1 do
   begin
-    b       := TfpgButton.Create(self);
+    b       := TlqButton.Create(self);
     b.Name  := 'DlgButton' + IntToStr(i+1);
     b.Text  := sl.Names[i];
-    b.ModalResult   := TfpgModalResult(StrToInt(sl.ValueFromIndex[i]));
+    b.ModalResult   := TlqModalResult(StrToInt(sl.ValueFromIndex[i]));
     if (i = lDefault) or (lcount = 1) then
       b.Default := True;
     FButtonList.Add(b);
@@ -221,11 +221,11 @@ begin
   else
     ltop := lblName1.Bottom + 15;
 
-//  ltop := Height - TfpgButton(FButtonList[0]).Height - cSpacing;
+//  ltop := Height - TlqButton(FButtonList[0]).Height - cSpacing;
   lleft := (Width - lwidth) div 2;
   for i := 0 to lcount-1 do
   begin
-    b := TfpgButton(FButtonList[i]);
+    b := TlqButton(FButtonList[i]);
     b.SetPosition(lleft, ltop, b.Width, b.Height);
     lleft := lleft + b.Width + cSpacing;
   end;
@@ -233,7 +233,7 @@ begin
   sl.Free;
 end;
 
-procedure TfpgMessageDialog.SetWindowTitle(const ATitle: string);
+procedure TlqMessageDialog.SetWindowTitle(const ATitle: string);
 begin
   if ATitle = '' then
   begin
@@ -248,16 +248,16 @@ begin
     inherited SetWindowTitle(ATitle);
 end;
 
-procedure TfpgMessageDialog.HandleClose;
+procedure TlqMessageDialog.HandleClose;
 begin
   if ModalResult = mrNone then      // Form was close via the X (window frame) button
     ModalResult := mrCancel;
   inherited HandleClose;
 end;
 
-procedure TfpgMessageDialog.HandlePaint;
+procedure TlqMessageDialog.HandlePaint;
 var
-  logo: TfpgImage;
+  logo: TlqImage;
   i: integer;
   y: integer;
   tw: integer;
@@ -315,19 +315,19 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TfpgMessageDialog.HandleShow;
+procedure TlqMessageDialog.HandleShow;
 var
   i: integer;
 begin
   inherited HandleShow;
 
   for i := 0 to ComponentCount-1 do
-    if Components[i] is TfpgButton then
-      if TfpgButton(Components[i]).Default then
-        TfpgButton(Components[i]).SetFocus;
+    if Components[i] is TlqButton then
+      if TlqButton(Components[i]).Default then
+        TlqButton(Components[i]).SetFocus;
 end;
 
-procedure TfpgMessageDialog.HandleKeyPress(var keycode: word;
+procedure TlqMessageDialog.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
   case CheckClipBoardKey(keycode, shiftstate) of
@@ -344,14 +344,14 @@ begin
   end;
 end;
 
-procedure TfpgMessageDialog.PrepareLayout;
+procedure TlqMessageDialog.PrepareLayout;
 begin
   PrepareIcon;
   PrepareText;
   PrepareButtons;
 end;
 
-constructor TfpgMessageDialog.Create(AOwner: TComponent);
+constructor TlqMessageDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -362,7 +362,7 @@ begin
   FLineHeight   := FFont.Height + 4;
 end;
 
-destructor TfpgMessageDialog.Destroy;
+destructor TlqMessageDialog.Destroy;
 begin
   FFont.Free;
   FButtonList.Clear;
@@ -371,16 +371,16 @@ begin
   inherited Destroy;
 end;
 
-class procedure TfpgMessageDialog.About(const ATitle: string; const AText: string);
+class procedure TlqMessageDialog.About(const ATitle: string; const AText: string);
 begin
-  writeln('** Implement TfpgMessageDialog.About');
+  writeln('** Implement TlqMessageDialog.About');
 end;
 
-class procedure TfpgMessageDialog.AboutFPGui(const ATitle: string);
+class procedure TlqMessageDialog.AbouTlqui(const ATitle: string);
 var
-  dlg: TfpgMessageDialog;
+  dlg: TlqMessageDialog;
 begin
-  dlg := TfpgMessageDialog.Create(nil);
+  dlg := TlqMessageDialog.Create(nil);
   try
     dlg.FDialogType := mtAbout;
     if ATitle = '' then
@@ -410,14 +410,14 @@ begin
   end;
 end;
 
-class function TfpgMessageDialog.Critical(const ATitle: string;
-  const AText: string; AButtons: TfpgMsgDlgButtons;
-  ADefaultButton: TfpgMsgDlgBtn; ACloseButton: TfpgMsgDlgBtn): TfpgMsgDlgBtn;
+class function TlqMessageDialog.Critical(const ATitle: string;
+  const AText: string; AButtons: TlqMsgDlgButtons;
+  ADefaultButton: TlqMsgDlgBtn; ACloseButton: TlqMsgDlgBtn): TlqMsgDlgBtn;
 var
-  dlg: TfpgMessageDialog;
-  mr: TfpgModalResult;
+  dlg: TlqMessageDialog;
+  mr: TlqModalResult;
 begin
-  dlg := TfpgMessageDialog.Create(nil);
+  dlg := TlqMessageDialog.Create(nil);
   try
     dlg.FDialogType     := mtError;
     dlg.FButtons        := AButtons;
@@ -431,20 +431,20 @@ begin
     if (mr = mrCancel) and (not (mbCancel in AButtons)) then
       Result := ACloseButton
     else
-      Result := TfpgMsgDlgBtn(mr);
+      Result := TlqMsgDlgBtn(mr);
   finally
     dlg.Free;
   end;
 end;
 
-class function TfpgMessageDialog.Information(const ATitle: string;
-  const AText: string; AButtons: TfpgMsgDlgButtons;
-  ADefaultButton: TfpgMsgDlgBtn; ACloseButton: TfpgMsgDlgBtn): TfpgMsgDlgBtn;
+class function TlqMessageDialog.Information(const ATitle: string;
+  const AText: string; AButtons: TlqMsgDlgButtons;
+  ADefaultButton: TlqMsgDlgBtn; ACloseButton: TlqMsgDlgBtn): TlqMsgDlgBtn;
 var
-  dlg: TfpgMessageDialog;
-  mr: TfpgModalResult;
+  dlg: TlqMessageDialog;
+  mr: TlqModalResult;
 begin
-  dlg := TfpgMessageDialog.Create(nil);
+  dlg := TlqMessageDialog.Create(nil);
   try
     dlg.FDialogType     := mtInformation;
     dlg.FButtons        := AButtons;
@@ -458,20 +458,20 @@ begin
     if (mr = mrCancel) and (not (mbCancel in AButtons)) then
       Result := ACloseButton
     else
-      Result := TfpgMsgDlgBtn(mr);
+      Result := TlqMsgDlgBtn(mr);
   finally
     dlg.Free;
   end;
 end;
 
-class function TfpgMessageDialog.Question(const ATitle: string;
-  const AText: string; AButtons: TfpgMsgDlgButtons;
-  ADefaultButton: TfpgMsgDlgBtn; ACloseButton: TfpgMsgDlgBtn): TfpgMsgDlgBtn;
+class function TlqMessageDialog.Question(const ATitle: string;
+  const AText: string; AButtons: TlqMsgDlgButtons;
+  ADefaultButton: TlqMsgDlgBtn; ACloseButton: TlqMsgDlgBtn): TlqMsgDlgBtn;
 var
-  dlg: TfpgMessageDialog;
-  mr: TfpgModalResult;
+  dlg: TlqMessageDialog;
+  mr: TlqModalResult;
 begin
-  dlg := TfpgMessageDialog.Create(nil);
+  dlg := TlqMessageDialog.Create(nil);
   try
     dlg.FDialogType     := mtConfirmation;
     dlg.FButtons        := AButtons;
@@ -485,20 +485,20 @@ begin
     if (mr = mrCancel) and (not (mbCancel in AButtons)) then
       Result := ACloseButton
     else
-      Result := TfpgMsgDlgBtn(mr);
+      Result := TlqMsgDlgBtn(mr);
   finally
     dlg.Free;
   end;
 end;
 
-class function TfpgMessageDialog.Warning(const ATitle: string;
-  const AText: string; AButtons: TfpgMsgDlgButtons;
-  ADefaultButton: TfpgMsgDlgBtn; ACloseButton: TfpgMsgDlgBtn): TfpgMsgDlgBtn;
+class function TlqMessageDialog.Warning(const ATitle: string;
+  const AText: string; AButtons: TlqMsgDlgButtons;
+  ADefaultButton: TlqMsgDlgBtn; ACloseButton: TlqMsgDlgBtn): TlqMsgDlgBtn;
 var
-  dlg: TfpgMessageDialog;
-  mr: TfpgModalResult;
+  dlg: TlqMessageDialog;
+  mr: TlqModalResult;
 begin
-  dlg := TfpgMessageDialog.Create(nil);
+  dlg := TlqMessageDialog.Create(nil);
   try
     dlg.FDialogType     := mtWarning;
     dlg.FButtons        := AButtons;
@@ -512,13 +512,13 @@ begin
     if (mr = mrCancel) and (not (mbCancel in AButtons)) then
       Result := ACloseButton
     else
-      Result := TfpgMsgDlgBtn(mr);
+      Result := TlqMsgDlgBtn(mr);
   finally
     dlg.Free;
   end;
 end;
 
-procedure TfpgMessageDialog.AfterCreate;
+procedure TlqMessageDialog.AfterCreate;
 begin
   {@VFD_BODY_BEGIN: fpgMessageDialog}
   Name := 'fpgMessageDialog';
@@ -530,7 +530,7 @@ begin
   MinHeight := 160;
   WindowPosition := wpOneThirdDown;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -539,7 +539,7 @@ begin
     FontDesc := '#Label2';
   end;
 
-  pnlIcon := TfpgBevel.Create(self);
+  pnlIcon := TlqBevel.Create(self);
   with pnlIcon do
   begin
     Name := 'pnlIcon';

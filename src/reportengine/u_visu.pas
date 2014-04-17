@@ -41,37 +41,37 @@ uses
 
 type
 
-  TF_Visu = class(TfpgForm)
+  TF_Visu = class(TlqForm)
   private
     FReport: T_Report;
-    Bv_Command: TfpgBevel;
-    Bt_Close: TfpgButton;
-    Bt_Print: TfpgButton;
-    Bt_Printer: TfpgButton;
-    Bt_Stop: TfpgButton;
-    Bt_Pdf: TfpgButton;
-    Bv_Pages: TfpgBevel;
-    L_Pages: TfpgLabel;
-    Bt_FirstPage: TfpgButton;
-    Bt_PrecPage: TfpgButton;
-    E_NumPage: TfpgEditInteger;
-    Bt_NextPage: TfpgButton;
-    Bt_LastPage: TfpgButton;
-    L_FromPage: TfpgLabel;
-    L_NbrPages: TfpgLabel;
-    Bv_Sections: TfpgBevel;
-    L_Sections: TfpgLabel;
-    Bt_PrecSect: TfpgButton;
-    E_NumSect: TfpgEditInteger;
-    Bt_NextSect: TfpgButton;
-    L_FromSect: TfpgLabel;
-    L_NbrSect: TfpgLabel;
-    L_PageSect: TfpgLabel;
-    L_NumPageSect: TfpgLabel;
-    L_FromPageSect: TfpgLabel;
-    L_NbrPageSect: TfpgLabel;
-    Bv_PreviewPage: TfpgBevel;
-    VScrollBar: TfpgScrollbar;
+    Bv_Command: TlqBevel;
+    Bt_Close: TlqButton;
+    Bt_Print: TlqButton;
+    Bt_Printer: TlqButton;
+    Bt_Stop: TlqButton;
+    Bt_Pdf: TlqButton;
+    Bv_Pages: TlqBevel;
+    L_Pages: TlqLabel;
+    Bt_FirstPage: TlqButton;
+    Bt_PrecPage: TlqButton;
+    E_NumPage: TlqEditInteger;
+    Bt_NextPage: TlqButton;
+    Bt_LastPage: TlqButton;
+    L_FromPage: TlqLabel;
+    L_NbrPages: TlqLabel;
+    Bv_Sections: TlqBevel;
+    L_Sections: TlqLabel;
+    Bt_PrecSect: TlqButton;
+    E_NumSect: TlqEditInteger;
+    Bt_NextSect: TlqButton;
+    L_FromSect: TlqLabel;
+    L_NbrSect: TlqLabel;
+    L_PageSect: TlqLabel;
+    L_NumPageSect: TlqLabel;
+    L_FromPageSect: TlqLabel;
+    L_NbrPageSect: TlqLabel;
+    Bv_PreviewPage: TlqBevel;
+    VScrollBar: TlqScrollbar;
     FPreviewMargin: integer;
     procedure FormShow(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -102,7 +102,7 @@ type
 
 var
   F_Visu: TF_Visu;
-  Bv_Visu: TfpgBevel;
+  Bv_Visu: TlqBevel;
 
 implementation
 
@@ -538,7 +538,7 @@ begin
 
   Bv_Visu := Bv_PreviewPage; // assign to global reference variable
 
-  VScrollBar := TfpgScrollbar.Create(self);
+  VScrollBar := TlqScrollbar.Create(self);
   with VScrollBar do
   begin
     Name := 'VScrollBar';

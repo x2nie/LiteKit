@@ -29,7 +29,7 @@ procedure fpgCreateStandardImages;
 
 implementation
 
-{$I stdimages.}
+{$I stdimages.inc}
 
 Const
   // 60x12 pixel 4bpp bitmap

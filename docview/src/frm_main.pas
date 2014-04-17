@@ -16,76 +16,76 @@ type
   // doesn't contain it's own index entries.
   TListType = ( ltContents, ltIndex );
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    bvlStatusBar: TfpgBevel;
-    ProgressBar: TfpgProgressBar;
-    lblStatus: TfpgLabel;
-    bvlBody: TfpgBevel;
-    PageControl1: TfpgPageControl;
-    tsContents: TfpgTabSheet;
-    tvContents: TfpgTreeView;
-    btnGo: TfpgButton;
-    tsIndex: TfpgTabSheet;
-    btnIndex: TfpgButton;
-    lbIndex: TfpgListBox;
-    IndexSearchEdit: TfpgEdit;
-    tsSearch: TfpgTabSheet;
-    Label1: TfpgLabel;
-    edSearchText: TfpgEdit;
-    Label2: TfpgLabel;
-    RadioButton1: TfpgRadioButton;
-    RadioButton2: TfpgRadioButton;
-    RadioButton3: TfpgRadioButton;
-    RadioButton4: TfpgRadioButton;
-    RadioButton5: TfpgRadioButton;
-    RadioButton6: TfpgRadioButton;
-    lbSearchResults: TfpgListBox;
-    Label3: TfpgLabel;
-    btnSearch: TfpgButton;
-    tsNotes: TfpgTabSheet;
-    NotesListBox: TfpgListBox;
-    btnNotesAdd: TfpgButton;
-    btnNotesEdit: TfpgButton;
-    btnNotesDel: TfpgButton;
-    btnNotesGoto: TfpgButton;
-    tsHistory: TfpgTabSheet;
-    lbHistory: TfpgListBox;
-    Splitter1: TfpgSplitter;
-    bvlContentArea: TfpgBevel;
-    pnlTitle: TfpgPanel;
+    bvlStatusBar: TlqBevel;
+    ProgressBar: TlqProgressBar;
+    lblStatus: TlqLabel;
+    bvlBody: TlqBevel;
+    PageControl1: TlqPageControl;
+    tsContents: TlqTabSheet;
+    tvContents: TlqTreeView;
+    btnGo: TlqButton;
+    tsIndex: TlqTabSheet;
+    btnIndex: TlqButton;
+    lbIndex: TlqListBox;
+    IndexSearchEdit: TlqEdit;
+    tsSearch: TlqTabSheet;
+    Label1: TlqLabel;
+    edSearchText: TlqEdit;
+    Label2: TlqLabel;
+    RadioButton1: TlqRadioButton;
+    RadioButton2: TlqRadioButton;
+    RadioButton3: TlqRadioButton;
+    RadioButton4: TlqRadioButton;
+    RadioButton5: TlqRadioButton;
+    RadioButton6: TlqRadioButton;
+    lbSearchResults: TlqListBox;
+    Label3: TlqLabel;
+    btnSearch: TlqButton;
+    tsNotes: TlqTabSheet;
+    NotesListBox: TlqListBox;
+    btnNotesAdd: TlqButton;
+    btnNotesEdit: TlqButton;
+    btnNotesDel: TlqButton;
+    btnNotesGoto: TlqButton;
+    tsHistory: TlqTabSheet;
+    lbHistory: TlqListBox;
+    Splitter1: TlqSplitter;
+    bvlContentArea: TlqBevel;
+    pnlTitle: TlqPanel;
     RichView: TRichTextView;
-    MainMenu: TfpgMenuBar;
-    miFile: TfpgPopupMenu;
-    miActions: TfpgPopupMenu;
-    miSettings: TfpgPopupMenu;
-    miBookmarks: TfpgPopupMenu;
-    miView: TfpgPopupMenu;
-    miTools: TfpgPopupMenu;
-    miHelp: TfpgPopupMenu;
-    ToolBar: TfpgBevel;
-    btnQuit: TfpgButton;
-    btnOpen: TfpgButton;
-    Bevel1: TfpgBevel;
-    btnBack: TfpgButton;
-    btnFwd: TfpgButton;
-    btnPrev: TfpgButton;
-    btnNext: TfpgButton;
-    Bevel2: TfpgBevel;
-    btnTBNoteAdd: TfpgButton;
-    btnBookmark: TfpgButton;
-    Bevel3: TfpgBevel;
-    btnHelp: TfpgButton;
-    cbEncoding: TfpgComboBox;
+    MainMenu: TlqMenuBar;
+    miFile: TlqPopupMenu;
+    miActions: TlqPopupMenu;
+    miSettings: TlqPopupMenu;
+    miBookmarks: TlqPopupMenu;
+    miView: TlqPopupMenu;
+    miTools: TlqPopupMenu;
+    miHelp: TlqPopupMenu;
+    ToolBar: TlqBevel;
+    btnQuit: TlqButton;
+    btnOpen: TlqButton;
+    Bevel1: TlqBevel;
+    btnBack: TlqButton;
+    btnFwd: TlqButton;
+    btnPrev: TlqButton;
+    btnNext: TlqButton;
+    Bevel2: TlqBevel;
+    btnTBNoteAdd: TlqButton;
+    btnBookmark: TlqButton;
+    Bevel3: TlqBevel;
+    btnHelp: TlqButton;
+    cbEncoding: TlqComboBox;
     {@VFD_HEAD_END: MainForm}
-    miOpenRecentMenu: TfpgPopupMenu;
-    miDebugHexInfo: TfpgMenuItem;
+    miOpenRecentMenu: TlqPopupMenu;
+    miDebugHexInfo: TlqMenuItem;
 //    Files: TList; // current open help files.
     Debug: boolean;
-    FFileOpenRecent: TfpgMenuItem;
+    FFileOpenRecent: TlqMenuItem;
     FHistorySelection: Boolean;
-    FImages: TfpgImageList;
+    FImages: TlqImageList;
 
     LoadingFilenameList: TStringList;
     LoadingFileIndex: integer;
@@ -145,7 +145,7 @@ type
     procedure   miOpenBookmarksMenuClicked(Sender: TObject);
     procedure   miBookmarksMenuItemClicked(Sender: TObject);
     procedure   miHelpProdInfoClicked(Sender: TObject);
-    procedure   miHelpAboutFPGui(Sender: TObject);
+    procedure   miHelpAbouTlqui(Sender: TObject);
     procedure   miHelpCmdLineParams(Sender: TObject);
     procedure   miHelpUsingDocView(Sender: TObject);
     procedure   miDebugHeader(Sender: TObject);
@@ -164,7 +164,7 @@ type
     procedure   lbSearchResultsKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure   MainFormException(Sender: TObject; E: Exception);
     procedure   MainFormCloseQuery(Sender: TObject; var CanClose: boolean);
-    procedure   PageControl1Change(Sender: TObject; NewActiveSheet: TfpgTabSheet);
+    procedure   PageControl1Change(Sender: TObject; NewActiveSheet: TlqTabSheet);
     procedure   tvContentsDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
     procedure   lbIndexDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
     procedure   lbIndexKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
@@ -187,24 +187,24 @@ type
     procedure   SetWaitCursor;
     procedure   ClearWaitCursor;
     procedure   SetMainCaption;
-    procedure   DisplayFiles(NewFiles: TList; var FirstContentsNode: TfpgTreeNode);
+    procedure   DisplayFiles(NewFiles: TList; var FirstContentsNode: TlqTreeNode);
     procedure   FileOpen;
     function    LoadFiles(const aFileNames: TStrings; aHelpFiles: TList): boolean;
     function    OpenFiles(const FileNames: TStrings; const AWindowTitle: string; const DisplayFirstTopic: boolean): boolean;
     function    OpenFile(const AFileName: string; const AWindowTitle: string; const DisplayFirstTopic: boolean): boolean;
     procedure   CloseFile(const ADestroying: boolean = False);
     procedure   OnHelpFileLoadProgress(n, outof: integer; AMessage: string);
-    procedure   LoadContents(AFiles: TList; var FirstNode: TfpgTreeNode);
+    procedure   LoadContents(AFiles: TList; var FirstNode: TlqTreeNode);
     procedure   LoadIndex;
     // Used in loading contents
-    procedure   AddChildNodes(AHelpFile: THelpFile; AParentNode: TfpgTreeNode; ALevel: longint; var ATopicIndex: longint );
+    procedure   AddChildNodes(AHelpFile: THelpFile; AParentNode: TlqTreeNode; ALevel: longint; var ATopicIndex: longint );
     procedure   ClearIndexComponents;
 
     // Note manipulations --------------------------------
     // make sure that note insert positions are not in
     // the middle of tags due to help file or newview updates.
     procedure   CorrectNotesPositions(Topic: TTopic; AText: pchar);
-    procedure   InsertNotesIntoTopicText(ATopic: TTopic; var AText: TfpgString);
+    procedure   InsertNotesIntoTopicText(ATopic: TTopic; var AText: TlqString);
     function    FindOriginalNoteCharIndex(NoteCharIndex: longword; Topic: TTopic): longword;
     function    FindActualNoteCharIndex(NoteCharIndex: longword; MaxNoteIndex: longword; Topic: TTopic): longword;
     procedure   RefreshNoteInsertInfo( NoteIndex: longword );
@@ -221,8 +221,8 @@ type
 
     procedure   DisplayTopic(ATopic: TTopic = nil);
     procedure   ResetProgress;
-    procedure   SetStatus(const AText: TfpgString);
-    function    TranslateEnvironmentVar(AFilenames: TfpgString): TfpgString;
+    procedure   SetStatus(const AText: TlqString);
+    function    TranslateEnvironmentVar(AFilenames: TlqString): TlqString;
     procedure   RefreshFontSubstitutions;
     procedure   DisplaySelectedContentsTopic;
     procedure   DisplaySelectedIndexTopic;
@@ -295,7 +295,7 @@ const
 
 procedure TMainForm.MainFormException(Sender: TObject; E: Exception);
 begin
-  TfpgMessageDialog.Critical('An unexpected error occurred.', E.Message);
+  TlqMessageDialog.Critical('An unexpected error occurred.', E.Message);
 end;
 
 procedure TMainForm.lbIndexKeyPress(Sender: TObject; var KeyCode: word;
@@ -450,16 +450,16 @@ end;
 
 procedure TMainForm.RichViewClickLink(Sender: TRichTextView; Link: string);
 var
-  LinkDetails: TfpgString;
+  LinkDetails: TlqString;
   LinkIndex: integer;
   lLink: THelpLink;
   lHelp: THelpFile;
   f: THelpFile;
-  lHelpFileName: TfpgString;
+  lHelpFileName: TlqString;
   i: integer;
   lTopic: TTopic;
   lFound: Boolean;
-  lURL: TfpgString;
+  lURL: TlqString;
   lNoteIndex: integer;
 begin
   if pos(PARAM_LINK_NOTE, Link) > 0 then
@@ -470,7 +470,7 @@ begin
   end
   else if pos(PARAM_LINK_PROGRAM, Link) > 0 then
   begin
-    TfpgMessageDialog.Warning('', 'Program links are not supported in DocView yet. Please try again with a later build.')
+    TlqMessageDialog.Warning('', 'Program links are not supported in DocView yet. Please try again with a later build.')
   end
   else if pos(PARAM_LINK_EXTERNAL, Link) > 0 then
   begin
@@ -559,7 +559,7 @@ end;
 
 procedure TMainForm.MainFormShow(Sender: TObject);
 var
-  lFilename: TfpgString;
+  lFilename: TlqString;
 begin
   bvlBody.Realign;
 
@@ -621,7 +621,7 @@ end;
 
 procedure TMainForm.miFileOpenSpecialClicked(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   OpenAdditionalFile := False;
   if fpgInputQuery('Open Special...', 'Enter Environment Variable or Directory Path to open', s) then
@@ -695,10 +695,10 @@ end;
 procedure TMainForm.miBookmarksMenuItemClicked(Sender: TObject);
 var
   t: PtrInt;
-  MenuItem: TfpgMenuItem;
+  MenuItem: TlqMenuItem;
   Bookmark: TBookmark;
 begin
-  MenuItem:= Sender as TfpgMenuItem;
+  MenuItem:= Sender as TlqMenuItem;
   t:= MenuItem.Tag;
   Bookmark := TBookmark(Bookmarks[t]);
   NavigateToBookmark( Bookmark );
@@ -706,18 +706,18 @@ end;
 
 procedure TMainForm.miHelpProdInfoClicked(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s :=  cShortName + '  -  ' + cLongName + LineEnding + LineEnding
       + cCreatedBy + LineEnding
       + cVersion + '  -  ' +  {$I %%}date + ' ' + {$I %%};
 
-  TfpgMessageDialog.Information('Product Information', s);
+  TlqMessageDialog.Information('Product Information', s);
 end;
 
-procedure TMainForm.miHelpAboutFPGui(Sender: TObject);
+procedure TMainForm.miHelpAbouTlqui(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui;
+  TlqMessageDialog.AbouTlqui;
 end;
 
 procedure TMainForm.miHelpCmdLineParams(Sender: TObject);
@@ -783,12 +783,12 @@ begin
   try
     ResourceID := StrToInt(ResourceIDString);
   except
-    TfpgMessageDialog.Critical('Find Resource ID', 'Invalid resource ID entered');
+    TlqMessageDialog.Critical('Find Resource ID', 'Invalid resource ID entered');
     exit;
   end;
 
   if not DisplayTopicByResourceID( ResourceID ) then
-    TfpgMessageDialog.Critical('Find Resource ID', 'Resource ID not found');
+    TlqMessageDialog.Critical('Find Resource ID', 'Resource ID not found');
 end;
 
 procedure TMainForm.miToolsFindTopifByName(Sender: TObject);
@@ -802,7 +802,7 @@ Begin
 
   if not DisplayTopicByName( TopicNameString ) then
     if not DisplayTopicByGlobalName( TopicNameString ) then
-      TfpgMessageDialog.Critical( 'Find Topic By Name', 'Topic name not found' );
+      TlqMessageDialog.Critical( 'Find Topic By Name', 'Topic name not found' );
 end;
 
 procedure TMainForm.miToolsShowEnvVariablesClicked(Sender: TObject);
@@ -884,7 +884,7 @@ procedure TMainForm.miFileSaveTopicAsIPF(Sender: TObject);
 var
   F: TextFile;
   T: TTopic;
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
   H: THelpFile;
   i: integer;
   filename: string;
@@ -1010,7 +1010,7 @@ begin
   T := TTopic(tvContents.Selection.Data);
   if T <> nil then
   begin
-    dlg := TfpgFileDialog.Create(nil);
+    dlg := TlqFileDialog.Create(nil);
     try
       dlg.FileName := T.Title + '.ipf';
       if dlg.RunSaveFile then
@@ -1032,10 +1032,10 @@ end;
 procedure TMainForm.OnMRUMenuItemClick(Sender: TObject);
 var
   lTag: longint;
-  MenuItem: TfpgMenuItem;
+  MenuItem: TlqMenuItem;
   MRUItem: TMRUItem;
 begin
-  MenuItem := Sender as TfpgMenuItem;
+  MenuItem := Sender as TlqMenuItem;
   lTag := MenuItem.Tag;
   MRUItem := TMRUItem(Settings.MRUList[ lTag ]);
   OpenFiles(MRUItem.FileNames, '', True);
@@ -1096,7 +1096,7 @@ begin
   CloseFile(True);
 end;
 
-procedure TMainForm.PageControl1Change(Sender: TObject; NewActiveSheet: TfpgTabSheet);
+procedure TMainForm.PageControl1Change(Sender: TObject; NewActiveSheet: TlqTabSheet);
 begin
   if NewActiveSheet = tsIndex then
   begin
@@ -1223,8 +1223,8 @@ end;
 
 procedure TMainForm.pnlTitleGradientPaint(Sender: TObject);
 begin
-  pnlTitle.Canvas.GradientFill(pnlTitle.GetClientRect, TfpgColor($ff4466d9),
-      TfpgColor($ff63a0fe), gdHorizontal);
+  pnlTitle.Canvas.GradientFill(pnlTitle.GetClientRect, TlqColor($ff4466d9),
+      TlqColor($ff63a0fe), gdHorizontal);
   pnlTitle.Canvas.DrawText(pnlTitle.Margin, 3, pnlTitle.Text);
 end;
 
@@ -1258,7 +1258,7 @@ procedure TMainForm.UpdateLocationPanel;
 var
   i: integer;
   s: string;
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
   sep: string;
 begin
   s := '';
@@ -1337,7 +1337,7 @@ begin
   except
     on e: ESearchSyntaxError do
     begin
-      TfpgMessageDialog.Critical( rsSearch,  rsDVSearchSyntaxError + e.Message );
+      TlqMessageDialog.Critical( rsSearch,  rsDVSearchSyntaxError + e.Message );
       exit;
     end;
   end;
@@ -1361,7 +1361,7 @@ begin
     except
       on E: EHelpFileException do
       begin
-        TfpgMessageDialog.Critical(rsError , E.Message);
+        TlqMessageDialog.Critical(rsError , E.Message);
         Query.Destroy;
         ClearWaitCursor;
         exit;
@@ -1432,7 +1432,7 @@ begin
   fpgApplication.ProcessMessages;
 end;
 
-procedure TMainForm.DisplayFiles(NewFiles: TList; var FirstContentsNode: TfpgTreeNode);
+procedure TMainForm.DisplayFiles(NewFiles: TList; var FirstContentsNode: TlqTreeNode);
 var
   HelpFile: THelpFile;
   FileIndex: longint;
@@ -1478,9 +1478,9 @@ end;
 
 procedure TMainForm.FileOpen;
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     dlg.InitialDir := Settings.LastOpenDirectory;
     dlg.WindowTitle := rsDVOpenHelpFile;
@@ -1540,7 +1540,7 @@ begin
     else
     begin
       LogEvent(LogStartup, '    File not found' );
-      TfpgMessageDialog.Critical('Error', 'Failed to find the help file: ' + Filename);
+      TlqMessageDialog.Critical('Error', 'Failed to find the help file: ' + Filename);
       Abort;
     end;
     LoadingFilenameList[ FileIndex ] := FullFilePath;
@@ -1571,7 +1571,7 @@ begin
         end
         else
         begin
-          TfpgMessageDialog.Critical( rsDVOpenHelpFile,
+          TlqMessageDialog.Critical( rsDVOpenHelpFile,
                       Format(rsDVCouldNotOpen, [Filename])
                       + ': '
                       + E.Message );
@@ -1600,7 +1600,7 @@ function TMainForm.OpenFiles(const FileNames: TStrings;
   const AWindowTitle: string; const DisplayFirstTopic: boolean): boolean;
 var
   tmpHelpFiles: TList;
-  FirstContentsNode: TfpgTreeNode;
+  FirstContentsNode: TlqTreeNode;
 begin
   LogEvent(LogStartup, 'OpenFiles' );
 
@@ -1739,18 +1739,18 @@ end;
 
 procedure TMainForm.LoadNotesForFile(AHelpFile: THelpFile);
 var
-  NotesFileName: TfpgString;
+  NotesFileName: TlqString;
   TopicIndex: longint;
   InsertPoint: longint;
   Note: THelpNote;
 
   NotesFile: TStringList;
 
-  Paragraph: TfpgString;
+  Paragraph: TlqString;
   NotEOF: boolean;
-  NoteText: TfpgString;
+  NoteText: TlqString;
   i: integer;
-  s: TfpgString;
+  s: TlqString;
   lReadTopicIndex: boolean;
   lReadInsertPoint: boolean;
   lNoteTextStarted: boolean;
@@ -1769,7 +1769,7 @@ begin
   NotesFile := TStringList.Create;
   if NotesFile = nil then
   begin
-    TfpgMessageDialog.Critical('Error', 'Error opening file: ' + NotesFileName);
+    TlqMessageDialog.Critical('Error', 'Error opening file: ' + NotesFileName);
     exit;
   end;
   NotesFile.LoadFromFile(NotesFileName);
@@ -1835,12 +1835,12 @@ begin
   UpdateNotesDisplay;
 end;
 
-procedure TMainForm.LoadContents(AFiles: TList; var FirstNode: TfpgTreeNode);
+procedure TMainForm.LoadContents(AFiles: TList; var FirstNode: TlqTreeNode);
 var
   FileIndex: integer;
   HelpFile: THelpFile;
   TopicIndex: integer;
-  Node: TfpgTreeNode;
+  Node: TlqTreeNode;
   Topic: TTopic;
 begin
   LogEvent(LogStartup, 'Load contents outline');
@@ -2090,11 +2090,11 @@ begin
   LogEvent(LogStartup, '  Done' );
 end;
 
-procedure TMainForm.AddChildNodes(AHelpFile: THelpFile; AParentNode: TfpgTreeNode;
+procedure TMainForm.AddChildNodes(AHelpFile: THelpFile; AParentNode: TlqTreeNode;
   ALevel: longint; var ATopicIndex: longint);
 var
   Topic: TTopic;
-  Node: TfpgTreeNode;
+  Node: TlqTreeNode;
 begin
   Node := nil;
   while ATopicIndex < AHelpFile.TopicCount do
@@ -2183,7 +2183,7 @@ begin
   end;
 end;
 
-procedure TMainForm.InsertNotesIntoTopicText(ATopic: TTopic; var AText: TfpgString);
+procedure TMainForm.InsertNotesIntoTopicText(ATopic: TTopic; var AText: TlqString);
 var
   NoteIndex: longint;
   Note: THelpNote;
@@ -2258,13 +2258,13 @@ end;
 
 procedure TMainForm.SaveNotesForFile(AHelpFile: THelpFile);
 var
-  NotesFileName: TfpgString;
+  NotesFileName: TlqString;
   FileNoteCount: integer;
   NoteIndex: integer;
   Note: THelpNote;
   NotesFile: TStringList;
   TopicIndex: integer;
-  s: TfpgString;
+  s: TlqString;
 begin
   ProfileEvent('Save notes for ' + AHelpFile.Filename);
   if not AHelpFile.NotesLoaded then
@@ -2320,7 +2320,7 @@ begin
   { check that the note position isn't within a note already }
   if RichView.LinkFromIndex(RichView.CursorIndex) <> '' then
   begin
-    TfpgMessageDialog.Critical('Error', 'You can''t add a note within a link or another note' );
+    TlqMessageDialog.Critical('Error', 'You can''t add a note within a link or another note' );
     exit;
   end;
 
@@ -2395,7 +2395,7 @@ procedure TMainForm.DeleteNote(ANoteIndex: longint);
 var
   Note: THelpNote;
 begin
-  if TfpgMessageDialog.Question(rsconfirmation, 'Are you sure you want to delete the seleted Note?') <> mbYes then
+  if TlqMessageDialog.Question(rsconfirmation, 'Are you sure you want to delete the seleted Note?') <> mbYes then
     Exit;
   { if we got here, we must delete the note }
   Note := THelpNote(Notes[ANoteIndex]);
@@ -2606,12 +2606,12 @@ begin
   ProgressBar.Position := 0;
 end;
 
-procedure TMainForm.SetStatus(const AText: TfpgString);
+procedure TMainForm.SetStatus(const AText: TlqString);
 begin
   lblStatus.Text := AText;
 end;
 
-function TMainForm.TranslateEnvironmentVar(AFilenames: TfpgString): TfpgString;
+function TMainForm.TranslateEnvironmentVar(AFilenames: TlqString): TlqString;
 var
   EnvironmentVarValue: string;
 begin
@@ -2624,7 +2624,7 @@ end;
 
 constructor TMainForm.Create(AOwner: TComponent);
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited Create(AOwner);
   fpgApplication.OnException  := @MainFormException;
@@ -2644,7 +2644,7 @@ begin
   { TODO -oGraeme : Make Debug a menu option }
   Debug := False;
 
-  FImages := TfpgImageList.Create;
+  FImages := TlqImageList.Create;
   // store up to three images per Topic - while we don't support INF images
   img := CreateImage_BMP(@dv_missing, sizeof(dv_missing));
   FImages.AddImage(img);
@@ -2711,7 +2711,7 @@ begin
   MinHeight := 300;
   OnCloseQuery  := @MainFormCloseQuery;
 
-  bvlStatusBar := TfpgBevel.Create(self);
+  bvlStatusBar := TlqBevel.Create(self);
   with bvlStatusBar do
   begin
     Name := 'bvlStatusBar';
@@ -2721,7 +2721,7 @@ begin
     Style := bsLowered;
   end;
 
-  ProgressBar := TfpgProgressBar.Create(bvlStatusBar);
+  ProgressBar := TlqProgressBar.Create(bvlStatusBar);
   with ProgressBar do
   begin
     Name := 'ProgressBar';
@@ -2730,7 +2730,7 @@ begin
     Hint := '';
   end;
 
-  lblStatus := TfpgLabel.Create(bvlStatusBar);
+  lblStatus := TlqLabel.Create(bvlStatusBar);
   with lblStatus do
   begin
     Name := 'lblStatus';
@@ -2741,7 +2741,7 @@ begin
     Text := '';
   end;
 
-  bvlBody := TfpgBevel.Create(self);
+  bvlBody := TlqBevel.Create(self);
   with bvlBody do
   begin
     Name := 'bvlBody';
@@ -2751,7 +2751,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  PageControl1 := TfpgPageControl.Create(bvlBody);
+  PageControl1 := TlqPageControl.Create(bvlBody);
   with PageControl1 do
   begin
     Name := 'PageControl1';
@@ -2763,7 +2763,7 @@ begin
     OnChange  := @PageControl1Change;
   end;
 
-  tsContents := TfpgTabSheet.Create(PageControl1);
+  tsContents := TlqTabSheet.Create(PageControl1);
   with tsContents do
   begin
     Name := 'tsContents';
@@ -2772,7 +2772,7 @@ begin
     Text := 'Contents';
   end;
 
-  tvContents := TfpgTreeView.Create(tsContents);
+  tvContents := TlqTreeView.Create(tsContents);
   with tvContents do
   begin
     Name := 'tvContents';
@@ -2787,7 +2787,7 @@ begin
     //OnDoubleClick  := @tvContentsDoubleClick;
   end;
 
-  btnGo := TfpgButton.Create(tsContents);
+  btnGo := TlqButton.Create(tsContents);
   with btnGo do
   begin
     Name := 'btnGo';
@@ -2801,7 +2801,7 @@ begin
     OnClick := @btnGoClicked;
   end;
 
-  tsIndex := TfpgTabSheet.Create(PageControl1);
+  tsIndex := TlqTabSheet.Create(PageControl1);
   with tsIndex do
   begin
     Name := 'tsIndex';
@@ -2810,7 +2810,7 @@ begin
     Text := 'Index';
   end;
 
-  btnIndex := TfpgButton.Create(tsIndex);
+  btnIndex := TlqButton.Create(tsIndex);
   with btnIndex do
   begin
     Name := 'btnIndex';
@@ -2824,7 +2824,7 @@ begin
     OnClick := @btnShowIndex;
   end;
 
-  lbIndex := TfpgListBox.Create(tsIndex);
+  lbIndex := TlqListBox.Create(tsIndex);
   with lbIndex do
   begin
     Name := 'lbIndex';
@@ -2837,7 +2837,7 @@ begin
     OnKeyPress := @lbIndexKeyPress;
   end;
 
-  IndexSearchEdit := TfpgEdit.Create(tsIndex);
+  IndexSearchEdit := TlqEdit.Create(tsIndex);
   with IndexSearchEdit do
   begin
     Name := 'IndexSearchEdit';
@@ -2852,7 +2852,7 @@ begin
     OnKeyPress :=@IndexSearchEditKeyPress;
   end;
 
-  tsSearch := TfpgTabSheet.Create(PageControl1);
+  tsSearch := TlqTabSheet.Create(PageControl1);
   with tsSearch do
   begin
     Name := 'tsSearch';
@@ -2861,7 +2861,7 @@ begin
     Text := 'Search';
   end;
 
-  Label1 := TfpgLabel.Create(tsSearch);
+  Label1 := TlqLabel.Create(tsSearch);
   with Label1 do
   begin
     Name := 'Label1';
@@ -2871,7 +2871,7 @@ begin
     Text := 'Search for:';
   end;
 
-  edSearchText := TfpgEdit.Create(tsSearch);
+  edSearchText := TlqEdit.Create(tsSearch);
   with edSearchText do
   begin
     Name := 'edSearchText';
@@ -2885,7 +2885,7 @@ begin
     OnKeyPress :=@edSearchTextKeyPress;
   end;
 
-  Label2 := TfpgLabel.Create(tsSearch);
+  Label2 := TlqLabel.Create(tsSearch);
   with Label2 do
   begin
     Name := 'Label2';
@@ -2895,7 +2895,7 @@ begin
     Text := 'Criteria:';
   end;
 
-  RadioButton1 := TfpgRadioButton.Create(tsSearch);
+  RadioButton1 := TlqRadioButton.Create(tsSearch);
   with RadioButton1 do
   begin
     Name := 'RadioButton1';
@@ -2908,7 +2908,7 @@ begin
     Text := 'This section';
   end;
 
-  RadioButton2 := TfpgRadioButton.Create(tsSearch);
+  RadioButton2 := TlqRadioButton.Create(tsSearch);
   with RadioButton2 do
   begin
     Name := 'RadioButton2';
@@ -2921,7 +2921,7 @@ begin
     Text := 'Marked sections';
   end;
 
-  RadioButton3 := TfpgRadioButton.Create(tsSearch);
+  RadioButton3 := TlqRadioButton.Create(tsSearch);
   with RadioButton3 do
   begin
     Name := 'RadioButton3';
@@ -2935,7 +2935,7 @@ begin
     Text := 'All sections';
   end;
 
-  RadioButton4 := TfpgRadioButton.Create(tsSearch);
+  RadioButton4 := TlqRadioButton.Create(tsSearch);
   with RadioButton4 do
   begin
     Name := 'RadioButton4';
@@ -2948,7 +2948,7 @@ begin
     Text := 'Index';
   end;
 
-  RadioButton5 := TfpgRadioButton.Create(tsSearch);
+  RadioButton5 := TlqRadioButton.Create(tsSearch);
   with RadioButton5 do
   begin
     Name := 'RadioButton5';
@@ -2961,7 +2961,7 @@ begin
     Text := 'Marked libraries';
   end;
 
-  RadioButton6 := TfpgRadioButton.Create(tsSearch);
+  RadioButton6 := TlqRadioButton.Create(tsSearch);
   with RadioButton6 do
   begin
     Name := 'RadioButton6';
@@ -2974,7 +2974,7 @@ begin
     Text := 'All libraries';
   end;
 
-  lbSearchResults := TfpgListBox.Create(tsSearch);
+  lbSearchResults := TlqListBox.Create(tsSearch);
   with lbSearchResults do
   begin
     Name := 'lbSearchResults';
@@ -2987,7 +2987,7 @@ begin
     OnKeyPress := @lbSearchResultsKeyPress;
   end;
 
-  Label3 := TfpgLabel.Create(tsSearch);
+  Label3 := TlqLabel.Create(tsSearch);
   with Label3 do
   begin
     Name := 'Label3';
@@ -2997,7 +2997,7 @@ begin
     Text := 'Search results:';
   end;
 
-  btnSearch := TfpgButton.Create(tsSearch);
+  btnSearch := TlqButton.Create(tsSearch);
   with btnSearch do
   begin
     Name := 'btnSearch';
@@ -3011,7 +3011,7 @@ begin
     OnClick := @btnSearchClicked;
   end;
 
-  tsNotes := TfpgTabSheet.Create(PageControl1);
+  tsNotes := TlqTabSheet.Create(PageControl1);
   with tsNotes do
   begin
     Name := 'tsNotes';
@@ -3020,7 +3020,7 @@ begin
     Text := 'Notes';
   end;
 
-  NotesListBox := TfpgListBox.Create(tsNotes);
+  NotesListBox := TlqListBox.Create(tsNotes);
   with NotesListBox do
   begin
     Name := 'NotesListBox';
@@ -3034,7 +3034,7 @@ begin
     OnChange  := @NotesListBoxChange;
   end;
 
-  btnNotesAdd := TfpgButton.Create(tsNotes);
+  btnNotesAdd := TlqButton.Create(tsNotes);
   with btnNotesAdd do
   begin
     Name := 'btnNotesAdd';
@@ -3049,7 +3049,7 @@ begin
     OnClick  := @btnNotesAddClick;
   end;
 
-  btnNotesEdit := TfpgButton.Create(tsNotes);
+  btnNotesEdit := TlqButton.Create(tsNotes);
   with btnNotesEdit do
   begin
     Name := 'btnNotesEdit';
@@ -3064,7 +3064,7 @@ begin
     OnClick := @btnNotesEditClick;
   end;
 
-  btnNotesDel := TfpgButton.Create(tsNotes);
+  btnNotesDel := TlqButton.Create(tsNotes);
   with btnNotesDel do
   begin
     Name := 'btnNotesDel';
@@ -3079,7 +3079,7 @@ begin
     OnClick := @btnNotesDelClick;
   end;
 
-  btnNotesGoto := TfpgButton.Create(tsNotes);
+  btnNotesGoto := TlqButton.Create(tsNotes);
   with btnNotesGoto do
   begin
     Name := 'btnNotesGoto';
@@ -3093,7 +3093,7 @@ begin
     OnClick := @btnNotesGotoClicked;
   end;
 
-  tsHistory := TfpgTabSheet.Create(PageControl1);
+  tsHistory := TlqTabSheet.Create(PageControl1);
   with tsHistory do
   begin
     Name := 'tsHistory';
@@ -3102,7 +3102,7 @@ begin
     Text := 'History';
   end;
 
-  lbHistory := TfpgListBox.Create(tsHistory);
+  lbHistory := TlqListBox.Create(tsHistory);
   with lbHistory do
   begin
     Name := 'lbHistory';
@@ -3115,7 +3115,7 @@ begin
     OnKeyPress := @lbHistoryKeyPress;
   end;
 
-  Splitter1 := TfpgSplitter.Create(bvlBody);
+  Splitter1 := TlqSplitter.Create(bvlBody);
   with Splitter1 do
   begin
     Name := 'Splitter1';
@@ -3124,7 +3124,7 @@ begin
     OnDoubleClick :=@Splitter1DoubleClicked;
   end;
 
-  bvlContentArea := TfpgBevel.Create(bvlBody);
+  bvlContentArea := TlqBevel.Create(bvlBody);
   with bvlContentArea do
   begin
     Name := 'bvlContentArea';
@@ -3134,20 +3134,20 @@ begin
     Shape := bsSpacer;
   end;
 
-  pnlTitle := TfpgPanel.Create(bvlContentArea);
+  pnlTitle := TlqPanel.Create(bvlContentArea);
   with pnlTitle do
   begin
     Name := 'pnlTitle';
     SetPosition(2, 2, 377, 20);
     Align := alTop;
     Alignment := taLeftJustify;
-    BackgroundColor := TfpgColor($559DD4);
+    BackgroundColor := TlqColor($559DD4);
     FontDesc := '#Label2';
     Hint := '';
     Margin := 15;
     Style := bsFlat;
     Text := 'Panel';
-    TextColor := TfpgColor($FFFFFF);
+    TextColor := TlqColor($FFFFFF);
     OnPaint:=@pnlTitleGradientPaint;
   end;
 
@@ -3163,7 +3163,7 @@ begin
     OnClickLink := @RichViewClickLink;
   end;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -3171,7 +3171,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  miFile := TfpgPopupMenu.Create(self);
+  miFile := TlqPopupMenu.Create(self);
   with miFile do
   begin
     Name := 'miFile';
@@ -3187,7 +3187,7 @@ begin
     AddMenuItem('Quit', 'Ctrl+Q', @miFileQuitClicked);
   end;
 
-  miActions := TfpgPopupMenu.Create(self);
+  miActions := TlqPopupMenu.Create(self);
   with miActions do
   begin
     Name := 'miActions';
@@ -3204,7 +3204,7 @@ begin
     AddMenuItem('Next Topic', rsKeyCtrl+'Down', @miActionsNextTopicClicked);
   end;
 
-  miSettings := TfpgPopupMenu.Create(self);
+  miSettings := TlqPopupMenu.Create(self);
   with miSettings do
   begin
     Name := 'miSettings';
@@ -3212,7 +3212,7 @@ begin
     AddMenuItem('Options...', '', @miConfigureClicked);
   end;
 
-  miBookmarks := TfpgPopupMenu.Create(self);
+  miBookmarks := TlqPopupMenu.Create(self);
   with miBookmarks do
   begin
     Name := 'miBookmarks';
@@ -3223,7 +3223,7 @@ begin
     AddMenuItem('Add note at cursor position', rsKeyCtrl+'M', @btnNotesAddClick);
   end;
 
-  miView := TfpgPopupMenu.Create(self);
+  miView := TlqPopupMenu.Create(self);
   with miView do
   begin
     Name := 'miView';
@@ -3234,7 +3234,7 @@ begin
     AddMenuItem('Topic Properties', '', @miTopicPropertiesClicked);
   end;
 
-  miTools := TfpgPopupMenu.Create(self);
+  miTools := TlqPopupMenu.Create(self);
   with miTools do
   begin
     Name := 'miTools';
@@ -3249,7 +3249,7 @@ begin
     AddMenuItem('Show DocView used environment variables', '', @miToolsShowEnvVariablesClicked);
   end;
 
-  miHelp := TfpgPopupMenu.Create(self);
+  miHelp := TlqPopupMenu.Create(self);
   with miHelp do
   begin
     Name := 'miHelp';
@@ -3257,11 +3257,11 @@ begin
     AddMenuItem('Help using DocView', rsKeyCtrl+'F1', @miHelpUsingDocView);
     AddMenuItem('Command line parameters', rsKeyCtrl+rsKeyShift+'F1', @miHelpCmdLineParams);
     AddSeparator;
-    AddMenuItem('About fpGUI Toolkit...', '', @miHelpAboutFPGui);
+    AddMenuItem('About fpGUI Toolkit...', '', @miHelpAbouTlqui);
     AddMenuItem('Product Information...', '', @miHelpProdInfoClicked);
   end;
 
-  ToolBar := TfpgBevel.Create(self);
+  ToolBar := TlqBevel.Create(self);
   with ToolBar do
   begin
     Name := 'ToolBar';
@@ -3272,7 +3272,7 @@ begin
     Style := bsLowered;
   end;
 
-  btnQuit := TfpgButton.Create(ToolBar);
+  btnQuit := TlqButton.Create(ToolBar);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -3289,7 +3289,7 @@ begin
     Focusable := False;
   end;
 
-  btnOpen := TfpgButton.Create(ToolBar);
+  btnOpen := TlqButton.Create(ToolBar);
   with btnOpen do
   begin
     Name := 'btnOpen';
@@ -3306,7 +3306,7 @@ begin
     Focusable := False;
   end;
 
-  Bevel1 := TfpgBevel.Create(ToolBar);
+  Bevel1 := TlqBevel.Create(ToolBar);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -3316,7 +3316,7 @@ begin
     Style := bsLowered;
   end;
 
-  btnBack := TfpgButton.Create(ToolBar);
+  btnBack := TlqButton.Create(ToolBar);
   with btnBack do
   begin
     Name := 'btnBack';
@@ -3333,7 +3333,7 @@ begin
     OnClick := @btnBackHistClick;
   end;
 
-  btnFwd := TfpgButton.Create(ToolBar);
+  btnFwd := TlqButton.Create(ToolBar);
   with btnFwd do
   begin
     Name := 'btnFwd';
@@ -3350,7 +3350,7 @@ begin
     OnClick := @btnFwdHistClick;
   end;
 
-  btnPrev := TfpgButton.Create(ToolBar);
+  btnPrev := TlqButton.Create(ToolBar);
   with btnPrev do
   begin
     Name := 'btnPrev';
@@ -3367,7 +3367,7 @@ begin
     OnClick := @btnPrevClick;
   end;
 
-  btnNext := TfpgButton.Create(ToolBar);
+  btnNext := TlqButton.Create(ToolBar);
   with btnNext do
   begin
     Name := 'btnNext';
@@ -3384,7 +3384,7 @@ begin
     OnClick := @btnNextClick;
   end;
 
-  Bevel2 := TfpgBevel.Create(ToolBar);
+  Bevel2 := TlqBevel.Create(ToolBar);
   with Bevel2 do
   begin
     Name := 'Bevel2';
@@ -3394,7 +3394,7 @@ begin
     Style := bsLowered;
   end;
 
-  btnTBNoteAdd := TfpgButton.Create(ToolBar);
+  btnTBNoteAdd := TlqButton.Create(ToolBar);
   with btnTBNoteAdd do
   begin
     Name := 'btnTBNoteAdd';
@@ -3411,7 +3411,7 @@ begin
     OnClick := @btnTBNoteAddClick;
   end;
 
-  btnBookmark := TfpgButton.Create(ToolBar);
+  btnBookmark := TlqButton.Create(ToolBar);
   with btnBookmark do
   begin
     Name := 'btnBookmark';
@@ -3428,7 +3428,7 @@ begin
     OnClick := @btnBookmarkClick;
   end;
 
-  Bevel3 := TfpgBevel.Create(ToolBar);
+  Bevel3 := TlqBevel.Create(ToolBar);
   with Bevel3 do
   begin
     Name := 'Bevel3';
@@ -3438,7 +3438,7 @@ begin
     Style := bsLowered;
   end;
 
-  btnHelp := TfpgButton.Create(ToolBar);
+  btnHelp := TlqButton.Create(ToolBar);
   with btnHelp do
   begin
     Name := 'btnHelp';
@@ -3455,7 +3455,7 @@ begin
     OnClick := @miHelpProdInfoClicked;
   end;
 
-  cbEncoding := TfpgComboBox.Create(ToolBar);
+  cbEncoding := TlqComboBox.Create(ToolBar);
   with cbEncoding do
   begin
     Name := 'cbEncoding';
@@ -3482,7 +3482,7 @@ begin
   btnNext.Text := '';
   btnPrev.Text := '';
 
-  miOpenRecentMenu := TfpgPopupMenu.Create(nil);
+  miOpenRecentMenu := TlqPopupMenu.Create(nil);
   with miOpenRecentMenu do
   begin
     Name := 'miOpenRecentMenu';
@@ -3584,7 +3584,7 @@ begin
     except
       on EConvertError do
         begin
-          TfpgMessageDialog.Critical('Invalid Parameter Value',
+          TlqMessageDialog.Critical('Invalid Parameter Value',
             '<' + gCommandLineParams.GetParam('n') + '> is not an number.');
         end;
     end;
@@ -3763,16 +3763,16 @@ end;
 
 procedure TMainForm.CreateMRUMenuItems;
 var
-  MenuItem: TfpgMenuItem;
+  MenuItem: TlqMenuItem;
   i: integer;
-  FileName: TfpgString;
+  FileName: TlqString;
   FileNameIndex: longint;
-  MRUText: TfpgString;
+  MRUText: TlqString;
   MRUItem: TMRUItem;
 begin
   FFileOpenRecent.SubMenu := nil;
   miOpenRecentMenu.Free;
-  miOpenRecentMenu := TfpgPopupMenu.Create(nil);
+  miOpenRecentMenu := TlqPopupMenu.Create(nil);
   FFileOpenRecent.SubMenu := miOpenRecentMenu;
 
   // Add items for the MRU files
@@ -3859,7 +3859,7 @@ begin
     end;
   except
     on e: exception do
-      TfpgMessageDialog.Critical('Load Bookmarks', 'Could not load bookmarks: ' + E.Message);
+      TlqMessageDialog.Critical('Load Bookmarks', 'Could not load bookmarks: ' + E.Message);
   end;
 end;
 
@@ -3880,7 +3880,7 @@ var
   i: integer;
   Bookmark: TBookmark;
   BookmarksFile: TextFile;
-  BookmarksFileName: TfpgString;
+  BookmarksFileName: TlqString;
   BookmarkCount: integer;
 begin
   ProfileEvent( 'Save bookmarks for ' + AHelpFile.Filename );
@@ -3920,7 +3920,7 @@ begin
     end;
   except
     on E: Exception do
-      TfpgMessageDialog.Critical('Save Bookmarks', 'Could not save bookmarks: ' + E.Message);
+      TlqMessageDialog.Critical('Save Bookmarks', 'Could not save bookmarks: ' + E.Message);
   end;
 end;
 
@@ -3967,7 +3967,7 @@ procedure TMainForm.BuildBookmarksMenu;
 var
   i: integer;
   Bookmark: TBookmark;
-  MenuItem: TfpgMenuItem;
+  MenuItem: TlqMenuItem;
 begin
   DestroyListObjects( BookmarksMenuItems );
   BookmarksMenuItems.Clear;

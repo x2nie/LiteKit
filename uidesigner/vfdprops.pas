@@ -36,73 +36,73 @@ type
 
   TPropertyString = class(TVFDWidgetProperty)
   public
-    function ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function GetValueText(wg: TfpgWidget): string; override;
+    function ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function GetValueText(wg: TlqWidget): string; override;
     function CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
   end;
 
 
   TPropertyInteger = class(TVFDWidgetProperty)
   public
-    function ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function GetValueText(wg: TfpgWidget): string; override;
+    function ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function GetValueText(wg: TlqWidget): string; override;
     function CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
   end;
 
 
   TPropertyFloat = class(TVFDWidgetProperty)
   public
-    function ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function GetValueText(wg: TfpgWidget): string; override;
+    function ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function GetValueText(wg: TlqWidget): string; override;
     function CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
   end;
 
 
   TPropertyEnum = class(TVFDWidgetProperty)
   public
-    function ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function GetValueText(wg: TfpgWidget): string; override;
+    function ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function GetValueText(wg: TlqWidget): string; override;
     function CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
   end;
 
 
   TPropertyStringList = class(TVFDWidgetProperty)
   public
-    function  ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function  GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function  GetValueText(wg: TfpgWidget): string; override;
+    function  ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function  GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function  GetValueText(wg: TlqWidget): string; override;
     function  CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
-    procedure OnExternalEdit(wg: TfpgWidget); override;
+    procedure OnExternalEdit(wg: TlqWidget); override;
   end;
 
 
   TPropertyBoolean = class(TVFDWidgetProperty)
   public
-    function ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function GetValueText(wg: TfpgWidget): string; override;
+    function ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function GetValueText(wg: TlqWidget): string; override;
     function CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
   end;
   
   
   TPropertyFontDesc = class(TPropertyString)
     function  CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
-    procedure OnExternalEdit(wg: TfpgWidget); override;
+    procedure OnExternalEdit(wg: TlqWidget); override;
   end;
   
   
   TPropertyColor = class(TVFDWidgetProperty)
   public
-    procedure DrawValue(wg: TfpgWidget; Canvas: TfpgCanvas; rect: TfpgRect; flags: integer); override;
-    function  ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function  GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function  GetValueText(wg: TfpgWidget): string; override;
+    procedure DrawValue(wg: TlqWidget; Canvas: TlqCanvas; rect: TlqRect; flags: integer); override;
+    function  ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function  GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function  GetValueText(wg: TlqWidget): string; override;
     function  CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
-    procedure OnExternalEdit(wg: TfpgWidget); override;
+    procedure OnExternalEdit(wg: TlqWidget); override;
   end;
 
 
@@ -117,34 +117,34 @@ type
       var ShiftState: TShiftState; var Consumed: boolean);
   public
     etype: TGPEType;
-    edit: TfpgEdit;
+    edit: TlqEdit;
     procedure CreateLayout; override;
-    procedure LoadValue(wg: TfpgWidget); override;
-    procedure StoreValue(wg: TfpgWidget); override;
-    procedure LoadIntValue(wg: TfpgWidget);
-    procedure StoreIntValue(wg: TfpgWidget);
-    procedure LoadStrValue(wg: TfpgWidget);
-    procedure StoreStrValue(wg: TfpgWidget);
-    procedure LoadFloatValue(wg: TfpgWidget);
-    procedure StoreFloatValue(wg: TfpgWidget);
+    procedure LoadValue(wg: TlqWidget); override;
+    procedure StoreValue(wg: TlqWidget); override;
+    procedure LoadIntValue(wg: TlqWidget);
+    procedure StoreIntValue(wg: TlqWidget);
+    procedure LoadStrValue(wg: TlqWidget);
+    procedure StoreStrValue(wg: TlqWidget);
+    procedure LoadFloatValue(wg: TlqWidget);
+    procedure StoreFloatValue(wg: TlqWidget);
     procedure SetFocus; override;
   end;
 
 
   TChoicePropertyEditor = class(TVFDPropertyEditor)
   public
-    chl: TfpgComboBox;
+    chl: TlqComboBox;
     procedure CreateLayout; override;
-    procedure LoadValue(wg: TfpgWidget); override;
-    procedure StoreValue(wg: TfpgWidget); override;
+    procedure LoadValue(wg: TlqWidget); override;
+    procedure StoreValue(wg: TlqWidget); override;
     procedure SetFocus; override;
   end;
   
   
   TBooleanPropertyEditor = class(TChoicePropertyEditor)
   public
-    procedure LoadValue(wg: TfpgWidget); override;
-    procedure StoreValue(wg: TfpgWidget); override;
+    procedure LoadValue(wg: TlqWidget); override;
+    procedure StoreValue(wg: TlqWidget); override;
   end;
 
 
@@ -152,11 +152,11 @@ type
   protected
     procedure HandlePaint; override;
   public
-    btnEdit: TfpgButton;
-    Widget: TfpgWidget;
+    btnEdit: TlqButton;
+    Widget: TlqWidget;
     procedure CreateLayout; override;
-    procedure LoadValue(wg: TfpgWidget); override;
-    procedure StoreValue(wg: TfpgWidget); override;
+    procedure LoadValue(wg: TlqWidget); override;
+    procedure StoreValue(wg: TlqWidget); override;
     procedure OnEditClick(Sender: TObject);
   end;
 
@@ -225,17 +225,17 @@ begin
     etype := gptString;
 end;
 
-function TPropertyString.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyString.GetPropertySource(wg: TlqWidget; const ident: string): string;
 begin
   Result := ident + Name + ' := ' + QuotedStr(GetStrProp(wg, Name)) + ';' + LineEnding;
 end;
 
-function TPropertyString.GetValueText(wg: TfpgWidget): string;
+function TPropertyString.GetValueText(wg: TlqWidget): string;
 begin
   Result := GetStrProp(wg, Name);
 end;
 
-function TPropertyString.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyString.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s, sval: string;
 begin
@@ -265,7 +265,7 @@ begin
     etype := gptInteger;
 end;
 
-function TPropertyInteger.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyInteger.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   PropInfo: PPropInfo;
 begin
@@ -276,12 +276,12 @@ begin
     Result := '';
 end;
 
-function TPropertyInteger.GetValueText(wg: TfpgWidget): string;
+function TPropertyInteger.GetValueText(wg: TlqWidget): string;
 begin
   Result := IntToStr(GetOrdProp(wg, Name));
 end;
 
-function TPropertyInteger.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyInteger.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s: string;
   ival: integer;
@@ -337,7 +337,7 @@ end;
 procedure TGeneralPropertyEditor.CreateLayout;
 begin
   Anchors       := [anTop, anLeft, anRight];
-  Edit          := TfpgEdit.Create(self);
+  Edit          := TlqEdit.Create(self);
   Edit.SetPosition(0, 0, Width, Height);
   Edit.Anchors  := Anchors;
 //  Edit.OnChange := @UpdateProperty;
@@ -346,12 +346,12 @@ begin
   Edit.Visible := True;
 end;
 
-procedure TGeneralPropertyEditor.LoadIntValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.LoadIntValue(wg: TlqWidget);
 begin
   edit.Text := IntToStr(GetOrdProp(wg, prop.Name));
 end;
 
-procedure TGeneralPropertyEditor.LoadStrValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.LoadStrValue(wg: TlqWidget);
 var
   s: string;
 begin
@@ -360,7 +360,7 @@ begin
     edit.Text := s;
 end;
 
-procedure TGeneralPropertyEditor.LoadValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.LoadValue(wg: TlqWidget);
 begin
   case etype of
     gptInteger:
@@ -373,7 +373,7 @@ begin
   FOrigValue := edit.Text;
 end;
 
-procedure TGeneralPropertyEditor.StoreIntValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.StoreIntValue(wg: TlqWidget);
 var
   i: integer;
 begin
@@ -385,7 +385,7 @@ begin
   end;
 end;
 
-procedure TGeneralPropertyEditor.StoreStrValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.StoreStrValue(wg: TlqWidget);
 var
   s: string;
 begin
@@ -394,12 +394,12 @@ begin
   SetStrProp(wg, prop.Name, s);
 end;
 
-procedure TGeneralPropertyEditor.LoadFloatValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.LoadFloatValue(wg: TlqWidget);
 begin
   edit.Text := FloatToStr(GetFloatProp(wg, prop.Name));
 end;
 
-procedure TGeneralPropertyEditor.StoreFloatValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.StoreFloatValue(wg: TlqWidget);
 var
   i: extended;
 begin
@@ -416,7 +416,7 @@ begin
   Edit.SetFocus;
 end;
 
-procedure TGeneralPropertyEditor.StoreValue(wg: TfpgWidget);
+procedure TGeneralPropertyEditor.StoreValue(wg: TlqWidget);
 begin
   case etype of
     gptInteger:
@@ -435,7 +435,7 @@ begin
   Result := TExternalPropertyEditor.Create(AOwner, self);
 end;
 
-function TPropertyStringList.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyStringList.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   sl: TStringList;
   f: integer;
@@ -455,7 +455,7 @@ begin
   //end;
 end;
 
-function TPropertyStringList.GetValueText(wg: TfpgWidget): string;
+function TPropertyStringList.GetValueText(wg: TlqWidget): string;
 var
   sl: TStringList;
 begin
@@ -465,7 +465,7 @@ begin
   Result := '[' + IntToStr(sl.Count) + ' lines]';
 end;
 
-procedure TPropertyStringList.OnExternalEdit(wg: TfpgWidget);
+procedure TPropertyStringList.OnExternalEdit(wg: TlqWidget);
 var
   sl: TStringList;
 begin
@@ -475,7 +475,7 @@ begin
   EditStringList(sl);
 end;
 
-function TPropertyStringList.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyStringList.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s: string;
   sval: string;
@@ -508,7 +508,7 @@ end;
 { TPropertyBoolean }
 
 
-function TPropertyBoolean.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyBoolean.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s: string;
   bval: boolean;
@@ -531,7 +531,7 @@ begin
     SetOrdProp(wg, Name, Ord(bval));
 end;
 
-function TPropertyBoolean.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyBoolean.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   i: integer;
   s: string;
@@ -554,7 +554,7 @@ begin
   end;
 end;
 
-function TPropertyBoolean.GetValueText(wg: TfpgWidget): string;
+function TPropertyBoolean.GetValueText(wg: TlqWidget): string;
 begin
   if GetOrdProp(wg, Name) = 1 then
     Result := 'True'
@@ -571,7 +571,7 @@ end;
 
 procedure TExternalPropertyEditor.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
 //  inherited HandlePaint;
 //  if not Windowed then
@@ -590,7 +590,7 @@ begin
   Widget      := nil;
   Anchors     := [anTop, anLeft, anRight];
 
-  btnEdit := TfpgButton.Create(self);
+  btnEdit := TlqButton.Create(self);
   with btnEdit do
   begin
     Height  := self.Height;
@@ -605,7 +605,7 @@ begin
   end;
 end;
 
-procedure TExternalPropertyEditor.LoadValue(wg: TfpgWidget);
+procedure TExternalPropertyEditor.LoadValue(wg: TlqWidget);
 begin
   Widget := wg;
   RePaint;
@@ -620,7 +620,7 @@ begin
   RePaint;
 end;
 
-procedure TExternalPropertyEditor.StoreValue(wg: TfpgWidget);
+procedure TExternalPropertyEditor.StoreValue(wg: TlqWidget);
 begin
   // nothing
 end;
@@ -632,12 +632,12 @@ begin
   Result := TChoicePropertyEditor.Create(AOwner, self);
 end;
 
-function TPropertyEnum.GetValueText(wg: TfpgWidget): string;
+function TPropertyEnum.GetValueText(wg: TlqWidget): string;
 begin
   Result := GetEnumProp(wg, Name);
 end;
 
-function TPropertyEnum.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyEnum.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   PropInfo: PPropInfo;
 begin
@@ -648,7 +648,7 @@ begin
     Result := '';
 end;
 
-function TPropertyEnum.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyEnum.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s, sval: string;
 begin
@@ -678,14 +678,14 @@ end;
 procedure TChoicePropertyEditor.CreateLayout;
 begin
   Anchors      := [anTop, anLeft, anRight];
-  chl          := TfpgComboBox.Create(self);
+  chl          := TlqComboBox.Create(self);
   chl.SetPosition(0, 0, Width, Height);
   chl.Anchors  := Anchors;
   chl.OnChange := @UpdateProperty;
   chl.Visible := True;
 end;
 
-procedure TChoicePropertyEditor.LoadValue(wg: TfpgWidget);
+procedure TChoicePropertyEditor.LoadValue(wg: TlqWidget);
 var
   sv: string;
   i, fi: integer;
@@ -705,7 +705,7 @@ begin
   sl.Free;
 end;
 
-procedure TChoicePropertyEditor.StoreValue(wg: TfpgWidget);
+procedure TChoicePropertyEditor.StoreValue(wg: TlqWidget);
 begin
   SetEnumProp(wg, prop.Name, chl.Text);
 end;
@@ -717,7 +717,7 @@ end;
 
 { TBooleanPropertyEditor }
 
-procedure TBooleanPropertyEditor.LoadValue(wg: TfpgWidget);
+procedure TBooleanPropertyEditor.LoadValue(wg: TlqWidget);
 var
   b: integer;
 begin
@@ -730,7 +730,7 @@ begin
     chl.FocusItem := 1;
 end;
 
-procedure TBooleanPropertyEditor.StoreValue(wg: TfpgWidget);
+procedure TBooleanPropertyEditor.StoreValue(wg: TlqWidget);
 begin
   SetOrdProp(wg, prop.Name, Ord(StrToBool(chl.Text)));
 end;
@@ -742,7 +742,7 @@ begin
   Result := TExternalPropertyEditor.Create(AOwner, self);
 end;
 
-procedure TPropertyFontDesc.OnExternalEdit(wg: TfpgWidget);
+procedure TPropertyFontDesc.OnExternalEdit(wg: TlqWidget);
 var
   s: string;
 begin
@@ -753,7 +753,7 @@ end;
 
 { TPropertyFloat }
 
-function TPropertyFloat.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyFloat.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s: string;
   ival: extended;
@@ -776,12 +776,12 @@ begin
     SetFloatProp(wg, Name, ival);
 end;
 
-function TPropertyFloat.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyFloat.GetPropertySource(wg: TlqWidget; const ident: string): string;
 begin
   Result := ident + Name + ' := ' + FloatToStr(GetFloatProp(wg, Name)) + ';' + LineEnding;
 end;
 
-function TPropertyFloat.GetValueText(wg: TfpgWidget): string;
+function TPropertyFloat.GetValueText(wg: TlqWidget): string;
 begin
   Result := FloatToStr(GetFloatProp(wg, Name));
 end;
@@ -795,15 +795,15 @@ end;
 
 { TPropertyColor }
 
-procedure TPropertyColor.DrawValue(wg: TfpgWidget; Canvas: TfpgCanvas;
-  rect: TfpgRect; flags: integer);
+procedure TPropertyColor.DrawValue(wg: TlqWidget; Canvas: TlqCanvas;
+  rect: TlqRect; flags: integer);
 const
   BLOCK_SIZE = 10;  { for margin and square size }
 var
-  s: TfpgString;
+  s: TlqString;
   dx: integer;
   i: integer;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   inherited DrawValue(wg, Canvas, rect, flags);
   try
@@ -814,7 +814,7 @@ begin
   end;
   dx := Canvas.Font.TextWidth(s) + BLOCK_SIZE;
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TfpgColor(i));
+  c := fpgColorToRGB(TlqColor(i));
   { paint the color square }
   Canvas.Color := c;
   Canvas.FillRectangle(rect.Left+dx, rect.Top+((rect.Height-BLOCK_SIZE) div 2), BLOCK_SIZE, BLOCK_SIZE);
@@ -823,7 +823,7 @@ begin
   Canvas.DrawRectangle(rect.Left+dx, rect.Top+((rect.Height-BLOCK_SIZE) div 2), BLOCK_SIZE, BLOCK_SIZE);
 end;
 
-function TPropertyColor.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyColor.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
   s: string;
   ival: integer;
@@ -849,38 +849,38 @@ begin
     end;
 end;
 
-function TPropertyColor.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyColor.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   PropInfo: PPropInfo;
   i: integer;
-  c: TfpgColor;
-  nc: TfpgColor;
+  c: TlqColor;
+  nc: TlqColor;
 begin
   PropInfo := GetPropInfo(wg.ClassType, Name);
   i := GetOrdProp(wg, Name);
   if PropInfo^.Default <> i then
   begin
-    if fpgIsNamedColor(TfpgColor(i)) then
-      Result := ident + Name + ' := TfpgColor($' + IntToHex(i, 8) + ');' + LineEnding
+    if fpgIsNamedColor(TlqColor(i)) then
+      Result := ident + Name + ' := TlqColor($' + IntToHex(i, 8) + ');' + LineEnding
     else
     begin
-      c := fpgColorToRGB(TfpgColor(i));
-      Result := ident + Name + ' := TfpgColor($' + IntToHex(c, 6) + ');' + LineEnding;
+      c := fpgColorToRGB(TlqColor(i));
+      Result := ident + Name + ' := TlqColor($' + IntToHex(c, 6) + ');' + LineEnding;
     end;
   end
   else
     Result := '';
 end;
 
-function TPropertyColor.GetValueText(wg: TfpgWidget): string;
+function TPropertyColor.GetValueText(wg: TlqWidget): string;
 var
   PropInfo: PPropInfo;
   i: integer;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   PropInfo := GetPropInfo(wg.ClassType, Name);
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TfpgColor(i));
+  c := fpgColorToRGB(TlqColor(i));
   Result := '$' + IntToHex(c, 6);
 end;
 
@@ -889,15 +889,15 @@ begin
   Result := TExternalPropertyEditor.Create(AOwner, self);
 end;
 
-procedure TPropertyColor.OnExternalEdit(wg: TfpgWidget);
+procedure TPropertyColor.OnExternalEdit(wg: TlqWidget);
 var
   PropInfo: PPropInfo;
   i: integer;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   PropInfo := GetPropInfo(wg.ClassType, Name);
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TfpgColor(i));
+  c := fpgColorToRGB(TlqColor(i));
   c := fpgSelectColorDialog(c);
   SetOrdProp(wg, Name, c);
 end;

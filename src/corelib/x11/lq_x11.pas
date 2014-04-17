@@ -52,7 +52,7 @@ const
 
 type
 
-  TfpgGContext  = Xlib.TGc;
+  TlqGContext  = Xlib.TGc;
   PInt = ^integer;
 
   TAtomArray = array[0..0] of TAtom;
@@ -76,7 +76,7 @@ type
 
 
   TXdbeSwapInfo = record
-    Window: TfpgWinHandle;
+    Window: TlqWinHandle;
     SwapAction: PChar;
   end;
   PXdbeSwapInfo = ^TXdbeSwapInfo;
@@ -131,11 +131,11 @@ type
   TX11EventFilter = function(const AEvent: TXEvent): Boolean of object;
 
   // forward declaration
-  TfpgX11Window = class;
-  TfpgX11Drag = class;
+  TlqX11Window = class;
+  TlqX11Drag = class;
 
 
-  TfpgX11FontResource = class(TfpgFontResourceBase)
+  TlqX11FontResource = class(TlqFontResourceBase)
   private
     FFontData: PXftFont;
     function    DoGetTextWidthClassic(const txt: string): integer;
@@ -153,7 +153,7 @@ type
   end;
 
 
-  TfpgX11Image = class(TfpgImageBase)
+  TlqX11Image = class(TlqImageBase)
   private
     FXimg: TXImage;
     FXimgmask: TXImage;
@@ -168,15 +168,15 @@ type
   end;
 
 
-  TfpgX11Canvas = class(TfpgCanvasBase)
+  TlqX11Canvas = class(TlqCanvasBase)
   private
     FDrawing: boolean;
-    FDrawWindow: TfpgX11Window;
-    FBufferPixmap: TfpgDCHandle;
-    FDrawHandle: TfpgDCHandle;
-    Fgc: TfpgGContext;
-    FCurFontRes: TfpgX11FontResource;
-    FClipRect: TfpgRect;
+    FDrawWindow: TlqX11Window;
+    FBufferPixmap: TlqDCHandle;
+    FDrawHandle: TlqDCHandle;
+    Fgc: TlqGContext;
+    FCurFontRes: TlqX11FontResource;
+    FClipRect: TlqRect;
     FClipRectSet: boolean;
     FXftDraw: PXftDraw;
     FColorTextXft: TXftColor;
@@ -187,59 +187,59 @@ type
     procedure   BufferFreeTimer(Sender: TObject);
     procedure   TryFreePixmap;
   protected
-    procedure   DoSetFontRes(fntres: TfpgFontResourceBase); override;
-    procedure   DoSetTextColor(cl: TfpgColor); override;
-    procedure   DoSetColor(cl: TfpgColor); override;
-    procedure   DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle); override;
-    procedure   DoGetWinRect(out r: TfpgRect); override;
-    procedure   DoFillRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord); override;
-    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord); override;
-    procedure   DoDrawRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoDrawLine(x1, y1, x2, y2: TfpgCoord); override;
-    procedure   DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi, w, h: integer); override;
-    procedure   DoDrawString(x, y: TfpgCoord; const txt: string); override;
-    procedure   DoSetClipRect(const ARect: TfpgRect); override;
-    function    DoGetClipRect: TfpgRect; override;
-    procedure   DoAddClipRect(const ARect: TfpgRect); override;
+    procedure   DoSetFontRes(fntres: TlqFontResourceBase); override;
+    procedure   DoSetTextColor(cl: TlqColor); override;
+    procedure   DoSetColor(cl: TlqColor); override;
+    procedure   DoSetLineStyle(awidth: integer; astyle: TlqLineStyle); override;
+    procedure   DoGetWinRect(out r: TlqRect); override;
+    procedure   DoFillRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord); override;
+    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord); override;
+    procedure   DoDrawRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoDrawLine(x1, y1, x2, y2: TlqCoord); override;
+    procedure   DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi, w, h: integer); override;
+    procedure   DoDrawString(x, y: TlqCoord; const txt: string); override;
+    procedure   DoSetClipRect(const ARect: TlqRect); override;
+    function    DoGetClipRect: TlqRect; override;
+    procedure   DoAddClipRect(const ARect: TlqRect); override;
     procedure   DoClearClipRect; override;
-    procedure   DoBeginDraw(awin: TfpgWindowBase; buffered: boolean); override;
-    procedure   DoPutBufferToScreen(x, y, w, h: TfpgCoord); override;
+    procedure   DoBeginDraw(awin: TlqWindowBase; buffered: boolean); override;
+    procedure   DoPutBufferToScreen(x, y, w, h: TlqCoord); override;
     procedure   DoEndDraw; override;
-    function    GetPixel(X, Y: integer): TfpgColor; override;
-    procedure   SetPixel(X, Y: integer; const AValue: TfpgColor); override;
-    procedure   DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
-    procedure   DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
+    function    GetPixel(X, Y: integer): TlqColor; override;
+    procedure   SetPixel(X, Y: integer; const AValue: TlqColor); override;
+    procedure   DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
+    procedure   DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
     procedure   DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean=False); override;
-    property    DCHandle: TfpgDCHandle read FDrawHandle;
+    property    DCHandle: TlqDCHandle read FDrawHandle;
   public
-    constructor Create(awin: TfpgWindowBase); override;
+    constructor Create(awin: TlqWindowBase); override;
     destructor  Destroy; override;
   end;
 
 
-  TfpgX11Window = class(TfpgWindowBase)
+  TlqX11Window = class(TlqWindowBase)
   private
     QueueEnabledDrops: boolean;
   protected
     FWinFlags: TXWindowStateFlags;
-    FWinHandle: TfpgWinHandle;
-    FBackupWinHandle: TfpgWinHandle;  // Used by DestroyNotify & UnmapNotify events
-    FModalForWin: TfpgX11Window;
-    procedure   DoAllocateWindowHandle(AParent: TfpgWindowBase); override;
+    FWinHandle: TlqWinHandle;
+    FBackupWinHandle: TlqWinHandle;  // Used by DestroyNotify & UnmapNotify events
+    FModalForWin: TlqX11Window;
+    procedure   DoAllocateWindowHandle(AParent: TlqWindowBase); override;
     procedure   DoReleaseWindowHandle; override;
     procedure   DoRemoveWindowLookup; override;
     procedure   DoSetWindowVisible(const AValue: Boolean); override;
     function    HandleIsValid: boolean; override;
     procedure   DoSetWindowTitle(const ATitle: string); override;
-    procedure   DoMoveWindow(const x: TfpgCoord; const y: TfpgCoord); override;
-    function    DoWindowToScreen(ASource: TfpgWindowBase; const AScreenPos: TPoint): TPoint; override;
+    procedure   DoMoveWindow(const x: TlqCoord; const y: TlqCoord); override;
+    function    DoWindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint; override;
     procedure   DoUpdateWindowPosition; override;
     procedure   DoSetMouseCursor; override;
     procedure   DoDNDEnabled(const AValue: boolean); override;
     procedure   DoAcceptDrops(const AValue: boolean); override;
-    property    WinHandle: TfpgWinHandle read FWinHandle;
-    function    GetWindowState: TfpgWindowState; override;
+    property    WinHandle: TlqWinHandle read FWinHandle;
+    function    GetWindowState: TlqWindowState; override;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   ActivateWindow; override;
@@ -250,9 +250,9 @@ type
   end;
 
 
-  TfpgX11Application = class(TfpgApplicationBase)
+  TlqX11Application = class(TlqApplicationBase)
   private
-    FComposeBuffer: TfpgString;
+    FComposeBuffer: TlqString;
     FComposeStatus: TStatus;
     FEventFilter: TX11EventFilter;
     { XDND type list received from Source window }
@@ -276,39 +276,39 @@ type
     XdndActionPrivate: TAtom;
     { XDND variables }
     FActionType: TAtom;
-    FSrcWinHandle: TfpgWinHandle;
+    FSrcWinHandle: TlqWinHandle;
     FDNDVersion: integer;
     FDNDDataType: TAtom;
     FSrcTimeStamp: clong;
-    FLastDropTarget: TfpgWinHandle;
+    FLastDropTarget: TlqWinHandle;
     FDropPos: TPoint;
-    FDrag: TfpgX11Drag;
+    FDrag: TlqX11Drag;
     { X11 window grouping }
-    FLeaderWindow: TfpgWinHandle;
+    FLeaderWindow: TlqWinHandle;
     FClientLeaderAtom: TAtom;
-    procedure   SetDrag(const AValue: TfpgX11Drag);
+    procedure   SetDrag(const AValue: TlqX11Drag);
     function    ConvertShiftState(AState: Cardinal): TShiftState;
     function    KeySymToKeycode(KeySym: TKeySym): Word;
     function    StartComposing(const Event: TXEvent): TKeySym;
-    function    GetDropActionFromAtom(const AAtom: TAtom): TfpgDropAction;
-    function    GetAtomFromDropAction(const AAction: TfpgDropAction): TAtom;
+    function    GetDropActionFromAtom(const AAtom: TAtom): TlqDropAction;
+    function    GetAtomFromDropAction(const AAction: TlqDropAction): TAtom;
     procedure   XdndInit;
     procedure   ResetDNDVariables;
-    procedure   HandleDNDenter(ATopLevelWindow: TfpgX11Window; const ASource: TWindow; const ev: TXEvent);
-    procedure   HandleDNDleave(ATopLevelWindow: TfpgX11Window; const ASource: TWindow);
-    procedure   HandleDNDposition(ATopLevelWindow: TfpgX11Window; const ASource: TWindow; const x_root: integer; const y_root: integer; const AAction: TAtom; const ATimestamp: x.TTime);
-    procedure   HandleDNDdrop(ATopLevelWindow: TfpgX11Window; const ASource: TWindow; const ATimestamp: x.TTime);
+    procedure   HandleDNDenter(ATopLevelWindow: TlqX11Window; const ASource: TWindow; const ev: TXEvent);
+    procedure   HandleDNDleave(ATopLevelWindow: TlqX11Window; const ASource: TWindow);
+    procedure   HandleDNDposition(ATopLevelWindow: TlqX11Window; const ASource: TWindow; const x_root: integer; const y_root: integer; const AAction: TAtom; const ATimestamp: x.TTime);
+    procedure   HandleDNDdrop(ATopLevelWindow: TlqX11Window; const ASource: TWindow; const ATimestamp: x.TTime);
     procedure   HandleDNDSelection(const ev: TXEvent);
-    property    Drag: TfpgX11Drag read FDrag write SetDrag;
+    property    Drag: TlqX11Drag read FDrag write SetDrag;
   protected
     FDisplay: PXDisplay;
     DisplayDepth: integer;
-    DefaultBackground: TfpgColor;
-    DefaultForeground: TfpgColor;
+    DefaultBackground: TlqColor;
+    DefaultForeground: TlqColor;
     DefaultScreen: integer;
     DefaultVisual: PVisual;
     DefaultColorMap: TColorMap;
-    FRootWindow: TfpgWinHandle;
+    FRootWindow: TlqWinHandle;
     xia_clipboard: TAtom;
     xia_motif_wm_hints: TAtom;
     xia_wm_protocols: TAtom;
@@ -326,45 +326,45 @@ type
     constructor Create(const AParams: string); override;
     destructor  Destroy; override;
     procedure   DoFlush;
-    function    GetScreenWidth: TfpgCoord; override;
-    function    GetScreenHeight: TfpgCoord; override;
+    function    GetScreenWidth: TlqCoord; override;
+    function    GetScreenHeight: TlqCoord; override;
     function    Screen_dpi_x: integer; override;
     function    Screen_dpi_y: integer; override;
     function    Screen_dpi: integer; override;
     property    Display: PXDisplay read FDisplay;
-    property    RootWindow: TfpgWinHandle read FRootWindow; platform;
+    property    RootWindow: TlqWinHandle read FRootWindow; platform;
     property    EventFilter: TX11EventFilter read FEventFilter write FEventFilter; platform;
   end;
 
 
-  TfpgX11Clipboard = class(TfpgClipboardBase)
+  TlqX11Clipboard = class(TlqClipboardBase)
   private
     FWaitingForSelection: Boolean;
   protected
-    FClipboardText: TfpgString;
-    function    DoGetText: TfpgString; override;
-    procedure   DoSetText(const AValue: TfpgString); override;
+    FClipboardText: TlqString;
+    function    DoGetText: TlqString; override;
+    procedure   DoSetText(const AValue: TlqString); override;
     procedure   InitClipboard; override;
   end;
 
 
-  TfpgX11FileList = class(TfpgFileListBase)
+  TlqX11FileList = class(TlqFileListBase)
   protected
     function    InitializeEntry(sr: TSearchRec): TFileEntry; override;
-    procedure   PopulateSpecialDirs(const aDirectory: TfpgString); override;
+    procedure   PopulateSpecialDirs(const aDirectory: TlqString); override;
   public
     constructor Create; override;
     function    EncodeModeString(FileMode: longword): TFileModeString;
   end;
 
 
-  TfpgX11MimeData = class(TfpgMimeDataBase)
+  TlqX11MimeData = class(TlqMimeDataBase)
   end;
 
 
-  TfpgX11Drag = class(TfpgDragBase)
+  TlqX11Drag = class(TlqDragBase)
   private
-    FLastTarget: TfpgWinHandle;
+    FLastTarget: TlqWinHandle;
     FUseVersion: integer;
     FTargetIsDNDAware: Boolean;
     FStatusPending: Boolean;
@@ -381,25 +381,25 @@ type
     procedure   SendDNDEnter(ATarget: TWindow);
     procedure   SendDNDPosition(ATarget: TWindow; x_root: cint; y_root: cint; AAction: TAtom; ATime: X.TTime);
     procedure   SendDNDDrop;
-    procedure   HandleDNDStatus(ATarget: TWindow; AAccept: integer; ARect: TfpgRect; AAction: TAtom);
+    procedure   HandleDNDStatus(ATarget: TWindow; AAccept: integer; ARect: TlqRect; AAction: TAtom);
     procedure   HandleSelectionRequest(ev: TXEvent);
   protected
-    FSource: TfpgX11Window;
-    function    GetSource: TfpgX11Window; virtual;
+    FSource: TlqX11Window;
+    function    GetSource: TlqX11Window; virtual;
   public
     destructor  Destroy; override;
-    function    Execute(const ADropActions: TfpgDropActions; const ADefaultAction: TfpgDropAction = daCopy): TfpgDropAction; override;
+    function    Execute(const ADropActions: TlqDropActions; const ADefaultAction: TlqDropAction = daCopy): TlqDropAction; override;
   end;
 
 
-  TfpgX11Timer = class(TfpgBaseTimer)
+  TlqX11Timer = class(TlqBaseTimer)
   end;
 
 
-  TfpgX11SystemTrayHandler = class(TfpgComponent)
+  TlqX11SystemTrayHandler = class(TlqComponent)
   private
     FTrayIconParent: TWindow;
-    FTrayWidget: TfpgWindowBase;
+    FTrayWidget: TlqWindowBase;
     function    GetTrayIconParent: TWindow;
     function    GetSysTrayWindow: TWindow;
     function    Send_Message(dest: TWindow; msg: longword; data1, data2, data3: longword): boolean;
@@ -413,7 +413,7 @@ type
   end;
 
 
-function fpgColorToX(col: TfpgColor): longword;
+function fpgColorToX(col: TlqColor): longword;
 
 
 implementation
@@ -438,13 +438,13 @@ uses
 type
   TDNDSrcType = class(TObject)
   public
-    Name: TfpgString;
+    Name: TlqString;
     ID: integer;
   end;
 
 var
-  xapplication: TfpgApplication;
-  uDragSource: TfpgWidget;  { points to the Source widget of the DND when drop is inside the same app }
+  xapplication: TlqApplication;
+  uDragSource: TlqWidget;  { points to the Source widget of the DND when drop is inside the same app }
 
 const
   FPG_XDND_VERSION: culong = 4; // our supported XDND version
@@ -460,9 +460,9 @@ function Xutf8LookupString(p1: PXIC; ev: PXKeyPressedEvent; str: PChar; len: lon
 
 // Double buffer functions
 function XdbeQueryExtension(ADisplay: PXDisplay; AMajor, AMinor: PInt): PStatus; cdecl; external;
-function XdbeAllocateBackBufferName(ADisplay: PXDisplay; AWindow: TfpgWinHandle; ASwapAction: PChar): TfpgWinHandle; cdecl; external;
+function XdbeAllocateBackBufferName(ADisplay: PXDisplay; AWindow: TlqWinHandle; ASwapAction: PChar): TlqWinHandle; cdecl; external;
 function XdbeSwapBuffers(ADisplay: PXDisplay; ASwapInfo: PXdbeSwapInfo; AScreenNums: integer): PStatus; cdecl; external;
-function XdbeDeallocateBackBufferName(ADisplay: PXDisplay; ABuffer: TfpgWinHandle): PStatus; cdecl; external;
+function XdbeDeallocateBackBufferName(ADisplay: PXDisplay; ABuffer: TlqWinHandle): PStatus; cdecl; external;
 
 function XOpenIM(para1: PDisplay; para2: PXrmHashBucketRec; para3: Pchar; para4: Pchar): PXIM; cdecl; external;
 function XCreateIC(para1: PXIM; para2: array of const): PXIC; cdecl; external;
@@ -477,10 +477,10 @@ begin
   Result := Result or ((rgb and $F80000) shr 8);
 end;
 
-function fpgColorToX(col: TfpgColor): longword;
+function fpgColorToX(col: TlqColor): longword;
 var
   xc: TXColor;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   c := fpgColorToRGB(col);
 
@@ -501,9 +501,9 @@ begin
   end;
 end;
 
-procedure SetXftColor(col: TfpgColor; var colxft: TXftColor);
+procedure SetXftColor(col: TlqColor; var colxft: TXftColor);
 var
-  c: TfpgColor;
+  c: TlqColor;
 begin
   c := fpgColorToRGB(col);
 
@@ -522,7 +522,7 @@ type
 
   // single direction linked list
   WindowLookupRec = record
-    w: TfpgX11Window;
+    w: TlqX11Window;
     Next: PWindowLookupRec;
   end;
 
@@ -530,7 +530,7 @@ var
   FirstWindowLookupRec: PWindowLookupRec;
   LastWindowLookupRec: PWindowLookupRec;
 
-procedure AddWindowLookup(w: TfpgX11Window);
+procedure AddWindowLookup(w: TlqX11Window);
 var
   p: PWindowLookupRec;
 begin
@@ -547,7 +547,7 @@ begin
   LastWindowLookupRec := p;
 end;
 
-procedure RemoveWindowLookup(w: TfpgX11Window);
+procedure RemoveWindowLookup(w: TlqX11Window);
 var
   prevp: PWindowLookupRec;
   p: PWindowLookupRec;
@@ -576,7 +576,7 @@ begin
     end;
 end;
 
-function FindWindowByHandle(wh: TfpgWinHandle): TfpgX11Window;
+function FindWindowByHandle(wh: TlqWinHandle): TlqX11Window;
 var
   p: PWindowLookupRec;
 begin
@@ -596,7 +596,7 @@ begin
   Result := nil;
 end;
 
-function FindWindowByBackupHandle(wh: TfpgWinHandle): TfpgX11Window;
+function FindWindowByBackupHandle(wh: TlqWinHandle): TlqX11Window;
 var
   p: PWindowLookupRec;
 begin
@@ -756,7 +756,7 @@ begin
     Result := None;
 end;
 
-procedure SetWindowGroup(AWindow: TfpgWinHandle);
+procedure SetWindowGroup(AWindow: TlqWinHandle);
 var
   ClassHint: PXClassHint;
 begin
@@ -779,16 +779,16 @@ begin
 end;
 
 
-{ TfpgX11Application }
+{ TlqX11Application }
 
-procedure TfpgX11Application.SetDrag(const AValue: TfpgX11Drag);
+procedure TlqX11Application.SetDrag(const AValue: TlqX11Drag);
 begin
   if Assigned(FDrag) then
     FDrag.Free;
   FDrag := AValue;
 end;
 
-function TfpgX11Application.ConvertShiftState(AState: Cardinal): TShiftState;
+function TlqX11Application.ConvertShiftState(AState: Cardinal): TShiftState;
 begin
   Result := [];
   if (AState and Button1Mask) <> 0 then
@@ -819,7 +819,7 @@ begin
     Include(Result, ssAltGr);
 end;
 
-function TfpgX11Application.KeySymToKeycode(KeySym: TKeySym): Word;
+function TlqX11Application.KeySymToKeycode(KeySym: TKeySym): Word;
 const
   Table_20aX: array[$20a0..$20ac] of Word = (keyEcuSign, keyColonSign,
     keyCruzeiroSign, keyFFrancSign, keyLiraSign, keyMillSign, keyNairaSign,
@@ -888,7 +888,7 @@ begin
 {$ENDIF}
 end;
 
-function TfpgX11Application.StartComposing(const Event: TXEvent): TKeySym;
+function TlqX11Application.StartComposing(const Event: TXEvent): TKeySym;
 var
   l: integer;
 begin
@@ -904,7 +904,7 @@ begin
         Length(FComposeBuffer), @Result, @FComposeStatus);
 end;
 
-function TfpgX11Application.GetDropActionFromAtom(const AAtom: TAtom): TfpgDropAction;
+function TlqX11Application.GetDropActionFromAtom(const AAtom: TAtom): TlqDropAction;
 begin
   if AAtom = XdndActionCopy then
     Result := daCopy
@@ -916,7 +916,7 @@ begin
     Result := daCopy; { the safe fallback option }
 end;
 
-function TfpgX11Application.GetAtomFromDropAction(const AAction: TfpgDropAction): TAtom;
+function TlqX11Application.GetAtomFromDropAction(const AAction: TlqDropAction): TAtom;
 begin
   case AAction of
     daCopy:  Result := XdndActionCopy;
@@ -927,7 +927,7 @@ begin
   end;
 end;
 
-procedure TfpgX11Application.XdndInit;
+procedure TlqX11Application.XdndInit;
 begin
   XdndAware         := XInternAtom(FDisplay, 'XdndAware',         False);
   XdndTypeList      := XInternAtom(FDisplay, 'XdndTypeList',      False);
@@ -949,9 +949,9 @@ begin
   XdndActionPrivate := XInternAtom(FDisplay, 'XdndActionPrivate', False);
 end;
 
-procedure TfpgX11Application.ResetDNDVariables;
+procedure TlqX11Application.ResetDNDVariables;
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
 begin
   if FLastDropTarget <> 0 then
   begin
@@ -966,7 +966,7 @@ begin
   FDropPos.Y := 0;
 end;
 
-procedure TfpgX11Application.HandleDNDenter(ATopLevelWindow: TfpgX11Window;
+procedure TlqX11Application.HandleDNDenter(ATopLevelWindow: TlqX11Window;
     const ASource: TWindow; const ev: TXEvent);
 var
   actualtype: TAtom;
@@ -974,11 +974,11 @@ var
   count, remaining: culong;
   xdndtypes: PAtomArray;
   i: integer;
-  s: TfpgString;
+  s: TlqString;
   itm: TDNDSrcType;
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Application.HandleDNDenter');
+  writeln('TlqX11Application.HandleDNDenter');
   {$ENDIF}
   ResetDNDVariables;
   FSrcWinHandle := ASource;
@@ -1045,17 +1045,17 @@ begin
     XFree(xdndtypes);
 end;
 
-procedure TfpgX11Application.HandleDNDleave(ATopLevelWindow: TfpgX11Window;
+procedure TlqX11Application.HandleDNDleave(ATopLevelWindow: TlqX11Window;
     const ASource: TWindow);
 var
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Application.HandleDNDleave');
+  writeln('TlqX11Application.HandleDNDleave');
   {$ENDIF}
   if FLastDropTarget <> 0 then { 0 would be first time in, so there is no last window }
   begin
-    wg := FindWindowByHandle(FLastDropTarget) as TfpgWidget;
+    wg := FindWindowByHandle(FLastDropTarget) as TlqWidget;
     if wg.AcceptDrops then
     begin
       if Assigned(wg.OnDragLeave) then
@@ -1065,7 +1065,7 @@ begin
   ResetDNDVariables;
 end;
 
-procedure TfpgX11Application.HandleDNDposition(ATopLevelWindow: TfpgX11Window; const ASource: TWindow;
+procedure TlqX11Application.HandleDNDposition(ATopLevelWindow: TlqX11Window; const ASource: TWindow;
     const x_root: integer; const y_root: integer; const AAction: TAtom; const ATimestamp: x.TTime);
 var
   Msg: TXEvent;
@@ -1073,22 +1073,22 @@ var
   child: TWindow;
   prevchild: TWindow;
 
-  ret_child: TfpgWinHandle;
+  ret_child: TlqWinHandle;
 
   i: integer;
   lTargetWinHandle: TWindow;
-  w: TfpgX11Window;
-  wg: TfpgWidget;
-  wg2: TfpgWidget;
-  swg: TfpgWidget;
-  msgp: TfpgMessageParams;
-  lDropAction: TfpgDropAction;
+  w: TlqX11Window;
+  wg: TlqWidget;
+  wg2: TlqWidget;
+  swg: TlqWidget;
+  msgp: TlqMessageParams;
+  lDropAction: TlqDropAction;
   lAccept: Boolean;
-  lMimeChoice: TfpgString;
+  lMimeChoice: TlqString;
   lMimeList: TStringList;
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Application.HandleDNDposition  (toplevel window = ', ATopLevelWindow.Name, ')');
+  writeln('TlqX11Application.HandleDNDposition  (toplevel window = ', ATopLevelWindow.Name, ')');
   {$ENDIF}
   lAccept := False;
   FSrcWinHandle := ASource;
@@ -1133,14 +1133,14 @@ begin
     {$IFDEF DNDDEBUG}
     writeln('dragging over window: ', w.Name);
     {$ENDIF}
-    if w is TfpgWidget then      // TODO: We could use Interfaces here eg: IDragDropEnabled
+    if w is TlqWidget then      // TODO: We could use Interfaces here eg: IDragDropEnabled
     begin
-      wg := TfpgWidget(w);
+      wg := TlqWidget(w);
       if FLastDropTarget <> lTargetWinHandle then
       begin
         if FLastDropTarget <> 0 then { 0 would be first time in, so there is no last window }
         begin
-          wg2 := FindWindowByHandle(FLastDropTarget) as TfpgWidget;
+          wg2 := FindWindowByHandle(FLastDropTarget) as TlqWidget;
           if wg2.AcceptDrops then
           begin
             if Assigned(wg2.OnDragLeave) then
@@ -1171,7 +1171,7 @@ begin
 
           { TODO: We need to populate the Source parameter. }
           if Assigned(Drag) then
-            swg := TfpgDrag(Drag).Source as TfpgWidget
+            swg := TlqDrag(Drag).Source as TlqWidget
           else
             swg := nil;
           wg.OnDragEnter(wg, swg, lMimeList, lMimeChoice, lDropAction, lAccept);
@@ -1229,13 +1229,13 @@ begin
   XSendEvent(FDisplay, FSrcWinHandle, False, NoEventMask, @Msg);
 end;
 
-procedure TfpgX11Application.HandleDNDdrop(ATopLevelWindow: TfpgX11Window;
+procedure TlqX11Application.HandleDNDdrop(ATopLevelWindow: TlqX11Window;
     const ASource: TWindow; const ATimestamp: x.TTime);
 var
   Msg: TXEvent;
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Application.HandleDNDdrop');
+  writeln('TlqX11Application.HandleDNDdrop');
   {$ENDIF}
   { TODO: Must XConvertSelection always be called? }
   if FDNDDataType <> None then
@@ -1259,22 +1259,22 @@ begin
   XSendEvent(FDisplay, FSrcWinHandle, False, NoEventMask, @Msg);
 end;
 
-procedure TfpgX11Application.HandleDNDSelection(const ev: TXEvent);
+procedure TlqX11Application.HandleDNDSelection(const ev: TXEvent);
 var
   actualtype: TAtom;
   actualformat: cint;
   count, remaining, dummy: culong;
   s: variant;
   data: PChar;
-  wg: TfpgWidget;
-  swg: TfpgWidget; { source widget that started drag - if drag and drop occur in the same application }
+  wg: TlqWidget;
+  swg: TlqWidget; { source widget that started drag - if drag and drop occur in the same application }
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Application.HandleDNDselection');
+  writeln('TlqX11Application.HandleDNDselection');
   {$ENDIF}
   if FLastDropTarget <> 0 then { 0 would be first time in, so there is no last window }
   begin
-    wg := FindWindowByHandle(FLastDropTarget) as TfpgWidget;
+    wg := FindWindowByHandle(FLastDropTarget) as TlqWidget;
     if not wg.AcceptDrops then
       Exit;
   end;
@@ -1310,13 +1310,13 @@ begin
 
   if FLastDropTarget <> 0 then { 0 would be first time in, so there is no last window }
   begin
-    wg := FindWindowByHandle(FLastDropTarget) as TfpgWidget;
+    wg := FindWindowByHandle(FLastDropTarget) as TlqWidget;
     if wg.AcceptDrops then
     begin
       if Assigned(wg.OnDragDrop) then
       begin
         if Assigned(uDragSource) then
-          swg := uDragSource as TfpgWidget
+          swg := uDragSource as TlqWidget
         else
           swg := nil;
         wg.OnDragDrop(wg, swg, FDropPos.X, FDropPos.Y, s);
@@ -1330,7 +1330,7 @@ begin
   ResetDNDVariables;
 end;
 
-function TfpgX11Application.DoGetFontFaceList: TStringList;
+function TlqX11Application.DoGetFontFaceList: TStringList;
 var
   pfs: PFcFontSet;
   ppat: PPFcPattern;
@@ -1363,7 +1363,7 @@ begin
   Result.Sort;
 end;
 
-constructor TfpgX11Application.Create(const AParams: string);
+constructor TlqX11Application.Create(const AParams: string);
 var
   s: string;
 begin
@@ -1416,10 +1416,10 @@ begin
   if InputContext = nil then
     Exit;
   FIsInitialized := True;
-  xapplication := TfpgApplication(self);
+  xapplication := TlqApplication(self);
 end;
 
-destructor TfpgX11Application.Destroy;
+destructor TlqX11Application.Destroy;
 begin
   netlayer.Free;
   XCloseDisplay(FDisplay);
@@ -1427,17 +1427,17 @@ begin
   inherited Destroy;
 end;
 
-function TfpgX11Application.MessagesPending: boolean;
+function TlqX11Application.MessagesPending: boolean;
 begin
   Result := (XPending(display) > 0);
   fpgCheckTimers;
 end;
 
-function GetParentWindow(wh: TfpgWinHandle; var pw, rw: TfpgWinHandle): boolean;
+function GetParentWindow(wh: TlqWinHandle; var pw, rw: TlqWinHandle): boolean;
 var
-  rootw: TfpgWinHandle;
-  parentw: TfpgWinHandle;
-  childs: ^TfpgWinHandle;
+  rootw: TlqWinHandle;
+  parentw: TlqWinHandle;
+  childs: ^TlqWinHandle;
   cnum: cuint;
 begin
   childs := nil;
@@ -1453,11 +1453,11 @@ begin
     XFree(childs);
 end;
 
-function GetDecorationWindow(wh: TfpgWinHandle): TfpgWinHandle;
+function GetDecorationWindow(wh: TlqWinHandle): TlqWinHandle;
 var
-  lpw: TfpgWinHandle;
-  pw: TfpgWinHandle;
-  rw: TfpgWinHandle;
+  lpw: TlqWinHandle;
+  pw: TlqWinHandle;
+  rw: TlqWinHandle;
   bok: boolean;
 begin
   pw := wh;
@@ -1494,24 +1494,24 @@ begin
   end;
 end;
 
-procedure TfpgX11Application.DoWaitWindowMessage(atimeoutms: integer);
+procedure TlqX11Application.DoWaitWindowMessage(atimeoutms: integer);
 var
   ev: TXEvent;
   NewEvent: TXevent;
   i: integer;
   r: integer;
   blockmsg: boolean;
-  w: TfpgX11Window;
-  ew: TfpgX11Window;
-  kwg: TfpgWidget;
-  wh: TfpgWinHandle;
+  w: TlqX11Window;
+  ew: TlqX11Window;
+  kwg: TlqWidget;
+  wh: TlqWinHandle;
   wa: TXWindowAttributes;
   mcode: integer;
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   rfds: baseunix.TFDSet;
   xfd: integer;
   KeySym: TKeySym;
-  Popup: TfpgWidget;
+  Popup: TlqWidget;
   needToWait: boolean;
 
   // debug purposes only
@@ -1714,10 +1714,10 @@ begin
             begin
               ew := w;
               while (w <> nil) and (w.Parent <> nil) do
-                w := TfpgX11Window(w.Parent);
+                w := TlqX11Window(w.Parent);
 
               if (w <> nil) and (PopupListFind(w.WinHandle) = nil) and
-                 (not PopupDontCloseWidget(TfpgWidget(ew))) then
+                 (not PopupDontCloseWidget(TlqWidget(ew))) then
               begin
                 ClosePopups;
               end;
@@ -1740,7 +1740,7 @@ begin
           w := FindWindowByHandle(ev.xbutton.window); // restore w
           if xapplication.TopModalForm <> nil then
           begin
-            ew := TfpgX11Window(WidgetParentForm(TfpgWidget(w)));
+            ew := TlqX11Window(WidgetParentForm(TlqWidget(w)));
             if (ew <> nil) and (xapplication.TopModalForm <> ew) and (waUnblockableMessages in ew.WindowAttributes = False) then
               blockmsg := true;
           end;
@@ -1836,7 +1836,7 @@ begin
             end;
             if xapplication.TopModalForm <> nil then
             begin
-              ew := TfpgX11Window(WidgetParentForm(TfpgWidget(w)));
+              ew := TlqX11Window(WidgetParentForm(TlqWidget(w)));
               if (ew <> nil) and (xapplication.TopModalForm <> ew) and (waUnblockableMessages in ew.WindowAttributes = False) then
                 blockmsg := true;
             end;
@@ -1871,7 +1871,7 @@ begin
               if xapplication.TopModalForm <> nil then
               begin
                 // This is ugly!!!!!!!!!!!!!!!
-                ew := TfpgX11Window(WidgetParentForm(TfpgWidget(w)));
+                ew := TlqX11Window(WidgetParentForm(TlqWidget(w)));
                 if (ew <> nil) and (TopModalForm <> ew) and (waUnblockableMessages in ew.WindowAttributes = False) then
                   blockmsg := true;
               end;
@@ -2081,7 +2081,7 @@ begin
           if not Assigned(w) then
             ReportLostWindow(ev)
           else
-            RemoveWindowLookup(TfpgX11Window(w));
+            RemoveWindowLookup(TlqX11Window(w));
         end;
 
     X.NoExpose:
@@ -2103,12 +2103,12 @@ begin
   end;
 end;
 
-procedure TfpgX11Application.DoFlush;
+procedure TlqX11Application.DoFlush;
 begin
   XFlush(FDisplay);
 end;
 
-function TfpgX11Application.GetScreenWidth: TfpgCoord;
+function TlqX11Application.GetScreenWidth: TlqCoord;
 var
   wa: TXWindowAttributes;
 begin
@@ -2116,7 +2116,7 @@ begin
   Result := wa.Width;
 end;
 
-function TfpgX11Application.GetScreenHeight: TfpgCoord;
+function TlqX11Application.GetScreenHeight: TlqCoord;
 var
   wa: TXWindowAttributes;
 begin
@@ -2124,7 +2124,7 @@ begin
   Result := wa.Height;
 end;
 
-function TfpgX11Application.Screen_dpi_x: integer;
+function TlqX11Application.Screen_dpi_x: integer;
 var
   mm: integer;
 begin
@@ -2137,7 +2137,7 @@ begin
     Result := 96; // seems to be a well known default. :-(
 end;
 
-function TfpgX11Application.Screen_dpi_y: integer;
+function TlqX11Application.Screen_dpi_y: integer;
 var
   mm: integer;
 begin
@@ -2150,7 +2150,7 @@ begin
     Result := Screen_dpi_x; // same as width
 end;
 
-function TfpgX11Application.Screen_dpi: integer;
+function TlqX11Application.Screen_dpi: integer;
 begin
   Result := Screen_dpi_y;
   {$IFDEF DEBUG}
@@ -2160,13 +2160,13 @@ begin
   {$ENDIF}
 end;
 
-{ TfpgX11Window }
+{ TlqX11Window }
 
-procedure TfpgX11Window.DoAllocateWindowHandle(AParent: TfpgWindowBase);
+procedure TlqX11Window.DoAllocateWindowHandle(AParent: TlqWindowBase);
 var
-  pwh: TfpgWinHandle;
-  wh: TfpgWinHandle;
-  lmwh: TfpgWinHandle;
+  pwh: TlqWinHandle;
+  wh: TlqWinHandle;
+  lmwh: TlqWinHandle;
   attr: TXSetWindowAttributes;
   mask: longword;
   hints: TXSizeHints;
@@ -2179,7 +2179,7 @@ begin
     Exit; //==>
 
   if AParent <> nil then
-    pwh := TfpgX11Window(AParent).WinHandle
+    pwh := TlqX11Window(AParent).WinHandle
   else
     pwh := xapplication.RootWindow;
 
@@ -2307,16 +2307,16 @@ begin
     begin
       lmwh := 0;
       if fpgApplication.PrevModalForm <> nil then
-        lmwh := TfpgX11Window(fpgApplication.PrevModalForm).WinHandle
+        lmwh := TlqX11Window(fpgApplication.PrevModalForm).WinHandle
 { 2011-03-24: Graeme Geldenhuys
   I commented code this code because it caused more problems that it solved
   when multiple modal dialogs or prompts are shown in succession.
   This code was originally introduced in commit 2ffdd747. I'm looking for an
   alternative solution to the original problem. }
 //      else if FocusRootWidget <> nil then
-//        lmwh := TfpgX11Window(FocusRootWidget).WinHandle
+//        lmwh := TlqX11Window(FocusRootWidget).WinHandle
       else if fpgApplication.MainForm <> nil then
-        lmwh := TfpgX11Window(fpgApplication.MainForm).WinHandle;
+        lmwh := TlqX11Window(fpgApplication.MainForm).WinHandle;
       if lmwh <> 0 then
       begin
         XSetTransientForHint(xapplication.display, FWinHandle, lmwh);
@@ -2367,7 +2367,7 @@ begin
   AddWindowLookup(self);
 end;
 
-procedure TfpgX11Window.DoReleaseWindowHandle;
+procedure TlqX11Window.DoReleaseWindowHandle;
 //var
 //  lCallTrace: IInterface;
 begin
@@ -2386,13 +2386,13 @@ begin
   FWinHandle := 0;
 end;
 
-procedure TfpgX11Window.DoRemoveWindowLookup;
+procedure TlqX11Window.DoRemoveWindowLookup;
 begin
 //  PrintCallTraceDbgLn('RemoveWindowLookup ' + Name + ' [' + Classname + ']');
   RemoveWindowLookup(self);
 end;
 
-procedure TfpgX11Window.DoSetWindowVisible(const AValue: Boolean);
+procedure TlqX11Window.DoSetWindowVisible(const AValue: Boolean);
 begin
   if AValue then
   begin
@@ -2411,34 +2411,34 @@ begin
   end;
 end;
 
-function TfpgX11Window.HandleIsValid: boolean;
+function TlqX11Window.HandleIsValid: boolean;
 begin
   Result := (FWinHandle > 0);
 end;
 
-procedure TfpgX11Window.DoMoveWindow(const x: TfpgCoord; const y: TfpgCoord);
+procedure TlqX11Window.DoMoveWindow(const x: TlqCoord; const y: TlqCoord);
 begin
   if HandleIsValid then
     XMoveWindow(xapplication.display, FWinHandle, x, y);
 end;
 
-function TfpgX11Window.DoWindowToScreen(ASource: TfpgWindowBase; const AScreenPos: TPoint): TPoint;
+function TlqX11Window.DoWindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint;
 var
   dx: integer;
   dy: integer;
-  cw: TfpgWinHandle;
+  cw: TlqWinHandle;
 begin
-  if not TfpgX11Window(ASource).HandleIsValid then
+  if not TlqX11Window(ASource).HandleIsValid then
     Exit; //==>
 
-  XTranslateCoordinates(xapplication.display, TfpgX11Window(ASource).WinHandle,
+  XTranslateCoordinates(xapplication.display, TlqX11Window(ASource).WinHandle,
       XDefaultRootWindow(xapplication.display), AScreenPos.X, AScreenPos.Y, @dx, @dy, @cw);
 
   Result.X := dx;
   Result.Y := dy;
 end;
 
-procedure TfpgX11Window.DoUpdateWindowPosition;
+procedure TlqX11Window.DoUpdateWindowPosition;
 var
   w: longword;
   h: longword;
@@ -2458,7 +2458,7 @@ begin
   end;
 end;
 
-procedure TfpgX11Window.DoSetMouseCursor;
+procedure TlqX11Window.DoSetMouseCursor;
 var
   xc: TCursor;
   shape: integer;
@@ -2496,7 +2496,7 @@ begin
   FMouseCursorIsDirty := False;
 end;
 
-procedure TfpgX11Window.DoDNDEnabled(const AValue: boolean);
+procedure TlqX11Window.DoDNDEnabled(const AValue: boolean);
 begin
   // notify XDND protocol that we can handle DND
   if AValue then
@@ -2510,12 +2510,12 @@ begin
     XDeleteProperty(xapplication.Display, WinHandle, xapplication.XdndAware);
 end;
 
-procedure TfpgX11Window.DoAcceptDrops(const AValue: boolean);
+procedure TlqX11Window.DoAcceptDrops(const AValue: boolean);
 begin
   { TODO : Remove EnableDrops, then recurse from here to parent top level from, and set XDNDAware property for form. }
 end;
 
-function TfpgX11Window.GetWindowState: TfpgWindowState;
+function TlqX11Window.GetWindowState: TlqWindowState;
 type
   TWMStateType = (wms_none, wms_normal, wms_withdrawn, wms_iconic);
   wmstate = record
@@ -2575,7 +2575,7 @@ begin
     XFree(data);
 end;
 
-procedure TfpgX11Window.DoSetWindowTitle(const ATitle: string);
+procedure TlqX11Window.DoSetWindowTitle(const ATitle: string);
 var
   tp: TXTextProperty;
 begin
@@ -2595,7 +2595,7 @@ begin
   XSetWMIconName(xapplication.Display, FWinHandle, @tp);
 end;
 
-constructor TfpgX11Window.Create(AOwner: TComponent);
+constructor TlqX11Window.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWinHandle := 0;
@@ -2603,12 +2603,12 @@ begin
   QueueEnabledDrops := False;
 end;
 
-procedure TfpgX11Window.ActivateWindow;
+procedure TlqX11Window.ActivateWindow;
 begin
   XSetInputFocus(xapplication.Display, FWinHandle, RevertToParent, CurrentTime);
 end;
 
-procedure TfpgX11Window.CaptureMouse;
+procedure TlqX11Window.CaptureMouse;
 begin
   XGrabPointer(xapplication.Display, FWinHandle,
       TBool(False),
@@ -2622,26 +2622,26 @@ begin
       );
 end;
 
-procedure TfpgX11Window.ReleaseMouse;
+procedure TlqX11Window.ReleaseMouse;
 begin
   XUngrabPointer(xapplication.display, CurrentTime);
 end;
 
-procedure TfpgX11Window.SetFullscreen(AValue: Boolean);
+procedure TlqX11Window.SetFullscreen(AValue: Boolean);
 begin
   inherited SetFullscreen(AValue);
   fpgApplication.netlayer.WindowSetFullscreen(FWinHandle, AValue);
 end;
 
-procedure TfpgX11Window.BringToFront;
+procedure TlqX11Window.BringToFront;
 begin
   if HasHandle then
     XRaiseWindow(xapplication.display, FWinHandle);
 end;
 
-{ TfpgX11FontResource }
+{ TlqX11FontResource }
 
-function TfpgX11FontResource.DoGetTextWidthClassic(const txt: string): integer;
+function TlqX11FontResource.DoGetTextWidthClassic(const txt: string): integer;
 var
   extents: TXGlyphInfo;
 begin
@@ -2649,7 +2649,7 @@ begin
   Result := extents.xOff;
 end;
 
-function TfpgX11FontResource.DoGetTextWidthWorkaround(const txt: string): integer;
+function TlqX11FontResource.DoGetTextWidthWorkaround(const txt: string): integer;
 var
   extents: TXGlyphInfo;
   ch: string;
@@ -2665,39 +2665,39 @@ begin
   end;
 end;
 
-constructor TfpgX11FontResource.Create(const afontdesc: string);
+constructor TlqX11FontResource.Create(const afontdesc: string);
 begin
   FFontData := XftFontOpenName(xapplication.display, xapplication.DefaultScreen, PChar(afontdesc));
 end;
 
-destructor TfpgX11FontResource.Destroy;
+destructor TlqX11FontResource.Destroy;
 begin
   if HandleIsValid then
     XftFontClose(xapplication.Display, FFontData);
   inherited;
 end;
 
-function TfpgX11FontResource.HandleIsValid: boolean;
+function TlqX11FontResource.HandleIsValid: boolean;
 begin
   Result := (FFontData <> nil);
 end;
 
-function TfpgX11FontResource.GetAscent: integer;
+function TlqX11FontResource.GetAscent: integer;
 begin
   Result := FFontData^.ascent;
 end;
 
-function TfpgX11FontResource.GetDescent: integer;
+function TlqX11FontResource.GetDescent: integer;
 begin
   Result := FFontData^.descent;
 end;
 
-function TfpgX11FontResource.GetHeight: integer;
+function TlqX11FontResource.GetHeight: integer;
 begin
   Result := FFontData^.Height;
 end;
 
-function TfpgX11FontResource.GetTextWidth(const txt: string): integer;
+function TlqX11FontResource.GetTextWidth(const txt: string): integer;
 begin
   if length(txt) < 1 then
   begin
@@ -2712,9 +2712,9 @@ begin
     Result := DoGetTextWidthWorkaround(txt);
 end;
 
-{ TfpgX11Canvas }
+{ TlqX11Canvas }
 
-constructor TfpgX11Canvas.Create(awin: TfpgWindowBase);
+constructor TlqX11Canvas.Create(awin: TlqWindowBase);
 begin
   inherited Create(awin);
   FDrawing    := False;
@@ -2727,7 +2727,7 @@ begin
   FClipRegion   := nil;
 end;
 
-destructor TfpgX11Canvas.Destroy;
+destructor TlqX11Canvas.Destroy;
 begin
   if FDrawing then
     DoEndDraw;
@@ -2736,7 +2736,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgX11Canvas.DoBeginDraw(awin: TfpgWindowBase; buffered: boolean);
+procedure TlqX11Canvas.DoBeginDraw(awin: TlqWindowBase; buffered: boolean);
 var
   x: integer;
   y: integer;
@@ -2749,15 +2749,15 @@ var
   pmh: longword;
   GcValues: TXGcValues;
 begin
-  if Assigned(TfpgX11Window(awin)) then
+  if Assigned(TlqX11Window(awin)) then
   begin
-    // This occurs every now and again with TfpgMemo and InvertCaret painting!
+    // This occurs every now and again with TlqMemo and InvertCaret painting!
     // Investigate this.
-    if not TfpgX11Window(awin).HasHandle then
+    if not TlqX11Window(awin).HasHandle then
       raise Exception.Create('Window doesn''t have a Handle');
   end;
 
-  XGetGeometry(xapplication.display, TfpgX11Window(awin).FWinHandle, @rw, @x, @y, @w, @h, @bw, @d);
+  XGetGeometry(xapplication.display, TlqX11Window(awin).FWinHandle, @rw, @x, @y, @w, @h, @bw, @d);
 
   if FDrawing and buffered and (FBufferPixmap > 0) then
     if FBufferPixmap > 0 then
@@ -2770,7 +2770,7 @@ begin
 
   if not FDrawing then
   begin
-    FDrawWindow := TfpgX11Window(awin);
+    FDrawWindow := TlqX11Window(awin);
 
     if buffered then
     begin
@@ -2802,12 +2802,12 @@ begin
         // Reset the timers next trigger
         if FBufferFreeTimer = nil then
         begin
-          FBufferFreeTimer := TfpgTimer.Create(500);
-          TfpgTimer(FBufferFreeTimer).OnTimer := @BufferFreeTimer;
+          FBufferFreeTimer := TlqTimer.Create(500);
+          TlqTimer(FBufferFreeTimer).OnTimer := @BufferFreeTimer;
         end
         else
-          TfpgTimer(FBufferFreeTimer).Enabled := False;
-        TfpgTimer(FBufferFreeTimer).Enabled := True;
+          TlqTimer(FBufferFreeTimer).Enabled := False;
+        TlqTimer(FBufferFreeTimer).Enabled := True;
       end;
       FDrawHandle   := FBufferPixmap;
     end
@@ -2831,9 +2831,9 @@ begin
   FDrawing := True;
 end;
 
-procedure TfpgX11Canvas.DoPutBufferToScreen(x, y, w, h: TfpgCoord);
+procedure TlqX11Canvas.DoPutBufferToScreen(x, y, w, h: TlqCoord);
 var
-  cgc: TfpgGContext;
+  cgc: TlqGContext;
   GcValues: TXGcValues;
 begin
   if FBufferPixmap > 0 then
@@ -2844,7 +2844,7 @@ begin
   end;
 end;
 
-procedure TfpgX11Canvas.DoEndDraw;
+procedure TlqX11Canvas.DoEndDraw;
 begin
   if FDrawing then
   begin
@@ -2860,7 +2860,7 @@ begin
   end;
 end;
 
-function TfpgX11Canvas.GetPixel(X, Y: integer): TfpgColor;
+function TlqX11Canvas.GetPixel(X, Y: integer): TlqColor;
 var
   Image: PXImage;
   Pixel: Cardinal;
@@ -2877,7 +2877,7 @@ begin
     x_Color.pixel := Pixel;
 
     XQueryColor(xapplication.display, xapplication.DefaultColorMap, @x_Color);
-    Result := TfpgColor(((x_Color.red and $00FF) shl 16) or
+    Result := TlqColor(((x_Color.red and $00FF) shl 16) or
                        ((x_Color.green and $00FF) shl 8) or
                         (x_Color.blue and $00FF));
   finally
@@ -2885,9 +2885,9 @@ begin
   end;
 end;
 
-procedure TfpgX11Canvas.SetPixel(X, Y: integer; const AValue: TfpgColor);
+procedure TlqX11Canvas.SetPixel(X, Y: integer; const AValue: TlqColor);
 var
-  oldColor: TfpgColor;
+  oldColor: TlqColor;
 begin
   oldColor := Color;
   SetColor(AValue);
@@ -2895,19 +2895,19 @@ begin
   SetColor(oldColor);
 end;
 
-procedure TfpgX11Canvas.DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TlqX11Canvas.DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 begin
   XDrawArc(xapplication.display, FDrawHandle, Fgc, x, y, w-1, h-1,
       Trunc(64 * a1), Trunc(64 * a2));
 end;
 
-procedure TfpgX11Canvas.DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TlqX11Canvas.DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 begin
   XFillArc(xapplication.display, FDrawHandle, Fgc, x, y, w, h,
       Trunc(64 * a1), Trunc(64 * a2));
 end;
 
-procedure TfpgX11Canvas.DoDrawPolygon(Points: fpg_base.PPoint; NumPts: Integer; Winding: boolean);
+procedure TlqX11Canvas.DoDrawPolygon(Points: lq_base.PPoint; NumPts: Integer; Winding: boolean);
 var
   PointArray: PXPoint;
   i: integer;
@@ -2924,7 +2924,7 @@ begin
     FreeMem(PointArray);
 end;
 
-procedure TfpgX11Canvas.BufferFreeTimer(Sender: TObject);
+procedure TlqX11Canvas.BufferFreeTimer(Sender: TObject);
 begin
   {$IFDEF DEBUG}
   WriteLn('fpGFX/X11: Freeing Buffer w=', FPixWidth, ' h=', FPixHeight);
@@ -2933,32 +2933,32 @@ begin
   FreeAndNil(FBufferFreeTimer);
 end;
 
-procedure TfpgX11Canvas.TryFreePixmap;
+procedure TlqX11Canvas.TryFreePixmap;
 begin
   if FBufferPixmap > 0 then
     XFreePixmap(xapplication.Display, FBufferPixmap);
   FBufferPixmap := 0;
 end;
 
-procedure TfpgX11Canvas.DoSetFontRes(fntres: TfpgFontResourceBase);
+procedure TlqX11Canvas.DoSetFontRes(fntres: TlqFontResourceBase);
 begin
   if fntres = nil then
     Exit; //==>
-  FCurFontRes := TfpgX11FontResource(fntres);
+  FCurFontRes := TlqX11FontResource(fntres);
 end;
 
-procedure TfpgX11Canvas.DoSetTextColor(cl: TfpgColor);
+procedure TlqX11Canvas.DoSetTextColor(cl: TlqColor);
 begin
   { We use fpgColorToX() because we don't want Alpha channel information for X11 text }
   SetXftColor(fpgColorToX(cl), FColorTextXft);
 end;
 
-procedure TfpgX11Canvas.DoSetColor(cl: TfpgColor);
+procedure TlqX11Canvas.DoSetColor(cl: TlqColor);
 begin
   XSetForeGround(xapplication.display, Fgc, fpgColorToX(cl));
 end;
 
-procedure TfpgX11Canvas.DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle);
+procedure TlqX11Canvas.DoSetLineStyle(awidth: integer; astyle: TlqLineStyle);
 const
   cDot: array[0..1] of Char = #1#1;
   cDash: array[0..1] of Char = #4#2;
@@ -3005,7 +3005,7 @@ begin
   end;  { case }
 end;
 
-procedure TfpgX11Canvas.DoDrawString(x, y: TfpgCoord; const txt: string);
+procedure TlqX11Canvas.DoDrawString(x, y: TlqCoord; const txt: string);
 begin
   if Length(txt) < 1 then
     Exit; //==>
@@ -3014,9 +3014,9 @@ begin
     y + FCurFontRes.GetAscent, PChar(txt), Length(txt));
 end;
 
-procedure TfpgX11Canvas.DoGetWinRect(out r: TfpgRect);
+procedure TlqX11Canvas.DoGetWinRect(out r: TlqRect);
 var
-  rw: TfpgWinHandle;
+  rw: TlqWinHandle;
   x: integer;
   y: integer;
   bw: longword;
@@ -3028,12 +3028,12 @@ begin
       @(r.width), @(r.height), @bw, @d);
 end;
 
-procedure TfpgX11Canvas.DoFillRectangle(x, y, w, h: TfpgCoord);
+procedure TlqX11Canvas.DoFillRectangle(x, y, w, h: TlqCoord);
 begin
   XFillRectangle(xapplication.display, FDrawHandle, Fgc, x, y, w, h);
 end;
 
-procedure TfpgX11Canvas.DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord);
+procedure TlqX11Canvas.DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord);
 begin
   XSetForeGround(xapplication.display, Fgc, fpgColorToX(fpgColorToRGB(col)));
   XSetFunction(xapplication.display, Fgc, GXxor);
@@ -3042,7 +3042,7 @@ begin
   XSetFunction(xapplication.display, Fgc, GXcopy);
 end;
 
-procedure TfpgX11Canvas.DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord);
+procedure TlqX11Canvas.DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord);
 var
   pts: array[1..3] of TXPoint;
 begin
@@ -3053,7 +3053,7 @@ begin
   XFillPolygon(xapplication.display, FDrawHandle, Fgc, @pts, 3, CoordModeOrigin, X.Complex);
 end;
 
-procedure TfpgX11Canvas.DoDrawRectangle(x, y, w, h: TfpgCoord);
+procedure TlqX11Canvas.DoDrawRectangle(x, y, w, h: TlqCoord);
 begin
 //  writeln(Format('DoDrawRectangle  x=%d y=%d w=%d h=%d', [x, y, w, h]));
   // Same behavior as Windows. See documentation for reason.
@@ -3063,13 +3063,13 @@ begin
     XDrawRectangle(xapplication.display, FDrawHandle, Fgc, x, y, w-1, h-1);
 end;
 
-procedure TfpgX11Canvas.DoDrawLine(x1, y1, x2, y2: TfpgCoord);
+procedure TlqX11Canvas.DoDrawLine(x1, y1, x2, y2: TlqCoord);
 begin
   // Same behavior as Windows. See documentation for reason.
   XDrawLine(xapplication.display, FDrawHandle, Fgc, x1, y1, x2, y2);
 end;
 
-procedure TfpgX11Canvas.DoSetClipRect(const ARect: TfpgRect);
+procedure TlqX11Canvas.DoSetClipRect(const ARect: TlqRect);
 var
   r: TXRectangle;
   rg: TRegion;
@@ -3090,12 +3090,12 @@ begin
   XDestroyRegion(rg);
 end;
 
-function TfpgX11Canvas.DoGetClipRect: TfpgRect;
+function TlqX11Canvas.DoGetClipRect: TlqRect;
 begin
   Result := FClipRect;
 end;
 
-procedure TfpgX11Canvas.DoAddClipRect(const ARect: TfpgRect);
+procedure TlqX11Canvas.DoAddClipRect(const ARect: TlqRect);
 var
   r: TXRectangle;
   rg: TRegion;
@@ -3117,16 +3117,16 @@ begin
   XDestroyRegion(rg);
 end;
 
-procedure TfpgX11Canvas.DoClearClipRect;
+procedure TlqX11Canvas.DoClearClipRect;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   DoGetWinRect(r);
   DoSetClipRect(r);
   FClipRectSet := False;
 end;
 
-procedure TfpgX11Canvas.DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi, w, h: integer);
+procedure TlqX11Canvas.DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi, w, h: integer);
 var
   msk: TPixmap;
   gc2: Tgc;
@@ -3149,34 +3149,34 @@ begin
     XFillRectangle(xapplication.display, msk, gc2, 0, 0, w, h);
 
     XSetForeground(xapplication.display, gc2, 1);
-    XPutImage(xapplication.display, msk, gc2, TfpgX11Image(img).XImageMask, xi, yi, 0, 0, w, h);
+    XPutImage(xapplication.display, msk, gc2, TlqX11Image(img).XImageMask, xi, yi, 0, 0, w, h);
 
     drawgc := XCreateGc(xapplication.display, FDrawHandle, 0, @GcValues);
     XSetClipMask(xapplication.display, drawgc, msk);
     XSetClipOrigin(xapplication.display, drawgc, x, y);
 
-    XPutImage(xapplication.display, FDrawHandle, drawgc, TfpgX11Image(img).XImage, xi, yi, x, y, w, h);
+    XPutImage(xapplication.display, FDrawHandle, drawgc, TlqX11Image(img).XImage, xi, yi, x, y, w, h);
     XFreePixmap(xapplication.display, msk);
     XFreeGc(xapplication.display, drawgc);
     XFreeGc(xapplication.display, gc2);
   end
   else
-    XPutImage(xapplication.display, FDrawHandle, Fgc, TfpgImage(img).XImage, xi, yi, x, y, w, h);
+    XPutImage(xapplication.display, FDrawHandle, Fgc, TlqImage(img).XImage, xi, yi, x, y, w, h);
 end;
 
-{ TfpgX11Image }
+{ TlqX11Image }
 
-constructor TfpgX11Image.Create;
+constructor TlqX11Image.Create;
 begin
   inherited Create;
 end;
 
-procedure TfpgX11Image.DoFreeImage;
+procedure TlqX11Image.DoFreeImage;
 begin
   // does nothing on X11
 end;
 
-procedure TfpgX11Image.DoInitImage(acolordepth, awidth, aheight: integer; aimgdata: Pointer);
+procedure TlqX11Image.DoInitImage(acolordepth, awidth, aheight: integer; aimgdata: Pointer);
 begin
   FMasked := False;
 
@@ -3223,7 +3223,7 @@ begin
   XInitImage(@FXimg);
 end;
 
-procedure TfpgX11Image.DoInitImageMask(awidth, aheight: integer; aimgdata: Pointer);
+procedure TlqX11Image.DoInitImageMask(awidth, aheight: integer; aimgdata: Pointer);
 begin
   FMasked := True;
 
@@ -3253,19 +3253,19 @@ begin
   XInitImage(@FXimgMask);
 end;
 
-function TfpgX11Image.XImage: PXImage;
+function TlqX11Image.XImage: PXImage;
 begin
   Result := @FXimg;
 end;
 
-function TfpgX11Image.XImageMask: PXImage;
+function TlqX11Image.XImageMask: PXImage;
 begin
   Result := @FXimgMask;
 end;
 
-{ TfpgX11Clipboard }
+{ TlqX11Clipboard }
 
-function TfpgX11Clipboard.DoGetText: TfpgString;
+function TlqX11Clipboard.DoGetText: TlqString;
 begin
   XConvertSelection(xapplication.Display, xapplication.xia_clipboard,
       XA_STRING, xapplication.xia_clipboard, FClipboardWndHandle, 0);
@@ -3281,23 +3281,23 @@ begin
   Result := FClipboardText;
 end;
 
-procedure TfpgX11Clipboard.DoSetText(const AValue: TfpgString);
+procedure TlqX11Clipboard.DoSetText(const AValue: TlqString);
 begin
   FClipboardText := AValue;
   XSetSelectionOwner(xapplication.Display, xapplication.xia_clipboard,
       FClipboardWndHandle, CurrentTime);
 end;
 
-procedure TfpgX11Clipboard.InitClipboard;
+procedure TlqX11Clipboard.InitClipboard;
 begin
   FWaitingForSelection := False;
   FClipboardWndHandle := XCreateSimpleWindow(xapplication.Display,
       xapplication.RootWindow, 10, 10, 10, 10, 0, 0, 0);
 end;
 
-{ TfpgX11FileList }
+{ TlqX11FileList }
 
-function TfpgX11FileList.EncodeModeString(FileMode: longword): TFileModeString;
+function TlqX11FileList.EncodeModeString(FileMode: longword): TFileModeString;
 const
   modestring: string[9] = 'xwrxwrxwr';  // must be in reverse order
 var
@@ -3320,16 +3320,16 @@ begin
   end;
 end;
 
-constructor TfpgX11FileList.Create;
+constructor TlqX11FileList.Create;
 begin
   inherited Create;
   FHasFileMode := true;
 end;
 
-function TfpgX11FileList.InitializeEntry(sr: TSearchRec): TFileEntry;
+function TlqX11FileList.InitializeEntry(sr: TSearchRec): TFileEntry;
 var
   info: Tstat;
-  fullname: TfpgString;
+  fullname: TlqString;
 begin
   Result := inherited InitializeEntry(sr);
   if Assigned(Result) then
@@ -3362,7 +3362,7 @@ begin
   end;
 end;
 
-procedure TfpgX11FileList.PopulateSpecialDirs(const aDirectory: TfpgString);
+procedure TlqX11FileList.PopulateSpecialDirs(const aDirectory: TlqString);
 var
   ds: string;
 begin
@@ -3377,16 +3377,16 @@ begin
 end;
 
 
-{ TfpgX11Drag }
+{ TlqX11Drag }
 
-procedure TfpgX11Drag.SetTypeListProperty;
+procedure TlqX11Drag.SetTypeListProperty;
 begin
   XChangeProperty(xapplication.Display, FSource.WinHandle,
       xapplication.XdndTypeList, XA_ATOM, 32,
       PropModeReplace, @FMimeTypesArray[0], Length(FMimeTypesArray));
 end;
 
-procedure TfpgX11Drag.InitializeMimeTypesToAtoms;
+procedure TlqX11Drag.InitializeMimeTypesToAtoms;
 var
   sl: TStringList;
   i: integer;
@@ -3412,7 +3412,7 @@ begin
   end;
 end;
 
-procedure TfpgX11Drag.Dragging(ev: TXEvent);
+procedure TlqX11Drag.Dragging(ev: TXEvent);
 var
   lTarget: TWindow;
 begin
@@ -3445,7 +3445,7 @@ begin
   end;
 end;
 
-function TfpgX11Drag.IsDNDAware(win: TWindow): boolean;
+function TlqX11Drag.IsDNDAware(win: TWindow): boolean;
 var
   actualtype: TAtom;
   actualformat: cint;
@@ -3478,7 +3478,7 @@ begin
   {$ENDIF}
 end;
 
-procedure TfpgX11Drag.SendDNDLeave(ATarget: TWindow);
+procedure TlqX11Drag.SendDNDLeave(ATarget: TWindow);
 var
   xev: TXEvent;
 begin
@@ -3498,7 +3498,7 @@ begin
   XSendEvent(xapplication.Display, ATarget, False, NoEventMask, @xev);
 end;
 
-procedure TfpgX11Drag.SendDNDEnter(ATarget: TWindow);
+procedure TlqX11Drag.SendDNDEnter(ATarget: TWindow);
 var
   xev: TXEvent;
   i, n: integer;
@@ -3540,7 +3540,7 @@ begin
   XSendEvent(xapplication.Display, ATarget, False, NoEventMask, @xev);
 end;
 
-procedure TfpgX11Drag.SendDNDPosition(ATarget: TWindow; x_root: cint;
+procedure TlqX11Drag.SendDNDPosition(ATarget: TWindow; x_root: cint;
   y_root: cint; AAction: TAtom; ATime: X.TTime);
 var
   xev: TXEvent;
@@ -3561,7 +3561,7 @@ begin
   XSendEvent(xapplication.Display, ATarget, False, NoEventMask, @xev);
 end;
 
-procedure TfpgX11Drag.SendDNDDrop;
+procedure TlqX11Drag.SendDNDDrop;
 var
   xev: TXEvent;
 begin
@@ -3583,7 +3583,7 @@ begin
 
     XSendEvent(xapplication.Display, FLastTarget, False, NoEventMask, @xev);
 
-    uDragSource := FSource as TfpgWidget;
+    uDragSource := FSource as TlqWidget;
   end
   else
   begin
@@ -3593,8 +3593,8 @@ begin
   FSource.MouseCursor := mcDefault;
 end;
 
-procedure TfpgX11Drag.HandleDNDStatus(ATarget: TWindow; AAccept: integer;
-  ARect: TfpgRect; AAction: TAtom);
+procedure TlqX11Drag.HandleDNDStatus(ATarget: TWindow; AAccept: integer;
+  ARect: TlqRect; AAction: TAtom);
 begin
   if ATarget = FLastTarget then
   begin
@@ -3615,7 +3615,7 @@ begin
   { TODO: If we waited to long, we have a timeout }
 end;
 
-procedure TfpgX11Drag.HandleSelectionRequest(ev: TXEvent);
+procedure TlqX11Drag.HandleSelectionRequest(ev: TXEvent);
 var
   e: TXSelectionEvent;
   s: string;
@@ -3653,15 +3653,15 @@ begin
   XSendEvent(xapplication.Display, e.requestor, false, NoEventMask, @e );
 end;
 
-function TfpgX11Drag.GetSource: TfpgX11Window;
+function TlqX11Drag.GetSource: TlqX11Window;
 begin
   Result := FSource;
 end;
 
-destructor TfpgX11Drag.Destroy;
+destructor TlqX11Drag.Destroy;
 begin
   {$IFDEF DNDDEBUG}
-  writeln('TfpgX11Drag.Destroy ');
+  writeln('TlqX11Drag.Destroy ');
   {$ENDIF}
   FSource.MouseCursor := mcDefault;
   XDeleteProperty(xapplication.Display, FSource.WinHandle, xapplication.XdndAware);
@@ -3670,7 +3670,7 @@ begin
   inherited Destroy;
 end;
 
-function TfpgX11Drag.Execute(const ADropActions: TfpgDropActions; const ADefaultAction: TfpgDropAction): TfpgDropAction;
+function TlqX11Drag.Execute(const ADropActions: TlqDropActions; const ADefaultAction: TlqDropAction): TlqDropAction;
 var
   win: TWindow;
 begin
@@ -3694,16 +3694,16 @@ begin
   end;
 end;
 
-{ TfpgX11SystemTrayHandler }
+{ TlqX11SystemTrayHandler }
 
-function TfpgX11SystemTrayHandler.GetTrayIconParent: TWindow;
+function TlqX11SystemTrayHandler.GetTrayIconParent: TWindow;
 begin
   if FTrayIconParent = None then
     FTrayIconParent := GetSysTrayWindow;
   Result := FTrayIconParent;
 end;
 
-function TfpgX11SystemTrayHandler.GetSysTrayWindow: TWindow;
+function TlqX11SystemTrayHandler.GetSysTrayWindow: TWindow;
 var
   buf: array[0..32] of char;
   selection_atom: TAtom;
@@ -3717,7 +3717,7 @@ begin
   XUngrabServer(xapplication.Display);
 end;
 
-function TfpgX11SystemTrayHandler.Send_Message(dest: TWindow; msg: longword; data1, data2, data3: longword): boolean;
+function TlqX11SystemTrayHandler.Send_Message(dest: TWindow; msg: longword; data1, data2, data3: longword): boolean;
 var
   ev: TXEvent;
 begin
@@ -3738,29 +3738,29 @@ begin
   XSync(xapplication.Display, False);
 end;
 
-procedure TfpgX11SystemTrayHandler.Show;
+procedure TlqX11SystemTrayHandler.Show;
 begin
-  Send_Message(TrayIconParent, SYSTEM_TRAY_REQUEST_DOCK, TfpgX11Window(Owner).WinHandle, 0, 0);
+  Send_Message(TrayIconParent, SYSTEM_TRAY_REQUEST_DOCK, TlqX11Window(Owner).WinHandle, 0, 0);
 end;
 
-procedure TfpgX11SystemTrayHandler.Hide;
+procedure TlqX11SystemTrayHandler.Hide;
 begin
-  TfpgX11Window(FTrayWidget).DoSetWindowVisible(False);
+  TlqX11Window(FTrayWidget).DoSetWindowVisible(False);
 end;
 
-constructor TfpgX11SystemTrayHandler.Create(AOwner: TComponent);
+constructor TlqX11SystemTrayHandler.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FTrayWidget := AOwner as TfpgWindowBase;
+  FTrayWidget := AOwner as TlqWindowBase;
   FTrayIconParent := None;
 end;
 
-function TfpgX11SystemTrayHandler.IsSystemTrayAvailable: boolean;
+function TlqX11SystemTrayHandler.IsSystemTrayAvailable: boolean;
 begin
   Result := GetSysTrayWindow <> None;
 end;
 
-function TfpgX11SystemTrayHandler.SupportsMessages: boolean;
+function TlqX11SystemTrayHandler.SupportsMessages: boolean;
 begin
   Result := True;
 end;

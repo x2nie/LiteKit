@@ -34,16 +34,16 @@ uses
   
 type
 
-  TfpgPopupWindow = class(TfpgWidget)
+  TlqPopupWindow = class(TlqWidget)
   private
-    FDontCloseWidget: TfpgWidget;
+    FDontCloseWidget: TlqWidget;
     FOnClose: TNotifyEvent;
     FOnShow: TNotifyEvent;
     FPopupFrame: boolean;
     procedure   SetPopupFrame(const AValue: boolean);
-    function    GetDisplayPos(AReferenceWindow: TfpgWidget; const x, y: integer): TPoint;
+    function    GetDisplayPos(AReferenceWindow: TlqWidget; const x, y: integer): TPoint;
   protected
-    procedure   MsgClose(var msg: TfpgMessageRec); message FPGM_CLOSE;
+    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
     procedure   HandleClose; virtual;
     procedure   HandleShow; override;
     procedure   HandlePaint; override;
@@ -54,10 +54,10 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure   AdjustWindowStyle; override;
-    procedure   ShowAt(AWidget: TfpgWidget; x, y: TfpgCoord; const ACanAdjustPos: boolean = false); overload;
-    procedure   ShowAt(x, y: TfpgCoord); overload;
+    procedure   ShowAt(AWidget: TlqWidget; x, y: TlqCoord; const ACanAdjustPos: boolean = false); overload;
+    procedure   ShowAt(x, y: TlqCoord); overload;
     procedure   Close; virtual;
-    property    DontCloseWidget: TfpgWidget read FDontCloseWidget write FDontCloseWidget;
+    property    DontCloseWidget: TlqWidget read FDontCloseWidget write FDontCloseWidget;
     property    PopupFrame: boolean read FPopupFrame write SetPopupFrame;
     property    OnClose: TNotifyEvent read FOnClose write FOnClose;
     property    OnShow: TNotifyEvent read FOnShow write FOnShow;
@@ -65,9 +65,9 @@ type
 
 
 procedure ClosePopups;
-function  PopupListFirst: TfpgPopupWindow;
-function  PopupListFind(AWinHandle: TfpgWinHandle): TfpgPopupWindow;
-function  PopupDontCloseWidget(AWidget: TfpgWidget): boolean;
+function  PopupListFirst: TlqPopupWindow;
+function  PopupListFind(AWinHandle: TlqWinHandle): TlqPopupWindow;
+function  PopupDontCloseWidget(AWidget: TlqWidget): boolean;
 
 
 implementation
@@ -77,12 +77,12 @@ type
   // Popup window linked list. Maybe we can implement it via a TList as well.
   PPopupListRec = ^PopupListRec;
   PopupListRec = record
-    Widget: TfpgPopupWindow;
+    Widget: TlqPopupWindow;
     Next: PPopupListRec;
   end;
 
 var
-  uOriginalFocusRoot: TfpgWidget;
+  uOriginalFocusRoot: TlqWidget;
   uFirstPopup: PPopupListRec;
   uLastPopup: PPopupListRec;
   
@@ -96,11 +96,11 @@ begin
     {$IFDEF DEBUG}
     writeln('...closing ', uFirstPopup^.Widget.Name);
     {$ENDIF}
-    TfpgPopupWindow(uFirstPopup^.Widget).Close;
+    TlqPopupWindow(uFirstPopup^.Widget).Close;
   end;
 end;
 
-procedure PopupListAdd(pw: TfpgPopupWindow);
+procedure PopupListAdd(pw: TlqPopupWindow);
 var
   p: PPopupListRec;
 begin
@@ -122,7 +122,7 @@ begin
   uLastPopup := p;
 end;
 
-procedure PopupListRemove(pw: TfpgPopupWindow);
+procedure PopupListRemove(pw: TlqPopupWindow);
 var
   prevp: PPopupListRec;
   p: PPopupListRec;
@@ -158,7 +158,7 @@ begin
     FocusRootWidget := uOriginalFocusRoot;
 end;
 
-function PopupListFirst: TfpgPopupWindow;
+function PopupListFirst: TlqPopupWindow;
 begin
   if uFirstPopup <> nil then
     Result := uFirstPopup^.Widget
@@ -167,7 +167,7 @@ begin
 end;
 
 
-function PopupListFind(AWinHandle: TfpgWinHandle): TfpgPopupWindow;
+function PopupListFind(AWinHandle: TlqWinHandle): TlqPopupWindow;
 var
   p: PPopupListRec;
 begin
@@ -184,7 +184,7 @@ begin
   Result := nil;
 end;
 
-function PopupDontCloseWidget(AWidget: TfpgWidget): boolean;
+function PopupDontCloseWidget(AWidget: TlqWidget): boolean;
 var
   p: PPopupListRec;
 begin
@@ -205,9 +205,9 @@ begin
 end;
 
 
-{ TfpgPopupWindow }
+{ TlqPopupWindow }
 
-procedure TfpgPopupWindow.SetPopupFrame(const AValue: boolean);
+procedure TlqPopupWindow.SetPopupFrame(const AValue: boolean);
 begin
   if FPopupFrame <> AValue then
   begin
@@ -216,7 +216,7 @@ begin
   end;
 end;
 
-function TfpgPopupWindow.GetDisplayPos(AReferenceWindow: TfpgWidget; const x, y: integer): TPoint;
+function TlqPopupWindow.GetDisplayPos(AReferenceWindow: TlqWidget; const x, y: integer): TPoint;
 begin
   // translate coordinates
   Result := WindowToScreen(AReferenceWindow, Point(x, y));
@@ -230,41 +230,41 @@ begin
     Result.x := Result.x - self.Width;
 end;
 
-procedure TfpgPopupWindow.MsgClose(var msg: TfpgMessageRec);
+procedure TlqPopupWindow.MsgClose(var msg: TlqMessageRec);
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgPopupWindow.MsgClose [', Classname, ']');
+  writeln('TlqPopupWindow.MsgClose [', Classname, ']');
   {$ENDIF}
   HandleClose;
 end;
 
-procedure TfpgPopupWindow.AdjustWindowStyle;
+procedure TlqPopupWindow.AdjustWindowStyle;
 begin
   inherited AdjustWindowStyle;
   // We could possibly change this later
   Exclude(FWindowAttributes, waSizeable);
 end;
 
-procedure TfpgPopupWindow.HandleClose;
+procedure TlqPopupWindow.HandleClose;
 begin
   DoOnClose;
   HandleHide;
 end;
 
-procedure TfpgPopupWindow.HandleShow;
+procedure TlqPopupWindow.HandleShow;
 begin
   inherited HandleShow;
   DoOnShow;
 end;
 
-procedure TfpgPopupWindow.HandlePaint;
+procedure TlqPopupWindow.HandlePaint;
 begin
   inherited HandlePaint;
   if PopupFrame then
     DoPaintPopupFrame;
 end;
 
-procedure TfpgPopupWindow.ProcessPopupFrame;
+procedure TlqPopupWindow.ProcessPopupFrame;
 var
   i: integer;
 begin
@@ -272,8 +272,8 @@ begin
   begin
     for i := 0 to ComponentCount-1 do
     begin
-      if Components[i] is TfpgWidget then
-        TfpgWidget(Components[i]).Anchors := [anRight, anBottom];
+      if Components[i] is TlqWidget then
+        TlqWidget(Components[i]).Anchors := [anRight, anBottom];
     end;
     // make space for the frame
     HandleResize(Width+2, Height+2);
@@ -281,8 +281,8 @@ begin
 
     for i := 0 to ComponentCount-1 do
     begin
-      if Components[i] is TfpgWidget then
-        TfpgWidget(Components[i]).Anchors := [anLeft, anTop];
+      if Components[i] is TlqWidget then
+        TlqWidget(Components[i]).Anchors := [anLeft, anTop];
     end;
     HandleResize(Width+2, Height+2);
     UpdateWindowPosition;
@@ -290,9 +290,9 @@ begin
   end;
 end;
 
-procedure TfpgPopupWindow.DoPaintPopupFrame;
+procedure TlqPopupWindow.DoPaintPopupFrame;
 var
-  lColor: TfpgColor;
+  lColor: TlqColor;
 begin
   lColor := fpgColorToRGB(BackgroundColor);
   Canvas.SetLineStyle(1, lsSolid);
@@ -301,19 +301,19 @@ begin
   Canvas.SetColor(lColor);
 end;
 
-procedure TfpgPopupWindow.DoOnClose;
+procedure TlqPopupWindow.DoOnClose;
 begin
   if Assigned(OnClose) then
     OnClose(self);
 end;
 
-procedure TfpgPopupWindow.DoOnShow;
+procedure TlqPopupWindow.DoOnShow;
 begin
   if Assigned(FOnShow) then
     FOnShow(self);
 end;
 
-constructor TfpgPopupWindow.Create(AOwner: TComponent);
+constructor TlqPopupWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   WindowType := wtPopup;
@@ -323,7 +323,7 @@ begin
   FIsContainer := True;
 end;
 
-procedure TfpgPopupWindow.ShowAt(AWidget: TfpgWidget; x, y: TfpgCoord; const ACanAdjustPos: boolean);
+procedure TlqPopupWindow.ShowAt(AWidget: TlqWidget; x, y: TlqCoord; const ACanAdjustPos: boolean);
 var
   pt: TPoint;
 begin
@@ -351,12 +351,12 @@ begin
   HandleShow;
 end;
 
-procedure TfpgPopupWindow.ShowAt(x, y: TfpgCoord);
+procedure TlqPopupWindow.ShowAt(x, y: TlqCoord);
 begin
   ShowAt(nil, x, y);
 end;
 
-procedure TfpgPopupWindow.Close;
+procedure TlqPopupWindow.Close;
 begin
   HandleClose;
   PopupListRemove(self);

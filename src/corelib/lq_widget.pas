@@ -33,20 +33,20 @@ uses
 type
   TFocusSearchDirection = (fsdFirst, fsdLast, fsdNext, fsdPrev);
 
-  THintEvent = procedure(Sender: TObject; var AHint: TfpgString) of object;
+  THintEvent = procedure(Sender: TObject; var AHint: TlqString) of object;
 
-  TfpgDragEnterEvent = procedure(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TfpgString; var ADropAction: TfpgDropAction; var Accept: Boolean) of object;
-  TfpgDragDropEvent = procedure(Sender, Source: TObject; X, Y: integer; AData: variant) of object;
+  TlqDragEnterEvent = procedure(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TlqString; var ADropAction: TlqDropAction; var Accept: Boolean) of object;
+  TlqDragDropEvent = procedure(Sender, Source: TObject; X, Y: integer; AData: variant) of object;
 
 
-  TfpgWidget = class(TfpgWindow)
+  TlqWidget = class(TlqWindow)
   private
     FAcceptDrops: boolean;
-    FAlignRect: TfpgRect;
+    FAlignRect: TlqRect;
     FOnClick: TNotifyEvent;
     FOnDoubleClick: TMouseButtonEvent;
-    FOnDragDrop: TfpgDragDropEvent;
-    FOnDragEnter: TfpgDragEnterEvent;
+    FOnDragDrop: TlqDragDropEvent;
+    FOnDragEnter: TlqDragEnterEvent;
     FOnDragLeave: TNotifyEvent;
     FOnEnter: TNotifyEvent;
     FOnExit: TNotifyEvent;
@@ -61,28 +61,28 @@ type
     FOnResize: TNotifyEvent;
     FOnScreen: boolean;
     FOnShowHint: THintEvent;
-    FDragStartPos: TfpgPoint;
+    FDragStartPos: TlqPoint;
     alist: TList;
-    procedure   SetActiveWidget(const AValue: TfpgWidget);
+    procedure   SetActiveWidget(const AValue: TlqWidget);
     function    IsShowHintStored: boolean;
     procedure   SetFormDesigner(const AValue: TObject);
     procedure   SetAlign(const AValue: TAlign);
   protected
-    procedure   MsgPaint(var msg: TfpgMessageRec); message FPGM_PAINT;
-    procedure   MsgResize(var msg: TfpgMessageRec); message FPGM_RESIZE;
-    procedure   MsgMove(var msg: TfpgMessageRec); message FPGM_MOVE;
-    procedure   MsgKeyChar(var msg: TfpgMessageRec); message FPGM_KEYCHAR;
-    procedure   MsgKeyPress(var msg: TfpgMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgKeyRelease(var msg: TfpgMessageRec); message FPGM_KEYRELEASE;
-    procedure   MsgMouseDown(var msg: TfpgMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TfpgMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TfpgMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgDoubleClick(var msg: TfpgMessageRec); message FPGM_DOUBLECLICK;
-    procedure   MsgMouseEnter(var msg: TfpgMessageRec); message FPGM_MOUSEENTER;
-    procedure   MsgMouseExit(var msg: TfpgMessageRec); message FPGM_MOUSEEXIT;
-    procedure   MsgMouseScroll(var msg: TfpgMessageRec); message FPGM_SCROLL;
-    procedure   MsgDropEnter(var msg: TfpgMessageRec); message FPGM_DROPENTER;
-    procedure   MsgDropExit(var msg: TfpgMessageRec); message FPGM_DROPEXIT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
+    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
+    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
+    procedure   MsgKeyChar(var msg: TlqMessageRec); message FPGM_KEYCHAR;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
+    procedure   MsgKeyRelease(var msg: TlqMessageRec); message FPGM_KEYRELEASE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
+    procedure   MsgDoubleClick(var msg: TlqMessageRec); message FPGM_DOUBLECLICK;
+    procedure   MsgMouseEnter(var msg: TlqMessageRec); message FPGM_MOUSEENTER;
+    procedure   MsgMouseExit(var msg: TlqMessageRec); message FPGM_MOUSEEXIT;
+    procedure   MsgMouseScroll(var msg: TlqMessageRec); message FPGM_SCROLL;
+    procedure   MsgDropEnter(var msg: TlqMessageRec); message FPGM_DROPENTER;
+    procedure   MsgDropExit(var msg: TlqMessageRec); message FPGM_DROPEXIT;
   protected
     FFormDesigner: TObject;
     FVisible: boolean;
@@ -91,36 +91,36 @@ type
     FFocused: boolean;
     FTabOrder: integer;
     FAnchors: TAnchors;
-    FActiveWidget: TfpgWidget;
+    FActiveWidget: TlqWidget;
     FAlign: TAlign;
-    FHint: TfpgString;
+    FHint: TlqString;
     FShowHint: boolean;
     FParentShowHint: boolean;
-    FBackgroundColor: TfpgColor;
-    FTextColor: TfpgColor;
+    FBackgroundColor: TlqColor;
+    FTextColor: TlqColor;
     FIsContainer: Boolean;
     FOnClickPending: Boolean;
     FIgnoreDblClicks: Boolean;
     procedure   SetAcceptDrops(const AValue: boolean); virtual;
     function    GetOnShowHint: THintEvent; virtual;
     procedure   SetOnShowHint(const AValue: THintEvent); virtual;
-    procedure   SetBackgroundColor(const AValue: TfpgColor); virtual;
-    procedure   SetTextColor(const AValue: TfpgColor); virtual;
-    function    GetParent: TfpgWidget; reintroduce;
-    procedure   SetParent(const AValue: TfpgWidget); reintroduce;
+    procedure   SetBackgroundColor(const AValue: TlqColor); virtual;
+    procedure   SetTextColor(const AValue: TlqColor); virtual;
+    function    GetParent: TlqWidget; reintroduce;
+    procedure   SetParent(const AValue: TlqWidget); reintroduce;
     procedure   SetEnabled(const AValue: boolean); virtual;
     procedure   SetVisible(const AValue: boolean); virtual;
     procedure   SetShowHint(const AValue: boolean); virtual;
     procedure   SetParentShowHint(const AValue: boolean); virtual;
-    function    GetHint: TfpgString; virtual;
-    procedure   SetHint(const AValue: TfpgString); virtual;
+    function    GetHint: TlqString; virtual;
+    procedure   SetHint(const AValue: TlqString); virtual;
     procedure   DoUpdateWindowPosition; override;
     procedure   DoAlignment;
     procedure   DoResize;
-    procedure   DoShowHint(var AHint: TfpgString);
-    procedure   DoKeyShortcut(const AOrigin: TfpgWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); virtual;
+    procedure   DoShowHint(var AHint: TlqString);
+    procedure   DoKeyShortcut(const AOrigin: TlqWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); virtual;
     procedure   HandlePaint; virtual;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean); virtual;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean); virtual;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); virtual;
     procedure   HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); virtual;
     procedure   HandleSetFocus; virtual;
@@ -134,12 +134,12 @@ type
     procedure   HandleMouseEnter; virtual;
     procedure   HandleMouseExit; virtual;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); virtual;
-    function    FindFocusWidget(startwg: TfpgWidget; direction: TFocusSearchDirection): TfpgWidget;
-    procedure   HandleAlignments(const dwidth, dheight: TfpgCoord); virtual;
+    function    FindFocusWidget(startwg: TlqWidget; direction: TFocusSearchDirection): TlqWidget;
+    procedure   HandleAlignments(const dwidth, dheight: TlqCoord); virtual;
     procedure   HandleShow; virtual;
     procedure   InternalHandleShow; virtual;
     procedure   HandleHide; virtual;
-    procedure   MoveAndResize(ALeft, ATop, AWidth, AHeight: TfpgCoord);
+    procedure   MoveAndResize(ALeft, ATop, AWidth, AHeight: TlqCoord);
     procedure   RePaint; virtual;
     { property events }
     property    OnClick: TNotifyEvent read FOnClick write FOnClick;
@@ -165,13 +165,13 @@ type
     procedure   Realign;
     procedure   SetFocus;
     procedure   KillFocus;
-    procedure   MoveAndResizeBy(const dx, dy, dw, dh: TfpgCoord);
-    procedure   SetPosition(aleft, atop, awidth, aheight: TfpgCoord); virtual;
+    procedure   MoveAndResizeBy(const dx, dy, dw, dh: TlqCoord);
+    procedure   SetPosition(aleft, atop, awidth, aheight: TlqCoord); virtual;
     procedure   Invalidate; // double check this works as developers expect????
     property    FormDesigner: TObject read FFormDesigner write SetFormDesigner;
-    property    Parent: TfpgWidget read GetParent write SetParent;
+    property    Parent: TlqWidget read GetParent write SetParent;
     property    AcceptDrops: boolean read FAcceptDrops write SetAcceptDrops default False;
-    property    ActiveWidget: TfpgWidget read FActiveWidget write SetActiveWidget;
+    property    ActiveWidget: TlqWidget read FActiveWidget write SetActiveWidget;
     property    IsContainer: Boolean read FIsContainer;
     property    Visible: boolean read FVisible write SetVisible default True;
     property    Enabled: boolean read FEnabled write SetEnabled default True;
@@ -181,23 +181,23 @@ type
     property    Focused: boolean read FFocused write FFocused default False;
     property    Anchors: TAnchors read FAnchors write FAnchors default [anLeft, anTop];
     property    Align: TAlign read FAlign write SetAlign default alNone;
-    property    Hint: TfpgString read GetHint write SetHint;
+    property    Hint: TlqString read GetHint write SetHint;
     property    IgnoreDblClicks: Boolean read FIgnoreDblClicks write FIgnoreDblClicks default False;
     property    ShowHint: boolean read FShowHint write SetShowHint stored IsShowHintStored;
     property    ParentShowHint: boolean read FParentShowHint write SetParentShowHint default True;
-    property    BackgroundColor: TfpgColor read FBackgroundColor write SetBackgroundColor default clWindowBackground;
-    property    TextColor: TfpgColor read FTextColor write SetTextColor default clText1;
-    property    OnDragEnter: TfpgDragEnterEvent read FOnDragEnter write FOnDragEnter;
+    property    BackgroundColor: TlqColor read FBackgroundColor write SetBackgroundColor default clWindowBackground;
+    property    TextColor: TlqColor read FTextColor write SetTextColor default clText1;
+    property    OnDragEnter: TlqDragEnterEvent read FOnDragEnter write FOnDragEnter;
     property    OnDragLeave: TNotifyEvent read FOnDragLeave write FOnDragLeave;
-    property    OnDragDrop: TfpgDragDropEvent read FOnDragDrop write FOnDragDrop;
+    property    OnDragDrop: TlqDragDropEvent read FOnDragDrop write FOnDragDrop;
   end;
 
 
 var
-  FocusRootWidget: TfpgWidget;
+  FocusRootWidget: TlqWidget;
 
 
-function FindKeyboardFocus: TfpgWidget;
+function FindKeyboardFocus: TlqWidget;
 
 implementation
 
@@ -208,17 +208,17 @@ uses
 
 
 var
-  uLastClickWidget: TfpgWidget;
+  uLastClickWidget: TlqWidget;
   uLastClickPoint: TPoint;
   uLastClickTime: DWord;
-  uMouseDownSourceWidget: TfpgWidget; { widget Left MButton was pressed on }
+  uMouseDownSourceWidget: TlqWidget; { widget Left MButton was pressed on }
 
 
 type
-  TfpgFormFriend = class(TfpgBaseForm)
+  TlqFormFriend = class(TlqBaseForm)
   end;
 
-function FindKeyboardFocus: TfpgWidget;
+function FindKeyboardFocus: TlqWidget;
 begin
   Result := nil;
 
@@ -242,11 +242,11 @@ end;
 
 function AlignCompare(p1, p2: Pointer): integer;
 var
-  w1: TfpgWidget;
-  w2: TfpgWidget;
+  w1: TlqWidget;
+  w2: TlqWidget;
 begin
-  w1 := TfpgWidget(p1);
-  w2 := TfpgWidget(p2);
+  w1 := TlqWidget(p1);
+  w2 := TlqWidget(p2);
   case w1.Align of
     alTop:    Result := CompareInts(w1.Top, w2.Top);
     alBottom: Result := CompareInts(w2.Top, w1.Top);
@@ -258,9 +258,9 @@ begin
 end;
 
 
-{ TfpgWidget }
+{ TlqWidget }
 
-procedure TfpgWidget.SetEnabled(const AValue: boolean);
+procedure TlqWidget.SetEnabled(const AValue: boolean);
 var
   i: integer;
 begin
@@ -269,13 +269,13 @@ begin
   FEnabled := AValue;
   for i := 0 to ComponentCount - 1 do
   begin
-    if Components[i] is TfpgWidget then
-      TfpgWidget(Components[i]).Enabled := FEnabled;
+    if Components[i] is TlqWidget then
+      TlqWidget(Components[i]).Enabled := FEnabled;
   end;
   RePaint;
 end;
 
-procedure TfpgWidget.SetActiveWidget(const AValue: TfpgWidget);
+procedure TlqWidget.SetActiveWidget(const AValue: TlqWidget);
 begin
   if FActiveWidget = AValue then
     Exit; //==>
@@ -287,7 +287,7 @@ begin
       FActiveWidget.HandleKillFocus;
   except
     { This is just a failsafe, in case FActiveWidget was not correctly set
-      in the destructor of TfpgWidget }
+      in the destructor of TlqWidget }
     FActiveWidget := nil;
   end;
   FActiveWidget := AValue;
@@ -295,7 +295,7 @@ begin
     FActiveWidget.HandleSetFocus;
 end;
 
-procedure TfpgWidget.SetAcceptDrops(const AValue: boolean);
+procedure TlqWidget.SetAcceptDrops(const AValue: boolean);
 begin
   if FAcceptDrops = AValue then
     exit;
@@ -303,29 +303,29 @@ begin
   DoAcceptDrops(AValue);
 end;
 
-function TfpgWidget.GetHint: TfpgString;
+function TlqWidget.GetHint: TlqString;
 begin
   Result := FHint;
 end;
 
-function TfpgWidget.IsShowHintStored: boolean;
+function TlqWidget.IsShowHintStored: boolean;
 begin
   Result := not ParentShowHint;
 end;
 
-procedure TfpgWidget.SetFormDesigner(const AValue: TObject);
+procedure TlqWidget.SetFormDesigner(const AValue: TObject);
 var
   i: integer;
 begin
   FFormDesigner := AValue;
   for i := 0 to ComponentCount-1 do
   begin
-    if (Components[i] is TfpgWidget) and (TfpgWidget(Components[i]).Parent = self) then
-      TfpgWidget(Components[i]).FormDesigner := AValue;
+    if (Components[i] is TlqWidget) and (TlqWidget(Components[i]).Parent = self) then
+      TlqWidget(Components[i]).FormDesigner := AValue;
   end;
 end;
 
-procedure TfpgWidget.SetAlign(const AValue: TAlign);
+procedure TlqWidget.SetAlign(const AValue: TAlign);
 begin
   if FAlign = AValue then
     Exit;
@@ -334,7 +334,7 @@ begin
     Parent.Realign;
 end;
 
-procedure TfpgWidget.SetVisible(const AValue: boolean);
+procedure TlqWidget.SetVisible(const AValue: boolean);
 begin
   if FVisible = AValue then
     Exit; //==>
@@ -342,18 +342,18 @@ begin
   if FOnScreen then
     if FVisible then
     begin
-//      writeln('DEBUG:  TfpgWidget.SetVisible - handleshow');
+//      writeln('DEBUG:  TlqWidget.SetVisible - handleshow');
       HandleShow;
     end
     else
     begin
-//      writeln('DEBUG:  TfpgWidget.SetVisible - handlehide');
+//      writeln('DEBUG:  TlqWidget.SetVisible - handlehide');
       HandleHide;
       FOnScreen := True;
     end;
 end;
 
-procedure TfpgWidget.SetShowHint(const AValue: boolean);
+procedure TlqWidget.SetShowHint(const AValue: boolean);
 begin
   if FShowHint <> AValue then
     FShowHint := AValue;
@@ -361,7 +361,7 @@ begin
     FParentShowHint := False;
 end;
 
-procedure TfpgWidget.SetParentShowHint(const AValue: boolean);
+procedure TlqWidget.SetParentShowHint(const AValue: boolean);
 begin
   if FParentShowHint <> AValue then
     FParentShowHint := AValue;
@@ -369,12 +369,12 @@ begin
     FShowHint := False;
 end;
 
-procedure TfpgWidget.SetHint(const AValue: TfpgString);
+procedure TlqWidget.SetHint(const AValue: TlqString);
 begin
   FHint := AValue;
 end;
 
-procedure TfpgWidget.DoUpdateWindowPosition;
+procedure TlqWidget.DoUpdateWindowPosition;
 var
   dw: integer;
   dh: integer;
@@ -383,9 +383,9 @@ var
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.DoUpdateWindowPosition - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.DoUpdateWindowPosition - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
-//  writeln('TfpgWidget.DoUpdateWindowPosition - ' + Classname + ' ('+Name+')');
+//  writeln('TlqWidget.DoUpdateWindowPosition - ' + Classname + ' ('+Name+')');
   dw      := FWidth - FPrevWidth;
   dh      := FHeight - FPrevHeight;
 
@@ -409,7 +409,7 @@ begin
   FPosIsDirty := False;
 end;
 
-procedure TfpgWidget.SetBackgroundColor(const AValue: TfpgColor);
+procedure TlqWidget.SetBackgroundColor(const AValue: TlqColor);
 begin
   if FBackgroundColor <> AValue then
   begin
@@ -418,7 +418,7 @@ begin
   end;
 end;
 
-procedure TfpgWidget.SetTextColor(const AValue: TfpgColor);
+procedure TlqWidget.SetTextColor(const AValue: TlqColor);
 begin
   if FTextColor <> AValue then
   begin
@@ -427,12 +427,12 @@ begin
   end;
 end;
 
-function TfpgWidget.InDesigner: boolean;
+function TlqWidget.InDesigner: boolean;
 begin
   Result := (FFormDesigner <> nil)
 end;
 
-procedure TfpgWidget.InvokeHelp;
+procedure TlqWidget.InvokeHelp;
 begin
   case HelpType of
     htKeyword:
@@ -454,23 +454,23 @@ begin
     fpgApplication.InvokeHelp;
 end;
 
-procedure TfpgWidget.Realign;
+procedure TlqWidget.Realign;
 begin
   HandleAlignments(0, 0);
   RePaint;
 end;
 
-function TfpgWidget.GetParent: TfpgWidget;
+function TlqWidget.GetParent: TlqWidget;
 begin
-  Result := TfpgWidget(inherited GetParent);
+  Result := TlqWidget(inherited GetParent);
 end;
 
-procedure TfpgWidget.SetParent(const AValue: TfpgWidget);
+procedure TlqWidget.SetParent(const AValue: TlqWidget);
 begin
   inherited SetParent(AValue);
 end;
 
-constructor TfpgWidget.Create(AOwner: TComponent);
+constructor TlqWidget.Create(AOwner: TComponent);
 begin
   Loading;
 
@@ -495,9 +495,9 @@ begin
 
   inherited Create(AOwner);
 
-  if (AOwner <> nil) and (AOwner is TfpgWidget) then
+  if (AOwner <> nil) and (AOwner is TlqWidget) then
   begin
-    Parent := TfpgWidget(AOwner);
+    Parent := TlqWidget(AOwner);
     FTabOrder := AOwner.ComponentCount;
   end
   else
@@ -510,19 +510,19 @@ begin
   end;
 end;
 
-destructor TfpgWidget.Destroy;
+destructor TlqWidget.Destroy;
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgWidget.Destroy [', Classname, '.', Name, ']');
+  writeln('TlqWidget.Destroy [', Classname, '.', Name, ']');
   {$ENDIF}
   HandleHide;
   if Owner <> nil then
-    if (Owner is TfpgWidget) and (TfpgWidget(Owner).ActiveWidget = self) then
-      TfpgWidget(Owner).ActiveWidget := nil;
+    if (Owner is TlqWidget) and (TlqWidget(Owner).ActiveWidget = self) then
+      TlqWidget(Owner).ActiveWidget := nil;
   inherited Destroy;
 end;
 
-procedure TfpgWidget.AfterConstruction;
+procedure TlqWidget.AfterConstruction;
 begin
   inherited AfterConstruction;
   // This is for components that are created at runtime, after it's
@@ -535,12 +535,12 @@ begin
   Loaded;  // remove csLoading from ComponentState
 end;
 
-procedure TfpgWidget.MsgKeyChar(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgKeyChar(var msg: TlqMessageRec);
 var
-  lChar: TfpgChar;
+  lChar: TlqChar;
   ss: TShiftState;
   consumed: boolean;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   lChar := msg.params.keyboard.keychar;
   ss  := msg.params.keyboard.shiftstate;
@@ -559,13 +559,13 @@ begin
   end;
 end;
 
-procedure TfpgWidget.MsgKeyPress(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgKeyPress(var msg: TlqMessageRec);
 var
   key: word;
   ss: TShiftState;
   consumed: boolean;
-  wg: TfpgWidget;
-  wlast: TfpgWidget;
+  wg: TlqWidget;
+  wlast: TlqWidget;
 begin
   if InDesigner then
   begin
@@ -611,7 +611,7 @@ begin
       the Form a chance to fire its OnKeyPress event. }
     if not consumed then
     begin
-      if (wg is TfpgForm) and Assigned(TfpgForm(wg).OnKeyPress) then
+      if (wg is TlqForm) and Assigned(TlqForm(wg).OnKeyPress) then
         wg.OnKeyPress(self, key, ss, consumed);
     end;
 
@@ -619,9 +619,9 @@ begin
     if not consumed then
     begin
       { only do this if the top-level form is not Modal }
-      if (wg is TfpgForm) and (TfpgForm(wg).WindowType <> wtModalForm) then
+      if (wg is TlqForm) and (TlqForm(wg).WindowType <> wtModalForm) then
         if wg <> fpgApplication.MainForm then
-          TfpgFormFriend(fpgApplication.MainForm).DoKeyShortcut(self, key, ss, consumed);
+          TlqFormFriend(fpgApplication.MainForm).DoKeyShortcut(self, key, ss, consumed);
     end;
   end;
 
@@ -630,12 +630,12 @@ begin
     fpgApplication.OnKeyPress(self, key, ss, consumed);
 end;
 
-procedure TfpgWidget.MsgKeyRelease(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgKeyRelease(var msg: TlqMessageRec);
 var
   key: word;
   ss: TShiftState;
   consumed: boolean;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   if InDesigner then
   begin
@@ -660,7 +660,7 @@ begin
   end;
 end;
 
-procedure TfpgWidget.MsgMouseDown(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseDown(var msg: TlqMessageRec);
 var
   mb: TMouseButton;
 begin
@@ -700,12 +700,12 @@ begin
         Point(msg.Params.mouse.x, msg.Params.mouse.y));
 end;
 
-procedure TfpgWidget.MsgMouseUp(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseUp(var msg: TlqMessageRec);
 var
   mb: TMouseButton;
   IsDblClick: boolean;
 begin
-  //writeln('>> TfpgWidget.MsgMouseUp - ', Classname, '.', Name);
+  //writeln('>> TlqWidget.MsgMouseUp - ', Classname, '.', Name);
   FDragActive := False;
   if InDesigner then
   begin
@@ -763,10 +763,10 @@ begin
   if Assigned(FOnMouseUp) then // and not IsDblClick then
     FOnMouseUp(self, mb, msg.Params.mouse.shiftstate,
         Point(msg.Params.mouse.x, msg.Params.mouse.y));
-  //writeln('<< TfpgWidget.MsgMouseUp - ', Classname, '.', Name);
+  //writeln('<< TlqWidget.MsgMouseUp - ', Classname, '.', Name);
 end;
 
-procedure TfpgWidget.MsgMouseMove(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseMove(var msg: TlqMessageRec);
 begin
   if InDesigner then
   begin
@@ -791,7 +791,7 @@ begin
         Point(msg.Params.mouse.x, msg.Params.mouse.y));
 end;
 
-procedure TfpgWidget.MsgDoubleClick(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgDoubleClick(var msg: TlqMessageRec);
 begin
 (*
   // If we don't generate a mouse down, we get a rapid click
@@ -806,14 +806,14 @@ begin
 *)
 end;
 
-procedure TfpgWidget.MsgMouseEnter(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseEnter(var msg: TlqMessageRec);
 {$IFDEF Debug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF Debug}
-  itf := DebugMethodEnter('TfpgWidget.MsgMouseEnter - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.MsgMouseEnter - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   if InDesigner then
   begin
@@ -827,14 +827,14 @@ begin
     FOnMouseEnter(self);
 end;
 
-procedure TfpgWidget.MsgMouseExit(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseExit(var msg: TlqMessageRec);
 {$IFDEF Debug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF Debug}
-  itf := DebugMethodEnter('TfpgWidget.MsgMouseExit - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.MsgMouseExit - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   if InDesigner then
   begin
@@ -848,33 +848,33 @@ begin
     FOnMouseExit(Self);
 end;
 
-procedure TfpgWidget.MsgMouseScroll(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMouseScroll(var msg: TlqMessageRec);
 begin
   HandleMouseScroll(msg.Params.mouse.x, msg.Params.mouse.y,
       msg.Params.mouse.shiftstate, msg.Params.mouse.delta);
 end;
 
-procedure TfpgWidget.MsgDropEnter(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgDropEnter(var msg: TlqMessageRec);
 begin
   // do nothing
 end;
 
-procedure TfpgWidget.MsgDropExit(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgDropExit(var msg: TlqMessageRec);
 begin
   // do nothing
 end;
 
-function TfpgWidget.GetOnShowHint: THintEvent;
+function TlqWidget.GetOnShowHint: THintEvent;
 begin
   Result := FOnShowHint;
 end;
 
-procedure TfpgWidget.SetOnShowHint(const AValue: THintEvent);
+procedure TlqWidget.SetOnShowHint(const AValue: THintEvent);
 begin
   FOnShowHint := AValue;
 end;
 
-procedure TfpgWidget.HandleShow;
+procedure TlqWidget.HandleShow;
 var
   n: integer;
   c: TComponent;
@@ -886,24 +886,24 @@ begin
   for n := 0 to ComponentCount - 1 do
   begin
     c := Components[n];
-    if (c is TfpgWidget) and (TfpgWidget(c).Parent = self) then
+    if (c is TlqWidget) and (TlqWidget(c).Parent = self) then
     begin
-      if not (c is TfpgPopupMenu) then  // these should not be created yet
+      if not (c is TlqPopupMenu) then  // these should not be created yet
       begin
-        TfpgWidget(c).HandleShow;
+        TlqWidget(c).HandleShow;
       end;
     end;
   end;
 end;
 
-procedure TfpgWidget.InternalHandleShow;
+procedure TlqWidget.InternalHandleShow;
 begin
   FOnScreen := True;
   AllocateWindowHandle;
   DoSetWindowVisible(FVisible);
 end;
 
-procedure TfpgWidget.HandleHide;
+procedure TlqWidget.HandleHide;
 var
   n: integer;
   c: TComponent;
@@ -911,8 +911,8 @@ begin
   for n := 0 to ComponentCount - 1 do
   begin
     c := Components[n];
-    if (c is TfpgWidget) and (TfpgWidget(c).Parent = self) then
-      TfpgWidget(c).HandleHide;
+    if (c is TlqWidget) and (TlqWidget(c).Parent = self) then
+      TlqWidget(c).HandleHide;
   end;
   FOnScreen := False;
 
@@ -920,36 +920,36 @@ begin
     ReleaseWindowHandle;
 end;
 
-procedure TfpgWidget.RePaint;
+procedure TlqWidget.RePaint;
 begin
   if HasHandle then
     fpgSendMessage(self, self, FPGM_PAINT);
 end;
 
-procedure TfpgWidget.SetFocus;
+procedure TlqWidget.SetFocus;
 begin
   HandleSetFocus;
 end;
 
-procedure TfpgWidget.KillFocus;
+procedure TlqWidget.KillFocus;
 begin
   HandleKillFocus;
 end;
 
-procedure TfpgWidget.HandlePaint;
+procedure TlqWidget.HandlePaint;
 begin
   // descendants will implement this.
 end;
 
-procedure TfpgWidget.HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqWidget.HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean);
 begin
   // descendants will implement this.
 end;
 
-procedure TfpgWidget.HandleKeyPress(var keycode: word; var shiftstate: TShiftState;
+procedure TlqWidget.HandleKeyPress(var keycode: word; var shiftstate: TShiftState;
     var consumed: boolean);
 var
-  wg: TfpgWidget;
+  wg: TlqWidget;
   dir: integer;
 begin
   if Assigned(OnKeyPress) and FFocusable then
@@ -1032,14 +1032,14 @@ begin
   end;
 end;
 
-procedure TfpgWidget.HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqWidget.HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 begin
   // descendants will implement this.
 end;
 
-procedure TfpgWidget.HandleSetFocus;
+procedure TlqWidget.HandleSetFocus;
 var
-  awg: TfpgWidget;
+  awg: TlqWidget;
 begin
   if not FFocused and FFocusable then
   begin
@@ -1067,7 +1067,7 @@ begin
     OnEnter(self);
 end;
 
-procedure TfpgWidget.HandleKillFocus;
+procedure TlqWidget.HandleKillFocus;
 begin
   FFocused := False;
   RePaint;
@@ -1079,10 +1079,10 @@ begin
     OnExit(self);
 end;
 
-procedure TfpgWidget.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqWidget.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
-  pw: TfpgWidget;
-  w: TfpgWidget;
+  pw: TlqWidget;
+  w: TlqWidget;
 begin
   if FShowHint then
     fpgApplication.HideHint;
@@ -1099,7 +1099,7 @@ begin
   end;
 end;
 
-procedure TfpgWidget.HandleRMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqWidget.HandleRMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   if FShowHint then
     fpgApplication.HideHint;
@@ -1108,9 +1108,9 @@ begin
     HandleRMouseUp(x, y, []);
 end;
 
-procedure TfpgWidget.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqWidget.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(0, 0, Width, Height);
   if PtInRect(r, Point(x, y)) and FOnClickPending and (self = uMouseDownSourceWidget) then
@@ -1120,14 +1120,14 @@ begin
   end;
 end;
 
-procedure TfpgWidget.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqWidget.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   // do nothing yet
 end;
 
-procedure TfpgWidget.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqWidget.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
 begin
   fillchar(msgp, sizeof(msgp), 0);
   msgp.user.Param1 := 2;
@@ -1147,21 +1147,21 @@ begin
   end;
 end;
 
-procedure TfpgWidget.HandleDoubleClick(x, y: integer; button: word; shiftstate: TShiftState);
+procedure TlqWidget.HandleDoubleClick(x, y: integer; button: word; shiftstate: TShiftState);
 begin
   // do nothing yet
 end;
 
-procedure TfpgWidget.HandleMouseEnter;
+procedure TlqWidget.HandleMouseEnter;
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   b: boolean;
 {$IFDEF Debug}
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF Debug}
-  itf := DebugMethodEnter('TfpgWidget.HandleMouseEnter - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.HandleMouseEnter - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   fillchar(msgp, sizeof(msgp), 0);
 
@@ -1174,24 +1174,24 @@ begin
   fpgPostMessage(Self, fpgApplication, FPGM_HINTTIMER, msgp);
 end;
 
-procedure TfpgWidget.HandleMouseExit;
+procedure TlqWidget.HandleMouseExit;
 begin
   {$IFDEF DEBUG}
-  writeln('TfpgWidget.HandleMouseExit: ' + ClassName);
+  writeln('TlqWidget.HandleMouseExit: ' + ClassName);
   {$ENDIF}
   if FShowHint then
     fpgApplication.HideHint;
 end;
 
-procedure TfpgWidget.HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint);
+procedure TlqWidget.HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint);
 begin
   if Assigned(FOnMouseScroll) then
     FOnMouseScroll(self, shiftstate, delta, Point(x, y));
 end;
 
-function TfpgWidget.FindFocusWidget(startwg: TfpgWidget; direction: TFocusSearchDirection): TfpgWidget;
+function TlqWidget.FindFocusWidget(startwg: TlqWidget; direction: TFocusSearchDirection): TlqWidget;
 var
-  w: TfpgWidget;
+  w: TlqWidget;
   n: integer;
   FoundIt: boolean;
   lasttaborder: integer;
@@ -1205,9 +1205,9 @@ begin
 
   for n := 0 to ComponentCount - 1 do
   begin
-    if Components[n] is TfpgWidget then
+    if Components[n] is TlqWidget then
     begin
-      w := TfpgWidget(Components[n]);
+      w := TlqWidget(Components[n]);
       if w.Enabled and w.Visible and w.Focusable then
       begin
         case direction of
@@ -1256,9 +1256,9 @@ begin
   end; { if }
 end;
 
-procedure TfpgWidget.MsgPaint(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgPaint(var msg: TlqMessageRec);
 begin
-//  writeln('TfpgWidget.MsgPaint - ', Classname);
+//  writeln('TlqWidget.MsgPaint - ', Classname);
   Canvas.BeginDraw;
   HandlePaint;
   if Assigned(FOnPaint) then
@@ -1266,7 +1266,7 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TfpgWidget.MsgResize(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgResize(var msg: TlqMessageRec);
 var
   dw: integer;
   dh: integer;
@@ -1276,7 +1276,7 @@ var
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.MsgResize - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.MsgResize - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   _w := FWidth;
   _h := FHeight;
@@ -1295,14 +1295,14 @@ begin
   DoResize;
 end;
 
-procedure TfpgWidget.MsgMove(var msg: TfpgMessageRec);
+procedure TlqWidget.MsgMove(var msg: TlqMessageRec);
 {$IFDEF CStackDebug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.MsgMove - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.MsgMove - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   HandleMove(msg.Params.rect.Left, msg.Params.rect.Top);
   if InDesigner then
@@ -1311,21 +1311,21 @@ begin
   end;
 end;
 
-procedure TfpgWidget.HandleAlignments(const dwidth, dheight: TfpgCoord);
+procedure TlqWidget.HandleAlignments(const dwidth, dheight: TlqCoord);
 var
   n: integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   dx: integer;
   dy: integer;
   dw: integer;
   dh: integer;
-  w: TfpgWidget;
+  w: TlqWidget;
 {$IFDEF CStackDebug}
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.HandleAlignments - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.HandleAlignments - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   if (csLoading in ComponentState) then
   begin
@@ -1344,9 +1344,9 @@ begin
   try
     for n := 0 to ComponentCount - 1 do
     begin
-      if Components[n] is TfpgWidget then
+      if Components[n] is TlqWidget then
       begin
-        w := TfpgWidget(Components[n]);
+        w := TlqWidget(Components[n]);
         if (w.Align <> alNone) and (w.Visible) then
           alist.Add(w);
       end;
@@ -1364,9 +1364,9 @@ begin
 
   // Finally handle anchors (where Align = alNone)
   for n := 0 to ComponentCount - 1 do
-    if (Components[n] is TfpgWidget) then
+    if (Components[n] is TlqWidget) then
     begin
-      wg := TfpgWidget(Components[n]);
+      wg := TlqWidget(Components[n]);
       if (wg.FAlign = alNone) and ([anLeft, anTop] <> wg.Anchors) then
       begin
         // we must alter the window
@@ -1396,14 +1396,14 @@ begin
     end;  { if }
 end;
 
-procedure TfpgWidget.MoveAndResize(ALeft, ATop, AWidth, AHeight: TfpgCoord);
+procedure TlqWidget.MoveAndResize(ALeft, ATop, AWidth, AHeight: TlqCoord);
 {$IFDEF CStackDebug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.MoveAndResize');
+  itf := DebugMethodEnter('TlqWidget.MoveAndResize');
   DebugLn(Format('Class:%s  t:%d  l:%d  w:%d  h:%d', [Classname, ATop, ALeft, AWidth, aHeight]));
   {$ENDIF}
   if not (csLoading in ComponentState) then
@@ -1424,22 +1424,22 @@ begin
   UpdateWindowPosition;
 end;
 
-procedure TfpgWidget.MoveAndResizeBy(const dx, dy, dw, dh: TfpgCoord);
+procedure TlqWidget.MoveAndResizeBy(const dx, dy, dw, dh: TlqCoord);
 begin
   if (dx <> 0) or (dy <> 0) or
     (dw <> 0) or (dh <> 0) then
     MoveAndResize(FLeft + dx, FTop + dy, FWidth + dw, FHeight + dh);
 end;
 
-procedure TfpgWidget.DoAlignment;
+procedure TlqWidget.DoAlignment;
 var
-  w: TfpgWidget;
+  w: TlqWidget;
   n: integer;
 begin
   // and process this list in order
   for n := 0 to alist.Count - 1 do
   begin
-    w := TfpgWidget(alist[n]);
+    w := TlqWidget(alist[n]);
     case w.Align of
       alTop:
         begin
@@ -1473,13 +1473,13 @@ begin
   end;
 end;
 
-procedure TfpgWidget.DoResize;
+procedure TlqWidget.DoResize;
 begin
   if Assigned(FOnResize) then
     FOnResize(Self);
 end;
 
-procedure TfpgWidget.DoShowHint(var AHint: TfpgString);
+procedure TlqWidget.DoShowHint(var AHint: TlqString);
 begin
   AHint := Hint;
   if Assigned(FOnShowHint) then
@@ -1488,29 +1488,29 @@ begin
   end;
 end;
 
-procedure TfpgWidget.DoKeyShortcut(const AOrigin: TfpgWidget;
+procedure TlqWidget.DoKeyShortcut(const AOrigin: TlqWidget;
   const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False);
 var
-  c: TfpgComponent;
-  wg: TfpgWidget;
+  c: TlqComponent;
+  wg: TlqWidget;
   i: integer;
 begin
   //writeln(Classname, ' - ', Name, '.DoKeyShortcut() - ' + KeycodeToText(keycode, shiftstate));
   { process children of self }
   for i := 0 to ComponentCount-1 do
   begin
-    c := TfpgComponent(Components[i]);
-    if not (c is TfpgWidget) then
+    c := TlqComponent(Components[i]);
+    if not (c is TlqWidget) then
     begin
       //writeln('** skipped ', Classname, ' - ', Name);
       continue;
     end
     else
-      wg := TfpgWidget(c);
+      wg := TlqWidget(c);
     if (wg <> nil) and (wg <> self) and (wg <> AOrigin) then
     begin
       { ignore the MenuBar now, because it will be processed later by the top-level Form }
-      if IsChildOfOrigin and (wg is TfpgMenuBar) then
+      if IsChildOfOrigin and (wg is TlqMenuBar) then
       begin
         continue;
       end
@@ -1522,20 +1522,20 @@ begin
   end;
 end;
 
-procedure TfpgWidget.SetPosition(aleft, atop, awidth, aheight: TfpgCoord);
+procedure TlqWidget.SetPosition(aleft, atop, awidth, aheight: TlqCoord);
 {$IFDEF CStackDebug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgWidget.SetPosition - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqWidget.SetPosition - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   if (FLeft <> ALeft) or (FTop <> ATop) or (FWidth <> AWidth) or (FHeight <> AHeight) then
     MoveAndResize(aleft, atop, awidth, aheight);
 end;
 
-procedure TfpgWidget.Invalidate;
+procedure TlqWidget.Invalidate;
 begin
   RePaint;
 end;

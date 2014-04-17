@@ -13,14 +13,14 @@ uses
 
 type
 
-  TfrmMain = class(TfpgForm)
+  TfrmMain = class(TlqForm)
   private
     procedure miExitClicked(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: frmMain}
-    MainMenu: TfpgMenuBar;
-    miFile: TfpgPopupMenu;
-    btnName1: TfpgButton;
+    MainMenu: TlqMenuBar;
+    miFile: TlqPopupMenu;
+    btnName1: TlqButton;
     {@VFD_HEAD_END: frmMain}
 
     procedure AfterCreate; override;
@@ -45,7 +45,7 @@ begin
   WindowTitle := 'frmMain';
   WindowPosition := wpScreenCenter;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -53,7 +53,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  miFile := TfpgPopupMenu.Create(self);
+  miFile := TlqPopupMenu.Create(self);
   with miFile do
   begin
     Name := 'miFile';
@@ -64,7 +64,7 @@ begin
     AddMenuItem('E&xit', 'Alt+F4', @miExitClicked);
   end;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';

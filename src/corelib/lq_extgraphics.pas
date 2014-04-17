@@ -32,32 +32,32 @@ type
   TInitShapeProc  = procedure(var P: array of TPoint; const R: TRect; var NumPts: integer);
 
 
-procedure Paint2HeadArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintBarbadosTrident(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintBigI(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintBoldArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintCanadianMaple(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintChevronArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintFivePointStar(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintHexagon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintNotchedArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintOctogon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintPentagon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintPlus(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintQuadrangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintRightTriangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintSwastika(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintTriangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintTriangular(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0; RightLeftFactor: extended = 0.5);
-procedure PaintValve(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintVArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
-procedure PaintCross(Canvas: TfpgCanvas; XLeft, YUp, XRight, YLow, CrossX1, CrossX2, CrossY1, CrossY2: integer);
-procedure PaintHalfEllipse(Canvas: TfpgCanvas; const PaintRect: TRect; AHalfEllipseDirection: TShapeDirection);
-procedure PaintFivePointLineStar(Canvas: TfpgCanvas; const PaintRect: TRect);
-procedure PaintStarN(Canvas: TfpgCanvas; cx, cy, r, n, a: integer);
+procedure Paint2HeadArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBarbadosTrident(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBigI(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBoldArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintCanadianMaple(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintChevronArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintFivePointStar(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintHexagon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintNotchedArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintOctogon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintPentagon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintPlus(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintQuadrangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintRightTriangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintSwastika(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintTriangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintTriangular(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0; RightLeftFactor: extended = 0.5);
+procedure PaintValve(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintVArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintCross(Canvas: TlqCanvas; XLeft, YUp, XRight, YLow, CrossX1, CrossX2, CrossY1, CrossY2: integer);
+procedure PaintHalfEllipse(Canvas: TlqCanvas; const PaintRect: TRect; AHalfEllipseDirection: TShapeDirection);
+procedure PaintFivePointLineStar(Canvas: TlqCanvas; const PaintRect: TRect);
+procedure PaintStarN(Canvas: TlqCanvas; cx, cy, r, n, a: integer);
 
 
-procedure InitPolygon(Canvas: TfpgCanvas; PaintRect: TRect; RadAngle: extended; InitShapeProc: TInitShapeProc);
+procedure InitPolygon(Canvas: TlqCanvas; PaintRect: TRect; RadAngle: extended; InitShapeProc: TInitShapeProc);
 
 procedure CalculatePentagonPoints(const PentagonRect: TRect; var P1, P2, P3, P4, P5: TPoint);
 function LinesPointOfIntersection(const Line1a, Line1b, Line2a, line2b: TPoint): TPoint;
@@ -114,7 +114,7 @@ begin
   Result.y := RoundToInt(y);
 end;
 
-procedure PaintCross(Canvas: TfpgCanvas; XLeft, YUp, XRight, YLow, CrossX1, CrossX2, CrossY1, CrossY2: integer);
+procedure PaintCross(Canvas: TlqCanvas; XLeft, YUp, XRight, YLow, CrossX1, CrossX2, CrossY1, CrossY2: integer);
 var
   P: array[0..12] of TPoint;
 begin
@@ -232,7 +232,7 @@ begin
   end;
 end;
 
-procedure PaintPolygon(Canvas: TfpgCanvas; PR: TRect; fii: extended; P: array of TPoint; CountPts: integer; cntPoint: TPoint);
+procedure PaintPolygon(Canvas: TlqCanvas; PR: TRect; fii: extended; P: array of TPoint; CountPts: integer; cntPoint: TPoint);
 var
   N: array[0..3] of TPoint;
 begin
@@ -268,7 +268,7 @@ begin
   end;
 end;
 
-procedure InitPolygon(Canvas: TfpgCanvas; PaintRect: TRect; RadAngle: extended; InitShapeProc: TInitShapeProc);
+procedure InitPolygon(Canvas: TlqCanvas; PaintRect: TRect; RadAngle: extended; InitShapeProc: TInitShapeProc);
 var
   PR, vPR: TRect;
   P: array[0..35] of TPoint;
@@ -706,97 +706,97 @@ begin
   NumPts := 4;
 end;
 
-procedure Paint2HeadArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure Paint2HeadArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @Init2HeadArrow);
 end;
 
-procedure PaintBarbadosTrident(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBarbadosTrident(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitBarbadosTrident);
 end;
 
-procedure PaintBigI(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBigI(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitBigI);
 end;
 
-procedure PaintBoldArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintBoldArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitBoldArrow);
 end;
 
-procedure PaintCanadianMaple(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintCanadianMaple(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitCanadianMaple);
 end;
 
-procedure PaintChevronArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintChevronArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitChevronArrow);
 end;
 
-procedure PaintFivePointStar(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintFivePointStar(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitFivePointStar);
 end;
 
-procedure PaintHexagon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintHexagon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitHexagon);
 end;
 
-procedure PaintNotchedArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintNotchedArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitNotchedArrow);
 end;
 
-procedure PaintOctogon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintOctogon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitOctogon);
 end;
 
-procedure PaintPentagon(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintPentagon(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitPentagon);
 end;
 
-procedure PaintPlus(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintPlus(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitPlus);
 end;
 
-procedure PaintQuadrangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintQuadrangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitQuadrangle);
 end;
 
-procedure PaintRightTriangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintRightTriangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitRightTriangle);
 end;
 
-procedure PaintSwastika(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintSwastika(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitSwastika);
 end;
 
-procedure PaintTriangle(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintTriangle(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitTriangle);
 end;
 
-procedure PaintValve(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintValve(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitValve);
 end;
 
-procedure PaintVArrow(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
+procedure PaintVArrow(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0);
 begin
   InitPolygon(Canvas, PaintRect, RadAngle, @InitVArrow);
 end;
 
-procedure PaintTriangular(Canvas: TfpgCanvas; const PaintRect: TRect; RadAngle: extended = 0.0; RightLeftFactor: extended = 0.5);
+procedure PaintTriangular(Canvas: TlqCanvas; const PaintRect: TRect; RadAngle: extended = 0.0; RightLeftFactor: extended = 0.5);
 var
   PR, vPR: TRect;
   P: array[0..35] of TPoint;
@@ -822,7 +822,7 @@ begin
   PaintPolygon(Canvas, PR, RadAngle, P, CountPts, cntPoint);
 end;
 
-procedure PaintHalfEllipse(Canvas: TfpgCanvas; const PaintRect: TRect; AHalfEllipseDirection: TShapeDirection);
+procedure PaintHalfEllipse(Canvas: TlqCanvas; const PaintRect: TRect; AHalfEllipseDirection: TShapeDirection);
 var
   Ex1, Ex2, Ey1, Ey2, Sx, Sy, Ex, Ey, i: integer;
 begin
@@ -889,7 +889,7 @@ begin
 //   Canvas.DrawPie(Ex1,Ey1,Ex2,Ey2,Sx,Sy,Ex,Ey);
 end;
 
-procedure PaintFivePointLineStar(Canvas: TfpgCanvas; const PaintRect: TRect);
+procedure PaintFivePointLineStar(Canvas: TlqCanvas; const PaintRect: TRect);
 var
   P: array[0..4] of TPoint;
 begin
@@ -901,7 +901,7 @@ begin
   Canvas.DrawLine(P[2].x, P[2].y, P[4].x, P[4].y);
 end;
 
-procedure PaintStarN(Canvas: TfpgCanvas; cx, cy, r, n, a: integer);
+procedure PaintStarN(Canvas: TlqCanvas; cx, cy, r, n, a: integer);
 const
   MaxStarPoint = 36;
 var

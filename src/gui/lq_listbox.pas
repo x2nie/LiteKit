@@ -23,7 +23,7 @@ unit lq_listbox;
 {
   TODO:
     * Refactor these to have a better hierarchy
-    * Only surface properties as published in TfpgListBox
+    * Only surface properties as published in TlqListBox
     * Implement .BeginUpdate and .EndUpdate methods so we know when to refresh
       the items list.
     * Color Listbox: User Defined color palette support.
@@ -47,7 +47,7 @@ type
   // My thinking was that we could use this class as the base class for anything
   // that contains a list and needs to be presented like a normal listBox.
   // Not sure if it is actually going to work.
-  TfpgBaseListBox = class(TfpgWidget)
+  TlqBaseListBox = class(TlqWidget)
   private
     FHotTrack: boolean;
     FDragToReorder: boolean;
@@ -64,20 +64,20 @@ type
     procedure   UpdateScrollbarCoords;
     procedure   SetAutoHeight(const AValue: boolean);
   protected
-    FFont: TfpgFont;
-    FScrollBar: TfpgScrollBar;
+    FFont: TlqFont;
+    FScrollBar: TlqScrollBar;
     FFocusItem: integer;
     FMouseDragging: boolean;
     FFirstItem: integer;
     FMargin: integer;
-    procedure   MsgPaint(var msg: TfpgMessageRec); message FPGM_PAINT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
     procedure   UpdateScrollBar;
     procedure   FollowFocus;
-    function    ListHeight: TfpgCoord;
-    function    ScrollBarWidth: TfpgCoord;
+    function    ListHeight: TlqCoord;
+    function    ScrollBarWidth: TlqCoord;
     function    PageLength: integer;
     procedure   ScrollBarMove(Sender: TObject; APosition: integer);
-    procedure   DrawItem(num: integer; rect: TfpgRect; flags: integer); virtual;
+    procedure   DrawItem(num: integer; rect: TlqRect; flags: integer); virtual;
     procedure   DoChange;
     procedure   DoSelect;
     procedure   Exchange(Index1, Index2: Integer); virtual; abstract;
@@ -86,7 +86,7 @@ type
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState); override;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
     procedure   HandleShow; override;
     procedure   HandlePaint; override;
     property    AutoHeight: boolean read FAutoHeight write SetAutoHeight default False;
@@ -104,7 +104,7 @@ type
     function    ItemCount: integer; virtual;
     function    RowHeight: integer; virtual;
     procedure   SetFirstItem(item: integer);
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
     property    OnKeyPress; // to allow to detect return or tab key has been pressed
     property    OnScroll: TNotifyEvent read FOnScroll write FOnScroll;
@@ -114,14 +114,14 @@ type
 
   // Listbox containg strings - the normal listbox as we know it. Used by
   // component developers.
-  TfpgTextListBox = class(TfpgBaseListBox)
+  TlqTextListBox = class(TlqBaseListBox)
   protected
     FItems: TStringList;
     function    GetText: string; virtual;
     procedure   SetText(const AValue: string); virtual;
-    procedure   DrawItem(num: integer; rect: TfpgRect; flags: integer); override;
+    procedure   DrawItem(num: integer; rect: TlqRect; flags: integer); override;
     procedure   Exchange(Index1, Index2: Integer); override;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean); override;
     property    Items: TStringList read FItems;
   public
     constructor Create(AOwner: TComponent); override;
@@ -132,7 +132,7 @@ type
   
 
   // The standard strings listbox we will actually use in a GUI.
-  TfpgListBox = class(TfpgTextListBox)
+  TlqListBox = class(TlqTextListBox)
   published
     property    AcceptDrops;
     property    Align;
@@ -170,34 +170,34 @@ type
   TColorItem = class(TObject)
   public
     ColorName: string;
-    ColorValue: TfpgColor;
-    constructor Create(const AColorName: string; const AColorValue: TfpgColor);
+    ColorValue: TlqColor;
+    constructor Create(const AColorName: string; const AColorValue: TlqColor);
   end;
 
 
-  TfpgColorPalette = (cpStandardColors, cpSystemColors, cpWebColors, cpUserDefined);
+  TlqColorPalette = (cpStandardColors, cpSystemColors, cpWebColors, cpUserDefined);
 
   
-  TfpgBaseColorListBox = class(TfpgBaseListBox)
+  TlqBaseColorListBox = class(TlqBaseListBox)
   private
-    FColorBoxWidth: TfpgCoord;
-    FColorBoxHeight: TfpgCoord;
-    FColorPalette: TfpgColorPalette;
+    FColorBoxWidth: TlqCoord;
+    FColorBoxHeight: TlqCoord;
+    FColorPalette: TlqColorPalette;
     FShowColorNames: Boolean;
-    function    GetColor: TfpgColor;
-    procedure   SetColor(const AValue: TfpgColor);
-    procedure   SetColorPalette(const AValue: TfpgColorPalette);
+    function    GetColor: TlqColor;
+    procedure   SetColor(const AValue: TlqColor);
+    procedure   SetColorPalette(const AValue: TlqColorPalette);
     procedure   SetShowColorNames (const AValue: Boolean );
     procedure   SetupColorPalette;
     procedure   FreeAndClearColors;
   protected
     FItems: TList;
-    procedure   DrawItem(num: integer; rect: TfpgRect; flags: integer); override;
+    procedure   DrawItem(num: integer; rect: TlqRect; flags: integer); override;
     procedure   Exchange(Index1, Index2: Integer); override;
-//    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean); override;
+//    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean); override;
     property    Items: TList read FItems;
-    property    Color: TfpgColor read GetColor write SetColor;
-    property    ColorPalette: TfpgColorPalette read FColorPalette write SetColorPalette default cpStandardColors;
+    property    Color: TlqColor read GetColor write SetColor;
+    property    ColorPalette: TlqColorPalette read FColorPalette write SetColorPalette default cpStandardColors;
     property    ShowColorNames: Boolean read FShowColorNames write SetShowColorNames default True;
   public
     constructor Create(AOwner: TComponent); override;
@@ -206,7 +206,7 @@ type
   end;
   
   
-  TfpgColorListBox = class(TfpgBaseColorListBox)
+  TlqColorListBox = class(TlqBaseColorListBox)
   published
     property    AcceptDrops;
     property    Align;
@@ -234,7 +234,7 @@ type
   end;
 
 
-function CreateListBox(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgListBox;
+function CreateListBox(AOwner: TComponent; x, y, w, h: TlqCoord): TlqListBox;
 
 
 implementation
@@ -242,11 +242,11 @@ implementation
 
 type
   // custom stringlist that will notify listbox of item changes
-  TfpgListBoxStrings = class(TStringList)
+  TlqListBoxStrings = class(TStringList)
   protected
-    ListBox: TfpgTextListBox;
+    ListBox: TlqTextListBox;
   public
-    constructor Create(AListBox: TfpgTextListBox);
+    constructor Create(AListBox: TlqTextListBox);
     destructor  Destroy; override;
     function    Add(const s: String): Integer; override;
     procedure   Delete(Index: Integer); override;
@@ -256,9 +256,9 @@ type
   end;
 
 
-function CreateListBox(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgListBox;
+function CreateListBox(AOwner: TComponent; x, y, w, h: TlqCoord): TlqListBox;
 begin
-  Result       := TfpgListBox.Create(AOwner);
+  Result       := TlqListBox.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   Result.Width := w;
@@ -267,21 +267,21 @@ begin
 end;
 
 
-{ TfpgListBoxStrings }
+{ TlqListBoxStrings }
 
-constructor TfpgListBoxStrings.Create(AListBox: TfpgTextListBox);
+constructor TlqListBoxStrings.Create(AListBox: TlqTextListBox);
 begin
   inherited Create;
   ListBox := AListBox;
 end;
 
-destructor TfpgListBoxStrings.Destroy;
+destructor TlqListBoxStrings.Destroy;
 begin
   ListBox := nil;
   inherited Destroy;
 end;
 
-function TfpgListBoxStrings.Add(const s: String): Integer;
+function TlqListBoxStrings.Add(const s: String): Integer;
 begin
   Result := inherited Add(s);
   if UpdateCount > 0 then
@@ -293,7 +293,7 @@ begin
   end;
 end;
 
-procedure TfpgListBoxStrings.Delete(Index: Integer);
+procedure TlqListBoxStrings.Delete(Index: Integer);
 begin
   inherited Delete(Index);
   if UpdateCount > 0 then
@@ -305,7 +305,7 @@ begin
   end;
 end;
 
-procedure TfpgListBoxStrings.Clear;
+procedure TlqListBoxStrings.Clear;
 begin
   inherited Clear;
   if UpdateCount > 0 then
@@ -315,7 +315,7 @@ begin
   ListBox.EndUpdate;
 end;
 
-procedure TfpgListBoxStrings.Exchange(Index1, Index2: Integer);
+procedure TlqListBoxStrings.Exchange(Index1, Index2: Integer);
 begin
   inherited Exchange(Index1, Index2);
   if UpdateCount > 0 then
@@ -326,7 +326,7 @@ begin
   end;
 end;
 
-procedure TfpgListBoxStrings.Assign(Source: TPersistent);
+procedure TlqListBoxStrings.Assign(Source: TPersistent);
 begin
   inherited Assign(Source);
   if UpdateCount > 0 then
@@ -339,14 +339,14 @@ begin
 end;
 
 
-{ TfpgBaseListBox }
+{ TlqBaseListBox }
 
-function TfpgBaseListBox.GetFontDesc: string;
+function TlqBaseListBox.GetFontDesc: string;
 begin
   result := FFont.FontDesc;
 end;
 
-procedure TfpgBaseListBox.SetFocusItem(const AValue: integer);
+procedure TlqBaseListBox.SetFocusItem(const AValue: integer);
 var
   old: integer;
 begin
@@ -374,7 +374,7 @@ begin
   DoChange;
 end;
 
-procedure TfpgBaseListBox.SetFontDesc(const AValue: string);
+procedure TlqBaseListBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
@@ -383,7 +383,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseListBox.SetPopupFrame(const AValue: boolean);
+procedure TlqBaseListBox.SetPopupFrame(const AValue: boolean);
 begin
   if FPopupFrame = AValue then
     Exit; //==>
@@ -391,7 +391,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseListBox.UpdateScrollbarCoords;
+procedure TlqBaseListBox.UpdateScrollbarCoords;
 var
   HWidth: integer;
   VHeight: integer;
@@ -408,7 +408,7 @@ begin
   FScrollBar.UpdateWindowPosition;
 end;
 
-procedure TfpgBaseListBox.SetAutoHeight(const AValue: boolean);
+procedure TlqBaseListBox.SetAutoHeight(const AValue: boolean);
 begin
   if FAutoHeight= AValue then
     Exit; //==>
@@ -416,20 +416,20 @@ begin
   Height := (Succ(PageLength) * RowHeight) + (2 * FMargin);
 end;
 
-procedure TfpgBaseListBox.MsgPaint(var msg: TfpgMessageRec);
+procedure TlqBaseListBox.MsgPaint(var msg: TlqMessageRec);
 begin
   // Optimising painting and preventing OnPaint from firing if not needed
   if FUpdateCount = 0 then
     inherited MsgPaint(msg);
 end;
 
-procedure TfpgBaseListBox.SetFirstItem(item: integer);
+procedure TlqBaseListBox.SetFirstItem(item: integer);
 begin
   FFirstItem := item;
   UpdateScrollBar;
 end;
 
-procedure TfpgBaseListBox.UpdateScrollBar;
+procedure TlqBaseListBox.UpdateScrollBar;
 var
   pn : integer;
 begin
@@ -451,10 +451,10 @@ begin
   end;
 end;
 
-procedure TfpgBaseListBox.FollowFocus;
+procedure TlqBaseListBox.FollowFocus;
 var
   n: integer;
-  h: TfpgCoord;
+  h: TlqCoord;
 begin
   if FFocusItem < FFirstItem then
     FFirstItem := FFocusItem
@@ -477,12 +477,12 @@ begin
   UpdateScrollBar;
 end;
 
-function TfpgBaseListBox.ListHeight: TfpgCoord;
+function TlqBaseListBox.ListHeight: TlqCoord;
 begin
   result := height - (2*FMargin);
 end;
 
-function TfpgBaseListBox.ScrollBarWidth: TfpgCoord;
+function TlqBaseListBox.ScrollBarWidth: TlqCoord;
 begin
   if FScrollBar.Visible then
     result := FScrollBar.Width
@@ -490,12 +490,12 @@ begin
     result := 0;
 end;
 
-function TfpgBaseListBox.PageLength: integer;
+function TlqBaseListBox.PageLength: integer;
 begin
   result := (ListHeight div RowHeight)-1; // component height minus 1 line
 end;
 
-procedure TfpgBaseListBox.ScrollBarMove(Sender: TObject; APosition: integer);
+procedure TlqBaseListBox.ScrollBarMove(Sender: TObject; APosition: integer);
 begin
   FFirstItem := APosition;
   Repaint;
@@ -503,19 +503,19 @@ begin
     FOnScroll(self);
 end;
 
-procedure TfpgBaseListBox.DoChange;
+procedure TlqBaseListBox.DoChange;
 begin
   if Assigned(OnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgBaseListBox.DoSelect;
+procedure TlqBaseListBox.DoSelect;
 begin
   if Assigned(OnSelect) then
     FOnSelect(self);
 end;
 
-procedure TfpgBaseListBox.HandleKeyPress(var keycode: word;
+procedure TlqBaseListBox.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
   consumed := true;
@@ -577,7 +577,7 @@ begin
   inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgBaseListBox.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseListBox.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
 
@@ -588,7 +588,7 @@ begin
   FMouseDragging := True;
 end;
 
-procedure TfpgBaseListBox.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseListBox.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   if ItemCount < 1 then
@@ -598,7 +598,7 @@ begin
   DoSelect;
 end;
 
-procedure TfpgBaseListBox.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqBaseListBox.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   NewFocus: Integer;
   i: Integer;
@@ -630,7 +630,7 @@ begin
   FocusItem := NewFocus;
 end;
 
-procedure TfpgBaseListBox.HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint);
+procedure TlqBaseListBox.HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint);
 var
   pfi: integer;
 begin
@@ -651,7 +651,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseListBox.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqBaseListBox.HandleResize(awidth, aheight: TlqCoord);
 begin
   inherited HandleResize(awidth, aheight);
   if (csLoading in ComponentState) then
@@ -660,7 +660,7 @@ begin
   UpdateScrollBar;
 end;
 
-procedure TfpgBaseListBox.HandleShow;
+procedure TlqBaseListBox.HandleShow;
 begin
   inherited HandleShow;
   if (csLoading in ComponentState) then
@@ -669,10 +669,10 @@ begin
   UpdateScrollBar;
 end;
 
-procedure TfpgBaseListBox.HandlePaint;
+procedure TlqBaseListBox.HandlePaint;
 var
   n: integer;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   //if FUpdateCount > 0 then
   //  Exit; //==>
@@ -763,21 +763,21 @@ begin
     if (n = FFocusItem) and FFocused then
     begin
       // outer dark border
-      Canvas.SetColor(TfpgColor($3b4c71));
+      Canvas.SetColor(TlqColor($3b4c71));
       Canvas.SetLineStyle(1, lsSolid);
       Canvas.DrawRectangle(r);
       InflateRect(r, -1, -1);
       // left top
-      Canvas.SetColor(TfpgColor($98b2ed));
+      Canvas.SetColor(TlqColor($98b2ed));
       Canvas.DrawLine(r.Left, r.Bottom, r.Left, r.Top);  // left
       Canvas.DrawLine(r.Left, r.Top, r.Right, r.Top);    // top
       // right bottom
-      Canvas.SetColor(TfpgColor($4468b8));
+      Canvas.SetColor(TlqColor($4468b8));
       Canvas.DrawLine(r.Right, r.Top, r.Right, r.Bottom);   // right
       Canvas.DrawLine(r.Right, r.Bottom, r.Left-1, r.Bottom);   // bottom
       // inside gradient fill
       InflateRect(r, -1, -1);
-      Canvas.GradientFill(r, TfpgColor($435e9a), TfpgColor($5476c4), gdVertical);
+      Canvas.GradientFill(r, TlqColor($435e9a), TlqColor($5476c4), gdVertical);
       // reset rectangle
       InflateRect(r, 2, 2);
     end;
@@ -799,7 +799,7 @@ begin
   end;
 end;
 
-constructor TfpgBaseListBox.Create(AOwner: TComponent);
+constructor TlqBaseListBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFont := fpgGetFont('#List');
@@ -819,7 +819,7 @@ begin
   FAutoHeight     := False;
   FDragToReorder  := False;
 
-  FScrollBar      := TfpgScrollBar.Create(self);
+  FScrollBar      := TlqScrollBar.Create(self);
   FScrollBar.Name := '_BaseListBoxScrollBar';
   FScrollBar.OnScroll := @ScrollBarMove;
 
@@ -828,18 +828,18 @@ begin
   FOnScroll := nil;
 end;
 
-destructor TfpgBaseListBox.Destroy;
+destructor TlqBaseListBox.Destroy;
 begin
   FFont.Free;
   inherited Destroy;
 end;
 
-procedure TfpgBaseListBox.BeginUpdate;
+procedure TlqBaseListBox.BeginUpdate;
 begin
   Inc(FUpdateCount);
 end;
 
-procedure TfpgBaseListBox.EndUpdate;
+procedure TlqBaseListBox.EndUpdate;
 begin
   if FUpdateCount = 0 then
     Exit; //==>
@@ -848,7 +848,7 @@ begin
     Repaint;
 end;
 
-procedure TfpgBaseListBox.Update;
+procedure TlqBaseListBox.Update;
 begin
   FFirstItem := -1;
   FFocusItem := -1;
@@ -856,18 +856,18 @@ begin
   Repaint;
 end;
 
-function TfpgBaseListBox.ItemCount: integer;
+function TlqBaseListBox.ItemCount: integer;
 begin
   // This must be overridden in descendant classes!
   result := 17;
 end;
 
-function TfpgBaseListBox.RowHeight: integer;
+function TlqBaseListBox.RowHeight: integer;
 begin
   result := FFont.Height+2;
 end;
 
-procedure TfpgBaseListBox.DrawItem(num: integer; rect: TfpgRect; flags: integer);
+procedure TlqBaseListBox.DrawItem(num: integer; rect: TlqRect; flags: integer);
 var
   s: string;
 begin
@@ -876,9 +876,9 @@ begin
   Canvas.DrawString(rect.left+2, rect.top+1, s);
 end;
 
-{ TfpgTextListBox }
+{ TlqTextListBox }
 
-function TfpgTextListBox.GetText: string;
+function TlqTextListBox.GetText: string;
 begin
   if (ItemCount > 0) and (FocusItem <> -1) then
     result := FItems[FocusItem]
@@ -886,7 +886,7 @@ begin
     result := '';
 end;
 
-procedure TfpgTextListBox.SetText(const AValue: string);
+procedure TlqTextListBox.SetText(const AValue: string);
 var
   i: integer;
 begin
@@ -907,19 +907,19 @@ begin
   end;
 end;
 
-procedure TfpgTextListBox.DrawItem(num: integer; rect: TfpgRect; flags: integer);
+procedure TlqTextListBox.DrawItem(num: integer; rect: TlqRect; flags: integer);
 begin
   //if num < 0 then
     //Exit; //==>
   fpgStyle.DrawString(Canvas, rect.left+2, rect.top+1, FItems.Strings[num], Enabled);
 end;
 
-procedure TfpgTextListBox.Exchange (Index1, Index2: Integer);
+procedure TlqTextListBox.Exchange (Index1, Index2: Integer);
 begin
   Items.Exchange(Index1, Index2);
 end;
 
-procedure TfpgTextListBox.HandleKeyChar(var AText: TfpgChar;
+procedure TlqTextListBox.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   i: integer;
@@ -939,36 +939,36 @@ begin
   inherited HandleKeyChar(AText, shiftstate, consumed);
 end;
 
-constructor TfpgTextListBox.Create(AOwner: TComponent);
+constructor TlqTextListBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FItems := TfpgListBoxStrings.Create(self);
+  FItems := TlqListBoxStrings.Create(self);
   FFocusItem := -1;
 end;
 
-destructor TfpgTextListBox.Destroy;
+destructor TlqTextListBox.Destroy;
 begin
-  TfpgListBoxStrings(FItems).Free;
+  TlqListBoxStrings(FItems).Free;
   inherited Destroy;
 end;
 
-function TfpgTextListBox.ItemCount: integer;
+function TlqTextListBox.ItemCount: integer;
 begin
   result := FItems.Count;
 end;
 
 { TColorItem }
 
-constructor TColorItem.Create (const AColorName: string; const AColorValue: TfpgColor);
+constructor TColorItem.Create (const AColorName: string; const AColorValue: TlqColor);
 begin
   inherited Create;
   ColorName := AColorName;
   ColorValue := AColorValue;
 end;
 
-{ TfpgBaseColorListBox }
+{ TlqBaseColorListBox }
 
-procedure TfpgBaseColorListBox.SetColorPalette (const AValue: TfpgColorPalette );
+procedure TlqBaseColorListBox.SetColorPalette (const AValue: TlqColorPalette );
 begin
   if FColorPalette = AValue then
     Exit;
@@ -977,7 +977,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseColorListBox.SetShowColorNames (const AValue: Boolean );
+procedure TlqBaseColorListBox.SetShowColorNames (const AValue: Boolean );
 begin
   if FShowColorNames = AValue then
     Exit;
@@ -985,12 +985,12 @@ begin
   Repaint;
 end;
 
-function TfpgBaseColorListBox.GetColor: TfpgColor;
+function TlqBaseColorListBox.GetColor: TlqColor;
 begin
   Result := TColorItem(FItems.Items[FocusItem]).ColorValue;
 end;
 
-procedure TfpgBaseColorListBox.SetColor(const AValue: TfpgColor);
+procedure TlqBaseColorListBox.SetColor(const AValue: TlqColor);
 var
   i: integer;
 begin
@@ -1006,7 +1006,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseColorListBox.SetupColorPalette;
+procedure TlqBaseColorListBox.SetupColorPalette;
 begin
   FreeAndClearColors;
 
@@ -1220,7 +1220,7 @@ begin
   UpdateScrollbar;
 end;
 
-procedure TfpgBaseColorListBox.FreeAndClearColors;
+procedure TlqBaseColorListBox.FreeAndClearColors;
 var
   i: integer;
 begin
@@ -1229,7 +1229,7 @@ begin
   FItems.Clear;
 end;
 
-procedure TfpgBaseColorListBox.DrawItem(num: integer; rect: TfpgRect; flags: integer);
+procedure TlqBaseColorListBox.DrawItem(num: integer; rect: TlqRect; flags: integer);
 var
   itm: TColorItem;
 begin
@@ -1246,12 +1246,12 @@ begin
     fpgStyle.DrawString(Canvas, FColorboxWidth + 8 + rect.left, rect.top+1, itm.ColorName, Enabled);
 end;
 
-procedure TfpgBaseColorListBox.Exchange (Index1, Index2: Integer);
+procedure TlqBaseColorListBox.Exchange (Index1, Index2: Integer);
 begin
   Items.Exchange(Index1, Index2);
 end;
 
-constructor TfpgBaseColorListBox.Create(AOwner: TComponent);
+constructor TlqBaseColorListBox.Create(AOwner: TComponent);
 begin
   inherited Create (AOwner );
   FColorBoxWidth := 35;
@@ -1264,14 +1264,14 @@ begin
   SetupColorPalette;
 end;
 
-destructor TfpgBaseColorListBox.Destroy;
+destructor TlqBaseColorListBox.Destroy;
 begin
   FreeAndClearColors;
   FItems.Free;
   inherited Destroy;
 end;
 
-function TfpgBaseColorListBox.ItemCount: integer;
+function TlqBaseColorListBox.ItemCount: integer;
 begin
   result := FItems.Count;
 end;

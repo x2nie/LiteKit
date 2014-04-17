@@ -34,7 +34,7 @@ type
 
   TStandardColor = record
     Name: string[ 32 ];
-    Color: TfpgColor;
+    Color: TlqColor;
   end;
 
   TTag = record
@@ -51,7 +51,7 @@ type
 
   TTextElement = record
     ElementType: TTextElementType;
-    Character: TfpgChar;  // so we can support UTF-8 character
+    Character: TlqChar;  // so we can support UTF-8 character
     Tag: TTag;
   end;
 
@@ -115,7 +115,7 @@ function ExtractNextTextElement( TextPointer: PChar; Var NextElement: PChar ): T
 function ExtractPreviousTextElement( const TextStart: PChar; TextPointer: PChar; Var NextElement: PChar ): TTextElement;
 
 // Parse a color name or value (#hexval). Returns true if valid
-function GetTagColor( const ColorParam: string; var Color: TfpgColor ): boolean;
+function GetTagColor( const ColorParam: string; var Color: TlqColor ): boolean;
 
 function GetTagTextAlignment( const AlignParam: string;
                               const Default: TTextAlignment ): TTextAlignment;
@@ -357,10 +357,10 @@ end;
 
 function ExtractNextTextElement( TextPointer: PChar; Var NextElement: PChar ): TTextElement;
 var
-  TheChar: TfpgChar;
-  NextChar: TfpgChar;
+  TheChar: TlqChar;
+  NextChar: TlqChar;
   CharLength: integer;
-  s1, s2: TfpgString;
+  s1, s2: TlqString;
   c: Char;
 begin
   with Result do
@@ -516,7 +516,7 @@ begin
 end;
 
 function GetTagColor( const ColorParam: string;
-                      var Color: TfpgColor ): boolean;
+                      var Color: TlqColor ): boolean;
 var
   ColorIndex: longint;
 begin
@@ -755,7 +755,7 @@ begin
   Result := true;
 end;
 
-// TODO: Rewrite this to work with fpGUI and AnsiString/TfpgString
+// TODO: Rewrite this to work with fpGUI and AnsiString/TlqString
 function CopyPlainTextToBuffer( StartP: PChar;
                                 EndP: PChar;
                                 Buffer: PChar;

@@ -6,11 +6,11 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpg_main, fpg_form;
+  Classes, lq_main, lq_form;
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: MainForm}
     {@VFD_HEAD_END: MainForm}

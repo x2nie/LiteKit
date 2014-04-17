@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      Some more interpolation filters for TfpgCanvas.StretchDraw:
+      Some more interpolation filters for TlqCanvas.StretchDraw:
       Bessel, Gaussian and Sinc are infinite impulse response (IIR),
       the others are finite impulse response (FIR). The implementation
       of Bessel and Sinc are windowed with Blackman filter.
@@ -32,28 +32,28 @@ uses
 
 type
 
-  TBlackmanInterpolation = class(TfpgBaseInterpolation)
+  TBlackmanInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TBlackmanSincInterpolation = class(TfpgBaseInterpolation)
+  TBlackmanSincInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TBlackmanBesselInterpolation = class(TfpgBaseInterpolation)
+  TBlackmanBesselInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TGaussianInterpolation = class(TfpgBaseInterpolation)
+  TGaussianInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
@@ -61,77 +61,77 @@ type
 
 
   // a.k.a. "Nearest Neighbour" filter
-  TBoxInterpolation = class(TfpgBaseInterpolation)
+  TBoxInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  THermiteInterpolation = class(TfpgBaseInterpolation)
+  THermiteInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TLanczosInterpolation = class(TfpgBaseInterpolation)
+  TLanczosInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TQuadraticInterpolation = class(TfpgBaseInterpolation)
+  TQuadraticInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TCubicInterpolation = class(TfpgBaseInterpolation)
+  TCubicInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TCatromInterpolation = class(TfpgBaseInterpolation)
+  TCatromInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  TBilinearInterpolation = class(TfpgBaseInterpolation)
+  TBilinearInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  THanningInterpolation = class(TfpgBaseInterpolation)
+  THanningInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
 
 
-  THammingInterpolation = class(TfpgBaseInterpolation)
-  protected
-    function  Filter(x: double): double; override;
-    function  MaxSupport: double; override;
-  end;
-  
-  
-  TBSplineInterpolation = class(TfpgBaseInterpolation)
+  THammingInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;
   end;
   
   
-  TBellInterpolation = class(TfpgBaseInterpolation)
+  TBSplineInterpolation = class(TlqBaseInterpolation)
+  protected
+    function  Filter(x: double): double; override;
+    function  MaxSupport: double; override;
+  end;
+  
+  
+  TBellInterpolation = class(TlqBaseInterpolation)
   protected
     function  Filter(x: double): double; override;
     function  MaxSupport: double; override;

@@ -11,7 +11,7 @@ type
 
   TTestTreeview= class(TTestCase)
   private
-    FTree: TfpgTreeview;
+    FTree: TlqTreeview;
   protected
     procedure SetUp; override; 
     procedure TearDown; override; 
@@ -28,7 +28,7 @@ implementation
 
 procedure TTestTreeview.SetUp;
 begin
-  FTree := TfpgTreeview.Create(nil);
+  FTree := TlqTreeview.Create(nil);
 end; 
 
 procedure TTestTreeview.TearDown; 
@@ -38,7 +38,7 @@ end;
 
 procedure TTestTreeview.TestCount;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   AssertEquals('Failed on 1', 0, FTree.RootNode.Count);
   FTree.RootNode.AppendText('n1');
@@ -51,7 +51,7 @@ end;
 
 procedure TTestTreeview.TestCountRecursive;
 var
-  n1, n2: TfpgTreeNode;
+  n1, n2: TlqTreeNode;
 begin
   { root
       |--n1
@@ -77,7 +77,7 @@ end;
 
 procedure TTestTreeview.TestNext;
 var
-  n1, n2: TfpgTreeNode;
+  n1, n2: TlqTreeNode;
 begin
   AssertTrue('Failed on 1', FTree.RootNode.Next = nil);
   n1 := FTree.RootNode.AppendText('n1');
@@ -90,7 +90,7 @@ end;
 
 procedure TTestTreeview.TestPrev;
 var
-  n1, n2: TfpgTreeNode;
+  n1, n2: TlqTreeNode;
 begin
   AssertTrue('Failed on 1', FTree.RootNode.Prev = nil);
   n1 := FTree.RootNode.AppendText('n1');
@@ -103,7 +103,7 @@ end;
 
 procedure TTestTreeview.TestAppendText;
 var
-  n1, n2: TfpgTreeNode;
+  n1, n2: TlqTreeNode;
 begin
   n1 := FTree.RootNode.AppendText('n1');
   AssertTrue('Failed on 1', FTree.RootNode.FirstSubNode = n1);
@@ -114,8 +114,8 @@ end;
 
 procedure TTestTreeview.TestFindSubNode_Text;
 var
-  n1, n2, n3: TfpgTreeNode;
-  r: TfpgTreeNode;
+  n1, n2, n3: TlqTreeNode;
+  r: TlqTreeNode;
 begin
   { root
       |--n1

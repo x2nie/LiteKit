@@ -411,7 +411,7 @@ var
   oMsg: TMsgItemClass;
 begin
   DestFile := TStringList.Create;
-  DestFile.Add('{%mainunit fpg_constants.pas}');
+  DestFile.Add('{%mainunit lq_constants.pas}');
   DestFile.Add('');
   DestFile.Add('{ This file is auto generated!  DO NOT EDIT. }');
   DestFile.Add('{ Only exception is the default language English - lang_en.inc  }');

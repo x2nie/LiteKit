@@ -55,7 +55,7 @@ type
     FMeasureUnit: TMeasureUnit;
     FPreparation: TPreparation;
     FVisualization: Boolean;
-    FCanvas: TfpgCanvas;
+    FCanvas: TlqCanvas;
     FCurrentFont: integer;
     FCurrentLineSpace: integer;
     FCurrentColor: integer;
@@ -70,8 +70,8 @@ type
     FDefaultFile: string;
     function Dim2Pixels(Value: single): single;
     function Pixels2Dim(Value: single): single;
-    function AddLineBreaks(const Txt: TfpgString; AMaxLineWidth: integer; AFnt: TfpgFont): string;
-    function TxtHeight(AWid: integer; const ATxt: TfpgString; AFnt: TfpgFont; ALSpace: integer = 2): integer;
+    function AddLineBreaks(const Txt: TlqString; AMaxLineWidth: integer; AFnt: TlqFont): string;
+    function TxtHeight(AWid: integer; const ATxt: TlqString; AFnt: TlqFont; ALSpace: integer = 2): integer;
     function Convert2Alpha(Valeur: integer): string;
     function GetPaperHeight: integer;
     function GetPaperWidth: integer;
@@ -82,14 +82,14 @@ type
     procedure ShiftFooterLines(Shift: single);
     procedure ShiftPageLines(Shift: single);
     procedure ShiftGroup(Shift: single);
-    function WriteText(PosX, PosY: single; Column, Text, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TfpgTextFlags; Zone: TZone): single;
-    function WriteNumber(PosX, PosY: single; Column, TextNum, TextTot, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TfpgTextFlags; Total, Alpha: Boolean; Zone: TZone; SPNum: TSectPageNum): single;
+    function WriteText(PosX, PosY: single; Column, Text, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TlqTextFlags; Zone: TZone): single;
+    function WriteNumber(PosX, PosY: single; Column, TextNum, TextTot, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TlqTextFlags; Total, Alpha: Boolean; Zone: TZone; SPNum: TSectPageNum): single;
     function InsertSpace(PosY: single; Column: integer; SpaceHeight: single; BkColorNum: integer; Zone: TZone): single;
     procedure LineEnd(Zone: TZone);
     procedure DrawAFrame(StyLine, XLeft, XRight, YTop,YBottom: integer; Zone: TZone);
     procedure DrawALine(XBegin, YBegin, XEnd, YEnd: single; StyLine: integer);
     procedure DrawAHorizLine(XBegin, YBegin: single; Column: integer; XEnd: single; StyLine: integer; Zone: TZone);
-    procedure PaintSurface(Points: T_Points; Couleur: TfpgColor);
+    procedure PaintSurface(Points: T_Points; Couleur: TlqColor);
     procedure PaintImage(PosX, PosY: single; Column, ImgNum: integer; Zone: TZone);
     function GetSectionTitle: string;
     procedure SetSectionTitle(ATitle: string);
@@ -112,14 +112,14 @@ type
     // IniOrientation = paper orientation >> oPortrait or oLandscape
     procedure Page;
     // new page in the current section
-    function BackColor(FdColor: TfpgColor): integer;
+    function BackColor(FdColor: TlqColor): integer;
     // returns the number allocated to the color
     // FdColor = background color
-    function Font(FtNom: string; FtColor: TfpgColor): integer;
+    function Font(FtNom: string; FtColor: TlqColor): integer;
     // returns the number allocated to the font
     // FtNom = FontDesc of the font
     // FtColor = font color
-    function LineStyle(StThick: single; StColor: TfpgColor; StStyle: TfpgLineStyle): integer;
+    function LineStyle(StThick: single; StColor: TlqColor; StStyle: TlqLineStyle): integer;
     // returns the number allocated to the line style
     // StThick = thickness of the line in pixels
     // StColor = line color
@@ -128,7 +128,7 @@ type
     // returns the number allocated to the border
     // BdFlags = position of the border (bdTop,bdBottom,bdLeft,bdRight)
     // BdStyle = border line style: thickness, color, style
-    function Column(ClnPos, ClnWidth: single; ClnMargin: single = 0; ClnColor: TfpgColor = clWhite): integer;
+    function Column(ClnPos, ClnWidth: single; ClnMargin: single = 0; ClnColor: TlqColor = clWhite): integer;
     // returns the number allocated to the column
     // ClnPos = left position in numeric value in the measurement unit (msMM or msInch)
     // ClnWidth = width in numeric value in the measurement unit (msMM or msInch)
@@ -288,7 +288,7 @@ type
     procedure EndGroup(PageJump: Boolean = False);
     // PageJump = True >> forces new page after the group
     //          = False >> lets continue on the same page after the group
-    procedure ColorColChange(ColNum: integer; ColColor: TfpgColor);
+    procedure ColorColChange(ColNum: integer; ColColor: TlqColor);
     // Changes the background color of a column
     // ColNum = column reference
     // ColColor = new background color for the column
@@ -311,7 +311,7 @@ type
     // XEnd = horizontal position of ending point in numeric value in the measurement unit (msMM or msInch)
     // YEnd = vertical position of ending point in numeric value in the measurement unit (msMM or msInch)
     // AStyle = reference of the line style of the line
-    procedure SurfPage(XLimits, YLimits: array of single; AColor: TfpgColor);
+    procedure SurfPage(XLimits, YLimits: array of single; AColor: TlqColor);
     // draw a coloured surface inside the defined limit points
     // XLimits = list of horizontal positions of limit points
     // YLimits = list of vertical positions of limit points
@@ -373,7 +373,7 @@ type
     FPosY: single;
     FWidth: single;
     FText: string;
-    FColor: TfpgColor;
+    FColor: TlqColor;
   public
     property PageId: integer read FPage write FPage;
     property FontName: integer read FFont write FFont;
@@ -382,7 +382,7 @@ type
     property TextPosY: single read FPosY write FPosY;
     property TextWidt: single read FWidth write FWidth;
     property Writting: string read FText write FText;
-    property Couleur: TfpgColor read FColor write FColor;
+    property Couleur: TlqColor read FColor write FColor;
   end;
 
   TPdfRect = class(TPdfElement)
@@ -393,10 +393,10 @@ type
     FBottom: single;
     FHeight: single;
     FWidth: single;
-    FColor: TfpgColor;
+    FColor: TlqColor;
     FFill: Boolean;
     FStroke: Boolean;
-    FLineStyle: TfpgLineStyle;
+    FLineStyle: TlqLineStyle;
   protected
   public
     property PageId: integer read FPage write FPage;
@@ -405,10 +405,10 @@ type
     property RectBottom: single read FBottom write FBottom;
     property RectHeight: single read FHeight write FHeight;
     property RectWidth: single read FWidth write FWidth;
-    property RectColor: TfpgColor read FColor write FColor;
+    property RectColor: TlqColor read FColor write FColor;
     property RectFill: Boolean read FFill write FFill;
     property RectStroke: Boolean read FStroke write FStroke;
-    property RectLineStyle: TfpgLineStyle read FLineStyle write FLineStyle;
+    property RectLineStyle: TlqLineStyle read FLineStyle write FLineStyle;
   end;
 
   TPdfLine = class(TPdfElement)
@@ -419,8 +419,8 @@ type
     FBeginY: single;
     FEndX: single;
     FEndY: single;
-    FColor: TfpgColor;
-    FStyle: TfpgLineStyle;
+    FColor: TlqColor;
+    FStyle: TlqLineStyle;
   protected
   public
     property PageId: integer read FPage write FPage;
@@ -429,20 +429,20 @@ type
     property LineBeginY: single read FBeginY write FBeginY;
     property LineEndX: single read FEndX write FEndX;
     property LineEndY: single read FEndY write FEndY;
-    property LineColor: TfpgColor read FColor write FColor;
-    property LineStyle: TfpgLineStyle read FStyle write FStyle;
+    property LineColor: TlqColor read FColor write FColor;
+    property LineStyle: TlqLineStyle read FStyle write FStyle;
   end;
 
   TPdfSurf = class(TPdfElement)
   private
     FPage: integer;
     FPoints: T_Points;
-    FColor: TfpgColor;
+    FColor: TlqColor;
   protected
   public
     property PageId: integer read FPage write FPage;
     property Points: T_Points read FPoints;
-    property SurfColor: TfpgColor read FColor write FColor;
+    property SurfColor: TlqColor read FColor write FColor;
   end;
 
   TPdfImg = class(TPdfElement)
@@ -512,7 +512,7 @@ begin
     Result := Value / PPI;
 end;
 
-function T_Report.AddLineBreaks(const Txt: TfpgString; AMaxLineWidth: integer; AFnt: TfpgFont): string;
+function T_Report.AddLineBreaks(const Txt: TlqString; AMaxLineWidth: integer; AFnt: TlqFont): string;
 var
   i, n, ls: integer;
   sub: string;
@@ -555,7 +555,7 @@ begin
   end;
 end;
 
-function T_Report.TxtHeight(AWid: integer; const ATxt: TfpgString; AFnt: TfpgFont; ALSpace: integer = 2): integer;
+function T_Report.TxtHeight(AWid: integer; const ATxt: TlqString; AFnt: TlqFont; ALSpace: integer = 2): integer;
 var
   Cpt: integer;
   Wraplst: TStringList;
@@ -909,13 +909,13 @@ begin
   end;
 end;
 
-function T_Report.WriteText(PosX, PosY: single; Column, Text, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TfpgTextFlags; Zone: TZone): single;
+function T_Report.WriteText(PosX, PosY: single; Column, Text, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TlqTextFlags; Zone: TZone): single;
 var
   PosH, PosV, LnSpInt, LnSpSup, LnSpInf, ThickLine: single;
   HTxt, HeighTxt, Half, ColorLine, Cpt: integer;
   EndOfLine, UseCurFont: Boolean;
-  Fnt: TfpgFont;
-  StyleLine: TfpgLineStyle;
+  Fnt: TlqFont;
+  StyleLine: TlqLineStyle;
   Wraplst: TStringList;
 begin
   with T_Section(Sections[Pred(NumSection)]) do
@@ -1318,7 +1318,7 @@ begin
   end;
 end;
 
-function T_Report.WriteNumber(PosX, PosY: single; Column, TextNum, TextTot, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TfpgTextFlags; Total, Alpha: Boolean; Zone: TZone; SPNum: TSectPageNum): single;
+function T_Report.WriteNumber(PosX, PosY: single; Column, TextNum, TextTot, FontNum, BkColorNum, BordNum, SpLine: integer; TxtFlags: TlqTextFlags; Total, Alpha: Boolean; Zone: TZone; SPNum: TSectPageNum): single;
 
   function BuildChaine: string;
   var
@@ -1361,8 +1361,8 @@ var
   PosH, PosV, LnSpInt, LnSpSup, LnSpInf, ThickLine: single;
   HTxt, HeighTxt, Half, ColorLine: integer;
   EndOfLine, UseCurFont: Boolean;
-  Fnt: TfpgFont;
-  StyleLine: TfpgLineStyle;
+  Fnt: TlqFont;
+  StyleLine: TlqLineStyle;
   Chaine: string;
 begin
   with T_Section(Sections[Pred(NumSection)]) do
@@ -1952,9 +1952,9 @@ begin
   end; { with T_Section... }
 end;
 
-procedure T_Report.PaintSurface(Points: T_Points; Couleur: TfpgColor);
+procedure T_Report.PaintSurface(Points: T_Points; Couleur: TlqColor);
 var
-  OldColor: TfpgColor;
+  OldColor: TlqColor;
   Cpt: integer;
   Pts: array of TPoint;
 begin
@@ -2030,7 +2030,7 @@ begin
         end;
       end;
       ppVisualize:
-        FCanvas.DrawImage(Round(PosX), Round(PosY), TfpgImage(Images[ImgNum]));
+        FCanvas.DrawImage(Round(PosX), Round(PosY), TlqImage(Images[ImgNum]));
       ppPdfFile:
       begin
         PdfImg := TPdfImg.Create;
@@ -2039,9 +2039,9 @@ begin
           PageId    := NumPage;
           ImgNumber := ImgNum;
           ImgLeft   := PosX;
-          ImgBottom := Paper.H - PosY - TfpgImage(Images[ImgNum]).Height;
-          ImgWidth  := TfpgImage(Images[ImgNum]).Width;
-          ImgHeight := TfpgImage(Images[ImgNum]).Height;
+          ImgBottom := Paper.H - PosY - TlqImage(Images[ImgNum]).Height;
+          ImgWidth  := TlqImage(Images[ImgNum]).Width;
+          ImgHeight := TlqImage(Images[ImgNum]).Height;
         end;
         PdfPage.Add(PdfImg);
       end;
@@ -2115,7 +2115,7 @@ begin
   Borders.Free;
   if Images.Count > 0 then
     for Cpt := 0 to Pred(Images.Count) do
-      TfpgImage(Images[Cpt]).Free;
+      TlqImage(Images[Cpt]).Free;
   Images.Free;
   ImageNames.Free;
   Texts.Free;
@@ -2259,19 +2259,19 @@ begin
   end;
 end;
 
-function T_Report.BackColor(FdColor: TfpgColor): integer;
+function T_Report.BackColor(FdColor: TlqColor): integer;
 begin
   VBackColor := T_BackColor.Create(FdColor);
   Result     := BackColors.Add(VBackColor);
 end;
 
-function T_Report.Font(FtNom: string; FtColor: TfpgColor): integer;
+function T_Report.Font(FtNom: string; FtColor: TlqColor): integer;
 begin
   VFont  := T_Font.Create(FtNom, FtColor);
   Result := Fonts.Add(VFont);
 end;
 
-function T_Report.LineStyle(StThick: single; StColor: TfpgColor; StStyle: TfpgLineStyle): integer;
+function T_Report.LineStyle(StThick: single; StColor: TlqColor; StStyle: TlqLineStyle): integer;
 begin
   VLineStyle := T_LineStyle.Create(StThick, StColor, StStyle);
   Result     := LineStyles.Add(VLineStyle);
@@ -2289,7 +2289,7 @@ end;
  //Result:= Borders.Add(VBorder);
  //end;
 
-function T_Report.Column(ClnPos, ClnWidth: single; ClnMargin: single = 0; ClnColor: TfpgColor = clWhite): integer;
+function T_Report.Column(ClnPos, ClnWidth: single; ClnMargin: single = 0; ClnColor: TlqColor = clWhite): integer;
 var
   CPos, CWidth, CMargin: single;
 begin
@@ -2303,7 +2303,7 @@ end;
 procedure T_Report.WriteHeader(Horiz, Verti: single; Text: string; ColNum: integer = 0; FontNum: integer = 0; LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefText: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [txtWrap];
   if Horiz < 0 then
@@ -2328,7 +2328,7 @@ end;
 function T_Report.WritePage(Horiz, Verti: single; Text: string; ColNum: integer = 0; FontNum: integer = 0; LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1): single;
 var
   RefText: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [txtWrap];
   if Horiz < 0 then
@@ -2353,7 +2353,7 @@ end;
 procedure T_Report.WriteFooter(Horiz, Verti: single; Text: string; ColNum: integer = 0; FontNum: integer = 0; LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefText: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [txtWrap];
   if Horiz < 0 then
@@ -2379,7 +2379,7 @@ procedure T_Report.NumSectionHeader(Horiz, Verti: single; TexteSect: string = ''
   LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2408,7 +2408,7 @@ procedure T_Report.NumSectionFooter(Horiz, Verti: single; TexteSect: string = ''
   LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2436,7 +2436,7 @@ end;
 procedure T_Report.NumPageHeader(Horiz, Verti: single; TextePage: string = ''; TextTot: string = ''; Total: Boolean = False; ColNum: integer = 0; FontNum: integer = 0; LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2464,7 +2464,7 @@ end;
 procedure T_Report.NumPageFooter(Horiz, Verti: single; TextePage: string = ''; TextTot: string = ''; Total: Boolean = False; ColNum: integer = 0; FontNum: integer = 0; LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2493,7 +2493,7 @@ procedure T_Report.NumPageSectionHeader(Horiz, Verti: single; TexteSect: string 
   LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2522,7 +2522,7 @@ procedure T_Report.NumPageSectionFooter(Horiz, Verti: single; TexteSect: string 
   LineSpNum: integer = 0; BkColorNum: integer = -1; BordNum: integer = -1);
 var
   RefTextPage, RefTextTot: integer;
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
 begin
   Flags := [];
   if Horiz < 0 then
@@ -2614,7 +2614,7 @@ begin
     Page;
 end;
 
-procedure T_Report.ColorColChange(ColNum: integer; ColColor: TfpgColor);
+procedure T_Report.ColorColChange(ColNum: integer; ColColor: TlqColor);
 begin
   T_Column(Columns[ColNum]).SetColColor(ColColor);
 end;
@@ -2644,7 +2644,7 @@ begin
   DrawALine(Dim2Pixels(XBegin), Dim2Pixels(YBegin), Dim2Pixels(XEnd), Dim2Pixels(YEnd), AStyle);
 end;
 
-procedure T_Report.SurfPage(XLimits, YLimits: array of single; AColor: TfpgColor);
+procedure T_Report.SurfPage(XLimits, YLimits: array of single; AColor: TlqColor);
 var
   Size, Cpt: integer;
   Ends: array of TRefPos;
@@ -2667,7 +2667,7 @@ end;
 procedure T_Report.ImageHeader(Horiz, Verti: single; ImgFileName: string; ColNum, Scale: integer);
 var
   RefImage: integer;
-  Image: TfpgImage;
+  Image: TlqImage;
 begin
   Horiz := Dim2Pixels(Horiz);
   Verti := Dim2Pixels(Verti);
@@ -2708,7 +2708,7 @@ end;
 procedure T_Report.ImagePage(Horiz, Verti: single; ImgFileName: string; ColNum, Scale: integer);
 var
   RefImage: integer;
-  Image, TempImage: TfpgImage;
+  Image, TempImage: TlqImage;
 begin
   Horiz := Dim2Pixels(Horiz);
   Verti := Dim2Pixels(Verti);
@@ -2752,7 +2752,7 @@ end;
 procedure T_Report.ImageFooter(Horiz, Verti: single; ImgFileName: string; ColNum, Scale: integer);
 var
   RefImage: integer;
-  Image: TfpgImage;
+  Image: TlqImage;
 begin
   Horiz := Dim2Pixels(Horiz);
   Verti := Dim2Pixels(Verti);
@@ -2791,7 +2791,7 @@ end;
 
 procedure T_Report.PrintPdf(Layout: TPageLayout; Zoom: string; Prefer: Boolean);
 var
-  Fd_SavePdf: TfpgFileDialog;
+  Fd_SavePdf: TlqFileDialog;
   PdfFile: string;
   PdfFileStream: TFileStream;
 begin
@@ -2801,7 +2801,7 @@ begin
     Exit;
   end;
 
-  Fd_SavePdf          := TfpgFileDialog.Create(nil);
+  Fd_SavePdf          := TlqFileDialog.Create(nil);
   Fd_SavePdf.InitialDir := fpgExtractFilePath(ParamStr(0));
   Fd_SavePdf.Filter   := rsFileTypePDF + ' |*.pdf';
   Fd_SavePdf.FileName := DefaultFile;

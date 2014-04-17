@@ -37,7 +37,7 @@ type
   TImageLayout = (ilImageLeft, ilImageTop, ilImageRight, ilImageBottom);
 
 
-  TfpgBaseButton = class(TfpgWidget, ICommandHolder)
+  TlqBaseButton = class(TlqWidget, ICommandHolder)
   private
     FCommand: ICommand;
     FImageLayout: TImageLayout;
@@ -48,7 +48,7 @@ type
     FClickOnPush: Boolean;    { Used for group buttons where click happens on "down" state. Normal buttons, the click happens on "release" state }
     FGroupIndex: integer;
     FAllowAllUp: boolean;
-    FModalResult: TfpgModalResult;
+    FModalResult: TlqModalResult;
     function    GetFontDesc: string;
     procedure   SetDefault(const AValue: boolean);
     procedure   SetEmbedded(const AValue: Boolean);
@@ -71,9 +71,9 @@ type
     FImageSpacing: integer;
     FEmbedded: Boolean;
     FDown: Boolean;
-    FImage: TfpgImage;
+    FImage: TlqImage;
     FText: string;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FDefault: boolean;
     FState: integer;  // 0 - normal  // 1 - hover
     FAllowMultiLineText: boolean;
@@ -106,7 +106,7 @@ type
     property    ImageName: string read FImageName write SetImageName;
     property    ImageSpacing: integer read FImageSpacing write SetImageSpacing default -1;
     property    ImageLayout: TImageLayout read FImageLayout write SetImageLayout default ilImageLeft;
-    property    ModalResult: TfpgModalResult read FModalResult write FModalResult default mrNone;
+    property    ModalResult: TlqModalResult read FModalResult write FModalResult default mrNone;
     property    ShowImage: Boolean read FShowImage write SetShowImage default True;
     property    Text: string read FText write SetText;
   public
@@ -115,7 +115,7 @@ type
     procedure   Click;
     function    GetCommand: ICommand;   // ICommandHolder interface
     procedure   SetCommand(ACommand: ICommand); // ICommandHolder interface
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   end;
   
   
@@ -132,7 +132,7 @@ type
     than one set of toggle buttons in a Parent, you need to manually set the
     GroupIndex property instead. All buttons with the same GroupIndex work
     together. }
-  TfpgButton = class(TfpgBaseButton)
+  TlqButton = class(TlqBaseButton)
   published
     property    Align;
     property    AllowAllUp;
@@ -180,19 +180,19 @@ type
   end;
 
 
-function CreateButton(AOwner: TComponent; x, y, w: TfpgCoord; AText: string;
-  AOnClickEvent: TNotifyEvent; AImage: string = ''): TfpgButton;
+function CreateButton(AOwner: TComponent; x, y, w: TlqCoord; AText: string;
+  AOnClickEvent: TNotifyEvent; AImage: string = ''): TlqButton;
 
 
 implementation
 
 uses
-  lq_form; {$Note Try and remove this fpg_form dependency.}
+  lq_form; {$Note Try and remove this lq_form dependency.}
 
-function CreateButton(AOwner: TComponent; x, y, w: TfpgCoord; AText: string;
-  AOnClickEvent: TNotifyEvent; AImage: string): TfpgButton;
+function CreateButton(AOwner: TComponent; x, y, w: TlqCoord; AText: string;
+  AOnClickEvent: TNotifyEvent; AImage: string): TlqButton;
 begin
-  Result         := TfpgButton.Create(AOwner);
+  Result         := TlqButton.Create(AOwner);
   Result.Text    := AText;
   Result.SetPosition(x, y, w, Result.Height); // font was used to calculate height.
   Result.OnClick := AOnClickEvent;
@@ -200,9 +200,9 @@ begin
   Result.UpdateWindowPosition;
 end;
 
-{ TfpgBaseButton }
+{ TlqBaseButton }
 
-procedure TfpgBaseButton.SetDown(AValue: Boolean);
+procedure TlqBaseButton.SetDown(AValue: Boolean);
 begin
   if AValue <> FDown then
   begin
@@ -212,7 +212,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseButton.SetShowImage(AValue: Boolean);
+procedure TlqBaseButton.SetShowImage(AValue: Boolean);
 begin
   if AValue <> FShowImage then
   begin
@@ -222,7 +222,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseButton.CalculatePositions(var ImageX, ImageY, TextX, TextY: integer);
+procedure TlqBaseButton.CalculatePositions(var ImageX, ImageY, TextX, TextY: integer);
 var
   textWidth, textHeight: integer;
   w: integer;
@@ -409,7 +409,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseButton.SetText(const AValue: string);
+procedure TlqBaseButton.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit;
@@ -417,22 +417,22 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseButton.SetImageName(const AValue: string);
+procedure TlqBaseButton.SetImageName(const AValue: string);
 begin
   FImageName := AValue;
   FImage     := fpgImages.GetImage(FImageName);
   Repaint;
 end;
 
-function TfpgBaseButton.GetFontDesc: string;
+function TlqBaseButton.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgBaseButton.SetDefault(const AValue: boolean);
+procedure TlqBaseButton.SetDefault(const AValue: boolean);
 var
   i: integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   if FDefault = AValue then
     Exit; //==>
@@ -443,10 +443,10 @@ begin
   begin
     for i := 0 to Parent.ComponentCount-1 do
     begin
-      wg := TfpgWidget(Parent.Components[i]);
-      if (wg <> nil) and (wg <> self) and (wg is TfpgBaseButton) then
+      wg := TlqWidget(Parent.Components[i]);
+      if (wg <> nil) and (wg <> self) and (wg is TlqBaseButton) then
       begin
-        TfpgBaseButton(wg).Default := False;
+        TlqBaseButton(wg).Default := False;
       end;
     end;  { for }
   end;  { if }
@@ -454,14 +454,14 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseButton.SetEmbedded(const AValue: Boolean);
+procedure TlqBaseButton.SetEmbedded(const AValue: Boolean);
 begin
   if FEmbedded = AValue then
     Exit;
   FEmbedded := AValue;
 end;
 
-procedure TfpgBaseButton.SetFlat(const AValue: Boolean);
+procedure TlqBaseButton.SetFlat(const AValue: Boolean);
 begin
   if FFlat = AValue then
     Exit; //==>
@@ -470,14 +470,14 @@ begin
     FDefault := False;  // you can't have it all!
 end;
 
-procedure TfpgBaseButton.SetFontDesc(const AValue: string);
+procedure TlqBaseButton.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   RePaint;
 end;
 
-constructor TfpgBaseButton.Create(AOwner: TComponent);
+constructor TlqBaseButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText         := 'Button';
@@ -508,7 +508,7 @@ begin
   FIgnoreDblClicks := True;
 end;
 
-destructor TfpgBaseButton.Destroy;
+destructor TlqBaseButton.Destroy;
 begin
   FImage := nil;
   FText  := '';
@@ -516,16 +516,16 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgBaseButton.HandlePaint;
+procedure TlqBaseButton.HandlePaint;
 var
   tx, ty, ix, iy: integer;
-  r: TfpgRect;
+  r: TlqRect;
   border: TRect;
   offset: TPoint;
-  lBtnFlags: TfpgButtonFlags;
-  clr: TfpgColor;
-  img: TfpgImage;
-  lTextFlags: TfpgTextFlags;
+  lBtnFlags: TlqButtonFlags;
+  clr: TlqColor;
+  img: TlqImage;
+  lTextFlags: TlqTextFlags;
 begin
 //  inherited HandlePaint;
   Canvas.ClearClipRect;
@@ -635,7 +635,7 @@ begin
     fpgStyle.DrawString(Canvas, tx+offset.x, ty+offset.y, Text, Enabled);
 end;
 
-procedure TfpgBaseButton.DoPush;
+procedure TlqBaseButton.DoPush;
 var
   n: integer;
   c: TComponent;
@@ -646,8 +646,8 @@ begin
   for n := 0 to Parent.ComponentCount - 1 do
   begin
     c := Parent.Components[n];
-    if (c <> self) and (c is TfpgBaseButton) then
-      with TfpgBaseButton(c) do
+    if (c <> self) and (c is TlqBaseButton) then
+      with TlqBaseButton(c) do
         if GroupIndex = self.GroupIndex then
           Down := False;
   end;
@@ -660,9 +660,9 @@ begin
     Click;
 end;
 
-procedure TfpgBaseButton.DoRelease(x, y: integer);
+procedure TlqBaseButton.DoRelease(x, y: integer);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(0, 0, Width, Height);
   if AllowDown then
@@ -692,14 +692,14 @@ begin
   FClicked     := False;
 end;
 
-procedure TfpgBaseButton.SetAllowMultiLineText(const AValue: boolean);
+procedure TlqBaseButton.SetAllowMultiLineText(const AValue: boolean);
 begin
   if FAllowMultiLineText = AValue then exit;
   FAllowMultiLineText := AValue;
   Repaint;
 end;
 
-procedure TfpgBaseButton.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseButton.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 begin
   if (keycode = keyReturn) or (keycode = keySpace) or (keycode = keyPEnter) then
   begin
@@ -711,7 +711,7 @@ begin
     inherited;
 end;
 
-procedure TfpgBaseButton.HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseButton.HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 begin
   if (keycode = keyReturn) or (keycode = keySpace) or (keycode = keyPEnter) then
   begin
@@ -723,7 +723,7 @@ begin
     inherited;
 end;
 
-procedure TfpgBaseButton.HandleLMouseDown(X, Y: integer; ShiftState: TShiftState);
+procedure TlqBaseButton.HandleLMouseDown(X, Y: integer; ShiftState: TShiftState);
 begin
   inherited;
   if (csDesigning in ComponentState) then
@@ -732,7 +732,7 @@ begin
   DoPush;
 end;
 
-procedure TfpgBaseButton.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseButton.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
 //  inherited;
   if (csDesigning in ComponentState) then
@@ -741,7 +741,7 @@ begin
   DoRelease(x, y);
 end;
 
-procedure TfpgBaseButton.HandleMouseExit;
+procedure TlqBaseButton.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   if (csDesigning in ComponentState) then
@@ -760,7 +760,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseButton.HandleMouseEnter;
+procedure TlqBaseButton.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   if (csDesigning in ComponentState) then
@@ -779,9 +779,9 @@ begin
   end;
 end;
 
-procedure TfpgBaseButton.Click;
+procedure TlqBaseButton.Click;
 var
-  pform: TfpgForm;
+  pform: TlqForm;
 begin
   if not Enabled then
     Exit; //==>
@@ -805,29 +805,29 @@ begin
   end;
 end;
 
-function TfpgBaseButton.GetCommand: ICommand;
+function TlqBaseButton.GetCommand: ICommand;
 begin
   Result := FCommand;
 end;
 
-procedure TfpgBaseButton.SetCommand(ACommand: ICommand);
+procedure TlqBaseButton.SetCommand(ACommand: ICommand);
 begin
   FCommand := ACommand;
 end;
 
-procedure TfpgBaseButton.SetImageMargin(const Value: integer);
+procedure TlqBaseButton.SetImageMargin(const Value: integer);
 begin
   FImageMargin := Value;
   Repaint;
 end;
 
-procedure TfpgBaseButton.SetImageSpacing(const Value: integer);
+procedure TlqBaseButton.SetImageSpacing(const Value: integer);
 begin
   FImageSpacing := Value;
   Repaint;
 end;
 
-procedure TfpgBaseButton.SetImageLayout(const AValue: TImageLayout);
+procedure TlqBaseButton.SetImageLayout(const AValue: TImageLayout);
 begin
   if FImageLayout <> AValue then
     begin
@@ -836,17 +836,17 @@ begin
     end;
 end;
 
-function TfpgBaseButton.GetAllowDown: Boolean;
+function TlqBaseButton.GetAllowDown: Boolean;
 begin
   Result := GroupIndex > 0;
 end;
 
-procedure TfpgBaseButton.SetAllowDown(const Value: Boolean);
+procedure TlqBaseButton.SetAllowDown(const Value: Boolean);
 begin
   GroupIndex := 1;
 end;
 
-procedure TfpgBaseButton.SetAllowAllUp(const Value: boolean);
+procedure TlqBaseButton.SetAllowAllUp(const Value: boolean);
 begin
   FAllowAllUp := Value;
 end;

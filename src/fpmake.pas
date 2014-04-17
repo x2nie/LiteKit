@@ -115,7 +115,7 @@ begin
 }
 
     { corelib }
-    T := P.Targets.AddUnit('fpg_constants.pas');
+    T := P.Targets.AddUnit('lq_constants.pas');
       T.Dependencies.AddInclude('lang_en.inc');
       T.Dependencies.AddInclude('lang_af.inc');
       T.Dependencies.AddInclude('lang_de.inc');
@@ -125,82 +125,82 @@ begin
       T.Dependencies.AddInclude('lang_pt.inc');
       T.Dependencies.AddInclude('lang_ru.inc');
       T.ResourceStrings := True;
-    T := P.Targets.AddUnit('fpg_base.pas');
+    T := P.Targets.AddUnit('lq_base.pas');
       T.Dependencies.AddInclude('keys.inc');
       T.Dependencies.AddInclude('predefinedcolors.inc');
-    T := P.Targets.AddUnit('fpg_imagelist.pas');
-    T := P.Targets.AddUnit('fpg_popupwindow.pas');
-    T := P.Targets.AddUnit('fpg_translations.pas');
-    T := P.Targets.AddUnit('fpg_cmdlineparams.pas');
-    T := P.Targets.AddUnit('fpg_imgfmt_bmp.pas');
-    T := P.Targets.AddUnit('fpg_imgfmt_jpg.pas');
-    T := P.Targets.AddUnit('fpg_stdimages.pas');
+    T := P.Targets.AddUnit('lq_imagelist.pas');
+    T := P.Targets.AddUnit('lq_popupwindow.pas');
+    T := P.Targets.AddUnit('lq_translations.pas');
+    T := P.Targets.AddUnit('lq_cmdlineparams.pas');
+    T := P.Targets.AddUnit('lq_imgfmt_bmp.pas');
+    T := P.Targets.AddUnit('lq_imgfmt_jpg.pas');
+    T := P.Targets.AddUnit('lq_stdimages.pas');
       T.Dependencies.AddInclude('stdimages.inc');
-    T := P.Targets.AddUnit('fpg_utils.pas');
-      T.Dependencies.AddInclude('fpg_utils_impl.inc', AllUnixOSes);
-      T.Dependencies.AddInclude('fpg_utils_impl.inc', AllWindowsOSes);
-    T := P.Targets.AddUnit('fpg_imgutils.pas');
-    T := P.Targets.AddUnit('fpg_command_intf.pas');
-    T := P.Targets.AddUnit('fpg_main.pas');
+    T := P.Targets.AddUnit('lq_utils.pas');
+      T.Dependencies.AddInclude('lq_utils_impl.inc', AllUnixOSes);
+      T.Dependencies.AddInclude('lq_utils_impl.inc', AllWindowsOSes);
+    T := P.Targets.AddUnit('lq_imgutils.pas');
+    T := P.Targets.AddUnit('lq_command_intf.pas');
+    T := P.Targets.AddUnit('lq_main.pas');
       T.Dependencies.AddInclude('VERSION_FILE.inc');
-      T.Dependencies.AddInclude('fpg_msgqueue.inc');
-    T := P.Targets.AddUnit('fpg_stringhashlist.pas');
-    T := P.Targets.AddUnit('fpg_widget.pas');
-//    T := P.Targets.AddUnit('fpg_strings.pas');    // this unit is not used in fpGUI
-    T := P.Targets.AddUnit('fpg_wuline.pas');
-    T := P.Targets.AddUnit('fpg_extinterpolation.pas');
-    T := P.Targets.AddUnit('fpg_pofiles.pas');
-    T := P.Targets.AddUnit('fpg_stringutils.pas');
-    T := P.Targets.AddUnit('fpg_extgraphics.pas');
+      T.Dependencies.AddInclude('lq_msgqueue.inc');
+    T := P.Targets.AddUnit('lq_stringhashlist.pas');
+    T := P.Targets.AddUnit('lq_widget.pas');
+//    T := P.Targets.AddUnit('lq_strings.pas');    // this unit is not used in fpGUI
+    T := P.Targets.AddUnit('lq_wuline.pas');
+    T := P.Targets.AddUnit('lq_extinterpolation.pas');
+    T := P.Targets.AddUnit('lq_pofiles.pas');
+    T := P.Targets.AddUnit('lq_stringutils.pas');
+    T := P.Targets.AddUnit('lq_extgraphics.pas');
 
 
     { corelib/x11 }
     if Defaults.OS in AllUnixOSes then
     begin
-      T := P.Targets.AddUnit('fpg_impl.pas', AllUnixOSes);
-      T := P.Targets.AddUnit('fpg_keyconv_x11.pas', AllUnixOSes);
-      T := P.Targets.AddUnit('fpg_netlayer_x11.pas', AllUnixOSes);
-      T := P.Targets.AddUnit('fpg_xft_x11.pas', AllUnixOSes);
-      T := P.Targets.AddUnit('fpg_x11.pas', AllUnixOSes);
-        T.Dependencies.AddUnit('fpg_xft_x11');
-        T.Dependencies.AddUnit('fpg_netlayer_x11');
-        T.Dependencies.AddUnit('fpg_base');
-        T.Dependencies.AddUnit('fpg_impl');
-      T := P.Targets.AddUnit('fpg_interface.pas', AllUnixOSes);
+      T := P.Targets.AddUnit('lq_impl.pas', AllUnixOSes);
+      T := P.Targets.AddUnit('lq_keyconv_x11.pas', AllUnixOSes);
+      T := P.Targets.AddUnit('lq_netlayer_x11.pas', AllUnixOSes);
+      T := P.Targets.AddUnit('lq_xft_x11.pas', AllUnixOSes);
+      T := P.Targets.AddUnit('lq_x11.pas', AllUnixOSes);
+        T.Dependencies.AddUnit('lq_xft_x11');
+        T.Dependencies.AddUnit('lq_netlayer_x11');
+        T.Dependencies.AddUnit('lq_base');
+        T.Dependencies.AddUnit('lq_impl');
+      T := P.Targets.AddUnit('lq_interface.pas', AllUnixOSes);
     end;
 
 
     { corelib/gdi }
     if Defaults.OS in AllWindowsOSes then
     begin
-      T := P.Targets.AddUnit('fpg_impl.pas', AllWindowsOSes);
-      T := P.Targets.AddUnit('fpg_gdi.pas', AllWindowsOSes);
-        T.Dependencies.AddInclude('fpg_keys_gdi.inc', AllWindowsOSes);
-      T := P.Targets.AddUnit('fpg_interface.pas', AllWindowsOSes);
+      T := P.Targets.AddUnit('lq_impl.pas', AllWindowsOSes);
+      T := P.Targets.AddUnit('lq_gdi.pas', AllWindowsOSes);
+        T.Dependencies.AddInclude('lq_keys_gdi.inc', AllWindowsOSes);
+      T := P.Targets.AddUnit('lq_interface.pas', AllWindowsOSes);
     end;
 
     { gui/db }
     T := P.Targets.AddUnit('fpgui_db.pas');
 
     { gui }
-    T := P.Targets.AddUnit('fpg_animation.pas');
-    T := P.Targets.AddUnit('fpg_combobox.pas');
-    T := P.Targets.AddUnit('fpg_edit.pas');
-    T := P.Targets.AddUnit('fpg_hint.pas');
-    T := P.Targets.AddUnit('fpg_listbox.pas');
-    T := P.Targets.AddUnit('fpg_mru.pas');
-    T := P.Targets.AddUnit('fpg_radiobutton.pas');
-    T := P.Targets.AddUnit('fpg_tab.pas');
-    T := P.Targets.AddUnit('fpg_basegrid.pas');
-    T := P.Targets.AddUnit('fpg_customgrid.pas');
-    T := P.Targets.AddUnit('fpg_form.pas');
-    T := P.Targets.AddUnit('fpg_hyperlink.pas');
-    T := P.Targets.AddUnit('fpg_listview.pas');
-    T := P.Targets.AddUnit('fpg_panel.pas');
-    T := P.Targets.AddUnit('fpg_scrollbar.pas');
-    T := P.Targets.AddUnit('fpg_trackbar.pas');
-    T := P.Targets.AddUnit('fpg_button.pas');
-    T := P.Targets.AddUnit('fpg_dialogs.pas');
+    T := P.Targets.AddUnit('lq_animation.pas');
+    T := P.Targets.AddUnit('lq_combobox.pas');
+    T := P.Targets.AddUnit('lq_edit.pas');
+    T := P.Targets.AddUnit('lq_hint.pas');
+    T := P.Targets.AddUnit('lq_listbox.pas');
+    T := P.Targets.AddUnit('lq_mru.pas');
+    T := P.Targets.AddUnit('lq_radiobutton.pas');
+    T := P.Targets.AddUnit('lq_tab.pas');
+    T := P.Targets.AddUnit('lq_basegrid.pas');
+    T := P.Targets.AddUnit('lq_customgrid.pas');
+    T := P.Targets.AddUnit('lq_form.pas');
+    T := P.Targets.AddUnit('lq_hyperlink.pas');
+    T := P.Targets.AddUnit('lq_listview.pas');
+    T := P.Targets.AddUnit('lq_panel.pas');
+    T := P.Targets.AddUnit('lq_scrollbar.pas');
+    T := P.Targets.AddUnit('lq_trackbar.pas');
+    T := P.Targets.AddUnit('lq_button.pas');
+    T := P.Targets.AddUnit('lq_dialogs.pas');
       T.Dependencies.AddInclude('charmapdialog.inc');
       T.Dependencies.AddInclude('colordialog.inc');
       T.Dependencies.AddInclude('inputquerydialog.inc');
@@ -209,23 +209,23 @@ begin
       T.Dependencies.AddInclude('promptuserdialog.inc');
       T.Dependencies.AddInclude('selectdirdialog.inc');
       T.Dependencies.AddInclude('logo.inc');
-    T := P.Targets.AddUnit('fpg_gauge.pas');
-    T := P.Targets.AddUnit('fpg_iniutils.pas');
-    T := P.Targets.AddUnit('fpg_memo.pas');
-    T := P.Targets.AddUnit('fpg_popupcalendar.pas');
-    T := P.Targets.AddUnit('fpg_splitter.pas');
-    T := P.Targets.AddUnit('fpg_tree.pas');
-    T := P.Targets.AddUnit('fpg_checkbox.pas');
-    T := P.Targets.AddUnit('fpg_editcombo.pas');
-    T := P.Targets.AddUnit('fpg_grid.pas');
-    T := P.Targets.AddUnit('fpg_label.pas');
-    T := P.Targets.AddUnit('fpg_menu.pas');
-    T := P.Targets.AddUnit('fpg_progressbar.pas');
-    T := P.Targets.AddUnit('fpg_style.pas');
-    T := P.Targets.AddUnit('fpg_spinedit.pas');
-    T := P.Targets.AddUnit('fpg_colorwheel.pas');
-    T := P.Targets.AddUnit('fpg_colormapping.pas');
-    T := P.Targets.AddUnit('fpg_editbtn.pas');
+    T := P.Targets.AddUnit('lq_gauge.pas');
+    T := P.Targets.AddUnit('lq_iniutils.pas');
+    T := P.Targets.AddUnit('lq_memo.pas');
+    T := P.Targets.AddUnit('lq_popupcalendar.pas');
+    T := P.Targets.AddUnit('lq_splitter.pas');
+    T := P.Targets.AddUnit('lq_tree.pas');
+    T := P.Targets.AddUnit('lq_checkbox.pas');
+    T := P.Targets.AddUnit('lq_editcombo.pas');
+    T := P.Targets.AddUnit('lq_grid.pas');
+    T := P.Targets.AddUnit('lq_label.pas');
+    T := P.Targets.AddUnit('lq_menu.pas');
+    T := P.Targets.AddUnit('lq_progressbar.pas');
+    T := P.Targets.AddUnit('lq_style.pas');
+    T := P.Targets.AddUnit('lq_spinedit.pas');
+    T := P.Targets.AddUnit('lq_colorwheel.pas');
+    T := P.Targets.AddUnit('lq_colormapping.pas');
+    T := P.Targets.AddUnit('lq_editbtn.pas');
 
     { PDF report engine }
     T := P.Targets.AddUnit('u_reportimages.pas');

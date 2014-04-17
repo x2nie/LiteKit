@@ -16,17 +16,17 @@ uses
   lq_checkbox;
   
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    bevel: TfpgBevel;
-    btnQuit: TfpgButton;
-    btnStyles: TfpgButton;
-    btnShapes: TfpgButton;
-    lblTitle: TfpgLabel;
-    lblStyle: TfpgLabel;
-    lblShape: TfpgLabel;
-    lblNext: TfpgLabel;
-    chkDouble: TfpgCheckBox;
+    bevel: TlqBevel;
+    btnQuit: TlqButton;
+    btnStyles: TlqButton;
+    btnShapes: TlqButton;
+    lblTitle: TlqLabel;
+    lblStyle: TlqLabel;
+    lblShape: TlqLabel;
+    lblNext: TlqLabel;
+    chkDouble: TlqCheckBox;
     procedure   chkDoubleChanged(Sender: TObject);
     procedure   btnQuitClick(Sender: TObject);
     procedure   btnStylesClick(Sender: TObject);

@@ -11,26 +11,26 @@ uses
 
 type
 
-  TTestForm = class(TfpgForm)
+  TTestForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: TestForm}
-    btnName1: TfpgButton;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    btnName2: TfpgButton;
-    lblName3: TfpgLabel;
-    btnName3: TfpgButton;
-    lblName4: TfpgLabel;
-    btnName4: TfpgButton;
-    edtName1: TfpgEdit;
-    btnClose: TfpgButton;
-    MainMenu: TfpgMenuBar;
-    pmFile: TfpgPopupMenu;
-    pmEdit: TfpgPopupMenu;
-    pmHelp: TfpgPopupMenu;
-    pmSubMenu1: TfpgPopupMenu;
-    memStyles: TfpgMemo;
-    Label1: TfpgLabel;
+    btnName1: TlqButton;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    btnName2: TlqButton;
+    lblName3: TlqLabel;
+    btnName3: TlqButton;
+    lblName4: TlqLabel;
+    btnName4: TlqButton;
+    edtName1: TlqEdit;
+    btnClose: TlqButton;
+    MainMenu: TlqMenuBar;
+    pmFile: TlqPopupMenu;
+    pmEdit: TlqPopupMenu;
+    pmHelp: TlqPopupMenu;
+    pmSubMenu1: TlqPopupMenu;
+    memStyles: TlqMemo;
+    Label1: TlqLabel;
     {@VFD_HEAD_END: TestForm}
     procedure CloseClicked(Sender: TObject);
   public
@@ -53,7 +53,7 @@ end;
 
 procedure TTestForm.AfterCreate;
 var
-  miSubMenu: TfpgMenuItem;
+  miSubMenu: TlqMenuItem;
 begin
   {@VFD_BODY_BEGIN: TestForm}
   Name := 'TestForm';
@@ -62,7 +62,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -74,7 +74,7 @@ begin
     TabOrder := 1;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -84,7 +84,7 @@ begin
     Text := 'Standard Button';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -94,7 +94,7 @@ begin
     Text := 'Embedded Button';
   end;
 
-  btnName2 := TfpgButton.Create(self);
+  btnName2 := TlqButton.Create(self);
   with btnName2 do
   begin
     Name := 'btnName2';
@@ -107,7 +107,7 @@ begin
     TabOrder := 2;
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -117,7 +117,7 @@ begin
     Text := 'Default Button';
   end;
 
-  btnName3 := TfpgButton.Create(self);
+  btnName3 := TlqButton.Create(self);
   with btnName3 do
   begin
     Name := 'btnName3';
@@ -130,7 +130,7 @@ begin
     Default := True;
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -140,7 +140,7 @@ begin
     Text := 'Flat Button';
   end;
 
-  btnName4 := TfpgButton.Create(self);
+  btnName4 := TlqButton.Create(self);
   with btnName4 do
   begin
     Name := 'btnName4';
@@ -153,7 +153,7 @@ begin
     TabOrder := 4;
   end;
 
-  edtName1 := TfpgEdit.Create(self);
+  edtName1 := TlqEdit.Create(self);
   with edtName1 do
   begin
     Name := 'edtName1';
@@ -165,7 +165,7 @@ begin
     Text := '';
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';
@@ -179,7 +179,7 @@ begin
     OnClick := @CloseClicked;
   end;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -187,7 +187,7 @@ begin
     Align := alTop;
   end;
 
-  pmFile := TfpgPopupMenu.Create(self);
+  pmFile := TlqPopupMenu.Create(self);
   with pmFile do
   begin
     Name := 'pmFile';
@@ -201,7 +201,7 @@ begin
     AddMenuItem('&Quit', 'Ctrl+Q', nil);
   end;
 
-  pmEdit := TfpgPopupMenu.Create(self);
+  pmEdit := TlqPopupMenu.Create(self);
   with pmEdit do
   begin
     Name := 'pmEdit';
@@ -214,7 +214,7 @@ begin
     miSubMenu := AddMenuItem('My sub-menu', '', nil);
   end;
 
-  pmHelp := TfpgPopupMenu.Create(self);
+  pmHelp := TlqPopupMenu.Create(self);
   with pmHelp do
   begin
     Name := 'pmHelp';
@@ -222,7 +222,7 @@ begin
     AddMenuItem('About...', '', nil);
   end;
 
-  pmSubMenu1 := TfpgPopupMenu.Create(self);
+  pmSubMenu1 := TlqPopupMenu.Create(self);
   with pmSubMenu1 do
   begin
     Name := 'pmSubMenu1';
@@ -232,7 +232,7 @@ begin
     AddMenuItem('Item 3', '', nil).Enabled := False;
   end;
 
-  memStyles := TfpgMemo.Create(self);
+  memStyles := TlqMemo.Create(self);
   with memStyles do
   begin
     Name := 'memStyles';
@@ -242,7 +242,7 @@ begin
     TabOrder := 16;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';

@@ -11,29 +11,29 @@ uses
 
 type
 
-  TFindForm = class(TfpgForm)
+  TFindForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: FindForm}
-    Label1: TfpgLabel;
-    FindEdit: TfpgEdit;
-    btnFind: TfpgButton;
-    btnCancel: TfpgButton;
-    GroupBox1: TfpgGroupBox;
-    chkWholeWord: TfpgCheckBox;
-    chkCaseSensitive: TfpgCheckBox;
-    rbForward: TfpgRadioButton;
-    rbBackward: TfpgRadioButton;
+    Label1: TlqLabel;
+    FindEdit: TlqEdit;
+    btnFind: TlqButton;
+    btnCancel: TlqButton;
+    GroupBox1: TlqGroupBox;
+    chkWholeWord: TlqCheckBox;
+    chkCaseSensitive: TlqCheckBox;
+    rbForward: TlqRadioButton;
+    rbBackward: TlqRadioButton;
     {@VFD_HEAD_END: FindForm}
     procedure btnFindClicked(Sender: TObject);
-    function GetTextToFind: TfpgString;
+    function GetTextToFind: TlqString;
     function GetIsForward: boolean;
-    function GetFindOptions: TfpgFindOptions;
+    function GetFindOptions: TlqFindOptions;
   public
     procedure AfterCreate; override;
     function Execute: boolean;
-    property TextToFind: TfpgString read GetTextToFind;
+    property TextToFind: TlqString read GetTextToFind;
     property IsForward: boolean read GetIsForward;
-    property FindOptions: TfpgFindOptions read GetFindOptions;
+    property FindOptions: TlqFindOptions read GetFindOptions;
   end;
 
 {@VFD_NEWFORM_DECL}
@@ -47,7 +47,7 @@ begin
   ModalResult := mrOK;
 end;
 
-function TFindForm.GetTextToFind: TfpgString;
+function TFindForm.GetTextToFind: TlqString;
 begin
   Result := FindEdit.Text;
 end;
@@ -57,7 +57,7 @@ begin
   Result := rbForward.Checked;
 end;
 
-function TFindForm.GetFindOptions: TfpgFindOptions;
+function TFindForm.GetFindOptions: TlqFindOptions;
 begin
   Result := [foEntireScope];
   if chkWholeWord.Checked then
@@ -75,7 +75,7 @@ begin
   WindowTitle := 'Find';
   Hint := '';
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -85,7 +85,7 @@ begin
     Text := 'Text to find:';
   end;
 
-  FindEdit := TfpgEdit.Create(self);
+  FindEdit := TlqEdit.Create(self);
   with FindEdit do
   begin
     Name := 'FindEdit';
@@ -98,7 +98,7 @@ begin
     Text := '';
   end;
 
-  btnFind := TfpgButton.Create(self);
+  btnFind := TlqButton.Create(self);
   with btnFind do
   begin
     Name := 'btnFind';
@@ -112,7 +112,7 @@ begin
     OnClick := @btnFindClicked;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -126,7 +126,7 @@ begin
     TabOrder := 4;
   end;
 
-  GroupBox1 := TfpgGroupBox.Create(self);
+  GroupBox1 := TlqGroupBox.Create(self);
   with GroupBox1 do
   begin
     Name := 'GroupBox1';
@@ -136,7 +136,7 @@ begin
     Text := 'Direction';
   end;
 
-  chkWholeWord := TfpgCheckBox.Create(self);
+  chkWholeWord := TlqCheckBox.Create(self);
   with chkWholeWord do
   begin
     Name := 'chkWholeWord';
@@ -147,7 +147,7 @@ begin
     Text := 'Whole words only';
   end;
 
-  chkCaseSensitive := TfpgCheckBox.Create(self);
+  chkCaseSensitive := TlqCheckBox.Create(self);
   with chkCaseSensitive do
   begin
     Name := 'chkCaseSensitive';
@@ -158,7 +158,7 @@ begin
     Text := 'Case sensitive';
   end;
 
-  rbForward := TfpgRadioButton.Create(GroupBox1);
+  rbForward := TlqRadioButton.Create(GroupBox1);
   with rbForward do
   begin
     Name := 'rbForward';
@@ -171,7 +171,7 @@ begin
     Text := 'Forword';
   end;
 
-  rbBackward := TfpgRadioButton.Create(GroupBox1);
+  rbBackward := TlqRadioButton.Create(GroupBox1);
   with rbBackward do
   begin
     Name := 'rbBackward';

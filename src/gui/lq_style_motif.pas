@@ -28,14 +28,14 @@ uses
 
 type
 
-  TfpgMotifStyle = class(TfpgStyle)
+  TlqMotifStyle = class(TlqStyle)
   public
     constructor Create; override;
     { General }
-    procedure   DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord); override;
-    procedure   DrawFocusRect(ACanvas: TfpgCanvas; r: TfpgRect); override;
+    procedure   DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord); override;
+    procedure   DrawFocusRect(ACanvas: TlqCanvas; r: TlqRect); override;
     { Buttons }
-    procedure   DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags); override;
+    procedure   DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags); override;
     function    GetButtonBorders: TRect; override;
   end;
 
@@ -45,9 +45,9 @@ uses
   lq_stylemanager
   ;
 
-{ TfpgMotifStyle }
+{ TlqMotifStyle }
 
-constructor TfpgMotifStyle.Create;
+constructor TlqMotifStyle.Create;
 begin
   inherited Create;
 
@@ -58,9 +58,9 @@ begin
 
 end;
 
-procedure TfpgMotifStyle.DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord);
+procedure TlqMotifStyle.DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
   ACanvas.SetColor(clShadow2);
@@ -80,11 +80,11 @@ begin
   ACanvas.DrawLine(r.Right-1, r.Bottom-1, r.Left+1, r.Bottom-1);   // bottom (inner)
 end;
 
-procedure TfpgMotifStyle.DrawFocusRect(ACanvas: TfpgCanvas; r: TfpgRect);
+procedure TlqMotifStyle.DrawFocusRect(ACanvas: TlqCanvas; r: TlqRect);
 var
-  oldColor: TfpgColor;
+  oldColor: TlqColor;
   oldLineWidth: integer;
-  oldLineStyle: TfpgLineStyle;
+  oldLineStyle: TlqLineStyle;
 begin
   oldColor      := ACanvas.Color;
   oldLineWidth  := ACanvas.GetLineWidth;
@@ -99,9 +99,9 @@ begin
   ACanvas.SetLineStyle(oldLineWidth, oldLineStyle);
 end;
 
-procedure TfpgMotifStyle.DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags);
+procedure TlqMotifStyle.DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
 
@@ -192,14 +192,14 @@ begin
   ACanvas.DrawLine(r.Right-1, r.Bottom-1, r.Left, r.Bottom-1);   // bottom
 end;
 
-function TfpgMotifStyle.GetButtonBorders: TRect;
+function TlqMotifStyle.GetButtonBorders: TRect;
 begin
   Result := Rect(4, 4, 4, 4);
 end;
 
 
 initialization
-  fpgStyleManager.RegisterClass('Motif', TfpgMotifStyle);
+  fpgStyleManager.RegisterClass('Motif', TlqMotifStyle);
 
 end.
 

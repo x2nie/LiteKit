@@ -15,18 +15,18 @@
       This unit contains the Create New Directory dialog.
 }
 
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
-  TfpgNewDirDialog = class(TfpgBaseDialog)
+  TlqNewDirDialog = class(TlqBaseDialog)
   private
-    lblTitle: TfpgLabel;
-    edDirectory: TfpgEdit;
-    function    GetDirectory: TfpgString;
+    lblTitle: TlqLabel;
+    edDirectory: TlqEdit;
+    function    GetDirectory: TlqString;
   public
     constructor Create(AOwner: TComponent); override;
-    property    Directory: TfpgString read GetDirectory;
+    property    Directory: TlqString read GetDirectory;
   end;
 
 
@@ -37,14 +37,14 @@
 {$IFDEF read_implementation}
 
 
-{ TfpgNewDirDialog }
+{ TlqNewDirDialog }
 
-function TfpgNewDirDialog.GetDirectory: TfpgString;
+function TlqNewDirDialog.GetDirectory: TlqString;
 begin
   Result := edDirectory.Text;
 end;
 
-constructor TfpgNewDirDialog.Create(AOwner: TComponent);
+constructor TlqNewDirDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   // reset dimensions

@@ -30,13 +30,13 @@ uses
   lq_menu;
 
 type
-  TWidgetClass = class of TfpgWidget;
+  TWidgetClass = class of TlqWidget;
 
 
   TVFDWidgetProperty = class;
 
 
-  TVFDPropertyEditor = class(TfpgWidget)
+  TVFDPropertyEditor = class(TlqWidget)
   private
     FProp: TVFDWidgetProperty;
   public
@@ -45,8 +45,8 @@ type
     property    Prop: TVFDWidgetProperty read FProp;
     constructor Create(AOwner: TComponent; aprop: TVFDWidgetProperty); reintroduce;
     procedure   CreateLayout; virtual;
-    procedure   LoadValue(wg: TfpgWidget); virtual;
-    procedure   StoreValue(wg: TfpgWidget); virtual;
+    procedure   LoadValue(wg: TlqWidget); virtual;
+    procedure   StoreValue(wg: TlqWidget); virtual;
     procedure   SetFocus; virtual;
   end;
 
@@ -57,12 +57,12 @@ type
     Description: string;
   public
     constructor Create(aName: string); virtual;
-    function    ParseSourceLine(wg: TfpgWidget; const line: string): boolean; virtual;
-    function    GetPropertySource(wg: TfpgWidget; const ident: string): string; virtual;
-    function    GetValueText(wg: TfpgWidget): string; virtual;
-    procedure   DrawValue(wg: TfpgWidget; Canvas: TfpgCanvas; rect: TfpgRect; flags: integer); virtual;
+    function    ParseSourceLine(wg: TlqWidget; const line: string): boolean; virtual;
+    function    GetPropertySource(wg: TlqWidget; const ident: string): string; virtual;
+    function    GetValueText(wg: TlqWidget): string; virtual;
+    procedure   DrawValue(wg: TlqWidget; Canvas: TlqCanvas; rect: TlqRect; flags: integer); virtual;
     function    CreateEditor(AOwner: TComponent): TVFDPropertyEditor; virtual;
-    procedure   OnExternalEdit(wg: TfpgWidget); virtual;
+    procedure   OnExternalEdit(wg: TlqWidget); virtual;
   end;
 
 
@@ -84,8 +84,8 @@ type
     function    AddProperty(apropname: string; apropclass: TVFDPropertyClass; desc: string): TVFDWidgetProperty;
     function    PropertyCount: integer;
     function    GetProperty(ind: integer): TVFDWidgetProperty;
-    function    CreateWidget(AOwner: TComponent): TfpgWidget;
-    function    CreatePopupMenu(AWidget: TfpgWidget): TfpgPopupMenu; virtual;
+    function    CreateWidget(AOwner: TComponent): TlqWidget;
+    function    CreatePopupMenu(AWidget: TlqWidget): TlqPopupMenu; virtual;
   end;
 
 
@@ -97,7 +97,7 @@ uses
 
 type
   // used to get to SetDesigning() in Form Designer
-  TWidgetFriendClass = class(TfpgWidget);
+  TWidgetFriendClass = class(TlqWidget);
 
 
 { TVFDWidgetClass }
@@ -120,13 +120,13 @@ begin
   BlockMouseMsg := True;
 end;
 
-function TVFDWidgetClass.CreateWidget(AOwner: TComponent): TfpgWidget;
+function TVFDWidgetClass.CreateWidget(AOwner: TComponent): TlqWidget;
 begin
   Result := WidgetClass.Create(AOwner);
   TWidgetFriendClass(Result).SetDesigning(True);
 end;
 
-function TVFDWidgetClass.CreatePopupMenu(AWidget: TfpgWidget): TfpgPopupMenu;
+function TVFDWidgetClass.CreatePopupMenu(AWidget: TlqWidget): TlqPopupMenu;
 begin
   { descendant classed can implement this as needed }
   Result := nil;
@@ -160,12 +160,12 @@ begin
   Description := '';
 end;
 
-function TVFDWidgetProperty.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TVFDWidgetProperty.GetPropertySource(wg: TlqWidget; const ident: string): string;
 begin
 
 end;
 
-function TVFDWidgetProperty.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TVFDWidgetProperty.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 begin
   Result := False;
 end;
@@ -175,7 +175,7 @@ begin
   Result := nil;
 end;
 
-procedure TVFDWidgetProperty.DrawValue(wg: TfpgWidget; Canvas: TfpgCanvas; rect: TfpgRect; flags: integer);
+procedure TVFDWidgetProperty.DrawValue(wg: TlqWidget; Canvas: TlqCanvas; rect: TlqRect; flags: integer);
 var
   x, y, fy: integer;
   s: string;
@@ -196,12 +196,12 @@ begin
   Canvas.EndDraw;
 end;
 
-function TVFDWidgetProperty.GetValueText(wg: TfpgWidget): string;
+function TVFDWidgetProperty.GetValueText(wg: TlqWidget): string;
 begin
   Result := '[' + Name + ']';
 end;
 
-procedure TVFDWidgetProperty.OnExternalEdit(wg: TfpgWidget);
+procedure TVFDWidgetProperty.OnExternalEdit(wg: TlqWidget);
 begin
   debugln('external edit');
 end;
@@ -220,7 +220,7 @@ begin
   //abstract
 end;
 
-procedure TVFDPropertyEditor.LoadValue(wg: TfpgWidget);
+procedure TVFDPropertyEditor.LoadValue(wg: TlqWidget);
 begin
   debugln('abstract: editor.LoadValue');
 end;
@@ -231,7 +231,7 @@ begin
     OnUpdate(self);
 end;
 
-procedure TVFDPropertyEditor.StoreValue(wg: TfpgWidget);
+procedure TVFDPropertyEditor.StoreValue(wg: TlqWidget);
 begin
   debugln('abstract: editor.StoreValue');
   // check property type

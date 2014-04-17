@@ -32,7 +32,7 @@ uses
 
 Type
   { TPackageEditor }
-  TCustomPackageEditor = Class(TfpgBevel)
+  TCustomPackageEditor = Class(TlqBevel)
   Private
     FModified : Boolean;
     FDescriptionNode : TDomNode;
@@ -75,69 +75,69 @@ Type
   
   
   // faking a Splitter control
-  TSplitter = class(TfpgBevel);
+  TSplitter = class(TlqBevel);
   
 
   TPackageEditor = Class(TCustomPackageEditor)
   Private
     FLModules,
-    FLElements : TfpgLabel;
-    FPElements : TfpgBevel;
-    FModuleTree : TfpgTreeView;
-    FElementTree : TfpgTreeView;
-    FModuleNode : TfpgTreeNode;
+    FLElements : TlqLabel;
+    FPElements : TlqBevel;
+    FModuleTree : TlqTreeView;
+    FElementTree : TlqTreeView;
+    FModuleNode : TlqTreeNode;
     FSplitter : TSplitter;
     PEMenu,
-    PMMenu : TfpgPopupMenu;
+    PMMenu : TlqPopupMenu;
     FMRenameMenu,
     FMDeleteMenu,
     FERenameMenu,
     FECollapseAllMenu,
     FEExpandAllMenu,
-    FEDeleteMenu : TfpgMenuItem;
-    FImagelist : TfpgImageList;
+    FEDeleteMenu : TlqMenuItem;
+    FImagelist : TlqImageList;
     // Callbacks for visual controls.
-    Procedure ModuleChange(Sender: TObject; Node: TfpgTreeNode);
-    Procedure ModuleChanging(Sender: TObject; Node: TfpgTreeNode;
+    Procedure ModuleChange(Sender: TObject; Node: TlqTreeNode);
+    Procedure ModuleChanging(Sender: TObject; Node: TlqTreeNode;
                              Var AllowChange : Boolean);
-    Procedure ElementChange(Sender: TObject; Node: TfpgTreeNode);
-    Procedure ElementChanging(Sender: TObject; Node: TfpgTreeNode;
+    Procedure ElementChange(Sender: TObject; Node: TlqTreeNode);
+    Procedure ElementChanging(Sender: TObject; Node: TlqTreeNode;
                               Var AllowChange : Boolean);
     Procedure MenuRenameClick(Sender : TObject);
     Procedure MenuDeleteClick(Sender : TObject);
     Procedure MenuCollapseAllClick(Sender: TObject);
     procedure MenuExpandAllClick(Sender: TObject);
     // Internal node methods.
-    Procedure DeleteNode(Msg : String; N : TfpgTreeNode; E : TDomElement);
-    Procedure DeleteElementNode(N : TfpgTreeNode);
-    Procedure RenameNode(Msg : String; N : TfpgTreeNode);
-    Function  GetSelectedNode : TfpgTreeNode;
+    Procedure DeleteNode(Msg : String; N : TlqTreeNode; E : TDomElement);
+    Procedure DeleteElementNode(N : TlqTreeNode);
+    Procedure RenameNode(Msg : String; N : TlqTreeNode);
+    Function  GetSelectedNode : TlqTreeNode;
     Function  NewName(ATitle : String;Var AName : String) : Boolean;
-    Function  AddDomNode(E : TDomElement;Nodes: TfpgTreeNode;
-                         AParent : TfpgTreeNode) : TfpgTreeNode;
-    Procedure DoTopicNode(Node : TDomElement;Nodes: TfpgTreeNode;
-                          AParent : TfpgTreeNode);
+    Function  AddDomNode(E : TDomElement;Nodes: TlqTreeNode;
+                         AParent : TlqTreeNode) : TlqTreeNode;
+    Procedure DoTopicNode(Node : TDomElement;Nodes: TlqTreeNode;
+                          AParent : TlqTreeNode);
     Procedure ClearElements;
-    Procedure SetModuleNode(N : TfpgTreeNode);
-    Function  CreateElementNode(E : TDomelement) : TfpgTreeNode;
+    Procedure SetModuleNode(N : TlqTreeNode);
+    Function  CreateElementNode(E : TDomelement) : TlqTreeNode;
     // Correspondence TreeNode<->TDomElement
-    Function  FindPackageNode(P : TDomElement) : TfpgTreeNode;
-    Function  FindModuleNodeInNode(M : TDomElement; N : TfpgTreeNode) : TfpgTreeNode;
-    Function  FindTopicNodeInNode(M : TDomElement; N : TfpgTreeNode) : TfpgTreeNode;
-    Function  FindElementNode(E : TDomElement; N : TfpgTreeNode) : TfpgTreeNode;
+    Function  FindPackageNode(P : TDomElement) : TlqTreeNode;
+    Function  FindModuleNodeInNode(M : TDomElement; N : TlqTreeNode) : TlqTreeNode;
+    Function  FindTopicNodeInNode(M : TDomElement; N : TlqTreeNode) : TlqTreeNode;
+    Function  FindElementNode(E : TDomElement; N : TlqTreeNode) : TlqTreeNode;
     // Element node methods.
     Procedure SelectTopic(Sender : TDomElement);
     Procedure SelectModule(Sender : TDomElement);
     Procedure SelectPackage(Sender : TDomElement);
     Procedure SelectElement(Sender : TDomElement);
     Procedure ShowModuleElements(Module : TDomElement);
-    Procedure SetCurrentElementNode(N : TfpgTreeNode);
-    Procedure SetCurrentModuleNode(N : TfpgTreeNode);
-    Procedure SetCurrentPackageNode(N : TfpgTreeNode);
-    Procedure SetCurrentTopicNode(T : TfpgTreeNode);
+    Procedure SetCurrentElementNode(N : TlqTreeNode);
+    Procedure SetCurrentModuleNode(N : TlqTreeNode);
+    Procedure SetCurrentPackageNode(N : TlqTreeNode);
+    Procedure SetCurrentTopicNode(T : TlqTreeNode);
     // Other methods
-    procedure UpdateNodeImage(N: TfpgTreeNode);
-    procedure SetNodeImage(N: TfpgTreeNode; Index: Integer);
+    procedure UpdateNodeImage(N: TlqTreeNode);
+    procedure SetNodeImage(N: TlqTreeNode; Index: Integer);
   Protected
     Procedure SetCurrentModule(Value : TDomElement); override;
     Procedure SetCurrentPackage(Value : TDomElement); override;
@@ -157,8 +157,8 @@ Type
     Procedure RenameElement(E : TDomElement); override;
     Procedure RenameTopic(T : TDomElement); override;
     procedure UpdateSelectedNodeStatus;
-    Property ModuleTree : TfpgTreeView Read FModuleTree;
-    Property ElementTree : TfpgTreeView Read FElementTree;
+    Property ModuleTree : TlqTreeView Read FModuleTree;
+    Property ElementTree : TlqTreeView Read FElementTree;
   end;
 
 
@@ -265,10 +265,10 @@ end;
 
 Constructor TPackageEditor.Create(AOwner : TComponent);
 
-  Function NewMenuItem(ACaption : String; AOnClick : TNotifyEvent) : TfpgMenuItem;
+  Function NewMenuItem(ACaption : String; AOnClick : TNotifyEvent) : TlqMenuItem;
 
   begin
-    Result:=TfpgMenuItem.Create(Self);
+    Result:=TlqMenuItem.Create(Self);
     Result.Caption:=ACaption;
     Result.OnClick:=AOnClick;
   end;
@@ -281,7 +281,7 @@ begin
   Fimagelist.AddLazarusResource('node_modified'); // ImgIndxModified
   Fimagelist.AddLazarusResource('node_finished'); // ImgIndxFinished
 
-  FLModules:=Tfpglabel.Create(Self);
+  FLModules:=Tlqlabel.Create(Self);
   With FLModules do
     begin
     Parent:=Self;
@@ -289,7 +289,7 @@ begin
     Height:=20;
     Caption:=SFileStructure;
     end;
-  FModuleTree:=TfpgTreeView.Create(Self);
+  FModuleTree:=TlqTreeView.Create(Self);
   With FModuleTree do
     begin
     Parent:=Self;
@@ -307,14 +307,14 @@ begin
     Top := 180;
     align:=alTop;
     end;
-  FPElements:=TfpgBevel.Create(Self);
+  FPElements:=TlqBevel.Create(Self);
   With FPElements do
     begin
     Parent:=Self;
     Top := 185;
     align:=AlClient;
     end;
-  FLElements:=Tfpglabel.Create(Self);
+  FLElements:=Tlqlabel.Create(Self);
   With FLElements do
     begin
     Parent:=FpElements;
@@ -322,7 +322,7 @@ begin
     Height:=20;
     Caption:=SModuleElements;
     end;
-  FElementTree:=TfpgTreeView.Create(Self);
+  FElementTree:=TlqTreeView.Create(Self);
   With FElementTree do
     begin
     Parent:=FpElements;
@@ -332,7 +332,7 @@ begin
     OnChange:=@ElementChange;
     OnChanging:=@ElementChanging;
     end;
-  PEMenu:=TfpgPopupMenu.Create(Self);
+  PEMenu:=TlqPopupMenu.Create(Self);
   FERenameMenu:=NewMenuItem(SMenuRename,@MenuRenameClick);
   FEDeleteMenu:=NewMenuItem(SMenuDelete,@MenuDeleteClick);
   FEExpandAllMenu:=NewMenuItem(SMenuExpandAll,@MenuExpandAllClick);
@@ -359,7 +359,7 @@ begin
 end;
 
 
-procedure TPackageEditor.ModuleChanging(Sender: TObject; Node: TfpgTreeNode;
+procedure TPackageEditor.ModuleChanging(Sender: TObject; Node: TlqTreeNode;
   var AllowChange: Boolean);
 begin
   if Sender=nil then ;
@@ -367,7 +367,7 @@ begin
   AllowChange:=True;
 end;
 
-Procedure TPackageEditor.ModuleChange(Sender: TObject; Node: TfpgTreeNode);
+Procedure TPackageEditor.ModuleChange(Sender: TObject; Node: TlqTreeNode);
 
 Var
   o : TDomElement;
@@ -387,7 +387,7 @@ begin
     end;
 end;
 
-procedure TPackageEditor.ElementChanging(Sender: TObject; Node: TfpgTreeNode;
+procedure TPackageEditor.ElementChanging(Sender: TObject; Node: TlqTreeNode;
   var AllowChange: Boolean);
 begin
   if Sender=nil then ;
@@ -406,7 +406,7 @@ begin
     OnSelectElement(Sender);
 end;
 
-Procedure TPackageEditor.ElementChange(Sender: TObject; Node: TfpgTreeNode);
+Procedure TPackageEditor.ElementChange(Sender: TObject; Node: TlqTreeNode);
 
 Var
   o : TDomElement;
@@ -532,7 +532,7 @@ begin
 end;
 
 
-Procedure TPackageEditor.SetModuleNode(N : TfpgTreeNode);
+Procedure TPackageEditor.SetModuleNode(N : TlqTreeNode);
 
 begin
   If N<>Nil then
@@ -544,7 +544,7 @@ begin
     Refresh;
 end;
 
-Procedure TPackageEditor.DeleteNode(Msg : String; N : TfpgTreeNode; E : TDomElement);
+Procedure TPackageEditor.DeleteNode(Msg : String; N : TlqTreeNode; E : TDomElement);
 
 Var
   P : TTreeNode;
@@ -576,7 +576,7 @@ begin
     end;
 end;
 
-Procedure TPackageEditor.RenameNode(Msg : String; N : TfpgTreeNode);
+Procedure TPackageEditor.RenameNode(Msg : String; N : TlqTreeNode);
 
 Var
   E : TDomElement;
@@ -593,14 +593,14 @@ begin
     end;
 end;
 
-Function TPackageEditor.CreateElementNode(E : TDomelement) : TfpgTreeNode;
+Function TPackageEditor.CreateElementNode(E : TDomelement) : TlqTreeNode;
 
 begin
   Result:=FELementTree.Items.AddChild(FModuleNode,E['name']);
   Result.Data:=E;
 end;
 
-Procedure TPackageEditor.DeleteElementNode(N : TfpgTreeNode);
+Procedure TPackageEditor.DeleteElementNode(N : TlqTreeNode);
 
 Var
   Reposition : Boolean;
@@ -831,14 +831,14 @@ begin
     end;
 end;
 
-Function TPackageEditor.AddDomNode(E : TDomElement;Nodes: TfpgTreeNodes;AParent : TfpgTreeNode) : TfpgTreeNode;
+Function TPackageEditor.AddDomNode(E : TDomElement;Nodes: TlqTreeNodes;AParent : TlqTreeNode) : TlqTreeNode;
 
 begin
   Result:=Nodes.AddChild(AParent,E['name']);
   Result.Data:=E;
 end;
 
-Procedure TPackageEditor.DoTopicNode(Node : TDomElement;Nodes: TfpgTreeNode;AParent : TfpgTreeNode);
+Procedure TPackageEditor.DoTopicNode(Node : TDomElement;Nodes: TlqTreeNode;AParent : TlqTreeNode);
 
 Var
   N : TTreeNode;
@@ -901,7 +901,7 @@ begin
 end;
 
 
-Function TPackageEditor.FindPackageNode(P : TDomElement) : TfpgTreeNode;
+Function TPackageEditor.FindPackageNode(P : TDomElement) : TlqTreeNode;
 begin
   Result:=Nil;
   Result:=SubNodeWithElement(FModuleTree.Items[0],P);
@@ -909,7 +909,7 @@ begin
     Raise Exception.CreateFmt(SErrNoNodeForPackage,[P['name']]);
 end;
 
-Function TPackageEditor.FindModuleNodeInNode(M : TDomElement; N : TfpgTreeNode) : TfpgTreeNode;
+Function TPackageEditor.FindModuleNodeInNode(M : TDomElement; N : TlqTreeNode) : TlqTreeNode;
 
 Var
   P : TTreeNode;
@@ -925,7 +925,7 @@ begin
     Raise Exception.CreateFmt(SErrNoNodeForModule,[M['name']]);
 end;
 
-Function TPackageEditor.FindTopicNodeInNode(M : TDomElement; N : TfpgTreeNode) : TfpgTreeNode;
+Function TPackageEditor.FindTopicNodeInNode(M : TDomElement; N : TlqTreeNode) : TlqTreeNode;
 
 Var
   P : TTreeNode;
@@ -951,7 +951,7 @@ begin
     Raise Exception.CreateFmt(SErrNoNodeForTopic,[M['name']]);
 end;
 
-Function TPackageEditor.FindElementNode(E: TDomElement; N: TfpgTreeNode): TfpgTreeNode;
+Function TPackageEditor.FindElementNode(E: TDomElement; N: TlqTreeNode): TlqTreeNode;
 
 Var
   P : TTreeNode;
@@ -993,7 +993,7 @@ begin
     end;
 end;
 
-Procedure TPackageEditor.SetCurrentPackageNode(N : TfpgTreeNode);
+Procedure TPackageEditor.SetCurrentPackageNode(N : TlqTreeNode);
 
 begin
   FModuleTree.Selected:=N;
@@ -1011,7 +1011,7 @@ begin
     end;
 end;
 
-Procedure TPackageEditor.SetCurrentModuleNode(N : TfpgTreeNode);
+Procedure TPackageEditor.SetCurrentModuleNode(N : TlqTreeNode);
 
 Var
   P : TTreeNode;
@@ -1049,7 +1049,7 @@ begin
   Inherited;
 end;
 
-Procedure TPackageEditor.SetCurrentTopicNode(T : TfpgTreeNode);
+Procedure TPackageEditor.SetCurrentTopicNode(T : TlqTreeNode);
 
 begin
  T.Parent.Expand(False);
@@ -1058,7 +1058,7 @@ begin
    CurrentElement:=Nil;
 end;
 
-procedure TPackageEditor.UpdateNodeImage(N: TfpgTreeNode);
+procedure TPackageEditor.UpdateNodeImage(N: TlqTreeNode);
 var
   ImgIndex: Integer;
   Node: TDomNode;
@@ -1096,7 +1096,7 @@ begin
   end;
 end;
 
-procedure TPackageEditor.SetNodeImage(N: TfpgTreeNode; Index: Integer);
+procedure TPackageEditor.SetNodeImage(N: TlqTreeNode; Index: Integer);
 begin
   N.ImageIndex := Index;
   N.SelectedIndex := Index;
@@ -1125,7 +1125,7 @@ begin
     end;
 end;
 
-Procedure TPackageEditor.SetCurrentElementNode(N : TfpgTreeNode);
+Procedure TPackageEditor.SetCurrentElementNode(N : TlqTreeNode);
 
 begin
   FElementTree.Selected:=N;

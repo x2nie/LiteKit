@@ -29,39 +29,39 @@ type
   TProject = class(TObject)
   private
     FMakeOptionsGrid: TBooleanGrid;
-    FProjectName: TfpgString;
-    FMainUnit: TfpgString;
+    FProjectName: TlqString;
+    FMainUnit: TlqString;
     FUnitDirs: TStringList;
     FUnitDirsGrid: TBooleanGrid;
     FUnitList: TUnitList;
-    FIniFile: TfpgINIFile;
-    FProjectDir: TfpgString;
-    FTargetFile: TfpgString;
+    FIniFile: TlqINIFile;
+    FProjectDir: TlqString;
+    FTargetFile: TlqString;
     FDefaultMake: integer;
     FMakeOptions: TStringList;
     FMacroNames: TStringList;
-    FUnitOutputDir: TfpgString;
+    FUnitOutputDir: TlqString;
     procedure   MergeWithGlobalMacros;
   public
     constructor Create;
     destructor  Destroy; override;
-    function    Save(const AFile: TfpgString = ''): Boolean;
-    function    Load(AProjectFile: TfpgString): Boolean;
-    function    GenerateCmdLine(const AShowOnly: Boolean = False; const ABuildMode: integer = -1): TfpgString;
+    function    Save(const AFile: TlqString = ''): Boolean;
+    function    Load(AProjectFile: TlqString): Boolean;
+    function    GenerateCmdLine(const AShowOnly: Boolean = False; const ABuildMode: integer = -1): TlqString;
     procedure   ClearAndInitMakeOptions(const ASize: integer);
     procedure   ClearAndInitUnitDirsGrid(const ASize: integer);
     procedure   ClearAndInitMacrosGrid(const ASize: integer);
-    property    ProjectDir: TfpgString read FProjectDir write FProjectDir;
-    property    ProjectName: TfpgString read FProjectName write FProjectName;
-    property    MainUnit: TfpgString read FMainUnit write FMainUnit;
-    property    TargetFile: TfpgString read FTargetFile write FTargetFile;
+    property    ProjectDir: TlqString read FProjectDir write FProjectDir;
+    property    ProjectName: TlqString read FProjectName write FProjectName;
+    property    MainUnit: TlqString read FMainUnit write FMainUnit;
+    property    TargetFile: TlqString read FTargetFile write FTargetFile;
     property    UnitList: TUnitList read FUnitList;
     property    DefaultMake: integer read FDefaultMake write FDefaultMake;
     property    MakeOptions: TStringList read FMakeOptions;
     property    MakeOptionsGrid: TBooleanGrid read FMakeOptionsGrid write FMakeOptionsGrid;
     property    MacroNames: TStringList read FMacroNames;
     property    UnitDirs: TStringList read FUnitDirs;
-    property    UnitOutputDir: TfpgString read FUnitOutputDir write FUnitOutputDir;
+    property    UnitOutputDir: TlqString read FUnitOutputDir write FUnitOutputDir;
     property    UnitDirsGrid: TBooleanGrid read FUnitDirsGrid write FUnitDirsGrid;
   end;
 
@@ -105,7 +105,7 @@ procedure TProject.MergeWithGlobalMacros;
 var
   o: TIDEMacro;
   i: integer;
-  n,v: TfpgString;
+  n,v: TlqString;
 begin
   for i := 0 to MacroNames.Count-1 do
   begin
@@ -134,13 +134,13 @@ begin
   inherited Destroy;
 end;
 
-function TProject.Save(const AFile: TfpgString = ''): Boolean;
+function TProject.Save(const AFile: TlqString = ''): Boolean;
 var
   c, j: integer;
-  s: TfpgString;
-  lDelim: TfpgString;
+  s: TlqString;
+  lDelim: TlqString;
 
-  procedure SaveList(AList: TStringList; const CName, IName: TfpgString);
+  procedure SaveList(AList: TStringList; const CName, IName: TlqString);
   var
     i: integer;
   begin
@@ -157,16 +157,16 @@ begin
   if not Assigned(FIniFile) then
   begin
     if AFile = '' then
-      FIniFile := TfpgINIFile.CreateExt(ProjectDir + ProjectName + cProjectExt)
+      FIniFile := TlqINIFile.CreateExt(ProjectDir + ProjectName + cProjectExt)
     else
-      FIniFile := TfpgINIFile.CreateExt(AFile);
+      FIniFile := TlqINIFile.CreateExt(AFile);
   end
   else
   begin
     if AFile <> '' then
     begin
       FIniFile.Free;
-      FIniFile := TfpgINIFile.CreateExt(AFile);
+      FIniFile := TlqINIFile.CreateExt(AFile);
     end;
   end;
 
@@ -237,17 +237,17 @@ begin
   Result := True;
 end;
 
-function TProject.Load(AProjectFile: TfpgString): Boolean;
+function TProject.Load(AProjectFile: TlqString): Boolean;
 var
   a: string;
-  s: TfpgString;
+  s: TlqString;
   j: integer;
   l: integer;
   sl: TStringList;
   u: TUnit;
 
   // CName = xxxCount & IName is the Item name
-  procedure LoadList(ASection: TfpgString; AList: TStringList; const CName, IName: TfpgString);
+  procedure LoadList(ASection: TlqString; AList: TStringList; const CName, IName: TlqString);
   var
     c: integer;
     i: integer;
@@ -267,7 +267,7 @@ begin
     raise Exception.Create('You need to specify a Project filename');
 
   if not Assigned(FIniFile) then
-    FIniFile := TfpgINIFile.CreateExt(AProjectFile);
+    FIniFile := TlqINIFile.CreateExt(AProjectFile);
 
   ProjectDir := fpgExtractFilePath(AProjectFile);
   fpgSetCurrentDir(ProjectDir);
@@ -340,11 +340,11 @@ begin
   Result := True;
 end;
 
-function TProject.GenerateCmdLine(const AShowOnly: Boolean; const ABuildMode: integer): TfpgString;
+function TProject.GenerateCmdLine(const AShowOnly: Boolean; const ABuildMode: integer): TlqString;
 var
-  c: TfpgString;
+  c: TlqString;
   b: integer;
-  eol: TfpgString;
+  eol: TlqString;
   i: integer;
 begin
   if AShowOnly then

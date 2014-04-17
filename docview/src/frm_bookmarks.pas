@@ -17,15 +17,15 @@ uses
 type
   TBookmarkCallback = procedure(Bookmark: TBookmark) of object;
 
-  TBookmarksForm = class(TfpgForm)
+  TBookmarksForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: BookmarksForm}
-    lbBookmarks: TfpgListBox;
-    btnRename: TfpgButton;
-    btnDelete: TfpgButton;
-    btnGoTo: TfpgButton;
-    btnHelp: TfpgButton;
-    btnClose: TfpgButton;
+    lbBookmarks: TlqListBox;
+    btnRename: TlqButton;
+    btnDelete: TlqButton;
+    btnGoTo: TlqButton;
+    btnHelp: TlqButton;
+    btnClose: TlqButton;
     {@VFD_HEAD_END: BookmarksForm}
     FBookmarkList: TList;
     FOnBookmarksChanged: TNotifyEvent;
@@ -38,7 +38,7 @@ type
     procedure btnGotoClicked(Sender: TObject);
     procedure btnHelpClicked(Sender: TObject);
     procedure btnCloseClicked(Sender: TObject);
-    function SelectedObject(ListBox: TfpgListBox): TObject;
+    function SelectedObject(ListBox: TlqListBox): TObject;
     procedure UpdateControls;
     function GetSelectedBookmark: TBookmark;
     procedure GotoSelectedBookmark;
@@ -86,7 +86,7 @@ end;
 procedure TBookmarksForm.btnRenameClicked(Sender: TObject);
 var
   Bookmark: TBookmark;
-  lName: TfpgString;
+  lName: TlqString;
 begin
   Bookmark := GetSelectedBookmark;
   if Bookmark = nil then
@@ -113,7 +113,7 @@ begin
   if Bookmark = nil then
     exit;
 
-  if TfpgMessageDialog.Question('Delete Bookmark',
+  if TlqMessageDialog.Question('Delete Bookmark',
       Format('Delete the bookmark named "%s"?', [Bookmark.Name])) = mbYes then
   begin
     BookmarkIndex := BookmarkList.IndexOf( Bookmark );
@@ -149,7 +149,7 @@ begin
   Close;
 end;
 
-function TBookmarksForm.SelectedObject(ListBox: TfpgListBox): TObject;
+function TBookmarksForm.SelectedObject(ListBox: TlqListBox): TObject;
 begin
   if (ListBox.FocusItem >= 0) and (ListBox.FocusItem < ListBox.Items.Count) then
     Result := ListBox.Items.Objects[ListBox.FocusItem]
@@ -196,7 +196,7 @@ begin
   HelpContext := 8;
   OnShow := @FormShow;
 
-  lbBookmarks := TfpgListBox.Create(self);
+  lbBookmarks := TlqListBox.Create(self);
   with lbBookmarks do
   begin
     Name := 'lbBookmarks';
@@ -209,7 +209,7 @@ begin
     OnKeyPress := @lbBookmarksKeyPressed;
   end;
 
-  btnRename := TfpgButton.Create(self);
+  btnRename := TlqButton.Create(self);
   with btnRename do
   begin
     Name := 'btnRename';
@@ -223,7 +223,7 @@ begin
     OnClick := @btnRenameClicked;
   end;
 
-  btnDelete := TfpgButton.Create(self);
+  btnDelete := TlqButton.Create(self);
   with btnDelete do
   begin
     Name := 'btnDelete';
@@ -237,7 +237,7 @@ begin
     OnClick := @btnDeleteClicked;
   end;
 
-  btnGoTo := TfpgButton.Create(self);
+  btnGoTo := TlqButton.Create(self);
   with btnGoTo do
   begin
     Name := 'btnGoTo';
@@ -252,7 +252,7 @@ begin
     OnClick := @btnGotoClicked;
   end;
 
-  btnHelp := TfpgButton.Create(self);
+  btnHelp := TlqButton.Create(self);
   with btnHelp do
   begin
     Name := 'btnHelp';
@@ -266,7 +266,7 @@ begin
     OnClick := @btnHelpClicked;
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';

@@ -16,7 +16,7 @@
       style class should also be moved here.
 }
 
-{ TODO: Move the TfpgStyle class here and name it TfpgCommonStyle }
+{ TODO: Move the TlqStyle class here and name it TlqCommonStyle }
 
 unit lq_style;
 

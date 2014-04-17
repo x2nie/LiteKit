@@ -32,15 +32,15 @@ uses
  // Value: 0 - 1
  //   black =0   max brightness = 1
 
-procedure RGBToHSV(C: TfpgColor; out Hue: longint; out Saturation, Value: double);
-function HSVToRGB(const H: longint; const S, V: double): TfpgColor;
+procedure RGBToHSV(C: TlqColor; out Hue: longint; out Saturation, Value: double);
+function HSVToRGB(const H: longint; const S, V: double): TlqColor;
 
 implementation
 
 uses
   Math;
 
-procedure RGBToHSV(C: TfpgColor; out Hue: longint; out Saturation, Value: double);
+procedure RGBToHSV(C: TlqColor; out Hue: longint; out Saturation, Value: double);
 var
   r, g, b: longint;
   hi, lo: longint;
@@ -75,7 +75,7 @@ begin
     Saturation := 0; // doesn't matter (black: Val = 0
 end;
 
-function HSVToRGB(const H: longint; const S, V: double): TfpgColor;
+function HSVToRGB(const H: longint; const S, V: double): TlqColor;
 var
   r, g, b: longint;
   rgb: TFPColor;

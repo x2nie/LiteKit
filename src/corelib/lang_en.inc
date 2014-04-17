@@ -1,4 +1,4 @@
-{%mainunit fpg_constants.pas}
+{%mainunit lq_constants.pas}
 
 { This file is auto generated!  DO NOT EDIT. }
 { Only exception is the default language English - lang_en.inc  }

@@ -33,8 +33,8 @@ type
 
   TFileMonitorEventData = record
     EventType: TFileMonitorEventType;
-    FileName: TfpgString;
-//    OldFileName: TfpgString;
+    FileName: TlqString;
+//    OldFileName: TlqString;
 //    UserData: Pointer;
   end;
 
@@ -46,18 +46,18 @@ type
 
   TMonitoredFile = class(TObject)
   private
-    FName: TfpgString;
+    FName: TlqString;
     FSize: Int64;
     FDate: TDateTime;
-    FSHA1: TfpgString;
-    function AsString: TfpgString;
+    FSHA1: TlqString;
+    function AsString: TlqString;
   public
-    function GetNewSHA1: TfpgString;
+    function GetNewSHA1: TlqString;
     procedure UpdateInfo;
-    property Name: TfpgString read FName write FName;
+    property Name: TlqString read FName write FName;
     property Size: Int64 read FSize write FSize;
     property Date: TDateTime read FDate write FDate;
-    property SHA1: TfpgString read FSHA1 write FSHA1;
+    property SHA1: TlqString read FSHA1 write FSHA1;
   end;
 
 
@@ -74,8 +74,8 @@ type
     destructor Destroy; override;
     procedure Execute; override;
     property  Interval: LongWord read FInterval write FInterval;
-    procedure AddFile(const AFilename: TfpgString);
-    procedure RemoveFile(const AFilename: TfpgString);
+    procedure AddFile(const AFilename: TlqString);
+    procedure RemoveFile(const AFilename: TlqString);
     property  OnFileChanged: TFileChangedEvent read FOnFileChanged write FOnFileChanged;
   end;
 
@@ -115,14 +115,14 @@ end;
 
 { TMonitoredFile }
 
-function TMonitoredFile.AsString: TfpgString;
+function TMonitoredFile.AsString: TlqString;
 const
   OBJ_AS_STRING = '%s %s %d';
 begin
   Result := Format(OBJ_AS_STRING, [FName, FormatDateTime('yyyy-mm-dd hh:mm:ss', FDate), FSize]);
 end;
 
-function TMonitoredFile.GetNewSHA1: TfpgString;
+function TMonitoredFile.GetNewSHA1: TlqString;
 var
   lFile: TMonitoredFile;
   s: Int64;
@@ -237,7 +237,7 @@ begin
   end;
 end;
 
-procedure TFileMonitor.AddFile(const AFilename: TfpgString);
+procedure TFileMonitor.AddFile(const AFilename: TlqString);
 var
   lFile: TMonitoredFile;
   s: Int64;
@@ -254,7 +254,7 @@ begin
   FFileList.Add(lFile);
 end;
 
-procedure TFileMonitor.RemoveFile(const AFilename: TfpgString);
+procedure TFileMonitor.RemoveFile(const AFilename: TlqString);
 var
   i: integer;
   lFile: TMonitoredFile;

@@ -60,11 +60,11 @@ Type
   TLinkEvent = procedure( Sender: TRichTextView; Link: string ) of object;
 
 
-  TRichTextView = class(TfpgWidget)
+  TRichTextView = class(TlqWidget)
   private
-    FPopupMenu: TfpgPopupMenu;
+    FPopupMenu: TlqPopupMenu;
     FScrollDistance: integer;
-    FBorderStyle: TfpgEditBorderStyle;
+    FBorderStyle: TlqEditBorderStyle;
     procedure   FVScrollbarScroll(Sender: TObject; position: integer);
     procedure   FHScrollbarScroll(Sender: TObject; position: integer);
     procedure   ShowDefaultPopupMenu(const x, y: integer; const shiftstate: TShiftState); virtual;
@@ -77,13 +77,13 @@ Type
     Procedure   DebugMIClick( Sender: TObject );
     Procedure   DefaultMenuPopup( Sender: TObject );
     procedure   SetScrollDistance(const AValue: integer);
-    procedure SetBorderStyle(AValue: TfpgEditBorderStyle);
+    procedure SetBorderStyle(AValue: TlqEditBorderStyle);
   protected
     FFontManager: TCanvasFontManager;
     FRichTextSettings: TRichTextSettings;
 
     // Properties
-//    FBorderStyle:TfpgBorderStyle;
+//    FBorderStyle:TlqBorderStyle;
     FScrollbarWidth: longint;
     FSmoothScroll: boolean;
     FUseDefaultMenu: boolean;
@@ -93,13 +93,13 @@ Type
     FOnNotOverLink: TLinkEvent;
     FOnClickLink: TLinkEvent;
 
-    FDefaultMenu: TfpgPopupMenu;
-    FSelectAllMI: TfpgMenuItem;
-    FCopyMI: TfpgMenuItem;
-    FRefreshMI: TfpgMenuItem;
-    FWordWrapMI: TfpgMenuItem;
-    FSmoothScrollMI: TfpgMenuItem;
-    FDebugMI: TfpgMenuItem;
+    FDefaultMenu: TlqPopupMenu;
+    FSelectAllMI: TlqMenuItem;
+    FCopyMI: TlqMenuItem;
+    FRefreshMI: TlqMenuItem;
+    FWordWrapMI: TlqMenuItem;
+    FSmoothScrollMI: TlqMenuItem;
+    FDebugMI: TlqMenuItem;
 
     // Internal layout data
     FNeedVScroll, FNeedHScroll: boolean;
@@ -108,8 +108,8 @@ Type
     FLayout: TRichTextLayout;
 
     // Child controls
-    FHScrollbar: TfpgScrollbar;
-    FVScrollbar: TfpgScrollbar;
+    FHScrollbar: TlqScrollbar;
+    FVScrollbar: TlqScrollbar;
 
     // Text
     FText: PChar;
@@ -121,10 +121,10 @@ Type
     FCursorOffset: longint;
     FSelectionStart: longint;
     FSelectionEnd: longint;
-    FImages: TfpgImageList;
+    FImages: TlqImageList;
 
     // Selection scrolling
-    //FScrollTimer: TfpgTimer;
+    //FScrollTimer: TlqTimer;
     FOldMousePoint: TPoint;
     FScrollingDirection: TScrollingDirection;
 
@@ -142,7 +142,7 @@ Type
     FClickedLink: string;
 
     Procedure CreateWnd;
-    procedure HandleResize(AWidth, AHeight: TfpgCoord); override;
+    procedure HandleResize(AWidth, AHeight: TlqCoord); override;
     procedure UpdateScrollBarCoords;
     procedure HandlePaint; override;
     procedure HandleHide; override;
@@ -178,8 +178,8 @@ Type
     //Procedure SetFocus; override;
 
     // Messages for DragText
-    Procedure RTQueryText( Var Msg: TfpgMessageRec ); message RT_QUERYTEXT;
-    Procedure RTQuerySelText( Var Msg: TfpgMessageRec ); message RT_QUERYSELTEXT;
+    Procedure RTQueryText( Var Msg: TlqMessageRec ); message RT_QUERYTEXT;
+    Procedure RTQuerySelText( Var Msg: TlqMessageRec ); message RT_QUERYSELTEXT;
 
     procedure Layout;
 
@@ -218,9 +218,9 @@ Type
     Procedure Draw( StartLine, EndLine: longint );
 
     // Rectangle (GetClientRect) minus scrollbars (if they are enabled)
-    Function GetDrawRect: TfpgRect;
+    Function GetDrawRect: TlqRect;
     // Rectangle minus scrollbars (GetDrawRect), minus extra 2px border all round
-    function GetTextAreaRect: TfpgRect;
+    function GetTextAreaRect: TlqRect;
     function GetTextAreaHeight: longint;
     function GetTextAreaWidth: longint;
 
@@ -270,14 +270,14 @@ Type
     Procedure SetSelectionStart( SelectionStart: longint );
     Procedure SetSelectionEnd( SelectionEnd: longint );
 
-    Procedure SetImages( AImages: TfpgImageList );
+    Procedure SetImages( AImages: TlqImageList );
     Procedure Notification( AComponent: TComponent;
                             Operation: TOperation ); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; Override;
     // rect (of component) minus frame borders
-    function    GetClientRect: TfpgRect; override;
+    function    GetClientRect: TlqRect; override;
     procedure   AddText( Text: PChar; ADelay: boolean = False );
     procedure   AddParagraph( Text: PChar );
     procedure   AddSelectedParagraph( Text: PChar );
@@ -368,12 +368,12 @@ Type
   published
     property Align;
     property BackgroundColor default clBoxColor;
-    property BorderStyle: TfpgEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
+    property BorderStyle: TlqEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
     //property ParentColor;
     //property ParentFont;
     //property ParentPenColor;
     property ParentShowHint;
-    property PopupMenu: TfpgPopupMenu read FPopupMenu write FPopupMenu;
+    property PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
     property ShowHint;
     Property TabOrder;
     Property Focusable;
@@ -384,7 +384,7 @@ Type
     property ScrollDistance: integer read FScrollDistance write SetScrollDistance default 75;
     property UseDefaultMenu: boolean read FUseDefaultMenu write FUseDefaultMenu default True;
     property Debug: boolean read FDebug write SetDebug default False;
-    property Images: TfpgImageList read FImages write SetImages;
+    property Images: TlqImageList read FImages write SetImages;
 
     // ------- EVENTS ----------
 
@@ -462,7 +462,7 @@ Procedure TRichTextView.SetSelectionEndInternal( SelectionEnd: longint );
 var
   StartRedrawLine: longint;
   EndRedrawLine: longint;
-  OldClip: TfpgRect;
+  OldClip: TlqRect;
 begin
   if SelectionEnd = FSelectionEnd then
     exit;
@@ -514,7 +514,7 @@ end;
 
 Procedure TRichTextView.ClearSelection;
 var
-  OldClip: TfpgRect;
+  OldClip: TlqRect;
   StartLine: longint;
   EndLine: longint;
 begin
@@ -543,7 +543,7 @@ end;
 
 Procedure TRichTextView.CreateDefaultMenu;
 begin
-  FDefaultMenu := TfpgPopupMenu.Create(nil);
+  FDefaultMenu := TlqPopupMenu.Create(nil);
   FDefaultMenu.OnShow := @DefaultMenuPopup;
 
   with FDefaultMenu do
@@ -613,7 +613,7 @@ begin
     FHScrollBar.ScrollStep := FScrollDistance;
 end;
 
-procedure TRichTextView.SetBorderStyle(AValue: TfpgEditBorderStyle);
+procedure TRichTextView.SetBorderStyle(AValue: TlqEditBorderStyle);
 begin
   if FBorderStyle = AValue then
     Exit;
@@ -663,16 +663,16 @@ end;
 
 procedure TRichTextView.HandlePaint;
 Var
-  CornerRect: TfpgRect;
-  TextRect: TfpgRect;
-  DrawRect: TfpgRect;
+  CornerRect: TlqRect;
+  TextRect: TlqRect;
+  DrawRect: TlqRect;
   rect: TRect;
   x, y: integer;
 
   // Just for fun! :-)
-  procedure DesignerPainting(const AText: string; AColor: TfpgColor; AFontDesc: TfpgString = '');
+  procedure DesignerPainting(const AText: string; AColor: TlqColor; AFontDesc: TlqString = '');
   var
-    oldf: TfpgString;
+    oldf: TlqString;
   begin
     oldf := '';
     if AFontDesc <> '' then
@@ -807,7 +807,7 @@ procedure TRichTextView.HandleLMouseDown(x, y: integer; shiftstate: TShiftState)
 var
   Line: longint;
   Offset: longint;
-  Link: TfpgString;
+  Link: TlqString;
   Position: TTextPosition;
   Shift: boolean;
 begin
@@ -849,7 +849,7 @@ procedure TRichTextView.HandleMouseMove(x, y: integer; btnstate: word; shiftstat
 var
   Line: longint;
   Offset: longint;
-  Link: TfpgString;
+  Link: TlqString;
   Position: TTextPosition;
 begin
   inherited HandleMouseMove(x, y, btnstate, shiftstate);
@@ -911,7 +911,7 @@ End;
 //end;
 
 // Custom window messages for DragText support
-Procedure TRichTextView.RTQueryText( Var Msg: TfpgMessageRec );
+Procedure TRichTextView.RTQueryText( Var Msg: TlqMessageRec );
 begin
   //Msg.Handled := true;
   //Msg.Result :=
@@ -921,7 +921,7 @@ begin
   //                         Msg.Param2 );
 end;
 
-Procedure TRichTextView.RTQuerySelText( Var Msg: TfpgMessageRec );
+Procedure TRichTextView.RTQuerySelText( Var Msg: TlqMessageRec );
 begin
   //Msg.Handled := true;
   //Msg.Result :=
@@ -981,17 +981,17 @@ begin
     FPopupMenu := FDefaultMenu;
   end;
 
-  FHScrollbar := TfpgScrollBar.Create( self );
+  FHScrollbar := TlqScrollBar.Create( self );
   FHScrollbar.Visible := False;
   FHScrollbar.Orientation := orHorizontal;
   FHScrollBar.SetPosition(2, Height-2-FScrollbarWidth, Width-4-FScrollbarWidth, FScrollbarWidth);
 
-  FVScrollbar := TfpgScrollBar.Create( self );
+  FVScrollbar := TlqScrollBar.Create( self );
   FVScrollBar.Visible := False;
   FVScrollBar.Orientation := orVertical;
   FVScrollbar.SetPosition(Width-2-FScrollbarWidth, 2, FScrollbarWidth, Height-4-FScrollbarWidth);
 
-//  FScrollTimer := TfpgTimer.Create( 100 );
+//  FScrollTimer := TlqTimer.Create( 100 );
 //  FScrollTimer.OnTimer := @OnScrollTimer;
 
 //  FLinkCursor := GetLinkCursor;
@@ -1001,7 +1001,7 @@ begin
     Layout;
 end;
 
-procedure TRichTextView.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TRichTextView.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   if InDesigner then
@@ -1037,7 +1037,7 @@ end;
 
 procedure TRichTextView.UpdateScrollBarCoords;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r := GetDrawRect; // this includes borders and scrollbars
 
@@ -1166,7 +1166,7 @@ end;
 
 procedure TRichTextView.DrawBorder;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
 //  Canvas.GetWinRect(Rect);
   r.SetRect(0, 0, Width, Height);
@@ -1189,7 +1189,7 @@ end;
 
 Procedure TRichTextView.Draw( StartLine, EndLine: longint );
 Var
-  DrawRect: TfpgRect;
+  DrawRect: TlqRect;
   X: longint;
   Y: longint;
   SelectionStartP: PChar;
@@ -1232,7 +1232,7 @@ End;
 
 // This gets the area of the control that we can draw on
 // (not taken up by vertical scroll bar)
-Function TRichTextView.GetDrawRect: TfpgRect;
+Function TRichTextView.GetDrawRect: TlqRect;
 begin
   Result := GetClientRect;
   if InDesigner then
@@ -1247,7 +1247,7 @@ end;
 
 // Gets the area that we are drawing text on, which is the
 // draw rect minus borders
-Function TRichTextView.GetTextAreaRect: TfpgRect;
+Function TRichTextView.GetTextAreaRect: TlqRect;
 begin
   Result := GetDrawRect;
 //  InflateRect(Result, -2, -2);
@@ -1351,7 +1351,7 @@ Procedure TRichTextView.SetupCursor;
 var
   Line: TLayoutLine;
   X, Y: longint;
-  TextRect: TfpgRect;
+  TextRect: TlqRect;
   DrawHeight: longint;
   DrawWidth: longint;
   CursorHeight: longint;
@@ -1733,12 +1733,12 @@ end;
 //  Refresh;
 //end;
 
-Procedure TRichTextView.SetImages( AImages: TfpgImageList );
+Procedure TRichTextView.SetImages( AImages: TlqImageList );
 begin
   if AImages = FImages then
     exit; // no change
 
-  { TODO -oGraeme : TfpgImageList is not a TComponent descendant. Maybe it should be? }
+  { TODO -oGraeme : TlqImageList is not a TComponent descendant. Maybe it should be? }
   //if FImages <> nil then
   //  // Tell the old imagelist not to inform us any more
   //  FImages.Notification( Self, opRemove );
@@ -1769,7 +1769,7 @@ Procedure TRichTextView.Notification( AComponent: TComponent;
                                       Operation: TOperation );
 begin
   inherited Notification( AComponent, Operation );
-  { TODO -oGraeme : TfpgImageList is not a TComponent descendant. Maybe it should be? }
+  { TODO -oGraeme : TlqImageList is not a TComponent descendant. Maybe it should be? }
   //if AComponent = FImages then
   //  if Operation = opRemove then
   //    FImages := nil;
@@ -2892,7 +2892,7 @@ begin
   end;
 end;
 
-function TRichTextView.GetClientRect: TfpgRect;
+function TRichTextView.GetClientRect: TlqRect;
 var
   r: TRect;
 begin

@@ -33,7 +33,7 @@ type
     Name: string;
     Value: string;
     Description: string;
-    constructor Create(AName, AValue, ADescription: TfpgString);
+    constructor Create(AName, AValue, ADescription: TlqString);
   end;
 
 
@@ -48,13 +48,13 @@ type
     constructor Create;
     destructor  Destroy; override;
     function    Count: integer;
-    function    FindByName(const MacroName: TfpgString): TIDEMacro;
-    function    StrHasMacros(const s: TfpgString): boolean;
-    function    ExpandMacro(const s: TfpgString): TfpgString;
+    function    FindByName(const MacroName: TlqString): TIDEMacro;
+    function    StrHasMacros(const s: TlqString): boolean;
+    function    ExpandMacro(const s: TlqString): TlqString;
     procedure   Add(NewMacro: TIDEMacro);
     procedure   Clear;
     procedure   Delete(AIndex: integer);
-    procedure   SetValue(const MacroName, NewValue: TfpgString);
+    procedure   SetValue(const MacroName, NewValue: TlqString);
     procedure   ResetToDefaults;
     property    Items[AIndex: integer]: TIDEMacro read GetItems write SetItems; default;
   end;
@@ -84,7 +84,7 @@ end;
 
 { TIDEMacro }
 
-constructor TIDEMacro.Create(AName, AValue, ADescription: TfpgString);
+constructor TIDEMacro.Create(AName, AValue, ADescription: TlqString);
 begin
   Name := AName;
   Value := AValue;
@@ -130,7 +130,7 @@ end;
 
 procedure TIDEMacroList.LoadSavedValues;
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   // we don't unnecessarily override the defaults setup in AddDefaults()
   SetValue(cMacro_FPCSrcDir, gINI.ReadString(cEnvironment, 'FPCSrcDir', ''));
@@ -176,7 +176,7 @@ begin
   Result := FItems.Count;
 end;
 
-function TIDEMacroList.FindByName(const MacroName: TfpgString): TIDEMacro;
+function TIDEMacroList.FindByName(const MacroName: TlqString): TIDEMacro;
 var
   l: Integer;
   r: Integer;
@@ -201,7 +201,7 @@ begin
   Result := nil;
 end;
 
-function TIDEMacroList.StrHasMacros(const s: TfpgString): boolean;
+function TIDEMacroList.StrHasMacros(const s: TlqString): boolean;
 // search for ${
 var
   p: Integer;
@@ -235,14 +235,14 @@ begin
   end;
 end;
 
-function TIDEMacroList.ExpandMacro(const s: TfpgString): TfpgString;
+function TIDEMacroList.ExpandMacro(const s: TlqString): TlqString;
 var
-  sub: TfpgString;
+  sub: TlqString;
   pstart: integer;
   pend: integer;
   len: integer;
   m: TIDEMacro;
-  r: TfpgString;
+  r: TlqString;
 begin
   r := s;
   pstart := Pos('${', r);
@@ -307,7 +307,7 @@ begin
   FItems.Delete(AIndex);
 end;
 
-procedure TIDEMacroList.SetValue(const MacroName, NewValue: TfpgString);
+procedure TIDEMacroList.SetValue(const MacroName, NewValue: TlqString);
 var
   lMacro: TIDEMacro;
 begin

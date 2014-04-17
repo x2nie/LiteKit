@@ -15,7 +15,7 @@
      Win32 GDI target implementation: Keycode translation helpers
 }
 
-{%mainunit fpg_gdi.pas}
+{%mainunit lq_gdi.pas}
 
 function VirtKeyToKeycode(VirtKey: Byte): Word;
 const

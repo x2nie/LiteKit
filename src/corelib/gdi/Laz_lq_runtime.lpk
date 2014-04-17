@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="4">
+    <PathDelim Value="\"/>
+    <Name Value="Laz_lq_runtime"/>
+    <Author Value="Graeme Geldenhuys"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <IncludeFiles Value="..\..;..\render\software"/>
+        <OtherUnitFiles Value="..;..\..\gui;..\..\gui\db;..\render\software;..\..\reportengine"/>
+        <UnitOutputDirectory Value="..\..\..\lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <AllowLabel Value="False"/>
+          <CPPInline Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <CodeGeneration>
+        <Optimizations>
+          <OptimizationLevel Value="0"/>
+        </Optimizations>
+      </CodeGeneration>
+      <Other>
+        <CustomOptions Value="-dAggCanvasX"/>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="LiteKit runtime package"/>
+    <License Value="LGPL 2 with static linking exception."/>
+    <Version Major="1"/>
+    <Files Count="98">
+      <Item1>
+        <Filename Value="..\stdimages.inc"/>
+        <Type Value="Include"/>
+      </Item1>
+      <Item2>
+        <Filename Value="..\lq_base.pas"/>
+        <UnitName Value="lq_base"/>
+      </Item2>
+      <Item3>
+        <Filename Value="..\lq_main.pas"/>
+        <UnitName Value="lq_main"/>
+      </Item3>
+      <Item4>
+        <Filename Value="..\lq_cmdlineparams.pas"/>
+        <UnitName Value="lq_cmdlineparams"/>
+      </Item4>
+      <Item5>
+        <Filename Value="..\lq_command_intf.pas"/>
+        <UnitName Value="lq_command_intf"/>
+      </Item5>
+      <Item6>
+        <Filename Value="..\lq_constants.pas"/>
+        <UnitName Value="lq_constants"/>
+      </Item6>
+      <Item7>
+        <Filename Value="..\lq_extinterpolation.pas"/>
+        <UnitName Value="lq_extinterpolation"/>
+      </Item7>
+      <Item8>
+        <Filename Value="..\lq_imagelist.pas"/>
+        <UnitName Value="lq_imagelist"/>
+      </Item8>
+      <Item9>
+        <Filename Value="..\lq_imgfmt_bmp.pas"/>
+        <UnitName Value="lq_imgfmt_bmp"/>
+      </Item9>
+      <Item10>
+        <Filename Value="..\lq_msgqueue.inc"/>
+        <Type Value="Include"/>
+      </Item10>
+      <Item11>
+        <Filename Value="..\lq_pofiles.pas"/>
+        <UnitName Value="lq_pofiles"/>
+      </Item11>
+      <Item12>
+        <Filename Value="..\lq_popupwindow.pas"/>
+        <UnitName Value="lq_popupwindow"/>
+      </Item12>
+      <Item13>
+        <Filename Value="..\lq_stdimages.pas"/>
+        <UnitName Value="lq_stdimages"/>
+      </Item13>
+      <Item14>
+        <Filename Value="..\lq_stringhashlist.pas"/>
+        <UnitName Value="lq_stringhashlist"/>
+      </Item14>
+      <Item15>
+        <Filename Value="..\lq_translations.pas"/>
+        <UnitName Value="lq_translations"/>
+      </Item15>
+      <Item16>
+        <Filename Value="..\lq_stringutils.pas"/>
+        <UnitName Value="lq_stringutils"/>
+      </Item16>
+      <Item17>
+        <Filename Value="..\lq_utils.pas"/>
+        <UnitName Value="lq_utils"/>
+      </Item17>
+      <Item18>
+        <Filename Value="..\lq_widget.pas"/>
+        <UnitName Value="lq_widget"/>
+      </Item18>
+      <Item19>
+        <Filename Value="..\lq_wuline.pas"/>
+        <UnitName Value="lq_wuline"/>
+      </Item19>
+      <Item20>
+        <Filename Value="..\keys.inc"/>
+        <Type Value="Include"/>
+      </Item20>
+      <Item21>
+        <Filename Value="..\lang_af.inc"/>
+        <Type Value="Include"/>
+      </Item21>
+      <Item22>
+        <Filename Value="..\lang_en.inc"/>
+        <Type Value="Include"/>
+      </Item22>
+      <Item23>
+        <Filename Value="..\lang_fr.inc"/>
+        <Type Value="Include"/>
+      </Item23>
+      <Item24>
+        <Filename Value="..\lang_de.inc"/>
+        <Type Value="Include"/>
+      </Item24>
+      <Item25>
+        <Filename Value="..\lang_it.inc"/>
+        <Type Value="Include"/>
+      </Item25>
+      <Item26>
+        <Filename Value="..\lang_pt.inc"/>
+        <Type Value="Include"/>
+      </Item26>
+      <Item27>
+        <Filename Value="..\lang_ru.inc"/>
+        <Type Value="Include"/>
+      </Item27>
+      <Item28>
+        <Filename Value="..\lang_es.inc"/>
+        <Type Value="Include"/>
+      </Item28>
+      <Item29>
+        <Filename Value="..\predefinedcolors.inc"/>
+        <Type Value="Include"/>
+      </Item29>
+      <Item30>
+        <Filename Value="lq_impl.pas"/>
+        <UnitName Value="lq_impl"/>
+      </Item30>
+      <Item31>
+        <Filename Value="lq_utils_impl.inc"/>
+        <Type Value="Include"/>
+      </Item31>
+      <Item32>
+        <Filename Value="lq_gdi.pas"/>
+        <UnitName Value="lq_gdi"/>
+      </Item32>
+      <Item33>
+        <Filename Value="lq_keys_gdi.inc"/>
+        <Type Value="Include"/>
+      </Item33>
+      <Item34>
+        <Filename Value="lq_oledragdrop.pas"/>
+        <UnitName Value="lq_oledragdrop"/>
+      </Item34>
+      <Item35>
+        <Filename Value="..\..\gui\promptuserdialog.inc"/>
+        <Type Value="Include"/>
+      </Item35>
+      <Item36>
+        <Filename Value="..\..\gui\lq_animation.pas"/>
+        <UnitName Value="lq_animation"/>
+      </Item36>
+      <Item37>
+        <Filename Value="..\..\gui\lq_basegrid.pas"/>
+        <UnitName Value="lq_basegrid"/>
+      </Item37>
+      <Item38>
+        <Filename Value="..\..\gui\lq_button.pas"/>
+        <UnitName Value="lq_button"/>
+      </Item38>
+      <Item39>
+        <Filename Value="..\..\gui\lq_checkbox.pas"/>
+        <UnitName Value="lq_checkbox"/>
+      </Item39>
+      <Item40>
+        <Filename Value="..\..\gui\lq_combobox.pas"/>
+        <UnitName Value="lq_combobox"/>
+      </Item40>
+      <Item41>
+        <Filename Value="..\..\gui\lq_customgrid.pas"/>
+        <UnitName Value="lq_customgrid"/>
+      </Item41>
+      <Item42>
+        <Filename Value="..\..\gui\lq_dialogs.pas"/>
+        <UnitName Value="lq_dialogs"/>
+      </Item42>
+      <Item43>
+        <Filename Value="..\..\gui\lq_editcombo.pas"/>
+        <UnitName Value="lq_editcombo"/>
+      </Item43>
+      <Item44>
+        <Filename Value="..\..\gui\lq_edit.pas"/>
+        <UnitName Value="lq_edit"/>
+      </Item44>
+      <Item45>
+        <Filename Value="..\..\gui\lq_form.pas"/>
+        <UnitName Value="lq_form"/>
+      </Item45>
+      <Item46>
+        <Filename Value="..\..\gui\lq_gauge.pas"/>
+        <UnitName Value="lq_gauge"/>
+      </Item46>
+      <Item47>
+        <Filename Value="..\..\gui\lq_grid.pas"/>
+        <UnitName Value="lq_grid"/>
+      </Item47>
+      <Item48>
+        <Filename Value="..\..\gui\lq_hyperlink.pas"/>
+        <UnitName Value="lq_hyperlink"/>
+      </Item48>
+      <Item49>
+        <Filename Value="..\..\gui\lq_iniutils.pas"/>
+        <UnitName Value="lq_iniutils"/>
+      </Item49>
+      <Item50>
+        <Filename Value="..\..\gui\lq_label.pas"/>
+        <UnitName Value="lq_label"/>
+      </Item50>
+      <Item51>
+        <Filename Value="..\..\gui\lq_listbox.pas"/>
+        <UnitName Value="lq_listbox"/>
+      </Item51>
+      <Item52>
+        <Filename Value="..\..\gui\lq_listview.pas"/>
+        <UnitName Value="lq_listview"/>
+      </Item52>
+      <Item53>
+        <Filename Value="..\..\gui\lq_memo.pas"/>
+        <UnitName Value="lq_memo"/>
+      </Item53>
+      <Item54>
+        <Filename Value="..\..\gui\lq_menu.pas"/>
+        <UnitName Value="lq_menu"/>
+      </Item54>
+      <Item55>
+        <Filename Value="..\..\gui\lq_mru.pas"/>
+        <UnitName Value="lq_mru"/>
+      </Item55>
+      <Item56>
+        <Filename Value="..\..\gui\lq_panel.pas"/>
+        <UnitName Value="lq_panel"/>
+      </Item56>
+      <Item57>
+        <Filename Value="..\..\gui\lq_popupcalendar.pas"/>
+        <UnitName Value="lq_popupcalendar"/>
+      </Item57>
+      <Item58>
+        <Filename Value="..\..\gui\lq_progressbar.pas"/>
+        <UnitName Value="lq_progressbar"/>
+      </Item58>
+      <Item59>
+        <Filename Value="..\..\gui\lq_radiobutton.pas"/>
+        <UnitName Value="lq_radiobutton"/>
+      </Item59>
+      <Item60>
+        <Filename Value="..\..\gui\lq_scrollbar.pas"/>
+        <UnitName Value="lq_scrollbar"/>
+      </Item60>
+      <Item61>
+        <Filename Value="..\..\gui\lq_style.pas"/>
+        <UnitName Value="lq_style"/>
+      </Item61>
+      <Item62>
+        <Filename Value="..\..\gui\lq_tab.pas"/>
+        <UnitName Value="lq_tab"/>
+      </Item62>
+      <Item63>
+        <Filename Value="..\..\gui\lq_trackbar.pas"/>
+        <UnitName Value="lq_trackbar"/>
+      </Item63>
+      <Item64>
+        <Filename Value="..\..\gui\lq_tree.pas"/>
+        <UnitName Value="lq_tree"/>
+      </Item64>
+      <Item65>
+        <Filename Value="..\..\gui\logo.inc"/>
+        <Type Value="Include"/>
+      </Item65>
+      <Item66>
+        <Filename Value="..\..\gui\messagedialog.inc"/>
+        <Type Value="Include"/>
+      </Item66>
+      <Item67>
+        <Filename Value="..\..\gui\newdirdialog.inc"/>
+        <Type Value="Include"/>
+      </Item67>
+      <Item68>
+        <Filename Value="..\..\gui\selectdirdialog.inc"/>
+        <Type Value="Include"/>
+      </Item68>
+      <Item69>
+        <Filename Value="..\..\gui\db\lq_db.pas"/>
+        <UnitName Value="lq_db"/>
+      </Item69>
+      <Item70>
+        <Filename Value="..\..\gui\lq_splitter.pas"/>
+        <UnitName Value="lq_splitter"/>
+      </Item70>
+      <Item71>
+        <Filename Value="..\..\gui\lq_hint.pas"/>
+        <UnitName Value="lq_hint"/>
+      </Item71>
+      <Item72>
+        <Filename Value="..\..\gui\lq_spinedit.pas"/>
+        <UnitName Value="lq_spinedit"/>
+      </Item72>
+      <Item73>
+        <Filename Value="..\lq_extgraphics.pas"/>
+        <UnitName Value="lq_extgraphics"/>
+      </Item73>
+      <Item74>
+        <Filename Value="..\..\gui\charmapdialog.inc"/>
+        <Type Value="Include"/>
+      </Item74>
+      <Item75>
+        <Filename Value="..\..\gui\lq_colormapping.pas"/>
+        <UnitName Value="lq_colormapping"/>
+      </Item75>
+      <Item76>
+        <Filename Value="..\..\gui\lq_colorwheel.pas"/>
+        <UnitName Value="lq_colorwheel"/>
+      </Item76>
+      <Item77>
+        <Filename Value="lq_interface.pas"/>
+        <UnitName Value="lq_interface"/>
+      </Item77>
+      <Item78>
+        <Filename Value="..\..\gui\lq_editbtn.pas"/>
+        <UnitName Value="lq_editbtn"/>
+      </Item78>
+      <Item79>
+        <Filename Value="..\..\gui\colordialog.inc"/>
+        <Type Value="Include"/>
+      </Item79>
+      <Item80>
+        <Filename Value="..\lq_imgfmt_jpg.pas"/>
+        <UnitName Value="lq_imgfmt_jpg"/>
+      </Item80>
+      <Item81>
+        <Filename Value="..\..\gui\inputquerydialog.inc"/>
+        <Type Value="Include"/>
+      </Item81>
+      <Item82>
+        <Filename Value="..\lq_imgutils.pas"/>
+        <UnitName Value="lq_imgutils"/>
+      </Item82>
+      <Item83>
+        <Filename Value="..\..\VERSION_FILE.inc"/>
+        <Type Value="Include"/>
+      </Item83>
+      <Item84>
+        <Filename Value="..\..\gui\lq_stylemanager.pas"/>
+        <UnitName Value="lq_stylemanager"/>
+      </Item84>
+      <Item85>
+        <Filename Value="..\..\gui\lq_style_win2k.pas"/>
+        <UnitName Value="lq_style_win2k"/>
+      </Item85>
+      <Item86>
+        <Filename Value="..\..\gui\lq_style_motif.pas"/>
+        <UnitName Value="lq_style_motif"/>
+      </Item86>
+      <Item87>
+        <Filename Value="..\..\gui\lq_style_clearlooks.pas"/>
+        <UnitName Value="lq_style_clearlooks"/>
+      </Item87>
+      <Item88>
+        <Filename Value="..\..\gui\lq_style_bluecurve.pas"/>
+        <UnitName Value="lq_style_bluecurve"/>
+      </Item88>
+      <Item89>
+        <Filename Value="..\..\gui\lq_style_bitmap.pas"/>
+        <UnitName Value="lq_style_bitmap"/>
+      </Item89>
+      <Item90>
+        <Filename Value="..\..\gui\lq_readonly.pas"/>
+        <UnitName Value="lq_readonly"/>
+      </Item90>
+      <Item91>
+        <Filename Value="..\lq_imgfmt_png.pas"/>
+        <UnitName Value="lq_imgfmt_png"/>
+      </Item91>
+      <Item92>
+        <Filename Value="..\..\reportengine\u_command.pas"/>
+        <UnitName Value="U_Command"/>
+      </Item92>
+      <Item93>
+        <Filename Value="..\..\reportengine\u_pdf.pas"/>
+        <UnitName Value="U_Pdf"/>
+      </Item93>
+      <Item94>
+        <Filename Value="..\..\reportengine\u_report.pas"/>
+        <UnitName Value="U_Report"/>
+      </Item94>
+      <Item95>
+        <Filename Value="..\..\reportengine\u_reportimages.pas"/>
+        <UnitName Value="U_ReportImages"/>
+      </Item95>
+      <Item96>
+        <Filename Value="..\..\reportengine\u_visu.pas"/>
+        <UnitName Value="U_Visu"/>
+      </Item96>
+      <Item97>
+        <Filename Value="..\..\gui\lq_trayicon.pas"/>
+        <UnitName Value="lq_trayicon"/>
+      </Item97>
+      <Item98>
+        <Filename Value="..\render\software\Agg2D.pas"/>
+        <UnitName Value="Agg2D"/>
+      </Item98>
+    </Files>
+    <LazDoc Paths="..\..\..\docs\xml\corelib;..\..\..\docs\xml\corelib\x11;..\..\..\docs\xml\corelib\gdi;..\..\..\docs\xml\gui"/>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="1">
+      <Item1>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item1>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

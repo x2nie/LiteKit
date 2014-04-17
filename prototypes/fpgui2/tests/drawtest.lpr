@@ -14,10 +14,10 @@ uses
   
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    img: TfpgImage;
-    finalimg: TfpgImage;
+    img: TlqImage;
+    finalimg: TlqImage;
   protected
     procedure   HandlePaint; override;
     procedure   HandleShow; override;
@@ -30,7 +30,7 @@ type
 
 procedure TMainForm.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   Canvas.BeginDraw;
   inherited HandlePaint;

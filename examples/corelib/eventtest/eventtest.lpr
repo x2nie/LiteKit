@@ -20,27 +20,27 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgWindow)
+  TMainForm = class(TlqWindow)
   private
     FMoveEventCount: integer;
     function    ShiftStateToStr(Shift: TShiftState): string;
     function    MouseState(AShift: TShiftState; const AMousePos: TPoint): string;
-    procedure   MsgActivate(var msg: TfpgMessageRec); message FPGM_ACTIVATE;
-    procedure   MsgDeActivate(var msg: TfpgMessageRec); message FPGM_DEACTIVATE;
-    procedure   MsgClose(var msg: TfpgMessageRec); message FPGM_CLOSE;
-    procedure   MsgPaint(var msg: TfpgMessageRec); message FPGM_PAINT;
-    procedure   MsgResize(var msg: TfpgMessageRec); message FPGM_RESIZE;
-    procedure   MsgMove(var msg: TfpgMessageRec); message FPGM_MOVE;
-    procedure   MsgKeyChar(var msg: TfpgMessageRec); message FPGM_KEYCHAR;
-    procedure   MsgKeyPress(var msg: TfpgMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgKeyRelease(var msg: TfpgMessageRec); message FPGM_KEYRELEASE;
-    procedure   MsgMouseDown(var msg: TfpgMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TfpgMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TfpgMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgDoubleClick(var msg: TfpgMessageRec); message FPGM_DOUBLECLICK;
-    procedure   MsgMouseEnter(var msg: TfpgMessageRec); message FPGM_MOUSEENTER;
-    procedure   MsgMouseExit(var msg: TfpgMessageRec); message FPGM_MOUSEEXIT;
-    procedure   MsgScroll(var msg: TfpgMessageRec); message FPGM_SCROLL;
+    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
+    procedure   MsgDeActivate(var msg: TlqMessageRec); message FPGM_DEACTIVATE;
+    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
+    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
+    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
+    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
+    procedure   MsgKeyChar(var msg: TlqMessageRec); message FPGM_KEYCHAR;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
+    procedure   MsgKeyRelease(var msg: TlqMessageRec); message FPGM_KEYRELEASE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
+    procedure   MsgDoubleClick(var msg: TlqMessageRec); message FPGM_DOUBLECLICK;
+    procedure   MsgMouseEnter(var msg: TlqMessageRec); message FPGM_MOUSEENTER;
+    procedure   MsgMouseExit(var msg: TlqMessageRec); message FPGM_MOUSEEXIT;
+    procedure   MsgScroll(var msg: TlqMessageRec); message FPGM_SCROLL;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -96,23 +96,23 @@ begin
   Result := Result + '] ';
 end;
 
-procedure TMainForm.MsgActivate(var msg: TfpgMessageRec);
+procedure TMainForm.MsgActivate(var msg: TlqMessageRec);
 begin
   Writeln('Window Activate message');
 end;
 
-procedure TMainForm.MsgDeActivate(var msg: TfpgMessageRec);
+procedure TMainForm.MsgDeActivate(var msg: TlqMessageRec);
 begin
   Writeln('Window Deactivate message');
 end;
 
-procedure TMainForm.MsgClose(var msg: TfpgMessageRec);
+procedure TMainForm.MsgClose(var msg: TlqMessageRec);
 begin
   Writeln('Window Close message');
   Halt(0);
 end;
 
-procedure TMainForm.MsgPaint(var msg: TfpgMessageRec);
+procedure TMainForm.MsgPaint(var msg: TlqMessageRec);
 var
   h: integer;
 begin
@@ -128,7 +128,7 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TMainForm.MsgResize(var msg: TfpgMessageRec);
+procedure TMainForm.MsgResize(var msg: TlqMessageRec);
 begin
   Writeln('Resize message');
   FWidth  := msg.Params.rect.Width;
@@ -136,15 +136,15 @@ begin
   WriteLn('  Window has been resized. New size: ', Width, ' x ', Height);
 end;
 
-procedure TMainForm.MsgMove(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMove(var msg: TlqMessageRec);
 begin
   Writeln('Move message');
   WriteLn('  Window has been moved to (', msg.Params.rect.Left, ',', msg.Params.rect.Top, ')');
 end;
 
-procedure TMainForm.MsgKeyChar(var msg: TfpgMessageRec);
+procedure TMainForm.MsgKeyChar(var msg: TlqMessageRec);
 var
-  AKeyChar: TfpgChar;
+  AKeyChar: TlqChar;
 begin
   Write('Character generated: ');
   AKeyChar := msg.Params.keyboard.keychar;
@@ -154,33 +154,33 @@ begin
     WriteLn('#', Ord(AKeyChar[1]));
 end;
 
-procedure TMainForm.MsgKeyPress(var msg: TfpgMessageRec);
+procedure TMainForm.MsgKeyPress(var msg: TlqMessageRec);
 begin
   WriteLn('[', ShiftStateToStr(msg.Params.keyboard.shiftstate), '] Key pressed: ',
     KeycodeToText(msg.Params.keyboard.keycode, []));
 end;
 
-procedure TMainForm.MsgKeyRelease(var msg: TfpgMessageRec);
+procedure TMainForm.MsgKeyRelease(var msg: TlqMessageRec);
 begin
   WriteLn('[', ShiftStateToStr(msg.Params.keyboard.shiftstate), '] Key released: ',
     KeycodeToText(msg.Params.keyboard.keycode, []));
 end;
 
-procedure TMainForm.MsgMouseDown(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMouseDown(var msg: TlqMessageRec);
 begin
   WriteLn(MouseState(msg.Params.mouse.shiftstate, Point(msg.Params.mouse.x, msg.Params.mouse.y)),
     'Mouse button pressed: ', ' button=' + IntToStr(msg.Params.mouse.Buttons));
 //    ButtonNames[msg.Params.mouse.Buttons]);
 end;
 
-procedure TMainForm.MsgMouseUp(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMouseUp(var msg: TlqMessageRec);
 begin
   WriteLn(MouseState(msg.Params.mouse.shiftstate, Point(msg.Params.mouse.x, msg.Params.mouse.y)),
     'Mouse button released: ', ' button=' + IntToStr(msg.Params.mouse.Buttons));
 //    ButtonNames[msg.Params.mouse.Buttons]);
 end;
 
-procedure TMainForm.MsgMouseMove(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMouseMove(var msg: TlqMessageRec);
 begin
   inc(FMoveEventCount);
   // only report mouse moves every 10 messages - just to limit the output a bit
@@ -190,22 +190,22 @@ begin
   end;
 end;
 
-procedure TMainForm.MsgDoubleClick(var msg: TfpgMessageRec);
+procedure TMainForm.MsgDoubleClick(var msg: TlqMessageRec);
 begin
   Writeln('Mouse doubleclick message');
 end;
 
-procedure TMainForm.MsgMouseEnter(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMouseEnter(var msg: TlqMessageRec);
 begin
   WriteLn(MouseState(msg.Params.mouse.shiftstate, Point(msg.Params.mouse.x, msg.Params.mouse.y)), 'Mouse entered window');
 end;
 
-procedure TMainForm.MsgMouseExit(var msg: TfpgMessageRec);
+procedure TMainForm.MsgMouseExit(var msg: TlqMessageRec);
 begin
   WriteLn('Mouse left window');
 end;
 
-procedure TMainForm.MsgScroll(var msg: TfpgMessageRec);
+procedure TMainForm.MsgScroll(var msg: TlqMessageRec);
 var
   delta: Integer;
 begin

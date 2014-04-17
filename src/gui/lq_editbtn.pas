@@ -34,40 +34,40 @@ uses
 
 type
 
-  TfpgBaseEditButton = class(TfpgAbstractPanel)
+  TlqBaseEditButton = class(TlqAbstractPanel)
   private
     FOnButtonClick: TNotifyEvent;
     FReadOnly: Boolean;
     procedure SetReadOnly(const AValue: Boolean);
-    function GetExtraHint: TfpgString;
-    procedure SetExtraHint(const AValue: TfpgString);
+    function GetExtraHint: TlqString;
+    procedure SetExtraHint(const AValue: TlqString);
   protected
-    FEdit: TfpgEdit;
-    FButton: TfpgButton;
+    FEdit: TlqEdit;
+    FButton: TlqButton;
     function  GetOnShowHint: THintEvent; override;
     procedure SetOnShowHint(const AValue: THintEvent); override;
-    procedure SetHint(const AValue: TfpgString); override;
-    function  GetHint: TfpgString; override;
+    procedure SetHint(const AValue: TlqString); override;
+    function  GetHint: TlqString; override;
     procedure InternalButtonClick(Sender: TObject); virtual;
-    procedure HandleResize(AWidth, AHeight: TfpgCoord); override;
-    property  ExtraHint: TfpgString read GetExtraHint write SetExtraHint;
+    procedure HandleResize(AWidth, AHeight: TlqCoord); override;
+    property  ExtraHint: TlqString read GetExtraHint write SetExtraHint;
     property  ReadOnly: Boolean read FReadOnly write SetReadOnly default False;
     property  OnButtonClick: TNotifyEvent read FOnButtonClick write FOnButtonClick;
   public
     constructor Create(AOwner: TComponent); override;
   end;
 
-  TFilenameSetEvent = procedure(Sender: TObject; const AOldValue, ANewValue: TfpgString) of object;
+  TFilenameSetEvent = procedure(Sender: TObject; const AOldValue, ANewValue: TlqString) of object;
 
-  TfpgFileNameEdit = class(TfpgBaseEditButton)
+  TlqFileNameEdit = class(TlqBaseEditButton)
   private
     FOnFilenameSet: TFilenameSetEvent;
-    FFilter: TfpgString;
-    FInitialDir: TfpgString;
-    procedure SetFilter(const AValue: TfpgString);
-    procedure SetFileName(const AValue: TfpgString);
-    function GetFileName: TfpgString;
-    procedure DoFilenameSet(const AOld, ANew: TfpgString);
+    FFilter: TlqString;
+    FInitialDir: TlqString;
+    procedure SetFilter(const AValue: TlqString);
+    procedure SetFileName(const AValue: TlqString);
+    function GetFileName: TlqString;
+    procedure DoFilenameSet(const AOld, ANew: TlqString);
   protected
     procedure HandlePaint; override;
     procedure InternalButtonClick(Sender: TObject); override;
@@ -77,9 +77,9 @@ type
     property    Align;
     property    Enabled;
     property    ExtraHint;
-    property    FileName: TfpgString read GetFileName write SetFileName;
-    property    InitialDir: TfpgString read FInitialDir write FInitialDir;
-    property    Filter: TfpgString read FFilter write SetFilter;
+    property    FileName: TlqString read GetFileName write SetFileName;
+    property    InitialDir: TlqString read FInitialDir write FInitialDir;
+    property    Filter: TlqString read FFilter write SetFilter;
     property    ReadOnly;
     property    TabOrder;
     property    OnButtonClick;
@@ -88,11 +88,11 @@ type
   end;
 
 
-  TfpgDirectoryEdit = class(TfpgBaseEditButton)
+  TlqDirectoryEdit = class(TlqBaseEditButton)
   private
-    FRootDirectory: TfpgString;
-    function GetDirectory: TfpgString;
-    procedure SetDirectory(const AValue: TfpgString);
+    FRootDirectory: TlqString;
+    function GetDirectory: TlqString;
+    procedure SetDirectory(const AValue: TlqString);
   protected
     procedure HandlePaint; override;
     procedure InternalButtonClick(Sender: TObject); override;
@@ -100,10 +100,10 @@ type
     constructor Create(AOwner: TComponent); override;
   published
     property    Align;
-    property    Directory: TfpgString read GetDirectory write SetDirectory;
+    property    Directory: TlqString read GetDirectory write SetDirectory;
     property    Enabled;
     property    ExtraHint;
-    property    RootDirectory: TfpgString read FRootDirectory write FRootDirectory;
+    property    RootDirectory: TlqString read FRootDirectory write FRootDirectory;
     property    ReadOnly;
     property    TabOrder;
     property    OnButtonClick;
@@ -111,10 +111,10 @@ type
   end;
 
 
-  TfpgFontEdit = class(TfpgBaseEditButton)
+  TlqFontEdit = class(TlqBaseEditButton)
   protected
-    function GetFontDesc: TfpgString; virtual;
-    procedure SetFontDesc(const AValue: TfpgString); virtual;
+    function GetFontDesc: TlqString; virtual;
+    procedure SetFontDesc(const AValue: TlqString); virtual;
     procedure HandlePaint; override;
     procedure InternalButtonClick(Sender: TObject); override;
   public
@@ -123,7 +123,7 @@ type
     property    Align;
     property    Enabled;
     property    ExtraHint;
-    property    FontDesc: TfpgString read GetFontDesc write SetFontDesc;
+    property    FontDesc: TlqString read GetFontDesc write SetFontDesc;
     property    ReadOnly;
     property    TabOrder;
     property    OnButtonClick;
@@ -131,10 +131,10 @@ type
   end;
 
 
-  TfpgEditButton =  class(TfpgBaseEditButton)
+  TlqEditButton =  class(TlqBaseEditButton)
   protected
-    function    GetText: TfpgString;
-    procedure   SetText(const AValue: TfpgString);
+    function    GetText: TlqString;
+    procedure   SetText(const AValue: TlqString);
     procedure   HandlePaint; override;
   public
     constructor Create(AOwner: TComponent); override;
@@ -144,7 +144,7 @@ type
     property    ExtraHint;
     property    ReadOnly;
     property    TabOrder;
-    property    Text: TfpgString read GetText write SetText;
+    property    Text: TlqString read GetText write SetText;
     property    OnButtonClick;
     property    OnShowHint;
   end;
@@ -158,21 +158,21 @@ uses
   ,lq_utils
   ;
 
-{ TfpgEditButton }
+{ TlqEditButton }
 
-function TfpgEditButton.GetText: TfpgString;
+function TlqEditButton.GetText: TlqString;
 begin
   Result := FEdit.Text;
 end;
 
-procedure TfpgEditButton.SetText(const AValue: TfpgString);
+procedure TlqEditButton.SetText(const AValue: TlqString);
 begin
   FEdit.Text := AValue;
 end;
 
-procedure TfpgEditButton.HandlePaint;
+procedure TlqEditButton.HandlePaint;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited HandlePaint;
   // only so that it looks pretty in the UI Designer
@@ -200,16 +200,16 @@ begin
   end;
 end;
 
-constructor TfpgEditButton.Create(AOwner: TComponent);
+constructor TlqEditButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FButton.ImageName := 'stdimg.ellipse';
 end;
 
 
-{ TfpgBaseEditButton }
+{ TlqBaseEditButton }
 
-procedure TfpgBaseEditButton.SetReadOnly(const AValue: Boolean);
+procedure TlqBaseEditButton.SetReadOnly(const AValue: Boolean);
 begin
   if FReadOnly = AValue then
     Exit;
@@ -218,46 +218,46 @@ begin
   FButton.Enabled := not FReadOnly;   // Buttons don't have ReadOnly property.
 end;
 
-function TfpgBaseEditButton.GetExtraHint: TfpgString;
+function TlqBaseEditButton.GetExtraHint: TlqString;
 begin
   Result := FEdit.ExtraHint;
 end;
 
-procedure TfpgBaseEditButton.SetExtraHint(const AValue: TfpgString);
+procedure TlqBaseEditButton.SetExtraHint(const AValue: TlqString);
 begin
   FEdit.ExtraHint := AValue;
 end;
 
-function TfpgBaseEditButton.GetOnShowHint: THintEvent;
+function TlqBaseEditButton.GetOnShowHint: THintEvent;
 begin
   // rewire the FEdit event to the parent (composite) component
   Result := FEdit.OnShowHint;
 end;
 
-procedure TfpgBaseEditButton.SetOnShowHint(const AValue: THintEvent);
+procedure TlqBaseEditButton.SetOnShowHint(const AValue: THintEvent);
 begin
   // rewire the FEdit event to the parent (composite) component
   FEdit.OnShowHint := AValue;
 end;
 
-procedure TfpgBaseEditButton.SetHint(const AValue: TfpgString);
+procedure TlqBaseEditButton.SetHint(const AValue: TlqString);
 begin
   FEdit.Hint := AValue;
 end;
 
-function TfpgBaseEditButton.GetHint: TfpgString;
+function TlqBaseEditButton.GetHint: TlqString;
 begin
   Result := FEdit.Hint;
 end;
 
-procedure TfpgBaseEditButton.InternalButtonClick(Sender: TObject);
+procedure TlqBaseEditButton.InternalButtonClick(Sender: TObject);
 begin
   // do nothing
   if Assigned(OnButtonClick) then
     OnButtonClick(self);
 end;
 
-procedure TfpgBaseEditButton.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TlqBaseEditButton.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   { resizing can now occur before the component is shown, so we need extra
@@ -277,14 +277,14 @@ begin
   end;
 end;
 
-constructor TfpgBaseEditButton.Create(AOwner: TComponent);
+constructor TlqBaseEditButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Width           := 140;
   Height          := 24;
   FReadOnly       := False;
 
-  FEdit := TfpgEdit.Create(self);
+  FEdit := TlqEdit.Create(self);
   with FEdit do
   begin
     Name := 'FEdit';
@@ -294,7 +294,7 @@ begin
     TabOrder := 0;
   end;
 
-  FButton := TfpgButton.Create(self);
+  FButton := TlqButton.Create(self);
   with FButton do
   begin
     Name := 'FButton';
@@ -311,39 +311,39 @@ end;
 
 
 
-{ TfpgFileNameEdit }
+{ TlqFileNameEdit }
 
-constructor TfpgFileNameEdit.Create(AOwner: TComponent);
+constructor TlqFileNameEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFilter         := '';
   FButton.ImageName := 'stdimg.folderfile';
 end;
 
-procedure TfpgFileNameEdit.SetFilter(const AValue: TfpgString);
+procedure TlqFileNameEdit.SetFilter(const AValue: TlqString);
 begin
   FFilter := AValue;
 end;
 
-procedure TfpgFileNameEdit.SetFileName(const AValue: TfpgString);
+procedure TlqFileNameEdit.SetFileName(const AValue: TlqString);
 begin
   FEdit.Text := AValue;
 end;
 
-function TfpgFileNameEdit.GetFileName: TfpgString;
+function TlqFileNameEdit.GetFileName: TlqString;
 begin
   Result := FEdit.Text;
 end;
 
-procedure TfpgFileNameEdit.DoFilenameSet(const AOld, ANew: TfpgString);
+procedure TlqFileNameEdit.DoFilenameSet(const AOld, ANew: TlqString);
 begin
   if Assigned(FOnFilenameSet) then
     FOnFilenameSet(self, AOld, ANew);
 end;
 
-procedure TfpgFileNameEdit.HandlePaint;
+procedure TlqFileNameEdit.HandlePaint;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited HandlePaint;
   // only so that it looks pretty in the UI Designer
@@ -371,13 +371,13 @@ begin
   end;
 end;
 
-procedure TfpgFileNameEdit.InternalButtonClick(Sender: TObject);
+procedure TlqFileNameEdit.InternalButtonClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
-  old: TfpgString;
+  dlg: TlqFileDialog;
+  old: TlqString;
 begin
   old := FEdit.Text;
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if FileName = '' then
     begin
@@ -408,27 +408,27 @@ begin
 end;
 
 
-{ TfpgDirectoryEdit}
+{ TlqDirectoryEdit}
 
-constructor TfpgDirectoryEdit.Create(AOwner: TComponent);
+constructor TlqDirectoryEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FButton.ImageName := 'stdimg.folder';
 end;
 
-function TfpgDirectoryEdit.GetDirectory: TfpgString;
+function TlqDirectoryEdit.GetDirectory: TlqString;
 begin
   Result := FEdit.Text;
 end;
 
-procedure TfpgDirectoryEdit.SetDirectory(const AValue: TfpgString);
+procedure TlqDirectoryEdit.SetDirectory(const AValue: TlqString);
 begin
   FEdit.Text := AValue;
 end;
 
-procedure TfpgDirectoryEdit.HandlePaint;
+procedure TlqDirectoryEdit.HandlePaint;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited HandlePaint;
   // only so that it looks pretty in the UI Designer
@@ -456,11 +456,11 @@ begin
   end;
 end;
 
-procedure TfpgDirectoryEdit.InternalButtonClick(Sender: TObject);
+procedure TlqDirectoryEdit.InternalButtonClick(Sender: TObject);
 var
-  dlg: TfpgSelectDirDialog;
+  dlg: TlqSelectDirDialog;
 begin
-  dlg := TfpgSelectDirDialog.Create(nil);
+  dlg := TlqSelectDirDialog.Create(nil);
   try
     if FRootDirectory <> '' then
       dlg.RootDirectory := FRootDirectory;
@@ -476,21 +476,21 @@ begin
 end;
 
 
-{ TfpgFontEdit }
+{ TlqFontEdit }
 
-function TfpgFontEdit.GetFontDesc: TfpgString;
+function TlqFontEdit.GetFontDesc: TlqString;
 begin
   Result := FEdit.Text;
 end;
 
-procedure TfpgFontEdit.SetFontDesc(const AValue: TfpgString);
+procedure TlqFontEdit.SetFontDesc(const AValue: TlqString);
 begin
   FEdit.Text := AValue;
 end;
 
-procedure TfpgFontEdit.HandlePaint;
+procedure TlqFontEdit.HandlePaint;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited HandlePaint;
   // only so that it looks pretty in the UI Designer
@@ -510,9 +510,9 @@ begin
   end;
 end;
 
-procedure TfpgFontEdit.InternalButtonClick(Sender: TObject);
+procedure TlqFontEdit.InternalButtonClick(Sender: TObject);
 var
-  f: TfpgString;
+  f: TlqString;
 begin
   f := FontDesc;
   if SelectFontDialog(f) then
@@ -520,7 +520,7 @@ begin
   inherited InternalButtonClick(Sender);
 end;
 
-constructor TfpgFontEdit.Create(AOwner: TComponent);
+constructor TlqFontEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FButton.ImageName := 'stdimg.font';

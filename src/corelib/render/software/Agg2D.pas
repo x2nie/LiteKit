@@ -251,14 +251,14 @@ type
    constructor Construct;
    destructor  Destruct;
 
-   function  attach(bitmap : TfpgImage; flip : boolean ) : boolean;
+   function  attach(bitmap : TlqImage; flip : boolean ) : boolean;
 
    function  width : int;
    function  height : int;
 
   end;
 
- TAgg2D = class(TfpgCanvasBase)
+ TAgg2D = class(TlqCanvasBase)
   private
    m_rbuf : rendering_buffer;
    m_pixf : TPixelFormat;
@@ -351,52 +351,52 @@ type
    m_ifSpline36    : image_filter_spline36;
    m_ifBlackman144 : image_filter_blackman144;
   protected
-    FImg: TfpgImage;
+    FImg: TlqImage;
 
   {$undef uses_interface}
   {$define agg_platform_interface}
   {$undef uses_implementation}
   {$undef agg_platform_implementation}
     {$IFDEF WINDOWS}
-      {$I agg_platform_gdi.}
+      {$I agg_platform_gdi.inc}
     {$ENDIF}
     {$IFDEF UNIX}
-      {$I agg_platform_x11.}
+      {$I agg_platform_x11.inc}
     {$ENDIF}
 
-    // ------ TfpgCanvasBase implementation requirements ---------
-    procedure   DoSetFontRes(fntres: TfpgFontResourceBase); override;
-    procedure   DoSetTextColor(cl: TfpgColor); override;
-    procedure   DoSetColor(cl: TfpgColor); override;
-    procedure   DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle); override;
-    procedure   DoGetWinRect(out r: TfpgRect); override;
-    procedure   DoFillRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord); override;
-    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord); override;
-    procedure   DoDrawRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoDrawLine(x1, y1, x2, y2: TfpgCoord); override;
-    procedure   DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi, w, h: integer); override;
-    procedure   DoDrawString(x, y: TfpgCoord; const txt: string); override;
-    procedure   DoSetClipRect(const ARect: TfpgRect); override;
-    function    DoGetClipRect: TfpgRect; override;
-    procedure   DoAddClipRect(const ARect: TfpgRect); override;
+    // ------ TlqCanvasBase implementation requirements ---------
+    procedure   DoSetFontRes(fntres: TlqFontResourceBase); override;
+    procedure   DoSetTextColor(cl: TlqColor); override;
+    procedure   DoSetColor(cl: TlqColor); override;
+    procedure   DoSetLineStyle(awidth: integer; astyle: TlqLineStyle); override;
+    procedure   DoGetWinRect(out r: TlqRect); override;
+    procedure   DoFillRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord); override;
+    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord); override;
+    procedure   DoDrawRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoDrawLine(x1, y1, x2, y2: TlqCoord); override;
+    procedure   DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi, w, h: integer); override;
+    procedure   DoDrawString(x, y: TlqCoord; const txt: string); override;
+    procedure   DoSetClipRect(const ARect: TlqRect); override;
+    function    DoGetClipRect: TlqRect; override;
+    procedure   DoAddClipRect(const ARect: TlqRect); override;
     procedure   DoClearClipRect; override;
-    procedure   DoBeginDraw(awin: TfpgWindowBase; buffered: boolean); override;
-    procedure   DoPutBufferToScreen(x, y, w, h: TfpgCoord); override;
+    procedure   DoBeginDraw(awin: TlqWindowBase; buffered: boolean); override;
+    procedure   DoPutBufferToScreen(x, y, w, h: TlqCoord); override;
     procedure   DoEndDraw; override;
-    function    GetPixel(X, Y: integer): TfpgColor; override;
-    procedure   SetPixel(X, Y: integer; const AValue: TfpgColor); override;
-    procedure   DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
-    procedure   DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
+    function    GetPixel(X, Y: integer): TlqColor; override;
+    procedure   SetPixel(X, Y: integer; const AValue: TlqColor); override;
+    procedure   DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
+    procedure   DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
     procedure   DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean = False); override;
-    // -------- TfpgCanvasBase  end  ---------------
+    // -------- TlqCanvasBase  end  ---------------
 
   public
-   constructor Create(awin: TfpgWindowBase); override;
+   constructor Create(awin: TlqWindowBase); override;
    destructor  Destroy; override;
 
   // Vector Graphics Engine Initialization
-   function  Attach(bitmap : TfpgImage; flip_y : boolean = false ) : boolean;
+   function  Attach(bitmap : TlqImage; flip_y : boolean = false ) : boolean;
 
    procedure ClearAll(c : TAggColor ); overload;
    procedure ClearAll(r ,g ,b : byte; a : byte = 255 ); overload;
@@ -580,43 +580,43 @@ type
    procedure ImageFlip(f : boolean );
 
    procedure TransformImage(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
               dstX1 ,dstY1 ,dstX2 ,dstY2 : double ); overload;
 
    procedure TransformImage(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               dstX1 ,dstY1 ,dstX2 ,dstY2 : double ); overload;
 
    procedure TransformImage(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
               parallelo : PDouble ); overload;
 
-   procedure TransformImage(bitmap : TfpgImage; parallelo : PDouble ); overload;
+   procedure TransformImage(bitmap : TlqImage; parallelo : PDouble ); overload;
 
    procedure TransformImagePath(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
               dstX1 ,dstY1 ,dstX2 ,dstY2 : double ); overload;
 
    procedure TransformImagePath(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               dstX1 ,dstY1 ,dstX2 ,dstY2 : double ); overload;
 
    procedure TransformImagePath(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
               parallelo : PDouble ); overload;
 
-   procedure TransformImagePath(bitmap : TfpgImage; parallelo : PDouble ); overload;
+   procedure TransformImagePath(bitmap : TlqImage; parallelo : PDouble ); overload;
 
    procedure CopyImage(
-              bitmap : TfpgImage;
+              bitmap : TlqImage;
               imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
               dstX ,dstY : double ); overload;
 
-   procedure CopyImage(bitmap : TfpgImage; dstX ,dstY : double ); overload;
+   procedure CopyImage(bitmap : TlqImage; dstX ,dstY : double ); overload;
 
   private
    procedure render(fillColor_ : boolean ); overload;
@@ -639,9 +639,9 @@ type
  function  Agg2DUsesFreeType : boolean;
  function  Agg2DUsesWin32TrueType : boolean;
 
- function  BitmapAlphaTransparency(bitmap : TfpgImage; alpha : byte ) : boolean;
+ function  BitmapAlphaTransparency(bitmap : TlqImage; alpha : byte ) : boolean;
 
- function  fpgColor2AggColor(c: TfpgColor): TAggColor;
+ function  fpgColor2AggColor(c: TlqColor): TAggColor;
  
 
 IMPLEMENTATION
@@ -990,10 +990,10 @@ begin
 {$ENDIF }
 end;
 
-function fpgColor2AggColor(c: TfpgColor): TAggColor;
+function fpgColor2AggColor(c: TlqColor): TAggColor;
 var
   t: TRGBTriple;
-  c1: TfpgColor;
+  c1: TlqColor;
 begin
   t := fpgColorToRGBTriple(c);
   Result.Construct(t.Red, t.Green, t.Blue, t.Alpha);
@@ -1104,7 +1104,7 @@ begin
 end;
 
 { ATTACH }
-function TAggImage.attach(bitmap : TfpgImage; flip : boolean ) : boolean;
+function TAggImage.attach(bitmap : TlqImage; flip : boolean ) : boolean;
 var
  buffer : pointer;
  stride : integer;
@@ -1113,7 +1113,7 @@ begin
  result:=false;
 
  if Assigned(bitmap ) (* and
-    not bitmap.Empty *)then        {$Note Implement TfpgImage.Empty }
+    not bitmap.Empty *)then        {$Note Implement TlqImage.Empty }
   case bitmap.ColorDepth of
    32 :
     begin
@@ -1177,15 +1177,15 @@ end;
 {$undef uses_implementation}
 {$define agg_platform_implementation}
 {$IFDEF WINDOWS}
-  {$I agg_platform_gdi.}
+  {$I agg_platform_gdi.inc}
 {$ENDIF}
 {$IFDEF UNIX}
-  {$I agg_platform_x11.}
+  {$I agg_platform_x11.inc}
 {$ENDIF}
 
 
 { CREATE }
-constructor TAgg2D.Create(awin: TfpgWindowBase);
+constructor TAgg2D.Create(awin: TlqWindowBase);
 begin
   inherited Create(awin);
 
@@ -1338,7 +1338,7 @@ begin
 end;
 
 { ATTACH }
-function TAgg2D.Attach(bitmap : TfpgImage; flip_y : boolean = false ) : boolean;
+function TAgg2D.Attach(bitmap : TlqImage; flip_y : boolean = false ) : boolean;
 var
  buffer : pointer;
  stride : integer;
@@ -3171,7 +3171,7 @@ end;
 
 { TRANSFORMIMAGE }
 procedure TAgg2D.TransformImage(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
            dstX1 ,dstY1 ,dstX2 ,dstY2 : double );
 var
@@ -3207,7 +3207,7 @@ end;
 
 { TRANSFORMIMAGE }
 procedure TAgg2D.TransformImage(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            dstX1 ,dstY1 ,dstX2 ,dstY2 : double );
 var
  parall : array[0..5 ] of double;
@@ -3242,7 +3242,7 @@ end;
 
 { TRANSFORMIMAGE }
 procedure TAgg2D.TransformImage(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
            parallelo : PDouble );
 var
@@ -3286,7 +3286,7 @@ begin
 end;
 
 { TRANSFORMIMAGE }
-procedure TAgg2D.TransformImage(bitmap : TfpgImage; parallelo : PDouble );
+procedure TAgg2D.TransformImage(bitmap : TlqImage; parallelo : PDouble );
 var
  image : TAggImage;
 
@@ -3329,7 +3329,7 @@ end;
 
 { TRANSFORMIMAGEPATH }
 procedure TAgg2D.TransformImagePath(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
            dstX1 ,dstY1 ,dstX2 ,dstY2 : double );
 var
@@ -3358,7 +3358,7 @@ end;
 
 { TRANSFORMIMAGEPATH }
 procedure TAgg2D.TransformImagePath(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            dstX1 ,dstY1 ,dstX2 ,dstY2 : double );
 var
  parall : array[0..5 ] of double;
@@ -3386,7 +3386,7 @@ end;
 
 { TRANSFORMIMAGEPATH }
 procedure TAgg2D.TransformImagePath(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
            parallelo : PDouble );
 var
@@ -3406,7 +3406,7 @@ begin
 end;
 
 { TRANSFORMIMAGEPATH }
-procedure TAgg2D.TransformImagePath(bitmap : TfpgImage; parallelo : PDouble );
+procedure TAgg2D.TransformImagePath(bitmap : TlqImage; parallelo : PDouble );
 var
  image : TAggImage;
 
@@ -3425,7 +3425,7 @@ end;
 
 { COPYIMAGE }
 procedure TAgg2D.CopyImage(
-           bitmap : TfpgImage;
+           bitmap : TlqImage;
            imgX1 ,imgY1 ,imgX2 ,imgY2 : integer;
            dstX ,dstY : double );
 var
@@ -3449,7 +3449,7 @@ begin
 end;
 
 { COPYIMAGE }
-procedure TAgg2D.CopyImage(bitmap : TfpgImage; dstX ,dstY : double );
+procedure TAgg2D.CopyImage(bitmap : TlqImage; dstX ,dstY : double );
 var
  image : TAggImage;
 
@@ -3533,7 +3533,7 @@ begin
 
 end;
 
-procedure TAgg2D.DoSetFontRes(fntres: TfpgFontResourceBase);
+procedure TAgg2D.DoSetFontRes(fntres: TlqFontResourceBase);
 begin
   {$NOTE This is only temporary until I can correctly query font names }
   {$IFDEF WINDOWS}
@@ -3547,10 +3547,10 @@ begin
   {$ENDIF}
 end;
 
-procedure TAgg2D.DoSetTextColor(cl: TfpgColor);
+procedure TAgg2D.DoSetTextColor(cl: TlqColor);
 var
   t: TRGBTriple;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   c := fpgColorToRGB(cl);
   t := fpgColorToRGBTriple(c);
@@ -3558,10 +3558,10 @@ begin
   FillColor(t.Red, t.Green, t.Blue{, t.Alpha});
 end;
 
-procedure TAgg2D.DoSetColor(cl: TfpgColor);
+procedure TAgg2D.DoSetColor(cl: TlqColor);
 var
   t: TRGBTriple;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   c := fpgColorToRGB(cl);
   t := fpgColorToRGBTriple(c);
@@ -3569,7 +3569,7 @@ begin
   LineColor(t.Red, t.Green, t.Blue{, t.Alpha});
 end;
 
-procedure TAgg2D.DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle);
+procedure TAgg2D.DoSetLineStyle(awidth: integer; astyle: TlqLineStyle);
 begin
 //  LineWidth(awidth);
   case astyle of
@@ -3601,7 +3601,7 @@ begin
   end;
 end;
 
-procedure TAgg2D.DoGetWinRect(out r: TfpgRect);
+procedure TAgg2D.DoGetWinRect(out r: TlqRect);
 begin
   r.Left    := 0;
   r.Top     := 0;
@@ -3609,7 +3609,7 @@ begin
   r.Height := FWindow.Height;
 end;
 
-procedure TAgg2D.DoFillRectangle(x, y, w, h: TfpgCoord);
+procedure TAgg2D.DoFillRectangle(x, y, w, h: TlqCoord);
 begin
   FillColor(LineColor);
   LineColor(LineColor);
@@ -3628,17 +3628,17 @@ begin
     Rectangle(x, y, x+w-1, y+h-1, True);
 end;
 
-procedure TAgg2D.DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord);
+procedure TAgg2D.DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord);
 begin
 
 end;
 
-procedure TAgg2D.DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord);
+procedure TAgg2D.DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord);
 begin
 
 end;
 
-procedure TAgg2D.DoDrawRectangle(x, y, w, h: TfpgCoord);
+procedure TAgg2D.DoDrawRectangle(x, y, w, h: TlqCoord);
 begin
 //  LineWidth(FLineWidth);
   DoSetColor(FColor);
@@ -3656,20 +3656,20 @@ begin
     Rectangle(x, y, x+w-1, y+h-1, True);
 end;
 
-procedure TAgg2D.DoDrawLine(x1, y1, x2, y2: TfpgCoord);
+procedure TAgg2D.DoDrawLine(x1, y1, x2, y2: TlqCoord);
 begin
   Line(x1, y1, x2, y2, True);
 end;
 
-procedure TAgg2D.DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi,
+procedure TAgg2D.DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi,
   w, h: integer);
 begin
   { We use TransformImage so we can get alpha blending support.
     CopyImage doesn't use image blending, when it does painting. }
-  TransformImage(TfpgImage(img), xi, yi, xi+w, yi+h, x, y, x+w, y+h);
+  TransformImage(TlqImage(img), xi, yi, xi+w, yi+h, x, y, x+w, y+h);
 end;
 
-procedure TAgg2D.DoDrawString(x, y: TfpgCoord; const txt: string);
+procedure TAgg2D.DoDrawString(x, y: TlqCoord; const txt: string);
 begin
   DoSetTextColor(FTextColor);
   NoLine;
@@ -3677,17 +3677,17 @@ begin
   Text(x, y+FontHeight, txt);
 end;
 
-procedure TAgg2D.DoSetClipRect(const ARect: TfpgRect);
+procedure TAgg2D.DoSetClipRect(const ARect: TlqRect);
 begin
   ClipBox(ARect.Left, ARect.Top, ARect.Right+1, ARect.Bottom+1);
 end;
 
-function TAgg2D.DoGetClipRect: TfpgRect;
+function TAgg2D.DoGetClipRect: TlqRect;
 begin
   Result.SetRect(Round(ClipBox.x1), Round(ClipBox.y1), Round(ClipBox.x2 - ClipBox.x1), Round(ClipBox.y2 - ClipBox.y1));
 end;
 
-procedure TAgg2D.DoAddClipRect(const ARect: TfpgRect);
+procedure TAgg2D.DoAddClipRect(const ARect: TlqRect);
 begin
   {$NOTE TAgg2D.DoAddClipRect must still be implemented }
 end;
@@ -3698,7 +3698,7 @@ begin
   m_rasterizer.m_clipping := false;
 end;
 
-procedure TAgg2D.DoBeginDraw(awin: TfpgWindowBase; buffered: boolean);
+procedure TAgg2D.DoBeginDraw(awin: TlqWindowBase; buffered: boolean);
 begin
   if Assigned(FImg) then
   begin
@@ -3712,7 +3712,7 @@ begin
 
   if not Assigned(FImg) then
   begin
-    FImg := TfpgImage.Create;
+    FImg := TlqImage.Create;
     FImg.AllocateImage(32, FWindow.Width, FWindow.Height);
     Attach(FImg);
   end;
@@ -3723,24 +3723,24 @@ begin
   // nothing to do here
 end;
 
-function TAgg2D.GetPixel(X, Y: integer): TfpgColor;
+function TAgg2D.GetPixel(X, Y: integer): TlqColor;
 begin
   Result := FImg.Colors[y, y];
 end;
 
-procedure TAgg2D.SetPixel(X, Y: integer; const AValue: TfpgColor);
+procedure TAgg2D.SetPixel(X, Y: integer; const AValue: TlqColor);
 begin
   FImg.Colors[x, y] := AValue;
 end;
 
-procedure TAgg2D.DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TAgg2D.DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 begin
   NoFill;
   LineColor(LineColor);
   Arc(x+(w/2), y+(h/2), w/2, h/2, Deg2Rad(a1+90), Deg2Rad(a2+90));
 end;
 
-procedure TAgg2D.DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TAgg2D.DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 begin
   {$Note AggPas's Arc only does stroking, not filling. Make another plan }
   NoFill;
@@ -3768,7 +3768,7 @@ end;
 
 
 { BITMAPALPHATRANSPARENCY }
-function BitmapAlphaTransparency(bitmap : TfpgImage; alpha : byte ) : boolean;
+function BitmapAlphaTransparency(bitmap : TlqImage; alpha : byte ) : boolean;
 var
  fcx ,fcy : integer;
  transp   : ^byte;

@@ -13,23 +13,23 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     procedure TrackbarChanged(Sender: TObject; APosition: integer);
     procedure btnQuitClicked(Sender: TObject);
     procedure btnStartClicked(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    btnQuit: TfpgButton;
-    btnStart: TfpgButton;
-    tbName1: TfpgTrackBar;
-    Anim1: TfpgImgAnim;
-    wanda: TfpgImgAnim;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    lblName3: TfpgLabel;
-    loadinglogo: TfpgImgAnim;
-    Label1: TfpgLabel;
+    btnQuit: TlqButton;
+    btnStart: TlqButton;
+    tbName1: TlqTrackBar;
+    Anim1: TlqImgAnim;
+    wanda: TlqImgAnim;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    lblName3: TlqLabel;
+    loadinglogo: TlqImgAnim;
+    Label1: TlqLabel;
     {@VFD_HEAD_END: MainForm}
     procedure AfterCreate; override;
   end;
@@ -81,7 +81,7 @@ begin
   Sizeable := False;
   WindowPosition := wpScreenCenter;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -94,7 +94,7 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  btnStart := TfpgButton.Create(self);
+  btnStart := TlqButton.Create(self);
   with btnStart do
   begin
     Name := 'btnStart';
@@ -107,7 +107,7 @@ begin
     OnClick := @btnStartClicked;
   end;
 
-  tbName1 := TfpgTrackBar.Create(self);
+  tbName1 := TlqTrackBar.Create(self);
   with tbName1 do
   begin
     Name := 'tbName1';
@@ -118,7 +118,7 @@ begin
     OnChange := @TrackbarChanged;
   end;
 
-  Anim1 := TfpgImgAnim.Create(self);
+  Anim1 := TlqImgAnim.Create(self);
   with Anim1 do
   begin
     Name := 'Anim1';
@@ -126,7 +126,7 @@ begin
     ImageFileName := 'gears.bmp';
   end;
 
-  wanda := TfpgImgAnim.Create(self);
+  wanda := TlqImgAnim.Create(self);
   with wanda do
   begin
     Name := 'wanda';
@@ -138,7 +138,7 @@ begin
     Enabled := True;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -148,7 +148,7 @@ begin
     Text := 'Step through frames';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -158,7 +158,7 @@ begin
     Text := 'Wanda the fish';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -168,7 +168,7 @@ begin
     Text := '(stop the animation first)';
   end;
 
-  loadinglogo := TfpgImgAnim.Create(self);
+  loadinglogo := TlqImgAnim.Create(self);
   with loadinglogo do
   begin
     Name := 'loadinglogo';
@@ -180,7 +180,7 @@ begin
     Enabled := True;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';

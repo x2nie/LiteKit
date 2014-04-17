@@ -14,7 +14,7 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     procedure rbChanged(Sender: TObject);
     procedure cbAutoCompleteChanged(Sender: TObject);
@@ -25,22 +25,22 @@ type
     procedure btnAdd10Clicked(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    btnAdd10: TfpgButton;
-    btnClear: TfpgButton;
-    btnFocus: TfpgButton;
-    btnAdd1: TfpgButton;
-    cbAutoComplete: TfpgCheckBox;
-    Combo1: TfpgComboBox;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    EditCombo1: TfpgEditCombo;
-    lblName3: TfpgLabel;
-    lblName4: TfpgLabel;
-    cbAllowNew: TfpgComboBox;
-    grpBox: TfpgGroupBox;
-    rbName1: TfpgRadioButton;
-    rbName2: TfpgRadioButton;
-    rbName3: TfpgRadioButton;
+    btnAdd10: TlqButton;
+    btnClear: TlqButton;
+    btnFocus: TlqButton;
+    btnAdd1: TlqButton;
+    cbAutoComplete: TlqCheckBox;
+    Combo1: TlqComboBox;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    EditCombo1: TlqEditCombo;
+    lblName3: TlqLabel;
+    lblName4: TlqLabel;
+    cbAllowNew: TlqComboBox;
+    grpBox: TlqGroupBox;
+    rbName1: TlqRadioButton;
+    rbName2: TlqRadioButton;
+    rbName3: TlqRadioButton;
     {@VFD_HEAD_END: MainForm}
     constructor Create(AOwner: TComponent); override;
     procedure   AfterCreate; override;
@@ -57,10 +57,10 @@ uses
 
 procedure TMainForm.rbChanged(Sender: TObject);
 begin
-  if Sender is TfpgRadioButton then
+  if Sender is TlqRadioButton then
   begin
-    Combo1.DropDownCount := TfpgRadioButton(Sender).Tag;
-    EditCombo1.DropDownCount := TfpgRadioButton(Sender).Tag;
+    Combo1.DropDownCount := TlqRadioButton(Sender).Tag;
+    EditCombo1.DropDownCount := TlqRadioButton(Sender).Tag;
   end;
 end;
 
@@ -137,7 +137,7 @@ begin
   WindowTitle := 'ComboBox test';
   WindowPosition := wpScreenCenter;
 
-  btnAdd10 := TfpgButton.Create(self);
+  btnAdd10 := TlqButton.Create(self);
   with btnAdd10 do
   begin
     Name := 'btnAdd10';
@@ -149,7 +149,7 @@ begin
     OnClick := @btnAdd10Clicked;
   end;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -161,7 +161,7 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  btnFocus := TfpgButton.Create(self);
+  btnFocus := TlqButton.Create(self);
   with btnFocus do
   begin
     Name := 'btnFocus';
@@ -173,7 +173,7 @@ begin
     OnClick := @btnFocusClicked;
   end;
 
-  btnAdd1 := TfpgButton.Create(self);
+  btnAdd1 := TlqButton.Create(self);
   with btnAdd1 do
   begin
     Name := 'btnAdd1';
@@ -185,7 +185,7 @@ begin
     OnClick := @btnAdd1Clicked;
   end;
 
-  cbAutoComplete := TfpgCheckBox.Create(self);
+  cbAutoComplete := TlqCheckBox.Create(self);
   with cbAutoComplete do
   begin
     Name := 'cbAutoComplete';
@@ -196,7 +196,7 @@ begin
     OnChange := @cbAutoCompleteChanged;
   end;
 
-  Combo1 := TfpgComboBox.Create(self);
+  Combo1 := TlqComboBox.Create(self);
   with Combo1 do
   begin
     Name := 'Combo1';
@@ -205,7 +205,7 @@ begin
     TabOrder := 6;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -214,7 +214,7 @@ begin
     Text := 'Static ComboBox';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -223,14 +223,14 @@ begin
     Text := 'Edit ComboBox';
   end;
 
-  EditCombo1 := TfpgEditCombo.Create(self);
+  EditCombo1 := TlqEditCombo.Create(self);
   with EditCombo1 do
   begin
     Name := 'EditCombo1';
     SetPosition(8, 88, 168, 21);
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -239,7 +239,7 @@ begin
     Text := 'EditCombo only';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -248,7 +248,7 @@ begin
     Text := 'Both components';
   end;
 
-  cbAllowNew := TfpgComboBox.Create(self);
+  cbAllowNew := TlqComboBox.Create(self);
   with cbAllowNew do
   begin
     Name := 'cbAllowNew';
@@ -262,7 +262,7 @@ begin
     FocusItem := 0;
   end;
 
-  grpBox := TfpgGroupBox.Create(self);
+  grpBox := TlqGroupBox.Create(self);
   with grpBox do
   begin
     Name := 'grpBox';
@@ -270,7 +270,7 @@ begin
     Text := 'Dropdown Count:';
   end;
 
-  rbName1 := TfpgRadioButton.Create(grpBox);
+  rbName1 := TlqRadioButton.Create(grpBox);
   with rbName1 do
   begin
     Name := 'rbName1';
@@ -282,7 +282,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  rbName2 := TfpgRadioButton.Create(grpBox);
+  rbName2 := TlqRadioButton.Create(grpBox);
   with rbName2 do
   begin
     Name := 'rbName2';
@@ -294,7 +294,7 @@ begin
     OnChange := @rbChanged;
   end;
 
-  rbName3 := TfpgRadioButton.Create(grpBox);
+  rbName3 := TlqRadioButton.Create(grpBox);
   with rbName3 do
   begin
     Name := 'rbName3';

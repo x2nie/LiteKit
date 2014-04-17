@@ -31,13 +31,13 @@ uses
 
 type
   // forward declaration
-  TfpgBaseTextEdit = class;
+  TlqBaseTextEdit = class;
 
-  TfpgFindOptions = set of (foMatchCase, foWholeWords, foEntireScope);
+  TlqFindOptions = set of (foMatchCase, foWholeWords, foEntireScope);
 
-  TfpgGutter = class(TfpgWidget)
+  TlqGutter = class(TlqWidget)
   private
-    FOwner: TfpgBaseTextEdit; // convenience reference variable
+    FOwner: TlqBaseTextEdit; // convenience reference variable
     FDigits: Integer;
     FShowNum: Boolean;
     FSpace: Integer;
@@ -53,8 +53,8 @@ type
     procedure   HandlePaint; override;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
   public
-    constructor CreateGutter(AOwner: TfpgBaseTextEdit);
-    function    GetClientRect: TfpgRect; override;
+    constructor CreateGutter(AOwner: TlqBaseTextEdit);
+    function    GetClientRect: TlqRect; override;
     property    LeadingDigits: Integer read FDigits write SetDigits default 0;
     property    ShowNum: Boolean read FShowNum write SetShowNum default True;
     property    Space: Integer read FSpace write SetSpace default 2;
@@ -64,28 +64,28 @@ type
   end;
 
 
-  TfpgDrawLineEvent = procedure(Sender: TObject; ALineText: TfpgString;
-      ALineIndex: Integer; ACanvas: TfpgCanvas; ATextRect: TfpgRect;
+  TlqDrawLineEvent = procedure(Sender: TObject; ALineText: TlqString;
+      ALineIndex: Integer; ACanvas: TlqCanvas; ATextRect: TlqRect;
       var AllowSelfDraw: Boolean) of object;
 
-  TfpgFindText = procedure(Sender: TObject; FindPos: TPoint; var ScrollToWord: Boolean) of object;
+  TlqFindText = procedure(Sender: TObject; FindPos: TPoint; var ScrollToWord: Boolean) of object;
 
-  TfpgReplaceText = procedure(Sender: TObject; FindPos: TPoint; var ScrollToWord, ReplaceText: Boolean) of object;
+  TlqReplaceText = procedure(Sender: TObject; FindPos: TPoint; var ScrollToWord, ReplaceText: Boolean) of object;
 
-  TfpgOnSearchEnd = procedure(Sender: TObject; FindIt, ReplaceMode: Boolean) of object;
+  TlqOnSearchEnd = procedure(Sender: TObject; FindIt, ReplaceMode: Boolean) of object;
 
 
-  TfpgBaseTextEdit = class(TfpgWidget)
+  TlqBaseTextEdit = class(TlqWidget)
   private
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FFullRedraw: Boolean;
     FLines: TStrings;
     CaretPos: TPoint;
-    FOnDrawLine: TfpgDrawLineEvent;
-    FOnFindText: TfpgFindText;
-    FOnReplaceText: TfpgReplaceText;
-    FOnSearchEnd: TfpgOnSearchEnd;
-    FScrollBarStyle: TfpgScrollStyle;
+    FOnDrawLine: TlqDrawLineEvent;
+    FOnFindText: TlqFindText;
+    FOnReplaceText: TlqReplaceText;
+    FOnSearchEnd: TlqOnSearchEnd;
+    FScrollBarStyle: TlqScrollStyle;
     MousePos: TPoint;
     FChrW: Integer;
     FChrH: Integer;
@@ -100,12 +100,12 @@ type
     FTabWidth: Integer;
     HPos, VPos, XSize, YSize: Integer;
     FMaxScrollH: Integer;
-    FVScrollBar: TfpgScrollBar;
-    FHScrollBar: TfpgScrollBar;
+    FVScrollBar: TlqScrollBar;
+    FHScrollBar: TlqScrollBar;
     FTracking: Boolean;
     FSelDrag: Boolean;
     FSelected, FSelMouseDwn: Boolean;
-    FGutterPan: TfpgGutter;
+    FGutterPan: TlqGutter;
     FRightEdge: Boolean;
     FRightEdgeCol: Integer;
     FLineChanged: Integer;    // force only one line to repaint if greater than -1
@@ -133,7 +133,7 @@ type
     procedure   SetCaretPosH(const AValue: Integer);
     procedure   SetCaretPosV(const AValue: Integer);
     procedure   SetLines(const AValue: TStrings);
-    procedure   SetScrollBarStyle(const AValue: TfpgScrollStyle);
+    procedure   SetScrollBarStyle(const AValue: TlqScrollStyle);
     procedure   SetTabWidth(const AValue: Integer);
     procedure   SetVScrollPos(const AValue: Integer);
     procedure   UpdateCharBounds;
@@ -148,21 +148,21 @@ type
     procedure   InitMemoObjects;
     procedure   SetRightEdge(const AValue: Boolean);
     procedure   SetRightEdgeCol(const AValue: Integer);
-    function    calcmousewheeldelta(var info: TfpgMsgParmMouse; const fmin,fmax,deltamin,deltamax: double): double;
+    function    calcmousewheeldelta(var info: TlqMsgParmMouse; const fmin,fmax,deltamin,deltamax: double): double;
     function    mousewheelacceleration(const avalue: double): double;
     function    mousewheelacceleration(const avalue: integer): integer;
-    function    FindReplaceProc(TextToFind: TfpgString; FindOptions: TfpgFindOptions; Backward, ReplaceMode: Boolean; var ReplaceText: Boolean): Boolean;
+    function    FindReplaceProc(TextToFind: TlqString; FindOptions: TlqFindOptions; Backward, ReplaceMode: Boolean; var ReplaceText: Boolean): Boolean;
   protected
     { -- internal events -- }
     procedure   HandleShow; override;
-    procedure   HandleResize(AWidth, AHeight: TfpgCoord); override;
+    procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
     procedure   HandlePaint; override;
     procedure   HandleMouseEnter; override;
     procedure   HandleMouseExit; override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean); override;
     { -- local widget functions -- }
     procedure   DrawVisible; virtual;
     procedure   DrawLine(const ALineIndex, Y: Integer); virtual;
@@ -174,32 +174,32 @@ type
     property    GutterVisible: Boolean read GetGutterVisible write SetGutterVisible default False;
     property    GutterShowLineNumbers: Boolean read GetGutterShowLineNumbers write SetGutterShowLineNumbers default True;
     property    Lines: TStrings read FLines write SetLines;
-    property    ScrollBarStyle: TfpgScrollStyle read FScrollBarStyle write SetScrollBarStyle default ssAutoBoth;
+    property    ScrollBarStyle: TlqScrollStyle read FScrollBarStyle write SetScrollBarStyle default ssAutoBoth;
     property    TabWidth: Integer read FTabWidth write SetTabWidth default 8;
     property    Tracking: Boolean read FTracking write FTracking default True;
-    property    OnDrawLine: TfpgDrawLineEvent read FOnDrawLine write FOnDrawLine;
-    property    OnFindText: TfpgFindText read FOnFindText write FOnFindText;
-    property    OnSearchEnd: TfpgOnSearchEnd read FOnSearchEnd write FOnSearchEnd;
-    property    OnReplaceText: TfpgReplaceText read FOnReplaceText write FOnReplaceText;
+    property    OnDrawLine: TlqDrawLineEvent read FOnDrawLine write FOnDrawLine;
+    property    OnFindText: TlqFindText read FOnFindText write FOnFindText;
+    property    OnSearchEnd: TlqOnSearchEnd read FOnSearchEnd write FOnSearchEnd;
+    property    OnReplaceText: TlqReplaceText read FOnReplaceText write FOnReplaceText;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     procedure   UpdateScrollBars;
-    function    GetClientRect: TfpgRect; override;
-    function    GetWordAtPos(const X, Y: Integer; out XBegin: Integer): TfpgString;
+    function    GetClientRect: TlqRect; override;
+    function    GetWordAtPos(const X, Y: Integer; out XBegin: Integer): TlqString;
     procedure   GetRowColAtPos(const X, Y: Integer; out Row, Col: Integer);
     procedure   Clear;
-    procedure   InsertTextAtPos(S: TfpgString; Col, Row: Integer);
+    procedure   InsertTextAtPos(S: TlqString; Col, Row: Integer);
     procedure   ScrollTo(X, Y: Integer);
     procedure   GotoLine(ALine: integer);
     procedure   CopyToClipboard;
     procedure   CutToClipboard;
     procedure   PasteFromClipboard;
     procedure   DeleteSelection;
-    function    GetSelectedText: TfpgString;
-    procedure   SaveToFile(const AFileName: TfpgString);
-    procedure   LoadFromFile(const AFileName: TfpgString);
-    procedure   FindText(TextToFind: TfpgString; FindOptions: TfpgFindOptions; Backward: Boolean = False);
+    function    GetSelectedText: TlqString;
+    procedure   SaveToFile(const AFileName: TlqString);
+    procedure   LoadFromFile(const AFileName: TlqString);
+    procedure   FindText(TextToFind: TlqString; FindOptions: TlqFindOptions; Backward: Boolean = False);
     property    CaretPos_H: Integer read GetCaretPosH write SetCaretPosH;
     property    CaretPos_V: Integer read GetCaretPosV write SetCaretPosV;
     property    FontHeight: Integer read FChrH;
@@ -213,7 +213,7 @@ type
   end;
 
 
-  TfpgTextEdit = class(TfpgBaseTextEdit)
+  TlqTextEdit = class(TlqBaseTextEdit)
   published
     property    FontDesc;
     property    FullRedraw;
@@ -242,13 +242,13 @@ uses
   dbugintf;
 
 
-function GetNextWord(SLine: TfpgString; var PosX: Integer): Boolean;
+function GetNextWord(SLine: TlqString; var PosX: Integer): Boolean;
 const
   ValidChars = ['a'..'z', 'A'..'Z', '0'..'9', '#'];
 var
   I, RetX: Integer;
   FindNext: Boolean;
-  c: TfpgChar;
+  c: TlqChar;
 begin
   Result := False;
   if PosX > UTF8Length(SLine) then Exit;
@@ -276,39 +276,39 @@ begin
 end;
 
 
-{ TfpgGutter }
+{ TlqGutter }
 
-procedure TfpgGutter.SetDigits(const AValue: Integer);
+procedure TlqGutter.SetDigits(const AValue: Integer);
 begin
   if FDigits=AValue then exit;
   FDigits:=AValue;
 end;
 
-procedure TfpgGutter.SetShowNum(const AValue: Boolean);
+procedure TlqGutter.SetShowNum(const AValue: Boolean);
 begin
   if FShowNum=AValue then exit;
   FShowNum:=AValue;
   Invalidate;
 end;
 
-procedure TfpgGutter.SetSpace(const AValue: Integer);
+procedure TlqGutter.SetSpace(const AValue: Integer);
 begin
   if FSpace=AValue then exit;
   FSpace:=AValue;
 end;
 
-procedure TfpgGutter.SetStartNum(const AValue: Integer);
+procedure TlqGutter.SetStartNum(const AValue: Integer);
 begin
   if FStartNum=AValue then exit;
   FStartNum:=AValue;
 end;
 
-procedure TfpgGutter.DrawLineNums;
+procedure TlqGutter.DrawLineNums;
 var
-  r: TfpgRect;
+  r: TlqRect;
   I, MaxI, W, H, ZeroL: Integer;
-  s: TfpgString;
-  ltxtflags: TfpgTextFlags;
+  s: TlqString;
+  ltxtflags: TlqTextFlags;
 begin
   if not FShowNum then
     Exit; //==>
@@ -333,13 +333,13 @@ begin
   end;
 end;
 
-procedure TfpgGutter.SetZeroStart(const AValue: Boolean);
+procedure TlqGutter.SetZeroStart(const AValue: Boolean);
 begin
   if FZeroStart=AValue then exit;
   FZeroStart:=AValue;
 end;
 
-procedure TfpgGutter.HandlePaint;
+procedure TlqGutter.HandlePaint;
 begin
   inherited HandlePaint;
   Canvas.Clear(clWindowBackground);
@@ -351,10 +351,10 @@ begin
   DrawLineNums;
 end;
 
-procedure TfpgGutter.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
+procedure TlqGutter.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
     delta: smallint);
 var
-  msg: TfpgMessageParams;
+  msg: TlqMessageParams;
 begin
   inherited HandleMouseScroll(x, y, shiftstate, delta);
   fillchar(msg, sizeof(msg), 0);  // zero out the record - initialize it
@@ -365,7 +365,7 @@ begin
   fpgPostMessage(self, FOwner.FVScrollBar, FPGM_SCROLL, msg);
 end;
 
-constructor TfpgGutter.CreateGutter(AOwner: TfpgBaseTextEdit);
+constructor TlqGutter.CreateGutter(AOwner: TlqBaseTextEdit);
 begin
   inherited Create(AOwner);
   FOwner := AOwner;
@@ -377,21 +377,21 @@ begin
   Width := 35;
 end;
 
-function TfpgGutter.GetClientRect: TfpgRect;
+function TlqGutter.GetClientRect: TlqRect;
 begin
   Result := inherited GetClientRect;
   Result.Width := Result.Width - 2; // border right line takes up two pixels
 end;
 
-{ TfpgBaseTextEdit }
+{ TlqBaseTextEdit }
 
-procedure TfpgBaseTextEdit.SetLines(const AValue: TStrings);
+procedure TlqBaseTextEdit.SetLines(const AValue: TStrings);
 begin
   FLines.Assign(AValue);
   Invalidate;
 end;
 
-procedure TfpgBaseTextEdit.SetScrollBarStyle(const AValue: TfpgScrollStyle);
+procedure TlqBaseTextEdit.SetScrollBarStyle(const AValue: TlqScrollStyle);
 begin
   if FScrollBarStyle = AValue then
     Exit; //==>
@@ -399,54 +399,54 @@ begin
   UpdateScrollBarCoords;
 end;
 
-function TfpgBaseTextEdit.GetFontDesc: string;
+function TlqBaseTextEdit.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-function TfpgBaseTextEdit.GetGutterShowLineNumbers: Boolean;
+function TlqBaseTextEdit.GetGutterShowLineNumbers: Boolean;
 begin
  Result := FGutterPan.ShowNum;
 end;
 
-function TfpgBaseTextEdit.GetGutterVisible: Boolean;
+function TlqBaseTextEdit.GetGutterVisible: Boolean;
 begin
   Result := FGutterPan.Visible;
 end;
 
-function TfpgBaseTextEdit.GetHScrollPos: Integer;
+function TlqBaseTextEdit.GetHScrollPos: Integer;
 begin
   Result := HPos;
 end;
 
-function TfpgBaseTextEdit.GetVScrollPos: Integer;
+function TlqBaseTextEdit.GetVScrollPos: Integer;
 begin
   Result := VPos;
 end;
 
-function TfpgBaseTextEdit.GetCaretPosH: Integer;
+function TlqBaseTextEdit.GetCaretPosH: Integer;
 begin
   Result := CaretPos.Y;
 end;
 
-function TfpgBaseTextEdit.GetCaretPosV: Integer;
+function TlqBaseTextEdit.GetCaretPosV: Integer;
 begin
   Result := CaretPos.X;
 end;
 
-procedure TfpgBaseTextEdit.SetFontDesc(const AValue: string);
+procedure TlqBaseTextEdit.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   Invalidate;
 end;
 
-procedure TfpgBaseTextEdit.SetGutterShowLineNumbers(const AValue: Boolean);
+procedure TlqBaseTextEdit.SetGutterShowLineNumbers(const AValue: Boolean);
 begin
   FGutterPan.ShowNum := AValue;
 end;
 
-procedure TfpgBaseTextEdit.SetGutterVisible(const AValue: Boolean);
+procedure TlqBaseTextEdit.SetGutterVisible(const AValue: Boolean);
 begin
   FGutterPan.Visible := AValue;
   if FGutterPan.Visible then
@@ -454,39 +454,39 @@ begin
   Invalidate;
 end;
 
-procedure TfpgBaseTextEdit.SetHScrollPos(const AValue: Integer);
+procedure TlqBaseTextEdit.SetHScrollPos(const AValue: Integer);
 begin
   SetHPos(AValue);
 end;
 
-procedure TfpgBaseTextEdit.SetTabWidth(const AValue: Integer);
+procedure TlqBaseTextEdit.SetTabWidth(const AValue: Integer);
 begin
   if AValue < 1 then
   begin
     { todo: add these to resourcestring section }
     if csDesigning in ComponentState then
-      TfpgMessageDialog.Information(ClassName + ' Tip', 'Value for TabWidth must be greater than 0.');
+      TlqMessageDialog.Information(ClassName + ' Tip', 'Value for TabWidth must be greater than 0.');
     Exit; //==>
   end;
   FTabWidth := AValue;
 end;
 
-procedure TfpgBaseTextEdit.SetCaretPosH(const AValue: integer);
+procedure TlqBaseTextEdit.SetCaretPosH(const AValue: integer);
 begin
   CaretPos.Y := AValue;
 end;
 
-procedure TfpgBaseTextEdit.SetCaretPosV(const AValue: integer);
+procedure TlqBaseTextEdit.SetCaretPosV(const AValue: integer);
 begin
   CaretPos.X := AValue;
 end;
 
-procedure TfpgBaseTextEdit.SetVScrollPos(const AValue: Integer);
+procedure TlqBaseTextEdit.SetVScrollPos(const AValue: Integer);
 begin
   SetVPos(AValue);
 end;
 
-procedure TfpgBaseTextEdit.UpdateCharBounds;
+procedure TlqBaseTextEdit.UpdateCharBounds;
 begin
   FChrW := FFont.TextWidth('W');
   FChrH := FFont.Height;
@@ -498,7 +498,7 @@ begin
 end;
 
 { Re-order StartXXX and EndXXX if user is selecting backwards }
-procedure TfpgBaseTextEdit.GetSelBounds(var AStartNo, AEndNo, AStartOffs,
+procedure TlqBaseTextEdit.GetSelBounds(var AStartNo, AEndNo, AStartOffs,
   AEndOffs: Integer);
 begin
   if FSelStartNo <= FSelEndNo then
@@ -525,7 +525,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.UpdateScrollBars;
+procedure TlqBaseTextEdit.UpdateScrollBars;
 begin
   FVScrollBar.Min := 0;
   FVScrollBar.PageSize := FVisLines - 4;
@@ -550,7 +550,7 @@ begin
   UpdateCharBounds;
 end;
 
-procedure TfpgBaseTextEdit.VScrollBarMove(Sender: TObject; position: integer);
+procedure TlqBaseTextEdit.VScrollBarMove(Sender: TObject; position: integer);
 begin
   //if FDropList.Visible then
     //FDropList.Visible := False;
@@ -571,7 +571,7 @@ begin
     //end;
 end;
 
-procedure TfpgBaseTextEdit.HScrollBarMove(Sender: TObject; position: integer);
+procedure TlqBaseTextEdit.HScrollBarMove(Sender: TObject; position: integer);
 begin
   //if FDropList.Visible then
     //FDropList.Visible := False;
@@ -594,10 +594,10 @@ begin
     //end;
 end;
 
-procedure TfpgBaseTextEdit.SetVPos(p: Integer);
+procedure TlqBaseTextEdit.SetVPos(p: Integer);
 var
   OldPos: Integer;
-//  R: TfpgRect;
+//  R: TlqRect;
 begin
   OldPos := VPos;
   VPos := p;
@@ -628,10 +628,10 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.SetHPos(p: Integer);
+procedure TlqBaseTextEdit.SetHPos(p: Integer);
 var
   OldPos: Integer;
-//  R: TfpgRect;
+//  R: TlqRect;
 begin
   OldPos := HPos;
   HPos := p;
@@ -657,11 +657,11 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.UpdateScrollBarCoords;
+procedure TlqBaseTextEdit.UpdateScrollBarCoords;
 var
   HWidth: integer;
   VHeight: integer;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r := GetClientRect;
   VHeight := r.Height;
@@ -679,9 +679,9 @@ begin
   FHScrollBar.UpdateWindowPosition;
 end;
 
-procedure TfpgBaseTextEdit.UpdateGutterCoords;
+procedure TlqBaseTextEdit.UpdateGutterCoords;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r := GetClientRect;
   if FGutterPan.Visible then
@@ -690,13 +690,13 @@ end;
 
 { This procedure is used to set caret position on keyboard navigation and
   to set selection if Shift key is pressed. }
-procedure TfpgBaseTextEdit.KeyboardCaretNav(const ShiftState: TShiftState; const AKeyCode: Word);
+procedure TlqBaseTextEdit.KeyboardCaretNav(const ShiftState: TShiftState; const AKeyCode: Word);
 var
   SaveYCaretOffset: Integer;
 
   procedure CtrlKeyLeftKey;
   var
-    S: TfpgString;
+    S: TlqString;
     XB: Integer;
   begin
     S := GetWordAtPos(CaretPos.X, CaretPos.Y, XB);
@@ -716,7 +716,7 @@ var
 
   procedure CtrlKeyRightKey;
   var
-    S: TfpgString;
+    S: TlqString;
     I: Integer;
     NotFindIt: Boolean;
   begin
@@ -1122,9 +1122,9 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.InitMemoObjects;
+procedure TlqBaseTextEdit.InitMemoObjects;
 begin
-  FGutterPan := TfpgGutter.CreateGutter(Self);
+  FGutterPan := TlqGutter.CreateGutter(Self);
   with FGutterPan do
   begin
     Left    := -Width - 1;
@@ -1132,7 +1132,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.SetRightEdge(const AValue: Boolean);
+procedure TlqBaseTextEdit.SetRightEdge(const AValue: Boolean);
 begin
   if FRightEdge <> AValue then
   begin
@@ -1141,7 +1141,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.SetRightEdgeCol(const AValue: Integer);
+procedure TlqBaseTextEdit.SetRightEdgeCol(const AValue: Integer);
 var
   v: Integer;
 begin
@@ -1156,13 +1156,13 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.HandleShow;
+procedure TlqBaseTextEdit.HandleShow;
 begin
   inherited HandleShow;
   HandleResize(Width, Height);
 end;
 
-procedure TfpgBaseTextEdit.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TlqBaseTextEdit.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   if HasHandle then
@@ -1173,7 +1173,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.HandlePaint;
+procedure TlqBaseTextEdit.HandlePaint;
 begin
   Canvas.ClearClipRect;
   if FLineChanged > -1 then
@@ -1206,19 +1206,19 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.HandleMouseEnter;
+procedure TlqBaseTextEdit.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   MouseCursor := mcIBeam;
 end;
 
-procedure TfpgBaseTextEdit.HandleMouseExit;
+procedure TlqBaseTextEdit.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   MouseCursor := mcDefault;
 end;
 
-procedure TfpgBaseTextEdit.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseTextEdit.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   RNo: Integer;
   CNo: Integer;
@@ -1275,7 +1275,7 @@ begin
   Invalidate;
 end;
 
-function TfpgBaseTextEdit.calcmousewheeldelta(var info: TfpgMsgParmMouse;
+function TlqBaseTextEdit.calcmousewheeldelta(var info: TlqMsgParmMouse;
                const fmin,fmax,deltamin,deltamax: double): double;
 var
   frequ: double;
@@ -1311,9 +1311,9 @@ begin
   {$ENDIF}
 end;
 
-function TfpgBaseTextEdit.mousewheelacceleration(const avalue: double): double;
+function TlqBaseTextEdit.mousewheelacceleration(const avalue: double): double;
 var
-  info: TfpgMsgParmMouse;
+  info: TlqMsgParmMouse;
   d: double;
 begin
   info.timestamp := FLastScrollEventTime + FLastScrollEventTime -
@@ -1323,17 +1323,17 @@ begin
   result := avalue * d;
 end;
 
-function TfpgBaseTextEdit.mousewheelacceleration(const avalue: integer): integer;
+function TlqBaseTextEdit.mousewheelacceleration(const avalue: integer): integer;
 begin
   result:= round(mousewheelacceleration(avalue*1.0));
 end;
 
-function TfpgBaseTextEdit.FindReplaceProc(TextToFind: TfpgString;
-    FindOptions: TfpgFindOptions; Backward, ReplaceMode: Boolean;
+function TlqBaseTextEdit.FindReplaceProc(TextToFind: TlqString;
+    FindOptions: TlqFindOptions; Backward, ReplaceMode: Boolean;
     var ReplaceText: Boolean): Boolean;
 var
   SrcBegin, SrcEnd, I, WordPos, ScrollX, ScrollY, Fill: Integer;
-  SLine, SrcWord: TfpgString;
+  SLine, SrcWord: TlqString;
   FindPos: TPoint;
   AllowScroll, ContinueSrc: Boolean;
 begin
@@ -1521,14 +1521,14 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.CopyToClipboard;
+procedure TlqBaseTextEdit.CopyToClipboard;
 begin
   if not FSelected then
     Exit;
   fpgClipboard.Text := GetSelectedText;
 end;
 
-procedure TfpgBaseTextEdit.CutToClipboard;
+procedure TlqBaseTextEdit.CutToClipboard;
 begin
   if not FSelected then
     Exit;
@@ -1536,17 +1536,17 @@ begin
   DeleteSelection;
 end;
 
-procedure TfpgBaseTextEdit.PasteFromClipboard;
+procedure TlqBaseTextEdit.PasteFromClipboard;
 begin
   if FSelected then
     DeleteSelection;
   InsertTextAtPos(fpgClipboard.Text, CaretPos.X, CaretPos.Y);
 end;
 
-procedure TfpgBaseTextEdit.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
+procedure TlqBaseTextEdit.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
     delta: smallint);
 var
-  msg: TfpgMessageParams;
+  msg: TlqMessageParams;
   ldelta: integer;
 begin
   inherited HandleMouseScroll(x, y, shiftstate, delta);
@@ -1566,16 +1566,16 @@ begin
   fpgPostMessage(self, FVScrollBar, FPGM_SCROLL, msg);
 end;
 
-procedure TfpgBaseTextEdit.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseTextEdit.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 var
-  SLine: TfpgString;
-  AddS: TfpgString;
+  SLine: TlqString;
+  AddS: TlqString;
   Y: Integer;
   X: Integer;
   CaretScroll: Boolean;
 begin
   {$IFDEF gDEBUG}
-  SendMethodEnter('TfpgBaseTextEdit.HandleKeyPress')
+  SendMethodEnter('TlqBaseTextEdit.HandleKeyPress')
   {$ENDIF}
   CaretScroll := False;
 //  inherited HandleKeyPress(keycode, shiftstate, consumed);
@@ -1746,17 +1746,17 @@ begin
   if consumed then
     Invalidate;
   {$IFDEF gDEBUG}
-  SendMethodExit('TfpgBaseTextEdit.HandleKeyPress')
+  SendMethodExit('TlqBaseTextEdit.HandleKeyPress')
   {$ENDIF}
 end;
 
-procedure TfpgBaseTextEdit.HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseTextEdit.HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean);
 var
-  SLine: TfpgString;
+  SLine: TlqString;
   Fill: Integer;
 begin
   {$IFDEF gDEBUG}
-  writeln('>> TfpgBaseTextEdit.HandleKeyChar');
+  writeln('>> TlqBaseTextEdit.HandleKeyChar');
   {$ENDIF}
   if not consumed then
   begin
@@ -1787,11 +1787,11 @@ begin
   else
     inherited HandleKeyChar(AText, shiftstate, consumed);
   {$IFDEF gDEBUG}
-  writeln('<< TfpgBaseTextEdit.HandleKeyChar');
+  writeln('<< TlqBaseTextEdit.HandleKeyChar');
   {$ENDIF}
 end;
 
-procedure TfpgBaseTextEdit.DrawVisible;
+procedure TlqBaseTextEdit.DrawVisible;
 var
   I, Y, cntVis: Integer;
 begin
@@ -1828,7 +1828,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.DrawLine(const ALineIndex, Y: Integer);
+procedure TlqBaseTextEdit.DrawLine(const ALineIndex, Y: Integer);
 var
   X: Integer;
   GSz: Integer;
@@ -1852,11 +1852,11 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.FormatLine(const ALineIndex, X, Y: Integer);
+procedure TlqBaseTextEdit.FormatLine(const ALineIndex, X, Y: Integer);
 var
-  S, CorrectS, SS: TfpgString;
+  S, CorrectS, SS: TlqString;
   TI, Si, Ei, T: Integer;
-  R: TfpgRect;
+  R: TlqRect;
   AllowDraw: Boolean;
 begin
   if FLines.Count = 0 then
@@ -1962,7 +1962,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.DrawCaret(const X, Y: Integer);
+procedure TlqBaseTextEdit.DrawCaret(const X, Y: Integer);
 var
   Xp, Yp: Integer;
 begin
@@ -2018,7 +2018,7 @@ begin
   end;
 end;
 
-constructor TfpgBaseTextEdit.Create(AOwner: TComponent);
+constructor TlqBaseTextEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable     := True;
@@ -2050,12 +2050,12 @@ begin
   FLastScrollEventTime := 0;
   FLastScrollEventTimeBefore := 0;
 
-  FVScrollBar          := TfpgScrollBar.Create(self);
+  FVScrollBar          := TlqScrollBar.Create(self);
   FVScrollBar.Orientation := orVertical;
   FVScrollBar.OnScroll := @VScrollBarMove;
   FVScrollBar.Visible  := False;
 
-  FHScrollBar          := TfpgScrollBar.Create(self);
+  FHScrollBar          := TlqScrollBar.Create(self);
   FHScrollBar.Orientation := orHorizontal;
   FHScrollBar.OnScroll := @HScrollBarMove;
 //  FHScrollBar.ScrollStep := 5;
@@ -2064,14 +2064,14 @@ begin
   InitMemoObjects;
 end;
 
-destructor TfpgBaseTextEdit.Destroy;
+destructor TlqBaseTextEdit.Destroy;
 begin
   FLines.Free;
   FFont.Free;
   inherited Destroy;
 end;
 
-function TfpgBaseTextEdit.GetClientRect: TfpgRect;
+function TlqBaseTextEdit.GetClientRect: TlqRect;
 begin
   // widget has a 2 pixel 3D border
   Result.SetRect(2, 2, Width-4, Height-4);
@@ -2081,12 +2081,12 @@ begin
     Result.Height := Result.Height - FHScrollBar.Height;
 end;
 
-function TfpgBaseTextEdit.GetWordAtPos(const X, Y: Integer; out XBegin: Integer): TfpgString;
+function TlqBaseTextEdit.GetWordAtPos(const X, Y: Integer; out XBegin: Integer): TlqString;
 { todo: This needs to be made UTF8 compliant! It currently is not. }
 const
   ValidChars = ['a'..'z', 'A'..'Z', '0'..'9', '#'];
 var
-  S: TfpgString;
+  S: TlqString;
   C: Char;
   I, Si, Ei, CrX: Integer;
   lX: integer;
@@ -2132,7 +2132,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.GetRowColAtPos(const X, Y: Integer; out Row, Col: Integer);
+procedure TlqBaseTextEdit.GetRowColAtPos(const X, Y: Integer; out Row, Col: Integer);
 var
   Fine: Integer;
   lX: Integer;
@@ -2160,7 +2160,7 @@ begin
     Col := Col + 1;
 end;
 
-procedure TfpgBaseTextEdit.Clear;
+procedure TlqBaseTextEdit.Clear;
 begin
   CaretPos.x := 0;
   CaretPos.y := 0;
@@ -2174,9 +2174,9 @@ begin
   Invalidate;
 end;
 
-procedure TfpgBaseTextEdit.InsertTextAtPos(S: TfpgString; Col, Row: Integer);
+procedure TlqBaseTextEdit.InsertTextAtPos(S: TlqString; Col, Row: Integer);
 var
-  SLine, BufS1, BufS2, BufS: TfpgString;
+  SLine, BufS1, BufS2, BufS: TlqString;
   I, L: Integer;
 begin
   if S = '' then
@@ -2268,14 +2268,14 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.ScrollTo(X, Y: Integer);
+procedure TlqBaseTextEdit.ScrollTo(X, Y: Integer);
 begin
   SetVPos(Y div FChrH);
   SetHPos(X div FChrW);
   UpdateScrollBars;
 end;
 
-procedure TfpgBaseTextEdit.GotoLine(ALine: integer);
+procedure TlqBaseTextEdit.GotoLine(ALine: integer);
 begin
   CaretPos.X := 0;
   CaretPos.Y := ALine;
@@ -2283,9 +2283,9 @@ begin
   UpdateScrollBars;
 end;
 
-procedure TfpgBaseTextEdit.DeleteSelection;
+procedure TlqBaseTextEdit.DeleteSelection;
 var
-  FirstPart, LastPart, SLine: TfpgString;
+  FirstPart, LastPart, SLine: TlqString;
   StartLine, StartPos, EndLine, EndPos, I, DelLine: Integer;
 begin
   if not FSelected then Exit;
@@ -2334,7 +2334,7 @@ begin
   Invalidate;
 end;
 
-function TfpgBaseTextEdit.GetSelectedText: TfpgString;
+function TlqBaseTextEdit.GetSelectedText: TlqString;
 var
   StartLine, StartPos, EndLine, EndPos, I, LineI: Integer;
   FirstPart, LastPart, SLine: string;
@@ -2387,10 +2387,10 @@ begin
     Result := Copy(SLine, StartPos + 1, EndPos - StartPos);
 end;
 
-procedure TfpgBaseTextEdit.SaveToFile(const AFileName: TfpgString);
+procedure TlqBaseTextEdit.SaveToFile(const AFileName: TlqString);
 var
   BuffList: TStringList;
-  SLine: TfpgString;
+  SLine: TlqString;
   I, P: Integer;
   Replace: Boolean;
 begin
@@ -2418,7 +2418,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseTextEdit.LoadFromFile(const AFileName: TfpgString);
+procedure TlqBaseTextEdit.LoadFromFile(const AFileName: TlqString);
 begin
   if not fpgFileExists(AFileName) then
     Exit; //==>
@@ -2428,7 +2428,7 @@ begin
   Invalidate;
 end;
 
-procedure TfpgBaseTextEdit.FindText(TextToFind: TfpgString; FindOptions: TfpgFindOptions; Backward: Boolean);
+procedure TlqBaseTextEdit.FindText(TextToFind: TlqString; FindOptions: TlqFindOptions; Backward: Boolean);
 var
   Rep, SrcRes: Boolean;
 begin

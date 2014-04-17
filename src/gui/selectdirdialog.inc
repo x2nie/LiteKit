@@ -1,20 +1,20 @@
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
-  TfpgSelectDirDialog = class(TfpgBaseDialog)
+  TlqSelectDirDialog = class(TlqBaseDialog)
   private
-    tv: TfpgTreeView;
-    FRootDir: TfpgString;
+    tv: TlqTreeView;
+    FRootDir: TlqString;
     FShowHidden: Boolean;
-    FImagelist: TfpgImageList;
-    function    GetAbsolutePath(Node: TfpgTreeNode): TfpgString;
+    FImagelist: TlqImageList;
+    function    GetAbsolutePath(Node: TlqTreeNode): TlqString;
     procedure   InitializeTreeview;
-    procedure   SetRootDir(const AValue: TfpgString);
-    procedure   AddDirectories(Node: TfpgTreeNode; Dir: TfpgString);
-    procedure   NodeExpanded(Sender: TObject; ANode: TfpgTreeNode);
-    function    GetSelectedDir: TfpgString;
-    procedure   SetSelectedDir(const AValue: TfpgString);
+    procedure   SetRootDir(const AValue: TlqString);
+    procedure   AddDirectories(Node: TlqTreeNode; Dir: TlqString);
+    procedure   NodeExpanded(Sender: TObject; ANode: TlqTreeNode);
+    function    GetSelectedDir: TlqString;
+    procedure   SetSelectedDir(const AValue: TlqString);
     {$IFDEF MSWINDOWS}
     procedure   AddWindowsDriveLetters;
     {$ENDIF}
@@ -23,9 +23,9 @@
     destructor  Destroy; override;
     procedure   AfterCreate; override;
     { return the selected directory or set initial selected dir }
-    property    SelectedDir: TfpgString read GetSelectedDir write SetSelectedDir;
+    property    SelectedDir: TlqString read GetSelectedDir write SetSelectedDir;
     { Directory the treeview starts from }
-    property    RootDirectory: TfpgString read FRootDir write SetRootDir;
+    property    RootDirectory: TlqString read FRootDir write SetRootDir;
   end;
 
 
@@ -35,9 +35,9 @@
 
 {$IFDEF read_implementation}
 
-function TfpgSelectDirDialog.GetAbsolutePath(Node: TfpgTreeNode): TfpgString;
+function TlqSelectDirDialog.GetAbsolutePath(Node: TlqTreeNode): TlqString;
 var
-  lResult: TfpgString;
+  lResult: TlqString;
 begin
   lResult := '';
   while Node <> nil do
@@ -62,7 +62,7 @@ begin
   Result := lResult;
 end;
 
-procedure TfpgSelectDirDialog.InitializeTreeview;
+procedure TlqSelectDirDialog.InitializeTreeview;
 begin
   { I'm not sure what we should set these to. Maybe another Config option? }
   {$IFDEF UNIX}
@@ -74,10 +74,10 @@ begin
   tv.RootNode.Expand;
 end;
 
-procedure TfpgSelectDirDialog.SetRootDir(const AValue: TfpgString);
+procedure TlqSelectDirDialog.SetRootDir(const AValue: TlqString);
 var
-  RootNode: TfpgTreeNode;
-  lNode: TfpgTreeNode;
+  RootNode: TlqTreeNode;
+  lNode: TlqTreeNode;
 begin
   { Clear the list }
   tv.RootNode.Clear;
@@ -115,12 +115,12 @@ begin
 end;
 
 { Adds Subdirectories to a passed node if they exist }
-procedure TfpgSelectDirDialog.AddDirectories(Node: TfpgTreeNode; Dir: TfpgString);
+procedure TlqSelectDirDialog.AddDirectories(Node: TlqTreeNode; Dir: TlqString);
 var
   FileInfo: TSearchRec;
-  NewNode: TfpgTreeNode;
+  NewNode: TlqTreeNode;
   i: integer;
-  FCurrentDir: TfpgString;
+  FCurrentDir: TlqString;
   //used to sort the directories.
   SortList: TStringList;
 begin
@@ -178,26 +178,26 @@ begin
     //Node.Text := Dir;
 end;
 
-procedure TfpgSelectDirDialog.NodeExpanded(Sender: TObject; ANode: TfpgTreeNode);
+procedure TlqSelectDirDialog.NodeExpanded(Sender: TObject; ANode: TlqTreeNode);
 begin
   if ANode.Count = 0 then
     AddDirectories(ANode, GetAbsolutePath(ANode));
 end;
 
-function TfpgSelectDirDialog.GetSelectedDir: TfpgString;
+function TlqSelectDirDialog.GetSelectedDir: TlqString;
 begin
   Result := '';
   if tv.Selection <> nil then
     Result := GetAbsolutePath(tv.Selection);
 end;
 
-procedure TfpgSelectDirDialog.SetSelectedDir(const AValue: TfpgString);
+procedure TlqSelectDirDialog.SetSelectedDir(const AValue: TlqString);
 var
-  s: TfpgString;
-  dir: TfpgString;
+  s: TlqString;
+  dir: TlqString;
   i: integer;
   p: integer;
-  prevn, nextn: TfpgTreeNode;
+  prevn, nextn: TlqTreeNode;
 begin
   if AValue = '' then
     Exit;
@@ -228,7 +228,7 @@ begin
 end;
 
 {$IFDEF MSWINDOWS}
-procedure TfpgSelectDirDialog.AddWindowsDriveLetters;
+procedure TlqSelectDirDialog.AddWindowsDriveLetters;
 const
   MAX_DRIVES = 25;
 var
@@ -247,24 +247,24 @@ begin
 end;
 {$ENDIF}
 
-constructor TfpgSelectDirDialog.Create(AOwner: TComponent);
+constructor TlqSelectDirDialog.Create(AOwner: TComponent);
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited Create(AOwner);
   FShowHidden := False;
-  FImagelist := TfpgImageList.Create;
+  FImagelist := TlqImageList.Create;
   img := fpgImages.GetImage('stdimg.folder').ImageFromSource;
   FImageList.AddImage(img);
 end;
 
-destructor TfpgSelectDirDialog.Destroy;
+destructor TlqSelectDirDialog.Destroy;
 begin
   FImagelist.Free;
   inherited Destroy;
 end;
 
-procedure TfpgSelectDirDialog.AfterCreate;
+procedure TlqSelectDirDialog.AfterCreate;
 begin
   inherited AfterCreate;
   Name := 'fpgSelectDirDialog';
@@ -272,7 +272,7 @@ begin
   WindowTitle := rsSelectaDirectory;
   WindowPosition := wpOneThirdDown;
 
-  tv := TfpgTreeView.Create(self);
+  tv := TlqTreeView.Create(self);
   with tv do
   begin
     Name := 'tv';

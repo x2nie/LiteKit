@@ -33,34 +33,34 @@ type
 
   TCanvasFontManager = class(TObject)
   private
-    FWidget: TfpgWidget;
-    FCanvas: TfpgCanvas;
-    FFont: TfpgFont;
-    function    GetCurrentFont: TfpgFont;
-    procedure   SetDefaultFont(const AValue: TfpgFont);
+    FWidget: TlqWidget;
+    FCanvas: TlqCanvas;
+    FFont: TlqFont;
+    function    GetCurrentFont: TlqFont;
+    procedure   SetDefaultFont(const AValue: TlqFont);
   protected
-    FDefaultFont: TfpgFont;
+    FDefaultFont: TlqFont;
   public
-    constructor Create(ACanvas: TfpgCanvas; AWidget: TfpgWidget); reintroduce;
+    constructor Create(ACanvas: TlqCanvas; AWidget: TlqWidget); reintroduce;
     destructor  Destroy; override;
     function    AverageCharWidth: longint;
     function    CharDescender: longint;
     function    CharHeight: longint;
-    function    CharWidth( const C: TfpgChar ): longint;  // Retrieve the width of the given char, in the current font
+    function    CharWidth( const C: TlqChar ): longint;  // Retrieve the width of the given char, in the current font
     function    IsFixed: boolean;
     function    MaximumCharWidth: longint;
     procedure   DrawString(var Point: TPoint; const Length: longint; const S: PChar);
-    procedure   SetFont(const AFontDesc: TfpgString);
-    property    Canvas: TfpgCanvas read FCanvas;
-    property    CurrentFont: TfpgFont read GetCurrentFont;
-    property    DefaultFont: TfpgFont read FDefaultFont write SetDefaultFont;
-    property    Widget: TfpgWidget read FWidget;
+    procedure   SetFont(const AFontDesc: TlqString);
+    property    Canvas: TlqCanvas read FCanvas;
+    property    CurrentFont: TlqFont read GetCurrentFont;
+    property    DefaultFont: TlqFont read FDefaultFont write SetDefaultFont;
+    property    Widget: TlqWidget read FWidget;
   end;
 
 
 // Get the font attributes of a fpGUI font
-function GetFPGuiFontAttributes(const AFont: TfpgFont): TFontAttributes;
-function GetFPGuiFont(const AFontNameSize: string; const Attrs: TFontAttributes): TfpgFont;
+function GeTlquiFontAttributes(const AFont: TlqFont): TFontAttributes;
+function GeTlquiFont(const AFontNameSize: string; const Attrs: TFontAttributes): TlqFont;
 procedure ApplyFontAttributes(var AFontDesc: string; const Attrs: TFontAttributes);
 
 
@@ -75,7 +75,7 @@ uses
   ;
 
 
-function GetFPGuiFontAttributes(const AFont: TfpgFont): TFontAttributes;
+function GeTlquiFontAttributes(const AFont: TlqFont): TFontAttributes;
 var
   s: string;
   facename: string;
@@ -150,7 +150,7 @@ begin
   end;
 end;
 
-function GetFPGuiFont(const AFontNameSize: string; const Attrs: TFontAttributes): TfpgFont;
+function GeTlquiFont(const AFontNameSize: string; const Attrs: TFontAttributes): TlqFont;
 var
   s: string;
 begin
@@ -228,7 +228,7 @@ end;
 
 { TCanvasFontManager }
 
-constructor TCanvasFontManager.Create(ACanvas: TfpgCanvas; AWidget: TfpgWidget);
+constructor TCanvasFontManager.Create(ACanvas: TlqCanvas; AWidget: TlqWidget);
 begin
   inherited Create;
   FCanvas := ACanvas;
@@ -246,7 +246,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TCanvasFontManager.SetDefaultFont(const AValue: TfpgFont);
+procedure TCanvasFontManager.SetDefaultFont(const AValue: TlqFont);
 begin
   if FDefaultFont = AValue then
     exit;
@@ -254,14 +254,14 @@ begin
   FDefaultFont := AValue;
 end;
 
-function TCanvasFontManager.GetCurrentFont: TfpgFont;
+function TCanvasFontManager.GetCurrentFont: TlqFont;
 begin
-  Result := FCanvas.Font as TfpgFont;
+  Result := FCanvas.Font as TlqFont;
 end;
 
 // Set the current font for the canvas to match the given
 // spec, creating or re-using fonts as needed.
-procedure TCanvasFontManager.SetFont(const AFontDesc: TfpgString);
+procedure TCanvasFontManager.SetFont(const AFontDesc: TlqString);
 begin
   if FCanvas.Font.FontDesc = AFontDesc then
     Exit; // nothing to do so exit
@@ -278,7 +278,7 @@ begin
   FCanvas.Font := FFont;
 end;
 
-function TCanvasFontManager.CharWidth( const C: TfpgChar ): longint;
+function TCanvasFontManager.CharWidth( const C: TlqChar ): longint;
 begin
   Result := FCanvas.Font.TextWidth(C);
 end;
@@ -310,7 +310,7 @@ end;
 
 procedure TCanvasFontManager.DrawString(var Point: TPoint; const Length: longint; const S: PChar);
 var
-  t: TfpgString;
+  t: TlqString;
 begin
   t := s;
   //case Settings.Encoding of

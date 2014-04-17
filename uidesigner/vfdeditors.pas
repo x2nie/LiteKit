@@ -37,11 +37,11 @@ type
     procedure btnClearClicked(Sender: TObject);
     procedure OnButtonClick(Sender: TObject);
   public
-    l1: TfpgLabel;
-    edItems: TfpgMemo;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
-    btnClear: TfpgButton;
+    l1: TlqLabel;
+    edItems: TlqMemo;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
+    btnClear: TlqButton;
     procedure AfterCreate; override;
   end;
 
@@ -63,7 +63,7 @@ begin
 
   l1 := CreateLabel(self, 8, 4, 'Items:');
 
-  edItems := TfpgMemo.Create(self);
+  edItems := TlqMemo.Create(self);
   with edItems do
   begin
     SetPosition(8, 24, 344, 168);

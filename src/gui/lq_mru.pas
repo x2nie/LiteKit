@@ -29,17 +29,17 @@ type
 
   TMRUClickEvent = procedure(Sender: TObject; const FileName: String) of object;
 
-  TfpgMRU = class(TComponent)
+  TlqMRU = class(TComponent)
   private
     FItems: TStringList;
     FMaxItems: Integer;
     FShowFullPath: boolean;
-    FParentMenuItem: TfpgPopupMenu;
+    FParentMenuItem: TlqPopupMenu;
 //    FIniFilePath: string;
     FOnClick: TMRUClickEvent;
     procedure   SetMaxItems(const AValue: Integer);
 //    procedure   SetIniFilePath(const AValue: string);
-    procedure   SetParentMenuItem(const AValue: TfpgPopupMenu);
+    procedure   SetParentMenuItem(const AValue: TlqPopupMenu);
     procedure   SetShowFullPath(const AValue: boolean);
     procedure   SaveMRU;
     procedure   ItemsChange(Sender: TObject);
@@ -59,7 +59,7 @@ type
     property    MaxItems: Integer read FMaxItems write SetMaxItems default 4;
 //    property    IniFilePath: string read FIniFilePath write SetIniFilePath;
     property    ShowFullPath: boolean read FShowFullPath write SetShowFullPath default True;
-    property    ParentMenuItem: TfpgPopupMenu read FParentMenuItem write SetParentMenuItem;
+    property    ParentMenuItem: TlqPopupMenu read FParentMenuItem write SetParentMenuItem;
     property    OnClick: TMRUClickEvent read FOnClick write FOnClick;
   end;
 
@@ -71,12 +71,12 @@ uses
 
 type
   //to be able to recognize MRU menu item when deleting
-  TMRUMenuItem = class(TfpgMenuItem);
+  TMRUMenuItem = class(TlqMenuItem);
 
 
-{ TfpgMRU }
+{ TlqMRU }
 
-procedure TfpgMRU.SetMaxItems(const AValue: Integer);
+procedure TlqMRU.SetMaxItems(const AValue: Integer);
 begin
   if AValue <> FMaxItems then
   begin
@@ -102,21 +102,21 @@ begin
 end;
 
 {
-procedure TfpgMRU.SetIniFilePath(const AValue: string);
+procedure TlqMRU.SetIniFilePath(const AValue: string);
 begin
   if FIniFilePath=AValue then exit;
   FIniFilePath:=AValue;
 end;
 }
 
-procedure TfpgMRU.SetParentMenuItem(const AValue: TfpgPopupMenu);
+procedure TlqMRU.SetParentMenuItem(const AValue: TlqPopupMenu);
 begin
   if AValue = FParentMenuItem then
     Exit;
   FParentMenuItem := AValue;
 end;
 
-procedure TfpgMRU.SetShowFullPath(const AValue: boolean);
+procedure TlqMRU.SetShowFullPath(const AValue: boolean);
 begin
   if FShowFullPath <> AValue then
   begin
@@ -125,7 +125,7 @@ begin
   end;
 end;
 
-procedure TfpgMRU.LoadMRU;
+procedure TlqMRU.LoadMRU;
 var
   i: cardinal;
 begin
@@ -140,7 +140,7 @@ begin
   end;
 end;
 
-procedure TfpgMRU.SaveMRU;
+procedure TlqMRU.SaveMRU;
 var
   i: integer;
 begin
@@ -160,13 +160,13 @@ begin
     gINI.WriteString('MRU', 'MRU'+IntToStr(i+1), FItems[i]);
 end;
 
-procedure TfpgMRU.ItemsChange(Sender: TObject);
+procedure TlqMRU.ItemsChange(Sender: TObject);
 var
   i: Integer;
-  NewMenuItem: TfpgMenuItem;
+  NewMenuItem: TlqMenuItem;
   FileName: String;
 begin
-//  writeln('TfpgMRU.ItemsChange');
+//  writeln('TlqMRU.ItemsChange');
   if ParentMenuItem <> nil then
   begin
     ClearParentMenu;
@@ -189,7 +189,7 @@ begin
   end;
 end;
 
-procedure TfpgMRU.ClearParentMenu;
+procedure TlqMRU.ClearParentMenu;
 //var
 //  i:integer;
 begin
@@ -202,7 +202,7 @@ begin
 }
 end;
 
-procedure TfpgMRU.Loaded;
+procedure TlqMRU.Loaded;
 begin
   inherited Loaded;
   if not (csDesigning in ComponentState) then
@@ -210,20 +210,20 @@ begin
       LoadMRU;
 end;
 
-procedure TfpgMRU.Notification(AComponent: TComponent; Operation: TOperation);
+procedure TlqMRU.Notification(AComponent: TComponent; Operation: TOperation);
 begin
   inherited Notification(AComponent, Operation);
   if (Operation = opRemove) and (AComponent = FParentMenuItem) then
     FParentMenuItem := nil;
 end;
 
-procedure TfpgMRU.DoClick(Sender: TObject);
+procedure TlqMRU.DoClick(Sender: TObject);
 begin
   if Assigned(FOnClick) and (Sender is TMRUMenuItem) then
     FOnClick(Self, FItems[TMRUMenuItem(Sender).Tag]);
 end;
 
-constructor TfpgMRU.Create(AOwner: TComponent);
+constructor TlqMRU.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FParentMenuItem := nil;
@@ -234,7 +234,7 @@ begin
 //  Loaded;
 end;
 
-destructor TfpgMRU.Destroy;
+destructor TlqMRU.Destroy;
 begin
   if not (csDesigning in ComponentState) then
     SaveMRU;
@@ -243,7 +243,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgMRU.AddItem(const FileName: string);
+procedure TlqMRU.AddItem(const FileName: string);
 begin
   if FileName <> '' then
   begin
@@ -261,7 +261,7 @@ begin
   end;
 end;
 
-function TfpgMRU.RemoveItem(const FileName: string): boolean;
+function TlqMRU.RemoveItem(const FileName: string): boolean;
 begin
   if FItems.IndexOf(FileName) > -1 then
   begin

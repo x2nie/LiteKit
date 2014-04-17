@@ -34,9 +34,9 @@ uses
 
 type
 
-  TfpgMemo = class(TfpgWidget)
+  TlqMemo = class(TlqWidget)
   private
-    FBorderStyle: TfpgEditBorderStyle;
+    FBorderStyle: TlqEditBorderStyle;
     FLines: TStringList;
     FMaxLength: integer;
     FCursorPos: integer;
@@ -50,22 +50,22 @@ type
     FSelecting: boolean;
     FMouseDragging: boolean;
     FMouseDragPos: integer;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FDrawOffset: integer;
     FLineHeight: integer;
     FFirstLine: integer;
     FTabWidth: integer;
     FUseTabs: boolean;
-    FVScrollBar: TfpgScrollBar;
-    FHScrollBar: TfpgScrollBar;
+    FVScrollBar: TlqScrollBar;
+    FHScrollBar: TlqScrollBar;
     FWrapping: boolean;
-    FLongestLineWidth: TfpgCoord;
-    FPopupMenu: TfpgPopupMenu;
-    FDefaultPopupMenu: TfpgPopupMenu;
+    FLongestLineWidth: TlqCoord;
+    FPopupMenu: TlqPopupMenu;
+    FDefaultPopupMenu: TlqPopupMenu;
     FReadOnly: Boolean;
     FUpdateCount: integer;
     function    GetFontDesc: string;
-    procedure   SetBorderStyle(const AValue: TfpgEditBorderStyle);
+    procedure   SetBorderStyle(const AValue: TlqEditBorderStyle);
     procedure   SetFontDesc(const AValue: string);
     procedure   RecalcLongestLine;
     procedure   DeleteSelection;
@@ -81,8 +81,8 @@ type
     function    VisibleWidth: integer;
     procedure   VScrollBarMove(Sender: TObject; position: integer);
     procedure   HScrollBarMove(Sender: TObject; position: integer);
-    procedure   SetText(const AValue: TfpgString);
-    function    GetText: TfpgString;
+    procedure   SetText(const AValue: TlqString);
+    function    GetText: TlqString;
     procedure   SetCursorLine(aValue: integer);
     procedure   UpdateScrollBarCoords;
     procedure   DefaultPopupCut(Sender: TObject);
@@ -95,10 +95,10 @@ type
     procedure   SetReadOnly(const AValue: Boolean);
     procedure   ResetSelectionVariables;
     procedure   SetCursorPos(const AValue: integer);
-    function    GetSelectionText: TfpgString;
-    procedure   SetSelectionText(const AText: TfpgString);
+    function    GetSelectionText: TlqString;
+    procedure   SetSelectionText(const AText: TlqString);
   protected
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -123,18 +123,18 @@ type
     procedure   EndUpdate;
     property    CursorPos: integer read FCursorPos write SetCursorPos;
     property    CursorLine: integer read FCursorLine write SetCursorLine;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
     property    LineHeight: integer read FLineHeight;
     property    MaxLength: integer read FMaxLength write FMaxLength;
     property    TabWidth: integer read FTabWidth write FTabWidth;
-    property    Text: TfpgString read GetText write SetText;
+    property    Text: TlqString read GetText write SetText;
     property    UseTabs: boolean read FUseTabs write FUseTabs default False;
-    property    PopupMenu: TfpgPopupMenu read FPopupMenu write FPopupMenu;
-    Property    SelectionText : TfpgString Read GetSelectionText Write SetSelectionText;
+    property    PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
+    Property    SelectionText : TlqString Read GetSelectionText Write SetSelectionText;
   published
     property    Align;
     property    BackgroundColor default clBoxColor;
-    property    BorderStyle: TfpgEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
+    property    BorderStyle: TlqEditBorderStyle read FBorderStyle write SetBorderStyle default ebsDefault;
     property    Enabled;
     property    FontDesc: string read GetFontDesc write SetFontDesc;
     property    Hint;
@@ -152,7 +152,7 @@ type
   end;
 
 
-function CreateMemo(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgMemo;
+function CreateMemo(AOwner: TComponent; x, y, w, h: TlqCoord): TlqMemo;
 
 
 implementation
@@ -174,47 +174,47 @@ const
 
 type
   // custom stringlist that will notify the memo of item changes
-  TfpgMemoStrings = class(TStringList)
+  TlqMemoStrings = class(TStringList)
   protected
-    Memo: TfpgMemo;  { this is just a reference }
+    Memo: TlqMemo;  { this is just a reference }
   public
-    constructor Create(AMemo: TfpgMemo); reintroduce;
+    constructor Create(AMemo: TlqMemo); reintroduce;
     function    Add(const s: String): Integer; override;
     procedure   Clear; override;
     procedure   Delete(Index: Integer); override;
     procedure   Insert(Index: Integer; const S: string); override;
   end;
 
-{ TfpgMemoStrings }
+{ TlqMemoStrings }
 
-constructor TfpgMemoStrings.Create(AMemo: TfpgMemo);
+constructor TlqMemoStrings.Create(AMemo: TlqMemo);
 begin
   inherited Create;
   Memo := AMemo;
 end;
 
-function TfpgMemoStrings.Add(const s: String): Integer;
+function TlqMemoStrings.Add(const s: String): Integer;
 begin
   Memo.BeginUpdate;
   Result := inherited Add(s);
   Memo.EndUpdate;
 end;
 
-procedure TfpgMemoStrings.Delete(Index: Integer);
+procedure TlqMemoStrings.Delete(Index: Integer);
 begin
   Memo.BeginUpdate;
   inherited Delete(Index);
   Memo.EndUpdate;
 end;
 
-procedure TfpgMemoStrings.Insert(Index: Integer; const S: string);
+procedure TlqMemoStrings.Insert(Index: Integer; const S: string);
 begin
   Memo.BeginUpdate;
   inherited Insert(Index, S);
   Memo.EndUpdate;
 end;
 
-procedure TfpgMemoStrings.Clear;
+procedure TlqMemoStrings.Clear;
 begin
   if Assigned(Memo) then
     Memo.BeginUpdate;
@@ -224,12 +224,12 @@ begin
 end;
 
 
-{ TfpgMemo }
+{ TlqMemo }
 
 
-function CreateMemo(AOwner: TComponent; x, y, w, h: TfpgCoord): TfpgMemo;
+function CreateMemo(AOwner: TComponent; x, y, w, h: TlqCoord): TlqMemo;
 begin
-  Result       := TfpgMemo.Create(AOwner);
+  Result       := TlqMemo.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   Result.Width := w;
@@ -238,7 +238,7 @@ begin
 end;
 
 
-procedure TfpgMemo.SetCursorLine(aValue: integer);
+procedure TlqMemo.SetCursorLine(aValue: integer);
 var
   i: integer;
   MaxLine: integer;
@@ -293,7 +293,7 @@ begin
   end;
 end;
 
-procedure TfpgMemo.UpdateScrollBarCoords;
+procedure TlqMemo.UpdateScrollBarCoords;
 var
   HWidth: integer;
   VHeight: integer;
@@ -318,37 +318,37 @@ begin
   FHScrollBar.UpdateWindowPosition;
 end;
 
-procedure TfpgMemo.DefaultPopupCut(Sender: TObject);
+procedure TlqMemo.DefaultPopupCut(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   CutToClipboard;
 end;
 
-procedure TfpgMemo.DefaultPopupCopy(Sender: TObject);
+procedure TlqMemo.DefaultPopupCopy(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   CopyToClipboard;
 end;
 
-procedure TfpgMemo.DefaultPopupPaste(Sender: TObject);
+procedure TlqMemo.DefaultPopupPaste(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   PasteFromClipboard;
 end;
 
-procedure TfpgMemo.DefaultPopupClearAll(Sender: TObject);
+procedure TlqMemo.DefaultPopupClearAll(Sender: TObject);
 begin
   if ReadOnly then
     Exit;
   Clear;
 end;
 
-procedure TfpgMemo.DefaultPopupInsertFromCharmap(Sender: TObject);
+procedure TlqMemo.DefaultPopupInsertFromCharmap(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   if ReadOnly then
     Exit;
@@ -357,10 +357,10 @@ begin
     SetSelectionText(s);
 end;
 
-procedure TfpgMemo.SetDefaultPopupMenuItemsState;
+procedure TlqMemo.SetDefaultPopupMenuItemsState;
 var
   i: integer;
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
   b: boolean;
 
   function SomethingSelected: boolean;
@@ -372,9 +372,9 @@ begin
   b := SomethingSelected;
   for i := 0 to FDefaultPopupMenu.ComponentCount-1 do
   begin
-    if FDefaultPopupMenu.Components[i] is TfpgMenuItem then
+    if FDefaultPopupMenu.Components[i] is TlqMenuItem then
     begin
-      itm := TfpgMenuItem(FDefaultPopupMenu.Components[i]);
+      itm := TlqMenuItem(FDefaultPopupMenu.Components[i]);
       // enabled/disable menu items
       if itm.Name = ipmCut then
         itm.Enabled := (not ReadOnly) and b
@@ -390,14 +390,14 @@ begin
   end;
 end;
 
-procedure TfpgMemo.ShowDefaultPopupMenu(const x, y: integer;
+procedure TlqMemo.ShowDefaultPopupMenu(const x, y: integer;
   const shiftstate: TShiftState);
 var
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
   if not Assigned(FDefaultPopupMenu) then
   begin
-    FDefaultPopupMenu := TfpgPopupMenu.Create(nil);
+    FDefaultPopupMenu := TlqPopupMenu.Create(nil);
     itm := FDefaultPopupMenu.AddMenuItem(rsCut, '', @DefaultPopupCut);
     itm.Name := ipmCut;
     itm := FDefaultPopupMenu.AddMenuItem(rsCopy, '', @DefaultPopupCopy);
@@ -416,14 +416,14 @@ begin
   FDefaultPopupMenu.ShowAt(self, x, y);
 end;
 
-procedure TfpgMemo.SetReadOnly(const AValue: Boolean);
+procedure TlqMemo.SetReadOnly(const AValue: Boolean);
 begin
   if FReadOnly = AValue then exit;
   FReadOnly := AValue;
   RePaint;
 end;
 
-procedure TfpgMemo.ResetSelectionVariables;
+procedure TlqMemo.ResetSelectionVariables;
 begin
   FSelecting      := False;
   FSelStartPos    := FCursorPos;
@@ -433,7 +433,7 @@ begin
   FMouseDragging  := False;
 end;
 
-procedure TfpgMemo.SetCursorPos(const AValue: integer);
+procedure TlqMemo.SetCursorPos(const AValue: integer);
 var
   x: integer;
 begin
@@ -456,7 +456,7 @@ begin
   Repaint;
 end;
 
-constructor TfpgMemo.Create(AOwner: TComponent);
+constructor TlqMemo.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable   := True;
@@ -480,7 +480,7 @@ begin
   FUpdateCount := 0;
   FBorderStyle := ebsDefault;
 
-  FLines      := TfpgMemoStrings.Create(self);
+  FLines      := TlqMemoStrings.Create(self);
   FFirstLine  := 0;
   FCursorLine := 0;
 
@@ -488,31 +488,31 @@ begin
 
   FDrawOffset    := 0;
 
-  FVScrollBar          := TfpgScrollBar.Create(self);
+  FVScrollBar          := TlqScrollBar.Create(self);
   FVScrollBar.Orientation := orVertical;
   FVScrollBar.OnScroll := @VScrollBarMove;
   FVScrollBar.Visible  := False;
 
-  FHScrollBar          := TfpgScrollBar.Create(self);
+  FHScrollBar          := TlqScrollBar.Create(self);
   FHScrollBar.Orientation := orHorizontal;
   FHScrollBar.OnScroll := @HScrollBarMove;
   FHScrollBar.ScrollStep := 5;
   FHScrollBar.Visible  := False;
 end;
 
-destructor TfpgMemo.Destroy;
+destructor TlqMemo.Destroy;
 begin
   if Assigned(FDefaultPopupMenu) then
     FDefaultPopupMenu.Free;
-  TfpgMemoStrings(FLines).Free;
+  TlqMemoStrings(FLines).Free;
   FFont.Free;
   inherited Destroy;
 end;
 
-procedure TfpgMemo.RecalcLongestLine;
+procedure TlqMemo.RecalcLongestLine;
 var
   n: integer;
-  lw: TfpgCoord;
+  lw: TlqCoord;
 begin
   FLongestLineWidth := 0;
   for n := 0 to LineCount-1 do
@@ -523,12 +523,12 @@ begin
   end;
 end;
 
-function TfpgMemo.GetFontDesc: string;
+function TlqMemo.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgMemo.SetBorderStyle(const AValue: TfpgEditBorderStyle);
+procedure TlqMemo.SetBorderStyle(const AValue: TlqEditBorderStyle);
 begin
   if FBorderStyle = AValue then
     exit;
@@ -536,7 +536,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgMemo.DeleteSelection;
+procedure TlqMemo.DeleteSelection;
 var
   n: integer;
   selsl: integer;
@@ -603,7 +603,7 @@ begin
   FSelEndLine := -1;
 end;
 
-procedure TfpgMemo.DoCopy;
+procedure TlqMemo.DoCopy;
 begin
   if FSelEndLine < 0 then
     Exit;
@@ -611,12 +611,12 @@ begin
   fpgClipboard.Text := SelectionText;
 end;
 
-procedure TfpgMemo.SetSelectionText(const AText: TfpgString);
+procedure TlqMemo.SetSelectionText(const AText: TlqString);
 var
-  s: TfpgString;
-  si: TfpgString;       { beginning of line to cursor }
-  si8: TfpgString;
-  lineend: TfpgString;  { from cursor to end of line }
+  s: TlqString;
+  si: TlqString;       { beginning of line to cursor }
+  si8: TlqString;
+  lineend: TlqString;  { from cursor to end of line }
   n: integer;
   l: integer;
   lcnt: integer;
@@ -680,7 +680,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgMemo.AdjustCursor;
+procedure TlqMemo.AdjustCursor;
 var
   tw: integer;
 begin
@@ -713,7 +713,7 @@ begin
   UpdateScrollbars;
 end;
 
-procedure TfpgMemo.UpdateScrollBars;
+procedure TlqMemo.UpdateScrollBars;
 var
   vlines: integer;
   vsbw: integer;
@@ -778,12 +778,12 @@ begin
     AdjustCursor;
 end;
 
-function TfpgMemo.LineCount: integer;
+function TlqMemo.LineCount: integer;
 begin
   Result := FLines.Count;
 end;
 
-function TfpgMemo.GetLineText(linenum: integer): string;
+function TlqMemo.GetLineText(linenum: integer): string;
 begin
   if LineCount = 0 then
     FLines.Add('');
@@ -793,25 +793,25 @@ begin
     Result := '';
 end;
 
-procedure TfpgMemo.SetFontDesc(const AValue: string);
+procedure TlqMemo.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   RePaint;
 end;
 
-procedure TfpgMemo.SetLineText(linenum: integer; Value: string);
+procedure TlqMemo.SetLineText(linenum: integer; Value: string);
 begin
   FLines.Strings[linenum] := Value;
 end;
 
-function TfpgMemo.GetCursorX: integer;
+function TlqMemo.GetCursorX: integer;
 begin
   Result := FFont.TextWidth(copy(CurrentLine, 1, FCursorPos));
 end;
 
 // Set cursor position by X
-procedure TfpgMemo.SetCPByX(x: integer);
+procedure TlqMemo.SetCPByX(x: integer);
 var
   n: integer;
   cpx: integer;
@@ -839,12 +839,12 @@ begin
   FCursorPos := cp;
 end;
 
-function TfpgMemo.CurrentLine: string;
+function TlqMemo.CurrentLine: string;
 begin
   Result := GetLineText(FCursorLine);
 end;
 
-function TfpgMemo.VisibleLines: integer;
+function TlqMemo.VisibleLines: integer;
 var
   sh: integer;
 begin
@@ -855,7 +855,7 @@ begin
   Result := (Height - (FSideMargin shl 1) - sh) div Lineheight;
 end;
 
-function TfpgMemo.VisibleWidth: integer;
+function TlqMemo.VisibleWidth: integer;
 var
   sw: integer;
 begin
@@ -866,7 +866,7 @@ begin
   Result := (Width - (FSideMargin shl 1) - sw);
 end;
 
-procedure TfpgMemo.HandleShow;
+procedure TlqMemo.HandleShow;
 begin
   inherited HandleShow;
   if (csLoading in ComponentState) then
@@ -876,31 +876,31 @@ begin
   UpdateScrollBarCoords;
 end;
 
-procedure TfpgMemo.HandleMouseEnter;
+procedure TlqMemo.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   MouseCursor := mcIBeam;
 end;
 
-procedure TfpgMemo.HandleMouseExit;
+procedure TlqMemo.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   MouseCursor := mcDefault;
 end;
 
-procedure TfpgMemo.HandleHide;
+procedure TlqMemo.HandleHide;
 begin
   fpgCaret.UnSetCaret(Canvas);
   inherited;
 end;
 
-procedure TfpgMemo.RePaint;
+procedure TlqMemo.RePaint;
 begin
   if FUpdateCount <= 0 then
     inherited RePaint;
 end;
 
-procedure TfpgMemo.VScrollBarMove(Sender: TObject; position: integer);
+procedure TlqMemo.VScrollBarMove(Sender: TObject; position: integer);
 begin
   if FFirstLine <> position then
   begin
@@ -909,7 +909,7 @@ begin
   end;
 end;
 
-procedure TfpgMemo.HScrollBarMove(Sender: TObject; position: integer);
+procedure TlqMemo.HScrollBarMove(Sender: TObject; position: integer);
 begin
   if position <> FDrawOffset then
   begin
@@ -918,13 +918,13 @@ begin
   end;
 end;
 
-procedure TfpgMemo.HandlePaint;
+procedure TlqMemo.HandlePaint;
 var
   n: integer;
   tw, tw2, st, len: integer;
   yp, xp: integer;
   ls: string;
-  r: TfpgRect;
+  r: TlqRect;
   selsl, selsp, selel, selep: integer;
   c: integer;
   s: string;
@@ -1052,7 +1052,7 @@ begin
   end;
 end;
 
-procedure TfpgMemo.HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqMemo.HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: boolean);
 var
   prevval: string;
   s: string;
@@ -1096,7 +1096,7 @@ begin
     RePaint;
 end;
 
-procedure TfpgMemo.HandleKeyPress(var keycode: word;
+procedure TlqMemo.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   cx: integer;
@@ -1345,7 +1345,7 @@ begin
       FOnChange(self);
 end;
 
-procedure TfpgMemo.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqMemo.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   n: integer;
   cpx: integer;
@@ -1397,7 +1397,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgMemo.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqMemo.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
   if Assigned(PopupMenu) then
@@ -1406,7 +1406,7 @@ begin
     ShowDefaultPopupMenu(x, y, ShiftState);
 end;
 
-procedure TfpgMemo.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqMemo.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   n: integer;
   cpx: integer;
@@ -1479,7 +1479,7 @@ begin
 end;
 
 (*
-procedure TfpgMemo.HandleWindowScroll(direction, amount: integer);
+procedure TlqMemo.HandleWindowScroll(direction, amount: integer);
 var
   pfl, pdo : integer;
 begin
@@ -1523,7 +1523,7 @@ begin
 end;
 *)
 
-procedure TfpgMemo.HandleResize(dwidth, dheight: integer);
+procedure TlqMemo.HandleResize(dwidth, dheight: integer);
 begin
   inherited HandleResize(dwidth, dheight);
   if (csLoading in ComponentState) then
@@ -1532,7 +1532,7 @@ begin
   UpdateScrollBars;
 end;
 
-procedure TfpgMemo.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
+procedure TlqMemo.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
   delta: smallint);
 var
   pfl, pdo : integer;
@@ -1567,7 +1567,7 @@ begin
   end;
 end;
 
-function TfpgMemo.GetSelectionText: TfpgString;
+function TlqMemo.GetSelectionText: TlqString;
 var
   n: integer;
   selsl: integer;
@@ -1577,7 +1577,7 @@ var
   ls: string;
   len: integer;
   st: integer;
-  s: TfpgString;
+  s: TlqString;
 begin
   if FSelEndLine = -1 then { no text is selected }
   begin
@@ -1624,12 +1624,12 @@ begin
   Result := s;
 end;
 
-procedure TfpgMemo.CopyToClipboard;
+procedure TlqMemo.CopyToClipboard;
 begin
   DoCopy;
 end;
 
-procedure TfpgMemo.CutToClipboard;
+procedure TlqMemo.CutToClipboard;
 begin
   DoCopy;
   DeleteSelection;
@@ -1638,12 +1638,12 @@ begin
   RePaint;
 end;
 
-procedure TfpgMemo.PasteFromClipboard;
+procedure TlqMemo.PasteFromClipboard;
 begin
   SetSelectionText(fpgClipboard.Text);
 end;
 
-procedure TfpgMemo.Clear;
+procedure TlqMemo.Clear;
 begin
   FLines.Clear;
   { not sure if all of these are required }
@@ -1659,12 +1659,12 @@ begin
   Repaint;
 end;
 
-procedure TfpgMemo.BeginUpdate;
+procedure TlqMemo.BeginUpdate;
 begin
   Inc(FUpdateCount);
 end;
 
-procedure TfpgMemo.EndUpdate;
+procedure TlqMemo.EndUpdate;
 begin
   Dec(FUpdateCount);
   if FUpdateCount <= 0 then
@@ -1674,10 +1674,10 @@ begin
   end;
 end;
 
-function TfpgMemo.GetText: TfpgString;
+function TlqMemo.GetText: TlqString;
 var
   n: integer;
-  s: TfpgString;
+  s: TlqString;
 begin
   s := '';
   for n := 0 to LineCount-1 do
@@ -1689,11 +1689,11 @@ begin
   Result := s;
 end;
 
-procedure TfpgMemo.SetText(const AValue: TfpgString);
+procedure TlqMemo.SetText(const AValue: TlqString);
 var
   n: integer;
-  c: TfpgChar;
-  s: TfpgString;
+  c: TlqChar;
+  s: TlqString;
 begin
   FLines.Clear;
   s := '';

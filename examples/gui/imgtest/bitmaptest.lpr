@@ -1,5 +1,5 @@
 {
-  This demo shows how you can manipulate the data of a TfpgImage
+  This demo shows how you can manipulate the data of a TlqImage
   directly.
 }
 program bitmaptest;
@@ -16,9 +16,9 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    img: TfpgImage;
+    img: TlqImage;
     procedure   FormPaint(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
@@ -34,7 +34,7 @@ var
 begin
   if not Assigned(img) then // we only need to create the image once
   begin
-    img := TfpgImage.Create;
+    img := TlqImage.Create;
     img.AllocateImage(32, 256, 256);
     // populate the bitmap with pretty colors :-)
     for j := 0 to 255 do

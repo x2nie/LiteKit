@@ -19,11 +19,11 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    FGrid: TfpgFileGrid;
-    chkShowHidden: TfpgCheckBox;
-    btnQuit: TfpgButton;
+    FGrid: TlqFileGrid;
+    chkShowHidden: TlqCheckBox;
+    btnQuit: TlqButton;
     procedure   chkShowHiddenChanged(Sender: TObject);
     procedure   btnQuitClicked(Sender: TObject);
     procedure   GridDblClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
@@ -63,7 +63,7 @@ begin
   WindowTitle := 'Filegrid Test';
   SetPosition(100, 100, 620, 400);
   
-  FGrid := TfpgFileGrid.Create(self);
+  FGrid := TlqFileGrid.Create(self);
   FGrid.SetPosition(8, 8, 600, 360);
   FGrid.FileList.ShowHidden := True;
   FGrid.FileList.ReadDirectory('');

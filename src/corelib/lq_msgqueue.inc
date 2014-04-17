@@ -1,4 +1,4 @@
-{%mainunit fpg_main.pas}
+{%mainunit lq_main.pas}
 
 // fpGUI internal message queue implementation
 
@@ -9,7 +9,7 @@ type
     Next: TMessageListElement;
     Prev: TMessageListElement;
   public
-    msg: TfpgMessageRec;
+    msg: TlqMessageRec;
   end;
 
 var
@@ -117,7 +117,7 @@ begin
   end;
 end;
 
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TfpgMessageParams); overload;
+procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 var
   p: PfpgMessageRec;
 begin
@@ -164,9 +164,9 @@ begin
   end;
 end;
 
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TfpgMessageParams); overload;
+procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 var
-  m: TfpgMessageRec;
+  m: TlqMessageRec;
 begin
   if Dest = nil then
     Exit; //==>
@@ -181,7 +181,7 @@ end;
 
 procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
 var
-  m: TfpgMessageRec;
+  m: TlqMessageRec;
 begin
   if Dest = nil then
     Exit; //==>
@@ -193,7 +193,7 @@ begin
   fpgDeliverMessage(m);
 end;
 
-procedure fpgDeliverMessage(var msg: TfpgMessageRec);
+procedure fpgDeliverMessage(var msg: TlqMessageRec);
 var
   oItem: TMsgHookItem;
   i: integer;
@@ -218,7 +218,7 @@ end;
 procedure fpgDeliverMessages;
 var
   mp: PfpgMessageRec;
-  m: TfpgMessageRec;
+  m: TlqMessageRec;
 begin
   repeat
     mp := fpgGetFirstMessage;

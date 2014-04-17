@@ -18,27 +18,27 @@ uses
   lq_memo;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    FMenuBar: TfpgMenuBar;
-    StatusBar: TfpgPanel;
-    Toolbar: TfpgBevel;
-    btnQuit: TfpgButton;
-    btnSave: TfpgButton;
-    btnOpen: TfpgButton;
-    btnAbout: TfpgButton;
-    pnlClient: TfpgBevel;
-    edit1: TfpgEdit;
-    Memo1: TfpgMemo;
-    FFileSubMenu: TfpgPopupMenu;
-    FEditSubMenu: TfpgPopupMenu;
-    FEditSelectSubMenu: TfpgPopupMenu;
-    FViewSubMenu: TfpgPopupMenu;
-    FDisabledSubMenu: TfpgPopupMenu;
-    FHelpSubMenu: TfpgPopupMenu;
-    Bevel1: TfpgBevel;
-    Bevel2: TfpgBevel;
+    FMenuBar: TlqMenuBar;
+    StatusBar: TlqPanel;
+    Toolbar: TlqBevel;
+    btnQuit: TlqButton;
+    btnSave: TlqButton;
+    btnOpen: TlqButton;
+    btnAbout: TlqButton;
+    pnlClient: TlqBevel;
+    edit1: TlqEdit;
+    Memo1: TlqMemo;
+    FFileSubMenu: TlqPopupMenu;
+    FEditSubMenu: TlqPopupMenu;
+    FEditSelectSubMenu: TlqPopupMenu;
+    FViewSubMenu: TlqPopupMenu;
+    FDisabledSubMenu: TlqPopupMenu;
+    FHelpSubMenu: TlqPopupMenu;
+    Bevel1: TlqBevel;
+    Bevel2: TlqBevel;
     {@VFD_HEAD_END: MainForm}
     procedure   miExitClicked(Sender: TObject);
     procedure   miMenuItemSelected(Sender: TObject);
@@ -46,7 +46,7 @@ type
     procedure   miToolBarChecked(Sender: TObject);
     procedure   miStatusBarChecked(Sender: TObject);
     procedure   btnAboutClicked(Sender: TObject);
-    procedure   Log(const AText: TfpgString);
+    procedure   Log(const AText: TlqString);
   public
     procedure   AfterCreate; override;
   end;
@@ -61,19 +61,19 @@ end;
 
 procedure TMainForm.miMenuItemSelected(Sender: TObject);
 begin
-  if Sender is TfpgMenuItem then
-    Log('Menu clicked: ' + TfpgMenuItem(Sender).Text);
+  if Sender is TlqMenuItem then
+    Log('Menu clicked: ' + TlqMenuItem(Sender).Text);
 end;
 
 procedure TMainForm.miMenuItemChecked(Sender: TObject);
 begin
-  TfpgMenuItem(Sender).Checked := not TfpgMenuItem(Sender).Checked;
+  TlqMenuItem(Sender).Checked := not TlqMenuItem(Sender).Checked;
   Log('Check Menu item toggled');
 end;
 
 procedure TMainForm.miToolBarChecked(Sender: TObject);
 begin
-  TfpgMenuItem(Sender).Checked := not TfpgMenuItem(Sender).Checked;
+  TlqMenuItem(Sender).Checked := not TlqMenuItem(Sender).Checked;
   ToolBar.Visible := not ToolBar.Visible;
   Realign;
   Log('Check Menu for Toolbar toggled');
@@ -81,7 +81,7 @@ end;
 
 procedure TMainForm.miStatusBarChecked(Sender: TObject);
 begin
-  TfpgMenuItem(Sender).Checked := not TfpgMenuItem(Sender).Checked;
+  TlqMenuItem(Sender).Checked := not TlqMenuItem(Sender).Checked;
   StatusBar.Visible := not StatusBar.Visible;
   Realign;
   Log('Check Menu for Statusbar toggled');
@@ -89,17 +89,17 @@ end;
 
 procedure TMainForm.btnAboutClicked(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui;
+  TlqMessageDialog.AbouTlqui;
 end;
 
-procedure TMainForm.Log(const AText: TfpgString);
+procedure TMainForm.Log(const AText: TlqString);
 begin
   Memo1.Lines.Add(AText);
 end;
 
 procedure TMainForm.AfterCreate;
 var
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   {%region 'Auto-generated GUI code' -fold}
   {@VFD_BODY_BEGIN: MainForm}
@@ -111,7 +111,7 @@ begin
   MinWidth := 300;
   MinHeight := 100;
 
-  FMenuBar := TfpgMenuBar.Create(self);
+  FMenuBar := TlqMenuBar.Create(self);
   with FMenuBar do
   begin
     Name := 'FMenuBar';
@@ -119,7 +119,7 @@ begin
     Align := alTop;
   end;
 
-  StatusBar := TfpgPanel.Create(self);
+  StatusBar := TlqPanel.Create(self);
   with StatusBar do
   begin
     Name := 'StatusBar';
@@ -132,7 +132,7 @@ begin
     Align := alBottom;
   end;
 
-  Toolbar := TfpgBevel.Create(self);
+  Toolbar := TlqBevel.Create(self);
   with Toolbar do
   begin
     Name := 'Toolbar';
@@ -143,7 +143,7 @@ begin
     Align := alTop;
   end;
 
-  btnQuit := TfpgButton.Create(Toolbar);
+  btnQuit := TlqButton.Create(Toolbar);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -159,7 +159,7 @@ begin
     Focusable := False;
   end;
 
-  btnSave := TfpgButton.Create(Toolbar);
+  btnSave := TlqButton.Create(Toolbar);
   with btnSave do
   begin
     Name := 'btnSave';
@@ -174,7 +174,7 @@ begin
     Focusable := False;
   end;
 
-  btnOpen := TfpgButton.Create(Toolbar);
+  btnOpen := TlqButton.Create(Toolbar);
   with btnOpen do
   begin
     Name := 'btnOpen';
@@ -189,7 +189,7 @@ begin
     Focusable := False;
   end;
 
-  btnAbout := TfpgButton.Create(Toolbar);
+  btnAbout := TlqButton.Create(Toolbar);
   with btnAbout do
   begin
     Name := 'btnAbout';
@@ -205,7 +205,7 @@ begin
     Focusable := False;
   end;
 
-  pnlClient := TfpgBevel.Create(self);
+  pnlClient := TlqBevel.Create(self);
   with pnlClient do
   begin
     Name := 'pnlClient';
@@ -215,7 +215,7 @@ begin
     Align := alClient;
   end;
 
-  edit1 := TfpgEdit.Create(pnlClient);
+  edit1 := TlqEdit.Create(pnlClient);
   with edit1 do
   begin
     Name := 'edit1';
@@ -227,7 +227,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  Memo1 := TfpgMemo.Create(pnlClient);
+  Memo1 := TlqMemo.Create(pnlClient);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -239,7 +239,7 @@ begin
     TabOrder := 10;
   end;
 
-  FFileSubMenu := TfpgPopupMenu.Create(self);
+  FFileSubMenu := TlqPopupMenu.Create(self);
   with FFileSubMenu do
   begin
     Name := 'FFileSubMenu';
@@ -253,7 +253,7 @@ begin
     AddMenuItem('&Quit', 'Ctrl-Q', @miExitClicked);
   end;
 
-  FEditSubMenu := TfpgPopupMenu.Create(self);
+  FEditSubMenu := TlqPopupMenu.Create(self);
   with FEditSubMenu do
   begin
     Name := 'FEditSubMenu';
@@ -265,7 +265,7 @@ begin
     AddMenuItem('&Spell check', 'F4', @miMenuItemSelected).Enabled := False;
   end;
 
-  FEditSelectSubMenu := TfpgPopupMenu.Create(self);
+  FEditSelectSubMenu := TlqPopupMenu.Create(self);
   with FEditSelectSubMenu do
   begin
     Name := 'FEditSelectSubMenu';
@@ -276,7 +276,7 @@ begin
     FEditSubMenu.AddMenuItem('Selec&t', '', nil).SubMenu := FEditSelectSubMenu;
   end;
 
-  FViewSubMenu := TfpgPopupMenu.Create(self);
+  FViewSubMenu := TlqPopupMenu.Create(self);
   with FViewSubMenu do
   begin
     Name := 'FViewSubMenu';
@@ -287,7 +287,7 @@ begin
     AddMenuItem('Line Numbers', '', @miMenuItemChecked);
   end;
 
-  FHelpSubMenu := TfpgPopupMenu.Create(self);
+  FHelpSubMenu := TlqPopupMenu.Create(self);
   with FHelpSubMenu do
   begin
     Name := 'FHelpSubMenu';
@@ -296,7 +296,7 @@ begin
     AddMenuItem('Test Russian text -> Òåñò', '', @miMenuItemSelected);
   end;
 
-  FDisabledSubMenu := TfpgPopupMenu.Create(self);
+  FDisabledSubMenu := TlqPopupMenu.Create(self);
   with FDisabledSubMenu do
   begin
     Name := 'FDisabledSubMenu';
@@ -304,7 +304,7 @@ begin
     AddMenuItem('I''m not enabled', '', nil);
   end;
 
-  Bevel1 := TfpgBevel.Create(Toolbar);
+  Bevel1 := TlqBevel.Create(Toolbar);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -314,7 +314,7 @@ begin
     Shape := bsLeftLine;
   end;
 
-  Bevel2 := TfpgBevel.Create(Toolbar);
+  Bevel2 := TlqBevel.Create(Toolbar);
   with Bevel2 do
   begin
     Name := 'Bevel2';

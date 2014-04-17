@@ -1,21 +1,21 @@
-{%mainunit fpg_utils.pas}
+{%mainunit lq_utils.pas}
 
 uses
-  Unix, BaseUnix, fpg_constants, fpg_stringutils;
+  Unix, BaseUnix, lq_constants, lq_stringutils;
 
 // X11 specific filesystem implementations of encoding functions
 
-function fpgToOSEncoding(aString: TfpgString): string;
+function fpgToOSEncoding(aString: TlqString): string;
 begin
   Result := aString;
 end;
 
-function fpgFromOSEncoding(aString: string): TfpgString;
+function fpgFromOSEncoding(aString: string): TlqString;
 begin
   Result := aString;
 end;
 
-procedure fpgOpenURL(const aURL: TfpgString);
+procedure fpgOpenURL(const aURL: TlqString);
 var
   Helper: string;
 begin
@@ -44,7 +44,7 @@ begin
     fpSystem(Helper + ' ' + aURL + '&');
 end;
 
-function fpgFileSize(const AFilename: TfpgString): integer;
+function fpgFileSize(const AFilename: TlqString): integer;
 var
   st: baseunix.stat;
 begin

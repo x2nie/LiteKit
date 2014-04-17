@@ -21,8 +21,8 @@ program HelloWorld;
 
 uses
   Classes,
-  fpg_base,
-  fpg_main;
+  lq_base,
+  lq_main;
 
 const
   HelloWorldString: String = 'Hello, world!';
@@ -31,12 +31,12 @@ const
 
 type
 
-  TMainWindow = class(TfpgWindow)
+  TMainWindow = class(TlqWindow)
   private
-    procedure   MsgPaint(var msg: TfpgMessageRec); message FPGM_PAINT;
-    procedure   MsgClose(var msg: TfpgMessageRec); message FPGM_CLOSE;
-    procedure   MsgResize(var msg: TfpgMessageRec); message FPGM_RESIZE;
-    procedure   MsgMouseUp(var msg: TfpgMessageRec); message FPGM_MOUSEUP;
+    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
+    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
+    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   Show;
@@ -60,11 +60,11 @@ begin
   SetWindowTitle('fpGUI Hello World');
 end;
 
-procedure TMainWindow.MsgPaint(var msg: TfpgMessageRec);
+procedure TMainWindow.MsgPaint(var msg: TlqMessageRec);
 var
-  r: TfpgRect;
+  r: TlqRect;
   i: Integer;
-  fnt: TfpgFont;
+  fnt: TlqFont;
 begin
   Canvas.BeginDraw;  // begin double buffering
 
@@ -98,19 +98,19 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TMainWindow.MsgClose(var msg: TfpgMessageRec);
+procedure TMainWindow.MsgClose(var msg: TlqMessageRec);
 begin
   ReleaseWindowHandle;
   fpgApplication.Terminate;
 end;
 
-procedure TMainWindow.MsgResize(var msg: TfpgMessageRec);
+procedure TMainWindow.MsgResize(var msg: TlqMessageRec);
 begin
   FWidth  := msg.Params.rect.Width;
   FHeight := msg.Params.rect.Height;
 end;
 
-procedure TMainWindow.MsgMouseUp(var msg: TfpgMessageRec);
+procedure TMainWindow.MsgMouseUp(var msg: TlqMessageRec);
 begin
   MsgClose(msg);
 end;

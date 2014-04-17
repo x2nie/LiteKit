@@ -23,24 +23,24 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnQuit: TfpgButton;
-    stringgrid: TfpgStringGrid;
-    chkShowHeader: TfpgCheckBox;
-    chkShowGrid: TfpgCheckBox;
-    chkRowSelect: TfpgCheckBox;
-    chkDisabled: TfpgCheckBox;
-    chkHideFocus: TfpgCheckBox;
-    edtTopRow: TfpgEditInteger;
-    btnTopRow: TfpgButton;
-    btnAddFive: TfpgButton;
-    btnAddOne: TfpgButton;
-    btnFiveOnly: TfpgButton;
-    btnDelRow: TfpgButton;
-    chkSmoothScroll: TfpgCheckBox;
-    chkAlterColor: TfpgCheckBox;
+    btnQuit: TlqButton;
+    stringgrid: TlqStringGrid;
+    chkShowHeader: TlqCheckBox;
+    chkShowGrid: TlqCheckBox;
+    chkRowSelect: TlqCheckBox;
+    chkDisabled: TlqCheckBox;
+    chkHideFocus: TlqCheckBox;
+    edtTopRow: TlqEditInteger;
+    btnTopRow: TlqButton;
+    btnAddFive: TlqButton;
+    btnAddOne: TlqButton;
+    btnFiveOnly: TlqButton;
+    btnDelRow: TlqButton;
+    chkSmoothScroll: TlqCheckBox;
+    chkAlterColor: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure   StringGridDoubleClicked(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
     procedure   btnAddFiveClicked(Sender: TObject);
@@ -56,7 +56,7 @@ type
     procedure   chkAlterColorChange(Sender: TObject);
     procedure   btnQuitClick(Sender: TObject);
     procedure   stringgridDrawCell(Sender: TObject; const ARow, ACol: Integer;
-        const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+        const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure   btnTopRowClicked(Sender: TObject);
   public
     procedure   AfterCreate; override;
@@ -148,7 +148,7 @@ begin
 end;
 
 procedure TMainForm.stringgridDrawCell(Sender: TObject; const ARow,
-  ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState;
+  ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState;
   var ADefaultDrawing: boolean);
 begin
   if (ACol = 1) and (ARow = 3) then
@@ -196,7 +196,7 @@ begin
   MinWidth := 200;
   MinHeight := 200;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -210,7 +210,7 @@ begin
     OnClick := @btnQuitClick;
   end;
 
-  stringgrid := TfpgStringGrid.Create(self);
+  stringgrid := TlqStringGrid.Create(self);
   with stringgrid do
   begin
     Name := 'stringgrid';
@@ -246,7 +246,7 @@ begin
     OnDoubleClick := @StringGridDoubleClicked;
   end;
 
-  chkShowHeader := TfpgCheckBox.Create(self);
+  chkShowHeader := TlqCheckBox.Create(self);
   with chkShowHeader do
   begin
     Name := 'chkShowHeader';
@@ -260,7 +260,7 @@ begin
     OnChange := @chkShowHeaderChange;
   end;
 
-  chkShowGrid := TfpgCheckBox.Create(self);
+  chkShowGrid := TlqCheckBox.Create(self);
   with chkShowGrid do
   begin
     Name := 'chkShowGrid';
@@ -274,7 +274,7 @@ begin
     OnChange := @chkShowGridChange;
   end;
 
-  chkRowSelect := TfpgCheckBox.Create(self);
+  chkRowSelect := TlqCheckBox.Create(self);
   with chkRowSelect do
   begin
     Name := 'chkRowSelect';
@@ -287,7 +287,7 @@ begin
     OnChange := @chkRowSelectChange;
   end;
 
-  chkDisabled := TfpgCheckBox.Create(self);
+  chkDisabled := TlqCheckBox.Create(self);
   with chkDisabled do
   begin
     Name := 'chkDisabled';
@@ -300,7 +300,7 @@ begin
     OnChange := @chkDisabledChange;
   end;
 
-  chkHideFocus := TfpgCheckBox.Create(self);
+  chkHideFocus := TlqCheckBox.Create(self);
   with chkHideFocus do
   begin
     Name := 'chkHideFocus';
@@ -313,7 +313,7 @@ begin
     OnChange := @chkHideFocusChange;
   end;
 
-  edtTopRow := TfpgEditInteger.Create(self);
+  edtTopRow := TlqEditInteger.Create(self);
   with edtTopRow do
   begin
     Name := 'edtTopRow';
@@ -325,7 +325,7 @@ begin
     Value := 0;
   end;
 
-  btnTopRow := TfpgButton.Create(self);
+  btnTopRow := TlqButton.Create(self);
   with btnTopRow do
   begin
     Name := 'btnTopRow';
@@ -339,7 +339,7 @@ begin
     OnClick := @btnTopRowClicked;
   end;
 
-  btnAddFive := TfpgButton.Create(self);
+  btnAddFive := TlqButton.Create(self);
   with btnAddFive do
   begin
     Name := 'btnAddFive';
@@ -353,7 +353,7 @@ begin
     OnClick := @btnAddFiveClicked;
   end;
 
-  btnAddOne := TfpgButton.Create(self);
+  btnAddOne := TlqButton.Create(self);
   with btnAddOne do
   begin
     Name := 'btnAddOne';
@@ -367,7 +367,7 @@ begin
     OnClick := @btnAddOneClicked;
   end;
 
-  btnFiveOnly := TfpgButton.Create(self);
+  btnFiveOnly := TlqButton.Create(self);
   with btnFiveOnly do
   begin
     Name := 'btnFiveOnly';
@@ -381,7 +381,7 @@ begin
     OnClick := @btnFiveOnlyClicked;
   end;
 
-  btnDelRow := TfpgButton.Create(self);
+  btnDelRow := TlqButton.Create(self);
   with btnDelRow do
   begin
     Name := 'btnDelRow';
@@ -395,7 +395,7 @@ begin
     OnClick := @btnDelRowClicked;
   end;
 
-  chkSmoothScroll := TfpgCheckBox.Create(self);
+  chkSmoothScroll := TlqCheckBox.Create(self);
   with chkSmoothScroll do
   begin
     Name := 'chkSmoothScroll';
@@ -408,7 +408,7 @@ begin
     OnChange := @chkSmoothScrollChange;
   end;
 
-  chkAlterColor := TfpgCheckBox.Create(self);
+  chkAlterColor := TlqCheckBox.Create(self);
   with chkAlterColor do
   begin
     Name := 'chkAlterColor';

@@ -15,10 +15,10 @@ uses
   gui_mig_exceptions;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    FPanel: TfpgLayoutPanel;
-    FLabel1: TfpgLabel;
+    FPanel: TlqLayoutPanel;
+    FLabel1: TlqLabel;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   AfterCreate; override;
@@ -32,14 +32,14 @@ begin
   WindowTitle := 'MiG Layout Test';
   WindowPosition := wpUser;
 
-  FPanel := TfpgLayoutPanel.Create(self);
+  FPanel := TlqLayoutPanel.Create(self);
 
   SetPosition(100, 100, 300, 200);
 end;
 
 procedure TMainForm.AfterCreate;
 begin
-//  FLabel1 := TfpgLabel.Create(FPanel);
+//  FLabel1 := TlqLabel.Create(FPanel);
 //  FPanel.Add(FLabel1, '');
 end;
 

@@ -11,26 +11,26 @@ uses
   u_editgrid;
 
 type
-  TF_Demo = class(TfpgForm)
+  TF_Demo = class(TlqForm)
     private
-      EG_Grid: TfpgEditGrid;
-      Bt_AddOne: TfpgButton;
-      Ckb_Limits: TfpgCheckBox;
-      Ckb_FloatDec: TfpgCheckBox;
-      Ckb_FloatFixDec: TfpgCheckBox;
-      Ckb_Column: TfpgCheckBox;
-      Ckb_Row: TfpgCheckBox;
-      Rb_Point: TfpgRadioButton;
-      Rb_Comma: TfpgRadioButton;
-      Ckb_Space: TfpgCheckBox;
-      Ckb_Thousand: TfpgCheckBox;
-      Ckb_NegativeColor: TfpgCheckBox;
-      P_EditCombo: TfpgPanel;
-      Ckb_AutoComplete: TfpgCheckBox;
-      Rb_No: TfpgRadioButton;
-      Rb_Yes: TfpgRadioButton;
-      Rb_Ask: TfpgRadioButton;
-      Bt_Fermer: TfpgButton;
+      EG_Grid: TlqEditGrid;
+      Bt_AddOne: TlqButton;
+      Ckb_Limits: TlqCheckBox;
+      Ckb_FloatDec: TlqCheckBox;
+      Ckb_FloatFixDec: TlqCheckBox;
+      Ckb_Column: TlqCheckBox;
+      Ckb_Row: TlqCheckBox;
+      Rb_Point: TlqRadioButton;
+      Rb_Comma: TlqRadioButton;
+      Ckb_Space: TlqCheckBox;
+      Ckb_Thousand: TlqCheckBox;
+      Ckb_NegativeColor: TlqCheckBox;
+      P_EditCombo: TlqPanel;
+      Ckb_AutoComplete: TlqCheckBox;
+      Rb_No: TlqRadioButton;
+      Rb_Yes: TlqRadioButton;
+      Rb_Ask: TlqRadioButton;
+      Bt_Fermer: TlqButton;
       procedure EG_GridKeyPress(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState;
                 var Consumed: Boolean);
       procedure Bt_AddOneClick(Sender: TObject);
@@ -203,8 +203,8 @@ begin
   with EG_Grid do
   begin
     for Cpt:= 0 to Pred(ColumnCount) do
-      if Sender is TfpgRadioButton then
-        case (Sender as TfpgRadioButton).tag of
+      if Sender is TlqRadioButton then
+        case (Sender as TlqRadioButton).tag of
           0:
             case ColumnEditType[Cpt] of
               etInteger:

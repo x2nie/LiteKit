@@ -1,4 +1,4 @@
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 const
   // This is a ugly logo purely as an example. It will be replaced soon.

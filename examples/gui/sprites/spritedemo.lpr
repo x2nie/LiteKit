@@ -11,11 +11,11 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    Timer: TfpgTimer;
-    Background: TfpgImage;
-    SpriteImg: TfpgImage;
+    Timer: TlqTimer;
+    Background: TlqImage;
+    SpriteImg: TlqImage;
     FShowInterval: Boolean;
     procedure   TimerFired(Sender: TObject);
     procedure   FormDestroy(Sender: TObject);
@@ -130,7 +130,7 @@ begin
   SpriteImg.CreateMaskFromSample(0, 0);
   SpriteImg.UpdateImage;
 
-  Timer := TfpgTimer.Create(50);
+  Timer := TlqTimer.Create(50);
   Timer.OnTimer := @TimerFired;
   Timer.Enabled := True;
 end;

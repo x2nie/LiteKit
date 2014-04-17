@@ -5,9 +5,9 @@
 	************************************** }
 procedure TMainForm.miOpenClick(Sender: TObject);
 var
-	dlg: TfpgFileDialog;
+	dlg: TlqFileDialog;
 begin
-	dlg := TfpgFileDialog.Create(nil);
+	dlg := TlqFileDialog.Create(nil);
 	try
 		if dlg.RunOpenFile then
 		begin

@@ -58,7 +58,7 @@ type
 
 
 procedure TranslateResourceStrings(const BaseAppName, BaseDirectory, CustomLang: string);
-function  fpgMatchLocale(const ALanguageID: TfpgString): boolean;
+function  fpgMatchLocale(const ALanguageID: TlqString): boolean;
 
 
 implementation
@@ -159,7 +159,7 @@ begin
 end;
 
 // Strip the '.' onwards part. eg: en_ZA.UTF-8  ->  en_ZA
-procedure FixLanguageIDs(var ALanguageID: TfpgString);
+procedure FixLanguageIDs(var ALanguageID: TlqString);
 var
   lpos: integer;
 begin
@@ -168,9 +168,9 @@ begin
     ALanguageID := Copy(ALanguageID, 0, lpos-1);
 end;
 
-function fpgMatchLocale(const ALanguageID: TfpgString): boolean;
+function fpgMatchLocale(const ALanguageID: TlqString): boolean;
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := ALanguageID;
   FixLanguageIDs(s);

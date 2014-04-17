@@ -25,20 +25,20 @@ uses
 
 type
 
-  TDebugForm = class(TfpgForm)
+  TDebugForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: DebugForm}
-    PageControl1: TfpgPageControl;
-    TabSheet1: TfpgTabSheet;
-    TabSheet2: TfpgTabSheet;
-    TabSheet3: TfpgTabSheet;
-    TabSheet4: TfpgTabSheet;
-    TabSheet5: TfpgTabSheet;
-    TabSheet6: TfpgTabSheet;
-    TabSheet7: TfpgTabSheet;
-    Grid1: TfpgStringGrid;
-    Grid2: TfpgStringGrid;
-    Grid3: TfpgStringGrid;
+    PageControl1: TlqPageControl;
+    TabSheet1: TlqTabSheet;
+    TabSheet2: TlqTabSheet;
+    TabSheet3: TlqTabSheet;
+    TabSheet4: TlqTabSheet;
+    TabSheet5: TlqTabSheet;
+    TabSheet6: TlqTabSheet;
+    TabSheet7: TlqTabSheet;
+    Grid1: TlqStringGrid;
+    Grid2: TlqStringGrid;
+    Grid3: TlqStringGrid;
     {@VFD_HEAD_END: DebugForm}
   public
     procedure AfterCreate; override;
@@ -62,7 +62,7 @@ begin
   WindowTitle := 'Debug Window';
   Hint := '';
 
-  PageControl1 := TfpgPageControl.Create(self);
+  PageControl1 := TlqPageControl.Create(self);
   with PageControl1 do
   begin
     Name := 'PageControl1';
@@ -72,7 +72,7 @@ begin
     TabOrder := 0;
   end;
 
-  TabSheet1 := TfpgTabSheet.Create(PageControl1);
+  TabSheet1 := TlqTabSheet.Create(PageControl1);
   with TabSheet1 do
   begin
     Name := 'TabSheet1';
@@ -80,7 +80,7 @@ begin
     Text := 'Watches';
   end;
 
-  TabSheet2 := TfpgTabSheet.Create(PageControl1);
+  TabSheet2 := TlqTabSheet.Create(PageControl1);
   with TabSheet2 do
   begin
     Name := 'TabSheet2';
@@ -88,7 +88,7 @@ begin
     Text := 'BreakPoints';
   end;
 
-  TabSheet3 := TfpgTabSheet.Create(PageControl1);
+  TabSheet3 := TlqTabSheet.Create(PageControl1);
   with TabSheet3 do
   begin
     Name := 'TabSheet3';
@@ -96,7 +96,7 @@ begin
     Text := 'Local Vars';
   end;
 
-  TabSheet4 := TfpgTabSheet.Create(PageControl1);
+  TabSheet4 := TlqTabSheet.Create(PageControl1);
   with TabSheet4 do
   begin
     Name := 'TabSheet4';
@@ -104,7 +104,7 @@ begin
     Text := 'Call Stack';
   end;
 
-  TabSheet5 := TfpgTabSheet.Create(PageControl1);
+  TabSheet5 := TlqTabSheet.Create(PageControl1);
   with TabSheet5 do
   begin
     Name := 'TabSheet5';
@@ -112,7 +112,7 @@ begin
     Text := 'Registers';
   end;
 
-  TabSheet6 := TfpgTabSheet.Create(PageControl1);
+  TabSheet6 := TlqTabSheet.Create(PageControl1);
   with TabSheet6 do
   begin
     Name := 'TabSheet6';
@@ -120,7 +120,7 @@ begin
     Text := 'Asm';
   end;
 
-  TabSheet7 := TfpgTabSheet.Create(PageControl1);
+  TabSheet7 := TlqTabSheet.Create(PageControl1);
   with TabSheet7 do
   begin
     Name := 'TabSheet7';
@@ -128,7 +128,7 @@ begin
     Text := 'GDB output';
   end;
 
-  Grid1 := TfpgStringGrid.Create(TabSheet1);
+  Grid1 := TlqStringGrid.Create(TabSheet1);
   with Grid1 do
   begin
     Name := 'Grid1';
@@ -143,7 +143,7 @@ begin
     TabOrder := 0;
   end;
 
-  Grid2 := TfpgStringGrid.Create(TabSheet2);
+  Grid2 := TlqStringGrid.Create(TabSheet2);
   with Grid2 do
   begin
     Name := 'Grid2';
@@ -163,7 +163,7 @@ begin
     TabOrder := 0;
   end;
 
-  Grid3 := TfpgStringGrid.Create(TabSheet3);
+  Grid3 := TlqStringGrid.Create(TabSheet3);
   with Grid3 do
   begin
     Name := 'Grid3';

@@ -3,9 +3,9 @@ program ats_editor;
 {$mode objfpc}{$H+}
 
 uses
-  SysUtils, Classes, fpg_base, fpg_main, fpg_customgrid, fpg_basegrid,
-  ats_main, fpg_grid, fpg_form, fpg_button, fpg_edit, fpg_menu, fpg_label,
-  fpg_combobox, fpg_dialogs, fpg_utils;
+  SysUtils, Classes, lq_base, lq_main, lq_customgrid, lq_basegrid,
+  ats_main, lq_grid, lq_form, lq_button, lq_edit, lq_menu, lq_label,
+  lq_combobox, lq_dialogs, lq_utils;
 
 const
   langtabledata:
@@ -15,9 +15,9 @@ type
 
   { TLangGrid }
 
-  TLangGrid = class(TfpgCustomGrid)
+  TLangGrid = class(TlqCustomGrid)
   protected
-    procedure DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState); override;
+    procedure DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState); override;
     procedure HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     function GetRowCount: Integer; override;
   public
@@ -27,17 +27,17 @@ type
 
   { TfrmLangTable }
 
-  TfrmLangTable = class(TfpgForm)
+  TfrmLangTable = class(TlqForm)
   public
-    menuFile: TfpgPopupMenu;
+    menuFile: TlqPopupMenu;
   
     {@VFD_HEAD_BEGIN: frmLangTable}
-    mainmenu: TfpgMenuBar;
+    mainmenu: TlqMenuBar;
     grid: TLangGrid;
-    btnNewRow: TfpgButton;
-    btnCopyRow: TfpgButton;
-    btnDeleteRow: TfpgButton;
-    btnEdit: TfpgButton;
+    btnNewRow: TlqButton;
+    btnCopyRow: TlqButton;
+    btnDeleteRow: TlqButton;
+    btnEdit: TlqButton;
     {@VFD_HEAD_END: frmLangTable}
     
     procedure AfterCreate; override;
@@ -53,17 +53,17 @@ type
 
   { TfrmTextEdit }
 
-  TfrmTextEdit = class(TfpgForm)
+  TfrmTextEdit = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: frmTextEdit}
-    Label1: TfpgLabel;
-    edID: TfpgEdit;
-    cmbLang1: TfpgComboBox;
-    edLang1: TfpgEdit;
-    cmbLang2: TfpgComboBox;
-    edLang2: TfpgEdit;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    Label1: TlqLabel;
+    edID: TlqEdit;
+    cmbLang1: TlqComboBox;
+    edLang1: TlqEdit;
+    cmbLang2: TlqComboBox;
+    edLang2: TlqEdit;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     {@VFD_HEAD_END: frmTextEdit}
     
     textrow : TatsTextRow;
@@ -86,7 +86,7 @@ var
 
 { TLangGrid }
 
-procedure TLangGrid.DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState);
+procedure TLangGrid.DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState);
 var
   s : string;
   tr : TatsTextRow;
@@ -128,7 +128,7 @@ end;
 procedure TLangGrid.UpdateColumns;
 var
   n : integer;
-  gc : TfpgGridColumn;
+  gc : TlqGridColumn;
 begin
   if atstable = nil then Exit;
 
@@ -156,7 +156,7 @@ begin
   WindowTitle := 'Edit Text';
   Hint := '';
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -166,7 +166,7 @@ begin
     Text := 'Text ID:';
   end;
 
-  edID := TfpgEdit.Create(self);
+  edID := TlqEdit.Create(self);
   with edID do
   begin
     Name := 'edID';
@@ -178,7 +178,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  cmbLang1 := TfpgComboBox.Create(self);
+  cmbLang1 := TlqComboBox.Create(self);
   with cmbLang1 do
   begin
     Name := 'cmbLang1';
@@ -189,7 +189,7 @@ begin
     OnChange := @OnLangChange;
   end;
 
-  edLang1 := TfpgEdit.Create(self);
+  edLang1 := TlqEdit.Create(self);
   with edLang1 do
   begin
     Name := 'edLang1';
@@ -201,7 +201,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  cmbLang2 := TfpgComboBox.Create(self);
+  cmbLang2 := TlqComboBox.Create(self);
   with cmbLang2 do
   begin
     Name := 'cmbLang2';
@@ -212,7 +212,7 @@ begin
     OnChange := @OnLangChange;
   end;
 
-  edLang2 := TfpgEdit.Create(self);
+  edLang2 := TlqEdit.Create(self);
   with edLang2 do
   begin
     Name := 'edLang2';
@@ -224,7 +224,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -238,7 +238,7 @@ begin
     Default := true;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -286,7 +286,7 @@ end;
 
 procedure TfrmLangTable.AfterCreate;
 var
-  mi : TfpgMenuItem;
+  mi : TlqMenuItem;
 begin
   {@VFD_BODY_BEGIN: frmLangTable}
   Name := 'frmLangTable';
@@ -294,7 +294,7 @@ begin
   WindowTitle := 'ATS Table Editor';
   Hint := '';
 
-  mainmenu := TfpgMenuBar.Create(self);
+  mainmenu := TlqMenuBar.Create(self);
   with mainmenu do
   begin
     Name := 'mainmenu';
@@ -310,7 +310,7 @@ begin
     Anchors := [anLeft,anRight,anTop,anBottom];
   end;
 
-  btnNewRow := TfpgButton.Create(self);
+  btnNewRow := TlqButton.Create(self);
   with btnNewRow do
   begin
     Name := 'btnNewRow';
@@ -323,7 +323,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnCopyRow := TfpgButton.Create(self);
+  btnCopyRow := TlqButton.Create(self);
   with btnCopyRow do
   begin
     Name := 'btnCopyRow';
@@ -336,7 +336,7 @@ begin
     TabOrder := 3;
   end;
 
-  btnDeleteRow := TfpgButton.Create(self);
+  btnDeleteRow := TlqButton.Create(self);
   with btnDeleteRow do
   begin
     Name := 'btnDeleteRow';
@@ -349,7 +349,7 @@ begin
     TabOrder := 4;
   end;
 
-  btnEdit := TfpgButton.Create(self);
+  btnEdit := TlqButton.Create(self);
   with btnEdit do
   begin
     Name := 'btnEdit';
@@ -365,7 +365,7 @@ begin
 
   {@VFD_BODY_END: frmLangTable}
   
-  menuFile := TfpgPopupMenu.Create(self);
+  menuFile := TlqPopupMenu.Create(self);
   menuFile.AddMenuItem('&New', '', @menuProcNew);
   menuFile.AddMenuItem('&Open...', '', @menuProcOpen);
   menuFile.AddMenuItem('&Save...', '', @menuProcSave);
@@ -385,10 +385,10 @@ end;
 
 procedure TfrmLangTable.menuProcSave(Sender: TObject);
 var
-  dlg : TfpgFileDialog;
+  dlg : TlqFileDialog;
   fname : string;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   dlg.Filter := 'Pascal include (*.inc;*.pas)|*.inc;*.pas|ATS text (*.ats)|*.ats|CSV (*.csv)|*.csv|All Files (*)|*|';
 
   if dlg.RunSaveFile then fname := dlg.FileName
@@ -419,10 +419,10 @@ end;
 
 procedure TfrmLangTable.menuProcOpen(Sender: TObject);
 var
-  dlg : TfpgFileDialog;
+  dlg : TlqFileDialog;
   fname : string;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   dlg.Filter := 'Pascal include (*.inc;*.pas)|*.inc;*.pas|ATS text (*.ats)|*.ats|CSV (*.csv)|*.csv|All Files (*)|*|';
 
   if dlg.RunOpenFile then fname := dlg.FileName

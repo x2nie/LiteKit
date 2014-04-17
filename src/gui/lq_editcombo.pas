@@ -37,16 +37,16 @@ This is an example of what we can aim for:
 You need a mono font to see the correct layout.
 
 
-               TfpgBaseComboBox
+               TlqBaseComboBox
               _________|______________
              |                        |
-   TfpgBaseStaticCombo        TfpgBaseEditCombo
+   TlqBaseStaticCombo        TlqBaseEditCombo
        ______|_________               |
-      |                |         TfpgEditCombo
+      |                |         TlqEditCombo
       |                |
- TfpgComboBox   TfpgBaseColorCombo
+ TlqComboBox   TlqBaseColorCombo
                        |
-                 TfpgColorComboBox
+                 TlqColorComboBox
 }
 
 interface
@@ -65,7 +65,7 @@ type
   TAllowNew = (anNo, anYes, anAsk);
 
 
-  TfpgBaseEditCombo = class(TfpgBaseComboBox)
+  TlqBaseEditCombo = class(TlqBaseComboBox)
   private
     FAutoCompletion: Boolean;
     FAllowNew: TAllowNew;
@@ -73,16 +73,16 @@ type
     FSelectedItem: integer;
     FMaxLength: integer;
     FNewItem: boolean;
-    FDefaultPopupMenu: TfpgPopupMenu;
+    FDefaultPopupMenu: TlqPopupMenu;
     procedure   SetAllowNew(const AValue: TAllowNew);
     procedure   InternalBtnClick(Sender: TObject);
     procedure   InternalListBoxSelect(Sender: TObject);
     procedure   InternalListBoxKeyPress(Sender: TObject; var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
     procedure   DefaultPopupInsertFromCharmap(Sender: TObject);
-    procedure   DoPaste(const AText: TfpgString);
+    procedure   DoPaste(const AText: TlqString);
     procedure   SetDefaultPopupMenuItemsState;
   protected
-    FDropDown: TfpgPopupWindow;
+    FDropDown: TlqPopupWindow;
     FDrawOffset: integer;
     FSelStart: integer;
     FSelOffset: integer;
@@ -92,8 +92,8 @@ type
     function    HasText: boolean; virtual;
     procedure   SetText(const AValue: string); virtual;
     procedure   ShowDefaultPopupMenu(const x, y: integer; const shiftstate: TShiftState); virtual;
-    procedure   HandleResize(AWidth, AHeight: TfpgCoord); override;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -114,7 +114,7 @@ type
   end;
 
 
-  TfpgEditCombo = class(TfpgBaseEditCombo)
+  TlqEditCombo = class(TlqBaseEditCombo)
   published
     property    Align;
     property    AllowNew;
@@ -141,8 +141,8 @@ type
   end;
 
 
-function CreateEditCombo(AOwner: TComponent; x, y, w: TfpgCoord; AList:TStringList; ACompletion: boolean = False;
-      ANew: TAllowNew = anNo; h: TfpgCoord = 0): TfpgEditCombo;
+function CreateEditCombo(AOwner: TComponent; x, y, w: TlqCoord; AList:TStringList; ACompletion: boolean = False;
+      ANew: TAllowNew = anNo; h: TlqCoord = 0): TlqEditCombo;
 
 
 implementation
@@ -162,23 +162,23 @@ const
   ipmCharmap    = 'miDefaultCharmap';
 
 var
-  OriginalFocusRoot: TfpgWidget;
+  OriginalFocusRoot: TlqWidget;
 
 type
   { This is the class representing the dropdown window of the combo box. }
-  TDropDownWindow = class(TfpgPopupWindow)
+  TDropDownWindow = class(TlqPopupWindow)
   private
-    FCallerWidget: TfpgWidget;
-    ListBox:    TfpgListBox;
+    FCallerWidget: TlqWidget;
+    ListBox:    TlqListBox;
   protected
     procedure   HandlePaint; override;
-    procedure   HandleKeyChar(var AText: TfpgChar; var shiftstate: TShiftState; var consumed: Boolean); override;
+    procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleShow; override;
     procedure   HandleHide; override;
   public
     constructor Create(AOwner: TComponent); override;
-    property    CallerWidget: TfpgWidget read FCallerWidget write FCallerWidget;
+    property    CallerWidget: TlqWidget read FCallerWidget write FCallerWidget;
   end;
 
 
@@ -192,19 +192,19 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TDropDownWindow.HandleKeyChar(var AText: TfpgChar;
+procedure TDropDownWindow.HandleKeyChar(var AText: TlqChar;
   var shiftstate: TShiftState; var consumed: Boolean);
 begin
-  if TfpgEditCombo(FCallerWidget).FAutoCompletion then
-    TfpgEditCombo(FCallerWidget).HandleKeyChar(AText,shiftstate,consumed);
+  if TlqEditCombo(FCallerWidget).FAutoCompletion then
+    TlqEditCombo(FCallerWidget).HandleKeyChar(AText,shiftstate,consumed);
 end;
 
 procedure TDropDownWindow.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
-  if TfpgEditCombo(FCallerWidget).FAutoCompletion then
+  if TlqEditCombo(FCallerWidget).FAutoCompletion then
   begin
-    TfpgEditCombo(FCallerWidget).HandleKeyPress(keycode,shiftstate,consumed);
+    TlqEditCombo(FCallerWidget).HandleKeyPress(keycode,shiftstate,consumed);
 //    consumed:= True;
   end
   else
@@ -227,7 +227,7 @@ end;
 
 procedure TDropDownWindow.HandleHide;
 begin
-  // HandleHide also gets called in TfpgWidget.Destroy so we need a few
+  // HandleHide also gets called in TlqWidget.Destroy so we need a few
   // if Assigned() tests here. This should be improved on.
 //  if Assigned(FocusRootWidget) then
 //    FocusRootWidget.ReleaseMouse;  // for internal ListBox
@@ -240,22 +240,22 @@ end;
 constructor TDropDownWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  ListBox := TfpgListBox.Create(self);
+  ListBox := TlqListBox.Create(self);
   ListBox.PopupFrame := True;
 end;
 
-function CreateEditCombo(AOwner: TComponent; x, y, w: TfpgCoord; AList:TStringList; ACompletion: boolean = False;
-      ANew: TAllowNew = anNo; h: TfpgCoord = 0): TfpgEditCombo;
+function CreateEditCombo(AOwner: TComponent; x, y, w: TlqCoord; AList:TStringList; ACompletion: boolean = False;
+      ANew: TAllowNew = anNo; h: TlqCoord = 0): TlqEditCombo;
 begin
-  Result           := TfpgEditCombo.Create(AOwner);
+  Result           := TlqEditCombo.Create(AOwner);
   Result.Left      := x;
   Result.Top       := y;
   Result.Width     := w;
   Result.Focusable := True;
   Result.AutoCompletion := ACompletion;
   Result.AllowNew       := ANew;
-  if h < TfpgEditCombo(Result).Font.Height + (Result.FMargin * 2) then
-    Result.Height := TfpgEditCombo(Result).Font.Height + (Result.FMargin * 2)
+  if h < TlqEditCombo(Result).Font.Height + (Result.FMargin * 2) then
+    Result.Height := TlqEditCombo(Result).Font.Height + (Result.FMargin * 2)
   else
     Result.Height:= h;
 
@@ -263,15 +263,15 @@ begin
     Result.Items.Assign(AList);
 end;
 
-{ TfpgBaseEditCombo }
+{ TlqBaseEditCombo }
 
-procedure TfpgBaseEditCombo.SetAllowNew(const AValue: TAllowNew);
+procedure TlqBaseEditCombo.SetAllowNew(const AValue: TAllowNew);
 begin
   if FAllowNew <> AValue then
     FAllowNew := AValue;
 end;
 
-function TfpgBaseEditCombo.GetText: string;
+function TlqBaseEditCombo.GetText: string;
 begin
   if FAutoCompletion then
     Result := FText
@@ -282,16 +282,16 @@ begin
       Result := '';
 end;
 
-function TfpgBaseEditCombo.HasText: boolean;
+function TlqBaseEditCombo.HasText: boolean;
 begin
   Result := FFocusItem >= 0;
 end;
 
-procedure TfpgBaseEditCombo.DoDropDown;
+procedure TlqBaseEditCombo.DoDropDown;
 var
   ddw: TDropDownWindow;
   rowcount, i: integer;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   if (not Assigned(FDropDown)) or (not FDropDown.HasHandle) then
   begin
@@ -345,12 +345,12 @@ begin
   end;
 end;
 
-procedure TfpgBaseEditCombo.InternalBtnClick(Sender: TObject);
+procedure TlqBaseEditCombo.InternalBtnClick(Sender: TObject);
 begin
   DoDropDown;
 end;
 
-procedure TfpgBaseEditCombo.InternalListBoxSelect(Sender: TObject);
+procedure TlqBaseEditCombo.InternalListBoxSelect(Sender: TObject);
 var
   i: Integer;
 begin
@@ -369,7 +369,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEditCombo.InternalListBoxKeyPress(Sender: TObject; var keycode: word;
+procedure TlqBaseEditCombo.InternalListBoxKeyPress(Sender: TObject; var keycode: word;
           var shiftstate: TShiftState; var consumed: Boolean);
 var
   i: Integer;
@@ -388,9 +388,9 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseEditCombo.DefaultPopupInsertFromCharmap(Sender: TObject);
+procedure TlqBaseEditCombo.DefaultPopupInsertFromCharmap(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   if FAllowNew= anNo then
     Exit;
@@ -400,10 +400,10 @@ begin
     DoPaste(s);
 end;
 
-procedure TfpgBaseEditCombo.DoPaste(const AText: TfpgString);
+procedure TlqBaseEditCombo.DoPaste(const AText: TlqString);
 var
   s: string;
-  prevval: TfpgString;
+  prevval: TlqString;
   i: integer;
 begin
   prevval := FText;
@@ -431,16 +431,16 @@ begin
     DoOnChange;
 end;
 
-procedure TfpgBaseEditCombo.SetDefaultPopupMenuItemsState;
+procedure TlqBaseEditCombo.SetDefaultPopupMenuItemsState;
 var
   i: integer;
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
   //for i := 0 to FDefaultPopupMenu.ComponentCount-1 do
   //begin
-  //  if FDefaultPopupMenu.Components[i] is TfpgMenuItem then
+  //  if FDefaultPopupMenu.Components[i] is TlqMenuItem then
   //  begin
-  //    itm := TfpgMenuItem(FDefaultPopupMenu.Components[i]);
+  //    itm := TlqMenuItem(FDefaultPopupMenu.Components[i]);
   //    // enabled/disable menu items
   //    if itm.Name = ipmCut then
   //      itm.Enabled := (not ReadOnly) and (FSelOffset <> 0)
@@ -456,7 +456,7 @@ begin
   //end;
 end;
 
-procedure TfpgBaseEditCombo.SetText(const AValue: string);
+procedure TlqBaseEditCombo.SetText(const AValue: string);
 var
   i: integer;
 begin
@@ -482,14 +482,14 @@ begin
   end;
 end;
 
-procedure TfpgBaseEditCombo.ShowDefaultPopupMenu(const x, y: integer;
+procedure TlqBaseEditCombo.ShowDefaultPopupMenu(const x, y: integer;
   const shiftstate: TShiftState);
 var
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
   if not Assigned(FDefaultPopupMenu) then
   begin
-    FDefaultPopupMenu := TfpgPopupMenu.Create(nil);
+    FDefaultPopupMenu := TlqPopupMenu.Create(nil);
     //itm := FDefaultPopupMenu.AddMenuItem(rsCut, '', @DefaultPopupCut);
     //itm.Name := ipmCut;
     //itm := FDefaultPopupMenu.AddMenuItem(rsCopy, '', @DefaultPopupCopy);
@@ -508,17 +508,17 @@ begin
   FDefaultPopupMenu.ShowAt(self, x, y);
 end;
 
-procedure TfpgBaseEditCombo.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TlqBaseEditCombo.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   if FSizeIsDirty then
     CalculateInternalButtonRect;
 end;
 
-procedure TfpgBaseEditCombo.HandleKeyChar(var AText: TfpgChar;
+procedure TlqBaseEditCombo.HandleKeyChar(var AText: TlqChar;
     var shiftstate: TShiftState; var consumed: Boolean);
 var
-  s: TfpgChar;
+  s: TlqChar;
   prevval: string;
   i: integer;
 begin
@@ -576,7 +576,7 @@ begin
     inherited HandleKeyChar(AText, shiftstate, consumed);
 end;
 
-procedure TfpgBaseEditCombo.HandleKeyPress(var keycode: word;
+procedure TlqBaseEditCombo.HandleKeyPress(var keycode: word;
     var shiftstate: TShiftState; var consumed: boolean);
 var
   hasChanged: boolean;
@@ -640,7 +640,7 @@ begin
                   end;
                 anAsk:
                   begin
-                    if TfpgMessageDialog.Question(rsNewItemDetected, Format(rsAddNewItem, [FText])) = mbYes then
+                    if TlqMessageDialog.Question(rsNewItemDetected, Format(rsAddNewItem, [FText])) = mbYes then
                     begin
                       FItems.Add(FText);
                       FFocusItem := Pred(FItems.Count);
@@ -679,7 +679,7 @@ begin
   inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgBaseEditCombo.HandleLMouseDown(x, y: integer;
+procedure TlqBaseEditCombo.HandleLMouseDown(x, y: integer;
     shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
@@ -697,7 +697,7 @@ begin
     end;
 end;
 
-procedure TfpgBaseEditCombo.HandleLMouseUp(x, y: integer;
+procedure TlqBaseEditCombo.HandleLMouseUp(x, y: integer;
     shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
@@ -705,7 +705,7 @@ begin
   PaintInternalButton;
 end;
 
-procedure TfpgBaseEditCombo.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseEditCombo.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
   //if Assigned(PopupMenu) then
@@ -714,16 +714,16 @@ begin
     ShowDefaultPopupMenu(x, y, ShiftState);
 end;
 
-procedure TfpgBaseEditCombo.HandlePaint;
+procedure TlqBaseEditCombo.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   tw, tw2, st, len: integer;
   Texte: string;
 
   // paint selection rectangle
   procedure DrawSelection;
   var
-    lcolor: TfpgColor;
+    lcolor: TlqColor;
   begin
     if Focused then
     begin
@@ -747,7 +747,7 @@ var
     tw2 := Font.TextWidth(UTF8Copy(Items[FSelectedItem], 1, st + len));
 
     // XOR on Anti-aliased text doesn't look to good. Lets try standard
-    // Blue & White like what was doen in TfpgEdit.
+    // Blue & White like what was doen in TlqEdit.
 {   Canvas.SetColor(lcolor);
     Canvas.FillRectangle(-FDrawOffset + FMargin + tw, 3, tw2 - tw, Font.Height);
     r.SetRect(-FDrawOffset + FMargin + tw, 3, tw2 - tw, Font.Height);
@@ -864,7 +864,7 @@ begin
   Canvas.EndDraw;
 end;
 
-constructor TfpgBaseEditCombo.Create(AOwner: TComponent);
+constructor TlqBaseEditCombo.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FBackgroundColor  := clBoxColor;
@@ -887,20 +887,20 @@ begin
   CalculateInternalButtonRect;
 end;
 
-destructor TfpgBaseEditCombo.Destroy;
+destructor TlqBaseEditCombo.Destroy;
 begin
   if Assigned(FDropDown) then
     FDropDown.Free;
   inherited Destroy;
 end;
 
-procedure TfpgBaseEditCombo.Clear;
+procedure TlqBaseEditCombo.Clear;
 begin
   Text := '';
   Items.Clear;
 end;
 
-procedure TfpgBaseEditCombo.SetFocus;
+procedure TlqBaseEditCombo.SetFocus;
 var
   i: integer;
 begin
@@ -915,7 +915,7 @@ begin
       end;
 end;
 
-procedure TfpgBaseEditCombo.Update;
+procedure TlqBaseEditCombo.Update;
 begin
   FFocusItem := -1;
   Repaint;

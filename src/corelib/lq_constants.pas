@@ -52,25 +52,25 @@ resourcestring
   {$I lang_de.}
   
 {$ELSEIF defined(ru)}
-  {$I lang_ru.}
+  {$I lang_ru.inc}
   
 {$ELSEIF defined(fr)}
-  {$I lang_fr.}
+  {$I lang_fr.inc}
   
 {$ELSEIF defined(pt)}
-  {$I lang_pt.}
+  {$I lang_pt.inc}
   
 {$ELSEIF defined(af)}
-  {$I lang_af.}
+  {$I lang_af.inc}
 
 {$ELSEIF defined(it)}
-  {$I lang_it.}
+  {$I lang_it.inc}
 
 {$ELSEIF defined(es)}
-  {$I lang_es.}
+  {$I lang_es.inc}
 
 {$ELSE}
-  {$I lang_en.}
+  {$I lang_en.inc}
 {$IFEND}
 
 
@@ -95,7 +95,7 @@ const
   cMessageQueueSize = 2048;
 
   // version and name constants
-  {$I VERSIONFILE_.}inc  // this includes the auto :generated  GUIVfp_ersion = 
+  {$I VERSION_FILE.inc}  // this includes the auto :generated  GUIVfp_ersion =
   fpGUIName    = 'fpGUI Toolkit';
   fpGUIWebsite = 'http://fpgui.sourceforge.net/';
 

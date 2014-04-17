@@ -23,35 +23,35 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    tree: TfpgTreeView;
-    cbShowImages: TfpgCheckBox;
-    cbIndentNode: TfpgCheckBox;
-    btnClear: TfpgButton;
-    Label1: TfpgLabel;
-    Label2: TfpgLabel;
-    Label3: TfpgLabel;
-    Label4: TfpgLabel;
-    Label5: TfpgLabel;
-    lblSource: TfpgLabel;
-    lblDestination: TfpgLabel;
-    btnSource: TfpgButton;
-    btnDest: TfpgButton;
-    btnMoveTo: TfpgButton;
-    cbMoveToTypes: TfpgComboBox;
-    Label6: TfpgLabel;
-    Label7: TfpgLabel;
-    Label8: TfpgLabel;
-    btnCollapseAll: TfpgButton;
-    btnExpandAll: TfpgButton;
-    btnShowChecked: TfpgButton;
+    tree: TlqTreeView;
+    cbShowImages: TlqCheckBox;
+    cbIndentNode: TlqCheckBox;
+    btnClear: TlqButton;
+    Label1: TlqLabel;
+    Label2: TlqLabel;
+    Label3: TlqLabel;
+    Label4: TlqLabel;
+    Label5: TlqLabel;
+    lblSource: TlqLabel;
+    lblDestination: TlqLabel;
+    btnSource: TlqButton;
+    btnDest: TlqButton;
+    btnMoveTo: TlqButton;
+    cbMoveToTypes: TlqComboBox;
+    Label6: TlqLabel;
+    Label7: TlqLabel;
+    Label8: TlqLabel;
+    btnCollapseAll: TlqButton;
+    btnExpandAll: TlqButton;
+    btnShowChecked: TlqButton;
     {@VFD_HEAD_END: MainForm}
-    FImagelist: TfpgImageList;
-    FStateImagelist: TfpgImageList;
-    FSrcNode: TfpgTreeNode;
-    FDestnode: TfpgTreeNode;
+    FImagelist: TlqImageList;
+    FStateImagelist: TlqImageList;
+    FSrcNode: TlqTreeNode;
+    FDestnode: TlqTreeNode;
     procedure   cbShowImagesChange(Sender: TObject);
     procedure   cbIndentNodeChange(Sender: TObject);
     procedure   btnClearClicked(Sender: TObject);
@@ -62,7 +62,7 @@ type
     procedure   btnMoveToClicked(Sender: TObject);
     procedure   btnCollapseAllClicked(Sender: TObject);
     procedure   btnExpandAllClicked(Sender: TObject);
-    procedure   StateImageClicked(Sender: TObject; ANode: TfpgTreeNode);
+    procedure   StateImageClicked(Sender: TObject; ANode: TlqTreeNode);
     procedure   btnShowCheckedClicked(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
@@ -79,7 +79,7 @@ end;
 
 procedure TMainForm.btnClearClicked(Sender: TObject);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   if tree.Selection <> nil then
   begin
@@ -98,9 +98,9 @@ const
   cFirstSubNode = 'FirstSubnode = %s';
   cLastSubNode = 'LastSubnode = %s';
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 
-  procedure PrintNodeInfo(ALabel: TfpgLabel; AFormat: string; ANode: TfpgTreeNode);
+  procedure PrintNodeInfo(ALabel: TlqLabel; AFormat: string; ANode: TlqTreeNode);
   begin
     if ANode = nil then
       ALabel.Text := Format(AFormat, ['nil'])
@@ -119,10 +119,10 @@ end;
 
 procedure TMainForm.PopulateTree;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
   i: integer;
-  n2: TfpgTreeNode;
-  s: TfpgString;
+  n2: TlqTreeNode;
+  s: TlqString;
 begin
   n := tree.RootNode.AppendText('Node 1');
 
@@ -188,16 +188,16 @@ var
 begin
   if FSrcNode = FDestNode then
   begin
-    TfpgMessageDialog.Warning('', 'Source and Destination may not be the same');
+    TlqMessageDialog.Warning('', 'Source and Destination may not be the same');
     exit;
   end;
   if (FSrcNode = nil) or (FDestnode = nil) then
   begin
-    TfpgMessageDialog.Warning('', 'Both Source and Destintation needs to be set first');
+    TlqMessageDialog.Warning('', 'Both Source and Destintation needs to be set first');
     exit;
   end;
   i := cbMoveToTypes.FocusItem;
-  FSrcNode.MoveTo(FDestnode, TfpgNodeAttachMode(i)); // This cast is a hack! Do not do this in real-world apps!!
+  FSrcNode.MoveTo(FDestnode, TlqNodeAttachMode(i)); // This cast is a hack! Do not do this in real-world apps!!
   tree.FullExpand;
   tree.Invalidate;
   // reset values
@@ -209,7 +209,7 @@ begin
   TreeNodeChanged(nil);
 end;
 
-procedure TMainForm.StateImageClicked(Sender: TObject; ANode: TfpgTreeNode);
+procedure TMainForm.StateImageClicked(Sender: TObject; ANode: TlqTreeNode);
 begin
   case ANode.StateImageIndex of
     0:  ANode.StateImageIndex := 1;
@@ -220,7 +220,7 @@ end;
 
 procedure TMainForm.btnShowCheckedClicked(Sender: TObject);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
   s: string;
 begin
   s := 'These are all the nodes that have checkboxes and are checked:' + LineEnding;
@@ -243,7 +243,7 @@ constructor TMainForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   // create a image list
-  FImagelist := TfpgImageList.Create;
+  FImagelist := TlqImageList.Create;
   if fpgFileExists('../../../images/folder_16.bmp') then
     FImagelist.AddItemFromFile(SetDirSeparators('../../../images/folder_16.bmp'), 0);
   if fpgFileExists('../../../images/menu_preferences_16.bmp') then
@@ -254,7 +254,7 @@ begin
   end;
 
   InitializeCustomImages;
-  FStateImagelist := TfpgImageList.Create;
+  FStateImagelist := TlqImageList.Create;
   FStateImagelist.AddImage(fpgImages.GetImage('usr.state0'));
   FStateImagelist.AddImage(fpgImages.GetImage('usr.state1'));
 
@@ -283,7 +283,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  tree := TfpgTreeView.Create(self);
+  tree := TlqTreeView.Create(self);
   with tree do
   begin
     Name := 'tree';
@@ -300,7 +300,7 @@ begin
     OnStateImageClicked  := @StateImageClicked;
   end;
 
-  cbShowImages := TfpgCheckBox.Create(self);
+  cbShowImages := TlqCheckBox.Create(self);
   with cbShowImages do
   begin
     Name := 'cbShowImages';
@@ -314,7 +314,7 @@ begin
     OnChange := @cbShowImagesChange;
   end;
 
-  cbIndentNode := TfpgCheckBox.Create(self);
+  cbIndentNode := TlqCheckBox.Create(self);
   with cbIndentNode do
   begin
     Name := 'cbIndentNode';
@@ -328,7 +328,7 @@ begin
     OnChange := @cbIndentNodeChange;
   end;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -342,7 +342,7 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -352,7 +352,7 @@ begin
     Text := 'Label';
   end;
 
-  Label2 := TfpgLabel.Create(self);
+  Label2 := TlqLabel.Create(self);
   with Label2 do
   begin
     Name := 'Label2';
@@ -362,7 +362,7 @@ begin
     Text := 'Label';
   end;
 
-  Label3 := TfpgLabel.Create(self);
+  Label3 := TlqLabel.Create(self);
   with Label3 do
   begin
     Name := 'Label3';
@@ -372,7 +372,7 @@ begin
     Text := 'Label';
   end;
 
-  Label4 := TfpgLabel.Create(self);
+  Label4 := TlqLabel.Create(self);
   with Label4 do
   begin
     Name := 'Label4';
@@ -382,7 +382,7 @@ begin
     Text := 'Label';
   end;
 
-  Label5 := TfpgLabel.Create(self);
+  Label5 := TlqLabel.Create(self);
   with Label5 do
   begin
     Name := 'Label5';
@@ -392,7 +392,7 @@ begin
     Text := 'Label';
   end;
 
-  lblSource := TfpgLabel.Create(self);
+  lblSource := TlqLabel.Create(self);
   with lblSource do
   begin
     Name := 'lblSource';
@@ -402,7 +402,7 @@ begin
     Text := '--';
   end;
 
-  lblDestination := TfpgLabel.Create(self);
+  lblDestination := TlqLabel.Create(self);
   with lblDestination do
   begin
     Name := 'lblDestination';
@@ -412,7 +412,7 @@ begin
     Text := '--';
   end;
 
-  btnSource := TfpgButton.Create(self);
+  btnSource := TlqButton.Create(self);
   with btnSource do
   begin
     Name := 'btnSource';
@@ -425,7 +425,7 @@ begin
     OnClick := @btnSourceClicked;
   end;
 
-  btnDest := TfpgButton.Create(self);
+  btnDest := TlqButton.Create(self);
   with btnDest do
   begin
     Name := 'btnDest';
@@ -438,7 +438,7 @@ begin
     OnClick := @btnDestinationClicked;
   end;
 
-  btnMoveTo := TfpgButton.Create(self);
+  btnMoveTo := TlqButton.Create(self);
   with btnMoveTo do
   begin
     Name := 'btnMoveTo';
@@ -451,7 +451,7 @@ begin
     OnClick := @btnMoveToClicked;
   end;
 
-  cbMoveToTypes := TfpgComboBox.Create(self);
+  cbMoveToTypes := TlqComboBox.Create(self);
   with cbMoveToTypes do
   begin
     Name := 'cbMoveToTypes';
@@ -468,7 +468,7 @@ begin
     TabOrder := 14;
   end;
 
-  Label6 := TfpgLabel.Create(self);
+  Label6 := TlqLabel.Create(self);
   with Label6 do
   begin
     Name := 'Label6';
@@ -478,7 +478,7 @@ begin
     Text := 'Selected Node Information';
   end;
 
-  Label7 := TfpgLabel.Create(self);
+  Label7 := TlqLabel.Create(self);
   with Label7 do
   begin
     Name := 'Label7';
@@ -488,7 +488,7 @@ begin
     Text := 'Reorder Nodes (testing MovoTo() function)';
   end;
 
-  Label8 := TfpgLabel.Create(self);
+  Label8 := TlqLabel.Create(self);
   with Label8 do
   begin
     Name := 'Label8';
@@ -498,7 +498,7 @@ begin
     Text := 'Test various Tree functions';
   end;
 
-  btnCollapseAll := TfpgButton.Create(self);
+  btnCollapseAll := TlqButton.Create(self);
   with btnCollapseAll do
   begin
     Name := 'btnCollapseAll';
@@ -511,7 +511,7 @@ begin
     OnClick := @btnCollapseAllClicked;
   end;
 
-  btnExpandAll := TfpgButton.Create(self);
+  btnExpandAll := TlqButton.Create(self);
   with btnExpandAll do
   begin
     Name := 'btnExpandAll';
@@ -524,7 +524,7 @@ begin
     OnClick := @btnExpandAllClicked;
   end;
 
-  btnShowChecked := TfpgButton.Create(self);
+  btnShowChecked := TlqButton.Create(self);
   with btnShowChecked do
   begin
     Name := 'btnShowChecked';

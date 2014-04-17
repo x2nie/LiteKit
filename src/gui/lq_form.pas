@@ -36,12 +36,12 @@ type
   
   TFormCloseEvent = procedure(Sender: TObject; var CloseAction: TCloseAction) of object;
   TFormCloseQueryEvent = procedure(Sender: TObject; var CanClose: boolean) of object;
-  TfpgHelpEvent = function(AHelpType: THelpType; AHelpContext: THelpContext;
+  TlqHelpEvent = function(AHelpType: THelpType; AHelpContext: THelpContext;
        const AHelpKeyword: String; const AHelpFile: String;
        var AHandled: Boolean): Boolean of object;
 
 
-  TfpgBaseForm = class(TfpgWidget)
+  TlqBaseForm = class(TlqWidget)
   private
     FFullScreen: boolean;
     FOnActivate: TNotifyEvent;
@@ -52,32 +52,32 @@ type
     FOnDestroy: TNotifyEvent;
     FOnHide: TNotifyEvent;
     FOnShow: TNotifyEvent;
-    FOnHelp: TfpgHelpEvent;
+    FOnHelp: TlqHelpEvent;
     FDNDEnabled: boolean;
     procedure   SetDNDEnabled(const AValue: boolean);
   protected
-    FModalResult: TfpgModalResult;
-    FParentForm: TfpgBaseForm;
+    FModalResult: TlqModalResult;
+    FParentForm: TlqBaseForm;
     FWindowPosition: TWindowPosition;
     FWindowTitle: string;
     FSizeable: boolean;
     procedure   SetWindowTitle(const ATitle: string); override;
-    procedure   MsgActivate(var msg: TfpgMessageRec); message FPGM_ACTIVATE;
-    procedure   MsgDeActivate(var msg: TfpgMessageRec); message FPGM_DEACTIVATE;
-    procedure   MsgClose(var msg: TfpgMessageRec); message FPGM_CLOSE;
+    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
+    procedure   MsgDeActivate(var msg: TlqMessageRec); message FPGM_DEACTIVATE;
+    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
     procedure   HandlePaint; override;
     procedure   HandleClose; virtual;
     procedure   HandleHide; override;
     procedure   HandleShow; override;
-    procedure   HandleMove(x, y: TfpgCoord); override;
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
+    procedure   HandleMove(x, y: TlqCoord); override;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
     procedure   DoOnClose(var CloseAction: TCloseAction); virtual;
     function    DoOnHelp(AHelpType: THelpType; AHelpContext: THelpContext; const AHelpKeyword: String; const AHelpFile: String; var AHandled: Boolean): Boolean; virtual;
-    procedure   DoKeyShortcut(const AOrigin: TfpgWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); override;
+    procedure   DoKeyShortcut(const AOrigin: TlqWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); override;
     { -- properties -- }
     property    DNDEnabled: boolean read FDNDEnabled write SetDNDEnabled default False;
     property    Sizeable: boolean read FSizeable write FSizeable;
-    property    ModalResult: TfpgModalResult read FModalResult write FModalResult;
+    property    ModalResult: TlqModalResult read FModalResult write FModalResult;
     property    FullScreen: boolean read FFullScreen write FFullScreen default False;
     property    WindowPosition: TWindowPosition read FWindowPosition write FWindowPosition default wpAuto;
     property    WindowTitle: string read FWindowTitle write SetWindowTitle;
@@ -88,7 +88,7 @@ type
     property    OnCreate: TNotifyEvent read FOnCreate write FOnCreate;
     property    OnDeactivate: TNotifyEvent read FOnDeactivate write FOnDeactivate;
     property    OnDestroy: TNotifyEvent read FOnDestroy write FOnDestroy;
-    property    OnHelp: TfpgHelpEvent read FOnHelp write FOnHelp;
+    property    OnHelp: TlqHelpEvent read FOnHelp write FOnHelp;
     property    OnHide: TNotifyEvent read FOnHide write FOnHide;
     property    OnShow: TNotifyEvent read FOnShow write FOnShow;
   public
@@ -102,13 +102,13 @@ type
     procedure   InvokeHelp; override;
     procedure   Show;
     procedure   Hide;
-    function    ShowModal: TfpgModalResult;
+    function    ShowModal: TlqModalResult;
     procedure   Close;
     function    CloseQuery: boolean; virtual;
   end;
   
   
-  TfpgForm = class(TfpgBaseForm)
+  TlqForm = class(TlqBaseForm)
   published
     property    BackgroundColor;
     property    DNDEnabled;
@@ -154,7 +154,7 @@ type
   end;
 
 
-function WidgetParentForm(wg: TfpgWidget): TfpgForm;
+function WidgetParentForm(wg: TlqWidget): TlqForm;
 
 
 implementation
@@ -166,23 +166,23 @@ uses
   
 type
   // to access protected methods
-  TfpgMenuBarFriend = class(TfpgMenuBar)
+  TlqMenuBarFriend = class(TlqMenuBar)
   end;
 
-  TfpgWidgetFriend = class(TfpgWidget)
+  TlqWidgetFriend = class(TlqWidget)
   end;
 
 
-function WidgetParentForm(wg: TfpgWidget): TfpgForm;
+function WidgetParentForm(wg: TlqWidget): TlqForm;
 var
-  w: TfpgWidget;
+  w: TlqWidget;
 begin
   w := wg;
   while w <> nil do
   begin
-    if w is TfpgForm then
+    if w is TlqForm then
     begin
-      Result := TfpgForm(w);
+      Result := TlqForm(w);
       Exit; //==>
     end;
     w := w.Parent;
@@ -190,22 +190,22 @@ begin
   Result := nil;
 end;
 
-{ TfpgBaseForm }
+{ TlqBaseForm }
 
-procedure TfpgBaseForm.SetDNDEnabled(const AValue: boolean);
+procedure TlqBaseForm.SetDNDEnabled(const AValue: boolean);
 begin
   if FDNDEnabled = AValue then exit;
   FDNDEnabled := AValue;
   DoDNDEnabled(AValue);
 end;
 
-procedure TfpgBaseForm.SetWindowTitle(const ATitle: string);
+procedure TlqBaseForm.SetWindowTitle(const ATitle: string);
 begin
   FWindowTitle := ATitle;
   inherited SetWindowTitle(ATitle);
 end;
 
-procedure TfpgBaseForm.MsgActivate(var msg: TfpgMessageRec);
+procedure TlqBaseForm.MsgActivate(var msg: TlqMessageRec);
 begin
   {$IFDEF DEBUG}
   DebugLn(Classname + ' ' + Name + '.BaseForm - MsgActivate');
@@ -233,7 +233,7 @@ begin
     FOnActivate(self);
 end;
 
-procedure TfpgBaseForm.MsgDeActivate(var msg: TfpgMessageRec);
+procedure TlqBaseForm.MsgDeActivate(var msg: TlqMessageRec);
 begin
   ClosePopups;
   if ActiveWidget <> nil then
@@ -242,13 +242,13 @@ begin
     FOnDeactivate(self);
 end;
 
-procedure TfpgBaseForm.HandlePaint;
+procedure TlqBaseForm.HandlePaint;
 begin
   inherited HandlePaint;
   Canvas.Clear(FBackgroundColor);
 end;
 
-procedure TfpgBaseForm.AdjustWindowStyle;
+procedure TlqBaseForm.AdjustWindowStyle;
 begin
   if fpgApplication.MainForm = nil then
     fpgApplication.MainForm := self;
@@ -279,13 +279,13 @@ begin
     Exclude(FWindowAttributes, waFullScreen);
 end;
 
-procedure TfpgBaseForm.SetWindowParameters;
+procedure TlqBaseForm.SetWindowParameters;
 begin
   inherited;
   DoSetWindowTitle(FWindowTitle);
 end;
 
-constructor TfpgBaseForm.Create(AOwner: TComponent);
+constructor TlqBaseForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWindowPosition  := wpAuto;
@@ -302,18 +302,18 @@ begin
   FDNDEnabled      := False;
 end;
 
-destructor TfpgBaseForm.Destroy;
+destructor TlqBaseForm.Destroy;
 begin
   fpgApplication.RemoveWindowFromModalStack(Self);
   inherited Destroy;
 end;
 
-procedure TfpgBaseForm.AfterCreate;
+procedure TlqBaseForm.AfterCreate;
 begin
   // for the user
 end;
 
-procedure TfpgBaseForm.InvokeHelp;
+procedure TlqBaseForm.InvokeHelp;
 var
   lEventHandled: Boolean;
   lSucceeded: Boolean;
@@ -325,20 +325,20 @@ begin
     inherited InvokeHelp;
 end;
 
-procedure TfpgBaseForm.Show;
+procedure TlqBaseForm.Show;
 {$IFDEF CStackDebug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgBaseForm.Show - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqBaseForm.Show - ' + ClassName + ' ('+Name+')');
   {$ENDIF}
   FVisible := True;
   HandleShow;
 end;
 
-function TfpgBaseForm.ShowModal: TfpgModalResult;
+function TlqBaseForm.ShowModal: TlqModalResult;
 var
   lCloseAction: TCloseAction;
 begin
@@ -375,24 +375,24 @@ begin
   end;
 end;
 
-procedure TfpgBaseForm.MsgClose(var msg: TfpgMessageRec);
+procedure TlqBaseForm.MsgClose(var msg: TlqMessageRec);
 begin
   HandleClose;
 end;
 
-procedure TfpgBaseForm.HandleClose;
+procedure TlqBaseForm.HandleClose;
 begin
   Close;
 end;
 
-procedure TfpgBaseForm.HandleHide;
+procedure TlqBaseForm.HandleHide;
 begin
   if Assigned(FOnHide) then
     FOnHide(self);
   inherited HandleHide;
 end;
 
-procedure TfpgBaseForm.HandleShow;
+procedure TlqBaseForm.HandleShow;
 begin
   inherited HandleShow;
   HandleAlignments(0, 0);
@@ -400,35 +400,35 @@ begin
     FOnShow(self);
 end;
 
-procedure TfpgBaseForm.HandleMove(x, y: TfpgCoord);
+procedure TlqBaseForm.HandleMove(x, y: TlqCoord);
 {$IFDEF CStackDebug}
 var
   itf: IInterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  itf := DebugMethodEnter('TfpgBaseForm.HandleMove - ' + ClassName + ' ('+Name+')');
+  itf := DebugMethodEnter('TlqBaseForm.HandleMove - ' + ClassName + ' ('+Name+')');
   DebugLn(Format('x:%d  y:%d', [x, y]));
   {$ENDIF}
   ClosePopups;
   inherited HandleMove(x, y);
 end;
 
-procedure TfpgBaseForm.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqBaseForm.HandleResize(awidth, aheight: TlqCoord);
 {$IFDEF CStackDebug}
 var
   i: iinterface;
 {$ENDIF}
 begin
   {$IFDEF CStackDebug}
-  DebugMethodEnter('TfpgBaseForm.HandleResize - ' + ClassName + ' ('+Name+')');
+  DebugMethodEnter('TlqBaseForm.HandleResize - ' + ClassName + ' ('+Name+')');
   DebugLn(Format('w:%d  h:%d', [awidth, aheight]));
   {$ENDIF}
   ClosePopups;
   inherited HandleResize(awidth, aheight);
 end;
 
-procedure TfpgBaseForm.AfterConstruction;
+procedure TlqBaseForm.AfterConstruction;
 begin
   AfterCreate;
   inherited AfterConstruction;
@@ -436,46 +436,46 @@ begin
     FOnCreate(self);
 end;
 
-procedure TfpgBaseForm.BeforeDestruction;
+procedure TlqBaseForm.BeforeDestruction;
 begin
   inherited BeforeDestruction;
   if Assigned(FOnDestroy) then
     FOnDestroy(self);
 end;
 
-procedure TfpgBaseForm.DoOnClose(var CloseAction: TCloseAction);
+procedure TlqBaseForm.DoOnClose(var CloseAction: TCloseAction);
 begin
   if Assigned(FOnClose) then
     OnClose(self, CloseAction);
 end;
 
-function TfpgBaseForm.DoOnHelp(AHelpType: THelpType; AHelpContext: THelpContext;
+function TlqBaseForm.DoOnHelp(AHelpType: THelpType; AHelpContext: THelpContext;
   const AHelpKeyword: String; const AHelpFile: String; var AHandled: Boolean): Boolean;
 begin
   if Assigned(FOnHelp) then
     Result := FOnHelp(AHelpType, AHelpContext, AHelpKeyword, AHelpFile, AHandled);
 end;
 
-procedure TfpgBaseForm.DoKeyShortcut(const AOrigin: TfpgWidget;
+procedure TlqBaseForm.DoKeyShortcut(const AOrigin: TlqWidget;
   const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False);
 var
-  wg: TfpgWidget;
-  menu: TfpgMenuBar;
+  wg: TlqWidget;
+  menu: TlqMenuBar;
   i: integer;
   ss: TShiftState;
   key: word;
-  c: TfpgComponent;
+  c: TlqComponent;
 
-  function FindMenuBar(AWidget: TfpgWidget): TfpgWidget;
+  function FindMenuBar(AWidget: TlqWidget): TlqWidget;
   var
     n: integer;
-    w: TfpgWidget;
+    w: TlqWidget;
   begin
     Result := nil;
     for n := 0 to AWidget.ComponentCount-1 do
     begin
-      w := TfpgWidget(AWidget.Components[n]);
-      if (w <> nil) and (w <> self) and (w <> AOrigin) and (w is TfpgMenuBar) then
+      w := TlqWidget(AWidget.Components[n]);
+      if (w <> nil) and (w <> self) and (w <> AOrigin) and (w is TlqMenuBar) then
       begin
         Result := w;
         exit;
@@ -488,14 +488,14 @@ var
   end;
 
 begin
-  // find the first TfpgMenuBar - if it exits
+  // find the first TlqMenuBar - if it exits
   wg := FindMenuBar(self);
   if (wg <> nil) then
   begin
-    menu := wg as TfpgMenuBar;
+    menu := wg as TlqMenuBar;
     key := keycode;
     ss := shiftstate;
-    TfpgMenuBarFriend(wg).HandleKeyPress(key, ss, consumed);
+    TlqMenuBarFriend(wg).HandleKeyPress(key, ss, consumed);
   end;
 
   if consumed then
@@ -503,18 +503,18 @@ begin
   // now send to each widget on the form - excluding AOrigin and MenuBar widgets
   for i := 0 to ComponentCount-1 do
   begin
-    c := TfpgComponent(Components[i]);
-    if c is TfpgWidget then
-      wg := TfpgWidget(c)
+    c := TlqComponent(Components[i]);
+    if c is TlqWidget then
+      wg := TlqWidget(c)
     else
       wg := nil;
-    if (wg <> nil) and (wg <> self) and (wg <> AOrigin) and (wg <> menu) and (not (wg is TfpgPopupMenu)) then
+    if (wg <> nil) and (wg <> self) and (wg <> AOrigin) and (wg <> menu) and (not (wg is TlqPopupMenu)) then
     begin
       if (not wg.Visible) or (not wg.Enabled) then
         continue
       else
       begin
-        TfpgWidgetFriend(wg).DoKeyShortcut(AOrigin, keycode, shiftstate, consumed);
+        TlqWidgetFriend(wg).DoKeyShortcut(AOrigin, keycode, shiftstate, consumed);
         if consumed then
           Exit;
       end;
@@ -522,12 +522,12 @@ begin
   end;
 end;
 
-procedure TfpgBaseForm.Hide;
+procedure TlqBaseForm.Hide;
 begin
   Visible := False;
 end;
 
-procedure TfpgBaseForm.Close;
+procedure TlqBaseForm.Close;
 var
   CloseAction: TCloseAction;
   IsMainForm: Boolean;
@@ -563,7 +563,7 @@ begin
   end;  { if CloseQuery }
 end;
 
-function TfpgBaseForm.CloseQuery: boolean;
+function TlqBaseForm.CloseQuery: boolean;
 begin
   Result := True;
   if Assigned(FOnCloseQuery) then

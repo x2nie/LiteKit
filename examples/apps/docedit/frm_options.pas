@@ -14,30 +14,30 @@ uses
 
 type
 
-  TfrmOptions = class(TfpgForm)
+  TfrmOptions = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: frmOptions}
-    lblName1: TfpgLabel;
-    cbConfirmDeletes: TfpgCheckBox;
-    cbBackups: TfpgCheckBox;
-    cbSkipNodes: TfpgCheckBox;
-    edtDftExt: TfpgEdit;
-    edtBakExt: TfpgEdit;
-    edtMRU: TfpgEdit;
-    lblName2: TfpgLabel;
-    lblName3: TfpgLabel;
-    lblName4: TfpgLabel;
-    edtMakeSkel: TfpgEdit;
-    btnMakeSkel: TfpgButton;
-    edtFPDoc: TfpgEdit;
-    btnFPDoc: TfpgButton;
-    cbShowHints: TfpgCheckBox;
-    pnlName1: TfpgBevel;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
-    lblName5: TfpgLabel;
-    lblName6: TfpgLabel;
-    lblName7: TfpgLabel;
+    lblName1: TlqLabel;
+    cbConfirmDeletes: TlqCheckBox;
+    cbBackups: TlqCheckBox;
+    cbSkipNodes: TlqCheckBox;
+    edtDftExt: TlqEdit;
+    edtBakExt: TlqEdit;
+    edtMRU: TlqEdit;
+    lblName2: TlqLabel;
+    lblName3: TlqLabel;
+    lblName4: TlqLabel;
+    edtMakeSkel: TlqEdit;
+    btnMakeSkel: TlqButton;
+    edtFPDoc: TlqEdit;
+    btnFPDoc: TlqButton;
+    cbShowHints: TlqCheckBox;
+    pnlName1: TlqBevel;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
+    lblName5: TlqLabel;
+    lblName6: TlqLabel;
+    lblName7: TlqLabel;
     {@VFD_HEAD_END: frmOptions}
 
     procedure AfterCreate; override;
@@ -56,7 +56,7 @@ begin
   WindowTitle := 'Options';
   WindowPosition := wpScreenCenter;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     SetPosition(8, 8, 51, 16);
@@ -65,7 +65,7 @@ begin
     AutoSize := True;
   end;
 
-  cbConfirmDeletes := TfpgCheckBox.Create(self);
+  cbConfirmDeletes := TlqCheckBox.Create(self);
   with cbConfirmDeletes do
   begin
     SetPosition(24, 28, 120, 20);
@@ -73,7 +73,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  cbBackups := TfpgCheckBox.Create(self);
+  cbBackups := TlqCheckBox.Create(self);
   with cbBackups do
   begin
     SetPosition(24, 52, 120, 20);
@@ -81,7 +81,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  cbSkipNodes := TfpgCheckBox.Create(self);
+  cbSkipNodes := TlqCheckBox.Create(self);
   with cbSkipNodes do
   begin
     SetPosition(24, 76, 216, 20);
@@ -89,7 +89,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  edtDftExt := TfpgEdit.Create(self);
+  edtDftExt := TlqEdit.Create(self);
   with edtDftExt do
   begin
     SetPosition(164, 104, 120, 22);
@@ -97,7 +97,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  edtBakExt := TfpgEdit.Create(self);
+  edtBakExt := TlqEdit.Create(self);
   with edtBakExt do
   begin
     SetPosition(164, 128, 120, 22);
@@ -105,7 +105,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  edtMRU := TfpgEdit.Create(self);
+  edtMRU := TlqEdit.Create(self);
   with edtMRU do
   begin
     SetPosition(164, 152, 120, 22);
@@ -113,7 +113,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     SetPosition(8, 252, 50, 16);
@@ -122,7 +122,7 @@ begin
     AutoSize := True;
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     SetPosition(24, 108, 104, 16);
@@ -130,7 +130,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     SetPosition(24, 132, 108, 16);
@@ -138,7 +138,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  edtMakeSkel := TfpgEdit.Create(self);
+  edtMakeSkel := TlqEdit.Create(self);
   with edtMakeSkel do
   begin
     SetPosition(164, 184, 196, 22);
@@ -147,7 +147,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnMakeSkel := TfpgButton.Create(self);
+  btnMakeSkel := TlqButton.Create(self);
   with btnMakeSkel do
   begin
     SetPosition(364, 184, 23, 20);
@@ -157,7 +157,7 @@ begin
     ImageName := '';
   end;
 
-  edtFPDoc := TfpgEdit.Create(self);
+  edtFPDoc := TlqEdit.Create(self);
   with edtFPDoc do
   begin
     SetPosition(164, 208, 196, 22);
@@ -166,7 +166,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnFPDoc := TfpgButton.Create(self);
+  btnFPDoc := TlqButton.Create(self);
   with btnFPDoc do
   begin
     SetPosition(364, 208, 23, 20);
@@ -176,7 +176,7 @@ begin
     ImageName := '';
   end;
 
-  cbShowHints := TfpgCheckBox.Create(self);
+  cbShowHints := TlqCheckBox.Create(self);
   with cbShowHints do
   begin
     SetPosition(24, 272, 120, 20);
@@ -184,7 +184,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  pnlName1 := TfpgBevel.Create(self);
+  pnlName1 := TlqBevel.Create(self);
   with pnlName1 do
   begin
     SetPosition(4, 313, 389, 11);
@@ -194,7 +194,7 @@ begin
     Focusable := False;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     SetPosition(234, 325, 75, 24);
@@ -205,7 +205,7 @@ begin
     ModalResult := mrOK;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     SetPosition(314, 325, 75, 24);
@@ -216,7 +216,7 @@ begin
     ModalResult := mrCancel;
   end;
 
-  lblName5 := TfpgLabel.Create(self);
+  lblName5 := TlqLabel.Create(self);
   with lblName5 do
   begin
     SetPosition(24, 156, 132, 16);
@@ -224,7 +224,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName6 := TfpgLabel.Create(self);
+  lblName6 := TlqLabel.Create(self);
   with lblName6 do
   begin
     SetPosition(24, 188, 127, 16);
@@ -232,7 +232,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName7 := TfpgLabel.Create(self);
+  lblName7 := TlqLabel.Create(self);
   with lblName7 do
   begin
     SetPosition(24, 212, 102, 16);

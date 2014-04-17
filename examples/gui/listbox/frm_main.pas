@@ -15,7 +15,7 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     procedure cbHotTrackChanged(Sender: TObject);
     procedure ckhReorderChanged(Sender: TObject);
@@ -25,14 +25,14 @@ type
     procedure btnAdd10Clicked(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    lstName1: TfpgListBox;
-    btnAdd10: TfpgButton;
-    btnClear: TfpgButton;
-    btnFocus: TfpgButton;
-    btnAdd1: TfpgButton;
-    memName1: TfpgMemo;
-    cbHotTrack: TfpgCheckBox;
-    chkReorder: TfpgCheckBox;
+    lstName1: TlqListBox;
+    btnAdd10: TlqButton;
+    btnClear: TlqButton;
+    btnFocus: TlqButton;
+    btnAdd1: TlqButton;
+    memName1: TlqMemo;
+    cbHotTrack: TlqCheckBox;
+    chkReorder: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure AfterCreate; override;
   end;
@@ -85,7 +85,7 @@ begin
   WindowTitle := 'ListBox test';
   WindowPosition := wpScreenCenter;
 
-  lstName1 := TfpgListBox.Create(self);
+  lstName1 := TlqListBox.Create(self);
   with lstName1 do
   begin
     Name := 'lstName1';
@@ -96,7 +96,7 @@ begin
     TabOrder := 0;
   end;
 
-  btnAdd10 := TfpgButton.Create(self);
+  btnAdd10 := TlqButton.Create(self);
   with btnAdd10 do
   begin
     Name := 'btnAdd10';
@@ -109,7 +109,7 @@ begin
     OnClick := @btnAdd10Clicked;
   end;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -122,7 +122,7 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  btnFocus := TfpgButton.Create(self);
+  btnFocus := TlqButton.Create(self);
   with btnFocus do
   begin
     Name := 'btnFocus';
@@ -135,7 +135,7 @@ begin
     OnClick := @btnFocusClicked;
   end;
 
-  btnAdd1 := TfpgButton.Create(self);
+  btnAdd1 := TlqButton.Create(self);
   with btnAdd1 do
   begin
     Name := 'btnAdd1';
@@ -148,7 +148,7 @@ begin
     OnClick := @btnAdd1Clicked;
   end;
 
-  memName1 := TfpgMemo.Create(self);
+  memName1 := TlqMemo.Create(self);
   with memName1 do
   begin
     Name := 'memName1';
@@ -157,7 +157,7 @@ begin
     TabOrder := 5;
   end;
 
-  cbHotTrack := TfpgCheckBox.Create(self);
+  cbHotTrack := TlqCheckBox.Create(self);
   with cbHotTrack do
   begin
     Name := 'cbHotTrack';
@@ -168,7 +168,7 @@ begin
     OnChange := @cbHotTrackChanged;
   end;
 
-  chkReorder := TfpgCheckBox.Create(self);
+  chkReorder := TlqCheckBox.Create(self);
   with chkReorder do
   begin
     Name := 'chkReorder';

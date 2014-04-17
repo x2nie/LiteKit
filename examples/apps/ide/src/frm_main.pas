@@ -30,57 +30,57 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    pnlMenu: TfpgBevel;
-    mainmenu: TfpgMenuBar;
-    Toolbar: TfpgBevel;
-    btnQuit: TfpgButton;
-    btnOpen: TfpgButton;
-    btnSave: TfpgButton;
-    btnSaveAll: TfpgButton;
-    pnlStatusBar: TfpgBevel;
-    lblStatus: TfpgLabel;
-    pnlClientArea: TfpgBevel;
-    pnlWindow: TfpgPageControl;
-    tsMessages: TfpgTabSheet;
-    grdMessages: TfpgStringGrid;
-    tsScribble: TfpgTabSheet;
-    memScribble: TfpgMemo;
-    tsTerminal: TfpgTabSheet;
-    Splitter1: TfpgSplitter;
-    pnlTool: TfpgPageControl;
-    tsProject: TfpgTabSheet;
-    tvProject: TfpgTreeView;
-    tsFiles: TfpgTabSheet;
-    grdFiles: TfpgFileGrid;
-    Splitter2: TfpgSplitter;
-    pcEditor: TfpgPageControl;
-    tseditor: TfpgTabSheet;
-    TextEditor: TfpgTextEdit;
-    mnuFile: TfpgPopupMenu;
-    mnuEdit: TfpgPopupMenu;
-    mnuSearch: TfpgPopupMenu;
-    mnuView: TfpgPopupMenu;
-    mnuProject: TfpgPopupMenu;
-    mnuRun: TfpgPopupMenu;
-    mnuTools: TfpgPopupMenu;
-    mnuSettings: TfpgPopupMenu;
-    mnuHelp: TfpgPopupMenu;
+    pnlMenu: TlqBevel;
+    mainmenu: TlqMenuBar;
+    Toolbar: TlqBevel;
+    btnQuit: TlqButton;
+    btnOpen: TlqButton;
+    btnSave: TlqButton;
+    btnSaveAll: TlqButton;
+    pnlStatusBar: TlqBevel;
+    lblStatus: TlqLabel;
+    pnlClientArea: TlqBevel;
+    pnlWindow: TlqPageControl;
+    tsMessages: TlqTabSheet;
+    grdMessages: TlqStringGrid;
+    tsScribble: TlqTabSheet;
+    memScribble: TlqMemo;
+    tsTerminal: TlqTabSheet;
+    Splitter1: TlqSplitter;
+    pnlTool: TlqPageControl;
+    tsProject: TlqTabSheet;
+    tvProject: TlqTreeView;
+    tsFiles: TlqTabSheet;
+    grdFiles: TlqFileGrid;
+    Splitter2: TlqSplitter;
+    pcEditor: TlqPageControl;
+    tseditor: TlqTabSheet;
+    TextEditor: TlqTextEdit;
+    mnuFile: TlqPopupMenu;
+    mnuEdit: TlqPopupMenu;
+    mnuSearch: TlqPopupMenu;
+    mnuView: TlqPopupMenu;
+    mnuProject: TlqPopupMenu;
+    mnuRun: TlqPopupMenu;
+    mnuTools: TlqPopupMenu;
+    mnuSettings: TlqPopupMenu;
+    mnuHelp: TlqPopupMenu;
     {@VFD_HEAD_END: MainForm}
     {$ifdef DEBUGSVR}
-    btnTest: TfpgButton;
+    btnTest: TlqButton;
     {$endif}
-    pmOpenRecentMenu: TfpgPopupMenu;
-    miFile: TfpgMenuItem;
-    miRecentProjects: TfpgMenuItem;
-    FRecentFiles: TfpgMRU;
+    pmOpenRecentMenu: TlqPopupMenu;
+    miFile: TlqMenuItem;
+    miRecentProjects: TlqMenuItem;
+    FRecentFiles: TlqMRU;
     FRegex: TRegExpr;
-    FKeywordFont: TfpgFont;
+    FKeywordFont: TlqFont;
     FFileMonitor: TFileMonitor;
-    FLastSearchText: TfpgString;
-    FLastFindOptions: TfpgFindOptions;
+    FLastSearchText: TlqString;
+    FLastFindOptions: TlqFindOptions;
     FLastFindBackward: Boolean;
     procedure   MonitoredFileChanged(Sender: TObject; AData: TFileMonitorEventData);
     procedure   FormShow(Sender: TObject);
@@ -98,7 +98,7 @@ type
     procedure   miFindPrevClicked(Sender: TObject);
     procedure   miGoToLineClick(Sender: TObject);
     procedure   miSearchProcedureList(Sender: TObject);
-    procedure   miAboutFPGuiClicked(Sender: TObject);
+    procedure   miAbouTlquiClicked(Sender: TObject);
     procedure   miAboutIDE(Sender: TObject);
     procedure   miRunMake(Sender: TObject);
     procedure   miRunBuild(Sender: TObject);
@@ -115,28 +115,28 @@ type
     procedure   miRecentProjectsClick(Sender: TObject; const FileName: String);
     procedure   miProjectSave(Sender: TObject);
     procedure   miProjectSaveAs(Sender: TObject);
-    procedure   AddUnitToProject(const AUnitName: TfpgString);
+    procedure   AddUnitToProject(const AUnitName: TlqString);
     procedure   miProjectAddUnitToProject(Sender: TObject);
     procedure   tvProjectDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
     procedure   grdMessageKeyPressed(Sender: TObject; var KeyCode: Word; var ShiftState: TShiftState; var Consumed: Boolean);
-    procedure   TabSheetClosing(Sender: TObject; ATabSheet: TfpgTabSheet);
+    procedure   TabSheetClosing(Sender: TObject; ATabSheet: TlqTabSheet);
     procedure   BuildTerminated(Sender: TObject);
     procedure   BuildOutput(Sender: TObject; const ALine: string);
-    procedure   UpdateStatus(const AText: TfpgString);
+    procedure   UpdateStatus(const AText: TlqString);
     procedure   SetupProjectTree;
     procedure   PopuplateProjectTree;
     procedure   SetupFilesGrid;
-    procedure   AddMessage(const AMsg: TfpgString);
+    procedure   AddMessage(const AMsg: TlqString);
     procedure   ClearMessagesWindow;
     procedure   CloseAllTabs;
-    procedure   LoadProject(const AFilename: TfpgString);
-    function    CreateNewEditorTab(const ATitle: TfpgString): TfpgTabSheet;
-    function    OpenEditorPage(const AFilename: TfpgString): TfpgTabSheet;
+    procedure   LoadProject(const AFilename: TlqString);
+    function    CreateNewEditorTab(const ATitle: TlqString): TlqTabSheet;
+    function    OpenEditorPage(const AFilename: TlqString): TlqTabSheet;
     procedure   miTest(Sender: TObject);
-    function    GetUnitsNode: TfpgTreeNode;
+    function    GetUnitsNode: TlqTreeNode;
     procedure   UpdateWindowTitle;
-    procedure   HighlightObjectPascal(Sender: TObject; ALineText: TfpgString; ALineIndex: Integer; ACanvas: TfpgCanvas; ATextRect: TfpgRect; var AllowSelfDraw: Boolean);
-    procedure   HighlightPatch(Sender: TObject; ALineText: TfpgString; ALineIndex: Integer; ACanvas: TfpgCanvas; ATextRect: TfpgRect; var AllowSelfDraw: Boolean);
+    procedure   HighlightObjectPascal(Sender: TObject; ALineText: TlqString; ALineIndex: Integer; ACanvas: TlqCanvas; ATextRect: TlqRect; var AllowSelfDraw: Boolean);
+    procedure   HighlightPatch(Sender: TObject; ALineText: TlqString; ALineIndex: Integer; ACanvas: TlqCanvas; ATextRect: TlqRect; var AllowSelfDraw: Boolean);
     procedure   SetupEditorPreference;
   public
     constructor Create(AOwner: TComponent); override;
@@ -190,7 +190,7 @@ end;
 
 procedure TMainForm.btnOpenFileClicked(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := SelectFileDialog(sfdOpen, Format(cFileFilterTemplate, ['Source Files', cSourceFiles, cSourceFiles]));
   if s <> '' then
@@ -201,7 +201,7 @@ end;
 
 procedure TMainForm.miFileNewUnit(Sender: TObject);
 var
-  newunit: TfpgString;
+  newunit: TlqString;
   sl: TStringList;
   FInternalMacroList: TIDEMacroList;
   i: integer;
@@ -229,51 +229,51 @@ end;
 
 procedure TMainForm.miFileSave(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := pcEditor.ActivePage.Hint;
   if s <> '' then
-    TfpgTextEdit(pcEditor.ActivePage.Components[0]).SaveToFile(s);
+    TlqTextEdit(pcEditor.ActivePage.Components[0]).SaveToFile(s);
   AddMessage('File saved');
 end;
 
 procedure TMainForm.miFileSaveAs(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := SelectFileDialog(sfdSave);
   if s <> '' then
-    TfpgTextEdit(pcEditor.ActivePage.Components[0]).SaveToFile(s);
+    TlqTextEdit(pcEditor.ActivePage.Components[0]).SaveToFile(s);
 end;
 
 procedure TMainForm.miEditCutClicked(Sender: TObject);
 var
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   edt.CutToClipboard;
 end;
 
 procedure TMainForm.miEditCopyClicked(Sender: TObject);
 var
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   edt.CopyToClipboard;
 end;
 
 procedure TMainForm.miEditPasteClicked(Sender: TObject);
 var
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   edt.PasteFromClipboard;
 end;
 
 procedure TMainForm.miFindClicked(Sender: TObject);
 var
-  s: TfpgString;
-  edt: TfpgTextEdit;
+  s: TlqString;
+  edt: TlqTextEdit;
 begin
   FLastFindBackward := False;
   FLastFindOptions := [];
@@ -281,19 +281,19 @@ begin
   if s = '' then
     exit;
   FLastSearchText := s;
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   edt.FindText(s, FLastFindOptions, FLastFindBackward);
   edt.SetFocus;
 end;
 
 procedure TMainForm.miFindNextClicked(Sender: TObject);
 var
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
   if FLastSearchText = '' then
     Exit;
   FLastFindBackward := False;
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   if not Assigned(edt) then
     Exit;
   edt.FindText(FLastSearchText, FLastFindOptions, FLastFindBackward);
@@ -302,12 +302,12 @@ end;
 
 procedure TMainForm.miFindPrevClicked(Sender: TObject);
 var
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
   if FLastSearchText = '' then
     Exit;
   FLastFindBackward := True;
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   if not Assigned(edt) then
     Exit;
   edt.FindText(FLastSearchText, FLastFindOptions, FLastFindBackward);
@@ -318,9 +318,9 @@ procedure TMainForm.miGoToLineClick(Sender: TObject);
 var
   sValue: string;
   i: integer;
-  edt: TfpgTextEdit;
+  edt: TlqTextEdit;
 begin
-  edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+  edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   if not Assigned(edt) then
     Exit;
   if fpgInputQuery('Go to line', 'Go to line number?', sValue) then
@@ -337,25 +337,25 @@ end;
 
 procedure TMainForm.miSearchProcedureList(Sender: TObject);
 var
-  s: TfpgString;
-  edt: TfpgTextEdit;
+  s: TlqString;
+  edt: TlqTextEdit;
 begin
   s := pcEditor.ActivePage.Hint;
   if s <> '' then
   begin
-    edt := TfpgTextEdit(pcEditor.ActivePage.Components[0]);
+    edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
     DisplayProcedureList(s, edt);
   end;
 end;
 
-procedure TMainForm.miAboutFPGuiClicked(Sender: TObject);
+procedure TMainForm.miAbouTlquiClicked(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui;
+  TlqMessageDialog.AbouTlqui;
 end;
 
 procedure TMainForm.miAboutIDE(Sender: TObject);
 begin
-  TfpgMessageDialog.Information('About fpGUI IDE',
+  TlqMessageDialog.Information('About fpGUI IDE',
       'fpGUI IDE version ' + FPGUI_VERSION + LineEnding + LineEnding
       + 'Created by Graeme Geldenhuys' + LineEnding
       + 'Compiled with FPC ' + FPCVersion);
@@ -441,7 +441,7 @@ end;
 procedure TMainForm.miViewDebug(Sender: TObject);
 begin
   if not Assigned(DebugForm) then
-    fpgApplication.CreateForm(TDebugForm, TfpgWindowBase(DebugForm));
+    fpgApplication.CreateForm(TDebugForm, TlqWindowBase(DebugForm));
   DebugForm.Show;
 end;
 
@@ -457,12 +457,12 @@ end;
 
 procedure TMainForm.miProjectNewFromTemplate(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
-  lFilename: TfpgString;
+  dlg: TlqFileDialog;
+  lFilename: TlqString;
 begin
   CloseAllTabs;
   FreeProject;
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     dlg.InitialDir := GMacroList.ExpandMacro(cMacro_TemplateDir);
     dlg.Filter := Format(cFileFilterTemplate, ['Project Files', cProjectFiles, cProjectFiles])
@@ -484,7 +484,7 @@ end;
 
 procedure TMainForm.miProjectOpen(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := SelectFileDialog(sfdOpen, Format(cFileFilterTemplate, ['Project Files', cProjectFiles, cProjectFiles]));
   if s <> '' then
@@ -505,7 +505,7 @@ begin
   except
     on E: Exception do
     begin
-      TfpgMessageDialog.Critical('', E.Message);
+      TlqMessageDialog.Critical('', E.Message);
     end;
   end;
   AddMessage('Project saved.');
@@ -513,7 +513,7 @@ end;
 
 procedure TMainForm.miProjectSaveAs(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := SelectFileDialog(sfdSave, Format(cFileFilterTemplate, ['Project Files', cProjectFiles, cProjectFiles]));
   if s <> '' then
@@ -526,7 +526,7 @@ begin
     except
       on E: Exception do
       begin
-        TfpgMessageDialog.Critical('', E.Message);
+        TlqMessageDialog.Critical('', E.Message);
       end;
     end;
     UpdateWindowTitle;
@@ -534,12 +534,12 @@ begin
   end;
 end;
 
-procedure TMainForm.AddUnitToProject(const AUnitName: TfpgString);
+procedure TMainForm.AddUnitToProject(const AUnitName: TlqString);
 var
   u: TUnit;
-  s: TfpgString;
-  r: TfpgTreeNode;
-  n: TfpgTreeNode;
+  s: TlqString;
+  r: TlqTreeNode;
+  n: TlqTreeNode;
 begin
   u := TUnit.Create;
   u.FileName := AUnitName;
@@ -557,7 +557,7 @@ end;
 
 procedure TMainForm.miProjectAddUnitToProject(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   s := pcEditor.ActivePage.Hint;
 //  writeln('adding unit: ', s);
@@ -570,9 +570,9 @@ end;
 
 procedure TMainForm.tvProjectDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 var
-  r: TfpgTreeNode;
-  n: TfpgTreeNode;
-  ts: TfpgTabSheet;
+  r: TlqTreeNode;
+  n: TlqTreeNode;
+  ts: TlqTabSheet;
   u: TUnit;
 begin
   r := GetUnitsNode;
@@ -591,7 +591,7 @@ procedure TMainForm.grdMessageKeyPressed(Sender: TObject; var KeyCode: Word; var
 var
   cr: TClipboardKeyType;
   i: integer;
-  s: TfpgString;
+  s: TlqString;
 begin
   cr := CheckClipboardKey(KeyCode, ShiftState);
   if cr = ckCopy then
@@ -603,7 +603,7 @@ begin
   end;
 end;
 
-procedure TMainForm.TabSheetClosing(Sender: TObject; ATabSheet: TfpgTabSheet);
+procedure TMainForm.TabSheetClosing(Sender: TObject; ATabSheet: TlqTabSheet);
 var
   u: TUnit;
 begin
@@ -625,7 +625,7 @@ begin
   AddMessage(ALine);
 end;
 
-procedure TMainForm.UpdateStatus(const AText: TfpgString);
+procedure TMainForm.UpdateStatus(const AText: TlqString);
 begin
   lblStatus.Text := AText;
 end;
@@ -642,10 +642,10 @@ end;
 
 procedure TMainForm.PopuplateProjectTree;
 var
-  r: TfpgTreeNode;
-  n: TfpgTreeNode;
+  r: TlqTreeNode;
+  n: TlqTreeNode;
   i: integer;
-  s: TfpgString;
+  s: TlqString;
 begin
   r := GetUnitsNode;
   tvProject.Selection := r;
@@ -671,7 +671,7 @@ begin
   grdFiles.Invalidate;
 end;
 
-procedure TMainForm.AddMessage(const AMsg: TfpgString);
+procedure TMainForm.AddMessage(const AMsg: TlqString);
 begin
   grdMessages.BeginUpdate;
   grdMessages.RowCount := grdMessages.RowCount + 1;
@@ -688,7 +688,7 @@ end;
 
 procedure TMainForm.CloseAllTabs;
 var
-  ts: TfpgTabSheet;
+  ts: TlqTabSheet;
   i: integer;
 begin
   pcEditor.BeginUpdate;
@@ -704,10 +704,10 @@ begin
   end;
 end;
 
-procedure TMainForm.LoadProject(const AFilename: TfpgString);
+procedure TMainForm.LoadProject(const AFilename: TlqString);
 var
   i: integer;
-  ts: TfpgTabSheet;
+  ts: TlqTabSheet;
 begin
   // remove all project info
   CloseAllTabs;
@@ -729,12 +729,12 @@ begin
   AddMessage('Project loaded');
 end;
 
-function TMainForm.CreateNewEditorTab(const ATitle: TfpgString): TfpgTabSheet;
+function TMainForm.CreateNewEditorTab(const ATitle: TlqString): TlqTabSheet;
 var
-  m: TfpgTextEdit;
+  m: TlqTextEdit;
 begin
   Result := pcEditor.AppendTabSheet(ATitle);
-  m := TfpgTextEdit.Create(Result);
+  m := TlqTextEdit.Create(Result);
   m.SetPosition(1, 1, 200, 20);
   m.Align := alClient;
   m.FontDesc := gINI.ReadString(cEditor, 'Font', '#Edit2');
@@ -743,19 +743,19 @@ begin
   m.RightEdge := True;
 end;
 
-function TMainForm.OpenEditorPage(const AFilename: TfpgString): TfpgTabSheet;
+function TMainForm.OpenEditorPage(const AFilename: TlqString): TlqTabSheet;
 var
-  s: TfpgString;
-  f: TfpgString;
+  s: TlqString;
+  f: TlqString;
   i: integer;
   found: Boolean;
-  ts: TfpgTabSheet;
-  ext: TfpgString;
+  ts: TlqTabSheet;
+  ext: TlqString;
   pos_h: integer;
   pos_v: integer;
   cur_pos_h: integer;
   cur_pos_v: integer;
-  editor: TfpgTextEdit;
+  editor: TlqTextEdit;
 begin
   s := AFilename;
   f := fpgExtractFileName(s);
@@ -770,7 +770,7 @@ begin
   if found then
   begin
     // reuse existing tab
-    editor := TfpgTextEdit(pcEditor.Pages[i].Components[0]);
+    editor := TlqTextEdit(pcEditor.Pages[i].Components[0]);
     pos_h := editor.ScrollPos_H;
     pos_v := editor.ScrollPos_V;
     cur_pos_h := editor.CaretPos_H;
@@ -791,7 +791,7 @@ begin
   begin
     // we need a new tabsheet
     ts := CreateNewEditorTab(f);
-    editor := ts.Components[0] as TfpgTextEdit;
+    editor := ts.Components[0] as TlqTextEdit;
     editor.Lines.BeginUpdate;
     if fpgFileExists(s) then
       editor.Lines.LoadFromFile(s);
@@ -801,11 +801,11 @@ begin
       ext := fpgExtractFileExt(AFilename);
       if (ext = '.pas') or (ext = '.pp') or (ext = '.inc') or (ext = '.lpr') or (ext = '.dpr') then
       begin
-        TfpgTextEdit(ts.Components[0]).OnDrawLine := @HighlightObjectPascal;
+        TlqTextEdit(ts.Components[0]).OnDrawLine := @HighlightObjectPascal;
       end
       else if (ext = '.patch') or (ext = '.diff') then
       begin
-        TfpgTextEdit(ts.Components[0]).OnDrawLine := @HighlightPatch;
+        TlqTextEdit(ts.Components[0]).OnDrawLine := @HighlightPatch;
       end;
     end;
     ts.Realign;
@@ -819,11 +819,11 @@ end;
 
 procedure TMainForm.miTest(Sender: TObject);
 var
-  s: TfpgString;
-  r: TfpgString;
+  s: TlqString;
+  r: TlqString;
 begin
   {$ifdef DEBUGSVR}
-  TempHourGlassCursor(TfpgWidget(self));
+  TempHourGlassCursor(TlqWidget(self));
   s := cMacro_Compiler + ' -FU' +cMacro_Target+' -Fu' + cMacro_FPGuiLibDir;
   SendDebug('source string = ' + s);
   r := GMacroList.ExpandMacro(s);
@@ -832,7 +832,7 @@ begin
   {$endif}
 end;
 
-function TMainForm.GetUnitsNode: TfpgTreeNode;
+function TMainForm.GetUnitsNode: TlqTreeNode;
 begin
   Result := tvProject.RootNode.FindSubNode('Units', True);
 end;
@@ -842,8 +842,8 @@ begin
   WindowTitle := Format(cTitle, [GProject.ProjectName]);
 end;
 
-procedure TMainForm.HighlightObjectPascal(Sender: TObject; ALineText: TfpgString;
-  ALineIndex: Integer; ACanvas: TfpgCanvas; ATextRect: TfpgRect;
+procedure TMainForm.HighlightObjectPascal(Sender: TObject; ALineText: TlqString;
+  ALineIndex: Integer; ACanvas: TlqCanvas; ATextRect: TlqRect;
   var AllowSelfDraw: Boolean);
 const
   { nicely working so far }
@@ -865,20 +865,20 @@ const
   cDecimal = '\b(([0-9]+)|([0-9]+\.[0-9]+([Ee][-]?[0-9]+)?))\b';
   cHexadecimal = '\$[0-9a-fA-F]+';
 var
-  oldfont: TfpgFont;
-  s: TfpgString;  // copy of ALineText we work with
+  oldfont: TlqFont;
+  s: TlqString;  // copy of ALineText we work with
   i, j, c: integer;  // i = position of reserved word; c = last character pos
   iLength: integer; // length of reserved word
   w: integer;     // reserved word loop variable
-  r: TfpgRect;    // string rectangle to draw in
-  edt: TfpgTextEdit;
+  r: TlqRect;    // string rectangle to draw in
+  edt: TlqTextEdit;
   lMatchPos, lOffset: integer; // user for regex
 begin
 //  writeln('syntax highlight line: ', ALineIndex);
-  edt := TfpgTextEdit(Sender);
+  edt := TlqTextEdit(Sender);
   AllowSelfDraw := False;
 
-  oldfont := TfpgFont(ACanvas.Font);
+  oldfont := TlqFont(ACanvas.Font);
   ACanvas.Color := clWhite;
 
   { draw the plain text first }
@@ -1014,8 +1014,8 @@ begin
 //  writeln('------');
 end;
 
-procedure TMainForm.HighlightPatch(Sender: TObject; ALineText: TfpgString;
-  ALineIndex: Integer; ACanvas: TfpgCanvas; ATextRect: TfpgRect;
+procedure TMainForm.HighlightPatch(Sender: TObject; ALineText: TlqString;
+  ALineIndex: Integer; ACanvas: TlqCanvas; ATextRect: TlqRect;
   var AllowSelfDraw: Boolean);
 const
   cRemovedLines = '^(-[^-]|\<|!).*';        // starts with "-" or "<" or "!" symbols
@@ -1025,19 +1025,19 @@ const
   cHunk = '^\@\@.*';                        // starts with "@@" symbols
   cStartOfFile = '^(diff|index) .*';        // starts with "diff " or "index " symbols
 var
-  oldfont: TfpgFont;
-  s: TfpgString;  // copy of ALineText we work with
+  oldfont: TlqFont;
+  s: TlqString;  // copy of ALineText we work with
   i, j, c: integer;  // i = position of reserved word; c = last character pos
   iLength: integer; // length of reserved word
   w: integer;     // reserved word loop variable
-  r: TfpgRect;    // string rectangle to draw in
-  edt: TfpgTextEdit;
+  r: TlqRect;    // string rectangle to draw in
+  edt: TlqTextEdit;
   lMatchPos, lOffset: integer; // user for regex
 begin
-  edt := TfpgTextEdit(Sender);
+  edt := TlqTextEdit(Sender);
   AllowSelfDraw := False;
 
-  oldfont := TfpgFont(ACanvas.Font);
+  oldfont := TlqFont(ACanvas.Font);
   ACanvas.Color := clWhite;
 
   { draw the plain text first }
@@ -1158,12 +1158,12 @@ procedure TMainForm.SetupEditorPreference;
 var
   i: integer;
 begin
-  pcEditor.TabPosition := TfpgTabPosition(gINI.ReadInteger(cEditor, 'TabPosition', 0));
-  pcEditor.ActiveTabColor := TfpgColor(gINI.ReadInteger(cEditor, 'ActiveTabColor', pcEditor.BackgroundColor));
+  pcEditor.TabPosition := TlqTabPosition(gINI.ReadInteger(cEditor, 'TabPosition', 0));
+  pcEditor.ActiveTabColor := TlqColor(gINI.ReadInteger(cEditor, 'ActiveTabColor', pcEditor.BackgroundColor));
   FKeywordFont.Free;
   FKeywordFont := nil;
   for i := 0 to pcEditor.PageCount-1 do
-    TfpgTextEdit(pcEditor.Pages[i].Components[0]).FontDesc := gINI.ReadString(cEditor, 'Font', '#Edit2');
+    TlqTextEdit(pcEditor.Pages[i].Components[0]).FontDesc := gINI.ReadString(cEditor, 'Font', '#Edit2');
 end;
 
 procedure TMainForm.MonitoredFileChanged(Sender: TObject; AData: TFileMonitorEventData);
@@ -1240,7 +1240,7 @@ begin
   MinWidth := 580;
   MinHeight := 400;
 
-  pnlMenu := TfpgBevel.Create(self);
+  pnlMenu := TlqBevel.Create(self);
   with pnlMenu do
   begin
     Name := 'pnlMenu';
@@ -1250,7 +1250,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  mainmenu := TfpgMenuBar.Create(pnlMenu);
+  mainmenu := TlqMenuBar.Create(pnlMenu);
   with mainmenu do
   begin
     Name := 'mainmenu';
@@ -1259,7 +1259,7 @@ begin
     Align := alTop;
   end;
 
-  Toolbar := TfpgBevel.Create(pnlMenu);
+  Toolbar := TlqBevel.Create(pnlMenu);
   with Toolbar do
   begin
     Name := 'Toolbar';
@@ -1270,7 +1270,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  btnQuit := TfpgButton.Create(Toolbar);
+  btnQuit := TlqButton.Create(Toolbar);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -1286,7 +1286,7 @@ begin
     OnClick  := @btnQuitClicked;
   end;
 
-  btnOpen := TfpgButton.Create(Toolbar);
+  btnOpen := TlqButton.Create(Toolbar);
   with btnOpen do
   begin
     Name := 'btnOpen';
@@ -1302,7 +1302,7 @@ begin
     OnClick := @btnOpenFileClicked;
   end;
 
-  btnSave := TfpgButton.Create(Toolbar);
+  btnSave := TlqButton.Create(Toolbar);
   with btnSave do
   begin
     Name := 'btnSave';
@@ -1318,7 +1318,7 @@ begin
     OnClick := @miFileSave;
   end;
 
-  btnSaveAll := TfpgButton.Create(Toolbar);
+  btnSaveAll := TlqButton.Create(Toolbar);
   with btnSaveAll do
   begin
     Name := 'btnSaveAll';
@@ -1334,7 +1334,7 @@ begin
     TabOrder := 6;
   end;
 
-  pnlStatusBar := TfpgBevel.Create(self);
+  pnlStatusBar := TlqBevel.Create(self);
   with pnlStatusBar do
   begin
     Name := 'pnlStatusBar';
@@ -1344,7 +1344,7 @@ begin
     Style := bsLowered;
   end;
 
-  lblStatus := TfpgLabel.Create(pnlStatusBar);
+  lblStatus := TlqLabel.Create(pnlStatusBar);
   with lblStatus do
   begin
     Name := 'lblStatus';
@@ -1356,7 +1356,7 @@ begin
     Text := '';
   end;
 
-  pnlClientArea := TfpgBevel.Create(self);
+  pnlClientArea := TlqBevel.Create(self);
   with pnlClientArea do
   begin
     Name := 'pnlClientArea';
@@ -1367,7 +1367,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  pnlWindow := TfpgPageControl.Create(pnlClientArea);
+  pnlWindow := TlqPageControl.Create(pnlClientArea);
   with pnlWindow do
   begin
     Name := 'pnlWindow';
@@ -1379,7 +1379,7 @@ begin
     TabPosition := tpRight;
   end;
 
-  tsMessages := TfpgTabSheet.Create(pnlWindow);
+  tsMessages := TlqTabSheet.Create(pnlWindow);
   with tsMessages do
   begin
     Name := 'tsMessages';
@@ -1387,13 +1387,13 @@ begin
     Text := 'Messages';
   end;
 
-  grdMessages := TfpgStringGrid.Create(tsMessages);
+  grdMessages := TlqStringGrid.Create(tsMessages);
   with grdMessages do
   begin
     Name := 'grdMessages';
     SetPosition(0, 4, 558, 73);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('New', 2000, taLeftJustify);
     FontDesc := '#Grid';
     HeaderFontDesc := '#GridHeader';
@@ -1405,7 +1405,7 @@ begin
     OnKeyPress := @grdMessageKeyPressed;
   end;
 
-  tsScribble := TfpgTabSheet.Create(pnlWindow);
+  tsScribble := TlqTabSheet.Create(pnlWindow);
   with tsScribble do
   begin
     Name := 'tsScribble';
@@ -1413,7 +1413,7 @@ begin
     Text := 'Scribble';
   end;
 
-  memScribble := TfpgMemo.Create(tsScribble);
+  memScribble := TlqMemo.Create(tsScribble);
   with memScribble do
   begin
     Name := 'memScribble';
@@ -1426,7 +1426,7 @@ begin
     TabOrder := 15;
   end;
 
-  tsTerminal := TfpgTabSheet.Create(pnlWindow);
+  tsTerminal := TlqTabSheet.Create(pnlWindow);
   with tsTerminal do
   begin
     Name := 'tsTerminal';
@@ -1434,7 +1434,7 @@ begin
     Text := 'Terminal';
   end;
 
-  Splitter1 := TfpgSplitter.Create(pnlClientArea);
+  Splitter1 := TlqSplitter.Create(pnlClientArea);
   with Splitter1 do
   begin
     Name := 'Splitter1';
@@ -1442,7 +1442,7 @@ begin
     Align := alBottom;
   end;
 
-  pnlTool := TfpgPageControl.Create(pnlClientArea);
+  pnlTool := TlqPageControl.Create(pnlClientArea);
   with pnlTool do
   begin
     Name := 'pnlTool';
@@ -1453,7 +1453,7 @@ begin
     TabOrder := 18;
   end;
 
-  tsProject := TfpgTabSheet.Create(pnlTool);
+  tsProject := TlqTabSheet.Create(pnlTool);
   with tsProject do
   begin
     Name := 'tsProject';
@@ -1461,7 +1461,7 @@ begin
     Text := 'Project';
   end;
 
-  tvProject := TfpgTreeView.Create(tsProject);
+  tvProject := TlqTreeView.Create(tsProject);
   with tvProject do
   begin
     Name := 'tvProject';
@@ -1473,7 +1473,7 @@ begin
     OnDoubleClick := @tvProjectDoubleClick;
   end;
 
-  tsFiles := TfpgTabSheet.Create(pnlTool);
+  tsFiles := TlqTabSheet.Create(pnlTool);
   with tsFiles do
   begin
     Name := 'tsFiles';
@@ -1481,7 +1481,7 @@ begin
     Text := 'Files';
   end;
 
-  grdFiles := TfpgFileGrid.Create(tsFiles);
+  grdFiles := TlqFileGrid.Create(tsFiles);
   with grdFiles do
   begin
     Name := 'grdFiles';
@@ -1490,7 +1490,7 @@ begin
     Options := Options + [go_SmoothScroll];
   end;
 
-  Splitter2 := TfpgSplitter.Create(pnlClientArea);
+  Splitter2 := TlqSplitter.Create(pnlClientArea);
   with Splitter2 do
   begin
     Name := 'Splitter2';
@@ -1498,7 +1498,7 @@ begin
     Align := alLeft;
   end;
 
-  pcEditor := TfpgPageControl.Create(pnlClientArea);
+  pcEditor := TlqPageControl.Create(pnlClientArea);
   with pcEditor do
   begin
     Name := 'pcEditor';
@@ -1512,7 +1512,7 @@ begin
     OnClosingTabSheet := @TabSheetClosing;
   end;
 
-  tseditor := TfpgTabSheet.Create(pcEditor);
+  tseditor := TlqTabSheet.Create(pcEditor);
   with tseditor do
   begin
     Name := 'tseditor';
@@ -1520,7 +1520,7 @@ begin
     Text := 'Tabsheet1';
   end;
 
-  TextEditor := TfpgTextEdit.Create(tseditor);
+  TextEditor := TlqTextEdit.Create(tseditor);
   with TextEditor do
   begin
     Name := 'TextEditor';
@@ -1531,7 +1531,7 @@ begin
     FontDesc := '#Edit2';
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';
@@ -1547,7 +1547,7 @@ begin
     AddMenuItem('Quit', rsKeyCtrl+'Q', @btnQuitClicked);
   end;
 
-  mnuEdit := TfpgPopupMenu.Create(self);
+  mnuEdit := TlqPopupMenu.Create(self);
   with mnuEdit do
   begin
     Name := 'mnuEdit';
@@ -1561,7 +1561,7 @@ begin
     AddMenuItem('Insert $IFDEF...', rsKeyCtrl+rsKeyShift+'D', nil).Enabled := False;
   end;
 
-  mnuSearch := TfpgPopupMenu.Create(self);
+  mnuSearch := TlqPopupMenu.Create(self);
   with mnuSearch do
   begin
     Name := 'mnuSearch';
@@ -1576,7 +1576,7 @@ begin
     AddMenuItem('Go to line...', rsKeyAlt+'G', @miGoToLineClick);
   end;
 
-  mnuView := TfpgPopupMenu.Create(self);
+  mnuView := TlqPopupMenu.Create(self);
   with mnuView do
   begin
     Name := 'mnuView';
@@ -1585,7 +1585,7 @@ begin
     AddMenuItem('Debug Windows', '', @miViewDebug);
   end;
 
-  mnuProject := TfpgPopupMenu.Create(self);
+  mnuProject := TlqPopupMenu.Create(self);
   with mnuProject do
   begin
     Name := 'mnuProject';
@@ -1603,7 +1603,7 @@ begin
     AddMenuItem('Add editor file to Project', rsKeyCtrl+rsKeyShift+'A', @miProjectAddUnitToProject);
   end;
 
-  mnuRun := TfpgPopupMenu.Create(self);
+  mnuRun := TlqPopupMenu.Create(self);
   with mnuRun do
   begin
     Name := 'mnuRun';
@@ -1619,7 +1619,7 @@ begin
     AddMenuItem('Run Parameters...', rsKeyShift+'F9', nil);
   end;
 
-  mnuTools := TfpgPopupMenu.Create(self);
+  mnuTools := TlqPopupMenu.Create(self);
   with mnuTools do
   begin
     Name := 'mnuTools';
@@ -1628,7 +1628,7 @@ begin
     AddMenuItem('fpGUI DocView...', rsKeyCtrl+'F1', nil);
   end;
 
-  mnuSettings := TfpgPopupMenu.Create(self);
+  mnuSettings := TlqPopupMenu.Create(self);
   with mnuSettings do
   begin
     Name := 'mnuSettings';
@@ -1636,14 +1636,14 @@ begin
     AddMenuItem('Configure IDE...', '', @miConfigureIDE);
   end;
 
-  mnuHelp := TfpgPopupMenu.Create(self);
+  mnuHelp := TlqPopupMenu.Create(self);
   with mnuHelp do
   begin
     Name := 'mnuHelp';
     SetPosition(476, 224, 172, 20);
     AddMenuItem('Contents...', '', nil);
     AddMenuItem('-', '', nil);
-    AddMenuItem('About fpGUI Toolkit...', '', @miAboutFPGuiClicked);
+    AddMenuItem('About fpGUI Toolkit...', '', @miAbouTlquiClicked);
     AddMenuItem('About fpGUI IDE...', '', @miAboutIDE);
   end;
 
@@ -1679,7 +1679,7 @@ begin
   mainmenu.AddMenuItem('Sett&ings', nil).SubMenu := mnuSettings;
   mainmenu.AddMenuItem('&Help', nil).SubMenu := mnuHelp;
 
-  pmOpenRecentMenu := TfpgPopupMenu.Create(self);
+  pmOpenRecentMenu := TlqPopupMenu.Create(self);
   with pmOpenRecentMenu do
   begin
     Name := 'pmOpenRecentMenu';
@@ -1688,7 +1688,7 @@ begin
 
   miRecentProjects.SubMenu := pmOpenRecentMenu;
 
-  FRecentFiles := TfpgMRU.Create(self);
+  FRecentFiles := TlqMRU.Create(self);
   FRecentFiles.ParentMenuItem := pmOpenRecentMenu;
   FRecentFiles.OnClick        := @miRecentProjectsClick;
   FRecentFiles.MaxItems       := gINI.ReadInteger('Options', 'MRUProjectCount', 10);
@@ -1696,7 +1696,7 @@ begin
   FRecentFiles.LoadMRU;
 
   {$IFDEF DEBUGSVR}
-  btnTest := TfpgButton.Create(Toolbar);
+  btnTest := TlqButton.Create(Toolbar);
   with btnTest do
   begin
     Name := 'btnTest';

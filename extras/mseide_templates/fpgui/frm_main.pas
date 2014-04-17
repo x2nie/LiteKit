@@ -9,7 +9,7 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
     {@VFD_HEAD_END: MainForm}

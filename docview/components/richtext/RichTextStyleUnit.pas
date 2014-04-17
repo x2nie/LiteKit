@@ -9,10 +9,10 @@ uses
 
 type
   TTextDrawStyle = record
-    FontNameSize: TfpgString;
+    FontNameSize: TlqString;
     FontAttributes: TFontAttributes;
-    Color: TfpgColor;
-    BackgroundColor: TfpgColor;
+    Color: TlqColor;
+    BackgroundColor: TlqColor;
     Alignment: TTextAlignment;
     Wrap: boolean;
     LeftMargin: longint;
@@ -21,15 +21,15 @@ type
 
   TMarginSizeStyle = ( msAverageCharWidth, msMaximumCharWidth, msSpecifiedChar );
 
-  TRichTextSettings = class( TfpgComponent )
+  TRichTextSettings = class( TlqComponent )
   protected
-    FHeading1Font: TfpgFont;
-    FHeading2Font: TfpgFont;
-    FHeading3Font: TfpgFont;
-    FFixedFont: TfpgFont;
-    FNormalFont: TfpgFont;
-    FDefaultBackgroundColor: TfpgColor;
-    FDefaultColor: TfpgColor;
+    FHeading1Font: TlqFont;
+    FHeading2Font: TlqFont;
+    FHeading3Font: TlqFont;
+    FFixedFont: TlqFont;
+    FNormalFont: TlqFont;
+    FDefaultBackgroundColor: TlqColor;
+    FDefaultColor: TlqColor;
     FDefaultAlignment: TTextAlignment;
     FDefaultWrap: boolean;
     FAtLeastOneWordBeforeWrap: boolean;
@@ -40,13 +40,13 @@ type
     FUpdateCount: longint;
     FChangesPending: boolean;
     Procedure Change;
-    Procedure SetNormalFont( NewFont: TfpgFont );
-    Procedure SetFixedFont( NewFont: TfpgFont );
-    Procedure SetHeading1Font( NewFont: TfpgFont );
-    Procedure SetHeading2Font( NewFont: TfpgFont );
-    Procedure SetHeading3Font( NewFont: TfpgFont );
-    Procedure SetDefaultColor( NewColor: TfpgColor );
-    Procedure SetDefaultBackgroundColor( NewColor: TfpgColor );
+    Procedure SetNormalFont( NewFont: TlqFont );
+    Procedure SetFixedFont( NewFont: TlqFont );
+    Procedure SetHeading1Font( NewFont: TlqFont );
+    Procedure SetHeading2Font( NewFont: TlqFont );
+    Procedure SetHeading3Font( NewFont: TlqFont );
+    Procedure SetDefaultColor( NewColor: TlqColor );
+    Procedure SetDefaultBackgroundColor( NewColor: TlqColor );
     Procedure SetDefaultAlignment( Alignment: TTextAlignment );
     Procedure SetDefaultWrap( Wrap: boolean );
     Procedure SetAtLeastOneWordBeforeWrap( NewValue: boolean );
@@ -62,22 +62,22 @@ type
     function GetMargin_Top: longint;
     Procedure SetMargin_Top( NewValue: longint );
     Procedure SetupComponent;
-    Procedure AssignFont(var AFont: TfpgFont; NewFont: TfpgFont);
+    Procedure AssignFont(var AFont: TlqFont; NewFont: TlqFont);
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure BeginUpdate;
     procedure EndUpdate;
     property Margins: TRect read FMargins write SetMargins;
-    property Heading1Font: TfpgFont read FHeading1Font write SetHeading1Font;
-    property Heading2Font: TfpgFont read FHeading2Font write SetHeading2Font;
-    property Heading3Font: TfpgFont read FHeading3Font write SetHeading3Font;
-    property FixedFont: TfpgFont read FFixedFont write SetFixedFont;
-    property NormalFont: TfpgFont read FNormalFont write SetNormalFont;
+    property Heading1Font: TlqFont read FHeading1Font write SetHeading1Font;
+    property Heading2Font: TlqFont read FHeading2Font write SetHeading2Font;
+    property Heading3Font: TlqFont read FHeading3Font write SetHeading3Font;
+    property FixedFont: TlqFont read FFixedFont write SetFixedFont;
+    property NormalFont: TlqFont read FNormalFont write SetNormalFont;
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   published
-    property DefaultBackgroundColor: TfpgColor read FDefaultBackgroundColor write SetDefaultBackgroundColor;
-    property DefaultColor: TfpgColor read FDefaultColor write SetDefaultColor;
+    property DefaultBackgroundColor: TlqColor read FDefaultBackgroundColor write SetDefaultBackgroundColor;
+    property DefaultColor: TlqColor read FDefaultColor write SetDefaultColor;
     property DefaultAlignment: TTextAlignment read FDefaultAlignment write SetDefaultAlignment;
     property DefaultWrap: boolean read FDefaultWrap write SetDefaultWrap default True;
     property AtLeastOneWordBeforeWrap: boolean read FAtLeastOneWordBeforeWrap write SetAtLeastOneWordBeforeWrap;
@@ -171,31 +171,31 @@ ProfileEvent('DEBUG:  ApplyStyleTag >>>');
     ttFixedWidthOn:
       begin
         Style.FontNameSize := Copy(ASettings.FixedFont.FontDesc, 1, Pos(':', ASettings.FixedFont.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.FixedFont);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.FixedFont);
       end;
 
     ttFixedWidthOff:
       begin
         Style.FontNameSize := Copy(ASettings.NormalFont.FontDesc, 1, Pos(':', ASettings.NormalFont.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.NormalFont);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.NormalFont);
       end;
 
     ttHeading1:
       begin
         Style.FontNameSize := Copy(ASettings.Heading1Font.FontDesc, 1, Pos(':', ASettings.Heading1Font.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.Heading1Font);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.Heading1Font);
       end;
 
     ttHeading2:
       begin
         Style.FontNameSize := Copy(ASettings.Heading2Font.FontDesc, 1, Pos(':', ASettings.Heading2Font.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.Heading2Font);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.Heading2Font);
       end;
 
     ttHeading3:
       begin
         Style.FontNameSize := Copy(ASettings.Heading3Font.FontDesc, 1, Pos(':', ASettings.Heading3Font.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.Heading3Font);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.Heading3Font);
       end;
 
     ttHeading1Off,
@@ -203,7 +203,7 @@ ProfileEvent('DEBUG:  ApplyStyleTag >>>');
     ttHeading3Off:
       begin
         Style.FontNameSize := Copy(ASettings.NormalFont.FontDesc, 1, Pos(':', ASettings.NormalFont.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.NormalFont);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.NormalFont);
       end;
 
     ttFont:
@@ -241,7 +241,7 @@ ProfileEvent('DEBUG:  ApplyStyleTag >>>');
         { TODO: Restore to previous font, not NormalFont, because previous font could have
            been something different to NormalFont }
         Style.FontNameSize := Copy(ASettings.NormalFont.FontDesc, 1, Pos(':', ASettings.NormalFont.FontDesc)-1);
-        Style.FontAttributes := GetFPGuiFontAttributes(ASettings.NormalFont);
+        Style.FontAttributes := GeTlquiFontAttributes(ASettings.NormalFont);
       end;
 
     ttColor:
@@ -459,7 +459,7 @@ begin
   Change;
 end;
 
-Function FontSame( FontA: TfpgFont; FontB: TfpgFont ): boolean;
+Function FontSame( FontA: TlqFont; FontB: TlqFont ): boolean;
 begin
   if ( FontA = nil ) or ( FontB = nil ) then
     Result := False
@@ -467,7 +467,7 @@ begin
     Result := FontA.FontDesc = FontB.FontDesc;
 end;
 
-Procedure TRichTextSettings.AssignFont(var AFont: TfpgFont; NewFont: TfpgFont );
+Procedure TRichTextSettings.AssignFont(var AFont: TlqFont; NewFont: TlqFont );
 begin
   If NewFont = Nil Then
     NewFont := fpgApplication.DefaultFont;
@@ -485,27 +485,27 @@ begin
   Change;
 End;
 
-Procedure TRichTextSettings.SetHeading1Font( NewFont: TfpgFont );
+Procedure TRichTextSettings.SetHeading1Font( NewFont: TlqFont );
 begin
   AssignFont( FHeading1Font, NewFont );
 end;
 
-Procedure TRichTextSettings.SetHeading2Font( NewFont: TfpgFont );
+Procedure TRichTextSettings.SetHeading2Font( NewFont: TlqFont );
 begin
   AssignFont( FHeading2Font, NewFont );
 End;
 
-Procedure TRichTextSettings.SetHeading3Font( NewFont: TfpgFont );
+Procedure TRichTextSettings.SetHeading3Font( NewFont: TlqFont );
 begin
   AssignFont( FHeading3Font, NewFont );
 End;
 
-Procedure TRichTextSettings.SetFixedFont( NewFont: TfpgFont );
+Procedure TRichTextSettings.SetFixedFont( NewFont: TlqFont );
 begin
   AssignFont( FFixedFont, NewFont );
 end;
 
-Procedure TRichTextSettings.SetNormalFont( NewFont: TfpgFont );
+Procedure TRichTextSettings.SetNormalFont( NewFont: TlqFont );
 begin
   AssignFont( FNormalFont, NewFont );
 end;
@@ -558,7 +558,7 @@ begin
   FMargins.Top := NewValue;
 end;
 
-Procedure TRichTextSettings.SetDefaultColor( NewColor: TfpgColor );
+Procedure TRichTextSettings.SetDefaultColor( NewColor: TlqColor );
 begin
   if NewColor = FDefaultColor then
     exit;
@@ -566,7 +566,7 @@ begin
   Change;
 end;
 
-Procedure TRichTextSettings.SetDefaultBackgroundColor( NewColor: TfpgColor );
+Procedure TRichTextSettings.SetDefaultBackgroundColor( NewColor: TlqColor );
 begin
   if NewColor = FDefaultBackgroundColor then
     exit;

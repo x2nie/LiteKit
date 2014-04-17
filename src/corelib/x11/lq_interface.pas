@@ -13,7 +13,7 @@
 
     Description:
       This unit defines alias types to bind each backend graphics library
-      to fpg_main without the need for IFDEF's
+      to lq_main without the need for IFDEF's
 }
 
 unit lq_interface;
@@ -26,17 +26,17 @@ uses
   lq_x11;
 
 type
-  TfpgFontResourceImpl  = class(TfpgX11FontResource);
-  TfpgImageImpl         = class(TfpgX11Image);
-  TfpgCanvasImpl        = class(TfpgX11Canvas);
-  TfpgWindowImpl        = class(TfpgX11Window);
-  TfpgApplicationImpl   = class(TfpgX11Application);
-  TfpgClipboardImpl     = class(TfpgX11Clipboard);
-  TfpgFileListImpl      = class(TfpgX11FileList);
-  TfpgMimeDataImpl      = class(TfpgX11MimeData);
-  TfpgDragImpl          = class(TfpgX11Drag);
-  TfpgTimerImpl         = class(TfpgX11Timer);
-  TfpgSystemTrayHandler = class(TfpgX11SystemTrayHandler);
+  TlqFontResourceImpl  = class(TlqX11FontResource);
+  TlqImageImpl         = class(TlqX11Image);
+  TlqCanvasImpl        = class(TlqX11Canvas);
+  TlqWindowImpl        = class(TlqX11Window);
+  TlqApplicationImpl   = class(TlqX11Application);
+  TlqClipboardImpl     = class(TlqX11Clipboard);
+  TlqFileListImpl      = class(TlqX11FileList);
+  TlqMimeDataImpl      = class(TlqX11MimeData);
+  TlqDragImpl          = class(TlqX11Drag);
+  TlqTimerImpl         = class(TlqX11Timer);
+  TlqSystemTrayHandler = class(TlqX11SystemTrayHandler);
 
 implementation
 

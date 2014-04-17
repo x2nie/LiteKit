@@ -31,25 +31,25 @@ uses
   lq_form;
   
 type
-  TfpgHintWindow = class(TfpgBaseForm)
+  TlqHintWindow = class(TlqBaseForm)
   private
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FTime: Integer;
     FShadow: Integer;
     FBorder: Integer;
     FMargin: Integer;
-    FTimer: TfpgTimer;
-    FHintTextRec: TfpgRect;
-    FText: TfpgString;
+    FTimer: TlqTimer;
+    FHintTextRec: TlqRect;
+    FText: TlqString;
     procedure   FormShow(Sender: TObject);
     procedure   FormHide(Sender: TObject);
-    function    GetText: TfpgString;
-    procedure   SetText(const AValue: TfpgString);
+    function    GetText: TlqString;
+    procedure   SetText(const AValue: TlqString);
     procedure   HintTimerFired(Sender: TObject);
     procedure   SetShadow(AValue: Integer);
     procedure   SetBorder(AValue: Integer);
     procedure   SetTime(AValue: Integer);
-    procedure   SetShadowColor(AValue: TfpgColor);
+    procedure   SetShadowColor(AValue: TlqColor);
     function    GetFontDesc: string;
     procedure   SetFontDesc(const AValue: string);
   protected
@@ -60,12 +60,12 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Font: TfpgFont read FFont;
-    property    Text: TfpgString read GetText write SetText;
+    property    Font: TlqFont read FFont;
+    property    Text: TlqString read GetText write SetText;
     property    Shadow: Integer read FShadow write SetShadow default 0;
     property    Border: Integer read FBorder write SetBorder default 1;
     property    Margin: Integer read FMargin write FMargin default 3;
-    property    ShadowColor: TfpgColor write SetShadowColor default clGray;
+    property    ShadowColor: TlqColor write SetShadowColor default clGray;
     property    Time: Integer read FTime write SetTime;
   published
     property    BackgroundColor;
@@ -84,72 +84,72 @@ type
   end;
 
 
-  TfpgHintWindowClass = class of TfpgHintWindow;
+  TlqHintWindowClass = class of TlqHintWindow;
   
 
 var
-  HintWindowClass: TfpgHintWindowClass = TfpgHintWindow;
+  HintWindowClass: TlqHintWindowClass = TlqHintWindow;
 
 
 implementation
 
 
 type
-  TfpgHintShadow = class(TfpgForm)
+  TlqHintShadow = class(TlqForm)
   public
     constructor Create(AOwner: TComponent); override;
   end;
   
   
 var
-  uShadowForm: TfpgHintShadow;
+  uShadowForm: TlqHintShadow;
 
 
-{ TfpgHintWindow }
+{ TlqHintWindow }
 
-procedure TfpgHintWindow.FormShow(Sender: TObject);
+procedure TlqHintWindow.FormShow(Sender: TObject);
 begin
   FTimer.Enabled:= True;
 end;
 
-procedure TfpgHintWindow.FormHide(Sender: TObject);
+procedure TlqHintWindow.FormHide(Sender: TObject);
 begin
   if Assigned(uShadowForm) then
     uShadowForm.Hide;
 end;
 
-function TfpgHintWindow.GetText: TfpgString;
+function TlqHintWindow.GetText: TlqString;
 begin
   Result := FText;
 end;
 
-procedure TfpgHintWindow.SetText(const AValue: TfpgString);
+procedure TlqHintWindow.SetText(const AValue: TlqString);
 begin
   FText := AValue;
 end;
 
-procedure TfpgHintWindow.HintTimerFired(Sender: TObject);
+procedure TlqHintWindow.HintTimerFired(Sender: TObject);
 begin
   {$IFDEF DEBUG}
-  DebugLn('DEBUG:  TfpgHintWindow.HintTimerFired timer fired');
+  DebugLn('DEBUG:  TlqHintWindow.HintTimerFired timer fired');
   {$ENDIF}
   FTimer.Enabled := False;
   Hide;
 end;
 
-procedure TfpgHintWindow.SetShadow(AValue: Integer);
+procedure TlqHintWindow.SetShadow(AValue: Integer);
 begin
   if FShadow <> AValue then
     FShadow := AValue;
 end;
 
-procedure TfpgHintWindow.SetBorder(AValue: Integer);
+procedure TlqHintWindow.SetBorder(AValue: Integer);
 begin
   if FBorder <> AValue then
     FBorder := AValue;
 end;
 
-procedure TfpgHintWindow.SetTime(AValue: Integer);
+procedure TlqHintWindow.SetTime(AValue: Integer);
 begin
   if FTime <> AValue then
   begin
@@ -158,24 +158,24 @@ begin
   end;
 end;
 
-procedure TfpgHintWindow.SetShadowColor(AValue: Tfpgcolor);
+procedure TlqHintWindow.SetShadowColor(AValue: Tlqcolor);
 begin
   if uShadowForm.BackgroundColor <> AValue then
     uShadowForm.BackgroundColor := AValue;
 end;
 
-function TfpgHintWindow.GetFontDesc: string;
+function TlqHintWindow.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgHintWindow.SetFontDesc(const AValue: string);
+procedure TlqHintWindow.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
 end;
 
-procedure TfpgHintWindow.HandleShow;
+procedure TlqHintWindow.HandleShow;
 begin
   // This is so the Shadow Window is below the Hint Window.
   if Shadow > 0 then
@@ -186,7 +186,7 @@ begin
   inherited HandleShow;
 end;
 
-procedure TfpgHintWindow.HandlePaint;
+procedure TlqHintWindow.HandlePaint;
 begin
   inherited HandlePaint;  // background is set
   Canvas.ClearClipRect;
@@ -198,7 +198,7 @@ begin
   PaintHintText;
 end;
 
-procedure TfpgHintWindow.PaintBorder;
+procedure TlqHintWindow.PaintBorder;
 var
   i: integer;
 begin
@@ -211,14 +211,14 @@ begin
   end;
 end;
 
-procedure TfpgHintWindow.PaintHintText;
+procedure TlqHintWindow.PaintHintText;
 begin
   FHintTextRec.SetRect(FBorder, FBorder, Width-(FBorder*2), Height-(FBorder*2));
   Canvas.TextColor := FTextColor;
   Canvas.DrawText(FHintTextRec, Text, [txtHCenter, txtVCenter, txtWrap]);
 end;
 
-constructor TfpgHintWindow.Create(AOwner: TComponent);
+constructor TlqHintWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Name := 'F_Hint';
@@ -232,15 +232,15 @@ begin
   FShadow := 0; // no shadow by default
   FTime := 5000; // show hint for 5 seconds then close
   FHintTextRec.SetRect(FBorder, FBorder, Width-(FBorder*2), Height-(FBorder*2));
-  FTimer := TfpgTimer.Create(FTime);
+  FTimer := TlqTimer.Create(FTime);
   FTimer.OnTimer := @HintTimerFired;
-  uShadowForm:= TfpgHintShadow.Create(nil);
+  uShadowForm:= TlqHintShadow.Create(nil);
   OnClick := @HintTimerFired;
   OnShow := @FormShow;
   OnHide := @FormHide;
 end;
 
-destructor TfpgHintWindow.Destroy;
+destructor TlqHintWindow.Destroy;
 begin
   FTimer.Free;
   FFont.Free;
@@ -248,7 +248,7 @@ begin
   uShadowForm.Free;
 end;
 
-constructor TfpgHintShadow.Create(AOwner: TComponent);
+constructor TlqHintShadow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Name := 'F_Shadow';

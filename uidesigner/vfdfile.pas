@@ -91,7 +91,7 @@ var
   s: string;
 begin
   s :=
-      Ind(1) + 'T' + formname + ' = class(TfpgForm)' + LineEnding +
+      Ind(1) + 'T' + formname + ' = class(TlqForm)' + LineEnding +
       Ind(1) + 'private' + LineEnding +
       Ind(2) + '{@VFD_HEAD_BEGIN: ' + formname + '}' + LineEnding
     + formheadblock +
@@ -350,7 +350,7 @@ begin
     '{$mode objfpc}{$H+}' + LineEnding + LineEnding +
     'interface' + LineEnding + LineEnding +
     'uses' + LineEnding +
-    Ind(1) + 'SysUtils, Classes, fpg_base, fpg_main, fpg_form;' + LineEnding + LineEnding +
+    Ind(1) + 'SysUtils, Classes, lq_base, lq_main, lq_form;' + LineEnding + LineEnding +
     'type' + LineEnding + LineEnding +
     '{@VFD_NEWFORM_DECL}' + LineEnding + LineEnding +
     'implementation' + LineEnding + LineEnding +

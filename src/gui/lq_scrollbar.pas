@@ -39,15 +39,15 @@ uses
 type
   TScrollNotifyEvent = procedure(Sender: TObject; position: integer) of object;
 
-  TfpgScrollStyle = (ssNone, ssHorizontal, ssVertical, ssAutoBoth);
+  TlqScrollStyle = (ssNone, ssHorizontal, ssVertical, ssAutoBoth);
   
-  TfpgScrollBarPart = (sbpNone, sbpUpBack, sbpPageUpBack, sbpSlider, sbpDownForward, sbpPageDownForward);
+  TlqScrollBarPart = (sbpNone, sbpUpBack, sbpPageUpBack, sbpSlider, sbpDownForward, sbpPageDownForward);
 
 
-  TfpgScrollBar = class(TfpgWidget)
+  TlqScrollBar = class(TlqWidget)
   private
     FLargeChange: Integer;
-    FScrollbarDownPart: TfpgScrollBarPart;
+    FScrollbarDownPart: TlqScrollBarPart;
     FRecalc: Boolean;
     procedure   SetMax(const AValue: integer);
     procedure   SetMin(const AValue: integer);
@@ -62,23 +62,23 @@ type
     FPageSize: integer;
     FPosition: integer;
     FScrollStep: integer;
-    FSliderPos: TfpgCoord;
-    FSliderLength: TfpgCoord;
-    FSliderDragPos: TfpgCoord;
-    FSliderDragStart: TfpgCoord;
-    FScrollTimer: TfpgTimer;
-    FActiveButtonRect: TfpgRect;
+    FSliderPos: TlqCoord;
+    FSliderLength: TlqCoord;
+    FSliderDragPos: TlqCoord;
+    FSliderDragStart: TlqCoord;
+    FScrollTimer: TlqTimer;
+    FActiveButtonRect: TlqRect;
     FMousePosition: TPoint;
     FOnScroll: TScrollNotifyEvent;
     procedure   ScrollTimer(Sender: TObject);
-    procedure   DrawButton(x, y, w, h: TfpgCoord; const imgname: string; Pressed: Boolean = False; const ButtonEnabled: Boolean= True); virtual;
+    procedure   DrawButton(x, y, w, h: TlqCoord; const imgname: string; Pressed: Boolean = False; const ButtonEnabled: Boolean= True); virtual;
     procedure   DrawSlider(recalc: boolean); virtual;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState); override;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
     procedure   HandlePaint; override;
-    procedure   HandleResize(AWidth, AHeight: TfpgCoord); override;
+    procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
     procedure   PositionChange(d: integer);
   public
     Orientation: TOrientation;
@@ -107,12 +107,12 @@ implementation
 const
   cMinSliderLength = 20;
 
-{ TfpgScrollBar }
+{ TlqScrollBar }
 
-constructor TfpgScrollBar.Create(AOwner: TComponent);
+constructor TlqScrollBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FScrollTimer := TfpgTimer.Create(500);
+  FScrollTimer := TlqTimer.Create(500);
   FScrollTimer.Enabled := False;
   FScrollTimer.OnTimer := @ScrollTimer;
   Orientation   := orVertical;
@@ -129,13 +129,13 @@ begin
   FRecalc := True;
 end;
 
-destructor TfpgScrollBar.Destroy;
+destructor TlqScrollBar.Destroy;
 begin
   FScrollTimer.Free;
   inherited Destroy;
 end;
 
-procedure TfpgScrollBar.HandlePaint;
+procedure TlqScrollBar.HandlePaint;
 begin
   Canvas.BeginDraw; // Do not remove - Scrollbars do painting outside HandlePaint as well!
   if Orientation = orVertical then
@@ -154,13 +154,13 @@ begin
   FRecalc := False;
 end;
 
-procedure TfpgScrollBar.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TlqScrollBar.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   FRecalc := True;
 end;
 
-procedure TfpgScrollBar.RepaintSlider;
+procedure TlqScrollBar.RepaintSlider;
 begin
   if not HasHandle then
     Exit; //==>
@@ -168,27 +168,27 @@ begin
   Invalidate;//  DrawSlider(True);
 end;
 
-procedure TfpgScrollBar.LineUp;
+procedure TlqScrollBar.LineUp;
 begin
   Step(-1);
 end;
 
-procedure TfpgScrollBar.LineDown;
+procedure TlqScrollBar.LineDown;
 begin
   Step(1);
 end;
 
-procedure TfpgScrollBar.PageUp;
+procedure TlqScrollBar.PageUp;
 begin
   StepPage(-1);
 end;
 
-procedure TfpgScrollBar.PageDown;
+procedure TlqScrollBar.PageDown;
 begin
   StepPage(1);
 end;
 
-procedure TfpgScrollBar.SetMax(const AValue: integer);
+procedure TlqScrollBar.SetMax(const AValue: integer);
 begin
   if AValue = FMax then
     Exit;
@@ -200,7 +200,7 @@ begin
     StepEnd;
 end;
 
-procedure TfpgScrollBar.SetMin(const AValue: integer);
+procedure TlqScrollBar.SetMin(const AValue: integer);
 begin
   if AValue = FMin then
     Exit;
@@ -212,7 +212,7 @@ begin
     StepStart;
 end;
 
-procedure TfpgScrollBar.SetSBPosition(const AValue: integer);
+procedure TlqScrollBar.SetSBPosition(const AValue: integer);
 begin
   if AValue < FMin then
     FPosition := FMin
@@ -225,27 +225,27 @@ begin
     Invalidate;//    DrawSlider(False);
 end;
 
-procedure TfpgScrollBar.Step(ASteps: Integer);
+procedure TlqScrollBar.Step(ASteps: Integer);
 begin
   PositionChange(FScrollStep*ASteps);
 end;
 
-procedure TfpgScrollBar.StepPage(ASteps: Integer);
+procedure TlqScrollBar.StepPage(ASteps: Integer);
 begin
   PositionChange(ASteps*FPageSize);
 end;
 
-procedure TfpgScrollBar.StepStart;
+procedure TlqScrollBar.StepStart;
 begin
   SetSBPosition(FMin)
 end;
 
-procedure TfpgScrollBar.StepEnd;
+procedure TlqScrollBar.StepEnd;
 begin
   SetSBPosition(FMax);
 end;
 
-procedure TfpgScrollBar.ScrollTimer(Sender: TObject);
+procedure TlqScrollBar.ScrollTimer(Sender: TObject);
    function WithinActiveButton: Boolean;
    begin
      Result := (FMousePosition.X < FActiveButtonRect.Right)
@@ -324,9 +324,9 @@ begin
 end;
 
 // only called from inside HandlePaint so no need for BeginDraw..EndDraw calls
-procedure TfpgScrollBar.DrawButton(x, y, w, h: TfpgCoord; const imgname: string; Pressed: Boolean = False; const ButtonEnabled: Boolean= True);
+procedure TlqScrollBar.DrawButton(x, y, w, h: TlqCoord; const imgname: string; Pressed: Boolean = False; const ButtonEnabled: Boolean= True);
 var
-  img, imgdisabled: TfpgImage;
+  img, imgdisabled: TlqImage;
   dx: integer;
   dy: integer;
 begin
@@ -358,10 +358,10 @@ begin
 end;
 
 // only called from inside HandlePaint so no need for BeginDraw..EndDraw calls
-procedure TfpgScrollBar.DrawSlider(recalc: boolean);
+procedure TlqScrollBar.DrawSlider(recalc: boolean);
 var
-  area: TfpgCoord;
-  mm: TfpgCoord;
+  area: TlqCoord;
+  mm: TlqCoord;
 begin
 //  Canvas.BeginDraw;
 
@@ -447,9 +447,9 @@ begin
   end;
 end;
 
-procedure TfpgScrollBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqScrollBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
-  lPos: TfpgCoord;
+  lPos: TlqCoord;
 begin
   inherited;
   CaptureMouse;
@@ -536,7 +536,7 @@ begin
   end;
 end;
 
-procedure TfpgScrollBar.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqScrollBar.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
   WasPressed: Boolean;
 begin
@@ -552,7 +552,7 @@ begin
     Invalidate;
 end;
 
-procedure TfpgScrollBar.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqScrollBar.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   d: integer;
   area: integer;
@@ -602,14 +602,14 @@ begin
   end;
 end;
 
-procedure TfpgScrollBar.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
+procedure TlqScrollBar.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
   delta: smallint);
 begin
   inherited HandleMouseScroll(x, y, shiftstate, delta);
   Step(delta);
 end;
 
-procedure TfpgScrollBar.PositionChange(d: integer);
+procedure TlqScrollBar.PositionChange(d: integer);
 begin
   FPosition := FPosition + d;
   if FPosition < FMin then

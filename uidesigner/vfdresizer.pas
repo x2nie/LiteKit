@@ -28,7 +28,7 @@ uses
   lq_widget;
 
 type
-  TwgResizer = class(TfpgWidget)
+  TwgResizer = class(TlqWidget)
   protected
     wgdesigner: TObject;
     procedure   HandlePaint; override;
@@ -39,7 +39,7 @@ type
     direction: integer;
     FDragging: boolean;
     FDragPosX,
-    FDragPosY: TfpgCoord;
+    FDragPosY: TlqCoord;
     constructor Create(ACompDesigner: TObject; adirection: integer); reintroduce;
     procedure   Show;
   end;

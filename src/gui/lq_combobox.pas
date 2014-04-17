@@ -22,13 +22,13 @@ unit lq_combobox;
 {.$Define DEBUG}
 
 { TODO: When combobox Items changes, the combobox needs to refresh. We need a
-      custom StringItems class to notify us of changes. See TfpgListBox for
+      custom StringItems class to notify us of changes. See TlqListBox for
       an example. }
       
 { TODO: Implement .BeginUpdate and .EndUpdate methods so we know when to refresh
       the items list. }
 
-{ TODO: Introduce SideMargin and HeightMargin like TfpgEdit, instead of just
+{ TODO: Introduce SideMargin and HeightMargin like TlqEdit, instead of just
       the single Margin property. }
 
 {
@@ -36,16 +36,16 @@ This is an example of what we can aim for:
 You need a mono font to see the correct layout.
 
 
-               TfpgBaseComboBox
+               TlqBaseComboBox
               _________|______________
              |                        |
-   TfpgBaseStaticCombo        TfpgBaseEditCombo
+   TlqBaseStaticCombo        TlqBaseEditCombo
        ______|_________               |
-      |                |         TfpgEditCombo
+      |                |         TlqEditCombo
       |                |
- TfpgComboBox   TfpgBaseColorCombo
+ TlqComboBox   TlqBaseColorCombo
                        |
-                 TfpgColorComboBox
+                 TlqColorComboBox
 }
 
 interface
@@ -60,18 +60,18 @@ uses
 
 type
   // widget options
-  TfpgComboOption = (wo_FocusItemTriggersOnChange, wo_AllowUserBlank);
-  TfpgComboOptions = set of TfpgComboOption;
+  TlqComboOption = (wo_FocusItemTriggersOnChange, wo_AllowUserBlank);
+  TlqComboOptions = set of TlqComboOption;
 
 
-  TfpgBaseComboBox = class(TfpgWidget)
+  TlqBaseComboBox = class(TlqWidget)
   private
     FDropDownCount: integer;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FOnChange: TNotifyEvent;
     FOnCloseUp: TNotifyEvent;
     FOnDropDown: TNotifyEvent;
-    FOptions: TfpgComboOptions;
+    FOptions: TlqComboOptions;
     FExtraHint: string;
     FReadOnly: Boolean;
     function    GetFontDesc: string;
@@ -83,7 +83,7 @@ type
   protected
     FAutoSize: Boolean;
     FMargin: integer;
-    FInternalBtnRect: TfpgRect;
+    FInternalBtnRect: TlqRect;
     FFocusItem: integer;
     FItems: TStringList;
     FBtnPressed: Boolean;
@@ -101,14 +101,14 @@ type
     procedure   DoDropDown; virtual; abstract;
     procedure   DoOnCloseUp; virtual;
     procedure   PaintInternalButton; virtual;
-    function    GetDropDownPos(AParent, AComboBox, ADropDown: TfpgWidget): TfpgRect; virtual;
+    function    GetDropDownPos(AParent, AComboBox, ADropDown: TlqWidget): TlqRect; virtual;
     property    AutoSize: Boolean read FAutoSize write SetAutoSize default False;
     property    DropDownCount: integer read FDropDownCount write SetDropDownCount default 8;
     property    ExtraHint: string read FExtraHint write SetExtraHint;
     property    FocusItem: integer read FFocusItem write SetFocusItem;
     property    FontDesc: string read GetFontDesc write SetFontDesc;
     property    Items: TStringList read FItems;    {$Note Make this read/write }
-    property    Options: TfpgComboOptions read FOptions write FOptions;
+    property    Options: TlqComboOptions read FOptions write FOptions;
     property    Margin: integer read FMargin write SetMargin default 1;
     property    ReadOnly: Boolean read FReadOnly write SetReadOnly default False;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
@@ -117,21 +117,21 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   end;
   
 
-  TfpgBaseStaticCombo = class(TfpgBaseComboBox)
+  TlqBaseStaticCombo = class(TlqBaseComboBox)
   private
     procedure   InternalBtnClick(Sender: TObject);
   protected
-    FDropDown: TfpgPopupWindow;
+    FDropDown: TlqPopupWindow;
     procedure   DoDropDown; override;
-    procedure   DoDrawText(const ARect: TfpgRect); virtual;
+    procedure   DoDrawText(const ARect: TlqRect); virtual;
     function    GetText: string; virtual;
     function    HasText: boolean; virtual;
     procedure   SetText(const AValue: string); virtual;
-    procedure   HandleResize(AWidth, AHeight: TfpgCoord); override;
+    procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -145,7 +145,7 @@ type
   end;
 
 
-  TfpgComboBox = class(TfpgBaseStaticCombo)
+  TlqComboBox = class(TlqBaseStaticCombo)
   published
     property    AcceptDrops;
     property    Align;
@@ -181,8 +181,8 @@ type
   end;
   
 
-function CreateComboBox(AOwner: TComponent; x, y, w: TfpgCoord; AList: TStringList;
-      h: TfpgCoord = 0): TfpgComboBox;
+function CreateComboBox(AOwner: TComponent; x, y, w: TlqCoord; AList: TStringList;
+      h: TlqCoord = 0): TlqComboBox;
 
 
 implementation
@@ -195,31 +195,31 @@ uses
 
 type
   { This is the class representing the dropdown window of the combo box. }
-  TComboboxDropdownWindow = class(TfpgPopupWindow)
+  TComboboxDropdownWindow = class(TlqPopupWindow)
   private
-    FCallerWidget: TfpgBaseStaticCombo;
-    FListBox: TfpgListBox;
+    FCallerWidget: TlqBaseStaticCombo;
+    FListBox: TlqListBox;
     procedure   SetFirstItem;
   protected
     procedure   ListBoxSelect(Sender: TObject);
     procedure   HandleShow; override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
   public
-    constructor Create(AOwner: TComponent; ACallerWidget: TfpgBaseStaticCombo); reintroduce;
-    property    ListBox: TfpgListBox read FListBox;
+    constructor Create(AOwner: TComponent; ACallerWidget: TlqBaseStaticCombo); reintroduce;
+    property    ListBox: TlqListBox read FListBox;
   end;
 
 
-{ TfpgBaseComboBox }
+{ TlqBaseComboBox }
 
-procedure TfpgBaseComboBox.SetDropDownCount(const AValue: integer);
+procedure TlqBaseComboBox.SetDropDownCount(const AValue: integer);
 begin
   if FDropDownCount = AValue then
     Exit;
   FDropDownCount := AValue;
 end;
 
-function TfpgBaseComboBox.GetFontDesc: string;
+function TlqBaseComboBox.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
@@ -227,7 +227,7 @@ end;
 { Focusitem is 0 based like the Delphi ItemIndex property.
   So at startup, FocusItem = -1 which means nothing is selected. If
   FocusItem = 0 it means the first item is selected etc. }
-procedure TfpgBaseComboBox.SetFocusItem(const AValue: integer);
+procedure TlqBaseComboBox.SetFocusItem(const AValue: integer);
 begin
   if ReadOnly then
     Exit;
@@ -246,7 +246,7 @@ begin
     DoOnChange;
 end;
 
-procedure TfpgBaseComboBox.SetFontDesc(const AValue: string);
+procedure TlqBaseComboBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
@@ -257,7 +257,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseComboBox.SetExtraHint(const AValue: string);
+procedure TlqBaseComboBox.SetExtraHint(const AValue: string);
 begin
   if FExtraHint = AValue then
     Exit; //==>
@@ -265,26 +265,26 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseComboBox.SetReadOnly(const AValue: Boolean);
+procedure TlqBaseComboBox.SetReadOnly(const AValue: Boolean);
 begin
   if FReadOnly = AValue then exit;
   FReadOnly := AValue;
   Repaint;
 end;
 
-procedure TfpgBaseComboBox.DisableShowHint;
+procedure TlqBaseComboBox.DisableShowHint;
 begin
   FStoredShowHint := ShowHint;
   ShowHint := False;
   fpgApplication.HideHint; // make sure Application hint timer doesn't fire
 end;
 
-procedure TfpgBaseComboBox.RestoreShowHint;
+procedure TlqBaseComboBox.RestoreShowHint;
 begin
   ShowHint := FStoredShowHint;
 end;
 
-procedure TfpgBaseComboBox.SetMargin(const AValue: integer);
+procedure TlqBaseComboBox.SetMargin(const AValue: integer);
 begin
   if (FMargin = AValue) or (AValue <= 0) then
     Exit; //=>
@@ -294,7 +294,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgBaseComboBox.SetAutoSize(const AValue: Boolean);
+procedure TlqBaseComboBox.SetAutoSize(const AValue: Boolean);
 var
   r: TRect;
 begin
@@ -310,25 +310,25 @@ begin
   end;
 end;
 
-procedure TfpgBaseComboBox.CalculateInternalButtonRect;
+procedure TlqBaseComboBox.CalculateInternalButtonRect;
 begin
   FInternalBtnRect.SetRect(Width - Min(Height, 20), 2, Min(Height, 20)-2, Height-4);
 end;
 
-procedure TfpgBaseComboBox.InternalOnClose(Sender: TObject);
+procedure TlqBaseComboBox.InternalOnClose(Sender: TObject);
 begin
   DoOnCloseUp;
   RestoreShowHint;
 end;
 
-procedure TfpgBaseComboBox.InternalItemsChanged(Sender: TObject);
+procedure TlqBaseComboBox.InternalItemsChanged(Sender: TObject);
 begin
   if FItems.Count = 0 then
     FocusItem := -1;
   Repaint;
 end;
 
-procedure TfpgBaseComboBox.HandleKeyPress(var keycode: word;
+procedure TlqBaseComboBox.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   old: integer;
@@ -367,28 +367,28 @@ begin
   end;  { if }
 end;
 
-procedure TfpgBaseComboBox.DoOnChange;
+procedure TlqBaseComboBox.DoOnChange;
 begin
   if Assigned(OnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgBaseComboBox.DoOnDropDown;
+procedure TlqBaseComboBox.DoOnDropDown;
 begin
   if Assigned(OnDropDown) then
     FOnDropDown(self);
 end;
 
-procedure TfpgBaseComboBox.DoOnCloseUp;
+procedure TlqBaseComboBox.DoOnCloseUp;
 begin
   if Assigned(OnCloseUp) then
     OnCloseUp(self);
 end;
 
-procedure TfpgBaseComboBox.PaintInternalButton;
+procedure TlqBaseComboBox.PaintInternalButton;
 var
-  ar: TfpgRect;
-  btnflags: TfpgButtonFlags;
+  ar: TlqRect;
+  btnflags: TlqButtonFlags;
 begin
   Canvas.BeginDraw;
   btnflags := [];
@@ -421,7 +421,7 @@ begin
   Canvas.EndDraw(FInternalBtnRect);
 end;
 
-function TfpgBaseComboBox.GetDropDownPos(AParent, AComboBox, ADropDown: TfpgWidget): TfpgRect;
+function TlqBaseComboBox.GetDropDownPos(AParent, AComboBox, ADropDown: TlqWidget): TlqRect;
 var
   pt: TPoint;
 begin
@@ -448,7 +448,7 @@ begin
   Result.Width  := ADropDown.Width;
 end;
 
-constructor TfpgBaseComboBox.Create(AOwner: TComponent);
+constructor TlqBaseComboBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWidth          := 120;
@@ -468,7 +468,7 @@ begin
   FStoredShowHint := ShowHint;
 end;
 
-destructor TfpgBaseComboBox.Destroy;
+destructor TlqBaseComboBox.Destroy;
 begin
   FFont.Free;
   FItems.Free;
@@ -516,7 +516,7 @@ begin
   end
 end;
 
-constructor TComboboxDropdownWindow.Create(AOwner: TComponent; ACallerWidget: TfpgBaseStaticCombo);
+constructor TComboboxDropdownWindow.Create(AOwner: TComponent; ACallerWidget: TlqBaseStaticCombo);
 begin
   inherited Create(nil);
   Name := '_ComboboxDropdownWindow';
@@ -534,17 +534,17 @@ end;
 
 
 
-function CreateComboBox(AOwner: TComponent; x, y, w: TfpgCoord; AList: TStringList;
-      h: TfpgCoord = 0): TfpgComboBox;
+function CreateComboBox(AOwner: TComponent; x, y, w: TlqCoord; AList: TStringList;
+      h: TlqCoord = 0): TlqComboBox;
 begin
-  Result           := TfpgComboBox.Create(AOwner);
+  Result           := TlqComboBox.Create(AOwner);
   Result.Left      := x;
   Result.Top       := y;
   Result.Width     := w;
   Result.Focusable := True;
 
-  if h < TfpgComboBox(Result).FFont.Height + (Result.FMargin * 2) then
-    Result.Height := TfpgComboBox(Result).FFont.Height + (Result.FMargin * 2)
+  if h < TlqComboBox(Result).FFont.Height + (Result.FMargin * 2) then
+    Result.Height := TlqComboBox(Result).FFont.Height + (Result.FMargin * 2)
   else
     Result.Height := h;
 
@@ -552,9 +552,9 @@ begin
     Result.Items.Assign(AList);
 end;
 
-{ TfpgBaseStaticCombo }
+{ TlqBaseStaticCombo }
 
-function TfpgBaseStaticCombo.GetText: string;
+function TlqBaseStaticCombo.GetText: string;
 begin
   if (FocusItem >= 0) and (FocusItem < FItems.Count) then
     Result := Items.Strings[FocusItem]
@@ -562,19 +562,19 @@ begin
     Result := '';
 end;
 
-function TfpgBaseStaticCombo.HasText: boolean;
+function TlqBaseStaticCombo.HasText: boolean;
 begin
   Result := FocusItem >= 0;
 end;
 
-procedure TfpgBaseStaticCombo.DoDropDown;
+procedure TlqBaseStaticCombo.DoDropDown;
 var
   ddw: TComboboxDropdownWindow;
   rowcount: integer;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   {$IFDEF DEBUG}
-  SendMethodEnter('TfpgBaseStaticCombo.DoDropDown');
+  SendMethodEnter('TlqBaseStaticCombo.DoDropDown');
   {$ENDIF}
   if (not Assigned(FDropDown)) or (not FDropDown.HasHandle) then
   begin
@@ -618,9 +618,9 @@ begin
   end;
 end;
 
-procedure TfpgBaseStaticCombo.DoDrawText(const ARect: TfpgRect);
+procedure TlqBaseStaticCombo.DoDrawText(const ARect: TlqRect);
 var
-  flags: TfpgTextFlags;
+  flags: TlqTextFlags;
 begin
   // Draw select item's text
   flags := [txtLeft, txtVCenter];
@@ -635,12 +635,12 @@ begin
   end;
 end;
 
-procedure TfpgBaseStaticCombo.InternalBtnClick(Sender: TObject);
+procedure TlqBaseStaticCombo.InternalBtnClick(Sender: TObject);
 begin
   DoDropDown;
 end;
 
-procedure TfpgBaseStaticCombo.SetText(const AValue: string);
+procedure TlqBaseStaticCombo.SetText(const AValue: string);
 var
   i: integer;
 begin
@@ -664,21 +664,21 @@ begin
   end;
 end;
 
-procedure TfpgBaseStaticCombo.HandleResize( AWidth, AHeight: TfpgCoord);
+procedure TlqBaseStaticCombo.HandleResize( AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   if FSizeIsDirty then
     CalculateInternalButtonRect;
 end;
 
-procedure TfpgBaseStaticCombo.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqBaseStaticCombo.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 begin
   inherited HandleKeyPress(keycode, shiftstate, consumed);
   if consumed then
     RePaint;
 end;
 
-procedure TfpgBaseStaticCombo.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseStaticCombo.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
   // button state is down only if user clicked in the button rectangle.
@@ -687,14 +687,14 @@ begin
   DoDropDown;
 end;
 
-procedure TfpgBaseStaticCombo.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseStaticCombo.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   FBtnPressed := False;
   PaintInternalButton;
 end;
 
-procedure TfpgBaseStaticCombo.HandleMouseScroll(x, y: integer;
+procedure TlqBaseStaticCombo.HandleMouseScroll(x, y: integer;
   shiftstate: TShiftState; delta: smallint);
 var
   NewIndex: Integer;
@@ -719,9 +719,9 @@ begin
   end;
 end;
 
-procedure TfpgBaseStaticCombo.HandlePaint;
+procedure TlqBaseStaticCombo.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
 //  inherited HandlePaint;
   Canvas.ClearClipRect;
@@ -769,7 +769,7 @@ begin
   DoDrawText(r);
 end;
 
-constructor TfpgBaseStaticCombo.Create(AOwner: TComponent);
+constructor TlqBaseStaticCombo.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FBackgroundColor  := clBoxColor;
@@ -779,13 +779,13 @@ begin
   CalculateInternalButtonRect;
 end;
 
-destructor TfpgBaseStaticCombo.Destroy;
+destructor TlqBaseStaticCombo.Destroy;
 begin
   FDropDown.Free;
   inherited Destroy;
 end;
 
-procedure TfpgBaseStaticCombo.Update;
+procedure TlqBaseStaticCombo.Update;
 begin
   FFocusItem := -1;
   Repaint;

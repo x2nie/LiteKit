@@ -46,13 +46,13 @@ type
   TAnchor  = (anLeft, anRight, anTop, anBottom);
   TAnchors = set of TAnchor;
 
-  TfpgButtonFlags = set of (btfIsEmbedded, btfIsDefault, btfIsPressed,
+  TlqButtonFlags = set of (btfIsEmbedded, btfIsDefault, btfIsPressed,
     btfIsSelected, btfHasFocus, btfHasParentColor, btfFlat, btfHover);
 
-  TfpgMenuItemFlags = set of (mifSelected, mifHasFocus, mifSeparator,
+  TlqMenuItemFlags = set of (mifSelected, mifHasFocus, mifSeparator,
     mifEnabled, mifChecked, mifSubMenu);
     
-  TfpgTextFlags = set of (txtLeft, txtHCenter, txtRight, txtTop, txtVCenter,
+  TlqTextFlags = set of (txtLeft, txtHCenter, txtRight, txtTop, txtVCenter,
     txtBottom, txtWrap, txtDisabled, txtAutoSize);
 
   TMouseButton = (mbLeft, mbRight, mbMiddle);
@@ -70,7 +70,7 @@ type
     *******************************************}
   TIntKeyPressEvent = procedure(Sender: TObject; var keycode: word; var shiftstate: word;
                             var consumed: boolean) of object;
-  TIntMouseEvent = procedure(Sender: TObject; x, y: TfpgCoord; var button: word;
+  TIntMouseEvent = procedure(Sender: TObject; x, y: TlqCoord; var button: word;
                           var shiftstate: word) of object;
 
 
@@ -86,21 +86,21 @@ type
   TMouseMoveEvent = procedure(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint) of object;
   TMouseWheelEvent = procedure(Sender: TObject; AShift: TShiftState; AWheelDelta: Single; const AMousePos: TPoint) of object;
   { Painting }
-  TPaintEvent = procedure(Sender: TObject{; const ARect: TfpgRect}) of object;
+  TPaintEvent = procedure(Sender: TObject{; const ARect: TlqRect}) of object;
   { Exceptions }
   TExceptionEvent = procedure(Sender: TObject; E: Exception) of object;
 
 
 type
   TSizeParams = record
-    min_width: TfpgCoord;
-    max_width: TfpgCoord;
-    min_height: TfpgCoord;
-    max_height: TfpgCoord;
+    min_width: TlqCoord;
+    max_width: TlqCoord;
+    min_height: TlqCoord;
+    max_height: TlqCoord;
   end;
 
 
-  TfpgFontResource = class(TfpgFontResourceImpl)
+  TlqFontResource = class(TlqFontResourceImpl)
   protected
     FFontDesc: string;
     FRefCount: integer;
@@ -112,118 +112,118 @@ type
   end;
 
 
-  TfpgFont = class(TfpgFontBase)
+  TlqFont = class(TlqFontBase)
   public
-    constructor Create(afontres: TfpgFontResource; const afontdesc: string);
+    constructor Create(afontres: TlqFontResource; const afontdesc: string);
     destructor  Destroy; override;
   end;
 
 
   // forward declaration
-  TfpgCanvas = class;
-  TfpgTimer = class;
+  TlqCanvas = class;
+  TlqTimer = class;
 
 
-  TfpgWindow = class(TfpgWindowImpl)
+  TlqWindow = class(TlqWindowImpl)
   protected
-    procedure   SetParent(const AValue: TfpgWindow); reintroduce;
-    function    GetParent: TfpgWindow; reintroduce;
-    function    GetCanvas: TfpgCanvas; reintroduce;
-    function    CreateCanvas: TfpgCanvasBase; virtual;
+    procedure   SetParent(const AValue: TlqWindow); reintroduce;
+    function    GetParent: TlqWindow; reintroduce;
+    function    GetCanvas: TlqCanvas; reintroduce;
+    function    CreateCanvas: TlqCanvasBase; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Parent: TfpgWindow read GetParent write SetParent;
-    property    Canvas: TfpgCanvas read GetCanvas;
-    property    WinHandle;  // surface this property from TfpgXXXImpl class in it's native format
+    property    Parent: TlqWindow read GetParent write SetParent;
+    property    Canvas: TlqCanvas read GetCanvas;
+    property    WinHandle;  // surface this property from TlqXXXImpl class in it's native format
   end;
 
 
-  TfpgImage = class(TfpgImageImpl)
+  TlqImage = class(TlqImageImpl)
   private
     function    GetScanLine(Row: Integer): Pointer;
   public
-    function    CreateDisabledImage: TfpgImage;
-    function    ImageFromSource: TfpgImage;
-    function    ImageFromRect(var ARect: TRect): TfpgImage; overload;
-    function    ImageFromRect(var ARect: TfpgRect): TfpgImage; overload;
+    function    CreateDisabledImage: TlqImage;
+    function    ImageFromSource: TlqImage;
+    function    ImageFromRect(var ARect: TRect): TlqImage; overload;
+    function    ImageFromRect(var ARect: TlqRect): TlqImage; overload;
     property    ScanLine[Row: Integer]: Pointer read GetScanLine;
   end;
 
 
-  TfpgImages = class
+  TlqImages = class
   private
     FImages: TStringList;
   public
     constructor Create;
     destructor  Destroy; override;
-    function    AddImage(const imgid: string; img: TfpgImage): boolean;
+    function    AddImage(const imgid: string; img: TlqImage): boolean;
     function    DeleteImage(const imgid: string; freeimg: boolean): boolean;
-    function    GetImage(const imgid: string): TfpgImage;
-    function    AddBMP(const imgid: string; bmpdata: pointer; bmpsize: integer): TfpgImage;
-    function    AddMaskedBMP(const imgid: string; bmpdata: pointer; bmpsize: integer; mcx, mcy: integer): TfpgImage;
+    function    GetImage(const imgid: string): TlqImage;
+    function    AddBMP(const imgid: string; bmpdata: pointer; bmpsize: integer): TlqImage;
+    function    AddMaskedBMP(const imgid: string; bmpdata: pointer; bmpsize: integer; mcx, mcy: integer): TlqImage;
     procedure   ListImages(var sl: TStringList);
   end;
 
 
-  TfpgCanvas = class(TfpgCanvasImpl)
+  TlqCanvas = class(TlqCanvasImpl)
   private
-    function    AddLineBreaks(const s: TfpgString; aMaxLineWidth: integer): string;
+    function    AddLineBreaks(const s: TlqString; aMaxLineWidth: integer): string;
   public
-    constructor Create(awin: TfpgWindowBase); override;
+    constructor Create(awin: TlqWindowBase); override;
     destructor  Destroy; override;
 
-    // As soon as TfpgStyle has moved out of CoreLib, these must go!
-    procedure   DrawButtonFace(x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags); overload;
-    procedure   DrawButtonFace(r: TfpgRect; AFlags: TfpgButtonFlags); overload;
-    procedure   DrawControlFrame(x, y, w, h: TfpgCoord); overload;
-    procedure   DrawControlFrame(r: TfpgRect); overload;
-    procedure   DrawBevel(x, y, w, h: TfpgCoord; ARaised: Boolean = True); overload;
-    procedure   DrawBevel(r: TfpgRect; ARaised: Boolean = True); overload;
-    procedure   DrawDirectionArrow(x, y, w, h: TfpgCoord; direction: TArrowDirection); overload;
-    procedure   DrawDirectionArrow(r: TfpgRect; direction: TArrowDirection); overload;
-    procedure   DrawFocusRect(r: TfpgRect);
-    function    DrawText(x, y, w, h: TfpgCoord; const AText: TfpgString; AFlags: TfpgTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
-    function    DrawText(x, y: TfpgCoord; const AText: TfpgString; AFlags: TfpgTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
-    function    DrawText(r: TfpgRect; const AText: TfpgString; AFlags: TfpgTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
+    // As soon as TlqStyle has moved out of CoreLib, these must go!
+    procedure   DrawButtonFace(x, y, w, h: TlqCoord; AFlags: TlqButtonFlags); overload;
+    procedure   DrawButtonFace(r: TlqRect; AFlags: TlqButtonFlags); overload;
+    procedure   DrawControlFrame(x, y, w, h: TlqCoord); overload;
+    procedure   DrawControlFrame(r: TlqRect); overload;
+    procedure   DrawBevel(x, y, w, h: TlqCoord; ARaised: Boolean = True); overload;
+    procedure   DrawBevel(r: TlqRect; ARaised: Boolean = True); overload;
+    procedure   DrawDirectionArrow(x, y, w, h: TlqCoord; direction: TArrowDirection); overload;
+    procedure   DrawDirectionArrow(r: TlqRect; direction: TArrowDirection); overload;
+    procedure   DrawFocusRect(r: TlqRect);
+    function    DrawText(x, y, w, h: TlqCoord; const AText: TlqString; AFlags: TlqTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
+    function    DrawText(x, y: TlqCoord; const AText: TlqString; AFlags: TlqTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
+    function    DrawText(r: TlqRect; const AText: TlqString; AFlags: TlqTextFlags = TextFlagsDflt; ALineSpace: integer = 2): integer; overload;
   end;
 
 
   { This is very basic for now, just to remind us of theming support. Later we
     will rework this to use a Style Manager like the previous fpGUI.
     Also support Bitmap based styles for easier theme implementations. }
-  TfpgStyle = class(TObject)
+  TlqStyle = class(TObject)
   public
-    DefaultFont: TfpgFont;
-    FixedFont: TfpgFont;
-    MenuFont: TfpgFont;
-    MenuAccelFont: TfpgFont;
-    MenuDisabledFont: TfpgFont;
+    DefaultFont: TlqFont;
+    FixedFont: TlqFont;
+    MenuFont: TlqFont;
+    MenuAccelFont: TlqFont;
+    MenuDisabledFont: TlqFont;
     constructor Create; virtual;
     destructor  Destroy; override;
     { General }
-    procedure   DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord); virtual; overload;
-    procedure   DrawControlFrame(ACanvas: TfpgCanvas; r: TfpgRect); overload;
+    procedure   DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord); virtual; overload;
+    procedure   DrawControlFrame(ACanvas: TlqCanvas; r: TlqRect); overload;
     function    GetControlFrameBorders: TRect; virtual;
-    procedure   DrawBevel(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; ARaised: Boolean = True); virtual;
-    procedure   DrawDirectionArrow(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; direction: TArrowDirection); virtual;
-    procedure   DrawString(ACanvas: TfpgCanvas; x, y: TfpgCoord; AText: string; AEnabled: boolean = True); virtual;
-    procedure   DrawFocusRect(ACanvas: TfpgCanvas; r: TfpgRect); virtual;
+    procedure   DrawBevel(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; ARaised: Boolean = True); virtual;
+    procedure   DrawDirectionArrow(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; direction: TArrowDirection); virtual;
+    procedure   DrawString(ACanvas: TlqCanvas; x, y: TlqCoord; AText: string; AEnabled: boolean = True); virtual;
+    procedure   DrawFocusRect(ACanvas: TlqCanvas; r: TlqRect); virtual;
     { Buttons }
-    procedure   DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags); virtual; overload;
-    procedure   DrawButtonFace(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgButtonFlags); overload;
+    procedure   DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags); virtual; overload;
+    procedure   DrawButtonFace(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqButtonFlags); overload;
     function    GetButtonBorders: TRect; virtual;
     function    GetButtonShift: TPoint; virtual;
     function    HasButtonHoverEffect: boolean; virtual;
     { Menus }
-    procedure   DrawMenuBar(ACanvas: TfpgCanvas; r: TfpgRect; ABackgroundColor: TfpgColor); virtual;
-    procedure   DrawMenuRow(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgMenuItemFlags); virtual;
-    procedure   DrawMenuItem(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgMenuItemFlags; AText: TfpgString); virtual;
-    procedure   DrawMenuItemSeparator(ACanvas: TfpgCanvas; r: TfpgRect); virtual;
-    procedure   DrawMenuItemImage(ACanvas: TfpgCanvas; x, y: TfpgCoord; r: TfpgRect; AFlags: TfpgMenuItemFlags); virtual;
+    procedure   DrawMenuBar(ACanvas: TlqCanvas; r: TlqRect; ABackgroundColor: TlqColor); virtual;
+    procedure   DrawMenuRow(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqMenuItemFlags); virtual;
+    procedure   DrawMenuItem(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqMenuItemFlags; AText: TlqString); virtual;
+    procedure   DrawMenuItemSeparator(ACanvas: TlqCanvas; r: TlqRect); virtual;
+    procedure   DrawMenuItemImage(ACanvas: TlqCanvas; x, y: TlqCoord; r: TlqRect; AFlags: TlqMenuItemFlags); virtual;
     function    GetSeparatorSize: integer; virtual;
     { Editbox }
-    procedure   DrawEditBox(ACanvas: TfpgCanvas; const r: TfpgRect; const IsEnabled: Boolean; const IsReadOnly: Boolean; const ABackgroundColor: TfpgColor); virtual;
+    procedure   DrawEditBox(ACanvas: TlqCanvas; const r: TlqRect; const IsEnabled: Boolean; const IsReadOnly: Boolean; const ABackgroundColor: TlqColor); virtual;
   end;
   
 
@@ -234,22 +234,22 @@ type
   end;
 
 
-  TfpgApplication = class(TfpgApplicationImpl)
+  TlqApplication = class(TlqApplicationImpl)
   private
     FHintPause: Integer;
     FShowHint: boolean;
     FOnException: TExceptionEvent;
     FStopOnException: Boolean;
-    FHintWindow: TfpgWindow;
-    FHintTimer: TfpgTimer;
-    FHintWidget: TfpgWindow;
+    FHintWindow: TlqWindow;
+    FHintTimer: TlqTimer;
+    FHintWidget: TlqWindow;
     FHintPos: TPoint;
     FOnKeyPress: TKeyPressEvent;
     FStartDragDistance: integer;
     procedure   SetHintPause(const AValue: Integer);
     procedure   SetupLocalizationStrings;
-    procedure   InternalMsgFreeMe(var msg: TfpgMessageRec); message FPGM_FREEME;
-    procedure   InternalMsgHintTimer(var msg: TfpgMessageRec); message FPGM_HINTTIMER;
+    procedure   InternalMsgFreeMe(var msg: TlqMessageRec); message FPGM_FREEME;
+    procedure   InternalMsgHintTimer(var msg: TlqMessageRec); message FPGM_HINTTIMER;
     procedure   CreateHintWindow;
     procedure   HintTimerFired(Sender: TObject);
     procedure   SetShowHint(const AValue: boolean);
@@ -258,18 +258,18 @@ type
     FDisplayParams: string;
     FScreenWidth: integer;
     FScreenHeight: integer;
-    FDefaultFont: TfpgFont;
+    FDefaultFont: TlqFont;
     FFontResList: TList;
     FMessageHookList: TFPList;
-    procedure   FreeFontRes(afontres: TfpgFontResource);
+    procedure   FreeFontRes(afontres: TlqFontResource);
     procedure   InternalInit;
     procedure   RunMessageLoop;
     procedure   WaitWindowMessage(atimeoutms: integer);
   public
     constructor Create(const AParams: string = ''); override;
     destructor  Destroy; override;
-    function    GetFont(const afontdesc: TfpgString): TfpgFont;
-    procedure   ActivateHint(APos: TPoint; AHint: TfpgString);
+    function    GetFont(const afontdesc: TlqString): TlqFont;
+    procedure   ActivateHint(APos: TPoint; AHint: TlqString);
     procedure   RecreateHintWindow;
     procedure   Flush;
     procedure   HandleException(Sender: TObject);
@@ -280,9 +280,9 @@ type
     procedure   SetMessageHook(AWidget: TObject; const AMsgCode: integer; AListener: TObject);
     procedure   ShowException(E: Exception);
     procedure   UnsetMessageHook(AWidget: TObject; const AMsgCode: integer; AListener: TObject);
-    property    DefaultFont: TfpgFont read FDefaultFont;
+    property    DefaultFont: TlqFont read FDefaultFont;
     property    HintPause: Integer read FHintPause write SetHintPause;
-    property    HintWindow: TfpgWindow read FHintWindow;
+    property    HintWindow: TlqWindow read FHintWindow;
     property    ScreenWidth: integer read FScreenWidth;
     property    ScreenHeight: integer read FScreenHeight;
     property    ShowHint: boolean read FShowHint write SetShowHint default True;
@@ -293,7 +293,7 @@ type
   end;
 
 
-  TfpgTimer = class(TfpgTimerImpl)
+  TlqTimer = class(TlqTimerImpl)
   public
     { AInterval is in milliseconds. }
     constructor Create(AInterval: integer); override;
@@ -302,86 +302,86 @@ type
 
 
   { Caret or text cursor, inverts painting over text and has blinking support. }
-  TfpgCaret = class(TObject)
+  TlqCaret = class(TObject)
   private
     FEnabled: boolean;
     FVisible: boolean;
     FInterval: integer;
-    FCanvas: TfpgCanvas;
-    FTop: TfpgCoord;
-    FLeft: TfpgCoord;
-    FWidth: TfpgCoord;
-    FHeight: TfpgCoord;
-    FTimer: TfpgTimer;
+    FCanvas: TlqCanvas;
+    FTop: TlqCoord;
+    FLeft: TlqCoord;
+    FWidth: TlqCoord;
+    FHeight: TlqCoord;
+    FTimer: TlqTimer;
     procedure   OnTimerTime(Sender: TObject);
   public
     constructor Create;
     destructor  Destroy; override;
-    procedure   SetCaret(acanvas: TfpgCanvas; x, y, w, h: TfpgCoord);
-    procedure   UnSetCaret(acanvas: TfpgCanvas);
+    procedure   SetCaret(acanvas: TlqCanvas; x, y, w, h: TlqCoord);
+    procedure   UnSetCaret(acanvas: TlqCanvas);
     procedure   InvertCaret;
     property    Width: integer read FWidth;
     property    Height: integer read FHeight;
   end;
   
   
-  TfpgClipboard = class(TfpgClipboardImpl)
+  TlqClipboard = class(TlqClipboardImpl)
   end;
 
   
-  TfpgFileList = class(TfpgFileListImpl)
+  TlqFileList = class(TlqFileListImpl)
   end;
 
 
-  TfpgMimeData = class(TfpgMimeDataImpl)
+  TlqMimeData = class(TlqMimeDataImpl)
   end;
 
 
-  TfpgDrag = class(TfpgDragImpl)
+  TlqDrag = class(TlqDragImpl)
   private
-    FTarget: TfpgWinHandle;
-    procedure   SetMimeData(const AValue: TfpgMimeDataBase);
+    FTarget: TlqWinHandle;
+    procedure   SetMimeData(const AValue: TlqMimeDataBase);
   protected
-    function    GetSource: TfpgWindow; reintroduce;
+    function    GetSource: TlqWindow; reintroduce;
   public
-    constructor Create(ASource: TfpgWindow);
-    function    Execute(const ADropActions: TfpgDropActions = [daCopy]; const ADefaultAction: TfpgDropAction = daCopy): TfpgDropAction; override;
-    property    Source: TfpgWindow read GetSource;
-    property    Target: TfpgWinHandle read FTarget write FTarget;
-    property    MimeData: TfpgMimeDataBase read FMimeData write SetMimeData;
+    constructor Create(ASource: TlqWindow);
+    function    Execute(const ADropActions: TlqDropActions = [daCopy]; const ADefaultAction: TlqDropAction = daCopy): TlqDropAction; override;
+    property    Source: TlqWindow read GetSource;
+    property    Target: TlqWinHandle read FTarget write FTarget;
+    property    MimeData: TlqMimeDataBase read FMimeData write SetMimeData;
   end;
 
 
 var
-  fpgStyle:  TfpgStyle;   { TODO -ograemeg : move this into fpgApplication }
-  fpgCaret:  TfpgCaret;   { TODO -ograemeg : move this into fpgApplication }
-  fpgImages: TfpgImages;  { TODO -ograemeg : move this into fpgApplication }
+  fpgStyle:  TlqStyle;   { TODO -ograemeg : move this into fpgApplication }
+  fpgCaret:  TlqCaret;   { TODO -ograemeg : move this into fpgApplication }
+  fpgImages: TlqImages;  { TODO -ograemeg : move this into fpgApplication }
 
-  DefaultCanvasClass: TfpgCanvasBaseClass = nil;
+  DefaultCanvasClass: TlqCanvasBaseClass = nil;
 
 // Application & Clipboard singletons
-function  fpgApplication: TfpgApplication;
-function  fpgClipboard: TfpgClipboard;
+function  fpgApplication: TlqApplication;
+function  fpgClipboard: TlqClipboard;
 
 // Fonts (easy access function)
-function  fpgGetFont(const afontdesc: TfpgString): TfpgFont;
+function  fpgGetFont(const afontdesc: TlqString): TlqFont;
 
 // Message Queue  (easy access function)
 procedure fpgWaitWindowMessage;
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TfpgMessageParams); overload;
+procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer); overload;
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TfpgMessageParams); overload;
+procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
-procedure fpgDeliverMessage(var msg: TfpgMessageRec);
+procedure fpgDeliverMessage(var msg: TlqMessageRec);
 procedure fpgDeliverMessages;
 function  fpgGetFirstMessage: PfpgMessageRec;
 procedure fpgDeleteFirstMessage;
 
 // Color & Font routines
-function  fpgColorToRGB(col: TfpgColor): TfpgColor;
-function  fpgGetNamedColor(col: TfpgColor): TfpgColor;
+function  fpgColorToRGB(col: TlqColor): TlqColor;
+function  fpgGetNamedColor(col: TlqColor): TlqColor;
 procedure fpgSetNamedColor(colorid, rgbvalue: longword);
-function  fpgIsNamedColor(col: TfpgColor): boolean;
+function  fpgIsNamedColor(col: TlqColor): boolean;
 function  fpgGetNamedFontDesc(afontid: string): string;
 procedure fpgSetNamedFont(afontid, afontdesc: string);
 function  fpgGetNamedFontList: TStringlist;
@@ -396,20 +396,20 @@ procedure fpgPause(MilliSeconds: Cardinal);
 
 // Rectangle, Point & Size routines
 function  InflateRect(var Rect: TRect; dx: Integer; dy: Integer): Boolean;
-function  InflateRect(var Rect: TfpgRect; dx: Integer; dy: Integer): Boolean;
+function  InflateRect(var Rect: TlqRect; dx: Integer; dy: Integer): Boolean;
 function  OffsetRect(var Rect: TRect; dx: Integer; dy: Integer): Boolean;
-function  OffsetRect(var Rect: TfpgRect; dx: Integer; dy: Integer): Boolean;
+function  OffsetRect(var Rect: TlqRect; dx: Integer; dy: Integer): Boolean;
 function  CenterPoint(const Rect: TRect): TPoint;
-function  CenterPoint(const Rect: TfpgRect): TPoint;
-function  fpgRect(ALeft, ATop, AWidth, AHeight: integer): TfpgRect;
-function  fpgRectToRect(const ARect: TfpgRect): TRect;
-function  fpgPoint(const AX, AY: integer): TfpgPoint;
-function  fpgSize(const AWidth, AHeight: integer): TfpgSize;
+function  CenterPoint(const Rect: TlqRect): TPoint;
+function  fpgRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
+function  fpgRectToRect(const ARect: TlqRect): TRect;
+function  fpgPoint(const AX, AY: integer): TlqPoint;
+function  fpgSize(const AWidth, AHeight: integer): TlqSize;
 
 // Debug rountines
 procedure PrintRect(const Rect: TRect);
-procedure PrintRect(const Rect: TfpgRect);
-procedure PrintCoord(const x, y: TfpgCoord);
+procedure PrintRect(const Rect: TlqRect);
+procedure PrintCoord(const x, y: TlqCoord);
 procedure PrintCoord(const pt: TPoint);
 function  PrintCallTrace(const AClassName, AMethodName: string): IInterface;
 procedure PrintCallTraceDbgLn(const AMessage: string);
@@ -417,35 +417,35 @@ procedure DumpStack;
 procedure DumpStack(var AList: TStrings);
 
 { These methods are safe to use even on Windows gui applications. }
-procedure DebugLn(const s1: TfpgString);
-procedure DebugLn(const s1, s2: TfpgString);
-procedure DebugLn(const s1, s2, s3: TfpgString);
-procedure DebugLn(const s1, s2, s3, s4: TfpgString);
-procedure DebugLn(const s1, s2, s3, s4, s5: TfpgString);
-function DebugMethodEnter(const s1: TfpgString): IInterface;
+procedure DebugLn(const s1: TlqString);
+procedure DebugLn(const s1, s2: TlqString);
+procedure DebugLn(const s1, s2, s3: TlqString);
+procedure DebugLn(const s1, s2, s3, s4: TlqString);
+procedure DebugLn(const s1, s2, s3, s4, s5: TlqString);
+function DebugMethodEnter(const s1: TlqString): IInterface;
 procedure DebugSeparator;
 
 // operator overloading of some useful structures
 operator = (a: TRect; b: TRect): boolean;
-operator = (const ASize1, ASize2: TfpgSize) b: Boolean;
+operator = (const ASize1, ASize2: TlqSize) b: Boolean;
 operator = (const APoint1, APoint2: TPoint) b: Boolean;
 operator + (const APoint1, APoint2: TPoint) p: TPoint;
-operator + (const APoint1, APoint2: TfpgPoint) p: TfpgPoint;
-operator + (const APoint: TPoint; ASize: TfpgSize) p: TPoint;
-operator + (const APoint: TfpgPoint; ASize: TfpgSize) p: TfpgPoint;
-operator + (const ASize: TfpgSize; APoint: TPoint) s: TfpgSize;
-operator + (const ASize: TfpgSize; APoint: TfpgPoint) s: TfpgSize;
-operator + (const ASize1, ASize2: TfpgSize) s: TfpgSize;
+operator + (const APoint1, APoint2: TlqPoint) p: TlqPoint;
+operator + (const APoint: TPoint; ASize: TlqSize) p: TPoint;
+operator + (const APoint: TlqPoint; ASize: TlqSize) p: TlqPoint;
+operator + (const ASize: TlqSize; APoint: TPoint) s: TlqSize;
+operator + (const ASize: TlqSize; APoint: TlqPoint) s: TlqSize;
+operator + (const ASize1, ASize2: TlqSize) s: TlqSize;
 operator + (const APoint: TPoint; i: Integer) p: TPoint;
-operator + (const APoint: TfpgPoint; i: Integer) p: TfpgPoint;
-operator + (const ASize: TfpgSize; i: Integer) s: TfpgSize;
+operator + (const APoint: TlqPoint; i: Integer) p: TlqPoint;
+operator + (const ASize: TlqSize; i: Integer) s: TlqSize;
 operator - (const APoint1, APoint2: TPoint) p: TPoint;
-operator - (const APoint1, APoint2: TfpgPoint) p: TfpgPoint;
+operator - (const APoint1, APoint2: TlqPoint) p: TlqPoint;
 operator - (const APoint: TPoint; i: Integer) p: TPoint;
-operator - (const APoint: TfpgPoint; i: Integer) p: TfpgPoint;
-operator - (const ASize: TfpgSize; const APoint: TPoint) s: TfpgSize;
-operator - (const ASize: TfpgSize; const APoint: TfpgPoint) s: TfpgSize;
-operator - (const ASize: TfpgSize; i: Integer) s: TfpgSize;
+operator - (const APoint: TlqPoint; i: Integer) p: TlqPoint;
+operator - (const ASize: TlqSize; const APoint: TPoint) s: TlqSize;
+operator - (const ASize: TlqSize; const APoint: TlqPoint) s: TlqSize;
+operator - (const ASize: TlqSize; i: Integer) s: TlqSize;
 operator = (const AColor1, AColor2: TFPColor) b: Boolean;
 
 
@@ -476,10 +476,10 @@ uses
 
 var
   fpgTimers: TList;
-  fpgNamedColors: array[0..255] of TfpgColor;
+  fpgNamedColors: array[0..255] of TlqColor;
   fpgNamedFonts: TList;
-  uApplication: TfpgApplication;
-  uClipboard: TfpgClipboard;
+  uApplication: TlqApplication;
+  uClipboard: TlqClipboard;
   uMsgQueueList: TList;
   uDebugText: ^Text;
   uDebugTextAllocated: Boolean;
@@ -504,7 +504,7 @@ type
   end;
 
 
-  TWidgetFriend = class(TfpgWidget);
+  TWidgetFriend = class(TlqWidget);
 
 
 { TDebugMethodHelper }
@@ -532,7 +532,7 @@ begin
   FontDesc := AFontDesc;
 end;
 
-{$include fpg_msgqueue.inc}
+{$include lq_msgqueue.inc}
 
 // Timer support
 
@@ -558,7 +558,7 @@ begin
     if fpgTimers[i] = nil then
       fpgTimers.Delete(i)
     else
-      TfpgTimer(fpgTimers[i]).CheckAlarm(ctime);
+      TlqTimer(fpgTimers[i]).CheckAlarm(ctime);
   end;
 end;
 
@@ -569,13 +569,13 @@ begin
   if fpgTimers = nil then
     Exit;
   for i := 0 to fpgTimers.Count-1 do
-    TfpgTimer(fpgTimers[i]).Reset;
+    TlqTimer(fpgTimers[i]).Reset;
 end;
 
 function fpgClosestTimer(ctime: TDateTime; amaxtime: integer): integer;
 var
   i: integer;
-  t: TfpgTimer;
+  t: TlqTimer;
   dt: TDateTime;
   tb: Boolean;
 begin
@@ -587,7 +587,7 @@ begin
 
   for i := 0 to fpgTimers.Count-1 do
   begin
-    t := TfpgTimer(fpgTimers[i]);
+    t := TlqTimer(fpgTimers[i]);
     if (t <> nil) and t.Enabled and (t.NextAlarm < dt) then
     begin
       dt := t.NextAlarm;
@@ -639,7 +639,7 @@ begin
     Result := False;
 end;
 
-function InflateRect(var Rect: TfpgRect; dx: Integer; dy: Integer): Boolean;
+function InflateRect(var Rect: TlqRect; dx: Integer; dy: Integer): Boolean;
 begin
   if Assigned(@Rect) then
   begin
@@ -670,7 +670,7 @@ begin
     OffsetRect := False;
 end;
 
-function OffsetRect(var Rect: TfpgRect; dx: Integer; dy: Integer): Boolean;
+function OffsetRect(var Rect: TlqRect; dx: Integer; dy: Integer): Boolean;
 begin
   if Assigned(@Rect) then
   begin
@@ -691,18 +691,18 @@ begin
   Result.Y := (Rect.Top + Rect.Bottom) div 2;
 end;
 
-function CenterPoint(const Rect: TfpgRect): TPoint;
+function CenterPoint(const Rect: TlqRect): TPoint;
 begin
   Result.X := (Rect.Left + Rect.Right) div 2;
   Result.Y := (Rect.Top + Rect.Bottom) div 2;
 end;
 
-function fpgRect(ALeft, ATop, AWidth, AHeight: integer): TfpgRect;
+function fpgRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
 begin
   Result.SetRect(ALeft, ATop, AWidth, AHeight);
 end;
 
-function fpgRectToRect(const ARect: TfpgRect): TRect;
+function fpgRectToRect(const ARect: TlqRect): TRect;
 begin
   Result.Left   := ARect.Left;
   Result.Top    := ARect.Top;
@@ -710,12 +710,12 @@ begin
   Result.Bottom := ARect.Bottom;
 end;
 
-function fpgPoint(const AX, AY: integer): TfpgPoint;
+function fpgPoint(const AX, AY: integer): TlqPoint;
 begin
   Result.SetPoint(AX, AY);
 end;
 
-function fpgSize(const AWidth, AHeight: integer): TfpgSize;
+function fpgSize(const AWidth, AHeight: integer): TlqSize;
 begin
   Result.SetSize(AWidth, AHeight);
 end;
@@ -796,13 +796,13 @@ begin
       ' bottom=', Rect.Bottom);
 end;
 
-procedure PrintRect(const Rect: TfpgRect);
+procedure PrintRect(const Rect: TlqRect);
 begin
   writeln('Rect left=', Rect.Left, ' top=', Rect.Top, ' right=', Rect.Right,
       ' bottom=', Rect.Bottom, ' width=', Rect.Width, ' height=', Rect.Height);
 end;
 
-procedure PrintCoord(const x, y: TfpgCoord);
+procedure PrintCoord(const x, y: TlqCoord);
 begin
   writeln('x=', x, '  y=', y);
 end;
@@ -917,7 +917,7 @@ begin
   AList.Add('');
 end;
 
-procedure DebugLn(const s1: TfpgString);
+procedure DebugLn(const s1: TlqString);
 var
   s: string;
 begin
@@ -927,27 +927,27 @@ begin
   writeln(uDebugText^, s + fpgConvertLineEndings(s1));
 end;
 
-procedure DebugLn(const s1, s2: TfpgString);
+procedure DebugLn(const s1, s2: TlqString);
 begin
   DebugLn(s1 + ' ' + s2);
 end;
 
-procedure DebugLn(const s1, s2, s3: TfpgString);
+procedure DebugLn(const s1, s2, s3: TlqString);
 begin
   DebugLn(s1 + ' ' + s2  + ' ' + s3);
 end;
 
-procedure DebugLn(const s1, s2, s3, s4: TfpgString);
+procedure DebugLn(const s1, s2, s3, s4: TlqString);
 begin
   DebugLn(s1 + ' ' + s2 + ' ' + s3 + ' ' + s4);
 end;
 
-procedure DebugLn(const s1, s2, s3, s4, s5: TfpgString);
+procedure DebugLn(const s1, s2, s3, s4, s5: TlqString);
 begin
   DebugLn(s1 + ' ' + s2 + ' ' + s3 + ' ' + s4 + ' ' + s5);
 end;
 
-function DebugMethodEnter(const s1: TfpgString): IInterface;
+function DebugMethodEnter(const s1: TlqString): IInterface;
 begin
   Result := TDebugMethodHelper.Create(s1);
 end;
@@ -968,7 +968,7 @@ begin
     Result := False;
 end;
 
-operator = (const ASize1, ASize2: TfpgSize) b: Boolean;
+operator = (const ASize1, ASize2: TlqSize) b: Boolean;
 begin
   b := (ASize1.w = ASize2.w) and (ASize1.h = ASize2.h);
 end;
@@ -984,37 +984,37 @@ begin
   p.y := APoint1.y + APoint2.y;
 end;
 
-operator + (const APoint1, APoint2: TfpgPoint) p: TfpgPoint;
+operator + (const APoint1, APoint2: TlqPoint) p: TlqPoint;
 begin
   p.x := APoint1.x + APoint2.x;
   p.y := APoint1.y + APoint2.y;
 end;
 
-operator + (const APoint: TPoint; ASize: TfpgSize) p: TPoint;
+operator + (const APoint: TPoint; ASize: TlqSize) p: TPoint;
 begin
   p.x := APoint.x + ASize.w;
   p.y := APoint.y + ASize.h;
 end;
 
-operator + (const APoint: TfpgPoint; ASize: TfpgSize) p: TfpgPoint;
+operator + (const APoint: TlqPoint; ASize: TlqSize) p: TlqPoint;
 begin
   p.x := APoint.x + ASize.w;
   p.y := APoint.y + ASize.h;
 end;
 
-operator + (const ASize: TfpgSize; APoint: TPoint) s: TfpgSize;
+operator + (const ASize: TlqSize; APoint: TPoint) s: TlqSize;
 begin
   s.w := ASize.w + APoint.x;
   s.h := ASize.h + APoint.y;
 end;
 
-operator + (const ASize: TfpgSize; APoint: TfpgPoint) s: TfpgSize;
+operator + (const ASize: TlqSize; APoint: TlqPoint) s: TlqSize;
 begin
   s.w := ASize.w + APoint.x;
   s.h := ASize.h + APoint.y;
 end;
 
-operator + (const ASize1, ASize2: TfpgSize) s: TfpgSize;
+operator + (const ASize1, ASize2: TlqSize) s: TlqSize;
 begin
   s.w := ASize1.w + ASize2.w;
   s.h := ASize1.h + ASize2.h;
@@ -1026,13 +1026,13 @@ begin
   p.y := APoint.y + i;
 end;
 
-operator + (const APoint: TfpgPoint; i: Integer) p: TfpgPoint;
+operator + (const APoint: TlqPoint; i: Integer) p: TlqPoint;
 begin
   p.x := APoint.x + i;
   p.y := APoint.y + i;
 end;
 
-operator + (const ASize: TfpgSize; i: Integer) s: TfpgSize;
+operator + (const ASize: TlqSize; i: Integer) s: TlqSize;
 begin
   s.w := ASize.w + i;
   s.h := ASize.h + i;
@@ -1044,7 +1044,7 @@ begin
   p.y := APoint1.y - APoint2.y;
 end;
 
-operator - (const APoint1, APoint2: TfpgPoint) p: TfpgPoint;
+operator - (const APoint1, APoint2: TlqPoint) p: TlqPoint;
 begin
   p.x := APoint1.x - APoint2.x;
   p.y := APoint1.y - APoint2.y;
@@ -1056,25 +1056,25 @@ begin
   p.y := APoint.y - i;
 end;
 
-operator - (const APoint: TfpgPoint; i: Integer) p: TfpgPoint;
+operator - (const APoint: TlqPoint; i: Integer) p: TlqPoint;
 begin
   p.x := APoint.x - i;
   p.y := APoint.y - i;
 end;
 
-operator - (const ASize: TfpgSize; const APoint: TPoint) s: TfpgSize;
+operator - (const ASize: TlqSize; const APoint: TPoint) s: TlqSize;
 begin
   s.w := ASize.w - APoint.x;
   s.h := ASize.h - APoint.y;
 end;
 
-operator - (const ASize: TfpgSize; const APoint: TfpgPoint) s: TfpgSize;
+operator - (const ASize: TlqSize; const APoint: TlqPoint) s: TlqSize;
 begin
   s.w := ASize.w - APoint.x;
   s.h := ASize.h - APoint.y;
 end;
 
-operator - (const ASize: TfpgSize; i: Integer) s: TfpgSize;
+operator - (const ASize: TlqSize; i: Integer) s: TlqSize;
 begin
   s.w := ASize.w - i;
   s.h := ASize.h - i;
@@ -1088,15 +1088,15 @@ begin
         and (AColor1.Alpha = AColor2.Alpha);
 end;
 
-{ TfpgTimer }
+{ TlqTimer }
 
-constructor TfpgTimer.Create(AInterval: integer);
+constructor TlqTimer.Create(AInterval: integer);
 begin
   inherited Create(AInterval);
   fpgTimers.Add(self);
 end;
 
-destructor TfpgTimer.Destroy;
+destructor TlqTimer.Destroy;
 var
   i: integer;
 begin
@@ -1107,23 +1107,23 @@ begin
 end;
 
 
-function fpgApplication: TfpgApplication;
+function fpgApplication: TlqApplication;
 begin
   if not Assigned(uApplication) then
-    uApplication := TfpgApplication.Create;
+    uApplication := TlqApplication.Create;
   result := uApplication;
 end;
 
 
-function fpgClipboard: TfpgClipboard;
+function fpgClipboard: TlqClipboard;
 begin
   if not Assigned(uClipboard) then
-    uClipboard := TfpgClipboard.Create;
+    uClipboard := TlqClipboard.Create;
   Result := uClipboard;
 end;
 
 
-function fpgColorToRGB(col: TfpgColor): TfpgColor;
+function fpgColorToRGB(col: TlqColor): TlqColor;
 begin
   if (((col shr 24) and $FF) = $80) and ((col and $FFFFFF) <= $FF) then
     Result := fpgNamedColors[col and $FF] or (col and $7F000000)// named color keeping alpha
@@ -1132,7 +1132,7 @@ begin
 end;
 
 
-function fpgGetNamedColor(col: TfpgColor): TfpgColor;
+function fpgGetNamedColor(col: TlqColor): TlqColor;
 begin
   if fpgIsNamedColor(col) then
     Result := col  // nothing to do, it is already a named color
@@ -1150,7 +1150,7 @@ begin
   fpgNamedColors[i] := rgbvalue;
 end;
 
-function fpgIsNamedColor(col: TfpgColor): boolean;
+function fpgIsNamedColor(col: TlqColor): boolean;
 begin
   if (((col shr 24) and $FF) = $80) and ((col and $FFFFFF) <= $FF) then
     Result := True
@@ -1211,12 +1211,12 @@ begin
   fpgApplication.WaitWindowMessage(500);
 end;
 
-function fpgGetFont(const afontdesc: TfpgString): TfpgFont;
+function fpgGetFont(const afontdesc: TlqString): TlqFont;
 begin
   Result := fpgApplication.GetFont(afontdesc);
 end;
 
-constructor TfpgApplication.Create(const AParams: string);
+constructor TlqApplication.Create(const AParams: string);
 begin
   FFontResList    := TList.Create;
   FDisplayParams  := AParams;
@@ -1243,7 +1243,7 @@ begin
   end;
 end;
 
-destructor TfpgApplication.Destroy;
+destructor TlqApplication.Destroy;
 var
   i: integer;
 begin
@@ -1270,14 +1270,14 @@ begin
   
   for i := fpgTimers.Count-1 downto 0 do
     if fpgTimers[i] <> nil then
-      TfpgTimer(fpgTimers[i]).Free;
+      TlqTimer(fpgTimers[i]).Free;
   fpgTimers.Free;
 
   FDefaultFont.Free;
 
   for i := FFontResList.Count-1 downto 0 do
   begin
-    TfpgFontResource(FFontResList[i]).Free;
+    TlqFontResource(FFontResList[i]).Free;
     FFontResList.Delete(i);
   end;
   FFontResList.Free;
@@ -1298,11 +1298,11 @@ begin
   inherited Destroy;
 end;
 
-function TfpgApplication.GetFont(const afontdesc: TfpgString): TfpgFont;
+function TlqApplication.GetFont(const afontdesc: TlqString): TlqFont;
 var
-  fr: TfpgFontResource;
+  fr: TlqFontResource;
   n: integer;
-  fdesc: TfpgString;
+  fdesc: TlqString;
 begin
   fdesc := afontdesc;
 
@@ -1312,20 +1312,20 @@ begin
   Result := nil;
 
   for n := 0 to FFontResList.Count - 1 do
-    if TfpgFontResource(FFontResList[n]).FontDesc = fdesc then
+    if TlqFontResource(FFontResList[n]).FontDesc = fdesc then
     begin
-      fr     := TfpgFontResource(FFontResList[n]);
+      fr     := TlqFontResource(FFontResList[n]);
       Inc(fr.FRefCount);
-      Result := TfpgFont.Create(fr, afontdesc);
+      Result := TlqFont.Create(fr, afontdesc);
       Exit; //==>
     end;
 
-  fr := TfpgFontResource.Create(fdesc);
+  fr := TlqFontResource.Create(fdesc);
 
   if fr.HandleIsValid then
   begin
     FFontResList.Add(fr);
-    Result := TfpgFont.Create(fr, afontdesc);
+    Result := TlqFont.Create(fr, afontdesc);
   end
   else
   begin
@@ -1336,13 +1336,13 @@ begin
   end;
 end;
 
-procedure TfpgApplication.ActivateHint(APos: TPoint; AHint: TfpgString);
+procedure TlqApplication.ActivateHint(APos: TPoint; AHint: TlqString);
 var
-  wnd: TfpgHintWindow;
+  wnd: TlqHintWindow;
   w: Integer;
   h: Integer;
 begin
-  wnd := TfpgHintWindow(FHintWindow);
+  wnd := TlqHintWindow(FHintWindow);
   if Assigned(wnd) and wnd.Visible then
     Exit; //==>  Nothing to do
 
@@ -1364,7 +1364,7 @@ begin
   wnd.Show;
 end;
 
-procedure TfpgApplication.RecreateHintWindow;
+procedure TlqApplication.RecreateHintWindow;
 begin
   if Assigned(FHintWindow) then
   begin
@@ -1375,7 +1375,7 @@ begin
   CreateHintWindow;
 end;
 
-procedure TfpgApplication.Initialize;
+procedure TlqApplication.Initialize;
 begin
   { TODO : Remember to process parameters!! }
   if IsInitialized then
@@ -1384,7 +1384,7 @@ begin
     raise Exception.Create('Failed to initialize the Application object!');
 end;
 
-procedure TfpgApplication.Run;
+procedure TlqApplication.Run;
 begin
   repeat
     try
@@ -1395,7 +1395,7 @@ begin
   until Terminated;
 end;
 
-procedure TfpgApplication.SetupLocalizationStrings;
+procedure TlqApplication.SetupLocalizationStrings;
 begin
   // setup internal FPC arrays with localized values
   ShortDayNames[1] := rsShortSun;
@@ -1460,38 +1460,38 @@ begin
   cMsgDlgBtnText[mbClose]     := rsClose;
 end;
 
-procedure TfpgApplication.SetHintPause(const AValue: Integer);
+procedure TlqApplication.SetHintPause(const AValue: Integer);
 begin
   FHintPause := AValue;
   FHintTimer.Interval := FHintPause;
 end;
 
-procedure TfpgApplication.InternalMsgFreeMe(var msg: TfpgMessageRec);
+procedure TlqApplication.InternalMsgFreeMe(var msg: TlqMessageRec);
 begin
   if Assigned(msg.Sender) then
   begin
     if csDestroying in TComponent(msg.Sender).ComponentState then
       Exit;
-    RemoveComponent(TfpgWindowBase(msg.Sender));
-    TfpgWindowBase(msg.Sender).Free;
+    RemoveComponent(TlqWindowBase(msg.Sender));
+    TlqWindowBase(msg.Sender).Free;
   end;
 end;
 
-procedure TfpgApplication.InternalMsgHintTimer(var msg: TfpgMessageRec);
+procedure TlqApplication.InternalMsgHintTimer(var msg: TlqMessageRec);
 begin
 //  writeln('InternalMsgHintTimer msg');
   if (msg.Params.user.Param1 < 2) then
   begin
     { MouseEnter occured }
     FHintTimer.Enabled := Boolean(msg.Params.user.Param1);
-    FHintWidget := TfpgWindow(msg.Sender);
+    FHintWidget := TlqWindow(msg.Sender);
   end
   else
   begin
     { Handle mouse move information }
     FHintPos.X := msg.Params.user.Param2;
     FHintPos.Y := msg.Params.user.Param3;
-    FHintWidget := TfpgWindow(msg.Sender);
+    FHintWidget := TlqWindow(msg.Sender);
     if FHintTimer.Enabled then
       FHintTimer.Reset    // keep reseting to prevent hint from showing
     else
@@ -1499,22 +1499,22 @@ begin
   end;
 end;
 
-procedure TfpgApplication.CreateHintWindow;
+procedure TlqApplication.CreateHintWindow;
 begin
   if not Assigned(FHintWindow) then
   begin
     FHintWindow := HintWindowClass.Create(nil);
-    TfpgHintWindow(FHintWindow).Visible := False;
+    TlqHintWindow(FHintWindow).Visible := False;
   end;
 end;
 
-procedure TfpgApplication.HintTimerFired(Sender: TObject);
+procedure TlqApplication.HintTimerFired(Sender: TObject);
 var
-  w: TfpgWidget;
-  lHint: TfpgString;
+  w: TlqWidget;
+  lHint: TlqString;
 begin
   w := nil;
-  w := TfpgWidget(FHintWidget);
+  w := TlqWidget(FHintWidget);
   try
     if Assigned(w) then
     begin
@@ -1531,13 +1531,13 @@ begin
   FHintTimer.Enabled := False;
 end;
 
-procedure TfpgApplication.SetShowHint(const AValue: boolean);
+procedure TlqApplication.SetShowHint(const AValue: boolean);
 begin
 //writeln('>> SetShowHint to :', AValue);
   FShowHint := AValue;
 end;
 
-procedure TfpgApplication.SetStartDragDistance(const AValue: integer);
+procedure TlqApplication.SetStartDragDistance(const AValue: integer);
 begin
   if AValue < 0 then
     FStartDragDistance := 0
@@ -1545,20 +1545,20 @@ begin
     FStartDragDistance := AValue;
 end;
 
-procedure TfpgApplication.FreeFontRes(afontres: TfpgFontResource);
+procedure TlqApplication.FreeFontRes(afontres: TlqFontResource);
 var
   n: integer;
 begin
   for n := FFontResList.Count-1 downto 0 do
     if FFontResList[n] = Pointer(afontres) then
     begin
-      TfpgFontResource(FFontResList[n]).Free;
+      TlqFontResource(FFontResList[n]).Free;
       FFontResList.Delete(n);
       Exit; //==>
     end;
 end;
 
-procedure TfpgApplication.InternalInit;
+procedure TlqApplication.InternalInit;
 begin
   FDefaultFont := GetFont(FPG_DEFAULT_FONT_DESC);
   fpgInitTimers;
@@ -1569,8 +1569,8 @@ begin
     fpgStyleManager.SetStyle(gCommandLineParams.GetParam('style'));
   fpgStyle := fpgStyleManager.Style;
 
-  fpgCaret      := TfpgCaret.Create;
-  fpgImages     := TfpgImages.Create;
+  fpgCaret      := TlqCaret.Create;
+  fpgImages     := TlqImages.Create;
 
   fpgCreateStandardImages;
 
@@ -1579,16 +1579,16 @@ begin
   SetupLocalizationStrings;
   CreateHintWindow;
 
-  FHintTimer := TfpgTimer.Create(HintPause);
+  FHintTimer := TlqTimer.Create(HintPause);
   FHintTimer.OnTimer := @HintTimerFired;
 end;
 
-procedure TfpgApplication.Flush;
+procedure TlqApplication.Flush;
 begin
   DoFlush;
 end;
 
-procedure TfpgApplication.ProcessMessages;
+procedure TlqApplication.ProcessMessages;
 begin
   Flush;
   while MessagesPending do
@@ -1598,7 +1598,7 @@ begin
   end;
 end;
 
-procedure TfpgApplication.SetMessageHook(AWidget: TObject; const AMsgCode: integer; AListener: TObject);
+procedure TlqApplication.SetMessageHook(AWidget: TObject; const AMsgCode: integer; AListener: TObject);
 var
   oItem: TMsgHookItem;
 begin
@@ -1609,7 +1609,7 @@ begin
   FMessageHookList.Add(oItem);
 end;
 
-procedure TfpgApplication.UnsetMessageHook(AWidget: TObject;
+procedure TlqApplication.UnsetMessageHook(AWidget: TObject;
   const AMsgCode: integer; AListener: TObject);
 var
   oItem: TMsgHookItem;
@@ -1627,7 +1627,7 @@ begin
   end;
 end;
 
-procedure TfpgApplication.HandleException(Sender: TObject);
+procedure TlqApplication.HandleException(Sender: TObject);
 begin
   if not (ExceptObject is Exception) then
     SysUtils.ShowException(ExceptObject, ExceptAddr)
@@ -1651,22 +1651,22 @@ begin
     Terminated := True;
 end;
 
-procedure TfpgApplication.HideHint;
+procedure TlqApplication.HideHint;
 begin
   {$IFDEF DEBUG}
   SendDebug('HideHint');
   {$ENDIF}
   FHintTimer.Enabled := False;
-  if Assigned(FHintWindow) and TfpgHintWindow(FHintWindow).Visible then
-    TfpgHintWindow(FHintWindow).Hide;
+  if Assigned(FHintWindow) and TlqHintWindow(FHintWindow).Visible then
+    TlqHintWindow(FHintWindow).Hide;
 end;
 
-procedure TfpgApplication.ShowException(E: Exception);
+procedure TlqApplication.ShowException(E: Exception);
 begin
-  TfpgMessageDialog.Critical('An unexpected error occurred.', E.Message);
+  TlqMessageDialog.Critical('An unexpected error occurred.', E.Message);
 end;
 
-procedure TfpgApplication.WaitWindowMessage(atimeoutms: integer);
+procedure TlqApplication.WaitWindowMessage(atimeoutms: integer);
 begin
   if IsMultiThread then
     CheckSynchronize;  // execute the to-be synchronized method
@@ -1676,54 +1676,54 @@ begin
   fpgCheckTimers;
 end;
 
-procedure TfpgApplication.RunMessageLoop;
+procedure TlqApplication.RunMessageLoop;
 begin
   WaitWindowMessage(2000);
 end;
 
-{ TfpgFont }
+{ TlqFont }
 
-constructor TfpgFont.Create(afontres: TfpgFontResource; const afontdesc: string);
+constructor TlqFont.Create(afontres: TlqFontResource; const afontdesc: string);
 begin
   FFontRes  := afontres;
   FFontDesc := afontdesc;
   afontres.IncRefCount;
 end;
 
-destructor TfpgFont.Destroy;
+destructor TlqFont.Destroy;
 begin
-  if TfpgFontResource(FFontRes).DecRefCount <= 0 then
-    fpgApplication.FreeFontRes(TfpgFontResource(FFontRes));
+  if TlqFontResource(FFontRes).DecRefCount <= 0 then
+    fpgApplication.FreeFontRes(TlqFontResource(FFontRes));
   inherited Destroy;
 end;
 
-{ TfpgFontResource }
+{ TlqFontResource }
 
-constructor TfpgFontResource.Create(const afontdesc: string);
+constructor TlqFontResource.Create(const afontdesc: string);
 begin
   inherited Create(afontdesc);
   FFontDesc := afontdesc;
   FRefCount := 0;
 end;
 
-function TfpgFontResource.DecRefCount: integer;
+function TlqFontResource.DecRefCount: integer;
 begin
   Dec(FRefCount);
   Result := FRefCount;
 end;
 
-function TfpgFontResource.IncRefCount: integer;
+function TlqFontResource.IncRefCount: integer;
 begin
   Inc(FRefCount);
   Result := FRefCount;
 end;
 
-{ TfpgCanvas }
+{ TlqCanvas }
 
 // Warning! This function is not supposed to handle existing line breaks,
 // it is only supposed to insert new ones when appropriate. Also, this function
 // simply inserts line breaks, it doesn't split text lines etc...
-function TfpgCanvas.AddLineBreaks(const s: TfpgString; aMaxLineWidth: integer): string;
+function TlqCanvas.AddLineBreaks(const s: TlqString; aMaxLineWidth: integer): string;
 var
   i, n, ls: integer;
   sub: string;
@@ -1763,7 +1763,7 @@ begin
   end;
 end;
 
-constructor TfpgCanvas.Create(awin: TfpgWindowBase);
+constructor TlqCanvas.Create(awin: TlqWindowBase);
 begin
   inherited Create(awin);
 
@@ -1774,63 +1774,63 @@ begin
   FPersistentResources := False;
 end;
 
-destructor TfpgCanvas.Destroy;
+destructor TlqCanvas.Destroy;
 begin
   if fpgCaret.FCanvas = self then
     fpgCaret.UnSetCaret(self);
   inherited Destroy;
 end;
 
-procedure TfpgCanvas.DrawButtonFace(x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags);
+procedure TlqCanvas.DrawButtonFace(x, y, w, h: TlqCoord; AFlags: TlqButtonFlags);
 begin
   fpgStyle.DrawButtonFace(self, x, y, w, h, AFlags);
 end;
 
-procedure TfpgCanvas.DrawButtonFace(r: TfpgRect; AFlags: TfpgButtonFlags);
+procedure TlqCanvas.DrawButtonFace(r: TlqRect; AFlags: TlqButtonFlags);
 begin
   DrawButtonFace(r.Left, r.Top, r.Width, r.Height, AFlags);
 end;
 
-procedure TfpgCanvas.DrawControlFrame(x, y, w, h: TfpgCoord);
+procedure TlqCanvas.DrawControlFrame(x, y, w, h: TlqCoord);
 begin
   fpgStyle.DrawControlFrame(self, x, y, w, h);
 end;
 
-procedure TfpgCanvas.DrawControlFrame(r: TfpgRect);
+procedure TlqCanvas.DrawControlFrame(r: TlqRect);
 begin
   DrawControlFrame(r.Left, r.Top, r.Width, r.Height);
 end;
 
-procedure TfpgCanvas.DrawBevel(x, y, w, h: TfpgCoord; ARaised: Boolean);
+procedure TlqCanvas.DrawBevel(x, y, w, h: TlqCoord; ARaised: Boolean);
 begin
   fpgStyle.DrawBevel(self, x, y, w, h, ARaised);
 end;
 
-procedure TfpgCanvas.DrawBevel(r: TfpgRect; ARaised: Boolean);
+procedure TlqCanvas.DrawBevel(r: TlqRect; ARaised: Boolean);
 begin
   DrawBevel(r.Left, r.Top, r.Width, r.Height, ARaised);
 end;
 
-procedure TfpgCanvas.DrawDirectionArrow(x, y, w, h: TfpgCoord; direction: TArrowDirection);
+procedure TlqCanvas.DrawDirectionArrow(x, y, w, h: TlqCoord; direction: TArrowDirection);
 begin
   fpgStyle.DrawDirectionArrow(self, x, y, w, h, direction);
 end;
 
-procedure TfpgCanvas.DrawDirectionArrow(r: TfpgRect; direction: TArrowDirection);
+procedure TlqCanvas.DrawDirectionArrow(r: TlqRect; direction: TArrowDirection);
 begin
   DrawDirectionArrow(r.Left, r.Top, r.Width, r.Height, direction);
 end;
 
-procedure TfpgCanvas.DrawFocusRect(r: TfpgRect);
+procedure TlqCanvas.DrawFocusRect(r: TlqRect);
 begin
   fpgStyle.DrawFocusRect(self, r);
 end;
 
-function TfpgCanvas.DrawText(x, y, w, h: TfpgCoord; const AText: TfpgString;
-    AFlags: TfpgTextFlags; ALineSpace: integer): integer;
+function TlqCanvas.DrawText(x, y, w, h: TlqCoord; const AText: TlqString;
+    AFlags: TlqTextFlags; ALineSpace: integer): integer;
 var
   wtxt, htxt, i, nw, nx, ny, l: integer;
-  buf: TfpgString;
+  buf: TlqString;
   wraplst: TStringList;
   lEnabled: Boolean;
 begin
@@ -1893,26 +1893,26 @@ begin
   Result := htxt;
 end;
 
-function TfpgCanvas.DrawText(x, y: TfpgCoord; const AText: TfpgString;
-    AFlags: TfpgTextFlags; ALineSpace: integer): integer;
+function TlqCanvas.DrawText(x, y: TlqCoord; const AText: TlqString;
+    AFlags: TlqTextFlags; ALineSpace: integer): integer;
 begin
   Result := DrawText(x, y, 0, 0, AText, AFlags, ALineSpace);
 end;
 
-function TfpgCanvas.DrawText(r: TfpgRect; const AText: TfpgString; AFlags: TfpgTextFlags;
+function TlqCanvas.DrawText(r: TlqRect; const AText: TlqString; AFlags: TlqTextFlags;
     ALineSpace: integer): integer;
 begin
   Result := DrawText(r.Left, r.Top, r.Width, r.Height, AText, AFlags, ALineSpace);
 end;
 
-{ TfpgWindow }
+{ TlqWindow }
 
-function TfpgWindow.CreateCanvas: TfpgCanvasBase;
+function TlqWindow.CreateCanvas: TlqCanvasBase;
 begin
   Result := DefaultCanvasClass.Create(self);
 end;
 
-constructor TfpgWindow.Create(AOwner: TComponent);
+constructor TlqWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner); // initialize the platform internals
 
@@ -1928,7 +1928,7 @@ begin
 
   FModalForWin := nil;
 
-  if (AOwner <> nil) and (AOwner is TfpgWindow) then
+  if (AOwner <> nil) and (AOwner is TlqWindow) then
     FWindowType   := wtChild
   else
     FWindowType   := wtWindow;
@@ -1936,31 +1936,31 @@ begin
   FCanvas := CreateCanvas;
 end;
 
-destructor TfpgWindow.Destroy;
+destructor TlqWindow.Destroy;
 begin
   FCanvas.Free;
   inherited Destroy;
 end;
 
-procedure TfpgWindow.SetParent(const AValue: TfpgWindow);
+procedure TlqWindow.SetParent(const AValue: TlqWindow);
 begin
   inherited SetParent(AValue);
 end;
 
-function TfpgWindow.GetParent: TfpgWindow;
+function TlqWindow.GetParent: TlqWindow;
 begin
-  result := TfpgWindow(inherited GetParent);
+  result := TlqWindow(inherited GetParent);
 end;
 
-function TfpgWindow.GetCanvas: TfpgCanvas;
+function TlqWindow.GetCanvas: TlqCanvas;
 begin
-  Result := TfpgCanvas(inherited GetCanvas);
+  Result := TlqCanvas(inherited GetCanvas);
 end;
 
 
-{ TfpgStyle }
+{ TlqStyle }
 
-constructor TfpgStyle.Create;
+constructor TlqStyle.Create;
 begin
   // Setup font aliases
   fpgSetNamedFont('Label1', FPG_DEFAULT_FONT_DESC);
@@ -2018,7 +2018,7 @@ begin
   MenuDisabledFont := fpgGetFont(fpgGetNamedFontDesc('MenuDisabled'));
 end;
 
-destructor TfpgStyle.Destroy;
+destructor TlqStyle.Destroy;
 begin
   DefaultFont.Free;
   FixedFont.Free;
@@ -2028,9 +2028,9 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgStyle.DrawButtonFace(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; AFlags: TfpgButtonFlags);
+procedure TlqStyle.DrawButtonFace(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; AFlags: TlqButtonFlags);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
 
@@ -2114,14 +2114,14 @@ begin
   ACanvas.DrawLine(r.Right-1, r.Bottom-1, r.Left, r.Bottom-1);   // bottom
 end;
 
-procedure TfpgStyle.DrawButtonFace(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgButtonFlags);
+procedure TlqStyle.DrawButtonFace(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqButtonFlags);
 begin
   DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
 end;
 
-procedure TfpgStyle.DrawControlFrame(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord);
+procedure TlqStyle.DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
   ACanvas.SetColor(clShadow1);
@@ -2141,14 +2141,14 @@ begin
   ACanvas.DrawLine(r.Right-1, r.Bottom-1, r.Left+1, r.Bottom-1);   // bottom (inner)
 end;
 
-procedure TfpgStyle.DrawControlFrame(ACanvas: TfpgCanvas; r: TfpgRect);
+procedure TlqStyle.DrawControlFrame(ACanvas: TlqCanvas; r: TlqRect);
 begin
   DrawControlFrame(ACanvas, r.Left, r.Top, r.Width, r.Height);
 end;
 
-procedure TfpgStyle.DrawBevel(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; ARaised: Boolean);
+procedure TlqStyle.DrawBevel(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; ARaised: Boolean);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r.SetRect(x, y, w, h);
   ACanvas.SetColor(clWindowBackground);
@@ -2176,7 +2176,7 @@ begin
   ACanvas.DrawLine(r.Right, r.Bottom, r.Left-1, r.Bottom);
 end;
 
-procedure TfpgStyle.DrawDirectionArrow(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord; direction: TArrowDirection);
+procedure TlqStyle.DrawDirectionArrow(ACanvas: TlqCanvas; x, y, w, h: TlqCoord; direction: TArrowDirection);
 var
 {
   peekx: integer;
@@ -2188,7 +2188,7 @@ var
 }
   rad: Extended;
   r: TRect;
-  r2: TfpgRect;
+  r2: TlqRect;
 begin
 {
   side   := (w div 4) + 1;
@@ -2241,7 +2241,7 @@ begin
   PaintTriangle(ACanvas, r, rad);
 end;
 
-procedure TfpgStyle.DrawString(ACanvas: TfpgCanvas; x, y: TfpgCoord;
+procedure TlqStyle.DrawString(ACanvas: TlqCanvas; x, y: TlqCoord;
   AText: string; AEnabled: boolean);
 begin
   if AText = '' then
@@ -2255,11 +2255,11 @@ begin
   ACanvas.DrawString(x, y, AText);
 end;
 
-procedure TfpgStyle.DrawFocusRect(ACanvas: TfpgCanvas; r: TfpgRect);
+procedure TlqStyle.DrawFocusRect(ACanvas: TlqCanvas; r: TlqRect);
 var
-  oldColor: TfpgColor;
+  oldColor: TlqColor;
   oldLineWidth: integer;
-  oldLineStyle: TfpgLineStyle;
+  oldLineStyle: TlqLineStyle;
 begin
   oldColor      := ACanvas.Color;
   oldLineWidth  := ACanvas.GetLineWidth;
@@ -2274,7 +2274,7 @@ begin
   ACanvas.SetLineStyle(oldLineWidth, oldLineStyle);
 end;
 
-procedure TfpgStyle.DrawMenuBar(ACanvas: TfpgCanvas; r: TfpgRect; ABackgroundColor: TfpgColor);
+procedure TlqStyle.DrawMenuBar(ACanvas: TlqCanvas; r: TlqRect; ABackgroundColor: TlqColor);
 begin
   ACanvas.Clear(ABackgroundColor);
 
@@ -2286,18 +2286,18 @@ begin
   ACanvas.DrawLine(r.Left, r.Bottom, r.Right+1, r.Bottom);   // bottom
 end;
 
-procedure TfpgStyle.DrawMenuRow(ACanvas: TfpgCanvas; r: TfpgRect; AFlags: TfpgMenuItemFlags);
+procedure TlqStyle.DrawMenuRow(ACanvas: TlqCanvas; r: TlqRect; AFlags: TlqMenuItemFlags);
 begin
   ACanvas.FillRectangle(r);
 end;
 
-procedure TfpgStyle.DrawMenuItem(ACanvas: TfpgCanvas; r: TfpgRect;
-  AFlags: TfpgMenuItemFlags; AText: TfpgString);
+procedure TlqStyle.DrawMenuItem(ACanvas: TlqCanvas; r: TlqRect;
+  AFlags: TlqMenuItemFlags; AText: TlqString);
 begin
   //
 end;
 
-procedure TfpgStyle.DrawMenuItemSeparator(ACanvas: TfpgCanvas; r: TfpgRect);
+procedure TlqStyle.DrawMenuItemSeparator(ACanvas: TlqCanvas; r: TlqRect);
 begin
   ACanvas.SetColor(clShadow1);
   ACanvas.DrawLine(r.Left+1, r.Top+2, r.Right, r.Top+2);
@@ -2305,11 +2305,11 @@ begin
   ACanvas.DrawLine(r.Left+1, r.Top+3, r.Right, r.Top+3);
 end;
 
-procedure TfpgStyle.DrawMenuItemImage(ACanvas: TfpgCanvas; x, y: TfpgCoord; r: TfpgRect; AFlags: TfpgMenuItemFlags);
+procedure TlqStyle.DrawMenuItemImage(ACanvas: TlqCanvas; x, y: TlqCoord; r: TlqRect; AFlags: TlqMenuItemFlags);
 var
-  img: TfpgImage;
-  lx: TfpgCoord;
-  ly: TfpgCoord;
+  img: TlqImage;
+  lx: TlqCoord;
+  ly: TlqCoord;
 begin
   if mifChecked in AFlags then
   begin
@@ -2334,32 +2334,32 @@ begin
   end;
 end;
 
-function TfpgStyle.GetButtonBorders: TRect;
+function TlqStyle.GetButtonBorders: TRect;
 begin
   Result := Rect(3, 3, 3, 3);
 end;
 
-function TfpgStyle.GetButtonShift: TPoint;
+function TlqStyle.GetButtonShift: TPoint;
 begin
   Result := Point(1, 1);
 end;
 
-function TfpgStyle.HasButtonHoverEffect: boolean;
+function TlqStyle.HasButtonHoverEffect: boolean;
 begin
   Result := False;
 end;
 
-function TfpgStyle.GetControlFrameBorders: TRect;
+function TlqStyle.GetControlFrameBorders: TRect;
 begin
   Result := Rect(2, 2, 2, 2);
 end;
 
-function TfpgStyle.GetSeparatorSize: integer;
+function TlqStyle.GetSeparatorSize: integer;
 begin
   Result := 2;
 end;
 
-procedure TfpgStyle.DrawEditBox(ACanvas: TfpgCanvas; const r: TfpgRect; const IsEnabled: Boolean; const IsReadOnly: Boolean; const ABackgroundColor: TfpgColor);
+procedure TlqStyle.DrawEditBox(ACanvas: TlqCanvas; const r: TlqRect; const IsEnabled: Boolean; const IsReadOnly: Boolean; const ABackgroundColor: TlqColor);
 begin
   if IsEnabled and not IsReadOnly then
     ACanvas.SetColor(ABackgroundColor)
@@ -2369,15 +2369,15 @@ begin
 end;
 
 
-{ TfpgCaret }
+{ TlqCaret }
 
-procedure TfpgCaret.OnTimerTime(Sender: TObject);
+procedure TlqCaret.OnTimerTime(Sender: TObject);
 begin
   if FEnabled then
     InvertCaret;
 end;
 
-constructor TfpgCaret.Create;
+constructor TlqCaret.Create;
 begin
   FEnabled       := False;
   FInterval      := 500;  // blinking interval
@@ -2386,18 +2386,18 @@ begin
   FLeft          := 0;
   FWidth         := 2;
   FHeight        := 8;
-  FTimer         := TfpgTimer.Create(FInterval);
+  FTimer         := TlqTimer.Create(FInterval);
   FTimer.OnTimer := @OnTimerTime;
 end;
 
-destructor TfpgCaret.Destroy;
+destructor TlqCaret.Destroy;
 begin
   FCanvas := nil;
   FTimer.Free;
   inherited Destroy;
 end;
 
-procedure TfpgCaret.SetCaret(ACanvas: TfpgCanvas; x, y, w, h: TfpgCoord);
+procedure TlqCaret.SetCaret(ACanvas: TlqCanvas; x, y, w, h: TlqCoord);
 begin
   FEnabled := True;
   FVisible := False;
@@ -2413,7 +2413,7 @@ begin
   FTimer.Enabled  := True;
 end;
 
-procedure TfpgCaret.UnSetCaret(ACanvas: TfpgCanvas);
+procedure TlqCaret.UnSetCaret(ACanvas: TlqCanvas);
 begin
   if (FCanvas = ACanvas) or (ACanvas = nil) then
   begin
@@ -2423,7 +2423,7 @@ begin
   end;
 end;
 
-procedure TfpgCaret.InvertCaret;
+procedure TlqCaret.InvertCaret;
 begin
   if FCanvas = nil then
     Exit; //==>
@@ -2439,29 +2439,29 @@ begin
       FCanvas.EndDraw(FLeft, FTop, FWidth, FHeight);
     end;
   except
-    {$Note This occurs every now and again with TfpgMemo and CaretInvert painting! }
+    {$Note This occurs every now and again with TlqMemo and CaretInvert painting! }
     // Investigate this.
     {$IFDEF DEBUG}
-    SendDebug('TfpgCaret.InvertCaret cause an exception');
+    SendDebug('TlqCaret.InvertCaret cause an exception');
     {$ENDIF}
   end;
 end;
 
-{ TfpgImages }
+{ TlqImages }
 
-constructor TfpgImages.Create;
+constructor TlqImages.Create;
 begin
   FImages := TStringList.Create;
 end;
 
-destructor TfpgImages.Destroy;
+destructor TlqImages.Destroy;
 var
   i: integer;
-  img: TfpgImage;
+  img: TlqImage;
 begin
   for i := FImages.Count-1 downto 0 do
   begin
-    img := TfpgImage(FImages.Objects[i]);
+    img := TlqImage(FImages.Objects[i]);
     FImages.Delete(i);
     img.Free;
   end;
@@ -2469,7 +2469,7 @@ begin
   inherited Destroy;
 end;
 
-function TfpgImages.AddImage(const imgid: string; img: TfpgImage): boolean;
+function TlqImages.AddImage(const imgid: string; img: TlqImage): boolean;
 var
   i: integer;
 begin
@@ -2487,7 +2487,7 @@ begin
   end;
 end;
 
-function TfpgImages.DeleteImage(const imgid: string; freeimg: boolean): boolean;
+function TlqImages.DeleteImage(const imgid: string; freeimg: boolean): boolean;
 var
   i: integer;
 begin
@@ -2495,7 +2495,7 @@ begin
   if i >= 0 then
   begin
     if freeimg then
-      TfpgImage(FImages.Objects[i]).Free;
+      TlqImage(FImages.Objects[i]).Free;
     FImages.Delete(i);
     Result := True;
   end
@@ -2503,26 +2503,26 @@ begin
     Result := False;
 end;
 
-function TfpgImages.GetImage(const imgid: string): TfpgImage;
+function TlqImages.GetImage(const imgid: string): TlqImage;
 var
   i: integer;
 begin
   i := FImages.IndexOf(LowerCase(imgid));
   if i >= 0 then
-    Result := TfpgImage(FImages.Objects[i])
+    Result := TlqImage(FImages.Objects[i])
   else
     Result := nil;
 end;
 
-function TfpgImages.AddBMP(const imgid: string; bmpdata: pointer; bmpsize: integer): TfpgImage;
+function TlqImages.AddBMP(const imgid: string; bmpdata: pointer; bmpsize: integer): TlqImage;
 begin
   Result := CreateImage_BMP(bmpdata, bmpsize);
   if Result <> nil then
     AddImage(imgid, Result);
 end;
 
-function TfpgImages.AddMaskedBMP(const imgid: string; bmpdata: pointer; bmpsize: integer;
-  mcx, mcy: integer): TfpgImage;
+function TlqImages.AddMaskedBMP(const imgid: string; bmpdata: pointer; bmpsize: integer;
+  mcx, mcy: integer): TlqImage;
 begin
   Result := AddBMP(imgid, bmpdata, bmpsize);
   if Result <> nil then
@@ -2532,16 +2532,16 @@ begin
   end;
 end;
 
-procedure TfpgImages.ListImages(var sl: TStringList);
+procedure TlqImages.ListImages(var sl: TStringList);
 begin
   if sl <> nil then
     sl.Assign(FImages);
 end;
 
 
-{ TfpgImage }
+{ TlqImage }
 
-function TfpgImage.GetScanLine(Row: Integer): Pointer;
+function TlqImage.GetScanLine(Row: Integer): Pointer;
 var
   pdest: Plongword;
 begin
@@ -2555,17 +2555,17 @@ begin
   Result := pdest + (Row * Width);
 end;
 
-function TfpgImage.CreateDisabledImage: TfpgImage;
+function TlqImage.CreateDisabledImage: TlqImage;
 begin
   Result := ImageFromSource;
   fpgApplyGreyFilter(Result);
 end;
 
-function TfpgImage.ImageFromSource: TfpgImage;
+function TlqImage.ImageFromSource: TlqImage;
 var
-  x, y: TfpgCoord;
+  x, y: TlqCoord;
 begin
-  Result := TfpgImage.Create;
+  Result := TlqImage.Create;
   Result.AllocateImage(ColorDepth, Width, Height);
   for x := 0 to Width-1 do
   begin
@@ -2579,13 +2579,13 @@ begin
   Result.UpdateImage;
 end;
 
-function TfpgImage.ImageFromRect(var ARect: TRect): TfpgImage;
+function TlqImage.ImageFromRect(var ARect: TRect): TlqImage;
 var
-  x, y: TfpgCoord;
-  ix, iy: TfpgCoord;
+  x, y: TlqCoord;
+  ix, iy: TlqCoord;
 begin
   SortRect(ARect);
-  Result := TfpgImage.Create;
+  Result := TlqImage.Create;
   Result.AllocateImage(ColorDepth, ARect.Right-ARect.Left, ARect.Bottom-ARect.Top);
   iy := -1;
   for y := ARect.Top to ARect.Bottom-1 do
@@ -2601,13 +2601,13 @@ begin
   Result.UpdateImage;
 end;
 
-function TfpgImage.ImageFromRect(var ARect: TfpgRect): TfpgImage;
+function TlqImage.ImageFromRect(var ARect: TlqRect): TlqImage;
 var
-  x, y: TfpgCoord;
-  ix, iy: TfpgCoord;
+  x, y: TlqCoord;
+  ix, iy: TlqCoord;
 begin
   SortRect(ARect);
-  Result := TfpgImage.Create;
+  Result := TlqImage.Create;
   Result.AllocateImage(ColorDepth, ARect.Width, ARect.Height);
   iy := -1;
   for y := ARect.Top to ARect.Bottom do
@@ -2624,28 +2624,28 @@ begin
 end;
 
 
-{ TfpgDrag }
+{ TlqDrag }
 
-procedure TfpgDrag.SetMimeData(const AValue: TfpgMimeDataBase);
+procedure TlqDrag.SetMimeData(const AValue: TlqMimeDataBase);
 begin
   if Assigned(FMimeData) then
     FMimeData.Free;
   FMimeData := AValue;
 end;
 
-function TfpgDrag.GetSource: TfpgWindow;
+function TlqDrag.GetSource: TlqWindow;
 begin
-  Result := TfpgWindow(inherited GetSource);
+  Result := TlqWindow(inherited GetSource);
 end;
 
-constructor TfpgDrag.Create(ASource: TfpgWindow);
+constructor TlqDrag.Create(ASource: TlqWindow);
 begin
   inherited Create;
   FSource := ASource;
 end;
 
-function TfpgDrag.Execute(const ADropActions: TfpgDropActions;
-  const ADefaultAction: TfpgDropAction): TfpgDropAction;
+function TlqDrag.Execute(const ADropActions: TlqDropActions;
+  const ADefaultAction: TlqDropAction): TlqDropAction;
 begin
   {$NOTE These exception messages need to become resource strings }
   if not Assigned(FMimeData) then
@@ -2672,7 +2672,7 @@ initialization
 {$ifdef AGGCanvas}
   DefaultCanvasClass := TAgg2D;
 {$else}
-  DefaultCanvasClass := TfpgCanvas;
+  DefaultCanvasClass := TlqCanvas;
 {$endif}
 
 finalization

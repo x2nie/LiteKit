@@ -15,11 +15,11 @@ uses
   lq_memo;
   
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    memo: TfpgMemo;
-    btnQuit: TfpgButton;
+    memo: TlqMemo;
+    btnQuit: TlqButton;
     {@VFD_HEAD_END: MainForm}
     procedure   btnQuitClicked(Sender: TObject);
   public
@@ -41,7 +41,7 @@ begin
   WindowTitle := 'Memo Test';
   WindowPosition := wpOneThirdDown;
 
-  memo := TfpgMemo.Create(self);
+  memo := TlqMemo.Create(self);
   with memo do
   begin
     Name := 'memo';
@@ -57,7 +57,7 @@ begin
     Lines.Insert(1, '0 Before 1 after');
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';

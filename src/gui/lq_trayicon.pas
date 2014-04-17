@@ -32,18 +32,18 @@ uses
 
 type
 
-  TfpgMessageIconType = (mitNoIcon, mitInformation, mitWarning, mitCritical);
+  TlqMessageIconType = (mitNoIcon, mitInformation, mitWarning, mitCritical);
 
 
-  TfpgSystemTrayIcon = class(TfpgWidget)
+  TlqSystemTrayIcon = class(TlqWidget)
   private
-    FPopupMenu: TfpgPopupMenu;
-    FImageName: TfpgString;
-    FImage: TfpgImage;
+    FPopupMenu: TlqPopupMenu;
+    FImageName: TlqString;
+    FImage: TlqImage;
     FOnMessageClicked: TNotifyEvent;
-    procedure   SetImageName(AValue: TfpgString);
+    procedure   SetImageName(AValue: TlqString);
   protected
-    FSysTrayHandler: TfpgSystemTrayHandler;
+    FSysTrayHandler: TlqSystemTrayHandler;
     procedure   SetVisible(const AValue: boolean); override;
     procedure   HandlePaint; override;
     procedure   HandleRMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -53,12 +53,12 @@ type
     function    SupportsMessages: boolean;
     procedure   Show;
     procedure   Hide;
-    procedure   ShowMessage(const ATitle: TfpgString; const AMessage: TfpgString; const AMessageIcon: TfpgMessageIconType; const AMillisecondsTimeoutHint: Word = 10000);
+    procedure   ShowMessage(const ATitle: TlqString; const AMessage: TlqString; const AMessageIcon: TlqMessageIconType; const AMillisecondsTimeoutHint: Word = 10000);
   published
     property    BackgroundColor;
     property    Hint;
-    property    ImageName: TfpgString read FImageName write SetImageName;
-    property    PopupMenu: TfpgPopupMenu read FPopupMenu write FPopupMenu;
+    property    ImageName: TlqString read FImageName write SetImageName;
+    property    PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
     property    ShowHint;
     property    OnClick;
     property    OnMessageClicked: TNotifyEvent read FOnMessageClicked write FOnMessageClicked;
@@ -68,9 +68,9 @@ type
 
 implementation
 
-{ TfpgSystemTrayIcon }
+{ TlqSystemTrayIcon }
 
-procedure TfpgSystemTrayIcon.SetImageName(AValue: TfpgString);
+procedure TlqSystemTrayIcon.SetImageName(AValue: TlqString);
 begin
   if FImageName = AValue then
     Exit;
@@ -78,7 +78,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgSystemTrayIcon.SetVisible(const AValue: boolean);
+procedure TlqSystemTrayIcon.SetVisible(const AValue: boolean);
 begin
   if FVisible = AValue then
     Exit;
@@ -89,9 +89,9 @@ begin
     Hide;
 end;
 
-procedure TfpgSystemTrayIcon.HandlePaint;
+procedure TlqSystemTrayIcon.HandlePaint;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   inherited HandlePaint;
   Canvas.Clear(FBackgroundColor);
@@ -106,7 +106,7 @@ begin
   end;
 end;
 
-procedure TfpgSystemTrayIcon.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqSystemTrayIcon.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
   if Assigned(FPopupMenu) then
@@ -115,7 +115,7 @@ begin
   end;
 end;
 
-constructor TfpgSystemTrayIcon.Create(AOwner: TComponent);
+constructor TlqSystemTrayIcon.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWidth := 20;
@@ -127,39 +127,39 @@ begin
   FImageName := '';
   FPopupMenu := nil;
 
-  FSysTrayHandler := TfpgSystemTrayHandler.Create(self);
+  FSysTrayHandler := TlqSystemTrayHandler.Create(self);
 end;
 
-function TfpgSystemTrayIcon.IsSystemTrayAvailable: boolean;
+function TlqSystemTrayIcon.IsSystemTrayAvailable: boolean;
 begin
   Result := FSysTrayHandler.IsSystemTrayAvailable;
 end;
 
-function TfpgSystemTrayIcon.SupportsMessages: boolean;
+function TlqSystemTrayIcon.SupportsMessages: boolean;
 begin
   { TODO : As far as I know Mac OS X doesn't support this, though they do now
     have this Notifications functionility since 10.8 }
   Result := FSysTrayHandler.SupportsMessages;
 end;
 
-procedure TfpgSystemTrayIcon.Show;
+procedure TlqSystemTrayIcon.Show;
 begin
   FSysTrayHandler.Show;
   FVisible := True;
 end;
 
-procedure TfpgSystemTrayIcon.Hide;
+procedure TlqSystemTrayIcon.Hide;
 begin
-  { TODO : TfpgSystemTrayIcon.Hide not implemented yet! }
+  { TODO : TlqSystemTrayIcon.Hide not implemented yet! }
 //  FVisible := False;
 //  FSysTrayHandler.Hide;
 end;
 
-procedure TfpgSystemTrayIcon.ShowMessage(const ATitle: TfpgString;
-  const AMessage: TfpgString; const AMessageIcon: TfpgMessageIconType;
+procedure TlqSystemTrayIcon.ShowMessage(const ATitle: TlqString;
+  const AMessage: TlqString; const AMessageIcon: TlqMessageIconType;
   const AMillisecondsTimeoutHint: Word);
 begin
-  { TODO : TfpgSystemTrayIcon.ShowMessage not implemented yet! }
+  { TODO : TlqSystemTrayIcon.ShowMessage not implemented yet! }
 end;
 
 end.

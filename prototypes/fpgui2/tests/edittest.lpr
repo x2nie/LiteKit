@@ -26,7 +26,7 @@ uses
 
 type
 
-  TXPButton = class(TfpgButton)
+  TXPButton = class(TlqButton)
   private
     State: integer;
       // 0 - normal
@@ -34,8 +34,8 @@ type
       // 2 - mouse down
       // 3 - disabled
       // 4 - got focus or default
-    image: TfpgImage;
-    procedure   SetThemeImage(const AValue: TfpgImage);
+    image: TlqImage;
+    procedure   SetThemeImage(const AValue: TlqImage);
   protected
     procedure   HandlePaint; override;
     procedure   HandleLMouseDown(X, Y: integer; ShiftState: TShiftState); override;
@@ -46,11 +46,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     { this property is only for demo purposes! }
-    property    ThemeImage: TfpgImage read image write SetThemeImage;
+    property    ThemeImage: TlqImage read image write SetThemeImage;
   end;
 
 
-  TMyWidget = class(TfpgWidget)
+  TMyWidget = class(TlqWidget)
   protected
     procedure   HandlePaint; override;
   public
@@ -58,9 +58,9 @@ type
   end;
   
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    FbtnRuntime: TfpgButton;
+    FbtnRuntime: TlqButton;
     procedure Trackbar1Changed(Sender: TObject; APosition: integer);
     procedure btnCloseClick(Sender: TObject);
     procedure btnDisplayBMP(Sender: TObject);
@@ -70,30 +70,30 @@ type
     procedure xpsilverClick(Sender: TObject);
     procedure Combo1Changed(Sender: TObject);
   public
-    label1: TfpgLabel;
-    label2: TfpgLabel;
-    lblTrackBarPos: TfpgLabel;
-    edit1: TfpgEdit;
-    edit2: TfpgEdit;
-    btn: TfpgButton;
-    btn2: TfpgButton;
-    btn3: TfpgButton;
-    memo: TfpgMemo;
-    listbox: TfpgListBox;
-    combo1: TfpgComboBox;
-    combo2: TfpgComboBox;
-    sbar: TfpgScrollBar;
+    label1: TlqLabel;
+    label2: TlqLabel;
+    lblTrackBarPos: TlqLabel;
+    edit1: TlqEdit;
+    edit2: TlqEdit;
+    btn: TlqButton;
+    btn2: TlqButton;
+    btn3: TlqButton;
+    memo: TlqMemo;
+    listbox: TlqListBox;
+    combo1: TlqComboBox;
+    combo2: TlqComboBox;
+    sbar: TlqScrollBar;
     xpluna: TXPButton;
     xpsilver: TXPButton;
-    checkbox1: TfpgCheckBox;
-    checkbox2: TfpgCheckBox;
-    radiobtn1: TfpgRadioButton;
-    radiobtn2: TfpgRadioButton;
-    radiobtn3: TfpgRadioButton;
-    trackbar1: TfpgTrackBar;
-    trackbar2: TfpgTrackBarExtra;
+    checkbox1: TlqCheckBox;
+    checkbox2: TlqCheckBox;
+    radiobtn1: TlqRadioButton;
+    radiobtn2: TlqRadioButton;
+    radiobtn3: TlqRadioButton;
+    trackbar1: TlqTrackBar;
+    trackbar2: TlqTrackBarExtra;
     w: TMyWidget;
-    progress: TfpgProgressBar;
+    progress: TlqProgressBar;
     procedure AfterCreate; override;
   end;
 
@@ -101,7 +101,7 @@ type
 
 procedure TMyWidget.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   Canvas.BeginDraw;
   inherited HandlePaint;
@@ -135,7 +135,7 @@ end;
 
 { TXPButton }
 
-procedure TXPButton.SetThemeImage(const AValue: TfpgImage);
+procedure TXPButton.SetThemeImage(const AValue: TlqImage);
 begin
   if Assigned(image) then
     image.Free;
@@ -146,7 +146,7 @@ end;
 procedure TXPButton.HandlePaint;
 var
   x, i: integer;
-  r: TfpgRect;
+  r: TlqRect;
   iy, y: integer;
   w: integer;
   pofs: integer;
@@ -398,7 +398,7 @@ end;
 procedure TMainForm.AfterCreate;
 var
   i: integer;
-  bmp: TfpgImage;
+  bmp: TlqImage;
 begin
   SetPosition(200, 200, 500, 350);
   WindowTitle := 'UTF-8 Title -> Òåñò';
@@ -455,14 +455,14 @@ begin
   for i := 1 to 20 do
     combo2.Items.Add(Format('Items %.2d', [i]));
 
-  memo        := TfpgMemo.Create(self);
+  memo        := TlqMemo.Create(self);
   memo.Top    := 10;
   memo.Left   := 250;
   memo.Width  := 200;
   memo.Height := 80;
 //  memo.Anchors := [anLeft, anTop, anRight, anBottom];
 
-  listbox         := TfpgListBox.Create(self);
+  listbox         := TlqListBox.Create(self);
   listbox.Top     := 100;
   listbox.Left    := 250;
   listbox.Width   := 200;
@@ -474,7 +474,7 @@ begin
   listbox.FocusItem := 3;
 
 
-  sbar        := TfpgScrollBar.Create(self);
+  sbar        := TlqScrollBar.Create(self);
   sbar.Top    := 160;
   sbar.Left   := 150;
   sbar.Height := 100;
@@ -509,7 +509,7 @@ begin
   radiobtn3.GroupIndex := 2;
   radiobtn1.Checked := True;
   
-  trackbar1 := TfpgTrackBar.Create(self);
+  trackbar1 := TlqTrackBar.Create(self);
   trackbar1.Top    := 230;
   trackbar1.Left   := 335;
   trackbar1.Width  := 100;
@@ -519,7 +519,7 @@ begin
 
   lblTrackBarPos := CreateLabel(self, 420, 200, '0');
 
-  trackbar2 := TfpgTrackBarExtra.Create(self);
+  trackbar2 := TlqTrackBarExtra.Create(self);
   trackbar2.Top    := 230;
   trackbar2.Left   := 440;
   trackbar2.Orientation := orVertical;
@@ -527,7 +527,7 @@ begin
   trackbar2.Height := 100;
   trackbar2.OnChange := @TrackBarChanged;
   
-  progress := TfpgProgressBar.Create(self);
+  progress := TlqProgressBar.Create(self);
   progress.Left := 300;
   progress.Top := 275;
   progress.ShowCaption := True;

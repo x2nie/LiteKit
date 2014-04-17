@@ -17,7 +17,7 @@ uses
 
 type
 
-  TGUITestRunnerForm = class(TfpgForm, ITestListener)
+  TGUITestRunnerForm = class(TlqForm, ITestListener)
   private
     failureCounter: Integer;
     errorCounter: Integer;
@@ -25,9 +25,9 @@ type
     skipsCounter: Integer;
     testSuite: TTest;
     temptest: TTest;
-    barColor: TfpgColor;
-    FImagelist: TfpgImageList;
-    FPopupMenu: TfpgPopupMenu;
+    barColor: TlqColor;
+    FImagelist: TlqImageList;
+    FPopupMenu: TlqPopupMenu;
     // ITestListener
     procedure AddFailure(ATest: TTest; AFailure: TTestFailure);
     procedure AddError(ATest: TTest; AError: TTestFailure);
@@ -38,14 +38,14 @@ type
     //
     procedure RunTest(ATest: TTest);
     procedure MemoLog(LogEntry: string);
-    procedure BuildTree(ARootNode: TfpgTreeNode; ASuite: TTestSuite);
+    procedure BuildTree(ARootNode: TlqTreeNode; ASuite: TTestSuite);
     procedure FormCreate(Sender: TObject);
     procedure btnQuitClicked(Sender: TObject);
     procedure btnClearClicked(Sender: TObject);
     procedure btnRunClicked(Sender: TObject);
-    procedure FindByData(ANode: TfpgTreeNode; var AFound: boolean);
-    function  FindNode(ATest: TTest): TfpgTreeNode;
-    procedure ResetNodeColors(ANode: TfpgTreeNode; var AFound: boolean);
+    procedure FindByData(ANode: TlqTreeNode; var AFound: boolean);
+    function  FindNode(ATest: TTest): TlqTreeNode;
+    procedure ResetNodeColors(ANode: TlqTreeNode; var AFound: boolean);
     procedure PopulateImageList;
     procedure CreatePopupMenu;
     procedure miCollapseAll(Sender: TObject);
@@ -56,22 +56,22 @@ type
     procedure UpdateCounters;
   public
     {@VFD_HEAD_BEGIN: GUITestRunnerForm}
-    bvlTree: TfpgBevel;
-    bvlButtons: TfpgBevel;
-    bvlResults: TfpgBevel;
-    splitter: TfpgSplitter;
-    pbName1: TfpgProgressBar;
-    btnRun: TfpgButton;
-    lblName2: TfpgLabel;
-    lblRuns: TfpgLabel;
-    lblName4: TfpgLabel;
-    lblErrors: TfpgLabel;
-    lblName6: TfpgLabel;
-    lblFailures: TfpgLabel;
-    tvTests: TfpgTreeView;
-    memName1: TfpgMemo;
-    btnClear: TfpgButton;
-    btnQuit: TfpgButton;
+    bvlTree: TlqBevel;
+    bvlButtons: TlqBevel;
+    bvlResults: TlqBevel;
+    splitter: TlqSplitter;
+    pbName1: TlqProgressBar;
+    btnRun: TlqButton;
+    lblName2: TlqLabel;
+    lblRuns: TlqLabel;
+    lblName4: TlqLabel;
+    lblErrors: TlqLabel;
+    lblName6: TlqLabel;
+    lblFailures: TlqLabel;
+    tvTests: TlqTreeView;
+    memName1: TlqMemo;
+    btnClear: TlqButton;
+    btnQuit: TlqButton;
     {@VFD_HEAD_END: GUITestRunnerForm}
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -99,7 +99,7 @@ resourcestring
 
 procedure TGUITestRunnerForm.AddFailure(ATest: TTest; AFailure: TTestFailure);
 var
-  FailureNode, node: TfpgTreeNode;
+  FailureNode, node: TlqTreeNode;
 begin
 //  MemoLog('failed - ' + ATest.TestName);
   FailureNode := FindNode(ATest);
@@ -131,7 +131,7 @@ end;
 
 procedure TGUITestRunnerForm.AddError(ATest: TTest; AError: TTestFailure);
 var
-  ErrorNode, node: TfpgTreeNode;
+  ErrorNode, node: TlqTreeNode;
 begin
 //  MemoLog('error - ' + ATest.TestName);
   ErrorNode := FindNode(ATest);
@@ -177,7 +177,7 @@ end;
 
 procedure TGUITestRunnerForm.StartTest(ATest: TTest);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := FindNode(ATest);
   if Assigned(n) then
@@ -200,7 +200,7 @@ end;
 
 procedure TGUITestRunnerForm.StartTestSuite(ATestSuite: TTestSuite);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := FindNode(ATestSuite);
   if Assigned(n) then
@@ -249,9 +249,9 @@ begin
   memName1.Lines.Add(TimeToStr(Now) + ' - ' + LogEntry);
 end;
 
-procedure TGUITestRunnerForm.BuildTree(ARootNode: TfpgTreeNode; ASuite: TTestSuite);
+procedure TGUITestRunnerForm.BuildTree(ARootNode: TlqTreeNode; ASuite: TTestSuite);
 var
-  node: TfpgTreeNode;
+  node: TlqTreeNode;
   i: integer;
 begin
 //  ARootNode.StateIndex := Ord(tsChecked);
@@ -277,7 +277,7 @@ end;
 
 procedure TGUITestRunnerForm.FormCreate(Sender: TObject);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := tvTests.RootNode.AppendText('All Tests');
   n.ImageIndex := 6;
@@ -312,7 +312,7 @@ procedure TGUITestRunnerForm.btnRunClicked(Sender: TObject);
 begin
   if tvTests.Selection = nil then
   begin
-    TfpgMessageDialog.Critical('No selection', 'Please select a test case first.');
+    TlqMessageDialog.Critical('No selection', 'Please select a test case first.');
     Exit; //==>
   end;
   
@@ -328,7 +328,7 @@ begin
   end;
 end;
 
-procedure TGUITestRunnerForm.FindByData(ANode: TfpgTreeNode; var AFound: boolean);
+procedure TGUITestRunnerForm.FindByData(ANode: TlqTreeNode; var AFound: boolean);
 begin
 //  writeln('...', ANode.Text);
   AFound := TTest(ANode.Data) = temptest;
@@ -336,9 +336,9 @@ begin
 //    MemoLog('Found Node ' + ANode.Text);
 end;
 
-function TGUITestRunnerForm.FindNode(ATest: TTest): TfpgTreeNode;
+function TGUITestRunnerForm.FindNode(ATest: TTest): TlqTreeNode;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   result := nil;
   
@@ -359,14 +359,14 @@ begin
   end;
 end;
 
-procedure TGUITestRunnerForm.ResetNodeColors(ANode: TfpgTreeNode; var AFound: boolean);
+procedure TGUITestRunnerForm.ResetNodeColors(ANode: TlqTreeNode; var AFound: boolean);
 begin
   ANode.TextColor := clUnset;
 end;
 
 procedure TGUITestRunnerForm.PopulateImageList;
 var
-  img: TfpgImage;
+  img: TlqImage;
 begin
   img := CreateImage_BMP(@fpcunit_circle_grey, sizeof(fpcunit_circle_grey) );
   FImagelist.AddImage(img, 0);
@@ -394,9 +394,9 @@ end;
 
 procedure TGUITestRunnerForm.CreatePopupMenu;
 var
-  itm: TfpgMenuItem;
+  itm: TlqMenuItem;
 begin
-  FPopupMenu := TfpgPopupMenu.Create(nil);
+  FPopupMenu := TlqPopupMenu.Create(nil);
 //  FPopupMenu.FreeNotification(self);
   
   itm := FPopupMenu.AddMenuItem(uiCollapseAll, '', @miCollapseAll);
@@ -456,7 +456,7 @@ begin
   OnCreate := @FormCreate;
 
   // create and populate the imagelist
-  FImagelist := TfpgImageList.Create;
+  FImagelist := TlqImageList.Create;
   PopulateImageList;
 end;
 
@@ -474,7 +474,7 @@ begin
   SetPosition(305, 196, 530, 547);
   WindowTitle := 'GUI Test Runner';
 
-  bvlTree := TfpgBevel.Create(self);
+  bvlTree := TlqBevel.Create(self);
   with bvlTree do
   begin
     Name := 'bvlTree';
@@ -484,7 +484,7 @@ begin
     Align := alClient;
   end;
 
-  bvlButtons := TfpgBevel.Create(self);
+  bvlButtons := TlqBevel.Create(self);
   with bvlButtons do
   begin
     Name := 'bvlButtons';
@@ -493,7 +493,7 @@ begin
     Align := alBottom;
   end;
 
-  bvlResults := TfpgBevel.Create(self);
+  bvlResults := TlqBevel.Create(self);
   with bvlResults do
   begin
     Name := 'bvlResults';
@@ -503,7 +503,7 @@ begin
     MinHeight := 45;
   end;
 
-  splitter := TfpgSplitter.Create(self);
+  splitter := TlqSplitter.Create(self);
   with splitter do
   begin
     Name := 'splitter';
@@ -511,7 +511,7 @@ begin
     Align := alBottom;
   end;
 
-  pbName1 := TfpgProgressBar.Create(bvlTree);
+  pbName1 := TlqProgressBar.Create(bvlTree);
   with pbName1 do
   begin
     Name := 'pbName1';
@@ -519,7 +519,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  btnRun := TfpgButton.Create(bvlTree);
+  btnRun := TlqButton.Create(bvlTree);
   with btnRun do
   begin
     Name := 'btnRun';
@@ -532,7 +532,7 @@ begin
     OnClick := @btnRunClicked;
   end;
 
-  lblName2 := TfpgLabel.Create(bvlTree);
+  lblName2 := TlqLabel.Create(bvlTree);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -541,7 +541,7 @@ begin
     Text := 'Runs:';
   end;
 
-  lblRuns := TfpgLabel.Create(bvlTree);
+  lblRuns := TlqLabel.Create(bvlTree);
   with lblRuns do
   begin
     Name := 'lblRuns';
@@ -550,7 +550,7 @@ begin
     Text := '---';
   end;
 
-  lblName4 := TfpgLabel.Create(bvlTree);
+  lblName4 := TlqLabel.Create(bvlTree);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -559,7 +559,7 @@ begin
     Text := 'Errors:';
   end;
 
-  lblErrors := TfpgLabel.Create(bvlTree);
+  lblErrors := TlqLabel.Create(bvlTree);
   with lblErrors do
   begin
     Name := 'lblErrors';
@@ -568,7 +568,7 @@ begin
     Text := '---';
   end;
 
-  lblName6 := TfpgLabel.Create(bvlTree);
+  lblName6 := TlqLabel.Create(bvlTree);
   with lblName6 do
   begin
     Name := 'lblName6';
@@ -577,7 +577,7 @@ begin
     Text := 'Failures:';
   end;
 
-  lblFailures := TfpgLabel.Create(bvlTree);
+  lblFailures := TlqLabel.Create(bvlTree);
   with lblFailures do
   begin
     Name := 'lblFailures';
@@ -586,7 +586,7 @@ begin
     Text := '---';
   end;
 
-  tvTests := TfpgTreeView.Create(bvlTree);
+  tvTests := TlqTreeView.Create(bvlTree);
   with tvTests do
   begin
     Name := 'tvTests';
@@ -598,7 +598,7 @@ begin
     ShowImages := True;
   end;
 
-  memName1 := TfpgMemo.Create(bvlResults);
+  memName1 := TlqMemo.Create(bvlResults);
   with memName1 do
   begin
     Name := 'memName1';
@@ -608,7 +608,7 @@ begin
     TabOrder := 4;
   end;
 
-  btnClear := TfpgButton.Create(bvlButtons);
+  btnClear := TlqButton.Create(bvlButtons);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -620,7 +620,7 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  btnQuit := TfpgButton.Create(bvlButtons);
+  btnQuit := TlqButton.Create(bvlButtons);
   with btnQuit do
   begin
     Name := 'btnQuit';

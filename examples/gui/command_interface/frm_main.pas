@@ -20,16 +20,16 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnAdd: TfpgButton;
-    memName1: TfpgMemo;
-    btnQuit: TfpgButton;
-    MainMenu: TfpgMenuBar;
-    mnuFile: TfpgPopupMenu;
+    btnAdd: TlqButton;
+    memName1: TlqMemo;
+    btnQuit: TlqButton;
+    MainMenu: TlqMenuBar;
+    mnuFile: TlqPopupMenu;
     {@VFD_HEAD_END: MainForm}
-    miAdd: TfpgMenuItem;
+    miAdd: TlqMenuItem;
     procedure CommandHandler(Sender: TObject);
   public
     procedure AfterCreate; override;
@@ -66,7 +66,7 @@ begin
   WindowTitle := 'Command Interface Test';
   WindowPosition := wpOneThirdDown;
 
-  btnAdd := TfpgButton.Create(self);
+  btnAdd := TlqButton.Create(self);
   with btnAdd do
   begin
     Name := 'btnAdd';
@@ -77,7 +77,7 @@ begin
     OnClick := @CommandHandler;
   end;
 
-  memName1 := TfpgMemo.Create(self);
+  memName1 := TlqMemo.Create(self);
   with memName1 do
   begin
     Name := 'memName1';
@@ -85,7 +85,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -96,7 +96,7 @@ begin
     OnClick := @CommandHandler;
   end;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -104,7 +104,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';

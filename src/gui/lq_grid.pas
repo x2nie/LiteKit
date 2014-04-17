@@ -39,19 +39,19 @@ uses
   
 type
 
-  TfpgFileGrid = class(TfpgCustomGrid)
+  TlqFileGrid = class(TlqCustomGrid)
   private
-    FFileList: TfpgFileList;
-    FFixedFont: TfpgFont;
+    FFileList: TlqFileList;
+    FFixedFont: TlqFont;
   protected
     function    GetRowCount: Integer; override;
-    procedure   DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState); override;
+    procedure   DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     function    CurrentEntry: TFileEntry;
-    property    FixedFont: TfpgFont read FFixedFont;
-    property    FileList: TfpgFileList read FFileList;
+    property    FixedFont: TlqFont read FFixedFont;
+    property    FileList: TlqFileList read FFileList;
     property    DefaultRowHeight;
     property    Font;
     property    HeaderFont;
@@ -74,7 +74,7 @@ type
   end;
 
 
-  TfpgStringColumn = class(TfpgGridColumn)
+  TlqStringColumn = class(TlqGridColumn)
   private
     FCells: TStringList;
   public
@@ -84,7 +84,7 @@ type
   end;
 
 
-  TfpgCustomStringGrid = class(TfpgCustomGrid)
+  TlqCustomStringGrid = class(TlqCustomGrid)
   private
     function    GetCell(ACol, ARow: Integer): string;
     function    GetColumnAlignment(ACol: Integer): TAlignment;
@@ -97,17 +97,17 @@ type
   protected
     function    GetColumnWidth(ACol: Integer): integer; override;
     procedure   SetColumnWidth(ACol: Integer; const AValue: integer); override;
-    function    GetColumns(AIndex: Integer): TfpgStringColumn; reintroduce;
+    function    GetColumns(AIndex: Integer): TlqStringColumn; reintroduce;
     procedure   DoDeleteColumn(ACol: integer); override;
     procedure   DoSetRowCount(AValue: integer); override;
     procedure   DoAfterAddColumn(ACol: integer); override;
-    function    DoCreateColumnClass: TfpgStringColumn; reintroduce; override;
-    procedure   DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState); override;
-    property    Columns[AIndex: Integer]: TfpgStringColumn read GetColumns;
+    function    DoCreateColumnClass: TlqStringColumn; reintroduce; override;
+    procedure   DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState); override;
+    property    Columns[AIndex: Integer]: TlqStringColumn read GetColumns;
   public
     constructor Create(AOwner: TComponent); override;
     function    AddColumn(ATitle: string; AWidth: integer; AAlignment: TAlignment = taLeftJustify;
-        AbackgroundColor: TfpgColor = clDefault; ATextColor: TfpgColor = clDefault): TfpgStringColumn; overload;
+        AbackgroundColor: TlqColor = clDefault; ATextColor: TlqColor = clDefault): TlqStringColumn; overload;
     procedure   DeleteRow(AIndex: integer); override;
     property    Cells[ACol, ARow: Integer]: string read GetCell write SetCell;
     property    Objects[ACol, ARow: Integer]: TObject read GetObjects write SetObjects;
@@ -122,7 +122,7 @@ type
   end;
 
 
-  TfpgStringGrid = class(TfpgCustomStringGrid)
+  TlqStringGrid = class(TlqCustomStringGrid)
   public
     property    Font;
   published
@@ -171,7 +171,7 @@ type
     property    OnShowHint;
   end;
 
-function CreateStringGrid(AOwner: TComponent; x, y, w, h: TfpgCoord; AColumnCount: integer = 0): TfpgStringGrid;
+function CreateStringGrid(AOwner: TComponent; x, y, w, h: TlqCoord; AColumnCount: integer = 0): TlqStringGrid;
 
 
 implementation
@@ -179,9 +179,9 @@ implementation
 uses
   lq_constants;
 
-function CreateStringGrid(AOwner: TComponent; x, y, w, h: TfpgCoord; AColumnCount: integer = 0): TfpgStringGrid;
+function CreateStringGrid(AOwner: TComponent; x, y, w, h: TlqCoord; AColumnCount: integer = 0): TlqStringGrid;
 begin
-  Result  := TfpgStringGrid.Create(AOwner);
+  Result  := TlqStringGrid.Create(AOwner);
   Result.Left         := x;
   Result.Top          := y;
   Result.Width        := w;
@@ -189,22 +189,22 @@ begin
   Result.ColumnCount  := AColumnCount;
 end;
 
-{ TfpgFileGrid }
+{ TlqFileGrid }
 
-function TfpgFileGrid.GetRowCount: Integer;
+function TlqFileGrid.GetRowCount: Integer;
 begin
   Result := FFileList.Count;
 end;
 
-procedure TfpgFileGrid.DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState);
+procedure TlqFileGrid.DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState);
 const
   picture_width = 20;
 var
   e: TFileEntry;
   x: integer;
   y: integer;
-  s: Tfpgstring;
-  img: TfpgImage;
+  s: Tlqstring;
+  img: TlqImage;
 begin
   e := FFileList.Entry[ARow];
   if e = nil then
@@ -270,9 +270,9 @@ begin
   Canvas.DrawString(x, y, s);
 end;
 
-constructor TfpgFileGrid.Create(AOwner: TComponent);
+constructor TlqFileGrid.Create(AOwner: TComponent);
 begin
-  FFileList := TfpgFileList.Create;
+  FFileList := TlqFileList.Create;
   inherited Create(AOwner);
   ColumnCount := 0;
   RowCount := 0;
@@ -299,7 +299,7 @@ begin
   DefaultRowHeight := fpgImages.GetImage('stdimg.document').Height + 2;
 end;
 
-destructor TfpgFileGrid.Destroy;
+destructor TlqFileGrid.Destroy;
 begin
   OnRowChange := nil;
   FFixedFont.Free;
@@ -307,117 +307,117 @@ begin
   inherited Destroy;
 end;
 
-function TfpgFileGrid.CurrentEntry: TFileEntry;
+function TlqFileGrid.CurrentEntry: TFileEntry;
 begin
   Result := FFileList.Entry[FocusRow];
 end;
 
-{ TfpgStringColumn }
+{ TlqStringColumn }
 
-constructor TfpgStringColumn.Create;
+constructor TlqStringColumn.Create;
 begin
   inherited Create;
   FCells := TStringList.Create;
 end;
 
-destructor TfpgStringColumn.Destroy;
+destructor TlqStringColumn.Destroy;
 begin
   FCells.Free;
   inherited Destroy;
 end;
 
-{ TfpgCustomStringGrid }
+{ TlqCustomStringGrid }
 
-function TfpgCustomStringGrid.GetCell(ACol, ARow: Integer): string;
+function TlqCustomStringGrid.GetCell(ACol, ARow: Integer): string;
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
   if ARow > RowCount-1 then
     Exit; //==>
-  Result := TfpgStringColumn(FColumns.Items[ACol]).Cells[ARow];
+  Result := TlqStringColumn(FColumns.Items[ACol]).Cells[ARow];
 end;
 
-function TfpgCustomStringGrid.GetColumnAlignment(ACol: Integer): TAlignment;
+function TlqCustomStringGrid.GetColumnAlignment(ACol: Integer): TAlignment;
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
-  Result := TfpgStringColumn(FColumns.Items[ACol]).Alignment;
+  Result := TlqStringColumn(FColumns.Items[ACol]).Alignment;
 end;
 
-function TfpgCustomStringGrid.GetColumnTitle(ACol: Integer): string;
+function TlqCustomStringGrid.GetColumnTitle(ACol: Integer): string;
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
-  Result := TfpgStringColumn(FColumns.Items[ACol]).Title;
+  Result := TlqStringColumn(FColumns.Items[ACol]).Title;
 end;
 
-function TfpgCustomStringGrid.GetObjects(ACol, ARow: Integer): TObject;
-begin
-  if ACol > ColumnCount-1 then
-    Exit; //==>
-  if ARow > RowCount-1 then
-    Exit; //==>
-  Result := TfpgStringColumn(FColumns.Items[ACol]).Cells.Objects[ARow];
-end;
-
-function TfpgCustomStringGrid.GetColumnWidth(ACol: Integer): integer;
-begin
-  if ACol > ColumnCount-1 then
-    Exit; //==>
-  Result := TfpgStringColumn(FColumns.Items[ACol]).Width;
-end;
-
-procedure TfpgCustomStringGrid.SetCell(ACol, ARow: Integer; const AValue: string);
+function TlqCustomStringGrid.GetObjects(ACol, ARow: Integer): TObject;
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
   if ARow > RowCount-1 then
     Exit; //==>
-  if TfpgStringColumn(FColumns.Items[ACol]).Cells[ARow] <> AValue then
+  Result := TlqStringColumn(FColumns.Items[ACol]).Cells.Objects[ARow];
+end;
+
+function TlqCustomStringGrid.GetColumnWidth(ACol: Integer): integer;
+begin
+  if ACol > ColumnCount-1 then
+    Exit; //==>
+  Result := TlqStringColumn(FColumns.Items[ACol]).Width;
+end;
+
+procedure TlqCustomStringGrid.SetCell(ACol, ARow: Integer; const AValue: string);
+begin
+  if ACol > ColumnCount-1 then
+    Exit; //==>
+  if ARow > RowCount-1 then
+    Exit; //==>
+  if TlqStringColumn(FColumns.Items[ACol]).Cells[ARow] <> AValue then
   begin
     BeginUpdate;
     try
-      TfpgStringColumn(FColumns.Items[ACol]).Cells[ARow] := AValue;
+      TlqStringColumn(FColumns.Items[ACol]).Cells[ARow] := AValue;
     finally
       EndUpdate;
     end;
   end;
 end;
 
-procedure TfpgCustomStringGrid.SetColumnAlignment(ACol: Integer; const AValue: TAlignment);
+procedure TlqCustomStringGrid.SetColumnAlignment(ACol: Integer; const AValue: TAlignment);
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
   BeginUpdate;
   try
-    TfpgStringColumn(FColumns.Items[ACol]).Alignment := AValue;
+    TlqStringColumn(FColumns.Items[ACol]).Alignment := AValue;
   finally
     EndUpdate;
   end;
 end;
 
-procedure TfpgCustomStringGrid.SetColumnTitle(ACol: Integer; const AValue: string);
+procedure TlqCustomStringGrid.SetColumnTitle(ACol: Integer; const AValue: string);
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
   BeginUpdate;
   try
-    TfpgStringColumn(FColumns.Items[ACol]).Title := AValue;
+    TlqStringColumn(FColumns.Items[ACol]).Title := AValue;
   finally
     EndUpdate;
   end;
 end;
 
-procedure TfpgCustomStringGrid.SetObjects(ACol, ARow: Integer; const AValue: TObject);
+procedure TlqCustomStringGrid.SetObjects(ACol, ARow: Integer; const AValue: TObject);
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
   if ARow > RowCount-1 then
     Exit; //==>
-  TfpgStringColumn(FColumns.Items[ACol]).Cells.Objects[ARow] := AValue;
+  TlqStringColumn(FColumns.Items[ACol]).Cells.Objects[ARow] := AValue;
 end;
 
-procedure TfpgCustomStringGrid.SetColumnWidth(ACol: Integer; const AValue: integer);
+procedure TlqCustomStringGrid.SetColumnWidth(ACol: Integer; const AValue: integer);
 begin
   if ACol > ColumnCount-1 then
     Exit; //==>
@@ -429,21 +429,21 @@ begin
   end;
 end;
 
-function TfpgCustomStringGrid.GetColumns(AIndex: Integer): TfpgStringColumn;
+function TlqCustomStringGrid.GetColumns(AIndex: Integer): TlqStringColumn;
 begin
   if (AIndex < 0) or (AIndex > ColumnCount-1) then
     Result := nil
   else
-    Result := TfpgStringColumn(FColumns.Items[AIndex]);
+    Result := TlqStringColumn(FColumns.Items[AIndex]);
 end;
 
-procedure TfpgCustomStringGrid.DoDeleteColumn(ACol: integer);
+procedure TlqCustomStringGrid.DoDeleteColumn(ACol: integer);
 begin
-  TfpgStringColumn(FColumns.Items[ACol]).Free;
+  TlqStringColumn(FColumns.Items[ACol]).Free;
   FColumns.Delete(ACol);
 end;
 
-procedure TfpgCustomStringGrid.DoSetRowCount(AValue: integer);
+procedure TlqCustomStringGrid.DoSetRowCount(AValue: integer);
 var
   diff: integer;
   c: integer;
@@ -452,38 +452,38 @@ begin
   if FColumns.Count = 0 then
     Exit; //==>
 
-  diff := AValue - TfpgStringColumn(FColumns.Items[0]).Cells.Count;
+  diff := AValue - TlqStringColumn(FColumns.Items[0]).Cells.Count;
   if diff > 0 then  // We need to add rows
   begin
     for c := 0 to FColumns.Count - 1 do
     begin
-      while TfpgStringColumn(FColumns[c]).Cells.Count <> AValue do
-        TfpgStringColumn(FColumns[c]).Cells.Append('');
+      while TlqStringColumn(FColumns[c]).Cells.Count <> AValue do
+        TlqStringColumn(FColumns[c]).Cells.Append('');
     end;
   end;
 end;
 
-procedure TfpgCustomStringGrid.DoAfterAddColumn(ACol: integer);
+procedure TlqCustomStringGrid.DoAfterAddColumn(ACol: integer);
 var
   r: integer;
 begin
   inherited DoAfterAddColumn(ACol);
   // initialize cells for existing rows
   for r := 0 to RowCount-1 do
-    TfpgStringColumn(FColumns.Items[ACol]).Cells.Append('');
+    TlqStringColumn(FColumns.Items[ACol]).Cells.Append('');
 end;
 
-function TfpgCustomStringGrid.DoCreateColumnClass: TfpgStringColumn;
+function TlqCustomStringGrid.DoCreateColumnClass: TlqStringColumn;
 begin
-  Result := TfpgStringColumn.Create;
+  Result := TlqStringColumn.Create;
 end;
 
-procedure TfpgCustomStringGrid.DrawCell(ARow, ACol: Integer; ARect: TfpgRect;
-    AFlags: TfpgGridDrawState);
+procedure TlqCustomStringGrid.DrawCell(ARow, ACol: Integer; ARect: TlqRect;
+    AFlags: TlqGridDrawState);
 var
-  Flags: TfpgTextFlags;
+  Flags: TlqTextFlags;
   txt: string;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   if Cells[ACol, ARow] <> '' then
   begin
@@ -522,18 +522,18 @@ begin
   end;
 end;
 
-constructor TfpgCustomStringGrid.Create(AOwner: TComponent);
+constructor TlqCustomStringGrid.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   ColumnCount := 0;
   RowCount := 0;
 end;
 
-function TfpgCustomStringGrid.AddColumn(ATitle: string; AWidth: integer;
-    AAlignment: TAlignment; ABackgroundColor: TfpgColor; ATextColor: TfpgColor): TfpgStringColumn;
+function TlqCustomStringGrid.AddColumn(ATitle: string; AWidth: integer;
+    AAlignment: TAlignment; ABackgroundColor: TlqColor; ATextColor: TlqColor): TlqStringColumn;
 begin
   Updating;
-  Result := TfpgStringColumn(inherited AddColumn(ATitle, AWidth));
+  Result := TlqStringColumn(inherited AddColumn(ATitle, AWidth));
   Result.Alignment := AAlignment;
 
   if ABackgroundColor = clDefault then
@@ -550,26 +550,26 @@ begin
     Updated;  // if we called .BeginUpdate then don't clear csUpdating here
 end;
 
-procedure TfpgCustomStringGrid.DeleteRow(AIndex: integer);
+procedure TlqCustomStringGrid.DeleteRow(AIndex: integer);
 var
   c: integer;
 begin
   inherited DeleteRow(AIndex);  // does sanity checks
   for c := 0 to FColumns.Count-1 do
   begin
-    TfpgStringColumn(FColumns[c]).Cells.Delete(AIndex);
+    TlqStringColumn(FColumns[c]).Cells.Delete(AIndex);
   end;
   FRowCount := FRowCount-1;
   if HasHandle then
     Update;
 end;
 
-procedure TfpgCustomStringGrid.Clear;
+procedure TlqCustomStringGrid.Clear;
 var
   i: integer;
 begin
   for i := FColumns.Count-1 downto 0 do
-    TfpgStringColumn(FColumns[i]).Free;
+    TlqStringColumn(FColumns[i]).Free;
   FColumns.Clear;
   FRowCount := 0;
   Update;

@@ -12,13 +12,13 @@ uses
 
 type
 
-	TMainForm = class(TfpgForm)
+	TMainForm = class(TlqForm)
 	private
 		{@VFD_HEAD_BEGIN: MainForm}
-		MainBar: TfpgMenuBar;
-		MDIWorkArea: TfpgMDIWorkArea;
-		Bevel1: TfpgBevel;
-		pmChildren: TfpgPopupMenu;
+		MainBar: TlqMenuBar;
+		MDIWorkArea: TlqMDIWorkArea;
+		Bevel1: TlqBevel;
+		pmChildren: TlqPopupMenu;
 		{@VFD_HEAD_END: MainForm}
 		procedure NewFormClicked(Sender: TObject);
 		procedure miQuitClicked(Sender: TObject);
@@ -52,7 +52,7 @@ begin
 	WindowTitle := 'fpGUI''s MDI Demo';
 	Hint := '';
 
-	MainBar := TfpgMenuBar.Create(self);
+	MainBar := TlqMenuBar.Create(self);
 	with MainBar do
 	begin
 		Name := 'MainBar';
@@ -60,7 +60,7 @@ begin
 		Anchors := [anLeft,anRight,anTop];
 	end;
 
-	MDIWorkArea := TfpgMDIWorkArea.Create(self);
+	MDIWorkArea := TlqMDIWorkArea.Create(self);
 	with MDIWorkArea do
 	begin
 		Name := 'MDIWorkArea';
@@ -68,7 +68,7 @@ begin
 		Anchors := [anLeft,anRight,anTop,anBottom];
 	end;
 
-	Bevel1 := TfpgBevel.Create(self);
+	Bevel1 := TlqBevel.Create(self);
 	with Bevel1 do
 	begin
 		Name := 'Bevel1';
@@ -78,7 +78,7 @@ begin
 		Style := bsLowered;
 	end;
 
-	pmChildren := TfpgPopupMenu.Create(self);
+	pmChildren := TlqPopupMenu.Create(self);
 	with pmChildren do
 	begin
 		Name := 'pmChildren';

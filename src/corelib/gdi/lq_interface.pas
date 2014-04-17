@@ -13,7 +13,7 @@
 
     Description:
       This unit defines alias types to bind each backend graphics library
-      to fpg_main without the need for IFDEF's
+      to lq_main without the need for IFDEF's
 }
 
 unit lq_interface;
@@ -26,17 +26,17 @@ uses
   lq_gdi;
 
 type
-  TfpgFontResourceImpl  = class(TfpgGDIFontResource);
-  TfpgImageImpl         = class(TfpgGDIImage);
-  TfpgCanvasImpl        = class(TfpgGDICanvas);
-  TfpgWindowImpl        = class(TfpgGDIWindow);
-  TfpgApplicationImpl   = class(TfpgGDIApplication);
-  TfpgClipboardImpl     = class(TfpgGDIClipboard);
-  TfpgFileListImpl      = class(TfpgGDIFileList);
-  TfpgMimeDataImpl      = class(TfpgGDIMimeDataBase);
-  TfpgDragImpl          = class(TfpgGDIDrag);
-  TfpgTimerImpl         = class(TfpgGDITimer);
-  TfpgSystemTrayHandler = class(TfpgGDISystemTrayIcon);
+  TlqFontResourceImpl  = class(TlqGDIFontResource);
+  TlqImageImpl         = class(TlqGDIImage);
+  TlqCanvasImpl        = class(TlqGDICanvas);
+  TlqWindowImpl        = class(TlqGDIWindow);
+  TlqApplicationImpl   = class(TlqGDIApplication);
+  TlqClipboardImpl     = class(TlqGDIClipboard);
+  TlqFileListImpl      = class(TlqGDIFileList);
+  TlqMimeDataImpl      = class(TlqGDIMimeDataBase);
+  TlqDragImpl          = class(TlqGDIDrag);
+  TlqTimerImpl         = class(TlqGDITimer);
+  TlqSystemTrayHandler = class(TlqGDISystemTrayIcon);
 
 implementation
 

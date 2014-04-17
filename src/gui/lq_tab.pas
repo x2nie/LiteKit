@@ -41,36 +41,36 @@ uses
   
 type
   // forward declaration
-  TfpgPageControl = class;
+  TlqPageControl = class;
   
-  TfpgTabStyle    = (tsTabs, tsButtons, tsFlatButtons);
-  TfpgTabPosition = (tpTop, tpBottom, tpLeft, tpRight, tpNone);
-  TfpgTabOption   = (to_PMenuClose, to_PMenuShowAvailTabs);
+  TlqTabStyle    = (tsTabs, tsButtons, tsFlatButtons);
+  TlqTabPosition = (tpTop, tpBottom, tpLeft, tpRight, tpNone);
+  TlqTabOption   = (to_PMenuClose, to_PMenuShowAvailTabs);
 
-  TfpgTabOptions = set of TfpgTabOption;
+  TlqTabOptions = set of TlqTabOption;
 
 
-  TfpgTabSheet = class(TfpgWidget)
+  TlqTabSheet = class(TlqWidget)
   private
-    FPageControl: TfpgPageControl;
+    FPageControl: TlqPageControl;
     FText: string;
     FTabVisible: boolean;
-    function    GetPageControl: TfpgPageControl;
+    function    GetPageControl: TlqPageControl;
     function    GetPageIndex: Integer;
     function    GetText: string;
     procedure   SetPageIndex(const AValue: Integer);
     procedure   SetText(const AValue: string);
-    procedure   SetPageControl(APageControl: TfpgPageControl);
+    procedure   SetPageControl(APageControl: TlqPageControl);
   protected
     procedure   HandlePaint; override;
     procedure   SetName(const NewName: TComponentName); override;
   public
     constructor Create(AOwner: TComponent); override;
-    constructor CreateWithTitle(AOwner: TComponent; const AText: TfpgString = ''); virtual;
+    constructor CreateWithTitle(AOwner: TComponent; const AText: TlqString = ''); virtual;
     destructor  Destroy; override;
     procedure   AfterConstruction; override;
     property    PageIndex: Integer read GetPageIndex write SetPageIndex;
-    property    PageControl: TfpgPageControl read FPageControl write SetPageControl;
+    property    PageControl: TlqPageControl read FPageControl write SetPageControl;
     property    TabVisible: boolean read FTabVisible write FTabVisible;
   published
     property    BackgroundColor;
@@ -80,14 +80,14 @@ type
   end;
 
 
-  TTabSheetChange = procedure(Sender: TObject; NewActiveSheet: TfpgTabSheet) of object;
-  TTabSheetClosing = procedure(Sender: TObject; ATabSheet: TfpgTabSheet) of object;
+  TTabSheetChange = procedure(Sender: TObject; NewActiveSheet: TlqTabSheet) of object;
+  TTabSheetClosing = procedure(Sender: TObject; ATabSheet: TlqTabSheet) of object;
   
   
-  TfpgPageControl = class(TfpgWidget)
+  TlqPageControl = class(TlqWidget)
   private
-    FFont: TfpgFont;
-    FActivePage: TfpgTabSheet;
+    FFont: TlqFont;
+    FActivePage: TlqTabSheet;
     FMargin: integer;
     FFixedTabWidth: integer;
     FFixedTabHeight: Integer;
@@ -95,26 +95,26 @@ type
     FPages: TList;
     FActivePageIndex: integer;
     FOnChange: TTabSheetChange;
-    FRightButton: TfpgButton;         // bottom/right
-    FLeftButton: TfpgButton;          // left/top
-    FFirstTabButton: TfpgTabSheet;    // when tabs don't fit in screen this is the first button on screen when tabs are scrolled
+    FRightButton: TlqButton;         // bottom/right
+    FLeftButton: TlqButton;          // left/top
+    FFirstTabButton: TlqTabSheet;    // when tabs don't fit in screen this is the first button on screen when tabs are scrolled
     FSortPages: boolean;
-    FStyle: TfpgTabStyle;
-    FTabPosition: TfpgTabPosition;
-    FPopupMenu: TfpgPopupMenu;
-    FTabOptions: TfpgTabOptions;
-    FLastRClickPos: TfpgPoint;
+    FStyle: TlqTabStyle;
+    FTabPosition: TlqTabPosition;
+    FPopupMenu: TlqPopupMenu;
+    FTabOptions: TlqTabOptions;
+    FLastRClickPos: TlqPoint;
     FUpdateCount: Integer;
-    FActiveTabColor: TfpgColor;
+    FActiveTabColor: TlqColor;
     function    GetActivePageIndex: integer;
-    function    GetPage(AIndex: integer): TfpgTabSheet;
+    function    GetPage(AIndex: integer): TlqTabSheet;
     function    GetPageCount: Integer;
-    procedure   InsertPage(var APage: TfpgTabSheet; SuppressOnChangeEvent: boolean = False);
-    procedure   RemovePage(const APage: TfpgTabSheet);
+    procedure   InsertPage(var APage: TlqTabSheet; SuppressOnChangeEvent: boolean = False);
+    procedure   RemovePage(const APage: TlqTabSheet);
     procedure   SetActivePageIndex(const AValue: integer);
-    procedure   SetActivePage(const AValue: TfpgTabSheet);
+    procedure   SetActivePage(const AValue: TlqTabSheet);
     procedure   PositionTabSheets;
-    procedure   PositionTabSheet(var APage: TfpgTabSheet);
+    procedure   PositionTabSheet(var APage: TlqTabSheet);
     function    MaxButtonWidthSum: integer;
     function    MaxButtonHeightSum: integer;
     function    MaxButtonWidth: integer;
@@ -125,18 +125,18 @@ type
     function    GetTabText(AText: string): string;
     procedure   LeftButtonClick(Sender: TObject);
     procedure   RightButtonClick(Sender: TObject);
-    function    FindNextPage(ACurrent: TfpgTabSheet; AForward: boolean): TfpgTabSheet;
+    function    FindNextPage(ACurrent: TlqTabSheet; AForward: boolean): TlqTabSheet;
     procedure   SetSortPages(const AValue: boolean);
-    procedure   SetStyle(const AValue: TfpgTabStyle);
-    procedure   SetTabPosition(const AValue: TfpgTabPosition);
-    procedure   DoPageChange(ATabSheet: TfpgTabSheet);
-    procedure   DoTabSheetClosing(ATabSheet: TfpgTabSheet);
-    function    DrawTab(const rect: TfpgRect; const Selected: Boolean = False; const Mode: Integer = 1): TfpgRect;
+    procedure   SetStyle(const AValue: TlqTabStyle);
+    procedure   SetTabPosition(const AValue: TlqTabPosition);
+    procedure   DoPageChange(ATabSheet: TlqTabSheet);
+    procedure   DoTabSheetClosing(ATabSheet: TlqTabSheet);
+    function    DrawTab(const rect: TlqRect; const Selected: Boolean = False; const Mode: Integer = 1): TlqRect;
     procedure   pmCloseTab(Sender: TObject);
-    function    GetActiveTabColor: TfpgColor;
-    procedure   SetActiveTabColor(AValue: TfpgColor);
+    function    GetActiveTabColor: TlqColor;
+    procedure   SetActiveTabColor(AValue: TlqColor);
   protected
-    procedure   SetBackgroundColor(const AValue: TfpgColor); override;
+    procedure   SetBackgroundColor(const AValue: TlqColor); override;
     procedure   OrderSheets; // currently using bubblesort
     procedure   RePaintTitles; virtual;
     procedure   HandlePaint; override;
@@ -150,30 +150,30 @@ type
     destructor  Destroy; override;
     procedure   BeginUpdate;
     procedure   EndUpdate;
-    function    TabSheetAtPos(const x, y: integer): TfpgTabSheet;
-    function    AppendTabSheet(ATitle: string): TfpgTabSheet;
-    procedure   RemoveTabSheet(ATabSheet: TfpgTabSheet);
+    function    TabSheetAtPos(const x, y: integer): TlqTabSheet;
+    function    AppendTabSheet(ATitle: string): TlqTabSheet;
+    procedure   RemoveTabSheet(ATabSheet: TlqTabSheet);
     property    PageCount: Integer read GetPageCount;
-    property    ActivePage: TfpgTabSheet read FActivePage write SetActivePage;
-    property    Pages[AIndex: integer]: TfpgTabSheet read GetPage;
+    property    ActivePage: TlqTabSheet read FActivePage write SetActivePage;
+    property    Pages[AIndex: integer]: TlqTabSheet read GetPage;
     property    OnChange: TTabSheetChange read FOnChange write FOnChange;
     property    OnClosingTabSheet: TTabSheetClosing read FOnClosingTabSheet write FOnClosingTabSheet;
   published
     property    ActivePageIndex: integer read GetActivePageIndex write SetActivePageIndex default 0;
-    property    ActiveTabColor: TfpgColor read GetActiveTabColor write SetActiveTabColor default clWindowBackground;
+    property    ActiveTabColor: TlqColor read GetActiveTabColor write SetActiveTabColor default clWindowBackground;
     property    Align;
     property    BackgroundColor;
     property    Enabled;
     property    FixedTabWidth: integer read FFixedTabWidth write SetFixedTabWidth default 0;
     property    FixedTabHeight: integer read FFixedTabHeight write SetFixedTabHeight default 21;
     property    Hint;
-    property    Options: TfpgTabOptions read FTabOptions write FTabOptions;
+    property    Options: TlqTabOptions read FTabOptions write FTabOptions;
     property    ParentShowHint;
     property    ShowHint;
     property    SortPages: boolean read FSortPages write SetSortPages default False;
-    property    Style: TfpgTabStyle read FStyle write SetStyle default tsTabs;
+    property    Style: TlqTabStyle read FStyle write SetStyle default tsTabs;
     property    TabOrder;
-    property    TabPosition: TfpgTabPosition read FTabPosition write SetTabPosition default tpTop;
+    property    TabPosition: TlqTabPosition read FTabPosition write SetTabPosition default tpTop;
     property    TextColor;
     property    OnShowHint;
   end;
@@ -189,20 +189,20 @@ uses
 
 function SortCompare(Item1, Item2: Pointer): integer;
 begin
-  Result := CompareText(TfpgTabSheet(Item1).Text, TfpgTabSheet(Item2).Text);
+  Result := CompareText(TlqTabSheet(Item1).Text, TlqTabSheet(Item2).Text);
 end;
 
-{ TfpgTabSheet }
+{ TlqTabSheet }
 
-function TfpgTabSheet.GetPageControl: TfpgPageControl;
+function TlqTabSheet.GetPageControl: TlqPageControl;
 begin
-  if Owner is TfpgPageControl then
-    Result := TfpgPageControl(Owner)
+  if Owner is TlqPageControl then
+    Result := TlqPageControl(Owner)
   else
     Result := nil;
 end;
 
-function TfpgTabSheet.GetPageIndex: Integer;
+function TlqTabSheet.GetPageIndex: Integer;
 begin
   if PageControl <> nil then
     Result := PageControl.FPages.IndexOf(Self)
@@ -210,12 +210,12 @@ begin
     Result := -1;
 end;
 
-function TfpgTabSheet.GetText: string;
+function TlqTabSheet.GetText: string;
 begin
   Result := FText;
 end;
 
-procedure TfpgTabSheet.SetPageIndex(const AValue: Integer);
+procedure TlqTabSheet.SetPageIndex(const AValue: Integer);
 begin
   if PageControl <> nil then
   begin
@@ -224,7 +224,7 @@ begin
   end;
 end;
 
-procedure TfpgTabSheet.SetText(const AValue: string);
+procedure TlqTabSheet.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit; //==>
@@ -233,13 +233,13 @@ begin
     PageControl.Invalidate;
 end;
 
-procedure TfpgTabSheet.HandlePaint;
+procedure TlqTabSheet.HandlePaint;
 begin
   inherited HandlePaint;
   Canvas.Clear(FBackgroundColor);
 end;
 
-procedure TfpgTabSheet.SetName(const NewName: TComponentName);
+procedure TlqTabSheet.SetName(const NewName: TComponentName);
 var
   old: String;
 begin
@@ -252,7 +252,7 @@ begin
   end;
 end;
 
-constructor TfpgTabSheet.Create(AOwner: TComponent);
+constructor TlqTabSheet.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText := '';
@@ -263,30 +263,30 @@ begin
   FIsContainer := True;
 end;
 
-constructor TfpgTabSheet.CreateWithTitle(AOwner: TComponent; const AText: TfpgString);
+constructor TlqTabSheet.CreateWithTitle(AOwner: TComponent; const AText: TlqString);
 begin
   Create(AOwner);
   FText := AText;
 end;
 
-destructor TfpgTabSheet.Destroy;
+destructor TlqTabSheet.Destroy;
 begin
   if FPageControl <> nil then
     FPageControl.RemovePage(self);
   inherited Destroy;
 end;
 
-procedure TfpgTabSheet.AfterConstruction;
+procedure TlqTabSheet.AfterConstruction;
 begin
-  if (Owner <> nil) and (Owner is TfpgPageControl) then
+  if (Owner <> nil) and (Owner is TlqPageControl) then
   begin
-    FPageControl:=TfpgPageControl(Owner);
+    FPageControl:=TlqPageControl(Owner);
     FPageControl.InsertPage(self, True);
   end;
   inherited AfterConstruction;
 end;
 
-procedure TfpgTabSheet.SetPageControl(APageControl: TfpgPageControl);
+procedure TlqTabSheet.SetPageControl(APageControl: TlqPageControl);
 begin
   FPageControl := APageControl;
   if APageControl <> nil then
@@ -294,26 +294,26 @@ begin
 end;
 
   
-{ TfpgPageControl }
+{ TlqPageControl }
 
-function TfpgPageControl.GetActivePageIndex: integer;
+function TlqPageControl.GetActivePageIndex: integer;
 begin
   Result := FActivePageIndex;
 end;
 
-function TfpgPageControl.GetPage(AIndex: integer): TfpgTabSheet;
+function TlqPageControl.GetPage(AIndex: integer): TlqTabSheet;
 begin
   Result := nil;
   if (AIndex >= 0) and (AIndex < FPages.Count) then
-    Result := TfpgTabSheet(FPages[AIndex]);
+    Result := TlqTabSheet(FPages[AIndex]);
 end;
 
-function TfpgPageControl.GetPageCount: Integer;
+function TlqPageControl.GetPageCount: Integer;
 begin
   Result := FPages.Count;
 end;
 
-procedure TfpgPageControl.InsertPage(var APage: TfpgTabSheet; SuppressOnChangeEvent: boolean = False);
+procedure TlqPageControl.InsertPage(var APage: TlqTabSheet; SuppressOnChangeEvent: boolean = False);
 begin
   if FPages.IndexOf(APage) <> -1 then
     Exit; //==>   The page has already been added.
@@ -330,7 +330,7 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.RemovePage(const APage: TfpgTabSheet);
+procedure TlqPageControl.RemovePage(const APage: TlqTabSheet);
 var
   i: integer;
 begin
@@ -348,14 +348,14 @@ begin
     if i = ActivePageIndex then
     begin	    
       if i > FPages.Count-1 then
-         ActivePage:=TfpgTabSheet(FPages.Last)
+         ActivePage:=TlqTabSheet(FPages.Last)
       else if i = 0 then
-        ActivePage:= TfpgTabSheet(FPages.First)
+        ActivePage:= TlqTabSheet(FPages.First)
       else
-        ActivePage:=TfpgTabSheet(FPages[i]);
+        ActivePage:=TlqTabSheet(FPages[i]);
     end
     else if i < ActivePageIndex then
-      ActivePage:=TfpgTabSheet(Pages[i-1]);	      
+      ActivePage:=TlqTabSheet(Pages[i-1]);	      
   end      
   else
   begin
@@ -366,15 +366,15 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.SetActivePageIndex(const AValue: integer);
+procedure TlqPageControl.SetActivePageIndex(const AValue: integer);
 begin
   if FPages.Count = 0 then
     exit;
   if (AValue >= 0) or (AValue < FPages.Count) then
-    ActivePage := TfpgTabSheet(FPages[AValue]);
+    ActivePage := TlqTabSheet(FPages[AValue]);
 end;
 
-procedure TfpgPageControl.SetActivePage(const AValue: TfpgTabSheet);
+procedure TlqPageControl.SetActivePage(const AValue: TlqTabSheet);
 begin
   if FActivePage = AValue then
     Exit; //==>
@@ -386,27 +386,27 @@ begin
   DoPageChange(FActivePage);
 end;
 
-procedure TfpgPageControl.PositionTabSheets;
+procedure TlqPageControl.PositionTabSheets;
 var
   i: integer;
-  t: TfpgTabSheet;
+  t: TlqTabSheet;
 begin
   for i := 0 to FPages.Count-1 do
   begin
-    t := TfpgTabSheet(FPages[i]);
+    t := TlqTabSheet(FPages[i]);
     PositionTabSheet(t);
     t.Anchors := [anLeft, anTop, anRight, anBottom];
   end;
 end;
 
-procedure TfpgPageControl.PositionTabSheet(var APage: TfpgTabSheet);
+procedure TlqPageControl.PositionTabSheet(var APage: TlqTabSheet);
 var
   r: TRect;
   w: integer;
   wd: integer;  { width delta }
   h: integer;
   hd: integer;  { height delta }
-  msg: TfpgMessageParams;
+  msg: TlqMessageParams;
 begin
   // PageControl has bevelled edges in some themes
   r := fpgStyle.GetControlFrameBorders;
@@ -471,29 +471,29 @@ begin
   APage.UpdateWindowPosition; { Internal state is now resolved }
 end;
 
-function TfpgPageControl.MaxButtonWidthSum: integer;
+function TlqPageControl.MaxButtonWidthSum: integer;
 var
   i: integer;
-  t: TfpgTabSheet;
+  t: TlqTabSheet;
 begin
   {$IFDEF DEBUG}writeln(Classname + '.MaxButtonWidthSum');{$ENDIF}
   Result := 0;
   
   for i := 0 to FPages.Count-1 do
   begin
-    t := TfpgTabSheet(FPages[i]);
+    t := TlqTabSheet(FPages[i]);
     Result := Result + ButtonWidth(t.Text);
   end;
 end;
 
-function TfpgPageControl.MaxButtonHeightSum: integer;
+function TlqPageControl.MaxButtonHeightSum: integer;
 begin
   result := PageCount * ButtonHeight;
 end;
 
-function TfpgPageControl.MaxButtonWidth: integer;
+function TlqPageControl.MaxButtonWidth: integer;
 var
-  t: TfpgTabSheet;
+  t: TlqTabSheet;
   i: integer;
 begin
   Result := 0;
@@ -505,14 +505,14 @@ begin
   begin
     for i := 0 to FPages.Count-1 do
     begin
-      t := TfpgTabSheet(FPages[i]);
+      t := TlqTabSheet(FPages[i]);
       if ButtonWidth(t.Text) > Result then
         Result := ButtonWidth(t.Text);
     end;
   end;
 end;
 
-function TfpgPageControl.ButtonHeight: integer;
+function TlqPageControl.ButtonHeight: integer;
 begin
   if FFixedTabHeight > 0 then
     result := FFixedTabHeight
@@ -520,7 +520,7 @@ begin
     result := FFont.Height + 10;   { TODO: correct this }
 end;
 
-function TfpgPageControl.ButtonWidth(AText: string): integer;
+function TlqPageControl.ButtonWidth(AText: string): integer;
 begin
   if FFixedTabWidth > 0 then
     result := FFixedTabWidth
@@ -528,7 +528,7 @@ begin
     result := FFont.TextWidth(AText) + 10;
 end;
 
-procedure TfpgPageControl.SetFixedTabWidth(const AValue: integer);
+procedure TlqPageControl.SetFixedTabWidth(const AValue: integer);
 begin
   if FFixedTabWidth = AValue then
     Exit; //==>
@@ -539,7 +539,7 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.SetFixedTabHeight(const AValue: integer);
+procedure TlqPageControl.SetFixedTabHeight(const AValue: integer);
 begin
   if FFixedTabHeight = AValue then
     Exit; //==>
@@ -550,7 +550,7 @@ begin
   end;
 end;
 
-function TfpgPageControl.GetTabText(AText: string): string;
+function TlqPageControl.GetTabText(AText: string): string;
 var
   s, s1: string;
   i: integer;
@@ -577,39 +577,39 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.LeftButtonClick(Sender: TObject);
+procedure TlqPageControl.LeftButtonClick(Sender: TObject);
 begin
   {$IFDEF DEBUG}writeln(Classname + '.LeftButtonClick');{$ENDIF}
   if FFirstTabButton <> nil then
   begin
-    if TfpgTabSheet(FPages.First) <> FFirstTabButton then
+    if TlqTabSheet(FPages.First) <> FFirstTabButton then
     begin
-      FFirstTabButton := TfpgTabSheet(FPages[FPages.IndexOf(FFirstTabButton)-1]);
+      FFirstTabButton := TlqTabSheet(FPages[FPages.IndexOf(FFirstTabButton)-1]);
       RePaint;
     end;
   end;
 end;
 
-procedure TfpgPageControl.RightButtonClick(Sender: TObject);
+procedure TlqPageControl.RightButtonClick(Sender: TObject);
 begin
   {$IFDEF DEBUG}writeln(Classname + '.RightButtonClick');{$ENDIF}
   if FFirstTabButton <> nil then
   begin
-    if TfpgTabSheet(FPages.Last) <> FFirstTabButton then
+    if TlqTabSheet(FPages.Last) <> FFirstTabButton then
     begin
-      FFirstTabButton := TfpgTabSheet(FPages[FPages.IndexOf(FFirstTabButton)+1]);
+      FFirstTabButton := TlqTabSheet(FPages[FPages.IndexOf(FFirstTabButton)+1]);
       RePaint;
     end;
   end;
 end;
 
-function TfpgPageControl.FindNextPage(ACurrent: TfpgTabSheet; AForward: boolean): TfpgTabSheet;
+function TlqPageControl.FindNextPage(ACurrent: TlqTabSheet; AForward: boolean): TlqTabSheet;
 begin
   // To be completed
   result := nil;
 end;
 
-procedure TfpgPageControl.SetSortPages(const AValue: boolean);
+procedure TlqPageControl.SetSortPages(const AValue: boolean);
 begin
   if FSortPages = AValue then
     Exit; //==>
@@ -617,7 +617,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgPageControl.SetStyle(const AValue: TfpgTabStyle);
+procedure TlqPageControl.SetStyle(const AValue: TlqTabStyle);
 begin
   if FStyle = AValue then
     Exit; //==>
@@ -625,7 +625,7 @@ begin
   Invalidate;
 end;
 
-procedure TfpgPageControl.SetTabPosition(const AValue: TfpgTabPosition);
+procedure TlqPageControl.SetTabPosition(const AValue: TlqTabPosition);
 begin
   if FTabPosition = AValue then
     Exit; //==>
@@ -633,7 +633,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgPageControl.DoPageChange(ATabSheet: TfpgTabSheet);
+procedure TlqPageControl.DoPageChange(ATabSheet: TlqTabSheet);
 begin
   if (csLoading in ComponentState) then
     Exit;
@@ -643,7 +643,7 @@ begin
     FOnChange(self, ATabSheet);
 end;
 
-procedure TfpgPageControl.DoTabSheetClosing(ATabSheet: TfpgTabSheet);
+procedure TlqPageControl.DoTabSheetClosing(ATabSheet: TlqTabSheet);
 begin
   if (csLoading in ComponentState) then
     Exit;
@@ -654,9 +654,9 @@ begin
 end;
 
 { Mode = 1 means the background tabs. Mode = 2 means the Active Tab }
-function TfpgPageControl.DrawTab(const rect: TfpgRect; const Selected: Boolean = False; const Mode: Integer = 1): TfpgRect;
+function TlqPageControl.DrawTab(const rect: TlqRect; const Selected: Boolean = False; const Mode: Integer = 1): TlqRect;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r := rect;
   if Selected then
@@ -751,9 +751,9 @@ begin
   end;  { case }
 end;
 
-procedure TfpgPageControl.pmCloseTab(Sender: TObject);
+procedure TlqPageControl.pmCloseTab(Sender: TObject);
 var
-  ts: TfpgTabSheet;
+  ts: TlqTabSheet;
 begin
   ts := TabSheetAtPos(FLastRClickPos.x, FLastRClickPos.y);
   if not Assigned(ts) then
@@ -765,12 +765,12 @@ begin
   ts.Free;
 end;
 
-function TfpgPageControl.GetActiveTabColor: TfpgColor;
+function TlqPageControl.GetActiveTabColor: TlqColor;
 begin
   Result := FActiveTabColor;
 end;
 
-procedure TfpgPageControl.SetActiveTabColor(AValue: TfpgColor);
+procedure TlqPageControl.SetActiveTabColor(AValue: TlqColor);
 begin
   if FActiveTabColor <> AValue then
   begin
@@ -779,7 +779,7 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.SetBackgroundColor(const AValue: TfpgColor);
+procedure TlqPageControl.SetBackgroundColor(const AValue: TlqColor);
 var
   lWasMatch: boolean;
 begin
@@ -789,25 +789,25 @@ begin
     ActiveTabColor := FBackgroundColor;
 end;
 
-procedure TfpgPageControl.OrderSheets;
+procedure TlqPageControl.OrderSheets;
 begin
   FPages.Sort(@SortCompare);
   FActivePageIndex := FPages.IndexOf(ActivePage);
 end;
 
-procedure TfpgPageControl.RePaintTitles;
+procedure TlqPageControl.RePaintTitles;
 const
   TabHeight = 21;
 var
   TabW, TabH: Integer;
-  r2: TfpgRect;
-  r3: TfpgRect;
-  h: TfpgTabSheet;
+  r2: TlqRect;
+  r3: TlqRect;
+  h: TlqTabSheet;
   lp: integer;
   toffset: integer;
   TextLeft, TextTop: Integer;
   dx: integer;
-  lTxtFlags: TfpgTextFlags;
+  lTxtFlags: TlqTextFlags;
   ActivePageVisible: Boolean;
 begin
   if not HasHandle then
@@ -821,7 +821,7 @@ begin
   ActivePageVisible := false;
   If TabH = 0 then
     TabH := TabHeight;
-  h := TfpgTabSheet(FPages.First);
+  h := TlqTabSheet(FPages.First);
   if h = nil then
     Exit; //==>
   
@@ -897,8 +897,8 @@ begin
           else
             h.Visible:=True;
           h.SetPosition(FMargin+2, FMargin+2 , Width - (FMargin*2) - 4, Height - ((FMargin+2)*2));
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
         end;
@@ -937,8 +937,8 @@ begin
 
           r2.Left := r2.Left + r2.Width;
           lp := lp + ButtonWidth(h.Text);
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
         end;
@@ -981,8 +981,8 @@ begin
                 FMargin+toffset, GetTabText(h.Text), lTxtFlags);
           r2.Left := r2.Left + r2.Width;
           lp := lp + ButtonWidth(h.Text);
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
         end;
@@ -1026,8 +1026,8 @@ begin
             Canvas.DrawText(r2.left+toffset, r2.Top, r2.Width, r2.Height, GetTabText(h.Text), lTxtFlags);
           r2.Top += r2.Height;
           lp := r2.Top;
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
         end;
@@ -1071,8 +1071,8 @@ begin
             Canvas.DrawText(r2.left+toffset, r2.Top, r2.Width, r2.Height, GetTabText(h.Text), lTxtFlags);
           r2.Top += r2.Height;
           lp := r2.Top;
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
         end;
@@ -1091,7 +1091,7 @@ begin
 
 end;
 
-procedure TfpgPageControl.HandlePaint;
+procedure TlqPageControl.HandlePaint;
 begin
   if SortPages then
     OrderSheets;
@@ -1112,19 +1112,19 @@ begin
   RePaintTitles;
 end;
 
-procedure TfpgPageControl.HandleShow;
+procedure TlqPageControl.HandleShow;
 begin
   inherited HandleShow;
   FLeftButton.Visible := False;
   FRightButton.Visible := False;
 end;
 
-procedure TfpgPageControl.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqPageControl.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
-  ts: TfpgTabSheet;
+  ts: TlqTabSheet;
 begin
-//  debugln('>> TfpgPageControl.HandleLMouseUp');
-  ts := TfpgTabSheet(FPages.First);
+//  debugln('>> TlqPageControl.HandleLMouseUp');
+  ts := TlqTabSheet(FPages.First);
   if ts = nil then
     exit; //==>  { This means there are no tabs }
   
@@ -1136,10 +1136,10 @@ begin
   inherited HandleLMouseUp(x, y, shiftstate);
 end;
 
-procedure TfpgPageControl.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqPageControl.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 var
-  ts: TfpgTabSheet;
-  s: TfpgString;
+  ts: TlqTabSheet;
+  s: TlqString;
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
 
@@ -1157,7 +1157,7 @@ begin
       
     if not Assigned(FPopupMenu) then
     begin
-      FPopupMenu := TfpgPopupMenu.Create(self);
+      FPopupMenu := TlqPopupMenu.Create(self);
       FPopupMenu.AddMenuItem(s, '', @pmCloseTab);
     end
     else
@@ -1168,7 +1168,7 @@ begin
   end;
 end;
 
-procedure TfpgPageControl.HandleKeyPress(var keycode: word;
+procedure TlqPageControl.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   i: integer;
@@ -1178,18 +1178,18 @@ begin
   case keycode of
     keyLeft:
         begin
-          if ActivePage <> TfpgTabSheet(FPages.First) then
+          if ActivePage <> TlqTabSheet(FPages.First) then
           begin
-            ActivePage := TfpgTabSheet(FPages[i-1]);
+            ActivePage := TlqTabSheet(FPages[i-1]);
             consumed := True;
           end;
         end;
 
     keyRight:
         begin
-          if ActivePage <> TfpgTabSheet(FPages.Last) then
+          if ActivePage <> TlqTabSheet(FPages.Last) then
           begin
-            ActivePage := TfpgTabSheet(FPages[i+1]);
+            ActivePage := TlqTabSheet(FPages[i+1]);
             consumed := True;
           end;
         end;
@@ -1198,14 +1198,14 @@ begin
     inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgPageControl.RePaint;
+procedure TlqPageControl.RePaint;
 begin
   if FUpdateCount > 0 then
     Exit;
   inherited RePaint;
 end;
 
-constructor TfpgPageControl.Create(AOwner: TComponent);
+constructor TlqPageControl.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FFont   := fpgStyle.DefaultFont;
@@ -1229,53 +1229,53 @@ begin
   FMargin           := 1;
   FSortPages        := False;
 
-  FLeftButton := TfpgButton.Create(self);
+  FLeftButton := TlqButton.Create(self);
   FLeftButton.Text      := '<';
   FLeftButton.Height    := 20;
   FLeftButton.Width     := 20;
   FLeftButton.OnClick   := @LeftButtonClick;
 
-  FRightButton := TfpgButton.Create(self);
+  FRightButton := TlqButton.Create(self);
   FRightButton.Text     := '>';
   FRightButton.Height   := 20;
   FRightButton.Width    := 20;
   FRightButton.OnClick  := @RightButtonClick;
 end;
 
-destructor TfpgPageControl.Destroy;
+destructor TlqPageControl.Destroy;
 var i: integer;
 begin
   FOnChange := nil;
   for i:=0 to FPages.Count-1 do
-    TfpgTabSheet(FPages[i]).PageControl:=nil;
+    TlqTabSheet(FPages[i]).PageControl:=nil;
   FPages.Free;
   ActiveWidget := nil;
   FFirstTabButton := nil;
   inherited Destroy;
 end;
 
-procedure TfpgPageControl.BeginUpdate;
+procedure TlqPageControl.BeginUpdate;
 begin
   Inc(FUpdateCount);
 end;
 
-procedure TfpgPageControl.EndUpdate;
+procedure TlqPageControl.EndUpdate;
 begin
   Dec(FUpdateCount);
   if FUpdateCount <= 0 then
     RePaint;
 end;
 
-function TfpgPageControl.TabSheetAtPos(const x, y: integer): TfpgTabSheet;
+function TlqPageControl.TabSheetAtPos(const x, y: integer): TlqTabSheet;
 var
-  h: TfpgTabSheet;
+  h: TlqTabSheet;
   lp: integer;  // left position
   bw: integer;  // button width
   bh: integer;  // button height
   p1, p2: integer;    // tab boundaries for mouse click to take affect
 begin
   Result := nil;
-  h := TfpgTabSheet(FPages.First);
+  h := TlqTabSheet(FPages.First);
 
   lp := FMargin;
   if MaxButtonWidthSum > (Width-(FMargin*2)) then
@@ -1321,8 +1321,8 @@ begin
             exit;
           end;  { if }
           lp := lp + bw;
-          if h <> TfpgTabSheet(FPages.Last) then
-            h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+          if h <> TlqTabSheet(FPages.Last) then
+            h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
           else
             h := nil;
        end;  { while }
@@ -1343,8 +1343,8 @@ begin
           exit;
         end;  { if }
         lp := lp + bh;
-        if h <> TfpgTabSheet(FPages.Last) then
-          h := TfpgTabSheet(FPages[FPages.IndexOf(h)+1])
+        if h <> TlqTabSheet(FPages.Last) then
+          h := TlqTabSheet(FPages[FPages.IndexOf(h)+1])
         else
           h := nil;
       end;  { while }
@@ -1352,14 +1352,14 @@ begin
   end;
 end;
 
-function TfpgPageControl.AppendTabSheet(ATitle: string): TfpgTabSheet;
+function TlqPageControl.AppendTabSheet(ATitle: string): TlqTabSheet;
 begin
-  Result := TfpgTabSheet.Create(self);
+  Result := TlqTabSheet.Create(self);
   Result.Text := ATitle;
   InsertPage(Result);
 end;
 
-procedure TfpgPageControl.RemoveTabSheet(ATabSheet: TfpgTabSheet);
+procedure TlqPageControl.RemoveTabSheet(ATabSheet: TlqTabSheet);
 begin
   RemovePage(ATabSheet);
 end;

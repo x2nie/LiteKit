@@ -11,17 +11,17 @@ uses
   lq_label, lq_edit, lq_checkbox, lq_combobox;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    btnQuit: TfpgButton;
-    pcMain: TfpgPageControl;
-    tsOne: TfpgTabSheet;
-    tsTwo: TfpgTabSheet;
-    tsThree: TfpgTabSheet;
-    tsFour: TfpgTabSheet;
-    btn2, btn3: TfpgButton;
-    chkSort: TfpgCheckBox;
-    cbTabPos: TfpgComboBox;
+    btnQuit: TlqButton;
+    pcMain: TlqPageControl;
+    tsOne: TlqTabSheet;
+    tsTwo: TlqTabSheet;
+    tsThree: TlqTabSheet;
+    tsFour: TlqTabSheet;
+    btn2, btn3: TlqButton;
+    chkSort: TlqCheckBox;
+    cbTabPos: TlqComboBox;
     procedure   btnQuitClick(Sender: TObject);
     procedure   btn2Click(Sender: TObject);
     procedure   btn3Click(Sender: TObject);
@@ -85,7 +85,7 @@ begin
   btnQuit.ShowImage := True;
   btnQuit.Anchors := [anRight, anBottom];
 
-  pcMain := TfpgPageControl.Create(self);
+  pcMain := TlqPageControl.Create(self);
   pcMain.Top      := 10;
   pcMain.Left     := 10;
   pcMain.Width    := Width - 20;
@@ -94,25 +94,25 @@ begin
 //  pcMain.FixedTabWidth:=150;
 
   // Tab One
-  tsOne := TfpgTabSheet.Create(pcMain);
+  tsOne := TlqTabSheet.Create(pcMain);
   tsOne.Text := 'Tab One';
   CreateLabel(tsOne, 15, 50, 'TabSheet One');
   CreateLabel(tsOne, 15, 30, 'Resize form to see PageControl left/right buttons in action.');
   CreateEdit(tsOne, 15, 100, 150, 25);
 
   // Tab Two
-  tsTwo := TfpgTabSheet.Create(pcMain);
+  tsTwo := TlqTabSheet.Create(pcMain);
   tsTwo.Text := 'Tab Two';
   CreateLabel(tsTwo, 50, 50, 'TabSheet Two');
   CreateButton(tsTwo, 50, 100, 80, 'Button1', nil);
 
   // Tab Three
-  tsThree := TfpgTabSheet.Create(pcMain);
+  tsThree := TlqTabSheet.Create(pcMain);
   tsThree.Text := 'Tab Three';
   CreateLabel(tsThree, 80, 50, 'TabSheet Three');
   
   // Tab Four
-  tsFour := TfpgTabSheet.Create(pcMain);
+  tsFour := TlqTabSheet.Create(pcMain);
   tsFour.Text := 'This is one long text caption';
   tsFour.BackgroundColor := clMediumSeaGreen;
   

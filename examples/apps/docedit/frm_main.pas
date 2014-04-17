@@ -24,7 +24,7 @@ uses
   dom, XMLWrite, XMLRead, contnrs, model;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     FFile: TDescDocument;
     FDescriptionNode: TDomNode;
@@ -42,15 +42,15 @@ type
     procedure   GetElementList(List: TStrings);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    menubar: TfpgMenuBar;
-    miFile: TfpgPopupMenu;
-    miInsert: TfpgPopupMenu;
-    miExtra: TfpgPopupMenu;
-    miHelp: TfpgPopupMenu;
-    btnQuit: TfpgButton;
-    tvXML: TfpgTreeView;
-    pnlName1: TfpgBevel;
-    lblFilename: TfpgLabel;
+    menubar: TlqMenuBar;
+    miFile: TlqPopupMenu;
+    miInsert: TlqPopupMenu;
+    miExtra: TlqPopupMenu;
+    miHelp: TlqPopupMenu;
+    btnQuit: TlqButton;
+    tvXML: TlqTreeView;
+    pnlName1: TlqBevel;
+    lblFilename: TlqLabel;
     {@VFD_HEAD_END: MainForm}
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -99,7 +99,7 @@ end;
 procedure TNodeTreeItem.CheckSubItems;
 begin
 //  If (SubTree=Nil) then
-//    SubTree:=TFPgtkTree.Create;
+//    SubTree:=TlqtkTree.Create;
 end;
 
 { TMainForm }
@@ -116,9 +116,9 @@ end;
 
 procedure TMainForm.miFileOpenClicked(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     dlg.Filter := 'FPDoc Desc Files (*.xml)|*.xml|All Files (*)|*';
     if dlg.RunOpenFile then
@@ -134,9 +134,9 @@ end;
 
 procedure TMainForm.miFileSaveAsClicked(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     dlg.Filter := 'FPDoc Desc Files (*.xml)|*.xml|All Files (*)|*';
     dlg.FileName := lblFilename.Text;
@@ -213,7 +213,7 @@ begin
   WindowTitle := 'fpGUI Documentation Editor';
   WindowPosition := wpScreenCenter;
 
-  menubar := TfpgMenuBar.Create(self);
+  menubar := TlqMenuBar.Create(self);
   with menubar do
   begin
     Name := 'menubar';
@@ -221,7 +221,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  miFile := TfpgPopupMenu.Create(self);
+  miFile := TlqPopupMenu.Create(self);
   with miFile do
   begin
     Name := 'miFile';
@@ -237,7 +237,7 @@ begin
     AddMenuItem('&Quit', 'Ctrl-Q', @miFileQuitClicked);
   end;
 
-  miInsert := TfpgPopupMenu.Create(self);
+  miInsert := TlqPopupMenu.Create(self);
   with miInsert do
   begin
     Name := 'miInsert';
@@ -251,7 +251,7 @@ begin
     AddMenuItem('&Short Desc Link', '', nil);
   end;
 
-  miExtra := TfpgPopupMenu.Create(self);
+  miExtra := TlqPopupMenu.Create(self);
   with miExtra do
   begin
     Name := 'miExtra';
@@ -260,7 +260,7 @@ begin
     AddMenuItem('&Build...', '', nil);
   end;
 
-  miHelp := TfpgPopupMenu.Create(self);
+  miHelp := TlqPopupMenu.Create(self);
   with miHelp do
   begin
     Name := 'miHelp';
@@ -268,7 +268,7 @@ begin
     AddMenuItem('About...', '', @miHelpAboutClicked);
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -281,7 +281,7 @@ begin
     OnClick   := @btnQuitClicked;
   end;
 
-  tvXML := TfpgTreeView.Create(self);
+  tvXML := TlqTreeView.Create(self);
   with tvXML do
   begin
     Name := 'tvXML';
@@ -292,7 +292,7 @@ begin
     ScrollWheelDelta := 15;
   end;
 
-  pnlName1 := TfpgBevel.Create(self);
+  pnlName1 := TlqBevel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
@@ -303,7 +303,7 @@ begin
     Focusable := False;
   end;
 
-  lblFilename := TfpgLabel.Create(pnlName1);
+  lblFilename := TlqLabel.Create(pnlName1);
   with lblFilename do
   begin
     Name := 'lblFilename';

@@ -10,7 +10,7 @@ uses
 type
   EHelpBitmapException = class(Exception);
 
-  THelpBitmap = class(TfpgImage)
+  THelpBitmap = class(TlqImage)
   public
     constructor CreateFromHelpFile( FileHandle: TFileStream; Offset: longint );
     procedure LoadFromResourceName(const AName: string);

@@ -65,7 +65,7 @@ Type
   Protected
     FFontManager: TCanvasFontManager;
     FText: PChar;
-    FImages: TfpgImageList;
+    FImages: TlqImageList;
     FLayoutWidth: longint; // The target width for the layout. Used for centreing/right align
     FWidth: longint;       // The actual width of the text. May be wider due to unaligned
                            // parts or bitmaps or width so small individual characters don't fit.
@@ -111,11 +111,11 @@ Type
     Function    GetCharIndex( P: PChar ): longint;
     Function    GetTextEnd: longint;
   public
-    constructor Create(Text: PChar; Images: TfpgImageList; RichTextSettings: TRichTextSettings; FontManager: TCanvasFontManager; AWidth: longint);
+    constructor Create(Text: PChar; Images: TlqImageList; RichTextSettings: TRichTextSettings; FontManager: TCanvasFontManager; AWidth: longint);
     destructor  Destroy; Override;
     function    LinkFromIndex( const CharIndexToFind: longint): string;
     property    TextEnd: longint read GetTextEnd;
-    property    Images: TfpgImageList read FImages;
+    property    Images: TlqImageList read FImages;
     property    Width: longint read FWidth;
     property    Height: longint read FHeight;
     property    HorizontalImageScale: double read FHorizontalImageScale;
@@ -178,7 +178,7 @@ begin
 end;
 
 // Create a layout of the specified rich text.
-constructor TRichTextLayout.Create(Text: PChar; Images: TfpgImageList;
+constructor TRichTextLayout.Create(Text: PChar; Images: TlqImageList;
     RichTextSettings: TRichTextSettings; FontManager: TCanvasFontManager;
     AWidth: longint);
 begin
@@ -286,7 +286,7 @@ Var
   Style: TTextDrawStyle;
   DisplayedCharsSinceFontChange: boolean;
   BitmapIndex: longint;
-  Bitmap: TfpgImage;
+  Bitmap: TlqImage;
   BitmapHeight: longint;
   OnBreak: boolean;
   DoWrap: boolean;
@@ -936,7 +936,7 @@ end;
 
 function TRichTextLayout.GetElementWidth( Element: TTextElement ): longint;
 var
-  Bitmap: TfpgImage;
+  Bitmap: TlqImage;
   BitmapIndex: longint;
 begin
   // Now find out how wide the thing is

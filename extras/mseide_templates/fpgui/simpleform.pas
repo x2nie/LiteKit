@@ -9,7 +9,7 @@ uses
 
 type
 
-  T${%FORMNAME%} = class(TfpgForm)
+  T${%FORMNAME%} = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: ${%FORMNAME%}}
     {@VFD_HEAD_END: ${%FORMNAME%}}

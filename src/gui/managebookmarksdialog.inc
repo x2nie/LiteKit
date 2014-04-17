@@ -16,28 +16,28 @@
       File Open/Save dialog.
 }
 
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
-  TConfigureBookmarksForm = class(TfpgForm)
+  TConfigureBookmarksForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: ConfigureBookmarksForm}
-    grdBookmarks: TfpgStringGrid;
-    btnChangeTitle: TfpgButton;
-    btnDelete: TfpgButton;
-    btnClose: TfpgButton;
-    btnMoveUp: TfpgButton;
-    btnMoveDown: TfpgButton;
+    grdBookmarks: TlqStringGrid;
+    btnChangeTitle: TlqButton;
+    btnDelete: TlqButton;
+    btnClose: TlqButton;
+    btnMoveUp: TlqButton;
+    btnMoveDown: TlqButton;
     {@VFD_HEAD_END: ConfigureBookmarksForm}
-    FIni: TfpgIniFile;
+    FIni: TlqIniFile;
     procedure   SetupCaptions;
     procedure   PopulateGrid;
     procedure   UpdateINIFile;
     procedure   btnChangeTitleClicked(Sender: TObject);
     procedure   btnDeleteClicked(Sender: TObject);
   public
-    constructor Create(var AIniFile: TfpgIniFile); reintroduce;
+    constructor Create(var AIniFile: TlqIniFile); reintroduce;
     destructor  Destroy; override;
     procedure   AfterCreate; override;
   end;
@@ -90,7 +90,7 @@ end;
 
 procedure TConfigureBookmarksForm.btnChangeTitleClicked(Sender: TObject);
 var
-  s: TfpgString;
+  s: TlqString;
 begin
   if (grdBookmarks.RowCount = 0) or (grdBookmarks.FocusRow = -1) then
     Exit;
@@ -109,7 +109,7 @@ begin
   grdBookmarks.DeleteRow(grdBookmarks.FocusRow);
 end;
 
-constructor TConfigureBookmarksForm.Create(var AIniFile: TfpgIniFile);
+constructor TConfigureBookmarksForm.Create(var AIniFile: TlqIniFile);
 begin
   inherited Create(nil);
   FIni := AIniFile;
@@ -132,7 +132,7 @@ begin
   ShowHint := True;
   WindowPosition := wpOneThirdDown;
 
-  grdBookmarks := TfpgStringGrid.Create(self);
+  grdBookmarks := TlqStringGrid.Create(self);
   with grdBookmarks do
   begin
     Name := 'grdBookmarks';
@@ -149,7 +149,7 @@ begin
     Options := [go_SmoothScroll, go_AlternativeColor]
   end;
 
-  btnChangeTitle := TfpgButton.Create(self);
+  btnChangeTitle := TlqButton.Create(self);
   with btnChangeTitle do
   begin
     Name := 'btnChangeTitle';
@@ -163,7 +163,7 @@ begin
     OnClick := @btnChangeTitleClicked;
   end;
 
-  btnDelete := TfpgButton.Create(self);
+  btnDelete := TlqButton.Create(self);
   with btnDelete do
   begin
     Name := 'btnDelete';
@@ -177,7 +177,7 @@ begin
     OnClick := @btnDeleteClicked;
   end;
 
-  btnMoveUp := TfpgButton.Create(self);
+  btnMoveUp := TlqButton.Create(self);
   with btnMoveUp do
   begin
     Name := 'btnMoveUp';
@@ -190,7 +190,7 @@ begin
     TabOrder := 4;
   end;
 
-  btnMoveDown := TfpgButton.Create(self);
+  btnMoveDown := TlqButton.Create(self);
   with btnMoveDown do
   begin
     Name := 'btnMoveDown';
@@ -203,7 +203,7 @@ begin
     TabOrder := 5;
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';

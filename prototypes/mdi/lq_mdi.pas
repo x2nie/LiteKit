@@ -10,17 +10,17 @@ uses
 
 type
 	// forward declarations
-	TfpgMDIChildForm = class;
+	TlqMDIChildForm = class;
 
 
-	TfpgMDIWorkArea = class(TfpgWidget)
+	TlqMDIWorkArea = class(TlqWidget)
 	private
-		FHorBar: TfpgScrollbar;
-		FVerBar: TfpgScrollbar;
+		FHorBar: TlqScrollbar;
+		FVerBar: TlqScrollbar;
 		FList: TList;
-		FActiveWindow: TfpgMDIChildForm;
-		procedure InternalMsgFreeMe(var msg: TfpgMessageRec); message FPGM_FREEME;
-		procedure SetActiveWindow(AValue: TfpgMDIChildForm);
+		FActiveWindow: TlqMDIChildForm;
+		procedure InternalMsgFreeMe(var msg: TlqMessageRec); message FPGM_FREEME;
+		procedure SetActiveWindow(AValue: TlqMDIChildForm);
 		function GetChildWindowCount: integer;
 	protected
 		procedure HandlePaint; override;
@@ -28,33 +28,33 @@ type
 	public
 		constructor Create(AOwner: TComponent); override;
 		destructor Destroy; override;
-		function AddWindow(AWindowClass: TfpgFrameClass): TfpgFrame;
-		property ActiveWindow: TfpgMDIChildForm read FActiveWindow write SetActiveWindow;
+		function AddWindow(AWindowClass: TlqFrameClass): TlqFrame;
+		property ActiveWindow: TlqMDIChildForm read FActiveWindow write SetActiveWindow;
 		property ChildWindowCount: integer read GetChildWindowCount;
 	end;
 
 
-	TfpgMDIChildForm = class(TfpgWidget)
+	TlqMDIChildForm = class(TlqWidget)
 	private
 		{@VFD_HEAD_BEGIN: MDIChildForm}
-		Panel1: TfpgPanel;
-		bevLeft: TfpgBevel;
-		Bevel2: TfpgBevel;
-		bevBottom: TfpgBevel;
-		Bevel4: TfpgBevel;
-		bevRight: TfpgBevel;
-		Button1: TfpgButton;
-		Button2: TfpgButton;
-		Button3: TfpgButton;
-		Button4: TfpgButton;
-		bvlClientArea: TfpgBevel;
+		Panel1: TlqPanel;
+		bevLeft: TlqBevel;
+		Bevel2: TlqBevel;
+		bevBottom: TlqBevel;
+		Bevel4: TlqBevel;
+		bevRight: TlqBevel;
+		Button1: TlqButton;
+		Button2: TlqButton;
+		Button3: TlqButton;
+		Button4: TlqButton;
+		bvlClientArea: TlqBevel;
 		{@VFD_HEAD_END: MDIChildForm}
-		FMDIWorkArea: TfpgMDIWorkArea;
-		FWindowTitle: TfpgString;
+		FMDIWorkArea: TlqMDIWorkArea;
+		FWindowTitle: TlqString;
 		FIsMouseDown: boolean;
 		FLastPos: TPoint;
 		FActive: boolean;
-		procedure SetWindowTitle(AValue: TfpgString);
+		procedure SetWindowTitle(AValue: TlqString);
 		procedure TitleMouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
 		procedure TitleMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 		procedure TitleMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
@@ -64,9 +64,9 @@ type
 	protected
 		property Active: boolean read FActive write SetActive;
 	public
-		constructor Create(AOwner: TfpgMDIWorkArea); reintroduce;
-		property WindowTitle: TfpgString read FWindowTitle write SetWindowTitle;
-		procedure SetClientFrame(AFrame: TfpgFrame);
+		constructor Create(AOwner: TlqMDIWorkArea); reintroduce;
+		property WindowTitle: TlqString read FWindowTitle write SetWindowTitle;
+		procedure SetClientFrame(AFrame: TlqFrame);
 		procedure UpdateWindowTitle;
 		procedure Close;
 	end;
@@ -76,9 +76,9 @@ implementation
 uses
 	dbugintf;
 
-{ TfpgMDIChildForm }
+{ TlqMDIChildForm }
 
-procedure TfpgMDIChildForm.TitleMouseMove(Sender: TObject; AShift: TShiftState;
+procedure TlqMDIChildForm.TitleMouseMove(Sender: TObject; AShift: TShiftState;
 	const AMousePos: TPoint);
 var
   dx, dy: integer;
@@ -99,14 +99,14 @@ begin
 	UpdateWindowPosition;
 end;
 
-procedure TfpgMDIChildForm.TitleMouseUp(Sender: TObject; AButton: TMouseButton;
+procedure TlqMDIChildForm.TitleMouseUp(Sender: TObject; AButton: TMouseButton;
 	AShift: TShiftState; const AMousePos: TPoint);
 begin
 	FIsMouseDown := False;
 	Panel1.ReleaseMouse;
 end;
 
-procedure TfpgMDIChildForm.TitleMouseDown(Sender: TObject; AButton: TMouseButton;
+procedure TlqMDIChildForm.TitleMouseDown(Sender: TObject; AButton: TMouseButton;
 	AShift: TShiftState; const AMousePos: TPoint);
 begin
 	FMDIWorkArea.ActiveWindow := self;
@@ -115,17 +115,17 @@ begin
 	Panel1.CaptureMouse;
 end;
 
-procedure TfpgMDIChildForm.TitleMouseExit(Sender: TObject);
+procedure TlqMDIChildForm.TitleMouseExit(Sender: TObject);
 begin
 //	FIsMouseDown := False;
 end;
 
-procedure TfpgMDIChildForm.CloseMDIWindowClicked(Sender: TObject);
+procedure TlqMDIChildForm.CloseMDIWindowClicked(Sender: TObject);
 begin
 	Close;
 end;
 
-procedure TfpgMDIChildForm.SetActive(AValue: boolean);
+procedure TlqMDIChildForm.SetActive(AValue: boolean);
 begin
 	if FActive = AValue then
 		Exit;
@@ -150,7 +150,7 @@ begin
 	end;
 end;
 
-procedure TfpgMDIChildForm.SetWindowTitle(AValue: TfpgString);
+procedure TlqMDIChildForm.SetWindowTitle(AValue: TlqString);
 begin
 	if FWindowTitle = AValue then
 		Exit;
@@ -159,7 +159,7 @@ begin
 		Panel1.Text := FWindowTitle;
 end;
 
-constructor TfpgMDIChildForm.Create(AOwner: TfpgMDIWorkArea);
+constructor TlqMDIChildForm.Create(AOwner: TlqMDIWorkArea);
 begin
 	inherited Create(AOwner);
 	FMDIWorkArea := AOwner;
@@ -171,77 +171,77 @@ begin
 	WindowTitle := 'ChildForm1';
 	Hint := '';
 
-	Panel1 := TfpgPanel.Create(self);
+	Panel1 := TlqPanel.Create(self);
 	with Panel1 do
 	begin
 		Name := 'Panel1';
 		SetPosition(0, 0, 301, 24);
 		Anchors := [anLeft,anRight,anTop];
-		BackgroundColor := TfpgColor($0A0081);
+		BackgroundColor := TlqColor($0A0081);
 		FontDesc := '#Label2';
 		Hint := '';
 		Text := 'Window Title';
-		TextColor := TfpgColor($FFFFFF);
+		TextColor := TlqColor($FFFFFF);
 		OnMouseDown := @TitleMouseDown;
 		OnMouseUp := @TitleMouseUp;
 		OnMouseMove := @TitleMouseMove;
 		OnMouseExit  := @TitleMouseExit;
 	end;
 
-	bevLeft := TfpgBevel.Create(self);
+	bevLeft := TlqBevel.Create(self);
 	with bevLeft do
 	begin
 		Name := 'bevLeft';
 		SetPosition(0, 24, 3, 211);
 		Anchors := [anLeft,anTop,anBottom];
-		BackgroundColor := TfpgColor($000080);
+		BackgroundColor := TlqColor($000080);
 		Hint := '';
 		Shape := bsSpacer;
 	end;
 
-	Bevel2 := TfpgBevel.Create(self);
+	Bevel2 := TlqBevel.Create(self);
 	with Bevel2 do
 	begin
 		Name := 'Bevel2';
 		SetPosition(0, 235, 16, 16);
 		Anchors := [anLeft,anBottom];
-		BackgroundColor := TfpgColor($000080);
+		BackgroundColor := TlqColor($000080);
 		Hint := '';
 	end;
 
-	bevBottom := TfpgBevel.Create(self);
+	bevBottom := TlqBevel.Create(self);
 	with bevBottom do
 	begin
 		Name := 'bevBottom';
 		SetPosition(16, 248, 269, 3);
 		Anchors := [anLeft,anRight,anBottom];
-		BackgroundColor := TfpgColor($000080);
+		BackgroundColor := TlqColor($000080);
 		Hint := '';
 		Shape := bsSpacer;
 	end;
 
-	Bevel4 := TfpgBevel.Create(self);
+	Bevel4 := TlqBevel.Create(self);
 	with Bevel4 do
 	begin
 		Name := 'Bevel4';
 		SetPosition(285, 235, 16, 16);
 		Anchors := [anRight,anBottom];
-		BackgroundColor := TfpgColor($000080);
+		BackgroundColor := TlqColor($000080);
 		Hint := '';
 	end;
 
-	bevRight := TfpgBevel.Create(self);
+	bevRight := TlqBevel.Create(self);
 	with bevRight do
 	begin
 		Name := 'bevRight';
 		SetPosition(297, 24, 3, 211);
 		Anchors := [anRight,anTop,anBottom];
-		BackgroundColor := TfpgColor($000080);
+		BackgroundColor := TlqColor($000080);
 		Hint := '';
 		Shape := bsSpacer;
 	end;
 
-	Button1 := TfpgButton.Create(Panel1);
+	Button1 := TlqButton.Create(Panel1);
 	with Button1 do
 	begin
 		Name := 'Button1';
@@ -252,10 +252,10 @@ begin
 		Hint := '';
 		ImageName := '';
 		TabOrder := 1;
-		TextColor := TfpgColor($000000);
+		TextColor := TlqColor($000000);
 	end;
 
-	Button2 := TfpgButton.Create(Panel1);
+	Button2 := TlqButton.Create(Panel1);
 	with Button2 do
 	begin
 		Name := 'Button2';
@@ -267,10 +267,10 @@ begin
 		Hint := '';
 		ImageName := '';
 		TabOrder := 1;
-		TextColor := TfpgColor($000000);
+		TextColor := TlqColor($000000);
 	end;
 
-	Button3 := TfpgButton.Create(Panel1);
+	Button3 := TlqButton.Create(Panel1);
 	with Button3 do
 	begin
 		Name := 'Button3';
@@ -282,10 +282,10 @@ begin
 		Hint := '';
 		ImageName := '';
 		TabOrder := 1;
-		TextColor := TfpgColor($000000);
+		TextColor := TlqColor($000000);
 	end;
 
-	Button4 := TfpgButton.Create(Panel1);
+	Button4 := TlqButton.Create(Panel1);
 	with Button4 do
 	begin
 		Name := 'Button4';
@@ -297,11 +297,11 @@ begin
 		Hint := '';
 		ImageName := '';
 		TabOrder := 1;
-		TextColor := TfpgColor($000000);
+		TextColor := TlqColor($000000);
 		OnClick := @CloseMDIWindowClicked;
 	end;
 
-	bvlClientArea := TfpgBevel.Create(self);
+	bvlClientArea := TlqBevel.Create(self);
 	with bvlClientArea do
 	begin
 		Name := 'bvlClientArea';
@@ -315,7 +315,7 @@ begin
 	Name := 'MDIChildForm' + IntToStr(Random(MaxInt));
 end;
 
-procedure TfpgMDIChildForm.SetClientFrame(AFrame: TfpgFrame);
+procedure TlqMDIChildForm.SetClientFrame(AFrame: TlqFrame);
 begin
 //	AFrame.Owner := bvlClientArea;
 	AFrame.Align := alClient;
@@ -323,20 +323,20 @@ begin
 	UpdateWindowTitle;
 end;
 
-procedure TfpgMDIChildForm.UpdateWindowTitle;
+procedure TlqMDIChildForm.UpdateWindowTitle;
 begin
 	Panel1.Text := FWindowTitle;
 end;
 
-procedure TfpgMDIChildForm.Close;
+procedure TlqMDIChildForm.Close;
 begin
 	// We can't free ourselves, somebody else needs to do it
 	fpgPostMessage(Self, FMDIWorkArea, FPGM_FREEME);
 end;
 
-{ TfpgMDIWorkArea }
+{ TlqMDIWorkArea }
 
-procedure TfpgMDIWorkArea.InternalMsgFreeMe(var msg: TfpgMessageRec);
+procedure TlqMDIWorkArea.InternalMsgFreeMe(var msg: TlqMessageRec);
 var
 	i: integer;
 begin
@@ -344,28 +344,28 @@ begin
 	begin
 		if csDestroying in TComponent(msg.Sender).ComponentState then
 			Exit;
-		RemoveComponent(TfpgMDIChildForm(msg.Sender));
-		i := FList.IndexOf(TfpgMDIChildForm(msg.Sender));
+		RemoveComponent(TlqMDIChildForm(msg.Sender));
+		i := FList.IndexOf(TlqMDIChildForm(msg.Sender));
 		if i = -1 then
 			raise Exception.Create('Could not find MDI Child Form');
 		FList.Delete(i);
 		if FList.Count >= i+1 then
 			{ set focus to next child window after the one just deleted }
-			ActiveWidget := TfpgMDIChildForm(FList.Items[i])
+			ActiveWidget := TlqMDIChildForm(FList.Items[i])
 		else if FList.Count > 0 then
 			{ fallback to the first child window we created }
-			ActiveWidget := TfpgMDIChildForm(FList.Items[0])
+			ActiveWidget := TlqMDIChildForm(FList.Items[0])
 		else
 			{ there simply isn't any more child windows }
 			ActiveWidget := nil;
-		TfpgMDIChildForm(msg.Sender).Free;
+		TlqMDIChildForm(msg.Sender).Free;
 	end;
 end;
 
-procedure TfpgMDIWorkArea.SetActiveWindow(AValue: TfpgMDIChildForm);
+procedure TlqMDIWorkArea.SetActiveWindow(AValue: TlqMDIChildForm);
 var
   i: integer;
-  w: TfpgMDIChildForm;
+  w: TlqMDIChildForm;
 begin
 	if FActiveWindow = AValue then
 		Exit;
@@ -374,23 +374,23 @@ begin
 	ActiveWidget := FActiveWindow;
 	for i := 0 to FList.Count-1 do
 	begin
-		w := TfpgMDIChildForm(FList[i]);
+		w := TlqMDIChildForm(FList[i]);
 		w.Active := (w = AValue);
 	end;
 end;
 
-function TfpgMDIWorkArea.GetChildWindowCount: integer;
+function TlqMDIWorkArea.GetChildWindowCount: integer;
 begin
 	Result := FList.Count;
 end;
 
-procedure TfpgMDIWorkArea.HandlePaint;
+procedure TlqMDIWorkArea.HandlePaint;
 begin
 	inherited HandlePaint;
 	Canvas.Clear(clLtGray);
 end;
 
-procedure TfpgMDIWorkArea.PositionScrollBars;
+procedure TlqMDIWorkArea.PositionScrollBars;
 begin
 	FHorBar.Left := Left;
 	FHorBar.Top := Height - FHorBar.Height;
@@ -402,14 +402,14 @@ begin
 	FVerBar.Anchors := [anRight, anTop, anBottom];
 end;
 
-constructor TfpgMDIWorkArea.Create(AOwner: TComponent);
+constructor TlqMDIWorkArea.Create(AOwner: TComponent);
 begin
 	inherited Create(AOwner);
 	FIsContainer := True;
-	FHorBar := TfpgScrollbar.Create(self);
+	FHorBar := TlqScrollbar.Create(self);
 	FHorBar.Visible := False;
 	FHorBar.Orientation := orHorizontal;
-	FVerBar := TfpgScrollbar.Create(self);
+	FVerBar := TlqScrollbar.Create(self);
 	FVerBar.Visible := False;
 	FVerBar.Orientation := orVertical;
 	PositionScrollBars;
@@ -417,17 +417,17 @@ begin
 	FActiveWindow := nil;
 end;
 
-destructor TfpgMDIWorkArea.Destroy;
+destructor TlqMDIWorkArea.Destroy;
 begin
 	FList.Free;
 	inherited Destroy;
 end;
 
-function TfpgMDIWorkArea.AddWindow(AWindowClass: TfpgFrameClass): TfpgFrame;
+function TlqMDIWorkArea.AddWindow(AWindowClass: TlqFrameClass): TlqFrame;
 var
-	frm: TfpgMDIChildForm;
+	frm: TlqMDIChildForm;
 begin
-	frm := TfpgMDIChildForm.Create(self);
+	frm := TlqMDIChildForm.Create(self);
 	Result := AWindowClass.Create(frm.bvlClientArea);
 	frm.SetClientFrame(Result);
 	FList.Add(frm);

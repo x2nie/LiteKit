@@ -24,7 +24,7 @@ unit lq_menu;
 {
   TODO:
     * Refactor the HotKey painting code into Canvas.DrawString so that other
-      widgets like TfpgButton could also use it.
+      widgets like TlqButton could also use it.
     * Global keyboard activation of menu items are still missing.
 }
 
@@ -41,35 +41,35 @@ uses
   lq_command_intf;
   
 type
-  TfpgHotKeyDef = string;
+  TlqHotKeyDef = string;
   
-  TfpgMenuOption = (mnuo_autoopen,          // auto open menus when mouse over menubar
+  TlqMenuOption = (mnuo_autoopen,          // auto open menus when mouse over menubar
                     mnuo_nofollowingmouse   // don't auto open new menus as mouse moves over menubar
                     );
   
-  TfpgMenuOptions = set of TfpgMenuOption;
+  TlqMenuOptions = set of TlqMenuOption;
   
   // forward declarations
-  TfpgPopupMenu = class;
-  TfpgMenuBar = class;
+  TlqPopupMenu = class;
+  TlqMenuBar = class;
   
   
-  TfpgMenuItem = class(TfpgComponent, ICommandHolder)
+  TlqMenuItem = class(TlqComponent, ICommandHolder)
   private
     FCommand: ICommand;
     FEnabled: boolean;
-    FHint: TfpgString;
-    FHotKeyDef: TfpgHotKeyDef;
+    FHint: TlqString;
+    FHotKeyDef: TlqHotKeyDef;
     FOnClick: TNotifyEvent;
     FSeparator: boolean;
-    FSubMenu: TfpgPopupMenu;
-    FText: TfpgString;
+    FSubMenu: TlqPopupMenu;
+    FText: TlqString;
     FVisible: boolean;
     FChecked: boolean;
     procedure   SetEnabled(const AValue: boolean);
-    procedure   SetHotKeyDef(const AValue: TfpgHotKeyDef);
+    procedure   SetHotKeyDef(const AValue: TlqHotKeyDef);
     procedure   SetSeparator(const AValue: boolean);
-    procedure   SetText(const AValue: TfpgString);
+    procedure   SetText(const AValue: TlqString);
     procedure   SetVisible(const AValue: boolean);
     procedure   SetChecked(const AValue: boolean);
   public
@@ -77,40 +77,40 @@ type
     procedure   Click;
     function    Selectable: boolean;
     function    GetAccelChar: string;
-    procedure   DrawText(ACanvas: TfpgCanvas; x, y: TfpgCoord; const AImgWidth: integer);
+    procedure   DrawText(ACanvas: TlqCanvas; x, y: TlqCoord; const AImgWidth: integer);
     function    GetCommand: ICommand;
     procedure   SetCommand(ACommand: ICommand);
     property    Checked: boolean read FChecked write SetChecked;
-    property    Text: TfpgString read FText write SetText;
-    property    Hint: TfpgString read FHint write FHint;
-    property    HotKeyDef: TfpgHotKeyDef read FHotKeyDef write SetHotKeyDef;
+    property    Text: TlqString read FText write SetText;
+    property    Hint: TlqString read FHint write FHint;
+    property    HotKeyDef: TlqHotKeyDef read FHotKeyDef write SetHotKeyDef;
     property    Separator: boolean read FSeparator write SetSeparator;
     property    Visible: boolean read FVisible write SetVisible;
     property    Enabled: boolean read FEnabled write SetEnabled;
-    property    SubMenu: TfpgPopupMenu read FSubMenu write FSubMenu;
+    property    SubMenu: TlqPopupMenu read FSubMenu write FSubMenu;
     property    OnClick: TNotifyEvent read FOnClick write FOnClick;
   end;
   
   
   // Actual Menu Items are stored in TComponent's Components property
   // Visible only items are stored in FItems just before a paint
-  TfpgPopupMenu = class(TfpgPopupWindow)
+  TlqPopupMenu = class(TlqPopupWindow)
   private
     FBeforeShow: TNotifyEvent;
-    FMargin: TfpgCoord;
-    FTextMargin: TfpgCoord;
+    FMargin: TlqCoord;
+    FTextMargin: TlqCoord;
     procedure   DoSelect;
     procedure   CloseSubmenus;
     function    GetItemPosY(index: integer): integer;
     function    CalcMouseRow(y: integer): integer;
     function    VisibleCount: integer;
-    function    VisibleItem(ind: integer): TfpgMenuItem;
+    function    VisibleItem(ind: integer): TlqMenuItem;
     function    MenuFocused: boolean;
     function    SearchItemByAccel(s: string): integer;
   protected
-    FMenuFont: TfpgFont;
-    FMenuAccelFont: TfpgFont;
-    FMenuDisabledFont: TfpgFont;
+    FMenuFont: TlqFont;
+    FMenuAccelFont: TlqFont;
+    FMenuDisabledFont: TlqFont;
     FSymbolWidth: integer;
     FItems: TList;
     FFocusItem: integer;
@@ -123,33 +123,33 @@ type
     procedure   HandlePaint; override;
     procedure   HandleShow; override;
     procedure   HandleClose; override;
-    procedure   DrawItem(mi: TfpgMenuItem; rect: TfpgRect; AFlags: TfpgMenuItemFlags); virtual;
+    procedure   DrawItem(mi: TlqMenuItem; rect: TlqRect; AFlags: TlqMenuItemFlags); virtual;
     procedure   DrawRow(line: integer; const AItemFocused: boolean); virtual;
-    function    ItemHeight(mi: TfpgMenuItem): integer; virtual;
+    function    ItemHeight(mi: TlqMenuItem): integer; virtual;
     procedure   PrepareToShow;
-    procedure   DoKeyShortcut(const AOrigin: TfpgWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); override;
+    procedure   DoKeyShortcut(const AOrigin: TlqWidget; const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False); override;
   public
-    OpenerPopup: TfpgPopupMenu;
-    OpenerMenuBar: TfpgMenuBar;
+    OpenerPopup: TlqPopupMenu;
+    OpenerMenuBar: TlqMenuBar;
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     procedure   Close; override;
-    function    AddMenuItem(const AMenuName: TfpgString; const hotkeydef: string; OnClickProc: TNotifyEvent): TfpgMenuItem;
+    function    AddMenuItem(const AMenuName: TlqString; const hotkeydef: string; OnClickProc: TNotifyEvent): TlqMenuItem;
     procedure   AddSeparator;
-    function    MenuItemByName(const AMenuName: TfpgString): TfpgMenuItem;
-    function    MenuItem(const AMenuPos: integer): TfpgMenuItem;  // added to allow for localization
+    function    MenuItemByName(const AMenuName: TlqString): TlqMenuItem;
+    function    MenuItem(const AMenuPos: integer): TlqMenuItem;  // added to allow for localization
     property    BeforeShow: TNotifyEvent read FBeforeShow write FBeforeShow;
   end;
   
   
   // Actual Menu Items are stored in TComponents Components property
   // Visible only items are stored in FItems just before a paint
-  TfpgMenuBar = class(TfpgWidget)
+  TlqMenuBar = class(TlqWidget)
   private
     FBeforeShow: TNotifyEvent;
-    FLightColor: TfpgColor;
-    FDarkColor: TfpgColor;
-    FMenuOptions: TfpgMenuOptions;
+    FLightColor: TlqColor;
+    FDarkColor: TlqColor;
+    FMenuOptions: TlqMenuOptions;
     FPrevFocusItem: integer;
     FFocusItem: integer;
     FClicked: Boolean;
@@ -158,14 +158,14 @@ type
     procedure   SetFocusItem(const AValue: integer);
     procedure   DoSelect;
     procedure   CloseSubmenus;
-    function    ItemWidth(mi: TfpgMenuItem): integer;
+    function    ItemWidth(mi: TlqMenuItem): integer;
     procedure   InternalReset;
   protected
     FItems: TList;  // stores visible items only
     property    FocusItem: integer read FFocusItem write SetFocusItem;
     procedure   PrepareToShow;
     function    VisibleCount: integer;
-    function    VisibleItem(ind: integer): TfpgMenuItem;
+    function    VisibleItem(ind: integer): TlqMenuItem;
     procedure   HandleShow; override;
     procedure   HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
@@ -183,31 +183,31 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    function    AddMenuItem(const AMenuTitle: string; OnClickProc: TNotifyEvent): TfpgMenuItem;
-    function    MenuItem(const AMenuPos: integer): TfpgMenuItem;  // added to allow for localization
-    property    MenuOptions: TfpgMenuOptions read FMenuOptions write FMenuOptions;
+    function    AddMenuItem(const AMenuTitle: string; OnClickProc: TNotifyEvent): TlqMenuItem;
+    function    MenuItem(const AMenuPos: integer): TlqMenuItem;  // added to allow for localization
+    property    MenuOptions: TlqMenuOptions read FMenuOptions write FMenuOptions;
     property    BeforeShow: TNotifyEvent read FBeforeShow write FBeforeShow;
   end;
 
 
-function CreateMenuBar(AOwner: TfpgWidget; x, y, w, h: TfpgCoord): TfpgMenuBar; overload;
-function CreateMenuBar(AOwner: TfpgWidget): TfpgMenuBar; overload;
+function CreateMenuBar(AOwner: TlqWidget; x, y, w, h: TlqCoord): TlqMenuBar; overload;
+function CreateMenuBar(AOwner: TlqWidget): TlqMenuBar; overload;
 
 
 implementation
   
 var
-  uFocusedPopupMenu: TfpgPopupMenu;
+  uFocusedPopupMenu: TlqPopupMenu;
 
 const
   cImgWidth: integer = 16;
 
   
-function CreateMenuBar(AOwner: TfpgWidget; x, y, w, h: TfpgCoord): TfpgMenuBar;
+function CreateMenuBar(AOwner: TlqWidget; x, y, w, h: TlqCoord): TlqMenuBar;
 begin
   if AOwner = nil then
     raise Exception.Create('MenuBar component must have an Owner assigned');
-  Result       := TfpgMenuBar.Create(AOwner);
+  Result       := TlqMenuBar.Create(AOwner);
   Result.Left  := x;
   Result.Top   := y;
   if w = 0 then
@@ -218,52 +218,52 @@ begin
     Result.Height := h;
 end;
 
-function CreateMenuBar(AOwner: TfpgWidget): TfpgMenuBar;
+function CreateMenuBar(AOwner: TlqWidget): TlqMenuBar;
 begin
   Result := CreateMenuBar(AOwner, 0, 0, 0, 0);
 end;
 
 
-{ TfpgMenuItem }
+{ TlqMenuItem }
 
-procedure TfpgMenuItem.SetText(const AValue: TfpgString);
+procedure TlqMenuItem.SetText(const AValue: TlqString);
 begin
   if FText = AValue then
     Exit; //==>
   FText := AValue;
 end;
 
-procedure TfpgMenuItem.SetVisible(const AValue: boolean);
+procedure TlqMenuItem.SetVisible(const AValue: boolean);
 begin
   if FVisible=AValue then exit;
   FVisible:=AValue;
 end;
 
-procedure TfpgMenuItem.SetChecked(const AValue: boolean);
+procedure TlqMenuItem.SetChecked(const AValue: boolean);
 begin
   if FChecked = AValue then exit;
   FChecked := AValue;
 end;
 
-procedure TfpgMenuItem.SetHotKeyDef(const AValue: TfpgHotKeyDef);
+procedure TlqMenuItem.SetHotKeyDef(const AValue: TlqHotKeyDef);
 begin
   if FHotKeyDef=AValue then exit;
   FHotKeyDef:=AValue;
 end;
 
-procedure TfpgMenuItem.SetEnabled(const AValue: boolean);
+procedure TlqMenuItem.SetEnabled(const AValue: boolean);
 begin
   if FEnabled=AValue then exit;
   FEnabled:=AValue;
 end;
 
-procedure TfpgMenuItem.SetSeparator(const AValue: boolean);
+procedure TlqMenuItem.SetSeparator(const AValue: boolean);
 begin
   if FSeparator=AValue then exit;
   FSeparator:=AValue;
 end;
 
-constructor TfpgMenuItem.Create(AOwner: TComponent);
+constructor TlqMenuItem.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Text := '';
@@ -276,7 +276,7 @@ begin
   FOnClick := nil;
 end;
 
-procedure TfpgMenuItem.Click;
+procedure TlqMenuItem.Click;
 begin
   if Assigned(FCommand) then    // ICommand takes preference over OnClick
     FCommand.Execute
@@ -284,12 +284,12 @@ begin
     FOnClick(self);
 end;
 
-function TfpgMenuItem.Selectable: boolean;
+function TlqMenuItem.Selectable: boolean;
 begin
   Result := Enabled and Visible and (not Separator);
 end;
 
-function TfpgMenuItem.GetAccelChar: string;
+function TlqMenuItem.GetAccelChar: string;
 var
   p: integer;
 begin
@@ -302,7 +302,7 @@ begin
     Result := '';
 end;
 
-procedure TfpgMenuItem.DrawText(ACanvas: TfpgCanvas; x, y: TfpgCoord; const AImgWidth: integer);
+procedure TlqMenuItem.DrawText(ACanvas: TlqCanvas; x, y: TlqCoord; const AImgWidth: integer);
 var
   s: string;
   p: integer;
@@ -349,19 +349,19 @@ begin
     fpgStyle.DrawString(ACanvas, x, y, s, Enabled);
 end;
 
-function TfpgMenuItem.GetCommand: ICommand;
+function TlqMenuItem.GetCommand: ICommand;
 begin
   Result := FCommand;
 end;
 
-procedure TfpgMenuItem.SetCommand(ACommand: ICommand);
+procedure TlqMenuItem.SetCommand(ACommand: ICommand);
 begin
   FCommand := ACommand;
 end;
 
-{ TfpgMenuBar }
+{ TlqMenuBar }
 
-procedure TfpgMenuBar.SetFocusItem(const AValue: integer);
+procedure TlqMenuBar.SetFocusItem(const AValue: integer);
 begin
   if FFocusItem = AValue then
     Exit;
@@ -370,10 +370,10 @@ begin
   Repaint;
 end;
 
-procedure TfpgMenuBar.PrepareToShow;
+procedure TlqMenuBar.PrepareToShow;
 var
   n: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   if Assigned(FBeforeShow) then
     FBeforeShow(self);
@@ -382,35 +382,35 @@ begin
   // Collecting visible items
   for n := 0 to ComponentCount-1 do
   begin
-    if Components[n] is TfpgMenuItem then
+    if Components[n] is TlqMenuItem then
     begin
-      mi := TfpgMenuItem(Components[n]);
+      mi := TlqMenuItem(Components[n]);
       if mi.Visible then
         FItems.Add(mi);
     end;
   end;
 end;
 
-function TfpgMenuBar.VisibleCount: integer;
+function TlqMenuBar.VisibleCount: integer;
 begin
   Result := FItems.Count;
 end;
 
-function TfpgMenuBar.VisibleItem(ind: integer): TfpgMenuItem;
+function TlqMenuBar.VisibleItem(ind: integer): TlqMenuItem;
 begin
   if (ind < 0) or (ind > FItems.Count-1) then
     Result := nil
   else
-    Result := TfpgMenuItem(FItems.Items[ind]);
+    Result := TlqMenuItem(FItems.Items[ind]);
 end;
 
-procedure TfpgMenuBar.HandleShow;
+procedure TlqMenuBar.HandleShow;
 begin
   PrepareToShow;
   inherited HandleShow;
 end;
 
-procedure TfpgMenuBar.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqMenuBar.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   newf: integer;
 begin
@@ -457,7 +457,7 @@ begin
   end
 end;
 
-procedure TfpgMenuBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqMenuBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   newf: integer;
 begin
@@ -501,12 +501,12 @@ begin
   DoSelect;
 end;
 
-procedure TfpgMenuBar.HandleKeyPress(var keycode: word;
+procedure TlqMenuBar.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   s: string;
   i: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   s := KeycodeToText(keycode, shiftstate);
 
@@ -526,9 +526,9 @@ begin
   { now process sub-menus off the MenuBar }
   for i := 0 to ComponentCount-1 do
   begin
-    if Components[i] is TfpgMenuItem then     { these are main menu items }
+    if Components[i] is TlqMenuItem then     { these are main menu items }
     begin
-      mi := TfpgMenuItem(Components[i]);
+      mi := TlqMenuItem(Components[i]);
       if mi.Visible and mi.Enabled then
       begin
         { process the sub menus }
@@ -542,10 +542,10 @@ begin
 
 end;
 
-procedure TfpgMenuBar.HandlePaint;
+procedure TlqMenuBar.HandlePaint;
 var
   n: integer;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   Canvas.BeginDraw;
 
@@ -557,19 +557,19 @@ begin
   Canvas.EndDraw;
 end;
 
-procedure TfpgMenuBar.HandleMouseEnter;
+procedure TlqMenuBar.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   FMouseIsOver := True;
 end;
 
-procedure TfpgMenuBar.HandleMouseExit;
+procedure TlqMenuBar.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   FMouseIsOver := False;
 end;
 
-constructor TfpgMenuBar.Create(AOwner: TComponent);
+constructor TlqMenuBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FItems := TList.Create;
@@ -587,18 +587,18 @@ begin
   FMouseIsOver := False;
 end;
 
-destructor TfpgMenuBar.Destroy;
+destructor TlqMenuBar.Destroy;
 begin
   FItems.Free;
   inherited Destroy;
 end;
 
-function TfpgMenuBar.ItemWidth(mi: TfpgMenuItem): integer;
+function TlqMenuBar.ItemWidth(mi: TlqMenuItem): integer;
 begin
   Result := fpgStyle.MenuFont.TextWidth(mi.Text) + (2*6);
 end;
 
-procedure TfpgMenuBar.InternalReset;
+procedure TlqMenuBar.InternalReset;
 begin
   FClicked := False;
   FLastItemClicked := -1;
@@ -606,11 +606,11 @@ begin
   Repaint;
 end;
 
-procedure TfpgMenuBar.DrawColumn(col: integer; focus: boolean);
+procedure TlqMenuBar.DrawColumn(col: integer; focus: boolean);
 var
   n: integer;
-  r: TfpgRect;
-  mi: TfpgMenuItem;
+  r: TlqRect;
+  mi: TlqMenuItem;
 begin
   r.SetRect(2, 1, 1, Height-4);
 
@@ -646,7 +646,7 @@ begin
   end;  { for }
 end;
 
-function TfpgMenuBar.CalcMouseCol(x: integer): integer;
+function TlqMenuBar.CalcMouseCol(x: integer): integer;
 var
   w: integer;
   n: integer;
@@ -662,7 +662,7 @@ begin
   end;
 end;
 
-function TfpgMenuBar.GetItemPosX(index: integer): integer;
+function TlqMenuBar.GetItemPosX(index: integer): integer;
 var
   n: integer;
 begin
@@ -677,9 +677,9 @@ begin
   end;
 end;
 
-procedure TfpgMenuBar.DoSelect;
+procedure TlqMenuBar.DoSelect;
 var
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   mi := VisibleItem(FocusItem);
   CloseSubMenus;  // deactivates menubar!
@@ -702,7 +702,7 @@ begin
   end;
 end;
 
-procedure TfpgMenuBar.CloseSubmenus;
+procedure TlqMenuBar.CloseSubmenus;
 var
   n: integer;
 begin
@@ -715,10 +715,10 @@ begin
     end;
 end;
 
-function TfpgMenuBar.MenuFocused: boolean;
+function TlqMenuBar.MenuFocused: boolean;
 var
   n: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   Result := True;
   for n := 0 to VisibleCount-1 do
@@ -732,7 +732,7 @@ begin
   end;
 end;
 
-function TfpgMenuBar.SearchItemByAccel(s: string): integer;
+function TlqMenuBar.SearchItemByAccel(s: string): integer;
 var
   n: integer;
 begin
@@ -751,39 +751,39 @@ begin
   end;
 end;
 
-procedure TfpgMenuBar.DeActivateMenu;
+procedure TlqMenuBar.DeActivateMenu;
 begin
   Parent.ActiveWidget := nil;
   if not FMouseIsOver then
     InternalReset;
 end;
 
-procedure TfpgMenuBar.ActivateMenu;
+procedure TlqMenuBar.ActivateMenu;
 begin
   Parent.ActiveWidget := self;
 end;
 
-function TfpgMenuBar.AddMenuItem(const AMenuTitle: string; OnClickProc: TNotifyEvent): TfpgMenuItem;
+function TlqMenuBar.AddMenuItem(const AMenuTitle: string; OnClickProc: TNotifyEvent): TlqMenuItem;
 begin
-  Result := TfpgMenuItem.Create(self);
+  Result := TlqMenuItem.Create(self);
   Result.Text       := AMenuTitle;
   Result.HotKeyDef  := '';
   Result.OnClick    := OnClickProc;
   Result.Separator  := False;
 end;
 
-function TfpgMenuBar.MenuItem(const AMenuPos: integer): TfpgMenuItem;
+function TlqMenuBar.MenuItem(const AMenuPos: integer): TlqMenuItem;
 begin
-  Result:= TfpgMenuItem(Components[AMenuPos]);
+  Result:= TlqMenuItem(Components[AMenuPos]);
 end;
 
 
-{ TfpgPopupMenu }
+{ TlqPopupMenu }
 
-procedure TfpgPopupMenu.DoSelect;
+procedure TlqPopupMenu.DoSelect;
 var
-  mi: TfpgMenuItem;
-  op: TfpgPopupMenu;
+  mi: TlqMenuItem;
+  op: TlqPopupMenu;
 begin
   mi := VisibleItem(FFocusItem);
   if mi.SubMenu <> nil then
@@ -818,7 +818,7 @@ begin
 //    OpenerMenuBar.DeActivateMenu;
 end;
 
-procedure TfpgPopupMenu.CloseSubmenus;
+procedure TlqPopupMenu.CloseSubmenus;
 var
   n: integer;
 begin
@@ -831,7 +831,7 @@ begin
   end;
 end;
 
-function TfpgPopupMenu.GetItemPosY(index: integer): integer;
+function TlqPopupMenu.GetItemPosY(index: integer): integer;
 var
   n: integer;
 begin
@@ -846,7 +846,7 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
+procedure TlqPopupMenu.HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState);
 var
   newf: integer;
 begin
@@ -866,9 +866,9 @@ begin
   Repaint;
 end;
 
-procedure TfpgPopupMenu.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqPopupMenu.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
 
@@ -880,10 +880,10 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqPopupMenu.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
   newf: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
 
@@ -905,12 +905,12 @@ begin
     DoSelect;
 end;
 
-procedure TfpgPopupMenu.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqPopupMenu.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 var
   oldf: integer;
   i: integer;
   s: string;
-  op: TfpgPopupMenu;
+  op: TlqPopupMenu;
   trycnt: integer;
 
   procedure FollowFocus;
@@ -1021,7 +1021,7 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.HandlePaint;
+procedure TlqPopupMenu.HandlePaint;
 var
   n: integer;
 begin
@@ -1034,13 +1034,13 @@ begin
     DrawRow(n, n = FFocusItem);
 end;
 
-procedure TfpgPopupMenu.HandleShow;
+procedure TlqPopupMenu.HandleShow;
 begin
   PrepareToShow;
   inherited HandleShow;
 end;
 
-procedure TfpgPopupMenu.HandleClose;
+procedure TlqPopupMenu.HandleClose;
 begin
   {$IFDEF DEBUG}
   writeln(Classname, '.HandleClose');
@@ -1048,25 +1048,25 @@ begin
   inherited HandleClose;
 end;
 
-function TfpgPopupMenu.VisibleCount: integer;
+function TlqPopupMenu.VisibleCount: integer;
 begin
   Result := FItems.Count;
 end;
 
-function TfpgPopupMenu.VisibleItem(ind: integer): TfpgMenuItem;
+function TlqPopupMenu.VisibleItem(ind: integer): TlqMenuItem;
 begin
   if (ind < 0) or (ind > FItems.Count-1) then
     Result := nil
   else
-    Result := TfpgMenuItem(FItems.Items[ind]);
+    Result := TlqMenuItem(FItems.Items[ind]);
 end;
 
-procedure TfpgPopupMenu.DrawItem(mi: TfpgMenuItem; rect: TfpgRect; AFlags: TfpgMenuItemFlags);
+procedure TlqPopupMenu.DrawItem(mi: TlqMenuItem; rect: TlqRect; AFlags: TlqMenuItemFlags);
 var
   s: string;
   x: integer;
-  img: TfpgImage;
-  lFlags: TfpgMenuItemFlags;
+  img: TlqImage;
+  lFlags: TlqMenuItemFlags;
 begin
   lFlags := AFlags;
   if mi.Separator then
@@ -1105,12 +1105,12 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.DrawRow(line: integer; const AItemFocused: boolean);
+procedure TlqPopupMenu.DrawRow(line: integer; const AItemFocused: boolean);
 var
   n: integer;
-  r: TfpgRect;
-  mi: TfpgMenuItem;
-  lFlags: TfpgMenuItemFlags;
+  r: TlqRect;
+  mi: TlqMenuItem;
+  lFlags: TlqMenuItemFlags;
 begin
   r.SetRect(FMargin, FMargin, FWidth-(2*FMargin), FHeight-(2*FMargin));
 
@@ -1169,7 +1169,7 @@ begin
   end;  { for }
 end;
 
-function TfpgPopupMenu.ItemHeight(mi: TfpgMenuItem): integer;
+function TlqPopupMenu.ItemHeight(mi: TlqMenuItem): integer;
 begin
   if mi.Separator then
     Result := 5
@@ -1177,12 +1177,12 @@ begin
     Result := FMenuFont.Height + 2;
 end;
 
-function TfpgPopupMenu.MenuFocused: boolean;
+function TlqPopupMenu.MenuFocused: boolean;
 begin
   Result := (uFocusedPopupMenu = self);
 end;
 
-function TfpgPopupMenu.SearchItemByAccel(s: string): integer;
+function TlqPopupMenu.SearchItemByAccel(s: string): integer;
 var
   n: integer;
 begin
@@ -1201,7 +1201,7 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.HandleMouseEnter;
+procedure TlqPopupMenu.HandleMouseEnter;
 begin
   {$IFDEF DEBUG}
   writeln(Classname, '.HandleMouseEnter');
@@ -1209,7 +1209,7 @@ begin
   inherited HandleMouseEnter;
 end;
 
-procedure TfpgPopupMenu.HandleMouseExit;
+procedure TlqPopupMenu.HandleMouseExit;
 begin
   {$IFDEF DEBUG}
   writeln(Classname, '.HandleMouseExit');
@@ -1220,14 +1220,14 @@ begin
 end;
 
 // Collecting visible items and measuring sizes
-procedure TfpgPopupMenu.PrepareToShow;
+procedure TlqPopupMenu.PrepareToShow;
 var
   n: integer;
   h: integer;
   tw: integer;
   hkw: integer;
   x: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   if Assigned(FBeforeShow) then
     BeforeShow(self);
@@ -1237,9 +1237,9 @@ begin
 
   for n := 0 to ComponentCount-1 do
   begin
-    if Components[n] is TfpgMenuItem then
+    if Components[n] is TlqMenuItem then
     begin
-      mi := TfpgMenuItem(Components[n]);
+      mi := TlqMenuItem(Components[n]);
       if mi.Visible then
         FItems.Add(mi);
     end;
@@ -1276,19 +1276,19 @@ begin
   uFocusedPopupMenu := self;
 end;
 
-procedure TfpgPopupMenu.DoKeyShortcut(const AOrigin: TfpgWidget;
+procedure TlqPopupMenu.DoKeyShortcut(const AOrigin: TlqWidget;
   const keycode: word; const shiftstate: TShiftState; var consumed: boolean; const IsChildOfOrigin: boolean = False);
 var
-  s: TfpgString;
+  s: TlqString;
   i: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   s := KeycodeToText(keycode, shiftstate);
   for i := 0 to ComponentCount-1 do
   begin
-    if Components[i] is TfpgMenuItem then
+    if Components[i] is TlqMenuItem then
     begin
-      mi := Components[i] as TfpgMenuItem;
+      mi := Components[i] as TlqMenuItem;
       if mi.Separator then
         Continue;
       if mi.Visible and mi.Enabled then
@@ -1309,7 +1309,7 @@ begin
 
 end;
 
-function TfpgPopupMenu.CalcMouseRow(y: integer): integer;
+function TlqPopupMenu.CalcMouseRow(y: integer): integer;
 var
   h: integer;
   n: integer;
@@ -1332,7 +1332,7 @@ begin
   end;
 end;
 
-constructor TfpgPopupMenu.Create(AOwner: TComponent);
+constructor TlqPopupMenu.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FMargin     := 3;
@@ -1351,7 +1351,7 @@ begin
   OpenerMenubar := nil;
 end;
 
-destructor TfpgPopupMenu.Destroy;
+destructor TlqPopupMenu.Destroy;
 begin
   {$IFDEF DEBUG}
   writeln(Classname, '.Destroy');
@@ -1361,14 +1361,14 @@ begin
 end;
 
 {$Note See if we can move this to HandleHide + not make Close virtual! }
-procedure TfpgPopupMenu.Close;
+procedure TlqPopupMenu.Close;
 var
   n: integer;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   for n := 0 to FItems.Count-1 do
   begin
-    mi := TfpgMenuItem(FItems[n]);
+    mi := TlqMenuItem(FItems[n]);
     if mi.SubMenu <> nil then
     begin
       if mi.SubMenu.HasHandle then
@@ -1391,10 +1391,10 @@ begin
   end;
 end;
 
-function TfpgPopupMenu.AddMenuItem(const AMenuName: TfpgString;
-    const hotkeydef: string; OnClickProc: TNotifyEvent): TfpgMenuItem;
+function TlqPopupMenu.AddMenuItem(const AMenuName: TlqString;
+    const hotkeydef: string; OnClickProc: TNotifyEvent): TlqMenuItem;
 begin
-  result := TfpgMenuItem.Create(self);
+  result := TlqMenuItem.Create(self);
   if AMenuName <> '-' then
   begin
     result.Text := AMenuName;
@@ -1407,30 +1407,30 @@ begin
   end;
 end;
 
-procedure TfpgPopupMenu.AddSeparator;
+procedure TlqPopupMenu.AddSeparator;
 begin
   AddMenuitem('-', '', nil);
 end;
 
-function TfpgPopupMenu.MenuItemByName(const AMenuName: TfpgString): TfpgMenuItem;
+function TlqPopupMenu.MenuItemByName(const AMenuName: TlqString): TlqMenuItem;
 var
   i: integer;
 begin
   Result := nil;
   for i := 0 to ComponentCount-1 do
   begin
-    if Components[i] is TfpgMenuItem then
-      if SameText(TfpgMenuItem(Components[i]).Text, AMenuName) then
+    if Components[i] is TlqMenuItem then
+      if SameText(TlqMenuItem(Components[i]).Text, AMenuName) then
       begin
-        Result := TfpgMenuItem(Components[i]);
+        Result := TlqMenuItem(Components[i]);
         Exit; //==>
       end;
   end;
 end;
 
-function TfpgPopupMenu.MenuItem(const AMenuPos: integer): TfpgMenuItem;
+function TlqPopupMenu.MenuItem(const AMenuPos: integer): TlqMenuItem;
 begin
-  Result:= TfpgMenuItem(Components[AMenuPos]);
+  Result:= TlqMenuItem(Components[AMenuPos]);
 end;
 
 initialization

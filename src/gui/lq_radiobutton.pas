@@ -30,11 +30,11 @@ uses
 
 type
 
-  TfpgRadioButton = class(TfpgWidget)
+  TlqRadioButton = class(TlqWidget)
   private
     FAutoSize: boolean;
     FChecked: boolean;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FGroupIndex: integer;
     FOnChange: TNotifyEvent;
     FText: string;
@@ -50,7 +50,7 @@ type
     procedure   SetFontDesc(const AValue: string);
     procedure   SetText(const AValue: string);
     procedure   DoAdjustWidth;
-    function    FindNeighbour(direction: TFocusSearchDirection): TfpgRadioButton;
+    function    FindNeighbour(direction: TFocusSearchDirection): TlqRadioButton;
   protected
     procedure   HandlePaint; override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
@@ -60,7 +60,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   published
     property    Align;
     property    AutoSize: boolean read FAutoSize write SetAutoSize default False;
@@ -81,34 +81,34 @@ type
   end;
   
   
-function CreateRadioButton(AOwner: TComponent; x, y: TfpgCoord; AText: string): TfpgRadioButton;
+function CreateRadioButton(AOwner: TComponent; x, y: TlqCoord; AText: string): TlqRadioButton;
 
 
 implementation
 
 
-function CreateRadioButton(AOwner: TComponent; x, y: TfpgCoord; AText: string): TfpgRadioButton;
+function CreateRadioButton(AOwner: TComponent; x, y: TlqCoord; AText: string): TlqRadioButton;
 begin
-  Result := TfpgRadioButton.Create(AOwner);
+  Result := TlqRadioButton.Create(AOwner);
   Result.Top    := y;
   Result.Left   := x;
   Result.Text   := AText;
   Result.Width  := Result.Font.TextWidth(Result.Text) + 24;
 end;
 
-{ TfpgRadioButton }
+{ TlqRadioButton }
 
-function TfpgRadioButton.GetBoxLayout: TBoxLayout;
+function TlqRadioButton.GetBoxLayout: TBoxLayout;
 begin
   Result := FBoxLayout;
 end;
 
-function TfpgRadioButton.GetFontDesc: string;
+function TlqRadioButton.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgRadioButton.SetBoxLayout(const AValue: TBoxLayout);
+procedure TlqRadioButton.SetBoxLayout(const AValue: TBoxLayout);
 begin
   if FBoxLayout = AValue then
     Exit; //==>
@@ -116,7 +116,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgRadioButton.SetAutoSize(const AValue: boolean);
+procedure TlqRadioButton.SetAutoSize(const AValue: boolean);
 begin
   if FAutoSize = AValue then
     Exit; //==>
@@ -126,10 +126,10 @@ begin
   Repaint;
 end;
 
-procedure TfpgRadioButton.SetChecked(const AValue: boolean);
+procedure TlqRadioButton.SetChecked(const AValue: boolean);
 var
   i: integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   if FChecked = AValue then
     Exit; //==>
@@ -139,13 +139,13 @@ begin
   if FChecked and (Parent <> nil) then
   begin
     for i := 0 to Parent.ComponentCount-1 do
-      if (Parent.Components[i] is TfpgWidget) then
+      if (Parent.Components[i] is TlqWidget) then
       begin
-        wg := TfpgWidget(Parent.Components[i]);
-        if (wg <> nil) and (wg <> self) and (wg is TfpgRadioButton) and
-            (TfpgRadioButton(wg).GroupIndex = GroupIndex) then
+        wg := TlqWidget(Parent.Components[i]);
+        if (wg <> nil) and (wg <> self) and (wg is TlqRadioButton) and
+            (TlqRadioButton(wg).GroupIndex = GroupIndex) then
         begin
-          TfpgRadioButton(wg).Checked := False;
+          TlqRadioButton(wg).Checked := False;
         end;
       end;  { if }
   end;  { if }
@@ -156,14 +156,14 @@ begin
       FOnChange(self);
 end;
 
-procedure TfpgRadioButton.SetFontDesc(const AValue: string);
+procedure TlqRadioButton.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   RePaint;
 end;
 
-procedure TfpgRadioButton.SetText(const AValue: string);
+procedure TlqRadioButton.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit; //==>
@@ -173,7 +173,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgRadioButton.DoAdjustWidth;
+procedure TlqRadioButton.DoAdjustWidth;
 begin
   if AutoSize then
   begin
@@ -182,12 +182,12 @@ begin
   end;
 end;
 
-procedure TfpgRadioButton.HandlePaint;
+procedure TlqRadioButton.HandlePaint;
 var
-  r: TfpgRect;
-  img: TfpgImage;
+  r: TlqRect;
+  img: TlqImage;
   ix: integer;
-  LFlags: TfpgTextFlags;
+  LFlags: TlqTextFlags;
 begin
   inherited HandlePaint;
   Canvas.ClearClipRect;
@@ -256,7 +256,7 @@ begin
   end;
 end;
 
-procedure TfpgRadioButton.HandleLMouseDown(x, y: integer;
+procedure TlqRadioButton.HandleLMouseDown(x, y: integer;
   shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
@@ -264,7 +264,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgRadioButton.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqRadioButton.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   FIsPressed := False;
@@ -274,10 +274,10 @@ begin
     RePaint;
 end;
 
-procedure TfpgRadioButton.HandleKeyPress(var keycode: word;
+procedure TlqRadioButton.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
-  nbr: TfpgRadioButton;
+  nbr: TlqRadioButton;
 begin
   case keycode of
     keyUp, keyLeft:
@@ -306,7 +306,7 @@ begin
   inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgRadioButton.HandleKeyRelease(var keycode: word;
+procedure TlqRadioButton.HandleKeyRelease(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
   if (keycode = keySpace) then
@@ -321,10 +321,10 @@ begin
   inherited HandleKeyRelease(keycode, shiftstate, consumed);
 end;
 
-function TfpgRadioButton.FindNeighbour(direction: TFocusSearchDirection): TfpgRadioButton;
+function TlqRadioButton.FindNeighbour(direction: TFocusSearchDirection): TlqRadioButton;
 var
   i: integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   bestdtab: integer;
   FoundIt: boolean;
 begin
@@ -339,25 +339,25 @@ begin
     
     for i := 0 to Parent.ComponentCount-1 do
     begin
-      if (Parent.Components[i] is TfpgWidget) then
+      if (Parent.Components[i] is TlqWidget) then
       begin
-        wg := TfpgWidget(Parent.Components[i]);
-        if (wg <> nil) and (wg is TfpgRadioButton) and
+        wg := TlqWidget(Parent.Components[i]);
+        if (wg <> nil) and (wg is TlqRadioButton) and
            wg.Visible and wg.Enabled and wg.Focusable and
-           (TfpgRadioButton(wg).GroupIndex = GroupIndex) then
+           (TlqRadioButton(wg).GroupIndex = GroupIndex) then
         begin
           case direction of
             fsdFirst:
               if (wg.TabOrder < bestdtab) then
               begin
-                Result   := TfpgRadioButton(wg);
+                Result   := TlqRadioButton(wg);
                 bestdtab := wg.TabOrder;
               end;
 
             fsdLast:
               if (wg.TabOrder >= bestdtab) then
               begin
-                Result   := TfpgRadioButton(wg);
+                Result   := TlqRadioButton(wg);
                 bestdtab := wg.TabOrder;
               end;
 
@@ -369,7 +369,7 @@ begin
                 if ((wg.TabOrder > Self.TabOrder) and (wg.TabOrder < bestdtab)) or
                    ((wg.TabOrder = Self.TabOrder) and FoundIt) then
                 begin
-                  Result   := TfpgRadioButton(wg);
+                  Result   := TlqRadioButton(wg);
                   bestdtab := wg.TabOrder;
                 end;
               end;
@@ -382,18 +382,18 @@ begin
                 if ((wg.TabOrder < Self.TabOrder) and (wg.TabOrder >= bestdtab)) or
                    ((wg.TabOrder = Self.TabOrder) and not FoundIt) then
                 begin
-                  Result   := TfpgRadioButton(wg);
+                  Result   := TlqRadioButton(wg);
                   bestdtab := wg.TabOrder;
                 end;
               end;
           end; { case }
         end; { if }
-      end; { if is TfpgWidget }
+      end; { if is TlqWidget }
     end;  { for ComponentCount }
   end;  { if }
 end;
 
-constructor TfpgRadioButton.Create(AOwner: TComponent);
+constructor TlqRadioButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText       := 'RadioButton';
@@ -413,7 +413,7 @@ begin
   FImgTextSpacing := 6;
 end;
 
-destructor TfpgRadioButton.Destroy;
+destructor TlqRadioButton.Destroy;
 begin
   FFont.Free;
   inherited Destroy;

@@ -15,16 +15,16 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Button1: TfpgButton;
+    Button1: TlqButton;
     RichTextView1: TRichTextView;
-    Memo1: TfpgMemo;
-    CheckBox1: TfpgCheckBox;
-    btnLoad: TfpgButton;
+    Memo1: TlqMemo;
+    CheckBox1: TlqCheckBox;
+    btnLoad: TlqButton;
     {@VFD_HEAD_END: MainForm}
-    FImageList: TfpgImageList;
+    FImageList: TlqImageList;
     procedure   Button1Click(Sender: TObject);
     procedure   btnLoadClicked(Sender: TObject);
     procedure   LinkClicked(Sender: TRichTextView; Link: string);
@@ -51,7 +51,7 @@ end;
 procedure TMainForm.btnLoadClicked(Sender: TObject);
 var
   sl: TStringList;
-  lFile: TfpgString;
+  lFile: TlqString;
 begin
   lFile := SelectFileDialog(sfdOpen, 'Text Files (*.txt)|*.txt');
   if lFile = '' then
@@ -73,11 +73,11 @@ end;
 
 constructor TMainForm.Create(AOwner: TComponent);
 var
-  img_ref: TfpgImage;
-  img: TfpgImage;
+  img_ref: TlqImage;
+  img: TlqImage;
 begin
   inherited Create(AOwner);
-  FImageList := TfpgImageList.Create;
+  FImageList := TlqImageList.Create;
 
   { make copies of standard fpGUI images, and add them to our imagelist }
   img_ref := fpgImages.GetImage('stdimg.folderhome');
@@ -113,7 +113,7 @@ begin
   WindowTitle := 'RichTextView test application';
   Hint := '';
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -143,7 +143,7 @@ begin
     OnClickLink :=@LinkClicked;
   end;
 
-  Memo1 := TfpgMemo.Create(self);
+  Memo1 := TlqMemo.Create(self);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -155,7 +155,7 @@ begin
     TabOrder := 2;
   end;
 
-  CheckBox1 := TfpgCheckBox.Create(self);
+  CheckBox1 := TlqCheckBox.Create(self);
   with CheckBox1 do
   begin
     Name := 'CheckBox1';
@@ -167,7 +167,7 @@ begin
     Text := 'Paragraph';
   end;
 
-  btnLoad := TfpgButton.Create(self);
+  btnLoad := TlqButton.Create(self);
   with btnLoad do
   begin
     Name := 'btnLoad';

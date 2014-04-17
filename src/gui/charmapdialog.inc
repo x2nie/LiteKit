@@ -18,33 +18,33 @@
 }
 
 
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
-  TCharMapForm = class(TfpgForm)
+  TCharMapForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: CharMapForm}
-    grdCharacters: TfpgStringGrid;
-    btnClose: TfpgButton;
-    lblCharInfo: TfpgLabel;
-    edText: TfpgEdit;
-    lblText: TfpgLabel;
-    pnlChar: TfpgPanel;
+    grdCharacters: TlqStringGrid;
+    btnClose: TlqButton;
+    lblCharInfo: TlqLabel;
+    edText: TlqEdit;
+    lblText: TlqLabel;
+    pnlChar: TlqPanel;
     {@VFD_HEAD_END: CharMapForm}
     procedure   FormShow(Sender: TObject);
     procedure   grdCharactersFocusChange(Sender: TObject; ARow, ACol: integer);
-    procedure   grdCharactersDrawCell(Sender: TObject; const ARow, ACol: integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure   grdCharactersDrawCell(Sender: TObject; const ARow, ACol: integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     procedure   grdCharactersCanSelectCell(Sender: TObject; const ARow, ACol: integer; var ACanSelect: boolean);
     procedure   grdCharactersDoubleClick(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
     procedure   grdCharactersKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure   FillCharMap;
     procedure   Button1Clicked(Sender: TObject);
-    function    GetNewText: TfpgString;
+    function    GetNewText: TlqString;
     procedure   SetupCaptions;
   public
     procedure   AfterCreate; override;
-    property    NewText: TfpgString read GetNewText;
+    property    NewText: TlqString read GetNewText;
   end;
 
 
@@ -55,7 +55,7 @@
 {$IFDEF read_implementation}
 
 
-function fpgShowCharMap: TfpgString;
+function fpgShowCharMap: TlqString;
 var
   frm: TCharMapForm;
 begin
@@ -79,7 +79,7 @@ end;
 procedure TCharMapForm.grdCharactersFocusChange(Sender: TObject; ARow, ACol: integer);
 var
   i: integer;
-  tmp, tmp2: TfpgString;
+  tmp, tmp2: TlqString;
 begin
   if (ARow > 0) and (ACol > 0) then
   begin
@@ -99,7 +99,7 @@ begin
 end;
 
 procedure TCharMapForm.grdCharactersDrawCell(Sender: TObject;
-  const ARow, ACol: integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState;
+  const ARow, ACol: integer; const ARect: TlqRect; const AFlags: TlqGridDrawState;
   var ADefaultDrawing: boolean);
 begin
   if (ARow = 0) or (ACol = 0) then
@@ -181,7 +181,7 @@ begin
   Close;
 end;
 
-function TCharMapForm.GetNewText: TfpgString;
+function TCharMapForm.GetNewText: TlqString;
 begin
   Result := edText.Text;
 end;
@@ -204,7 +204,7 @@ begin
   WindowPosition := wpOneThirdDown;
   OnShow  := @FormShow;
 
-  grdCharacters := TfpgStringGrid.Create(self);
+  grdCharacters := TlqStringGrid.Create(self);
   with grdCharacters do
   begin
     Name := 'grdCharacters';
@@ -223,7 +223,7 @@ begin
     OnKeyPress  := @grdCharactersKeyPressed;
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';
@@ -237,7 +237,7 @@ begin
     OnClick   := @Button1Clicked;
   end;
 
-  lblCharInfo := TfpgLabel.Create(self);
+  lblCharInfo := TlqLabel.Create(self);
   with lblCharInfo do
   begin
     Name := 'lblCharInfo';
@@ -248,7 +248,7 @@ begin
     Text := 'lblCharInfo';
   end;
 
-  edText := TfpgEdit.Create(self);
+  edText := TlqEdit.Create(self);
   with edText do
   begin
     Name := 'edText';
@@ -260,7 +260,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  lblText := TfpgLabel.Create(self);
+  lblText := TlqLabel.Create(self);
   with lblText do
   begin
     Name := 'lblText';
@@ -271,7 +271,7 @@ begin
     Text := 'lblTextToInsert';
   end;
 
-  pnlChar := TfpgPanel.Create(self);
+  pnlChar := TlqPanel.Create(self);
   with pnlChar do
   begin
     Name := 'pnlChar';

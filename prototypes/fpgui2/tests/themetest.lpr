@@ -23,10 +23,10 @@ uses
 type
   { Note:
     I am only creating new classes to test my drawing routines in HandlePaint.
-    The final themeing will be done inside the standard gui TfpgXXXX classes. }
+    The final themeing will be done inside the standard gui TlqXXXX classes. }
 
   { Concept theme button }
-  TThemeButton = class(TfpgButton)
+  TThemeButton = class(TlqButton)
   private
     FMasked: Boolean;
     FThemeBorder: Integer;
@@ -36,8 +36,8 @@ type
       // 2 - mouse down
       // 3 - disabled
       // 4 - got focus or default
-    image: TfpgImage;
-    procedure   SetThemeImage(const AValue: TfpgImage);
+    image: TlqImage;
+    procedure   SetThemeImage(const AValue: TlqImage);
   protected
     procedure   HandlePaint; override;
     procedure   HandleLMouseDown(X, Y: integer; ShiftState: TShiftState); override;
@@ -48,27 +48,27 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     { this property is only for demo purposes! }
-    property    ThemeImage: TfpgImage read image write SetThemeImage;
+    property    ThemeImage: TlqImage read image write SetThemeImage;
     property    Masked: Boolean read FMasked write FMasked default False;
     property    ThemeBorder: Integer read FThemeBorder write FThemeBorder default 3;
   end;
 
 
-  TThemeScrollbar = class(TfpgScrollBar)
+  TThemeScrollbar = class(TlqScrollBar)
   private
-    TopRect: TfpgRect;
-    BottomRect: TfpgRect;
-    ThumbRect: TfpgRect;
+    TopRect: TlqRect;
+    BottomRect: TlqRect;
+    ThumbRect: TlqRect;
     State: integer;
       // 0 - normal
       // 1 - hover
       // 2 - mouse down
       // 3 - disabled
       // 4 - got focus or default
-    image: TfpgImage;
+    image: TlqImage;
     FStartBtnPressed: Boolean;
     FEndBtnPressed: Boolean;
-    procedure   SetThemeImage(const AValue: TfpgImage);
+    procedure   SetThemeImage(const AValue: TlqImage);
   protected
     procedure   HandlePaint; override;
     procedure   DrawSlider(recalc: boolean); override;
@@ -80,14 +80,14 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     { this property is only for demo purposes! }
-    property    ThemeImage: TfpgImage read image write SetThemeImage;
+    property    ThemeImage: TlqImage read image write SetThemeImage;
   end;
   
   
-  { A button using the TfpgCommonStyle descendants }
-  TStyledButton = class(TfpgButton)
+  { A button using the TlqCommonStyle descendants }
+  TStyledButton = class(TlqButton)
   private
-    FStyle: TfpgBaseStyle;
+    FStyle: TlqBaseStyle;
   protected
     procedure   HandlePaint; override;
   public
@@ -96,11 +96,11 @@ type
   end;
 
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    btnClose: TfpgButton;
-    lblLuna: TfpgLabel;
-    lblSilver: TfpgLabel;
+    btnClose: TlqButton;
+    lblLuna: TlqLabel;
+    lblSilver: TlqLabel;
     xpluna: TThemeButton;
     xpsilver: TThemeButton;
     styledbutton: TStyledButton;
@@ -108,8 +108,8 @@ type
     sbsilver: TThemeScrollbar;
     sblunaHor: TThemeScrollbar;
     sbsilverHor: TThemeScrollbar;
-    trackbar: TfpgTrackBar;
-    lblTrackBar: TfpgLabel;
+    trackbar: TlqTrackBar;
+    lblTrackBar: TlqLabel;
     FIndex: integer;
     procedure   TrackBarChange(Sender: TObject; APosition: integer);
     procedure   btnCloseClick(Sender: TObject);
@@ -126,12 +126,12 @@ type
 
 procedure TStyledButton.HandlePaint;
 var
-  buttonoptions: TfpgButtonStyleOption;
+  buttonoptions: TlqButtonStyleOption;
   tx, ty, ix, iy: integer;
   offset: integer;
-  img: TfpgImage;
-  r: TfpgRect;
-  lTextFlags: TfpgTextFlags;
+  img: TlqImage;
+  r: TlqRect;
+  lTextFlags: TlqTextFlags;
 begin
   writeln('TStyledButton.HandlePaint');
   Canvas.BeginDraw;
@@ -142,7 +142,7 @@ begin
   lTextFlags := [];
 
   // Setup all button options that we need
-  buttonoptions := TfpgButtonStyleOption.Create;
+  buttonoptions := TlqButtonStyleOption.Create;
   buttonoptions.Rect.SetRect(0, 0, Width, Height);
   buttonoptions.StyleOption := soButton;
   buttonoptions.State := [];
@@ -228,7 +228,7 @@ end;
 constructor TStyledButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FStyle := TfpgWin2000Style.Create;
+  FStyle := TlqWin2000Style.Create;
 end;
 
 destructor TStyledButton.Destroy;
@@ -239,11 +239,11 @@ end;
 
 
 
-  procedure PaintPartScaledImage(Image: TfpgImage; Canvas: TfpgCanvas; x, y: TfpgCoord; OrigWidth, OrigHeight: TfpgCoord; NewWidth, NewHeight: TfpgCoord; Border: TfpgCoord; ImgIndex: integer; Masked: Boolean = False);
+  procedure PaintPartScaledImage(Image: TlqImage; Canvas: TlqCanvas; x, y: TlqCoord; OrigWidth, OrigHeight: TlqCoord; NewWidth, NewHeight: TlqCoord; Border: TlqCoord; ImgIndex: integer; Masked: Boolean = False);
   var
-    rect: TfpgRect;
-    img: TfpgImage;
-    part: TfpgImage;
+    rect: TlqRect;
+    img: TlqImage;
+    part: TlqImage;
   begin
     // Get correct image
     rect.SetRect(OrigWidth * ImgIndex, 0, OrigWidth, OrigHeight);
@@ -322,7 +322,7 @@ end;
 
 { TThemeScrollbar }
 
-procedure TThemeScrollbar.SetThemeImage(const AValue: TfpgImage);
+procedure TThemeScrollbar.SetThemeImage(const AValue: TlqImage);
 begin
   if Assigned(image) then
     image.Free;
@@ -334,7 +334,7 @@ procedure TThemeScrollbar.HandlePaint;
 var
   imgwidth: integer;
   x: integer;
-  part: TfpgImage;
+  part: TlqImage;
   r: TRect;
 begin
   TopRect.SetRect(0, 0, Width, Width);
@@ -473,7 +473,7 @@ end;
 
 { TXPButton }
 
-procedure TThemeButton.SetThemeImage(const AValue: TfpgImage);
+procedure TThemeButton.SetThemeImage(const AValue: TlqImage);
 begin
   if Assigned(image) then
     image.Free;
@@ -484,7 +484,7 @@ end;
 procedure TThemeButton.HandlePaint;
 var
   x, i: integer;
-  r: TfpgRect;
+  r: TlqRect;
   iy, y: integer;
   w: integer;
   pofs: integer;
@@ -670,10 +670,10 @@ end;
 
 procedure TMainForm.CreateButtons;
 var
-  bmp: TfpgImage;
+  bmp: TlqImage;
   vista: TThemeButton;
 begin
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   btnClose.Width      := 80;
   btnClose.Left       := Width - btnClose.Width - 6;
   btnClose.Top        := Height - btnClose.Height - 6;
@@ -722,7 +722,7 @@ end;
 
 procedure TMainForm.CreateScrollbars;
 var
-  bmp: TfpgImage;
+  bmp: TlqImage;
 begin
   bmp := LoadImage_BMP(SetDirSeparators('../../../images/themes/silver/scrollbar.bmp'));
   bmp.UpdateImage;
@@ -760,12 +760,12 @@ end;
 
 procedure TMainForm.HandlePaint;
 var
-  image: TfpgImage;
-  img: TfpgImage;
+  image: TlqImage;
+  img: TlqImage;
   r: TRect;
-  r2: TfpgRect;
-  x, y: TfpgCoord;
-  nr: TfpgRect;
+  r2: TlqRect;
+  x, y: TlqCoord;
+  nr: TlqRect;
   
 
 begin
@@ -777,7 +777,7 @@ begin
 //  image.CreateMaskFromSample(0, 0);
   image.UpdateImage;
 
-  Canvas.InterpolationFilter := TfpgMitchelInterpolation.Create;
+  Canvas.InterpolationFilter := TlqMitchelInterpolation.Create;
   Canvas.StretchDraw(0, 0, Width, 21, image);
 
   Canvas.InterpolationFilter := TBilinearInterpolation.Create;
@@ -839,7 +839,7 @@ begin
   
   lblTrackBar := CreateLabel(self, 190, 265, '--');
   
-  trackbar := TfpgTrackBar.Create(self);
+  trackbar := TlqTrackBar.Create(self);
   trackbar.Width := 150;
   trackbar.Orientation := orHorizontal;
   trackbar.Min := 0;

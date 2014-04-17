@@ -36,37 +36,37 @@ type
                   bsRaised3D, bsSunken3D, bsEtched, bsEmmbossed);
 
 
-  TfpgBaseGauge = class(TfpgWidget)
+  TlqBaseGauge = class(TlqWidget)
   private
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FMin: Longint;
     FMax: Longint;
     FPosition: Longint;
     FShowText: Boolean;
     { TODO: Implement Border style }
     FBorderStyle: TBorderStyle;
-    FColor: TfpgColor; // Background color
+    FColor: TlqColor; // Background color
     { Currently little used colors, should be derived from style and possibly
     overriden by user TODO - How to deal with gradients? Starting color and compute ending,
     or give pair? }
-    FFirstColor: TfpgColor; // Text and Needle color
-    FSecondColor: TfpgColor; // Bar, Pie etc. main color
+    FFirstColor: TlqColor; // Text and Needle color
+    FSecondColor: TlqColor; // Bar, Pie etc. main color
     { TODO: Currently unused. Implement Low Watermark and High Watermark }
-//    FLWMColor: TfpgColor; // Low Watermark Color
+//    FLWMColor: TlqColor; // Low Watermark Color
 //    FLWMValue: Longint;   //  Low Watermark Value
-//    FHWMColor: TfpgColor; // High Watermark Color
+//    FHWMColor: TlqColor; // High Watermark Color
 //    FHWMValue: Longint;   // High Watermark Color
     procedure   SetGaugeKind(AValue: TGaugeKind);
     procedure   SetShowText(AValue: Boolean);
     procedure   SetBorderStyle(AValue: TBorderStyle);
-    procedure   SetFirstColor(AValue: TfpgColor);
-    procedure   SetSecondColor(AValue: TfpgColor);
+    procedure   SetFirstColor(AValue: TlqColor);
+    procedure   SetSecondColor(AValue: TlqColor);
     procedure   SetMin(AValue: Longint);
     procedure   SetMax(AValue: Longint);
     procedure   SetProgress(AValue: Longint);
     function    GetPercentage: Longint;
   protected
-    FClientRect: TfpgRect;
+    FClientRect: TlqRect;
     FKind: TGaugeKind;
     procedure   BackgroundDraw; virtual;
     procedure   TextDraw; virtual;
@@ -76,23 +76,23 @@ type
     procedure   DialDraw; virtual;
     procedure   HandlePaint; override;
     property    BorderStyle: TBorderStyle read FBorderStyle write SetBorderStyle default bsSingle;
-    property    Color: TfpgColor read FColor write FColor default TfpgColor($c4c4c4);
-    property    FirstColor: TfpgColor read FFirstColor write SetFirstColor default clBlack;
+    property    Color: TlqColor read FColor write FColor default TlqColor($c4c4c4);
+    property    FirstColor: TlqColor read FFirstColor write SetFirstColor default clBlack;
     property    Kind: TGaugeKind read FKind write SetGaugeKind default gkHorizontalBar;
     property    MaxValue: Longint read FMax write SetMax default 100;
     property    MinValue: Longint read FMin write SetMin default 0;
     property    Progress: Longint read FPosition write SetProgress;
-    property    SecondColor: TfpgColor read FSecondColor write SetSecondColor default clWhite;
+    property    SecondColor: TlqColor read FSecondColor write SetSecondColor default clWhite;
     property    ShowText: Boolean read FShowText write SetShowText default True;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   AddProgress(AValue: Longint);
     property    Percentage: Longint read GetPercentage;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   end;
 
 
-  TfpgGauge = class(TfpgBaseGauge)
+  TlqGauge = class(TlqBaseGauge)
   published
     property    Align;
     property    Anchors;
@@ -115,7 +115,7 @@ type
 
 // A convenience function to quickly create a gauge from code
 function CreateGauge (AOwner: TComponent; ALeft, ATop, AWidth,
-    AHeight: TfpgCoord; AKind: TGaugeKind ): TfpgBaseGauge;
+    AHeight: TlqCoord; AKind: TGaugeKind ): TlqBaseGauge;
 
 
 implementation
@@ -125,7 +125,7 @@ uses
 
 { This procedure draws a filled arc with a color gradient  -
   to be moved in CanvasBase? }
-procedure FillArcGradient(canvas: TfpgCanvas; X,Y,W,H: TfpgCoord; a1,a2: double; Astart,Astop: TfpgColor);
+procedure FillArcGradient(canvas: TlqCanvas; X,Y,W,H: TlqCoord; a1,a2: double; Astart,Astop: TlqColor);
 var
   RGBStart: TRGBTriple;
   RGBStop: TRGBTriple;
@@ -173,10 +173,10 @@ begin
   end;
 end;
 
-function CreateGauge(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord;
-    AKind: TGaugeKind): TfpgBaseGauge;
+function CreateGauge(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord;
+    AKind: TGaugeKind): TlqBaseGauge;
 begin
-  Result := TfpgBaseGauge.Create(AOwner);
+  Result := TlqBaseGauge.Create(AOwner);
   Result.Left   := ALeft;
   Result.Top    := ATop;
   Result.Width  := AWidth;
@@ -184,11 +184,11 @@ begin
   Result.Kind   := AKind;
 end;
 
-{ TfpgBaseGauge }
+{ TlqBaseGauge }
 
 { Drawing procedures - they're called from HandlePaint, which takes care of
   Canvas.BeginDraw and Canvas.EndDraw - Shouldn't be used otherwise. }
-procedure TfpgBaseGauge.BackgroundDraw;
+procedure TlqBaseGauge.BackgroundDraw;
 begin
   {common Background for all kinds }
 
@@ -197,7 +197,7 @@ begin
   Canvas.ClearClipRect;
   Canvas.Clear(Color);
   { This must be adjusted according the selected style }
-  Canvas.SetColor(TfpgColor($999999));
+  Canvas.SetColor(TlqColor($999999));
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawRectangle(FClientRect);
   { This must be completed and adjusted with border style }
@@ -217,35 +217,35 @@ begin
           begin
             { Round frame for the Pie }
             Canvas.SetLineStyle(2, lsSolid);
-            Canvas.SetColor(TfpgColor($98b2ed));
+            Canvas.SetColor(TlqColor($98b2ed));
             Canvas.DrawArc(Left, Top, Width, Height, 0, 360);
           end;
       gkNeedle:
           begin
             { Half a filled circle background for needle }
-            FillArcGradient(Canvas,Left, Top, Width, Height * 2 -1, 0, 180,TfpgColor($425d9b),TfpgColor($98b2ed));
+            FillArcGradient(Canvas,Left, Top, Width, Height * 2 -1, 0, 180,TlqColor($425d9b),TlqColor($98b2ed));
             Canvas.SetLineStyle(2, lsSolid);
-            //Canvas.SetColor(TfpgColor($3b4c71));
-            Canvas.SetColor(TfpgColor($98b2ed));
+            //Canvas.SetColor(TlqColor($3b4c71));
+            Canvas.SetColor(TlqColor($98b2ed));
             Canvas.DrawArc(Left, Top, Width, Height * 2 - 1, 0, 180);
             Canvas.SetLineStyle(1, lsSolid);
-            Canvas.SetColor(TfpgColor($3b4c71));
+            Canvas.SetColor(TlqColor($3b4c71));
             Canvas.DrawLine(Left, Bottom,Left + Width, Bottom);
           end;
       gkDial:
           begin
             { 270° pie shaped background for Dial }
-            FillArcGradient (Canvas,Left, Top, Width, Height , 225, -270 ,TfpgColor($425d9b),TfpgColor($98b2ed));
+            FillArcGradient (Canvas,Left, Top, Width, Height , 225, -270 ,TlqColor($425d9b),TlqColor($98b2ed));
             Canvas.SetLineStyle(2, lsSolid);
-            //Canvas.SetColor(TfpgColor($3b4c71));
-            Canvas.SetColor(TfpgColor($98b2ed));
+            //Canvas.SetColor(TlqColor($3b4c71));
+            Canvas.SetColor(TlqColor($98b2ed));
             Canvas.DrawArc(Left,Top,Width,Height,225,-270);
           end;
     end;
   end;  { with }
 end;
 
-procedure TfpgBaseGauge.TextDraw;
+procedure TlqBaseGauge.TextDraw;
 var
   S: string;
   X, Y: Integer;
@@ -264,10 +264,10 @@ begin
   Canvas.DrawString(x, y, S);
 end;
 
-procedure TfpgBaseGauge.BarDraw;
+procedure TlqBaseGauge.BarDraw;
 var
   BarLength: Longint;
-  SavedRect: TfpgRect;
+  SavedRect: TlqRect;
 begin
   SavedRect := FClientRect; // save client rect for text !!
   with FClientRect do
@@ -282,16 +282,16 @@ begin
                 BarLength := Width;
               Width := BarLength;
               // left top
-              Canvas.SetColor(TfpgColor($98b2ed));
+              Canvas.SetColor(TlqColor($98b2ed));
               Canvas.DrawLine(Left, Bottom, Left, Top);  // left
               Canvas.DrawLine(Left, Top, Right, Top);    // top
               // right bottom
-              Canvas.SetColor(TfpgColor($3b4c71));
+              Canvas.SetColor(TlqColor($3b4c71));
               Canvas.DrawLine(Right, Top, Right, Bottom);   // right
               Canvas.DrawLine(Right, Bottom, Left, Bottom);   // bottom
               // inside gradient fill
               InflateRect(FClientRect, -1, -1);
-              Canvas.GradientFill(FClientRect, TfpgColor($425d9b), TfpgColor($97b0e8), gdVertical);
+              Canvas.GradientFill(FClientRect, TlqColor($425d9b), TlqColor($97b0e8), gdVertical);
             end;  { if }
           end;
       gkVerticalBar:
@@ -304,16 +304,16 @@ begin
               Top := Height - BarLength+1;
               Height := BarLength;
               // left top
-              Canvas.SetColor(TfpgColor($98b2ed));
+              Canvas.SetColor(TlqColor($98b2ed));
               Canvas.DrawLine(Left, Bottom, Left, Top);  // left
               Canvas.DrawLine(Left, Top, Right, Top);    // top
               // right bottom
-              Canvas.SetColor(TfpgColor($3b4c71));
+              Canvas.SetColor(TlqColor($3b4c71));
               Canvas.DrawLine(Right, Top, Right, Bottom);   // right
               Canvas.DrawLine(Right, Bottom, Left, Bottom);   // bottom
               // inside gradient fill
               InflateRect(FClientRect, -1, -1);
-              Canvas.GradientFill(FClientRect, TfpgColor($425d9b), TfpgColor($97b0e8), gdHorizontal);
+              Canvas.GradientFill(FClientRect, TlqColor($425d9b), TlqColor($97b0e8), gdHorizontal);
             end;
           end;  { if }
     end;  { case }
@@ -321,7 +321,7 @@ begin
   FClientRect := SavedRect;
 end;
 
-procedure TfpgBaseGauge.PieDraw;
+procedure TlqBaseGauge.PieDraw;
 var
   Angle: Double;
 begin
@@ -329,12 +329,12 @@ begin
   begin
     Angle := Percentage;
     Angle := Angle * 3.6; // Percentage to degrees
-    Canvas.SetColor(TfpgColor($425d9b));
-    FillArcGradient (Canvas,Left, Top, Width, Height , 90, -Angle,TfpgColor($425d9b),TfpgColor($98b2ed));
+    Canvas.SetColor(TlqColor($425d9b));
+    FillArcGradient (Canvas,Left, Top, Width, Height , 90, -Angle,TlqColor($425d9b),TlqColor($98b2ed));
   end;
 end;
 
-procedure TfpgBaseGauge.NeedleDraw;
+procedure TlqBaseGauge.NeedleDraw;
 var
   Center: TPoint;
   Radius: TPoint;
@@ -351,7 +351,7 @@ begin
       Radius.Y := (Bottom - 4);
       Canvas.SetLineStyle(2,lsSolid);
       Angle := (Pi * ((Percentage / 100.0))); // percentage to radiants
-      Canvas.SetColor(TfpgColor($3b4c71));
+      Canvas.SetColor(TlqColor($3b4c71));
       Canvas.SetLineStyle(2,lsSolid);
       //Canvas.DrawLine(Center.X, FClientRect.Bottom,
           //Integer(round(Center.X - (Radius.X * Cos(Angle)))),
@@ -372,7 +372,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.DialDraw;
+procedure TlqBaseGauge.DialDraw;
 var
   Center: TPoint;
   Radius: TPoint;
@@ -393,7 +393,7 @@ begin
       if CenterDot < 2 then
         CenterDot := 2;
       { draw needle centre circle }
-      Canvas.SetColor(TfpgColor($3b4c71));
+      Canvas.SetColor(TlqColor($3b4c71));
       Canvas.FillArc(Center.X - CenterDot, Center.Y - CenterDot,CenterDot * 2, CenterDot * 2,0,360);
       { draw needle }
       Angle := (Pi * ((Percentage / (100 * 2 / 3)) + -0.25));
@@ -417,7 +417,7 @@ begin
   end;  { with }
 end;
 
-procedure TfpgBaseGauge.HandlePaint;
+procedure TlqBaseGauge.HandlePaint;
 begin
   inherited HandlePaint;
 //  Canvas.BeginDraw(True);
@@ -441,7 +441,7 @@ begin
 //  Canvas.EndDraw;
 end;
 
-procedure TfpgBaseGauge.SetGaugeKind(AValue: TGaugeKind);
+procedure TlqBaseGauge.SetGaugeKind(AValue: TGaugeKind);
 begin
   if AValue <> FKind then
   begin
@@ -450,7 +450,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetShowText(AValue: Boolean);
+procedure TlqBaseGauge.SetShowText(AValue: Boolean);
 begin
   if AValue <> FShowText then
   begin
@@ -459,19 +459,19 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetBorderStyle(AValue: TBorderStyle);
+procedure TlqBaseGauge.SetBorderStyle(AValue: TBorderStyle);
 begin
   if AValue <> FBorderStyle then
   begin
     FBorderStyle := AValue;
     { TODO: Implement Border style }
-    // Graeme:  Wouldn't descending from TfpgBevel give you this functionality already?
+    // Graeme:  Wouldn't descending from TlqBevel give you this functionality already?
     //          It could be a option.
     //RePaint;
   end;
 end;
 
-procedure TfpgBaseGauge.SetFirstColor(AValue: TfpgColor);
+procedure TlqBaseGauge.SetFirstColor(AValue: TlqColor);
 begin
   if AValue <> FFirstColor then
   begin
@@ -481,7 +481,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetSecondColor(AValue: TfpgColor);
+procedure TlqBaseGauge.SetSecondColor(AValue: TlqColor);
 begin
   if AValue <> FSecondColor then
   begin
@@ -491,7 +491,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetMin(AValue: Longint);
+procedure TlqBaseGauge.SetMin(AValue: Longint);
 begin
   if AValue <> FMin then
   begin
@@ -507,7 +507,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetMax(AValue: Longint);
+procedure TlqBaseGauge.SetMax(AValue: Longint);
 begin
   if AValue <> FMax then
   begin
@@ -523,7 +523,7 @@ begin
   end;
 end;
 
-procedure TfpgBaseGauge.SetProgress(AValue: Longint);
+procedure TlqBaseGauge.SetProgress(AValue: Longint);
 var
   CurrPercentage: Longint;
   MustRepaint: Boolean;
@@ -547,7 +547,7 @@ begin
     RePaint;
 end;
 
-function TfpgBaseGauge.GetPercentage: Longint;
+function TlqBaseGauge.GetPercentage: Longint;
 Var
  V,T: Longint;
 begin
@@ -559,7 +559,7 @@ begin
     Result := Longint(Trunc( (V * 100.0) / T ));
 end;
 
-constructor TfpgBaseGauge.Create(AOwner: TComponent);
+constructor TlqBaseGauge.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable     := False;
@@ -568,7 +568,7 @@ begin
   FKind         := gkHorizontalBar;
   FSecondColor  := clWhite;
   FFirstColor   := clBlack;
-  FColor        := TfpgColor($c4c4c4); //clInactiveWgFrame;
+  FColor        := TlqColor($c4c4c4); //clInactiveWgFrame;
   FMax          := 100;
   FMin          := 0;
   FPosition     := 0;
@@ -577,7 +577,7 @@ begin
   FFont         := fpgStyle.DefaultFont;
 end;
 
-procedure TfpgBaseGauge.AddProgress(AValue: Longint);
+procedure TlqBaseGauge.AddProgress(AValue: Longint);
 begin
   Progress := FPosition + AValue;
 end;

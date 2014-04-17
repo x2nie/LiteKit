@@ -141,7 +141,7 @@ type
 
     property ReferencedFiles: TStringList read _ReferencedFiles;
 
-    procedure GetImages( ImageOffsets: TList; Images: TfpgImageList );
+    procedure GetImages( ImageOffsets: TList; Images: TlqImageList );
 
     function GetImage( ImageOffset: longint ): THelpBitmap;
 
@@ -190,9 +190,9 @@ uses
 //  DebugUnit,
 //  ACLFileIOUtility,
 //  ACLLanguageUnit;
-  fpg_main
-  ,fpg_utils
-  ,fpg_stringutils
+  lq_main
+  ,lq_utils
+  ,lq_stringutils
   ,nvUtilities
   ,ACLStringUtility
   ;
@@ -1074,7 +1074,7 @@ begin
   end;
 end;
 
-procedure THelpFile.GetImages( ImageOffsets: TList; Images: TfpgImageList );
+procedure THelpFile.GetImages( ImageOffsets: TList; Images: TlqImageList );
 var
   ListIndex: longint;
   ImageOffset: longint;

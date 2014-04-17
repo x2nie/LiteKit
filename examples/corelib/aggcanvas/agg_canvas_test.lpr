@@ -36,7 +36,7 @@ uses
 
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
     {@VFD_HEAD_END: MainForm}
@@ -69,8 +69,8 @@ end;
 // the OnPaint event.fpgcanvas
 procedure TMainForm.CustomPaintJob;
 var
-  r: TfpgRect;
-  fnt: TfpgFont;
+  r: TlqRect;
+  fnt: TlqFont;
   y: integer;
   ac: TAgg2D;
   c1, c2: TAggColor;

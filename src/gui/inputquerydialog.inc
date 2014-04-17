@@ -15,19 +15,19 @@
       This unit contains the Input Query dialogs.
 }
 
-{%mainunit fpg_dialogs.pas}
+{%mainunit lq_dialogs.pas}
 
 {$IFDEF read_interface}
 
 type
 
-  TfpgQueryDialog = class(TfpgForm)
+  TlqQueryDialog = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: fpgQueryDialog}
-    lblText: TfpgLabel;
-    edtText: TfpgEdit;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    lblText: TlqLabel;
+    edtText: TlqEdit;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     {@VFD_HEAD_END: fpgQueryDialog}
     procedure SetupCaptions;
     procedure edtTextKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
@@ -42,11 +42,11 @@ type
 
 {$IFDEF read_implementation}
 
-function fpgInputQuery(const ACaption, APrompt: TfpgString; var Value: TfpgString): Boolean;
+function fpgInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
 var
-  dlg: TfpgQueryDialog;
+  dlg: TlqQueryDialog;
 begin
-  dlg := TfpgQueryDialog.Create(nil);
+  dlg := TlqQueryDialog.Create(nil);
   try
     dlg.WindowTitle := ACaption;
     dlg.lblText.Text := APrompt;
@@ -59,21 +59,21 @@ begin
   end;
 end;
 
-{ TfpgQueryDialog }
+{ TlqQueryDialog }
 
-procedure TfpgQueryDialog.SetupCaptions;
+procedure TlqQueryDialog.SetupCaptions;
 begin
   btnOK.Text := rsOK;
   btnCancel.Text := rsCancel;
 end;
 
-procedure TfpgQueryDialog.edtTextKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
+procedure TlqQueryDialog.edtTextKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
 begin
   if KeyCode = keyEnter then
    btnOK.Click;
 end;
 
-procedure TfpgQueryDialog.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqQueryDialog.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 begin
   if KeyCode = keyEscape then
   begin
@@ -82,7 +82,7 @@ begin
   end;
 end;
 
-procedure TfpgQueryDialog.AfterCreate;
+procedure TlqQueryDialog.AfterCreate;
 begin
   {%region 'Auto-generated GUI code' -fold}
   {@VFD_BODY_BEGIN: fpgQueryDialog}
@@ -92,7 +92,7 @@ begin
   Hint := '';
   WindowPosition := wpOneThirdDown;
 
-  lblText := TfpgLabel.Create(self);
+  lblText := TlqLabel.Create(self);
   with lblText do
   begin
     Name := 'lblText';
@@ -103,7 +103,7 @@ begin
     Text := 'lblText';
   end;
 
-  edtText := TfpgEdit.Create(self);
+  edtText := TlqEdit.Create(self);
   with edtText do
   begin
     Name := 'edtText';
@@ -117,7 +117,7 @@ begin
     OnKeyPress := @edtTextKeyPressed;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -131,7 +131,7 @@ begin
     TabOrder := 3;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';

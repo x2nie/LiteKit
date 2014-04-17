@@ -14,14 +14,14 @@ type
 
   { TMainForm }
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnQuit: TfpgButton;
-    pnlName1: TfpgBevel;
-    rbSpokes: TfpgRadioButton;
-    rbLines: TfpgRadioButton;
-    rbSpiral: TfpgRadioButton;
+    btnQuit: TlqButton;
+    pnlName1: TlqBevel;
+    rbSpokes: TlqRadioButton;
+    rbLines: TlqRadioButton;
+    rbSpiral: TlqRadioButton;
     {@VFD_HEAD_END: MainForm}
     procedure   btnQuitClicked(Sender: TObject);
     procedure   DrawSpokes(phase: double);
@@ -119,7 +119,7 @@ begin
   WindowPosition := wpScreenCenter;
   Sizeable := False;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -131,14 +131,14 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  pnlName1 := TfpgBevel.Create(self);
+  pnlName1 := TlqBevel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
     SetPosition(436, 8, 156, 76);
   end;
 
-  rbSpokes := TfpgRadioButton.Create(pnlName1);
+  rbSpokes := TlqRadioButton.Create(pnlName1);
   with rbSpokes do
   begin
     Name := 'rbSpokes';
@@ -150,7 +150,7 @@ begin
     OnChange := @RadioButtonChanged;
   end;
 
-  rbLines := TfpgRadioButton.Create(pnlName1);
+  rbLines := TlqRadioButton.Create(pnlName1);
   with rbLines do
   begin
     Name := 'rbLines';
@@ -163,7 +163,7 @@ begin
     OnChange := @RadioButtonChanged;
   end;
 
-  rbSpiral := TfpgRadioButton.Create(pnlName1);
+  rbSpiral := TlqRadioButton.Create(pnlName1);
   with rbSpiral do
   begin
     Name := 'rbSpiral';

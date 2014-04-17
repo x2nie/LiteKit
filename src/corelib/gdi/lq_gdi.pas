@@ -59,12 +59,12 @@ var
 
 type
   // forward declaration
-  TfpgGDIWindow = class;
+  TlqGDIWindow = class;
   TGDIDragManager = class;
-  TfpgGDIDrag = class;
+  TlqGDIDrag = class;
 
 
-  TfpgGDIFontResource = class(TfpgFontResourceBase)
+  TlqGDIFontResource = class(TlqFontResourceBase)
   private
     FFontData: HFONT;
     FMetrics: Windows.TEXTMETRIC;
@@ -82,7 +82,7 @@ type
   end;
 
 
-  TfpgGDIImage = class(TfpgImageBase)
+  TlqGDIImage = class(TlqImageBase)
   private
     FIsTwoColor: boolean;
     FBMPHandle: HBITMAP;
@@ -98,17 +98,17 @@ type
   end;
 
 
-  TfpgGDICanvas = class(TfpgCanvasBase)
+  TlqGDICanvas = class(TlqCanvasBase)
   private
     FDrawing: boolean;
     FBufferBitmap: HBitmap;
-    FDrawWindow: TfpgGDIWindow;
-    Fgc: TfpgDCHandle;
-    FBufgc: TfpgDCHandle;
-    FWinGC: TfpgDCHandle;
-    FBackgroundColor: TfpgColor;
-    FCurFontRes: TfpgGDIFontResource;
-    FClipRect: TfpgRect;
+    FDrawWindow: TlqGDIWindow;
+    Fgc: TlqDCHandle;
+    FBufgc: TlqDCHandle;
+    FWinGC: TlqDCHandle;
+    FBackgroundColor: TlqColor;
+    FCurFontRes: TlqGDIFontResource;
+    FClipRect: TlqRect;
     FClipRectSet: Boolean;
     FWindowsColor: longword;
     FBrush: HBRUSH;
@@ -119,80 +119,80 @@ type
     FBufHeight: Integer;
     procedure   TryFreeBackBuffer;
   protected
-    procedure   DoSetFontRes(fntres: TfpgFontResourceBase); override;
-    procedure   DoSetTextColor(cl: TfpgColor); override;
-    procedure   DoSetColor(cl: TfpgColor); override;
-    procedure   DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle); override;
-    procedure   DoGetWinRect(out r: TfpgRect); override;
-    procedure   DoFillRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord); override;
-    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord); override;
-    procedure   DoDrawRectangle(x, y, w, h: TfpgCoord); override;
-    procedure   DoDrawLine(x1, y1, x2, y2: TfpgCoord); override;
-    procedure   DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi, w, h: integer); override;
-    procedure   DoDrawString(x, y: TfpgCoord; const txt: string); override;
-    procedure   DoSetClipRect(const ARect: TfpgRect); override;
-    function    DoGetClipRect: TfpgRect; override;
-    procedure   DoAddClipRect(const ARect: TfpgRect); override;
+    procedure   DoSetFontRes(fntres: TlqFontResourceBase); override;
+    procedure   DoSetTextColor(cl: TlqColor); override;
+    procedure   DoSetColor(cl: TlqColor); override;
+    procedure   DoSetLineStyle(awidth: integer; astyle: TlqLineStyle); override;
+    procedure   DoGetWinRect(out r: TlqRect); override;
+    procedure   DoFillRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord); override;
+    procedure   DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord); override;
+    procedure   DoDrawRectangle(x, y, w, h: TlqCoord); override;
+    procedure   DoDrawLine(x1, y1, x2, y2: TlqCoord); override;
+    procedure   DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi, w, h: integer); override;
+    procedure   DoDrawString(x, y: TlqCoord; const txt: string); override;
+    procedure   DoSetClipRect(const ARect: TlqRect); override;
+    function    DoGetClipRect: TlqRect; override;
+    procedure   DoAddClipRect(const ARect: TlqRect); override;
     procedure   DoClearClipRect; override;
-    procedure   DoBeginDraw(awin: TfpgWindowBase; buffered: boolean); override;
-    procedure   DoPutBufferToScreen(x, y, w, h: TfpgCoord); override;
+    procedure   DoBeginDraw(awin: TlqWindowBase; buffered: boolean); override;
+    procedure   DoPutBufferToScreen(x, y, w, h: TlqCoord); override;
     procedure   DoEndDraw; override;
-    function    GetPixel(X, Y: integer): TfpgColor; override;
-    procedure   SetPixel(X, Y: integer; const AValue: TfpgColor); override;
-    procedure   DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
-    procedure   DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended); override;
+    function    GetPixel(X, Y: integer): TlqColor; override;
+    procedure   SetPixel(X, Y: integer; const AValue: TlqColor); override;
+    procedure   DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
+    procedure   DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended); override;
     procedure   DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean = False); override;
-    property    DCHandle: TfpgDCHandle read Fgc;
+    property    DCHandle: TlqDCHandle read Fgc;
   public
-    constructor Create(awin: TfpgWindowBase); override;
+    constructor Create(awin: TlqWindowBase); override;
     destructor  Destroy; override;
   end;
 
 
-  TfpgGDIWindow = class(TfpgWindowBase)
+  TlqGDIWindow = class(TlqWindowBase)
   private
-    FDropManager: TfpgOLEDropTarget;
+    FDropManager: TlqOLEDropTarget;
     FDropPos: TPoint;
-    FUserMimeSelection: TfpgString;
+    FUserMimeSelection: TlqString;
     FUserAcceptDrag: Boolean;
-    function    GetDropManager: TfpgOLEDropTarget;
+    function    GetDropManager: TlqOLEDropTarget;
     procedure   HandleDNDLeave(Sender: TObject);
     procedure   HandleDNDEnter(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; var Effect: DWORD);
-    procedure   HandleDNDPosition(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TfpgOLEDragDropEffect);
-    procedure   HandleDNDDrop(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TfpgOLEDragDropEffect);
+    procedure   HandleDNDPosition(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TlqOLEDragDropEffect);
+    procedure   HandleDNDDrop(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TlqOLEDragDropEffect);
   private
     FMouseInWindow: boolean;
-    FNonFullscreenRect: TfpgRect;
+    FNonFullscreenRect: TlqRect;
     FNonFullscreenStyle: longword;
     FFullscreenIsSet: boolean;
     FSkipResizeMessage: boolean;
     QueueAcceptDrops: boolean;
-    function    DoMouseEnterLeaveCheck(AWindow: TfpgGDIWindow; uMsg, wParam, lParam: Cardinal): Boolean;
+    function    DoMouseEnterLeaveCheck(AWindow: TlqGDIWindow; uMsg, wParam, lParam: Cardinal): Boolean;
     procedure   WindowSetFullscreen(aFullScreen, aUpdate: boolean);
-    property    DropManager: TfpgOLEDropTarget read GetDropManager;
+    property    DropManager: TlqOLEDropTarget read GetDropManager;
   protected
-    FWinHandle: TfpgWinHandle;
-    FModalForWin: TfpgGDIWindow;
+    FWinHandle: TlqWinHandle;
+    FModalForWin: TlqGDIWindow;
     FWinStyle: longword;
     FWinStyleEx: longword;
-    FParentWinHandle: TfpgWinHandle;
-    procedure   DoAllocateWindowHandle(AParent: TfpgWindowBase); override;
+    FParentWinHandle: TlqWinHandle;
+    procedure   DoAllocateWindowHandle(AParent: TlqWindowBase); override;
     procedure   DoReleaseWindowHandle; override;
     procedure   DoRemoveWindowLookup; override;
     procedure   DoSetWindowVisible(const AValue: Boolean); override;
     function    HandleIsValid: boolean; override;
     procedure   DoUpdateWindowPosition; override;
-    procedure   DoMoveWindow(const x: TfpgCoord; const y: TfpgCoord); override;
-    function    DoWindowToScreen(ASource: TfpgWindowBase; const AScreenPos: TPoint): TPoint; override;
+    procedure   DoMoveWindow(const x: TlqCoord; const y: TlqCoord); override;
+    function    DoWindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint; override;
     //procedure MoveToScreenCenter; override;
     procedure   DoSetWindowTitle(const ATitle: string); override;
     procedure   DoSetMouseCursor; override;
     procedure   DoDNDEnabled(const AValue: boolean); override;
     procedure   DoAcceptDrops(const AValue: boolean); override;
     procedure   DoDragStartDetected; override;
-    function    GetWindowState: TfpgWindowState; override;
-    property    WinHandle: TfpgWinHandle read FWinHandle;
+    function    GetWindowState: TlqWindowState; override;
+    property    WinHandle: TlqWinHandle read FWinHandle;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -204,12 +204,12 @@ type
   end;
 
 
-  TfpgGDIApplication = class(TfpgApplicationBase)
+  TlqGDIApplication = class(TlqApplicationBase)
   private
-    FDrag: TfpgGDIDrag;
+    FDrag: TlqGDIDrag;
     procedure   DoWakeMainThread(Sender: TObject);
-    procedure   SetDrag(const AValue: TfpgGDIDrag);
-    property    Drag: TfpgGDIDrag read FDrag write SetDrag;
+    procedure   SetDrag(const AValue: TlqGDIDrag);
+    property    Drag: TlqGDIDrag read FDrag write SetDrag;
   protected
     FDisplay: HDC;
     WindowClass: TWndClass;
@@ -243,8 +243,8 @@ type
     constructor Create(const AParams: string); override;
     destructor  Destroy; override;
     procedure   DoFlush;
-    function    GetScreenWidth: TfpgCoord; override;
-    function    GetScreenHeight: TfpgCoord; override;
+    function    GetScreenWidth: TlqCoord; override;
+    function    GetScreenHeight: TlqCoord; override;
     function    Screen_dpi_x: integer; override;
     function    Screen_dpi_y: integer; override;
     function    Screen_dpi: integer; override;
@@ -252,44 +252,44 @@ type
   end;
 
 
-  TfpgGDIClipboard = class(TfpgClipboardBase)
+  TlqGDIClipboard = class(TlqClipboardBase)
   protected
-    FClipboardText: TfpgString;
-    function    DoGetText: TfpgString; override;
-    procedure   DoSetText(const AValue: TfpgString); override;
+    FClipboardText: TlqString;
+    function    DoGetText: TlqString; override;
+    procedure   DoSetText(const AValue: TlqString); override;
     procedure   InitClipboard; override;
   end;
 
 
-  TfpgGDIFileList = class(TfpgFileListBase)
+  TlqGDIFileList = class(TlqFileListBase)
     function    EncodeAttributesString(attrs: longword): TFileModeString;
     constructor Create; override;
     function    InitializeEntry(sr: TSearchRec): TFileEntry; override;
-    procedure   PopulateSpecialDirs(const aDirectory: TfpgString); override;
+    procedure   PopulateSpecialDirs(const aDirectory: TlqString); override;
   end;
 
 
-  TfpgGDIMimeDataBase = class(TfpgMimeDataBase)
+  TlqGDIMimeDataBase = class(TlqMimeDataBase)
   end;
 
 
   { Used mainly for sending drags - being the source of the drag }
-  TfpgGDIDrag = class(TfpgDragBase)
+  TlqGDIDrag = class(TlqDragBase)
   private
-    function    StringToHandle(const AString: TfpgString): HGLOBAL;
+    function    StringToHandle(const AString: TlqString): HGLOBAL;
   protected
-    FSource: TfpgGDIWindow;
-    function    GetSource: TfpgGDIWindow; virtual;
+    FSource: TlqGDIWindow;
+    function    GetSource: TlqGDIWindow; virtual;
   public
     destructor  Destroy; override;
-    function    Execute(const ADropActions: TfpgDropActions; const ADefaultAction: TfpgDropAction=daCopy): TfpgDropAction; override;
+    function    Execute(const ADropActions: TlqDropActions; const ADefaultAction: TlqDropAction=daCopy): TlqDropAction; override;
   end;
 
 
   { Used mainly for receiving drags - being the target of the drag }
   TGDIDragManager = class(TInterfacedObject, IDropTarget)
   private
-    FDropTarget: TfpgWindowBase;  { actually a TfpgWidget }
+    FDropTarget: TlqWindowBase;  { actually a TlqWidget }
     FRegistered: boolean;
     { IDropTarget }
     function    DragEnter(const dataObj: IDataObject; grfKeyState: DWORD; pt: TPoint; var dwEffect: DWORD): HResult;StdCall;
@@ -297,15 +297,15 @@ type
     function    DragLeave: HResult;StdCall;
     function    Drop(const dataObj: IDataObject; grfKeyState: DWORD; pt: TPoint; var dwEffect: DWORD):HResult;StdCall;
   public
-    constructor Create(ADropTarget: TfpgWindowBase); reintroduce;
+    constructor Create(ADropTarget: TlqWindowBase); reintroduce;
     destructor  Destroy; override;
     procedure   RegisterDragDrop;
     procedure   RevokeDragDrop;
-    property    DropTarget: TfpgWindowBase read FDropTarget; { actually a TfpgWidget }
+    property    DropTarget: TlqWindowBase read FDropTarget; { actually a TlqWidget }
   end;
 
 
-  TfpgGDITimer = class(TfpgBaseTimer)
+  TlqGDITimer = class(TlqBaseTimer)
   private
     FHandle: THandle;
   protected
@@ -315,7 +315,7 @@ type
   end;
 
 
-  TfpgGDISystemTrayIcon = class(TfpgComponent)
+  TlqGDISystemTrayIcon = class(TlqComponent)
   public
     constructor Create(AOwner: TComponent); override;
     procedure   Show;
@@ -337,18 +337,18 @@ uses
 
 
 var
-  wapplication: TfpgApplication;
-  uDragSource: TfpgWidget;  { points to the Source widget of the DND when drop is inside the same app }
+  wapplication: TlqApplication;
+  uDragSource: TlqWidget;  { points to the Source widget of the DND when drop is inside the same app }
   MouseFocusedWH: HWND;
   OldMousePos: TPoint;  // used to detect fake MouseMove events
   NeedToUnitialize: Boolean;
 
 // some required keyboard functions
-{$INCLUDE fpg_keys_gdi.inc}
+{$INCLUDE lq_keys_gdi.inc}
 
 {$IFDEF wince}
 // A few tweaks to get fpGUI working on the Symbol MC1000 WinCE 4.2
-// *** Need to fix the hack in procedure TfpgWindowImpl.DoAllocateWindowHandle
+// *** Need to fix the hack in procedure TlqWindowImpl.DoAllocateWindowHandle
 
 const
   CS_OWNDC = 0;
@@ -379,7 +379,7 @@ begin
 end;
 {$ENDIF}
 
-function fpgColorToWin(col: TfpgColor): longword;
+function fpgColorToWin(col: TlqColor): longword;
 var
   c: dword;
 begin
@@ -388,7 +388,7 @@ begin
   Result := ((c and $FF0000) shr 16) or (c and $00FF00) or ((c and $0000FF) shl 16);
 end;
 
-function WinColorTofpgColor(col: longword): TfpgColor;
+function WinColorTofpgColor(col: longword): TlqColor;
 var
   t: TRGBTriple;
 begin
@@ -401,18 +401,18 @@ begin
   Result := RGBTripleTofpgColor(t);
 end;
 
-function GetMyWidgetFromHandle(wh: TfpgWinHandle): TfpgWidget;
+function GetMyWidgetFromHandle(wh: TlqWinHandle): TlqWidget;
 var
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   {$IFDEF CPU64}
-  wg := TfpgWidget(Windows.GetWindowLongPtr(wh, GWL_USERDATA));
+  wg := TlqWidget(Windows.GetWindowLongPtr(wh, GWL_USERDATA));
   if (wh <> 0) and (MainInstance = GetWindowLongPtr(wh, GWL_HINSTANCE))
-    and (wg is TfpgWidget)
+    and (wg is TlqWidget)
   {$ELSE}
-  wg := TfpgWidget(Windows.GetWindowLong(wh, GWL_USERDATA));
+  wg := TlqWidget(Windows.GetWindowLong(wh, GWL_USERDATA));
   if (wh <> 0) and (MainInstance = longword(GetWindowLong(wh, GWL_HINSTANCE)))
-    and (wg is TfpgWidget)
+    and (wg is TlqWidget)
   {$ENDIF}
   then
     Result := wg
@@ -554,7 +554,7 @@ begin
     Include(result, ssCtrl);
 end;
 
-function TranslateToFPGDropActions(const pdwEffects: DWORD): TfpgDropActions;
+function TranslateToFPGDropActions(const pdwEffects: DWORD): TlqDropActions;
 begin
   Result := [daIgnore];
   if (pdwEffects and DROPEFFECT_LINK) <> 0 then
@@ -565,7 +565,7 @@ begin
     Result := Result + [daMove];
 end;
 
-function TranslateToFPGDropAction(const pdwEffects: DWORD): TfpgDropAction;
+function TranslateToFPGDropAction(const pdwEffects: DWORD): TlqDropAction;
 begin
   if (pdwEffects and DROPEFFECT_LINK) <> 0 then
     Result := daLink
@@ -577,7 +577,7 @@ begin
     Result := daIgnore;
 end;
 
-function TranslateToWinDragEffects(const AActions: TfpgDropActions): DWORD;
+function TranslateToWinDragEffects(const AActions: TlqDropActions): DWORD;
 begin
   Result := DROPEFFECT_NONE;
   if daLink in AActions then
@@ -588,7 +588,7 @@ begin
     Result := Result or DROPEFFECT_MOVE;
 end;
 
-function TranslateToWinDragEffect(const AAction: TfpgDropAction): DWORD;
+function TranslateToWinDragEffect(const AAction: TlqDropAction): DWORD;
 begin
   if AAction = daIgnore then
     Result := DROPEFFECT_NONE
@@ -629,7 +629,7 @@ begin
 end;
 {$ENDIF}
 
-procedure GetWindowBorderDimensions(const w: TfpgWindowBase; var dx, dy: integer);
+procedure GetWindowBorderDimensions(const w: TlqWindowBase; var dx, dy: integer);
 var
   bx: integer;  // left/right border width
   by: integer;  // top/bottom border height
@@ -641,9 +641,9 @@ begin
 
   if w.WindowType in [wtWindow, wtModalForm] then
   begin
-    if w is TfpgForm then
+    if w is TlqForm then
     begin
-      if TfpgForm(w).Sizeable then
+      if TlqForm(w).Sizeable then
       begin
         bx := GetSystemMetrics(SM_CXSIZEFRAME);
         by := GetSystemMetrics(SM_CYSIZEFRAME);
@@ -672,10 +672,10 @@ begin
   begin
     // write('Hooked HCBT_ACTIVATE at '+IntToStr(wParam)+': ');
     if (wapplication.TopModalForm <> nil) and
-       (wParam <> TfpgGDIWindow(wapplication.TopModalForm).FWinHandle) then
+       (wParam <> TlqGDIWindow(wapplication.TopModalForm).FWinHandle) then
     begin
       // writeln('stopped');
-      SetActiveWindow(TfpgGDIWindow(wapplication.TopModalForm).FWinHandle);
+      SetActiveWindow(TlqGDIWindow(wapplication.TopModalForm).FWinHandle);
       Result := 1;
     end else
     begin
@@ -688,10 +688,10 @@ end;
 
 function fpgWindowProc(hwnd: HWND; uMsg: UINT; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
 var
-  w: TfpgGDIWindow;
-  pw: TfpgGDIWindow;
-  kwg: TfpgWidget;
-  mw: TfpgGDIWindow;
+  w: TlqGDIWindow;
+  pw: TlqGDIWindow;
+  kwg: TlqWidget;
+  mw: TlqGDIWindow;
   kcode: integer;
   i: integer;
   sstate: integer;
@@ -700,7 +700,7 @@ var
   pt: TPOINT;
   r: TRECT;
   blockmsg: boolean;
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   mcode: integer;
   wmsg: TMsg;
   PaintStruct: TPaintStruct;
@@ -733,7 +733,7 @@ var
         pt.Y := IntfHeight;
     end;
   begin
-    if (w = nil) {or not (w is TfpgForm)} then
+    if (w = nil) {or not (w is TlqForm)} then
       Exit; //==>
     SetWin32SizePoint(w.MinWidth, w.MinHeight, MinMaxInfo.ptMinTrackSize);
 //    SetWin32SizePoint(MaxWidth, MaxHeight, MinMaxInfo.ptMaxSize);
@@ -743,7 +743,7 @@ var
 begin
   if uMsg = WM_CREATE then
   begin
-    w := TfpgGDIWindow(PCreateStruct(lParam)^.lpCreateParams);
+    w := TlqGDIWindow(PCreateStruct(lParam)^.lpCreateParams);
     w.FWinHandle := hwnd; // this is very important, because number of messages sent
     // before the createwindow returns the window handle
     {$IFDEF CPU64}
@@ -786,13 +786,13 @@ begin
   end;
 
   {$IFDEF CPU64}
-  w      := TfpgGDIWindow(Windows.GetWindowLongPtr(hwnd, GWL_USERDATA));
+  w      := TlqGDIWindow(Windows.GetWindowLongPtr(hwnd, GWL_USERDATA));
   {$ELSE}
-  w      := TfpgGDIWindow(Windows.GetWindowLong(hwnd, GWL_USERDATA));
+  w      := TlqGDIWindow(Windows.GetWindowLong(hwnd, GWL_USERDATA));
   {$ENDIF}
   Result := 0;
 
-  if not (w is TfpgGDIWindow) then
+  if not (w is TlqGDIWindow) then
   begin
     {$IFDEF DEBUG} SendDebug('fpGFX/GDI: Unable to detect Window - using DefWindowProc'); {$ENDIF}
     Result := Windows.DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -917,10 +917,10 @@ begin
               mw    := GetMyWidgetFromHandle(h);
               pw    := mw;
               while (pw <> nil) and (pw.Parent <> nil) do
-                pw := TfpgGDIWindow(pw.Parent);
+                pw := TlqGDIWindow(pw.Parent);
 
               if ((pw = nil) or (PopupListFind(pw.WinHandle) = nil)) and
-                 (not PopupDontCloseWidget(TfpgWidget(mw))) and
+                 (not PopupDontCloseWidget(TlqWidget(mw))) and
                  (uMsg = WM_LBUTTONDOWN) then
               begin
                 ClosePopups;
@@ -931,7 +931,7 @@ begin
           if (wapplication.TopModalForm <> nil) then
           begin
             mw := nil;
-            mw := TfpgGDIWindow(WidgetParentForm(TfpgWidget(w)));
+            mw := TlqGDIWindow(WidgetParentForm(TlqWidget(w)));
             if (mw <> nil) and (wapplication.TopModalForm <> mw) then
               blockmsg := True;
           end;
@@ -955,9 +955,9 @@ begin
                     {$ENDIF}
                     // This is temporary and we should try and move it to
                     // the UI Designer code instead.
-                    if (uMsg = WM_LBUTTONDOWN) and (w is TfpgWidget) then
+                    if (uMsg = WM_LBUTTONDOWN) and (w is TlqWidget) then
                     begin
-                      if TfpgWidget(w).FormDesigner <> nil then
+                      if TlqWidget(w).FormDesigner <> nil then
                         w.CaptureMouse;
                     end;
                     mcode := FPGM_MOUSEDOWN;
@@ -972,9 +972,9 @@ begin
                     {$ENDIF}
                     // This is temporary and we should try and move it to
                     // the UI Designer code instead.
-                    if (uMsg = WM_LBUTTONUP) and (w is TfpgWidget) then
+                    if (uMsg = WM_LBUTTONUP) and (w is TlqWidget) then
                     begin
-                      if TfpgWidget(w).FormDesigner <> nil then
+                      if TlqWidget(w).FormDesigner <> nil then
                         w.ReleaseMouse;
                     end;
                     mcode := FPGM_MOUSEUP;
@@ -1080,13 +1080,13 @@ begin
           if h > 0 then  // get window mouse is hovering over
           begin
             {$IFDEF CPU64}
-            mw := TfpgGDIWindow(Windows.GetWindowLongPtr(h, GWL_USERDATA));
+            mw := TlqGDIWindow(Windows.GetWindowLongPtr(h, GWL_USERDATA));
             {$ELSE}
-            mw := TfpgGDIWindow(Windows.GetWindowLong(h, GWL_USERDATA));
+            mw := TlqGDIWindow(Windows.GetWindowLong(h, GWL_USERDATA));
             {$ENDIF}
           end;
 
-          if (mw is TfpgGDIWindow) then
+          if (mw is TlqGDIWindow) then
           begin
             msgp.mouse.x := pt.x;
             msgp.mouse.y := pt.y;
@@ -1147,9 +1147,9 @@ begin
             {$IFDEF DEBUG}
             SendDebug(' Blockmsg = True (part 1) : ' + PopupListFirst.ClassName);
             {$ENDIF}
-            // This is ugly but needed for now to get TfpgCombobox to work
+            // This is ugly but needed for now to get TlqCombobox to work
             if (PopupListFirst.ClassName <> 'TDropDownWindow') then
-//            if not (PopupListFirst is TfpgPopupWindow) then
+//            if not (PopupListFirst is TlqPopupWindow) then
               blockmsg := True;
           end;
           //end else
@@ -1198,7 +1198,7 @@ begin
   end;
 end;
 
-{ TfpgGDIApplication }
+{ TlqGDIApplication }
 
 // helper function for DoGetFontFaceList
 {$IFDEF wince}
@@ -1219,7 +1219,7 @@ begin
   Result := 1;
 end;
 
-function TfpgGDIApplication.DoGetFontFaceList: TStringList;
+function TlqGDIApplication.DoGetFontFaceList: TStringList;
 var
   LFont: TLogFont;
 begin
@@ -1234,20 +1234,20 @@ begin
   Result.Sort;
 end;
 
-procedure TfpgGDIApplication.DoWakeMainThread(Sender: TObject);
+procedure TlqGDIApplication.DoWakeMainThread(Sender: TObject);
 begin
   // WakeMainThread is called during TThread.Synchronize.
-  Windows.PostMessage(TfpgGDIWindow(MainForm).WinHandle, WM_NULL, 0, 0);
+  Windows.PostMessage(TlqGDIWindow(MainForm).WinHandle, WM_NULL, 0, 0);
 end;
 
-procedure TfpgGDIApplication.SetDrag(const AValue: TfpgGDIDrag);
+procedure TlqGDIApplication.SetDrag(const AValue: TlqGDIDrag);
 begin
   if Assigned(FDrag) then
     FDrag.Free;
   FDrag := AValue;
 end;
 
-function TfpgGDIApplication.GetHiddenWindow: HWND;
+function TlqGDIApplication.GetHiddenWindow: HWND;
 begin
   if (FHiddenWindow = 0) then
   begin
@@ -1264,12 +1264,12 @@ begin
     Windows.RegisterClass(@HiddenWndClass);
 
     FHiddenWindow := CreateWindow('FPGHIDDEN', '',
-      DWORD(WS_POPUP), 0, 0, 0, 0, TfpgGDIWindow(MainForm).FWinHandle, 0, MainInstance, nil);
+      DWORD(WS_POPUP), 0, 0, 0, 0, TlqGDIWindow(MainForm).FWinHandle, 0, MainInstance, nil);
   end;
   Result := FHiddenWindow;
 end;
 
-constructor TfpgGDIApplication.Create(const AParams: string);
+constructor TlqGDIApplication.Create(const AParams: string);
 begin
   inherited Create(AParams);
   FIsInitialized  := False;
@@ -1319,11 +1319,11 @@ begin
   ActivationHook := SetWindowsHookEx(WH_CBT, HOOKPROC(@fpgCBTProc), 0, GetCurrentThreadId);
 
   FIsInitialized := True;
-  wapplication   := TfpgApplication(self);
+  wapplication   := TlqApplication(self);
   WakeMainThread := @DoWakeMainThread;
 end;
 
-destructor TfpgGDIApplication.Destroy;
+destructor TlqGDIApplication.Destroy;
 begin
   WakeMainThread := nil;
   if Assigned(FDrag) then
@@ -1332,14 +1332,14 @@ begin
   inherited Destroy;
 end;
 
-function TfpgGDIApplication.MessagesPending: boolean;
+function TlqGDIApplication.MessagesPending: boolean;
 var
   Msg: TMsg;
 begin
   Result := Windows.PeekMessageW(@Msg, 0, 0, 0, PM_NOREMOVE);
 end;
 
-procedure TfpgGDIApplication.DoWaitWindowMessage(atimeoutms: integer);
+procedure TlqGDIApplication.DoWaitWindowMessage(atimeoutms: integer);
 var
   Msg: TMsg;
   mp: boolean;
@@ -1363,14 +1363,14 @@ begin
   Windows.DispatchMessage(@msg);
 end;
 
-procedure TfpgGDIApplication.DoFlush;
+procedure TlqGDIApplication.DoFlush;
 begin
   {$IFNDEF wince}
   GdiFlush;
   {$ENDIF}
 end;
 
-function TfpgGDIApplication.GetScreenWidth: TfpgCoord;
+function TlqGDIApplication.GetScreenWidth: TlqCoord;
 var
   r: TRECT;
 begin
@@ -1379,7 +1379,7 @@ begin
   // Result := Windows.GetSystemMetrics(SM_CXSCREEN);
 end;
 
-function TfpgGDIApplication.GetScreenHeight: TfpgCoord;
+function TlqGDIApplication.GetScreenHeight: TlqCoord;
 var
   r: TRECT;
 begin
@@ -1388,35 +1388,35 @@ begin
   // Result := Windows.GetSystemMetrics(SM_CYSCREEN);
 end;
 
-function TfpgGDIApplication.Screen_dpi_x: integer;
+function TlqGDIApplication.Screen_dpi_x: integer;
 begin
   Result := GetDeviceCaps(wapplication.display, LOGPIXELSX)
 end;
 
-function TfpgGDIApplication.Screen_dpi_y: integer;
+function TlqGDIApplication.Screen_dpi_y: integer;
 begin
   Result := GetDeviceCaps(wapplication.display, LOGPIXELSY)
 end;
 
-function TfpgGDIApplication.Screen_dpi: integer;
+function TlqGDIApplication.Screen_dpi: integer;
 begin
   Result := Screen_dpi_y;
 end;
 
-{ TfpgGDIWindow }
+{ TlqGDIWindow }
 var
   // this are required for Windows MouseEnter & MouseExit detection.
-  uLastWindowHndl: TfpgWinHandle;
+  uLastWindowHndl: TlqWinHandle;
 
-procedure TfpgGDIWindow.HandleDNDLeave(Sender: TObject);
+procedure TlqGDIWindow.HandleDNDLeave(Sender: TObject);
 var
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   {$IFDEF DND_DEBUG}
-  writeln('TfpgGDIWindow.HandleDNDLeave ');
+  writeln('TlqGDIWindow.HandleDNDLeave ');
   {$ENDIF}
   FUserMimeSelection := '';
-  wg := self as TfpgWidget;
+  wg := self as TlqWidget;
   if wg.AcceptDrops then  { if we get here, this should always be true anyway }
   begin
     if Assigned(wg.OnDragLeave) then
@@ -1424,22 +1424,22 @@ begin
   end;
 end;
 
-procedure TfpgGDIWindow.HandleDNDEnter(Sender: TObject; DataObj: IDataObject;
+procedure TlqGDIWindow.HandleDNDEnter(Sender: TObject; DataObj: IDataObject;
     KeyState: Longint; PT: TPoint; var Effect: DWORD);
 var
-  wg: TfpgWidget;
-  swg: TfpgWidget;
+  wg: TlqWidget;
+  swg: TlqWidget;
   lMimeList: TStringList;
-  lMimeChoice: TfpgString;
+  lMimeChoice: TlqString;
   lAccept: Boolean;
-  lDropAction: TfpgDropAction;
+  lDropAction: TlqDropAction;
   EnumIntf: IEnumFORMATETC;
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
 begin
   {$IFDEF DND_DEBUG}
-  writeln('TfpgGDIWindow.HandleDNDEnter ');
+  writeln('TlqGDIWindow.HandleDNDEnter ');
   {$ENDIF}
-  wg := self as TfpgWidget;
+  wg := self as TlqWidget;
   if wg.AcceptDrops then
   begin
     lAccept := False;
@@ -1457,7 +1457,7 @@ begin
       if Assigned(wg.OnDragEnter) then
       begin
         if Assigned(uDragSource) then
-          swg := uDragSource as TfpgWidget
+          swg := uDragSource as TlqWidget
         else
           swg := nil;
         wg.OnDragEnter(self, swg, lMimeList, lMimeChoice, lDropAction, lAccept);
@@ -1487,12 +1487,12 @@ begin
   end;
 end;
 
-procedure TfpgGDIWindow.HandleDNDPosition(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TfpgOLEDragDropEffect);
+procedure TlqGDIWindow.HandleDNDPosition(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TlqOLEDragDropEffect);
 var
-  msgp: TfpgMessageParams;
-  wg: TfpgWidget;
+  msgp: TlqMessageParams;
+  wg: TlqWidget;
 begin
-  wg := self as TfpgWidget;
+  wg := self as TlqWidget;
   { Notify widget of drag status, so it can update its look. We do the pos
     check because OLE framework calls DragOver repeatedly even if the mouse
     doesn't move, but simply because the mouse is over the widget. We don't
@@ -1500,7 +1500,7 @@ begin
   if FDropPos <> PT then
   begin
     {$IFDEF DND_DEBUG}
-    writeln('TfpgGDIWindow.HandleDNDPosition ');
+    writeln('TlqGDIWindow.HandleDNDPosition ');
     {$ENDIF}
     FDropPos.x := PT.x;
     FDropPos.y := PT.y;
@@ -1511,14 +1511,14 @@ begin
   end;
 end;
 
-procedure TfpgGDIWindow.HandleDNDDrop(Sender: TObject; DataObj: IDataObject;
-    KeyState: Longint; PT: TPoint; Effect: TfpgOLEDragDropEffect);
+procedure TlqGDIWindow.HandleDNDDrop(Sender: TObject; DataObj: IDataObject;
+    KeyState: Longint; PT: TPoint; Effect: TlqOLEDragDropEffect);
 var
   FE: FORMATETC;
   stgmed: STGMEDIUM;
   data: pchar;
-  wg: TfpgWidget;
-  swg: TfpgWidget; { source widget }
+  wg: TlqWidget;
+  swg: TlqWidget; { source widget }
   CF: DWORD;
   lIsTranslated: Boolean;
 begin
@@ -1526,10 +1526,10 @@ begin
     exit;
 
   {$IFDEF DND_DEBUG}
-  Writeln('TfpgGDIWindow.HandleDNDDrop');
+  Writeln('TlqGDIWindow.HandleDNDDrop');
   {$ENDIF}
 
-  wg := self as TfpgWidget;
+  wg := self as TlqWidget;
   { construct a FORMATETC object }
   CF := WindowsClipboardLookup(FUserMimeSelection, lIsTranslated);
   FE := GetFormatEtc(CF);
@@ -1543,7 +1543,7 @@ begin
       if Assigned(wg.OnDragDrop) then
       begin
         if Assigned(uDragSource) then
-          swg := uDragSource as TfpgWidget
+          swg := uDragSource as TlqWidget
         else
           swg := nil;
         wg.OnDragDrop(wg, swg, pt.x, pt.y, data);
@@ -1556,11 +1556,11 @@ begin
   end;
 end;
 
-function TfpgGDIWindow.GetDropManager: TfpgOLEDropTarget;
+function TlqGDIWindow.GetDropManager: TlqOLEDropTarget;
 begin
   if not Assigned(FDropManager) then
   begin
-    FDropManager := TfpgOLEDropTarget.Create(self);
+    FDropManager := TlqOLEDropTarget.Create(self);
     FDropManager.OnDragLeave := @HandleDNDLeave;
     FDropManager.OnDragEnter := @HandleDNDEnter;
     FDropManager.OnDragOver  := @HandleDNDPosition;
@@ -1569,15 +1569,15 @@ begin
   Result := FDropManager;
 end;
 
-function TfpgGDIWindow.DoMouseEnterLeaveCheck(AWindow: TfpgGDIWindow; uMsg, wParam, lParam: Cardinal): Boolean;
+function TlqGDIWindow.DoMouseEnterLeaveCheck(AWindow: TlqGDIWindow; uMsg, wParam, lParam: Cardinal): Boolean;
 var
   pt, spt: Windows.POINT;
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   CursorInDifferentWindow: boolean;
-  CurrentWindowHndl: TfpgWinHandle;
-  MouseCaptureWHndl: TfpgWinHandle;
-  LastWindow: TfpgGDIWindow;
-  CurrentWindow: TfpgGDIWindow;
+  CurrentWindowHndl: TlqWinHandle;
+  MouseCaptureWHndl: TlqWinHandle;
+  LastWindow: TlqGDIWindow;
+  CurrentWindow: TlqGDIWindow;
 begin
   // vvzh: this method currently cannot receive mouse events when mouse pointer
   // is outside of the application window. We could try to play with
@@ -1627,7 +1627,7 @@ begin
   uLastWindowHndl := CurrentWindowHndl;
 end;
 
-procedure TfpgGDIWindow.WindowSetFullscreen(aFullScreen, aUpdate: boolean);
+procedure TlqGDIWindow.WindowSetFullscreen(aFullScreen, aUpdate: boolean);
 begin
   if aFullScreen = FFullscreenIsSet then
     Exit; //==>
@@ -1637,7 +1637,7 @@ begin
     FNonFullscreenStyle := FWinStyle;
     FNonFullscreenRect.SetRect(Left, Top, Width, Height);
     // vvzh: the following lines are the workaround for bug. When calling
-    // WindowSetFullscreen from TfpgGDIWindow.DoAllocateWindowHandle,
+    // WindowSetFullscreen from TlqGDIWindow.DoAllocateWindowHandle,
     // Left and Top are equal to -2147483648. As the result, if
     // we set FullScreen := True at the form creation time and then
     // call SetFullScreen(False) the form disappears, because it is moved
@@ -1694,7 +1694,7 @@ begin
   FFullscreenIsSet := aFullScreen;
 end;
 
-procedure TfpgGDIWindow.DoAllocateWindowHandle(AParent: TfpgWindowBase);
+procedure TlqGDIWindow.DoAllocateWindowHandle(AParent: TlqWindowBase);
 var
 {$IFDEF wince}
   wcname: widestring;
@@ -1719,7 +1719,7 @@ begin
   wcname      := 'FPGWIN';
 
   if AParent <> nil then
-    FParentWinHandle := TfpgGDIWindow(AParent).WinHandle
+    FParentWinHandle := TlqGDIWindow(AParent).WinHandle
   else
     FParentWinHandle := 0;
 
@@ -1758,8 +1758,8 @@ begin
 
   if waAutoPos in FWindowAttributes then
   begin
-    FLeft := TfpgCoord(CW_USEDEFAULT);
-    FTop  := TfpgCoord(CW_USEDEFAULT);
+    FLeft := TlqCoord(CW_USEDEFAULT);
+    FTop  := TlqCoord(CW_USEDEFAULT);
   end;
 
   if (WindowType <> wtChild) and not (waSizeable in FWindowAttributes) then
@@ -1854,7 +1854,7 @@ begin
   end;
 end;
 
-procedure TfpgGDIWindow.DoReleaseWindowHandle;
+procedure TlqGDIWindow.DoReleaseWindowHandle;
 begin
   if FWinHandle <= 0 then
     Exit;
@@ -1862,12 +1862,12 @@ begin
   FWinHandle := 0;
 end;
 
-procedure TfpgGDIWindow.DoRemoveWindowLookup;
+procedure TlqGDIWindow.DoRemoveWindowLookup;
 begin
   // Nothing to do here
 end;
 
-procedure TfpgGDIWindow.DoSetWindowVisible(const AValue: Boolean);
+procedure TlqGDIWindow.DoSetWindowVisible(const AValue: Boolean);
 var
   r: TRect;
 begin
@@ -1896,7 +1896,7 @@ begin
     Windows.ShowWindow(FWinHandle, SW_HIDE);
 end;
 
-procedure TfpgGDIWindow.DoMoveWindow(const x: TfpgCoord; const y: TfpgCoord);
+procedure TlqGDIWindow.DoMoveWindow(const x: TlqCoord; const y: TlqCoord);
 begin
   if HandleIsValid then
     Windows.SetWindowPos(
@@ -1905,18 +1905,18 @@ begin
       SWP_NOZORDER or SWP_NOSIZE);// or SWP_NOREDRAW);
 end;
 
-function TfpgGDIWindow.DoWindowToScreen(ASource: TfpgWindowBase; const AScreenPos: TPoint): TPoint;
+function TlqGDIWindow.DoWindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint;
 begin
-  if not TfpgGDIWindow(ASource).HandleIsValid then
+  if not TlqGDIWindow(ASource).HandleIsValid then
     Exit; //==>
 
   Result.X := AScreenPos.X;
   Result.Y := AScreenPos.Y;
-  ClientToScreen(TfpgGDIWindow(ASource).WinHandle, Result);
+  ClientToScreen(TlqGDIWindow(ASource).WinHandle, Result);
 end;
 
 {
-procedure TfpgGDIWindow.MoveToScreenCenter;
+procedure TlqGDIWindow.MoveToScreenCenter;
 var
   r : TRECT;
 begin
@@ -1927,7 +1927,7 @@ begin
 end;
 }
 
-procedure TfpgGDIWindow.DoSetWindowTitle(const atitle: string);
+procedure TlqGDIWindow.DoSetWindowTitle(const atitle: string);
 begin
   {$ifdef wince}
   Windows.SetWindowText(WinHandle, PWideChar(Utf8Decode(ATitle)));
@@ -1939,7 +1939,7 @@ begin
   {$endif}
 end;
 
-procedure TfpgGDIWindow.DoSetMouseCursor;
+procedure TlqGDIWindow.DoSetMouseCursor;
 var
   hc: HCURSOR;
 begin
@@ -1967,12 +1967,12 @@ begin
   SetCursor(hc);
 end;
 
-procedure TfpgGDIWindow.DoDNDEnabled(const AValue: boolean);
+procedure TlqGDIWindow.DoDNDEnabled(const AValue: boolean);
 begin
   { GDI has nothing to do here }
 end;
 
-procedure TfpgGDIWindow.DoAcceptDrops(const AValue: boolean);
+procedure TlqGDIWindow.DoAcceptDrops(const AValue: boolean);
 begin
   if AValue then
   begin
@@ -1989,7 +1989,7 @@ begin
   end;
 end;
 
-procedure TfpgGDIWindow.DoDragStartDetected;
+procedure TlqGDIWindow.DoDragStartDetected;
 begin
   inherited DoDragStartDetected;
   { In windows OLE dragging is a blocking function, so it never returns until
@@ -2000,7 +2000,7 @@ begin
     FreeAndNil(wapplication.FDrag);
 end;
 
-function TfpgGDIWindow.GetWindowState: TfpgWindowState;
+function TlqGDIWindow.GetWindowState: TlqWindowState;
 const
   flagsoffs = 0 * sizeof(integer);
 var
@@ -2036,7 +2036,7 @@ begin
   end; { case }
 end;
 
-constructor TfpgGDIWindow.Create(AOwner: TComponent);
+constructor TlqGDIWindow.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWinHandle := 0;
@@ -2048,14 +2048,14 @@ begin
   FUserAcceptDrag := False;
 end;
 
-destructor TfpgGDIWindow.Destroy;
+destructor TlqGDIWindow.Destroy;
 begin
   if Assigned(FDropManager) then
     FDropManager.Free;
   inherited Destroy;
 end;
 
-procedure TfpgGDIWindow.ActivateWindow;
+procedure TlqGDIWindow.ActivateWindow;
 begin
     Windows.SetWindowPos(
       WinHandle, HWND_NOTOPMOST,
@@ -2063,12 +2063,12 @@ begin
       SWP_NOZORDER or SWP_NOSIZE);
 end;
 
-procedure TfpgGDIWindow.CaptureMouse;
+procedure TlqGDIWindow.CaptureMouse;
 begin
   Windows.SetCapture(FWinHandle);
 end;
 
-procedure TfpgGDIWindow.ReleaseMouse;
+procedure TlqGDIWindow.ReleaseMouse;
 begin
   Windows.ReleaseCapture;
 //  if PopupListFirst <> nil then
@@ -2076,13 +2076,13 @@ begin
 //  if GfxFirstPopup <> nil then SetCapture(GfxFirstPopup^.wg.WinHandle);
 end;
 
-procedure TfpgGDIWindow.SetFullscreen(AValue: Boolean);
+procedure TlqGDIWindow.SetFullscreen(AValue: Boolean);
 begin
   inherited SetFullscreen(AValue);
   WindowSetFullscreen(AValue, True);
 end;
 
-procedure TfpgGDIWindow.BringToFront;
+procedure TlqGDIWindow.BringToFront;
 begin
   if HasHandle then
     Windows.SetWindowPos(
@@ -2091,12 +2091,12 @@ begin
       SWP_NOACTIVATE or SWP_NOSIZE);
 end;
 
-function TfpgGDIWindow.HandleIsValid: boolean;
+function TlqGDIWindow.HandleIsValid: boolean;
 begin
   Result := FWinHandle > 0;
 end;
 
-procedure TfpgGDIWindow.DoUpdateWindowPosition;
+procedure TlqGDIWindow.DoUpdateWindowPosition;
 var
   bx, by: integer;
 begin
@@ -2113,9 +2113,9 @@ begin
   end;
 end;
 
-{ TfpgGDICanvas }
+{ TlqGDICanvas }
 
-constructor TfpgGDICanvas.Create(awin: TfpgWindowBase);
+constructor TlqGDICanvas.Create(awin: TlqWindowBase);
 begin
   inherited Create(awin);
   FDrawing      := False;
@@ -2123,7 +2123,7 @@ begin
   FBufferBitmap := 0;
 end;
 
-destructor TfpgGDICanvas.Destroy;
+destructor TlqGDICanvas.Destroy;
 begin
   if FDrawing then
     DoEndDraw;
@@ -2131,9 +2131,9 @@ begin
   inherited;
 end;
 
-procedure TfpgGDICanvas.DoBeginDraw(awin: TfpgWindowBase; buffered: boolean);
+procedure TlqGDICanvas.DoBeginDraw(awin: TlqWindowBase; buffered: boolean);
 var
-  ARect: TfpgRect;
+  ARect: TlqRect;
   bmsize: Windows.TSIZE;
 begin
   if FDrawing and buffered and (FBufferBitmap > 0) then
@@ -2142,7 +2142,7 @@ begin
     {$IFNDEF wince}
     GetBitmapDimensionEx(FBufferBitmap, bmsize);
     {$ENDIF}
-    FDrawWindow := TfpgGDIWindow(awin);
+    FDrawWindow := TlqGDIWindow(awin);
     DoGetWinRect(ARect);
     if (bmsize.cx <> (ARect.Right-ARect.Left+1)) or
        (bmsize.cy <> (ARect.Bottom-ARect.Top+1)) then
@@ -2151,7 +2151,7 @@ begin
 
   if not FDrawing then
   begin
-    FDrawWindow := TfpgGDIWindow(awin);
+    FDrawWindow := TlqGDIWindow(awin);
     FWinGC      := Windows.GetDC(FDrawWindow.FWinHandle);
 
     if buffered then
@@ -2190,7 +2190,7 @@ begin
   FDrawing := True;
 end;
 
-procedure TfpgGDICanvas.DoEndDraw;
+procedure TlqGDICanvas.DoEndDraw;
 begin
   if FDrawing then
   begin
@@ -2207,22 +2207,22 @@ begin
   end;
 end;
 
-function TfpgGDICanvas.GetPixel(X, Y: integer): TfpgColor;
+function TlqGDICanvas.GetPixel(X, Y: integer): TlqColor;
 var
   c: longword;
 begin
   c := Windows.GetPixel(FWinGC, X, Y);
   if c = CLR_INVALID then
-    Writeln('fpGFX/GDI: TfpgGDICanvas.GetPixel returned an invalid color');
+    Writeln('fpGFX/GDI: TlqGDICanvas.GetPixel returned an invalid color');
   Result := WinColorTofpgColor(c);
 end;
 
-procedure TfpgGDICanvas.SetPixel(X, Y: integer; const AValue: TfpgColor);
+procedure TlqGDICanvas.SetPixel(X, Y: integer; const AValue: TlqColor);
 begin
   Windows.SetPixel(Fgc, X, Y, fpgColorToWin(AValue));
 end;
 
-procedure TfpgGDICanvas.DoDrawArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TlqGDICanvas.DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 var
   SX, SY, EX, EY: Longint;
 begin
@@ -2242,7 +2242,7 @@ begin
   {$ENDIF}
 end;
 
-procedure TfpgGDICanvas.DoFillArc(x, y, w, h: TfpgCoord; a1, a2: Extended);
+procedure TlqGDICanvas.DoFillArc(x, y, w, h: TlqCoord; a1, a2: Extended);
 var
   SX, SY, EX, EY: Longint;
 begin
@@ -2262,20 +2262,20 @@ begin
   {$ENDIF}
 end;
 
-procedure TfpgGDICanvas.DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean);
+procedure TlqGDICanvas.DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean);
 //var
 //  pts: array of TPoint;
 begin
   Windows.Polygon(Fgc, Points, NumPts);
 end;
 
-procedure TfpgGDICanvas.DoPutBufferToScreen(x, y, w, h: TfpgCoord);
+procedure TlqGDICanvas.DoPutBufferToScreen(x, y, w, h: TlqCoord);
 begin
   if FBufferBitmap > 0 then
     BitBlt(FWinGC, x, y, w, h, Fgc, x, y, SRCCOPY);
 end;
 
-procedure TfpgGDICanvas.DoAddClipRect(const ARect: TfpgRect);
+procedure TlqGDICanvas.DoAddClipRect(const ARect: TlqRect);
 var
   rg: HRGN;
 begin
@@ -2287,22 +2287,22 @@ begin
   DeleteObject(rg);
 end;
 
-procedure TfpgGDICanvas.DoClearClipRect;
+procedure TlqGDICanvas.DoClearClipRect;
 begin
   SelectClipRgn(Fgc, 0);
   FClipRectSet := False;
 end;
 
-procedure TfpgGDICanvas.DoDrawLine(x1, y1, x2, y2: TfpgCoord);
+procedure TlqGDICanvas.DoDrawLine(x1, y1, x2, y2: TlqCoord);
 begin
   Windows.MoveToEx(Fgc, x1, y1, nil);
   Windows.LineTo(Fgc, x2, y2);
 end;
 
-procedure TfpgGDICanvas.DoDrawRectangle(x, y, w, h: TfpgCoord);
+procedure TlqGDICanvas.DoDrawRectangle(x, y, w, h: TlqCoord);
 var
   wr: Windows.TRect;
-  r: TfpgRect;
+  r: TlqRect;
 
 {$IFDEF WinCE}
 // *** copied from Lazarus
@@ -2336,7 +2336,7 @@ begin
   end;
 end;
 
-procedure TfpgGDICanvas.DoDrawString(x, y: TfpgCoord; const txt: string);
+procedure TlqGDICanvas.DoDrawString(x, y: TlqCoord; const txt: string);
 var
   WideText: widestring;
 begin
@@ -2351,7 +2351,7 @@ begin
   {$endif}
 end;
 
-procedure TfpgGDICanvas.DoFillRectangle(x, y, w, h: TfpgCoord);
+procedure TlqGDICanvas.DoFillRectangle(x, y, w, h: TlqCoord);
 var
   wr: Windows.TRect;
 begin
@@ -2362,7 +2362,7 @@ begin
   Windows.FillRect(Fgc, wr, FBrush);
 end;
 
-procedure TfpgGDICanvas.DoFillTriangle(x1, y1, x2, y2, x3, y3: TfpgCoord);
+procedure TlqGDICanvas.DoFillTriangle(x1, y1, x2, y2, x3, y3: TlqCoord);
 var
   pts: array[1..3] of Windows.TPoint;
 begin
@@ -2375,12 +2375,12 @@ begin
   Windows.Polygon(Fgc, pts, 3);
 end;
 
-function TfpgGDICanvas.DoGetClipRect: TfpgRect;
+function TlqGDICanvas.DoGetClipRect: TlqRect;
 begin
   Result := FClipRect;
 end;
 
-procedure TfpgGDICanvas.DoGetWinRect(out r: TfpgRect);
+procedure TlqGDICanvas.DoGetWinRect(out r: TlqRect);
 var
   wr: TRect;
 begin
@@ -2391,7 +2391,7 @@ begin
   r.Height  := wr.Bottom - wr.Top + 1;
 end;
 
-procedure TfpgGDICanvas.DoSetClipRect(const ARect: TfpgRect);
+procedure TlqGDICanvas.DoSetClipRect(const ARect: TlqRect);
 begin
   FClipRectSet := True;
   FClipRect    := ARect;
@@ -2400,7 +2400,7 @@ begin
   SelectClipRgn(Fgc, FClipRegion);
 end;
 
-procedure TfpgGDICanvas.DoSetColor(cl: TfpgColor);
+procedure TlqGDICanvas.DoSetColor(cl: TlqColor);
 begin
   DeleteObject(FBrush);
   FWindowsColor := fpgColorToWin(cl);
@@ -2409,7 +2409,7 @@ begin
   SelectObject(Fgc, FBrush);
 end;
 
-procedure TfpgGDICanvas.DoSetLineStyle(awidth: integer; astyle: TfpgLineStyle);
+procedure TlqGDICanvas.DoSetLineStyle(awidth: integer; astyle: TlqLineStyle);
 const
   cDot: array[1..2] of DWORD = (1, 1);
   cDash: array[1..4] of DWORD = (4, 2, 4, 2);
@@ -2447,12 +2447,12 @@ begin
   SelectObject(Fgc, FPen);
 end;
 
-procedure TfpgGDICanvas.DoSetTextColor(cl: TfpgColor);
+procedure TlqGDICanvas.DoSetTextColor(cl: TlqColor);
 begin
   Windows.SetTextColor(Fgc, fpgColorToWin(cl));
 end;
 
-procedure TfpgGDICanvas.TryFreeBackBuffer;
+procedure TlqGDICanvas.TryFreeBackBuffer;
 begin
   if FBufferBitmap > 0 then
     DeleteObject(FBufferBitmap);
@@ -2463,15 +2463,15 @@ begin
   FBufgc := 0;
 end;
 
-procedure TfpgGDICanvas.DoSetFontRes(fntres: TfpgFontResourceBase);
+procedure TlqGDICanvas.DoSetFontRes(fntres: TlqFontResourceBase);
 begin
   if fntres = nil then
     Exit; //==>
-  FCurFontRes := TfpgGDIFontResource(fntres);
+  FCurFontRes := TlqGDIFontResource(fntres);
   Windows.SelectObject(Fgc, FCurFontRes.Handle);
 end;
 
-procedure TfpgGDICanvas.DoDrawImagePart(x, y: TfpgCoord; img: TfpgImageBase; xi, yi, w, h: integer);
+procedure TlqGDICanvas.DoDrawImagePart(x, y: TlqCoord; img: TlqImageBase; xi, yi, w, h: integer);
 const
   DSTCOPY     = $00AA0029;
   ROP_DSPDxax = $00E20746;
@@ -2483,22 +2483,22 @@ begin
     Exit; //==>
 
   tmpdc := CreateCompatibleDC(wapplication.display);
-  SelectObject(tmpdc, TfpgGDIImage(img).BMPHandle);
+  SelectObject(tmpdc, TlqGDIImage(img).BMPHandle);
 
-  if TfpgGDIImage(img).FIsTwoColor then
+  if TlqGDIImage(img).FIsTwoColor then
     rop := PATCOPY
   else
     rop := SRCCOPY;
 
-  if TfpgGDIImage(img).MaskHandle > 0 then
-    MaskBlt(Fgc, x, y, w, h, tmpdc, xi, yi, TfpgGDIImage(img).MaskHandle, xi, yi, MakeRop4(rop, DSTCOPY))
+  if TlqGDIImage(img).MaskHandle > 0 then
+    MaskBlt(Fgc, x, y, w, h, tmpdc, xi, yi, TlqGDIImage(img).MaskHandle, xi, yi, MakeRop4(rop, DSTCOPY))
   else
     BitBlt(Fgc, x, y, w, h, tmpdc, xi, yi, rop);
 
   DeleteDC(tmpdc);
 end;
 
-procedure TfpgGDICanvas.DoXORFillRectangle(col: TfpgColor; x, y, w, h: TfpgCoord);
+procedure TlqGDICanvas.DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord);
 var
   hb: HBRUSH;
   nullpen: HPEN;
@@ -2517,9 +2517,9 @@ begin
   SelectObject(Fgc, FPen);
 end;
 
-{ TfpgGDIFontResource }
+{ TlqGDIFontResource }
 
-constructor TfpgGDIFontResource.Create(const afontdesc: string);
+constructor TlqGDIFontResource.Create(const afontdesc: string);
 begin
   FFontData := OpenFontByDesc(afontdesc);
 
@@ -2530,14 +2530,14 @@ begin
   end;
 end;
 
-destructor TfpgGDIFontResource.Destroy;
+destructor TlqGDIFontResource.Destroy;
 begin
   if HandleIsValid then
     Windows.DeleteObject(FFontData);
   inherited;
 end;
 
-function TfpgGDIFontResource.OpenFontByDesc(const desc: string): HFONT;
+function TlqGDIFontResource.OpenFontByDesc(const desc: string): HFONT;
 var
   lf: Windows.LOGFONT;
   facename: string;
@@ -2633,27 +2633,27 @@ begin
   {$ENDIF}
 end;
 
-function TfpgGDIFontResource.HandleIsValid: boolean;
+function TlqGDIFontResource.HandleIsValid: boolean;
 begin
   Result := FFontData <> 0;
 end;
 
-function TfpgGDIFontResource.GetAscent: integer;
+function TlqGDIFontResource.GetAscent: integer;
 begin
   Result := FMetrics.tmAscent;
 end;
 
-function TfpgGDIFontResource.GetDescent: integer;
+function TlqGDIFontResource.GetDescent: integer;
 begin
   Result := FMetrics.tmDescent;
 end;
 
-function TfpgGDIFontResource.GetHeight: integer;
+function TlqGDIFontResource.GetHeight: integer;
 begin
   Result := FMetrics.tmHeight;
 end;
 
-function TfpgGDIFontResource.GetTextWidth(const txt: string): integer;
+function TlqGDIFontResource.GetTextWidth(const txt: string): integer;
 var
   ts: Windows.SIZE;
   WideText: widestring;
@@ -2675,16 +2675,16 @@ begin
   Result := ts.cx;
 end;
 
-{ TfpgGDIImage }
+{ TlqGDIImage }
 
-constructor TfpgGDIImage.Create;
+constructor TlqGDIImage.Create;
 begin
   FBMPHandle  := 0;
   FMaskHandle := 0;
   FIsTwoColor := False;
 end;
 
-procedure TfpgGDIImage.DoFreeImage;
+procedure TlqGDIImage.DoFreeImage;
 begin
   if FBMPHandle > 0 then
     DeleteObject(FBMPHandle);
@@ -2694,7 +2694,7 @@ begin
   FMaskHandle := 0;
 end;
 
-procedure TfpgGDIImage.DoInitImage(acolordepth, awidth, aheight: integer; aimgdata: Pointer);
+procedure TlqGDIImage.DoInitImage(acolordepth, awidth, aheight: integer; aimgdata: Pointer);
 var
   bi: TBitmapInfo;
 begin
@@ -2738,7 +2738,7 @@ type
     bmColors: array[1..2] of longword;
   end;
 
-procedure TfpgGDIImage.DoInitImageMask(awidth, aheight: integer; aimgdata: Pointer);
+procedure TlqGDIImage.DoInitImageMask(awidth, aheight: integer; aimgdata: Pointer);
 var
   bi: TMyMonoBitmap;
   pbi: PBitmapInfo;
@@ -2773,9 +2773,9 @@ begin
   {$ENDIF}
 end;
 
-{ TfpgGDIClipboard }
+{ TlqGDIClipboard }
 
-function TfpgGDIClipboard.DoGetText: TfpgString;
+function TlqGDIClipboard.DoGetText: TlqString;
 var
   h: THANDLE;
   p: PChar;
@@ -2801,7 +2801,7 @@ begin
   Result := FClipboardText;
 end;
 
-procedure TfpgGDIClipboard.DoSetText(const AValue: TfpgString);
+procedure TlqGDIClipboard.DoSetText(const AValue: TlqString);
 var
   mem: THandle;
   po2: PWideChar;
@@ -2837,15 +2837,15 @@ begin
   end;
 end;
 
-procedure TfpgGDIClipboard.InitClipboard;
+procedure TlqGDIClipboard.InitClipboard;
 begin
   // nothing to do here
 end;
 
 
-{ TfpgGDIFileList }
+{ TlqGDIFileList }
 
-function TfpgGDIFileList.EncodeAttributesString(attrs: longword
+function TlqGDIFileList.EncodeAttributesString(attrs: longword
   ): TFileModeString;
 begin
   Result := '';
@@ -2857,13 +2857,13 @@ begin
   if (attrs and FILE_ATTRIBUTE_COMPRESSED) <> 0 then Result := Result + 'c';
 end;
 
-constructor TfpgGDIFileList.Create;
+constructor TlqGDIFileList.Create;
 begin
   inherited Create;
   FHasFileMode := false;
 end;
 
-function TfpgGDIFileList.InitializeEntry(sr: TSearchRec): TFileEntry;
+function TlqGDIFileList.InitializeEntry(sr: TSearchRec): TFileEntry;
 begin
   Result := inherited InitializeEntry(sr);
   if Assigned(Result) then
@@ -2874,7 +2874,7 @@ begin
   end;
 end;
 
-procedure TfpgGDIFileList.PopulateSpecialDirs(const aDirectory: TfpgString);
+procedure TlqGDIFileList.PopulateSpecialDirs(const aDirectory: TlqString);
 const
   MAX_DRIVES = 25;
 var
@@ -2903,9 +2903,9 @@ begin
   inherited PopulateSpecialDirs(aDirectory);
 end;
 
-{ TfpgGDIDrag }
+{ TlqGDIDrag }
 
-function TfpgGDIDrag.StringToHandle(const AString: TfpgString): HGLOBAL;
+function TlqGDIDrag.StringToHandle(const AString: TlqString): HGLOBAL;
 var
   dest: HGLOBAL;
   l: integer;
@@ -2921,20 +2921,20 @@ begin
   Result := dest;
 end;
 
-function TfpgGDIDrag.GetSource: TfpgGDIWindow;
+function TlqGDIDrag.GetSource: TlqGDIWindow;
 begin
   Result := FSource;
 end;
 
-destructor TfpgGDIDrag.Destroy;
+destructor TlqGDIDrag.Destroy;
 begin
   {$IFDEF DND_DEBUG}
-  writeln('TfpgGDIDrag.Destroy ');
+  writeln('TlqGDIDrag.Destroy ');
   {$ENDIF}
   inherited Destroy;
 end;
 
-function TfpgGDIDrag.Execute(const ADropActions: TfpgDropActions; const ADefaultAction: TfpgDropAction): TfpgDropAction;
+function TlqGDIDrag.Execute(const ADropActions: TlqDropActions; const ADefaultAction: TlqDropAction): TlqDropAction;
 var
   dwEffect: DWORD;
   dwResult: HRESULT;
@@ -2942,28 +2942,28 @@ var
   F: PFormatEtc;
   S: string;
   M: PStgMedium;
-  itm: TfpgMimeDataItem;
+  itm: TlqMimeDataItem;
   lEffects: DWORD;
-  FDataObject: TfpgOLEDataObject;
-  FDropSource: TfpgOLEDropSource;
+  FDataObject: TlqOLEDataObject;
+  FDropSource: TlqOLEDropSource;
   lIsTranslated: boolean;
 begin
   if FDragging then
   begin
     {$IFDEF DND_DEBUG}
-    writeln('TfpgGDIDrag.Execute (already dragging)');
+    writeln('TlqGDIDrag.Execute (already dragging)');
     {$ENDIF}
     Result := daIgnore;
   end
   else
   begin
     {$IFDEF DND_DEBUG}
-    writeln('TfpgGDIDrag.Execute (new drag)');
+    writeln('TlqGDIDrag.Execute (new drag)');
     {$ENDIF}
     FDragging := True;
     wapplication.Drag := self;
     lEffects := TranslateToWinDragEffects(ADropActions);
-    FDataObject := TfpgOLEDataObject.Create;
+    FDataObject := TlqOLEDataObject.Create;
 
     for i := 0 to FMimeData.Count-1 do
     begin
@@ -3013,9 +3013,9 @@ begin
       end;
     end;
 
-    uDragSource := TfpgDrag(self).Source as TfpgWidget;
+    uDragSource := TlqDrag(self).Source as TlqWidget;
     { Now let OLE take over from here }
-    FDropSource := TfpgOLEDropSource.Create;
+    FDropSource := TlqOLEDropSource.Create;
     dwResult := ActiveX.DoDragDrop( FDataObject as IDataObject,
                                     FDropSource as IDropSource,
                                     lEffects,
@@ -3065,7 +3065,7 @@ begin
 
 end;
 
-constructor TGDIDragManager.Create(ADropTarget: TfpgWindowBase);
+constructor TGDIDragManager.Create(ADropTarget: TlqWindowBase);
 begin
   inherited Create;
   FDropTarget := ADropTarget;
@@ -3081,12 +3081,12 @@ end;
 
 procedure TGDIDragManager.RegisterDragDrop;
 begin
-  Activex.RegisterDragDrop(TfpgWidget(FDropTarget).WinHandle, self as IDropTarget)
+  Activex.RegisterDragDrop(TlqWidget(FDropTarget).WinHandle, self as IDropTarget)
 end;
 
 procedure TGDIDragManager.RevokeDragDrop;
 begin
-  ActiveX.RevokeDragDrop(TfpgWidget(FDropTarget).WinHandle);
+  ActiveX.RevokeDragDrop(TlqWidget(FDropTarget).WinHandle);
 end;
 
 procedure TimerCallBackProc(window_hwnd : hwnd; msg : DWORD; idEvent: UINT; dwTime: DWORD); stdcall;
@@ -3095,9 +3095,9 @@ begin
   fpgCheckTimers;
 end;
 
-{ TfpgGDITimer }
+{ TlqGDITimer }
 
-procedure TfpgGDITimer.SetEnabled(const AValue: boolean);
+procedure TlqGDITimer.SetEnabled(const AValue: boolean);
 begin
   inherited SetEnabled(AValue);
   if FEnabled then
@@ -3115,36 +3115,36 @@ begin
   end;
 end;
 
-constructor TfpgGDITimer.Create(AInterval: integer);
+constructor TlqGDITimer.Create(AInterval: integer);
 begin
   inherited Create(AInterval);
   FHandle := 0;
 end;
 
 
-{ TfpgGDISystemTrayIcon }
+{ TlqGDISystemTrayIcon }
 
-constructor TfpgGDISystemTrayIcon.Create(AOwner: TComponent);
+constructor TlqGDISystemTrayIcon.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 end;
 
-procedure TfpgGDISystemTrayIcon.Show;
+procedure TlqGDISystemTrayIcon.Show;
 begin
   //
 end;
 
-procedure TfpgGDISystemTrayIcon.Hide;
+procedure TlqGDISystemTrayIcon.Hide;
 begin
   //
 end;
 
-function TfpgGDISystemTrayIcon.IsSystemTrayAvailable: boolean;
+function TlqGDISystemTrayIcon.IsSystemTrayAvailable: boolean;
 begin
   Result := False;
 end;
 
-function TfpgGDISystemTrayIcon.SupportsMessages: boolean;
+function TlqGDISystemTrayIcon.SupportsMessages: boolean;
 begin
    Result := True;
 end;

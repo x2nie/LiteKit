@@ -8,9 +8,9 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    btnClose: TfpgButton;
+    btnClose: TlqButton;
     procedure   btnCloseClick(Sender: TObject);
   protected
     procedure   HandlePaint; override;
@@ -43,10 +43,10 @@ end;
 procedure TMainForm.HandlePaint;
 var
   n: integer;
-  x: TfpgCoord;
-  y: TfpgCoord;
+  x: TlqCoord;
+  y: TlqCoord;
   sl: TStringList;
-  img: TfpgImage;
+  img: TlqImage;
 begin
   Canvas.BeginDraw; // begin double buffering
   inherited HandlePaint;
@@ -60,7 +60,7 @@ begin
   begin
     Canvas.DrawString(x, y, sl[n]+':');
     
-    img := TfpgImage(sl.Objects[n]);
+    img := TlqImage(sl.Objects[n]);
     if img <> nil then
       Canvas.DrawImage(x+130, y, img);
 

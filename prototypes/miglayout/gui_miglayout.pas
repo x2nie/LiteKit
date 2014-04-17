@@ -9,11 +9,11 @@ uses
   
 type
 
-  { TfpgLayoutPanel }
+  { TlqLayoutPanel }
 
-  TfpgLayoutPanel = class(TfpgBevel)
+  TlqLayoutPanel = class(TlqBevel)
   protected
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   Add(AComponent: TComponent; AConstraint: string);
@@ -24,22 +24,22 @@ implementation
 uses
   lq_main;
 
-{ TfpgLayoutPanel }
+{ TlqLayoutPanel }
 
-procedure TfpgLayoutPanel.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqLayoutPanel.HandleResize(awidth, aheight: TlqCoord);
 begin
   writeln('HandleResize');
   inherited HandleResize(awidth, aheight);
 end;
 
-constructor TfpgLayoutPanel.Create(AOwner: TComponent);
+constructor TlqLayoutPanel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Align := alClient;
   Shape := bsSpacer;
 end;
 
-procedure TfpgLayoutPanel.Add(AComponent: TComponent; AConstraint: string);
+procedure TlqLayoutPanel.Add(AComponent: TComponent; AConstraint: string);
 begin
   //
 end;

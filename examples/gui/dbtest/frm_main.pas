@@ -11,7 +11,7 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     DataSet: TDBF;
     DataSource: TDataSource;
@@ -25,20 +25,20 @@ type
     procedure   FormShow(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    btnQuit: TfpgButton;
-    btnFirst: TfpgButton;
-    btnPrev: TfpgButton;
-    btnNext: TfpgButton;
-    btnLast: TfpgButton;
-    lstName1: TfpgListBox;
-    dblblName: TfpgDBLabel;
-    dblblEMail: TfpgDBLabel;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    pnlName1: TfpgBevel;
-    lblName3: TfpgLabel;
-    lblName4: TfpgLabel;
-    lblStatusBar: TfpgLabel;
+    btnQuit: TlqButton;
+    btnFirst: TlqButton;
+    btnPrev: TlqButton;
+    btnNext: TlqButton;
+    btnLast: TlqButton;
+    lstName1: TlqListBox;
+    dblblName: TlqDBLabel;
+    dblblEMail: TlqDBLabel;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    pnlName1: TlqBevel;
+    lblName3: TlqLabel;
+    lblName4: TlqLabel;
+    lblStatusBar: TlqLabel;
     {@VFD_HEAD_END: MainForm}
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -78,7 +78,7 @@ end;
 
 procedure TMainForm.ButtonEnter(Sender: TObject);
 begin
-  lblStatusBar.Text := TfpgButton(Sender).Hint;
+  lblStatusBar.Text := TlqButton(Sender).Hint;
 end;
 
 procedure TMainForm.ButtonExit(Sender: TObject);
@@ -155,7 +155,7 @@ begin
   WindowPosition := wpScreenCenter;
   Sizeable := False;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -166,7 +166,7 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  btnFirst := TfpgButton.Create(self);
+  btnFirst := TlqButton.Create(self);
   with btnFirst do
   begin
     Name := 'btnFirst';
@@ -180,7 +180,7 @@ begin
     OnMouseExit := @ButtonExit;
   end;
 
-  btnPrev := TfpgButton.Create(self);
+  btnPrev := TlqButton.Create(self);
   with btnPrev do
   begin
     Name := 'btnPrev';
@@ -194,7 +194,7 @@ begin
     OnMouseExit := @ButtonExit;
   end;
 
-  btnNext := TfpgButton.Create(self);
+  btnNext := TlqButton.Create(self);
   with btnNext do
   begin
     Name := 'btnNext';
@@ -208,7 +208,7 @@ begin
     OnMouseExit := @ButtonExit;
   end;
 
-  btnLast := TfpgButton.Create(self);
+  btnLast := TlqButton.Create(self);
   with btnLast do
   begin
     Name := 'btnLast';
@@ -222,7 +222,7 @@ begin
     OnMouseExit := @ButtonExit;
   end;
 
-  lstName1 := TfpgListBox.Create(self);
+  lstName1 := TlqListBox.Create(self);
   with lstName1 do
   begin
     Name := 'lstName1';
@@ -230,21 +230,21 @@ begin
     FontDesc := '#List';
   end;
 
-  dblblName := TfpgDBLabel.Create(self);
+  dblblName := TlqDBLabel.Create(self);
   with dblblName do
   begin
     Name := 'dblblName';
     SetPosition(104, 208, 304, 20);
   end;
 
-  dblblEMail := TfpgDBLabel.Create(self);
+  dblblEMail := TlqDBLabel.Create(self);
   with dblblEMail do
   begin
     Name := 'dblblEMail';
     SetPosition(104, 228, 304, 20);
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -253,7 +253,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -262,7 +262,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  pnlName1 := TfpgBevel.Create(self);
+  pnlName1 := TlqBevel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
@@ -271,7 +271,7 @@ begin
     Style := bsLowered;
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -280,7 +280,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -289,7 +289,7 @@ begin
     FontDesc := '#Label2';
   end;
 
-  lblStatusBar := TfpgLabel.Create(pnlName1);
+  lblStatusBar := TlqLabel.Create(pnlName1);
   with lblStatusBar do
   begin
     Name := 'lblStatusBar';

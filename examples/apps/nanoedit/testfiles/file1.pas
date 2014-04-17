@@ -13,16 +13,16 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     procedure miOpenClick(Sender: TObject);
     procedure miSaveClick(Sender: TObject);
     procedure miQuitClick(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainFrom}
-    menu: TfpgMenuBar;
-    mnuFile: TfpgPopupMenu;
-    memEditor: TfpgMemo;
+    menu: TlqMenuBar;
+    mnuFile: TlqPopupMenu;
+    memEditor: TlqMemo;
     {@VFD_HEAD_END: MainFrom}
 
     procedure AfterCreate; override;
@@ -36,9 +36,9 @@ implementation
 
 procedure TMainForm.miOpenClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if dlg.RunOpenFile then
     begin
@@ -51,9 +51,9 @@ end;
 
 procedure TMainForm.miSaveClick(Sender: TObject);
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
 begin
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if dlg.RunSaveFile then
     begin
@@ -76,14 +76,14 @@ begin
   WindowPosition := wpScreenCenter;
   WindowTitle := 'fpGUI nanoedit';
 
-  menu := TfpgMenuBar.Create(self);
+  menu := TlqMenuBar.Create(self);
   with menu do
   begin
     SetPosition(0, 0, 500, 24);
     Anchors := [anTop, anLeft, anRight];
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     SetPosition(320, 4, 120, 20);
@@ -92,7 +92,7 @@ begin
     AddMenuItem('Quit', '', @miQuitClick);
   end;
 
-  memEditor := TfpgMemo.Create(self);
+  memEditor := TlqMemo.Create(self);
   with memEditor do
   begin
     SetPosition(0, 24, 500, 324);

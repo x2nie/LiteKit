@@ -33,18 +33,18 @@ const
   CFSTR_FILECONTENTS          = 'FileContents';           { CF_FILECONTENTS }
 
 type
-  TfpgOLEFormatEtcList = class(TList)
+  TlqOLEFormatEtcList = class(TList)
   private
     function    GetFormatEtc(Index: Integer): PFormatEtc;
   protected
     procedure   Notify(Ptr: Pointer; Action: TListNotification); override;
   public
-    constructor CreateCopy(AFormatEtcList: TfpgOLEFormatEtcList);
+    constructor CreateCopy(AFormatEtcList: TlqOLEFormatEtcList);
     property    FormatEtc[Index: Integer]: PFormatEtc read GetFormatEtc; default;
   end;
 
 
-  TfpgOLEStgMediumList = class(TList)
+  TlqOLEStgMediumList = class(TList)
   private
     function    GetStgMedium(Index: Integer): PStgMedium;
   protected
@@ -54,7 +54,7 @@ type
   end;
 
 
-  TfpgOLEDropSource = class(TInterfacedObject, IDropSource)
+  TlqOLEDropSource = class(TInterfacedObject, IDropSource)
   private
     { IDropSource }
     {$IF FPC_FULLVERSION>=20601}
@@ -67,20 +67,20 @@ type
   end;
 
 
-  TfpgOLEDragDropEffect = (deNone, deCopy, deMove, deLink);
-  TfpgOLEDragEnterEvent = procedure(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; var Effect: DWORD) of object;
-  TfpgOLEDragOverEvent = procedure(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TfpgOLEDragDropEffect) of object;
-  TfpgOLEDragDropEvent = procedure(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TfpgOLEDragDropEffect) of object;
+  TlqOLEDragDropEffect = (deNone, deCopy, deMove, deLink);
+  TlqOLEDragEnterEvent = procedure(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; var Effect: DWORD) of object;
+  TlqOLEDragOverEvent = procedure(Sender: TObject; KeyState: Longint; PT: TPoint; var Effect: TlqOLEDragDropEffect) of object;
+  TlqOLEDragDropEvent = procedure(Sender: TObject; DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TlqOLEDragDropEffect) of object;
 
 
-  TfpgOLEDropTarget = class(TObject, IInterface, IDropTarget)
+  TlqOLEDropTarget = class(TObject, IInterface, IDropTarget)
   private
-    FDropTarget: TfpgWindowBase;
+    FDropTarget: TlqWindowBase;
     FRegistered: Boolean;
-    FOnDragEnter: TfpgOLEDragEnterEvent;
-    FOnDragOver: TfpgOLEDragOverEvent;
+    FOnDragEnter: TlqOLEDragEnterEvent;
+    FOnDragOver: TlqOLEDragOverEvent;
     FOnDragLeave: TNotifyEvent;
-    FOnDragDrop: TfpgOLEDragDropEvent;
+    FOnDragDrop: TlqOLEDragDropEvent;
   private
     { IInterface }
     function    QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} iid: TGuid; out obj): LongInt; stdcall;
@@ -93,27 +93,27 @@ type
     function    Drop(const dataObj: IDataObject; grfKeyState: DWORD; pt: TPoint; var dwEffect: DWORD): HResult; stdcall;
   protected
     procedure   DoDragEnter(DataObj: IDataObject; KeyState: Longint; PT: TPoint; var Effect: DWORD); virtual;
-    procedure   DoDragOver(KeyState: Longint; PT: TPoint; var Effect: TfpgOLEDragDropEffect); virtual;
+    procedure   DoDragOver(KeyState: Longint; PT: TPoint; var Effect: TlqOLEDragDropEffect); virtual;
     procedure   DoDragLeave;
-    procedure   DoDragDrop(DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TfpgOLEDragDropEffect); virtual;
+    procedure   DoDragDrop(DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TlqOLEDragDropEffect); virtual;
   public
-    property    OnDragEnter: TfpgOLEDragEnterEvent read FOnDragEnter write FOnDragEnter;
-    property    OnDragOver: TfpgOLEDragOverEvent read FOnDragOver write FOnDragOver;
+    property    OnDragEnter: TlqOLEDragEnterEvent read FOnDragEnter write FOnDragEnter;
+    property    OnDragOver: TlqOLEDragOverEvent read FOnDragOver write FOnDragOver;
     property    OnDragLeave: TNotifyEvent read FOnDragLeave write FOnDragLeave;
-    property    OnDragDrop: TfpgOLEDragDropEvent read FOnDragDrop write FOnDragDrop;
+    property    OnDragDrop: TlqOLEDragDropEvent read FOnDragDrop write FOnDragDrop;
   public
-    constructor Create(ADropTargetWidget: TfpgWindowBase); reintroduce; { Actually a TfpgWidget }
+    constructor Create(ADropTargetWidget: TlqWindowBase); reintroduce; { Actually a TlqWidget }
     destructor  Destroy; override;
     procedure   RegisterDragDrop;
     procedure   RevokeDragDrop;
-    property    DropTarget: TfpgWindowBase read FDropTarget;
+    property    DropTarget: TlqWindowBase read FDropTarget;
   end;
 
 
-  TfpgOLEDataObject = class(TInterfacedObject, IDataObject)
+  TlqOLEDataObject = class(TInterfacedObject, IDataObject)
   private
-    FFormatEtcList: TfpgOLEFormatEtcList;
-    FStgMediumList: TfpgOLEStgMediumList;
+    FFormatEtcList: TlqOLEFormatEtcList;
+    FStgMediumList: TlqOLEStgMediumList;
     function    LookupFormatEtc(AFormat: TFormatEtc): Integer;
   protected
     { IDataObject }
@@ -128,16 +128,16 @@ type
     function    EnumDAdvise(out enumAdvise: IEnumStatData): HResult; stdcall;
   public
     constructor Create; overload;
-    constructor Create(AFormatEtcList: TfpgOLEFormatEtcList); overload;
+    constructor Create(AFormatEtcList: TlqOLEFormatEtcList); overload;
     destructor  Destroy; override;
-    property    FormatEtcList: TfpgOLEFormatEtcList read FFormatEtcList;
-    property    StgMediumList: TfpgOLEStgMediumList read FStgMediumList;
+    property    FormatEtcList: TlqOLEFormatEtcList read FFormatEtcList;
+    property    StgMediumList: TlqOLEStgMediumList read FStgMediumList;
   end;
 
 
-  TfpgOLEEnumFormatEtc = class(TInterfacedObject, IEnumFORMATETC)
+  TlqOLEEnumFormatEtc = class(TInterfacedObject, IEnumFORMATETC)
   private
-    FFormatEtcList: TfpgOLEFormatEtcList;
+    FFormatEtcList: TlqOLEFormatEtcList;
     FIndex: Integer;
   protected
     { IEnumFORMATETC }
@@ -146,7 +146,7 @@ type
     function    Reset: HResult; stdcall;
     function    Clone(out Enum: IEnumFormatEtc): HResult; stdcall;
   public
-    constructor Create(AFormatEtcList: TfpgOLEFormatEtcList);
+    constructor Create(AFormatEtcList: TlqOLEFormatEtcList);
     destructor  Destroy; override;
   end;
 
@@ -173,7 +173,7 @@ type
   TDropFilesEvent = procedure(Sender: TObject; PT: TPoint; FileNames: TStrings) of object;
 
 
-  TDragFilesTarget = class(TfpgOLEDropTarget)
+  TDragFilesTarget = class(TlqOLEDropTarget)
   private
     FDragAcceptFiles: Boolean;
     FOnDragAcceptFiles: TDragAcceptFilesEvent;
@@ -186,8 +186,8 @@ type
     function    DoDragAcceptPosition(PT: TPoint): Boolean;
     procedure   DoDropFiles(DataObj: IDataObject; PT: TPoint);
     procedure   DoDragEnter(DataObj: IDataObject; KeyState: Longint; PT: TPoint; var Effect: DWORD); override;
-    procedure   DoDragOver(KeyState: Longint; PT: TPoint; var Effect: TfpgOLEDragDropEffect); override;
-    procedure   DoDragDrop(DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TfpgOLEDragDropEffect); override;
+    procedure   DoDragOver(KeyState: Longint; PT: TPoint; var Effect: TlqOLEDragDropEffect); override;
+    procedure   DoDragDrop(DataObj: IDataObject; KeyState: Longint; PT: TPoint; Effect: TlqOLEDragDropEffect); override;
   public
     property    OnDragAcceptFiles: TDragAcceptFilesEvent read FOnDragAcceptFiles write FOnDragAcceptFiles;
     property    OnDragAcceptPosition: TDragAcceptPositionEvent read FOnDragAcceptPosition write FOnDragAcceptPosition;
@@ -234,7 +234,7 @@ begin
   if AMime = 'text/html' then
   begin
     { We don't want duplicate CF_TEXT in DataObject, so register some of our
-      known convenience types (from TfpgMimeData) as-is }
+      known convenience types (from TlqMimeData) as-is }
     IsTranslated := False;
     Result := RegisterClipboardFormat('text/html');
   end
@@ -356,8 +356,8 @@ end;
 
 procedure TDragFilesSource.Execute;
 var
-  DataObject: TfpgOLEDataObject;
-  DropSource: TfpgOLEDropSource;
+  DataObject: TlqOLEDataObject;
+  DropSource: TlqOLEDropSource;
   dwEffect: DWORD;
   dwResult: HRESULT;
   I: Integer;
@@ -365,7 +365,7 @@ var
   S: string;
   M: PStgMedium;
 begin
-  DataObject := TfpgOLEDataObject.Create;
+  DataObject := TlqOLEDataObject.Create;
 
   { append filenames as one long string delimited by #0. ie: something like a PChar }
   S := '';
@@ -428,7 +428,7 @@ begin
     DataObject.StgMediumList.Add(M);
   end;
 
-  DropSource := TfpgOLEDropSource.Create;
+  DropSource := TlqOLEDropSource.Create;
   dwResult := ActiveX.DoDragDrop(DataObject as IDataObject, DropSource as IDropSource, DROPEFFECT_COPY, @dwEffect);
 
   if dwResult = DRAGDROP_S_DROP then
@@ -460,21 +460,21 @@ begin
   FFileNames.Assign(Value);
 end;
 
-{ TfpgOLEDropSource }
+{ TlqOLEDropSource }
 
 {$IF FPC_FULLVERSION>=20601}
-function TfpgOLEDropSource.GiveFeedback(dwEffect: DWORD): HResult;
+function TlqOLEDropSource.GiveFeedback(dwEffect: DWORD): HResult;
 {$ELSE}
-function TfpgOLEDropSource.GiveFeedback(dwEffect: longint): HResult;
+function TlqOLEDropSource.GiveFeedback(dwEffect: longint): HResult;
 {$ENDIF}
 begin
   Result := DRAGDROP_S_USEDEFAULTCURSORS;
 end;
 
 {$IF FPC_FULLVERSION>=20601}
-function TfpgOLEDropSource.QueryContinueDrag(fEscapePressed: BOOL; grfKeyState: DWORD):HResult;
+function TlqOLEDropSource.QueryContinueDrag(fEscapePressed: BOOL; grfKeyState: DWORD):HResult;
 {$ELSE}
-function TfpgOLEDropSource.QueryContinueDrag(fEscapePressed: BOOL; grfKeyState: LongInt): HResult;
+function TlqOLEDropSource.QueryContinueDrag(fEscapePressed: BOOL; grfKeyState: LongInt): HResult;
 {$ENDIF}
 begin
   if FEscapePressed then
@@ -484,55 +484,55 @@ begin
   else
     Result := S_OK;
   {$IFDEF DND_DEBUG}
-  writeln('TfpgOLEDropSource.QueryContinueDrag  Result = ', Result);
+  writeln('TlqOLEDropSource.QueryContinueDrag  Result = ', Result);
   {$ENDIF}
 end;
 
-{ TfpgOLEDataObject }
+{ TlqOLEDataObject }
 
-constructor TfpgOLEDataObject.Create(AFormatEtcList: TfpgOLEFormatEtcList);
+constructor TlqOLEDataObject.Create(AFormatEtcList: TlqOLEFormatEtcList);
 begin
   inherited Create;
-  FFormatEtcList := TfpgOLEFormatEtcList.CreateCopy(AFormatEtcList);
-  FStgMediumList := TfpgOLEStgMediumList.Create;
+  FFormatEtcList := TlqOLEFormatEtcList.CreateCopy(AFormatEtcList);
+  FStgMediumList := TlqOLEStgMediumList.Create;
 end;
 
-constructor TfpgOLEDataObject.Create;
+constructor TlqOLEDataObject.Create;
 begin
   inherited Create;
-  FFormatEtcList := TfpgOLEFormatEtcList.Create;
-  FStgMediumList := TfpgOLEStgMediumList.Create;
+  FFormatEtcList := TlqOLEFormatEtcList.Create;
+  FStgMediumList := TlqOLEStgMediumList.Create;
 end;
 
-function TfpgOLEDataObject.DAdvise(const formatetc: TFormatEtc; advf: DWORD;
+function TlqOLEDataObject.DAdvise(const formatetc: TFormatEtc; advf: DWORD;
   const advSink: IAdviseSink; out dwConnection: DWORD): HResult;
 begin
   Result := OLE_E_ADVISENOTSUPPORTED;
 end;
 
-destructor TfpgOLEDataObject.Destroy;
+destructor TlqOLEDataObject.Destroy;
 begin
   FreeAndNil(FFormatEtcList);
   FreeAndNil(FStgMediumList);
   inherited Destroy;
 end;
 
-function TfpgOLEDataObject.DUnadvise(dwConnection: DWORD): HResult;
+function TlqOLEDataObject.DUnadvise(dwConnection: DWORD): HResult;
 begin
   Result := OLE_E_ADVISENOTSUPPORTED;
 end;
 
-function TfpgOLEDataObject.EnumDAdvise(out enumAdvise: IEnumStatData): HResult;
+function TlqOLEDataObject.EnumDAdvise(out enumAdvise: IEnumStatData): HResult;
 begin
   Result := OLE_E_ADVISENOTSUPPORTED;
 end;
 
-function TfpgOLEDataObject.EnumFormatEtc(dwDirection: DWORD;
+function TlqOLEDataObject.EnumFormatEtc(dwDirection: DWORD;
   out enumFormatEtc: IEnumFormatEtc): HResult;
 begin
   if dwDirection = DATADIR_GET then
   begin
-    enumFormatEtc := TfpgOLEEnumFormatEtc.Create(FFormatEtcList) as IEnumFormatEtc;
+    enumFormatEtc := TlqOLEEnumFormatEtc.Create(FFormatEtcList) as IEnumFormatEtc;
     Result := S_OK;
   end
   else begin
@@ -540,7 +540,7 @@ begin
   end;
 end;
 
-function TfpgOLEDataObject.GetCanonicalFormatEtc(const formatetc: TFormatEtc;
+function TlqOLEDataObject.GetCanonicalFormatEtc(const formatetc: TFormatEtc;
   out formatetcOut: TFormatEtc): HResult;
 begin
   // Apparently we have to set this field to NULL even though we don't do anything else
@@ -548,7 +548,7 @@ begin
   Result := E_NOTIMPL;
 end;
 
-function TfpgOLEDataObject.GetData(const formatetcIn: TFormatEtc;
+function TlqOLEDataObject.GetData(const formatetcIn: TFormatEtc;
   out medium: TStgMedium): HResult;
 var
   Idx: Integer;
@@ -570,13 +570,13 @@ begin
   end;
 end;
 
-function TfpgOLEDataObject.GetDataHere(const formatetc: TFormatEtc;
+function TlqOLEDataObject.GetDataHere(const formatetc: TFormatEtc;
   out medium: TStgMedium): HResult;
 begin
   Result := DV_E_FORMATETC;
 end;
 
-function TfpgOLEDataObject.LookupFormatEtc(AFormat: TFormatEtc): Integer;
+function TlqOLEDataObject.LookupFormatEtc(AFormat: TFormatEtc): Integer;
 var
   I: Integer;
 begin
@@ -591,7 +591,7 @@ begin
   end;
 end;
 
-function TfpgOLEDataObject.QueryGetData(const formatetc: TFormatEtc): HResult;
+function TlqOLEDataObject.QueryGetData(const formatetc: TFormatEtc): HResult;
 begin
   if LookupFormatEtc(formatetc) >= 0 then begin
     Result := S_OK;
@@ -601,39 +601,39 @@ begin
   end;
 end;
 
-function TfpgOLEDataObject.SetData(const formatetc: TFormatEtc;
+function TlqOLEDataObject.SetData(const formatetc: TFormatEtc;
   const medium: TStgMedium; fRelease: BOOL): HResult;
 begin
   Result := E_NOTIMPL;
 end;
 
-{ TfpgOLEEnumFormatEtc }
+{ TlqOLEEnumFormatEtc }
 
-function TfpgOLEEnumFormatEtc.Clone(out Enum: IEnumFormatEtc): HResult;
+function TlqOLEEnumFormatEtc.Clone(out Enum: IEnumFormatEtc): HResult;
 var
-  C: TfpgOLEEnumFormatEtc;
+  C: TlqOLEEnumFormatEtc;
 begin
   // make a duplicate enumerator
-  C := TfpgOLEEnumFormatEtc.Create(FFormatEtcList);
+  C := TlqOLEEnumFormatEtc.Create(FFormatEtcList);
   // manually set the index state
   C.FIndex := FIndex;
   Enum := C as IEnumFormatEtc;
   Result := S_OK;
 end;
 
-constructor TfpgOLEEnumFormatEtc.Create(AFormatEtcList: TfpgOLEFormatEtcList);
+constructor TlqOLEEnumFormatEtc.Create(AFormatEtcList: TlqOLEFormatEtcList);
 begin
-  FFormatEtcList := TfpgOLEFormatEtcList.CreateCopy(AFormatEtcList);
+  FFormatEtcList := TlqOLEFormatEtcList.CreateCopy(AFormatEtcList);
   FIndex := 0;
 end;
 
-destructor TfpgOLEEnumFormatEtc.Destroy;
+destructor TlqOLEEnumFormatEtc.Destroy;
 begin
   FreeAndNil(FFormatEtcList);
   inherited;
 end;
 
-function TfpgOLEEnumFormatEtc.Next(celt: ULong; out elt:FormatEtc;
+function TlqOLEEnumFormatEtc.Next(celt: ULong; out elt:FormatEtc;
   pceltFetched: pULong): HResult;
 var
   Copied: Integer;
@@ -658,22 +658,22 @@ begin
   else Result := S_FALSE;
 end;
 
-function TfpgOLEEnumFormatEtc.Reset: HResult;
+function TlqOLEEnumFormatEtc.Reset: HResult;
 begin
   FIndex := 0;
   Result := S_OK;
 end;
 
-function TfpgOLEEnumFormatEtc.Skip(celt: ULong): HResult;
+function TlqOLEEnumFormatEtc.Skip(celt: ULong): HResult;
 begin
   FIndex := FIndex + celt;
   if FIndex <= FFormatEtcList.Count then Result := S_OK
   else Result := S_FALSE;
 end;
 
-{ TfpgOLEFormatEtcList }
+{ TlqOLEFormatEtcList }
 
-constructor TfpgOLEFormatEtcList.CreateCopy(AFormatEtcList: TfpgOLEFormatEtcList);
+constructor TlqOLEFormatEtcList.CreateCopy(AFormatEtcList: TlqOLEFormatEtcList);
 var
   I: Integer;
   P: PFormatEtc;
@@ -686,12 +686,12 @@ begin
   end;
 end;
 
-function TfpgOLEFormatEtcList.GetFormatEtc(Index: Integer): PFormatEtc;
+function TlqOLEFormatEtcList.GetFormatEtc(Index: Integer): PFormatEtc;
 begin
   Result := PFormatEtc(Get(Index));
 end;
 
-procedure TfpgOLEFormatEtcList.Notify(Ptr: Pointer; Action: TListNotification);
+procedure TlqOLEFormatEtcList.Notify(Ptr: Pointer; Action: TListNotification);
 begin
   if Action = lnDeleted then begin
     if PFormatEtc(Ptr)^.ptd <> nil then begin
@@ -702,14 +702,14 @@ begin
   inherited;
 end;
 
-{ TfpgOLEStgMediumList }
+{ TlqOLEStgMediumList }
 
-function TfpgOLEStgMediumList.GetStgMedium(Index: Integer): PStgMedium;
+function TlqOLEStgMediumList.GetStgMedium(Index: Integer): PStgMedium;
 begin
   Result := PStgMedium(Get(Index));
 end;
 
-procedure TfpgOLEStgMediumList.Notify(Ptr: Pointer; Action: TListNotification);
+procedure TlqOLEStgMediumList.Notify(Ptr: Pointer; Action: TListNotification);
 begin
   if Action = lnDeleted then begin
     if PStgMedium(Ptr)^.hGlobal <> 0 then begin
@@ -720,12 +720,12 @@ begin
   inherited;
 end;
 
-{ TfpgOLEDropTarget }
+{ TlqOLEDropTarget }
 
-function TfpgOLEDropTarget.DragEnter(const dataObj: IDataObject;
+function TlqOLEDropTarget.DragEnter(const dataObj: IDataObject;
   grfKeyState: DWORD; pt: TPoint; var dwEffect: DWORD): HResult;
 //var
-//  Effect: TfpgOLEDragDropEffect;
+//  Effect: TlqOLEDragDropEffect;
 begin
   //dwEffect := DROPEFFECT_NONE;
   //Effect := deNone;
@@ -739,16 +739,16 @@ begin
   Result := S_OK;
 end;
 
-function TfpgOLEDropTarget.DragLeave: HResult;
+function TlqOLEDropTarget.DragLeave: HResult;
 begin
   Result := S_OK;
   DoDragLeave;
 end;
 
-function TfpgOLEDropTarget.DragOver(grfKeyState: DWORD; pt: TPoint;
+function TlqOLEDropTarget.DragOver(grfKeyState: DWORD; pt: TPoint;
   var dwEffect: DWORD): HResult;
 var
-  Effect: TfpgOLEDragDropEffect;
+  Effect: TlqOLEDragDropEffect;
 begin
   if ((MK_SHIFT and grfKeyState) = MK_SHIFT) and
      ((dwEffect and DROPEFFECT_MOVE) = DROPEFFECT_MOVE) then begin
@@ -772,10 +772,10 @@ begin
   Result := S_OK;
 end;
 
-function TfpgOLEDropTarget.Drop(const dataObj: IDataObject;
+function TlqOLEDropTarget.Drop(const dataObj: IDataObject;
   grfKeyState: DWORD; pt: TPoint; var dwEffect: DWORD): HResult;
 var
-  Effect: TfpgOLEDragDropEffect;
+  Effect: TlqOLEDragDropEffect;
 begin
   if dwEffect and DROPEFFECT_COPY > 0 then
     Effect := deCopy
@@ -789,17 +789,17 @@ begin
   Result := S_OK;
 end;
 
-function TfpgOLEDropTarget._AddRef: longint;
+function TlqOLEDropTarget._AddRef: longint;
 begin
   Result := 1;
 end;
 
-function TfpgOLEDropTarget._Release: longint;
+function TlqOLEDropTarget._Release: longint;
 begin
   Result := 1;
 end;
 
-function TfpgOLEDropTarget.QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} iid: TGuid; out obj): longint; stdcall;
+function TlqOLEDropTarget.QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} iid: TGuid; out obj): longint; stdcall;
 begin
   if GetInterface(IID, Obj) then
     Result := 0
@@ -807,32 +807,32 @@ begin
     Result := E_NOINTERFACE;
 end;
 
-constructor TfpgOLEDropTarget.Create(ADropTargetWidget: TfpgWindowBase);
+constructor TlqOLEDropTarget.Create(ADropTargetWidget: TlqWindowBase);
 begin
   inherited Create;
   FDropTarget := ADropTargetWidget;
   FRegistered := False;
 end;
 
-procedure TfpgOLEDropTarget.RegisterDragDrop;
+procedure TlqOLEDropTarget.RegisterDragDrop;
 begin
-  ActiveX.RegisterDragDrop(TfpgWidget(FDropTarget).WinHandle, Self as IDropTarget);
+  ActiveX.RegisterDragDrop(TlqWidget(FDropTarget).WinHandle, Self as IDropTarget);
   FRegistered := True;
 end;
 
-procedure TfpgOLEDropTarget.RevokeDragDrop;
+procedure TlqOLEDropTarget.RevokeDragDrop;
 begin
   FRegistered := False;
-  ActiveX.RevokeDragDrop(TfpgWidget(FDropTarget).WinHandle);
+  ActiveX.RevokeDragDrop(TlqWidget(FDropTarget).WinHandle);
 end;
 
-destructor TfpgOLEDropTarget.Destroy;
+destructor TlqOLEDropTarget.Destroy;
 begin
   if FRegistered then RevokeDragDrop;
   inherited;
 end;
 
-procedure TfpgOLEDropTarget.DoDragEnter(DataObj: IDataObject;
+procedure TlqOLEDropTarget.DoDragEnter(DataObj: IDataObject;
   KeyState: LongInt; PT: TPoint; var Effect: DWORD);
 begin
   if Assigned(FOnDragEnter) then begin
@@ -840,22 +840,22 @@ begin
   end;
 end;
 
-procedure TfpgOLEDropTarget.DoDragOver(KeyState: LongInt; PT: TPoint;
-  var Effect: TfpgOLEDragDropEffect);
+procedure TlqOLEDropTarget.DoDragOver(KeyState: LongInt; PT: TPoint;
+  var Effect: TlqOLEDragDropEffect);
 begin
   if Assigned(FOnDragOver) then begin
     FOnDragOver(Self, KeyState, PT, Effect);
   end;
 end;
 
-procedure TfpgOLEDropTarget.DoDragLeave;
+procedure TlqOLEDropTarget.DoDragLeave;
 begin
   if Assigned(FOnDragLeave) then
     FOnDragLeave(self);
 end;
 
-procedure TfpgOLEDropTarget.DoDragDrop(DataObj: IDataObject; KeyState: LongInt;
-  PT: TPoint; Effect: TfpgOLEDragDropEffect);
+procedure TlqOLEDropTarget.DoDragDrop(DataObj: IDataObject; KeyState: LongInt;
+  PT: TPoint; Effect: TlqOLEDragDropEffect);
 begin
   if Assigned(FOnDragDrop) then begin
     FOnDragDrop(Self, DataObj, KeyState, PT, Effect);
@@ -947,7 +947,7 @@ begin
     Effect := DROPEFFECT_NONE;
 end;
 
-procedure TDragFilesTarget.DoDragOver(KeyState: LongInt; PT: TPoint; var Effect: TfpgOLEDragDropEffect);
+procedure TDragFilesTarget.DoDragOver(KeyState: LongInt; PT: TPoint; var Effect: TlqOLEDragDropEffect);
 begin
   if FDragAcceptFiles and DoDragAcceptPosition(PT) then
     inherited DoDragOver(KeyState, PT, Effect)
@@ -956,7 +956,7 @@ begin
 end;
 
 procedure TDragFilesTarget.DoDragDrop(DataObj: IDataObject;
-  KeyState: LongInt; PT: TPoint; Effect: TfpgOLEDragDropEffect);
+  KeyState: LongInt; PT: TPoint; Effect: TlqOLEDragDropEffect);
 begin
   DoDropFiles(DataObj, PT);
   inherited;

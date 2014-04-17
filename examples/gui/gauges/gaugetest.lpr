@@ -21,28 +21,28 @@ uses
 
 type
 
-  TGaugeTest = class(TfpgForm)
+  TGaugeTest = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: GaugeTest}
-    CloseBtn: TfpgButton;
-    Gauge: TfpgGauge;
-    MinusBtn: TfpgButton;
-    PlusBtn: TfpgButton;
-    ProgressBar: TfpgProgressBar;
-    TrackBar: TfpgTrackBar;
-    VertGauge: TfpgGauge;
-    TextGauge: TfpgGauge;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    lblName3: TfpgLabel;
-    lblName4: TfpgLabel;
-    NeedleGauge: TfpgGauge;
-    PieGauge: TfpgGauge;
-    DialGauge: TfpgGauge;
-    lblName5: TfpgLabel;
-    lblName6: TfpgLabel;
-    lblName7: TfpgLabel;
-    SmallNeedle: TfpgGauge;
+    CloseBtn: TlqButton;
+    Gauge: TlqGauge;
+    MinusBtn: TlqButton;
+    PlusBtn: TlqButton;
+    ProgressBar: TlqProgressBar;
+    TrackBar: TlqTrackBar;
+    VertGauge: TlqGauge;
+    TextGauge: TlqGauge;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    lblName3: TlqLabel;
+    lblName4: TlqLabel;
+    NeedleGauge: TlqGauge;
+    PieGauge: TlqGauge;
+    DialGauge: TlqGauge;
+    lblName5: TlqLabel;
+    lblName6: TlqLabel;
+    lblName7: TlqLabel;
+    SmallNeedle: TlqGauge;
     {@VFD_HEAD_END: GaugeTest}
     procedure   AfterCreate; override;
     procedure   OnCloseClick (Sender:TObject);
@@ -63,7 +63,7 @@ begin
   WindowPosition:= wpScreenCenter;
   Sizeable := False;
 
-  CloseBtn := TfpgButton.Create(self);
+  CloseBtn := TlqButton.Create(self);
   with CloseBtn do
   begin
     Name := 'CloseBtn';
@@ -76,7 +76,7 @@ begin
     OnClick:= @OnCloseClick;
   end;
 
-  Gauge := TfpgGauge.Create(self);
+  Gauge := TlqGauge.Create(self);
   with Gauge do
   begin
     Name := 'Gauge';
@@ -84,7 +84,7 @@ begin
     Kind := gkHorizontalBar;
   end;
 
-  MinusBtn := TfpgButton.Create(self);
+  MinusBtn := TlqButton.Create(self);
   with MinusBtn do
   begin
     Name := 'MinusBtn';
@@ -96,7 +96,7 @@ begin
     OnClick:= @OnMinusClick;
   end;
 
-  PlusBtn := TfpgButton.Create(self);
+  PlusBtn := TlqButton.Create(self);
   with PlusBtn do
   begin
     Name := 'PlusBtn';
@@ -108,7 +108,7 @@ begin
     OnClick:= @OnPlusClick;
   end;
 
-  ProgressBar := TfpgProgressBar.Create(self);
+  ProgressBar := TlqProgressBar.Create(self);
   with ProgressBar do
   begin
     Name := 'ProgressBar';
@@ -116,7 +116,7 @@ begin
     ShowCaption := True;
   end;
 
-  TrackBar := TfpgTrackBar.Create(self);
+  TrackBar := TlqTrackBar.Create(self);
   with TrackBar do
   begin
     Name := 'TrackBar';
@@ -125,7 +125,7 @@ begin
     OnChange := @OnTrackBarChange;
   end;
 
-  VertGauge := TfpgGauge.Create(self);
+  VertGauge := TlqGauge.Create(self);
   with VertGauge do
   begin
     Name := 'VertGauge';
@@ -134,7 +134,7 @@ begin
     ShowText := False;
   end;
 
-  TextGauge := TfpgGauge.Create(self);
+  TextGauge := TlqGauge.Create(self);
   with TextGauge do
   begin
     Name := 'TextGauge';
@@ -142,7 +142,7 @@ begin
     Kind := gkText;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -151,7 +151,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -160,7 +160,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -169,7 +169,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -178,7 +178,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  NeedleGauge := TfpgGauge.Create(self);
+  NeedleGauge := TlqGauge.Create(self);
   with NeedleGauge do
   begin
     Name := 'NeedleGauge';
@@ -186,7 +186,7 @@ begin
     Kind := gkNeedle;
   end;
 
-  PieGauge := TfpgGauge.Create(self);
+  PieGauge := TlqGauge.Create(self);
   with PieGauge do
   begin
     Name := 'PieGauge';
@@ -194,7 +194,7 @@ begin
     Kind := gkPie;
   end;
 
-  DialGauge := TfpgGauge.Create(self);
+  DialGauge := TlqGauge.Create(self);
   with DialGauge do
   begin
     Name := 'DialGauge';
@@ -202,7 +202,7 @@ begin
     Kind := gkDial;
   end;
 
-  lblName5 := TfpgLabel.Create(self);
+  lblName5 := TlqLabel.Create(self);
   with lblName5 do
   begin
     Name := 'lblName5';
@@ -211,7 +211,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName6 := TfpgLabel.Create(self);
+  lblName6 := TlqLabel.Create(self);
   with lblName6 do
   begin
     Name := 'lblName6';
@@ -220,7 +220,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName7 := TfpgLabel.Create(self);
+  lblName7 := TlqLabel.Create(self);
   with lblName7 do
   begin
     Name := 'lblName7';
@@ -229,7 +229,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  SmallNeedle := TfpgGauge.Create(self);
+  SmallNeedle := TlqGauge.Create(self);
   with SmallNeedle do
   begin
     Name := 'SmallNeedle';

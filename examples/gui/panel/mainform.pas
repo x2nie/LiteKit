@@ -18,50 +18,50 @@ uses
   lq_checkbox;
 
 type
-  TfrmMain = class(TfpgForm)
+  TfrmMain = class(TlqForm)
   private
-    L_Bevel: TfpgLabel;
-    B_Bevel: TfpgBevel;
-    L_BLabel: TfpgLabel;
-    L_Panel: TfpgLabel;
-    P_Panel: TfpgPanel;
-    L_PLabel: TfpgLabel;
-    L_GroupBox: TfpgLabel;
-    G_GroupBox: TfpgGroupBox;
-    L_GLabel: TfpgLabel;
-    B_Align: TfpgBevel;
-    RB_Left: TfpgRadioButton;
-    RB_Center: TfpgRadioButton;
-    RB_Right: TfpgRadioButton;
-    B_Layout: TfpgBevel;
-    RB_Top: TfpgRadioButton;
-    RB_LCenter: TfpgRadioButton;
-    RB_Bottom: TfpgRadioButton;
-    B_Margin: TfpgBevel;
-    RB_M0: TfpgRadioButton;
-    RB_M2: TfpgRadioButton;
-    RB_M20: TfpgRadioButton;
-    B_LigneSpace: TfpgBevel;
-    RB_LS0: TfpgRadioButton;
-    RB_LS2: TfpgRadioButton;
-    RB_LS5: TfpgRadioButton;
-    RB_LS10: TfpgRadioButton;
-    B_Color: TfpgBevel;
-    RB_Silver: TfpgRadioButton;
-    RB_Yellow: TfpgRadioButton;
-    RB_Cream: TfpgRadioButton;
-    B_TextColor: TfpgBevel;
-    RB_Black: TfpgRadioButton;
-    RB_Blue: TfpgRadioButton;
-    RB_Red: TfpgRadioButton;
-    RB_Green: TfpgRadioButton;
-    B_Style: TfpgBevel;
-    RB_Raised: TfpgRadioButton;
-    RB_Lowered: TfpgRadioButton;
-    Bt_Quit: TfpgButton;
-    cbxShape: TfpgComboBox;
-    cbxBorder: TfpgComboBox;
-    chkEnabled: TfpgCheckBox;
+    L_Bevel: TlqLabel;
+    B_Bevel: TlqBevel;
+    L_BLabel: TlqLabel;
+    L_Panel: TlqLabel;
+    P_Panel: TlqPanel;
+    L_PLabel: TlqLabel;
+    L_GroupBox: TlqLabel;
+    G_GroupBox: TlqGroupBox;
+    L_GLabel: TlqLabel;
+    B_Align: TlqBevel;
+    RB_Left: TlqRadioButton;
+    RB_Center: TlqRadioButton;
+    RB_Right: TlqRadioButton;
+    B_Layout: TlqBevel;
+    RB_Top: TlqRadioButton;
+    RB_LCenter: TlqRadioButton;
+    RB_Bottom: TlqRadioButton;
+    B_Margin: TlqBevel;
+    RB_M0: TlqRadioButton;
+    RB_M2: TlqRadioButton;
+    RB_M20: TlqRadioButton;
+    B_LigneSpace: TlqBevel;
+    RB_LS0: TlqRadioButton;
+    RB_LS2: TlqRadioButton;
+    RB_LS5: TlqRadioButton;
+    RB_LS10: TlqRadioButton;
+    B_Color: TlqBevel;
+    RB_Silver: TlqRadioButton;
+    RB_Yellow: TlqRadioButton;
+    RB_Cream: TlqRadioButton;
+    B_TextColor: TlqBevel;
+    RB_Black: TlqRadioButton;
+    RB_Blue: TlqRadioButton;
+    RB_Red: TlqRadioButton;
+    RB_Green: TlqRadioButton;
+    B_Style: TlqBevel;
+    RB_Raised: TlqRadioButton;
+    RB_Lowered: TlqRadioButton;
+    Bt_Quit: TlqButton;
+    cbxShape: TlqComboBox;
+    cbxBorder: TlqComboBox;
+    chkEnabled: TlqCheckBox;
     procedure chkEnabledChanged(Sender: TObject);
     procedure RB_LeftChange(Sender: TObject);
     procedure RB_CenterChange(Sender: TObject);
@@ -238,8 +238,8 @@ end;
 
 procedure TfrmMain.cbxShapeChange(Sender: TObject);
 begin
-  if Sender is TfpgComboBox then
-    B_Bevel.Shape := TPanelShape((Sender as TfpgComboBox).FocusItem);
+  if Sender is TlqComboBox then
+    B_Bevel.Shape := TPanelShape((Sender as TlqComboBox).FocusItem);
 end;
 
 procedure TfrmMain.cbxBorderChange(Sender: TObject);
@@ -266,11 +266,11 @@ begin
   WindowPosition := wpScreencenter;
   WindowTitle := 'Bevel, Panel and GroupBox demo';
   
-  L_Bevel        := CreateLabel(Self, 50, 30, 'Here is a TfpgBevel');
+  L_Bevel        := CreateLabel(Self, 50, 30, 'Here is a TlqBevel');
   B_Bevel        := CreateBevel(Self, 50, 50, 300, 200, bsBox, bsRaised);
   B_Bevel.BackgroundColor := clYellow;
   L_BLabel       := CreateLabel(B_Bevel, 10, 10, 'A simple label on a bevel');
-  L_Panel        := CreateLabel(Self, 450, 30, 'Here is a TfpgPanel');
+  L_Panel        := CreateLabel(Self, 450, 30, 'Here is a TlqPanel');
   P_Panel        := CreatePanel(Self, 450, 50, 300, 200, 'Panel', bsRaised);
   P_Panel.BackgroundColor := clYellow;
   P_Panel.Alignment := taCenter;
@@ -282,7 +282,7 @@ begin
   P_Panel.Margin := 2;
   P_Panel.WrapText := True;
   L_PLabel       := CreateLabel(P_Panel, 10, 10, 'A simple label on a panel');
-  L_GroupBox     := CreateLabel(Self, 50, 260, 'Here is a TfpgGroupBox');
+  L_GroupBox     := CreateLabel(Self, 50, 260, 'Here is a TlqGroupBox');
   G_GroupBox     := CreateGroupBox(Self, 50, 280, 300, 200, 'Group box', bsRaised);
   G_GroupBox.BackgroundColor := clYellow;
   G_GroupBox.TextColor := clGreen;

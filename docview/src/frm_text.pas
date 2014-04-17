@@ -12,12 +12,12 @@ uses
 
 type
 
-  TTextForm = class(TfpgForm)
+  TTextForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: TextForm}
-    btnClose: TfpgButton;
-    Memo1: TfpgMemo;
-    btnCopy: TfpgButton;
+    btnClose: TlqButton;
+    Memo1: TlqMemo;
+    btnCopy: TlqButton;
     {@VFD_HEAD_END: TextForm}
     procedure btnCopyClicked(Sender: TObject);
   public
@@ -26,13 +26,13 @@ type
 
 {@VFD_NEWFORM_DECL}
 
-procedure ShowText(const ATitle: TfpgString; const AText: TfpgString);
+procedure ShowText(const ATitle: TlqString; const AText: TlqString);
 
 
 implementation
 
 
-procedure ShowText(const ATitle: TfpgString; const AText: TfpgString);
+procedure ShowText(const ATitle: TlqString; const AText: TlqString);
 var
   frm: TTextForm;
 begin
@@ -66,7 +66,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';
@@ -80,7 +80,7 @@ begin
     TabOrder := 1;
   end;
 
-  Memo1 := TfpgMemo.Create(self);
+  Memo1 := TlqMemo.Create(self);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -91,7 +91,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnCopy := TfpgButton.Create(self);
+  btnCopy := TlqButton.Create(self);
   with btnCopy do
   begin
     Name := 'btnCopy';

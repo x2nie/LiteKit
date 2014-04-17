@@ -41,21 +41,21 @@ uses
 
 type
 
-  TwgPaletteButton = class(TfpgButton)
+  TwgPaletteButton = class(TlqButton)
   public
     VFDWidget: TVFDWidgetClass;
   end;
   
 
-  TwgPalette = class(TfpgWidget)
+  TwgPalette = class(TlqWidget)
   protected
     procedure HandlePaint; override;
   end;
   
 
-  TfrmMain = class(TfpgForm)
+  TfrmMain = class(TlqForm)
   private
-    FFileOpenRecent: TfpgMenuItem;
+    FFileOpenRecent: TlqMenuItem;
     procedure   FormShow(Sender: TObject);
     procedure   PaletteBarResized(Sender: TObject);
     procedure   miHelpAboutClick(Sender: TObject);
@@ -63,20 +63,20 @@ type
     procedure   miMRUClick(Sender: TObject; const FileName: string);
   public
     {@VFD_HEAD_BEGIN: frmMain}
-    MainMenu: TfpgMenuBar;
-    btnNewForm: TfpgButton;
-    btnOpen: TfpgButton;
-    btnSave: TfpgButton;
+    MainMenu: TlqMenuBar;
+    btnNewForm: TlqButton;
+    btnOpen: TlqButton;
+    btnSave: TlqButton;
     wgpalette: TwgPalette;
-    chlPalette: TfpgComboBox;
-    filemenu: TfpgPopupMenu;
-    formmenu: TfpgPopupMenu;
-    setmenu: TfpgPopupMenu;
-    miOpenRecentMenu: TfpgPopupMenu;
-    helpmenu: TfpgPopupMenu;
-    previewmenu: TfpgPopupMenu;
+    chlPalette: TlqComboBox;
+    filemenu: TlqPopupMenu;
+    formmenu: TlqPopupMenu;
+    setmenu: TlqPopupMenu;
+    miOpenRecentMenu: TlqPopupMenu;
+    helpmenu: TlqPopupMenu;
+    previewmenu: TlqPopupMenu;
     {@VFD_HEAD_END: frmMain}
-    mru: TfpgMRU;
+    mru: TlqMRU;
     constructor Create(AOwner: TComponent); override;
     function    GetSelectedWidget: TVFDWidgetClass;
     procedure   SetSelectedWidget(wgc: TVFDWidgetClass);
@@ -92,7 +92,7 @@ type
     FList: TList;
     function    GetCount: integer;
   public
-    Widget: TfpgWidget;
+    Widget: TlqWidget;
     constructor Create;
     destructor  Destroy; override;
     procedure   Clear;
@@ -102,9 +102,9 @@ type
   end;
 
 
-  TwgPropertyList = class(TfpgListBox)
+  TwgPropertyList = class(TlqListBox)
   protected
-    procedure   DrawItem(num: integer; rect: TfpgRect; flags: integer); override;
+    procedure   DrawItem(num: integer; rect: TlqRect; flags: integer); override;
     procedure   HandleMouseMove(x, y: integer; btnstate: word; shiftstate: TShiftState); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -129,31 +129,31 @@ type
   end;
 
 
-  TfrmProperties = class(TfpgForm)
+  TfrmProperties = class(TlqForm)
   protected
     procedure HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
   public
-    l1, l2, l3, l4, l5, l6, l7, l8: TfpgLabel;
-    lbClass: TfpgLabel;
-    edName: TfpgEdit;
-    edOther: TfpgMemo;
-    btnTop, btnLeft, btnWidth, btnHeight: TfpgButton;
-    btnAnLeft, btnAnTop, btnAnRight, btnAnBottom: TfpgButton;
+    l1, l2, l3, l4, l5, l6, l7, l8: TlqLabel;
+    lbClass: TlqLabel;
+    edName: TlqEdit;
+    edOther: TlqMemo;
+    btnTop, btnLeft, btnWidth, btnHeight: TlqButton;
+    btnAnLeft, btnAnTop, btnAnRight, btnAnBottom: TlqButton;
     lstProps: TwgPropertyList;
     procedure   AfterCreate; override;
     procedure   BeforeDestruction; override;
   end;
 
 
-  TfrmAbout = class(TfpgForm)
+  TfrmAbout = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: frmAbout}
-    lblName1: TfpgLabel;
-    lblVersion: TfpgLabel;
-    btnName1: TfpgButton;
-    lblName3: TfpgLabel;
-    lblName4: TfpgHyperlink;
-    lblCompiled: TfpgLabel;
+    lblName1: TlqLabel;
+    lblVersion: TlqLabel;
+    btnName1: TlqButton;
+    lblName3: TlqLabel;
+    lblName4: TlqHyperlink;
+    lblCompiled: TlqLabel;
     {@VFD_HEAD_END: frmAbout}
   public
     procedure AfterCreate; override;
@@ -194,7 +194,7 @@ begin
   Sizeable := False;
   WindowPosition := wpScreenCenter;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -204,7 +204,7 @@ begin
     Text := 'fpGUI UI Designer';
   end;
 
-  lblVersion := TfpgLabel.Create(self);
+  lblVersion := TlqLabel.Create(self);
   with lblVersion do
   begin
     Name := 'lblVersion';
@@ -215,7 +215,7 @@ begin
     Text := 'Version:  %s';
   end;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -230,7 +230,7 @@ begin
     TabOrder := 2;
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -240,7 +240,7 @@ begin
     Text := 'Written by Graeme Geldenhuys';
   end;
 
-  lblName4 := TfpgHyperlink.Create(self);
+  lblName4 := TlqHyperlink.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -253,7 +253,7 @@ begin
     HotTrackFont := 'Arial-9:underline';
   end;
 
-  lblCompiled := TfpgLabel.Create(self);
+  lblCompiled := TlqLabel.Create(self);
   with lblCompiled do
   begin
     Name := 'lblCompiled';
@@ -287,7 +287,7 @@ var
   x, y: integer;
   wgc: TVFDWidgetClass;
   btn: TwgPaletteButton;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
   {%region 'Auto-generated GUI code' -fold}
   {@VFD_BODY_BEGIN: frmMain}
@@ -300,7 +300,7 @@ begin
   MinHeight := 82;
   MinWidth := 315;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -308,7 +308,7 @@ begin
     Align := alTop;
   end;
 
-  btnNewForm := TfpgButton.Create(self);
+  btnNewForm := TlqButton.Create(self);
   with btnNewForm do
   begin
     Name := 'btnNewForm';
@@ -325,7 +325,7 @@ begin
     OnClick   := @(maindsgn.OnNewForm);
   end;
 
-  btnOpen := TfpgButton.Create(self);
+  btnOpen := TlqButton.Create(self);
   with btnOpen do
   begin
     Name := 'btnOpen';
@@ -342,7 +342,7 @@ begin
     OnClick   := @(maindsgn.OnLoadFile);
   end;
 
-  btnSave := TfpgButton.Create(self);
+  btnSave := TlqButton.Create(self);
   with btnSave do
   begin
     Name := 'btnSave';
@@ -371,7 +371,7 @@ begin
     OnResize := @PaletteBarResized;
   end;
 
-  chlPalette := TfpgComboBox.Create(self);
+  chlPalette := TlqComboBox.Create(self);
   with chlPalette do
   begin
     Name := 'chlPalette';
@@ -384,7 +384,7 @@ begin
     FocusItem := 0;
   end;
 
-  filemenu := TfpgPopupMenu.Create(self);
+  filemenu := TlqPopupMenu.Create(self);
   with filemenu do
   begin
     Name := 'filemenu';
@@ -402,7 +402,7 @@ begin
     AddMenuItem('Exit', 'Ctrl+Q', @(maindsgn.OnExit));
   end;
 
-  formmenu := TfpgPopupMenu.Create(self);
+  formmenu := TlqPopupMenu.Create(self);
   with formmenu do
   begin
     Name := 'formmenu';
@@ -413,7 +413,7 @@ begin
     AddMenuItem('Edit special...', '', nil).Enabled := False; // TODO
   end;
 
-  setmenu := TfpgPopupMenu.Create(self);
+  setmenu := TlqPopupMenu.Create(self);
   with setmenu do
   begin
     Name := 'setmenu';
@@ -421,14 +421,14 @@ begin
     AddMenuItem('General options...', '', @(maindsgn.OnOptionsClick));
   end;
 
-  miOpenRecentMenu := TfpgPopupMenu.Create(self);
+  miOpenRecentMenu := TlqPopupMenu.Create(self);
   with miOpenRecentMenu do
   begin
     Name := 'miOpenRecentMenu';
     SetPosition(336, 68, 128, 20);
   end;
 
-  helpmenu := TfpgPopupMenu.Create(self);
+  helpmenu := TlqPopupMenu.Create(self);
   with helpmenu do
   begin
     Name := 'helpmenu';
@@ -437,7 +437,7 @@ begin
     AddMenuItem('Product Information...', '', @miHelpAboutClick);
   end;
 
-  previewmenu := TfpgPopupMenu.Create(self);
+  previewmenu := TlqPopupMenu.Create(self);
   with previewmenu do
   begin
     Name := 'previewmenu';
@@ -488,7 +488,7 @@ begin
   
   FFileOpenRecent.SubMenu := miOpenRecentMenu;
 
-  mru := TfpgMRU.Create(self);
+  mru := TlqMRU.Create(self);
   mru.ParentMenuItem  := miOpenRecentMenu;
   mru.OnClick         := @miMRUClick;
   mru.MaxItems        := gINI.ReadInteger('Options', 'MRUFileCount', 4);
@@ -680,7 +680,7 @@ begin
   l7.Anchors := [anLeft, anBottom];
   Inc(y, 16);
 
-  edOther          := TfpgMemo.Create(self);
+  edOther          := TlqMemo.Create(self);
   edOther.SetPosition(0, y, self.Width, self.Height - y);
   edOther.Anchors  := [anLeft, anRight, anBottom];
   edOther.FontDesc := '#Edit2';
@@ -771,14 +771,14 @@ begin
   AllocateEditor;
 end;
 
-procedure TwgPropertyList.DrawItem(num: integer; rect: TfpgRect; flags: integer);
+procedure TwgPropertyList.DrawItem(num: integer; rect: TlqRect; flags: integer);
 var
   x,
   y,
   fy: integer;
   s: string;
   prop: TVFDWidgetProperty;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   prop := Props.GetItem(num);
   if prop = nil then
@@ -928,7 +928,7 @@ end;
 
 procedure TfrmMain.miHelpAboutGUI(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui;
+  TlqMessageDialog.AbouTlqui;
 end;
 
 procedure TfrmMain.miMRUClick(Sender: TObject; const FileName: string);

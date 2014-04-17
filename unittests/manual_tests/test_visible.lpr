@@ -14,22 +14,22 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Edit1: TfpgEdit;
-    Label1: TfpgLabel;
-    Button1: TfpgButton;
-    Memo1: TfpgMemo;
-    CheckBox1: TfpgCheckBox;
-    RadioButton1: TfpgRadioButton;
-    Panel1: TfpgPanel;
-    Edit2: TfpgEdit;
-    Label2: TfpgLabel;
-    CheckBox2: TfpgCheckBox;
-    Memo2: TfpgMemo;
-    MainMenu: TfpgMenuBar;
-    pmFile: TfpgPopupMenu;
+    Edit1: TlqEdit;
+    Label1: TlqLabel;
+    Button1: TlqButton;
+    Memo1: TlqMemo;
+    CheckBox1: TlqCheckBox;
+    RadioButton1: TlqRadioButton;
+    Panel1: TlqPanel;
+    Edit2: TlqEdit;
+    Label2: TlqLabel;
+    CheckBox2: TlqCheckBox;
+    Memo2: TlqMemo;
+    MainMenu: TlqMenuBar;
+    pmFile: TlqPopupMenu;
     {@VFD_HEAD_END: MainForm}
     procedure FormShow(Sender: TObject);
     procedure CheckboxChanged(Sender: TObject);
@@ -50,7 +50,7 @@ var
   indent: integer = 0;
 
 { Output component hierarchy and status of each component's Visible property }
-procedure PrintVisibleState(AComponent: TfpgWidget);
+procedure PrintVisibleState(AComponent: TlqWidget);
 var
   i: integer;
   { Create string equal to indentation level }
@@ -70,9 +70,9 @@ begin
   for i := 0 to AComponent.ComponentCount-1 do
   begin
     if AComponent.Components[i].ComponentCount > 0 then
-      PrintVisibleState(TfpgWidget(AComponent.Components[i]))
+      PrintVisibleState(TlqWidget(AComponent.Components[i]))
     else
-      writeln(Spaces + AComponent.Components[i].ClassName + ': ' + BoolToStr(TfpgWidget(AComponent.Components[i]).Visible, True));
+      writeln(Spaces + AComponent.Components[i].ClassName + ': ' + BoolToStr(TlqWidget(AComponent.Components[i]).Visible, True));
   end;
   dec(indent, 2);
 end;
@@ -114,7 +114,7 @@ begin
   WindowTitle := 'Test Visible property';
   Hint := '';
 
-  Edit1 := TfpgEdit.Create(self);
+  Edit1 := TlqEdit.Create(self);
   with Edit1 do
   begin
     Name := 'Edit1';
@@ -126,7 +126,7 @@ begin
     Visible := False;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -136,7 +136,7 @@ begin
     Text := 'Label';
   end;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -148,7 +148,7 @@ begin
     TabOrder := 2;
   end;
 
-  Memo1 := TfpgMemo.Create(self);
+  Memo1 := TlqMemo.Create(self);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -159,7 +159,7 @@ begin
     TabOrder := 3;
   end;
 
-  CheckBox1 := TfpgCheckBox.Create(self);
+  CheckBox1 := TlqCheckBox.Create(self);
   with CheckBox1 do
   begin
     Name := 'CheckBox1';
@@ -171,7 +171,7 @@ begin
     OnChange  := @CheckboxChanged;
   end;
 
-  RadioButton1 := TfpgRadioButton.Create(self);
+  RadioButton1 := TlqRadioButton.Create(self);
   with RadioButton1 do
   begin
     Name := 'RadioButton1';
@@ -183,7 +183,7 @@ begin
     Text := 'RadioButton';
   end;
 
-  Panel1 := TfpgPanel.Create(self);
+  Panel1 := TlqPanel.Create(self);
   with Panel1 do
   begin
     Name := 'Panel1';
@@ -193,7 +193,7 @@ begin
     Text := '';
   end;
 
-  Edit2 := TfpgEdit.Create(Panel1);
+  Edit2 := TlqEdit.Create(Panel1);
   with Edit2 do
   begin
     Name := 'Edit2';
@@ -205,7 +205,7 @@ begin
     Visible := False;
   end;
 
-  Label2 := TfpgLabel.Create(Panel1);
+  Label2 := TlqLabel.Create(Panel1);
   with Label2 do
   begin
     Name := 'Label2';
@@ -215,7 +215,7 @@ begin
     Text := 'Label';
   end;
 
-  CheckBox2 := TfpgCheckBox.Create(Panel1);
+  CheckBox2 := TlqCheckBox.Create(Panel1);
   with CheckBox2 do
   begin
     Name := 'CheckBox2';
@@ -226,7 +226,7 @@ begin
     Text := 'CheckBox';
   end;
 
-  Memo2 := TfpgMemo.Create(self);
+  Memo2 := TlqMemo.Create(self);
   with Memo2 do
   begin
     Name := 'Memo2';
@@ -248,14 +248,14 @@ begin
     TabOrder := 7;
   end;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
     SetPosition(0, 0, 144, 24);
   end;
 
-  pmFile := TfpgPopupMenu.Create(self);
+  pmFile := TlqPopupMenu.Create(self);
   with pmFile do
   begin
     Name := 'pmFile';

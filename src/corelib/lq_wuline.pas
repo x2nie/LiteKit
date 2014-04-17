@@ -29,8 +29,8 @@ uses
   Classes, SysUtils, lq_base, lq_main;
 
 
-procedure WuLine(ACanvas: TfpgCanvas; Point1, Point2: TPoint; AColor: TfpgColor);
-procedure DrawWuCircle(Canvas: TfpgCanvas; x, y, r: integer; AColor: TfpgColor);
+procedure WuLine(ACanvas: TlqCanvas; Point1, Point2: TPoint; AColor: TlqColor);
+procedure DrawWuCircle(Canvas: TlqCanvas; x, y, r: integer; AColor: TlqColor);
 
 
 implementation
@@ -38,11 +38,11 @@ implementation
 
 type
   // to get access to Protected fields
-  TCanvasHack = class(TfpgCanvas);
+  TCanvasHack = class(TlqCanvas);
   
 
 // Blend a pixel with the current colour
-procedure AlphaBlendPixel(ACanvas: TfpgCanvas; X, Y: integer; R, G, B: word; ARatio: Double);
+procedure AlphaBlendPixel(ACanvas: TlqCanvas; X, Y: integer; R, G, B: word; ARatio: Double);
 var
   LBack, LNew: TRGBTriple;
   LMinusRatio: Double;
@@ -61,7 +61,7 @@ begin
 end;
 
 // Draw a anti-aliased line
-procedure WuLine(ACanvas: TfpgCanvas; Point1, Point2: TPoint; AColor: TfpgColor);
+procedure WuLine(ACanvas: TlqCanvas; Point1, Point2: TPoint; AColor: TlqColor);
 var
   deltax, deltay, loop, start, finish: integer;
   dx, dy, dydx: single; // fractional parts
@@ -143,7 +143,7 @@ begin
 end;
 
 // A very basic circle implementation. Not to pretty, but it works.
-procedure DrawWuCircle(Canvas: TfpgCanvas; x, y, r: integer; AColor: TfpgColor);
+procedure DrawWuCircle(Canvas: TlqCanvas; x, y, r: integer; AColor: TlqColor);
 var
 	x1, y1, x2, y2: integer;
 	dt: integer;

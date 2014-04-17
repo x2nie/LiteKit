@@ -33,15 +33,15 @@ uses
   lq_imagelist;
   
 type
-  TfpgListView    = class;
-  TfpgLVItem      = class;
-  TfpgLVColumns   = class;
-  TfpgLVColumn    = class;
+  TlqListView    = class;
+  TlqLVItem      = class;
+  TlqLVColumns   = class;
+  TlqLVColumn    = class;
   
-  TfpgLVColumnClickEvent = procedure(Listview: TfpgListView; Column: TfpgLVColumn; Button: Integer) of object;
+  TlqLVColumnClickEvent = procedure(Listview: TlqListView; Column: TlqLVColumn; Button: Integer) of object;
   
 
-  TfpgLVColumn = class(TComponent)
+  TlqLVColumn = class(TComponent)
   private
     FAlignment: TAlignment;
     FCaptionAlignment: TAlignment;
@@ -50,7 +50,7 @@ type
     FCaption: String;
     FClickable: Boolean;
     FColumnIndex: Integer;
-    FColumns: TfpgLVColumns;
+    FColumns: TlqLVColumns;
     FHeight: Integer;
     FResizable: Boolean;
     FVisible: Boolean;
@@ -66,7 +66,7 @@ type
     procedure   SetVisible(const AValue: Boolean);
     procedure   SetWidth(const AValue: Integer);
   public
-    constructor Create(AColumns: TfpgLVColumns); reintroduce;
+    constructor Create(AColumns: TlqLVColumns); reintroduce;
     destructor  Destroy; override;
     property    Caption: String read FCaption write SetCaption;
     property    CaptionAlignment: TAlignment read FCaptionAlignment write SetCaptionAlignment;
@@ -81,34 +81,34 @@ type
   end;
   
 
-  TfpgLVColumns = class(TPersistent)
+  TlqLVColumns = class(TPersistent)
   private
-    FListView: TfpgListView;
+    FListView: TlqListView;
     FColumns: TObjectList;
-    function    GetColumn(AIndex: Integer): TfpgLVColumn;
-    procedure   SetColumn(AIndex: Integer; const AValue: TfpgLVColumn);
+    function    GetColumn(AIndex: Integer): TlqLVColumn;
+    procedure   SetColumn(AIndex: Integer; const AValue: TlqLVColumn);
   public
-    constructor Create(AListView: TfpgListView);
+    constructor Create(AListView: TlqListView);
     destructor  Destroy; override;
-    function    Add(AColumn: TfpgLVColumn): Integer;
+    function    Add(AColumn: TlqLVColumn): Integer;
     procedure   Clear;
     procedure   Delete(AIndex: Integer);
-    procedure   Insert(AColumn: TfpgLVColumn; AIndex: Integer);
+    procedure   Insert(AColumn: TlqLVColumn; AIndex: Integer);
     function    Count: Integer;
-    property    Column[AIndex: Integer]: TfpgLVColumn read GetColumn write SetColumn;
+    property    Column[AIndex: Integer]: TlqLVColumn read GetColumn write SetColumn;
   end;
 
 
-  TfpgLVItemStates = (lisNoState, lisSelected, lisFocused, lisHotTrack);
-  TfpgLVItemState = set of TfpgLVItemStates;
+  TlqLVItemStates = (lisNoState, lisSelected, lisFocused, lisHotTrack);
+  TlqLVItemState = set of TlqLVItemStates;
   
-  TfpgLVItemPaintPart = set of (lvppBackground, lvppIcon, lvppText, lvppFocused);
+  TlqLVItemPaintPart = set of (lvppBackground, lvppIcon, lvppText, lvppFocused);
   
-  TfpgLVPaintColumnEvent = procedure(ListView: TfpgListView; Canvas: TfpgCanvas; Column: TfpgLVColumn;
-                                     ColumnIndex: Integer; Area: TfpgRect; var PaintPart: TfpgLVItemPaintPart) of object;
-  TfpgLVPaintItemEvent = procedure(ListView: TfpgListView; Canvas: TfpgCanvas; Item: TfpgLVItem;
-                                   ItemIndex: Integer; Area:TfpgRect; var PaintPart: TfpgLVItemPaintPart) of object;
-  TfpgLVItemSelectEvent = procedure(ListView: TfpgListView; Item: TfpgLVItem;
+  TlqLVPaintColumnEvent = procedure(ListView: TlqListView; Canvas: TlqCanvas; Column: TlqLVColumn;
+                                     ColumnIndex: Integer; Area: TlqRect; var PaintPart: TlqLVItemPaintPart) of object;
+  TlqLVPaintItemEvent = procedure(ListView: TlqListView; Canvas: TlqCanvas; Item: TlqLVItem;
+                                   ItemIndex: Integer; Area:TlqRect; var PaintPart: TlqLVItemPaintPart) of object;
+  TlqLVItemSelectEvent = procedure(ListView: TlqListView; Item: TlqLVItem;
                                     ItemIndex: Integer; Selected: Boolean) of object;
   
   
@@ -120,68 +120,68 @@ type
   end;
   
 
-  TfpgLVItems = class(TObject)
+  TlqLVItems = class(TObject)
   private
     FUpdateCount: Integer;
-    FColumns: TfpgLVColumns;
+    FColumns: TlqLVColumns;
     FCurrentIndexOf: Integer;
     FViewers: TList;
     FItems: TObjectList;
     function    GetCapacity: Integer;
-    function    GetItem(AIndex: Integer): TfpgLVItem;
+    function    GetItem(AIndex: Integer): TlqLVItem;
     procedure   SetCapacity(const AValue: Integer);
-    procedure   SetItem(AIndex: Integer; const AValue: TfpgLVItem);
+    procedure   SetItem(AIndex: Integer; const AValue: TlqLVItem);
     procedure   AddViewer(AValue: IfpgLVItemViewer);
     procedure   DeleteViewer(AValue: IfpgLVItemViewer);
     // interface method triggers
-    procedure   DoChange(AItem: TfpgLVItem);
-    procedure   DoAdd(AItem: TfpgLVItem);
-    procedure   DoDelete(AItem: TfpgLVItem);
+    procedure   DoChange(AItem: TlqLVItem);
+    procedure   DoAdd(AItem: TlqLVItem);
+    procedure   DoDelete(AItem: TlqLVItem);
     procedure   DoEndUpdate;
   public
     constructor Create(AViewer: IfpgLVItemViewer);
     destructor  Destroy; override;
-    function    Add(AItem: TfpgLVItem): Integer;
+    function    Add(AItem: TlqLVItem): Integer;
     function    Count: Integer;
     procedure   Clear;
     procedure   Delete(AIndex: Integer);
-    function    IndexOf(AItem: TfpgLVItem): Integer;
-    procedure   InsertItem(AItem: TfpgLVItem; AIndex: Integer);
+    function    IndexOf(AItem: TlqLVItem): Integer;
+    procedure   InsertItem(AItem: TlqLVItem; AIndex: Integer);
     procedure   BeginUpdate;
     procedure   EndUpdate;
     procedure   Sort(Compare: TListSortCompare);
     property    Capacity: Integer read GetCapacity write SetCapacity;
-    property    Columns: TfpgLVColumns read FColumns;
-    property    Item[AIndex: Integer]: TfpgLVItem read GetItem write SetItem;
+    property    Columns: TlqLVColumns read FColumns;
+    property    Item[AIndex: Integer]: TlqLVItem read GetItem write SetItem;
   end;
   
   
-  TfpgLVItem = class(TObject)
+  TlqLVItem = class(TObject)
   private
     FCaption: String;
     FImageIndex: Integer;
-    FItems: TfpgLVItems;
+    FItems: TlqLVItems;
     FSubItems: TStrings;
     FUserData: Pointer;
-    function    GetSelected(ListView: TfpgListView): Boolean;
+    function    GetSelected(ListView: TlqListView): Boolean;
     function    GetSubItems: TStrings;
     procedure   SetCaption(const AValue: String);
     procedure   SetImageIndex(const AValue: Integer);
-    procedure   SetSelected(ListView: TfpgListView; const AValue: Boolean);
+    procedure   SetSelected(ListView: TlqListView; const AValue: Boolean);
     procedure   SubItemsChanged(Sender: TObject);
     function    SubItemCount: Integer;
   public
-    constructor Create(Items: TfpgLVItems); virtual;
+    constructor Create(Items: TlqLVItems); virtual;
     destructor  Destroy; override;
     property    Caption: String read FCaption write SetCaption;
     property    UserData: Pointer read FUserData write FUserData;
     property    ImageIndex: Integer read FImageIndex write SetImageIndex default -1;
     property    SubItems: TStrings read GetSubItems;
-    property    Selected[ListView: TfpgListView]: Boolean read GetSelected write SetSelected;
+    property    Selected[ListView: TlqListView]: Boolean read GetSelected write SetSelected;
   end;
 
 
-  TfpgListViewSubItems = class(TStrings)
+  TlqListViewSubItems = class(TStrings)
   private
     FList: TFPList;
     FOnChange: TNotifyEvent;
@@ -205,48 +205,48 @@ type
   end;
   
 
-  { TfpgListView }
+  { TlqListView }
 
-  TfpgListView = class(TfpgWidget, IfpgLVItemViewer)
+  TlqListView = class(TlqWidget, IfpgLVItemViewer)
   private
     procedure SetShiftIsPressed(const AValue: Boolean);
   private
-    FImages: array[TfpgLVItemStates] of TfpgImageList;
-    FSubitemImages: array[TfpgLVItemStates] of TfpgImageList;
+    FImages: array[TlqLVItemStates] of TlqImageList;
+    FSubitemImages: array[TlqLVItemStates] of TlqImageList;
     FItemIndex: Integer;
     FMultiSelect: Boolean;
-    FOnPaintColumn: TfpgLVPaintColumnEvent;
-    FOnSelectionChanged: TfpgLVItemSelectEvent;
+    FOnPaintColumn: TlqLVPaintColumnEvent;
+    FOnSelectionChanged: TlqLVItemSelectEvent;
     FSelectionFollowsFocus: Boolean;
     FSelectionShiftStart: Integer;
-    FOnColumnClick: TfpgLVColumnClickEvent;
+    FOnColumnClick: TlqLVColumnClickEvent;
     FSelected: TAVLTree;
     FOldSelected: TAVLTree;
     FUpdateCount: Integer;
-    FVScrollBar: TfpgScrollBar;
-    FHScrollBar: TfpgScrollBar;
-    FColumns: TfpgLVColumns;
-    FItems: TfpgLVItems;
-    FOnPaintItem: TfpgLVPaintItemEvent;
+    FVScrollBar: TlqScrollBar;
+    FHScrollBar: TlqScrollBar;
+    FColumns: TlqLVColumns;
+    FItems: TlqLVItems;
+    FOnPaintItem: TlqLVPaintItemEvent;
     FShowHeaders: Boolean;
-    FResizingColumn: TfpgLVColumn;
+    FResizingColumn: TlqLVColumn;
     FMouseDownPoint: TPoint;
     FScrollBarNeedsUpdate: Boolean;
     FShiftIsPressed: Boolean;
     function    HasImages: Boolean;
-    function    GetImages(AIndex: integer): TfpgImageList;
+    function    GetImages(AIndex: integer): TlqImageList;
     function    GetItemHeight: Integer;
-    procedure   SetImages(AIndex: integer; const AValue: TfpgImageList);
+    procedure   SetImages(AIndex: integer; const AValue: TlqImageList);
     procedure   SetItemIndex(const AValue: Integer);
-    procedure   SetItems(const AValue: TfpgLVItems);
+    procedure   SetItems(const AValue: TlqLVItems);
     procedure   SetMultiSelect(const AValue: Boolean);
-    procedure   SetOnColumnClick(const AValue: TfpgLVColumnClickEvent);
+    procedure   SetOnColumnClick(const AValue: TlqLVColumnClickEvent);
     procedure   SetShowHeaders(const AValue: Boolean);
-    function    SubItemGetImages(AIndex: integer): TfpgImageList;
-    procedure   SubItemSetImages(AIndex: integer; const AValue: TfpgImageList);
+    function    SubItemGetImages(AIndex: integer): TlqImageList;
+    procedure   SubItemSetImages(AIndex: integer; const AValue: TlqImageList);
     procedure   VScrollChange(Sender: TObject; Position: Integer);
     procedure   HScrollChange(Sender: TObject; Position: Integer);
-    function    FindImageForState(AItemIndex: Integer;  AColumnIndex: Integer; AState: TfpgLVItemState): TfpgImage;
+    function    FindImageForState(AItemIndex: Integer;  AColumnIndex: Integer; AState: TlqLVItemState): TlqImage;
     // interface methods
     procedure   ItemDeleted(AIndex: Integer);
     procedure   ItemAdded(AIndex: Integer);
@@ -258,18 +258,18 @@ type
     procedure   SelectionSetRangeEnabled(AStart, AEnd: Integer; AValue: Boolean);
     procedure   SelectionToggleRange(AStart, AEnd: Integer; const ShiftState: TShiftState; IgnoreStartIndex: Boolean);
     procedure   SelectionClear;
-    function    ItemGetSelected(const AItem: TfpgLVItem): Boolean;
-    procedure   ItemSetSelected(const AItem: TfpgLVItem; const AValue: Boolean);
-    function    ItemGetFromPoint(const X, Y: Integer): TfpgLVItem;
-    function    ItemGetRect(AIndex: Integer): TfpgRect;
+    function    ItemGetSelected(const AItem: TlqLVItem): Boolean;
+    procedure   ItemSetSelected(const AItem: TlqLVItem; const AValue: Boolean);
+    function    ItemGetFromPoint(const X, Y: Integer): TlqLVItem;
+    function    ItemGetRect(AIndex: Integer): TlqRect;
     function    ItemIndexFromY(Y: Integer): Integer;
     function    HeaderHeight: Integer;
     procedure   DoRepaint;
-    procedure   DoColumnClick(Column: TfpgLVColumn; Button: Integer);
+    procedure   DoColumnClick(Column: TlqLVColumn; Button: Integer);
     procedure   HandleHeaderMouseMove(x, y: Integer; btnstate: word; Shiftstate: TShiftState);
     property    ShiftIsPressed: Boolean read FShiftIsPressed write SetShiftIsPressed;
   protected
-    procedure   MsgPaint(var msg: TfpgMessageRec); message FPGM_PAINT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseDown(x, y: integer; shiftstate: TShiftState); override;
@@ -279,49 +279,49 @@ type
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandlePaint; override;
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
     procedure   PaintHeaders; virtual;
     procedure   PaintItems; virtual;
     procedure   UpdateScrollBarPositions; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    function    GetClientRect: TfpgRect; override;
+    function    GetClientRect: TlqRect; override;
     procedure   BeginUpdate;
     procedure   EndUpdate;
     procedure   MakeItemVisible(AIndex: Integer; PartialOK: Boolean = False);
-    function    ItemAdd: TfpgLVItem; deprecated;
-    function    AddItem: TfpgLVItem;
-    function    NewItem: TfpgLVItem;
+    function    ItemAdd: TlqLVItem; deprecated;
+    function    AddItem: TlqLVItem;
+    function    NewItem: TlqLVItem;
   published
     property    Align;
-    property    Columns: TfpgLVColumns read FColumns;
+    property    Columns: TlqLVColumns read FColumns;
     property    Enabled;
-    property    HScrollBar: TfpgScrollBar read FHScrollBar;
-    property    Images: TfpgImageList index Ord(lisNoState) read GetImages write SetImages;
-    property    ImagesSelected: TfpgImageList index Ord(lisSelected) read GetImages write SetImages;
-    property    ImagesFocused: TfpgImageList index Ord(lisFocused) read GetImages write SetImages;
-    property    ImagesHotTrack: TfpgImageList index Ord(lisHotTrack) read GetImages write SetImages;
+    property    HScrollBar: TlqScrollBar read FHScrollBar;
+    property    Images: TlqImageList index Ord(lisNoState) read GetImages write SetImages;
+    property    ImagesSelected: TlqImageList index Ord(lisSelected) read GetImages write SetImages;
+    property    ImagesFocused: TlqImageList index Ord(lisFocused) read GetImages write SetImages;
+    property    ImagesHotTrack: TlqImageList index Ord(lisHotTrack) read GetImages write SetImages;
     property    ItemHeight: Integer read GetItemHeight;
     property    ItemIndex: Integer read FItemIndex write SetItemIndex;
-    property    Items: TfpgLVItems read FItems write SetItems;
+    property    Items: TlqLVItems read FItems write SetItems;
     property    Hint;
     property    MultiSelect: Boolean read FMultiSelect write SetMultiSelect;
     property    ParentShowHint;
     property    SelectionFollowsFocus: Boolean read FSelectionFollowsFocus write FSelectionFollowsFocus;
-    property    SubItemImages: TfpgImageList index Ord(lisNoState) read SubItemGetImages write SubItemSetImages;
-    property    SubItemImagesSelected: TfpgImageList index Ord(lisSelected) read SubItemGetImages write SubItemSetImages;
-    property    SubItemImagesFocused: TfpgImageList index Ord(lisFocused) read SubItemGetImages write SubItemSetImages;
-    property    SubItemImagesHotTrack: TfpgImageList index Ord(lisHotTrack) read SubItemGetImages write SubItemSetImages;
+    property    SubItemImages: TlqImageList index Ord(lisNoState) read SubItemGetImages write SubItemSetImages;
+    property    SubItemImagesSelected: TlqImageList index Ord(lisSelected) read SubItemGetImages write SubItemSetImages;
+    property    SubItemImagesFocused: TlqImageList index Ord(lisFocused) read SubItemGetImages write SubItemSetImages;
+    property    SubItemImagesHotTrack: TlqImageList index Ord(lisHotTrack) read SubItemGetImages write SubItemSetImages;
 
     property    ShowHeaders: Boolean read FShowHeaders write SetShowHeaders;
     property    ShowHint;
     property    TabOrder;
-    property    VScrollBar: TfpgScrollBar read FVScrollBar;
-    property    OnColumnClick: TfpgLVColumnClickEvent read FOnColumnClick write SetOnColumnClick;
-    property    OnPaintColumn: TfpgLVPaintColumnEvent read FOnPaintColumn write FOnPaintColumn;
-    property    OnPaintItem: TfpgLVPaintItemEvent read FOnPaintItem write FOnPaintItem;
-    property    OnSelectionChanged: TfpgLVItemSelectEvent read FOnSelectionChanged write FOnSelectionChanged;
+    property    VScrollBar: TlqScrollBar read FVScrollBar;
+    property    OnColumnClick: TlqLVColumnClickEvent read FOnColumnClick write SetOnColumnClick;
+    property    OnPaintColumn: TlqLVPaintColumnEvent read FOnPaintColumn write FOnPaintColumn;
+    property    OnPaintItem: TlqLVPaintItemEvent read FOnPaintItem write FOnPaintItem;
+    property    OnSelectionChanged: TlqLVItemSelectEvent read FOnSelectionChanged write FOnSelectionChanged;
     property    OnShowHint;
   end;
   
@@ -334,11 +334,11 @@ uses
 
 type
   // used to access protected methods
-  TfpgScrollbarFriend = class(TfpgScrollbar)
+  TlqScrollbarFriend = class(TlqScrollbar)
   end;
 
-  PfpgLVSubitemRec = ^TfpgLVSubitemRec;
-  TfpgLVSubitemRec = record
+  PfpgLVSubitemRec = ^TlqLVSubitemRec;
+  TlqLVSubitemRec = record
     AText: String;
     AObject: TObject;
     AImageIndex: Integer;
@@ -360,7 +360,7 @@ begin
   AddNodeNodes(From.Root);
 end;
 
-{ TfpgLVItems }
+{ TlqLVItems }
 
 function Min(AInt, BInt: Integer): Integer;
 begin
@@ -376,33 +376,33 @@ begin
   else Result := BInt;
 end;
 
-function TfpgLVItems.GetItem(AIndex: Integer): TfpgLVItem;
+function TlqLVItems.GetItem(AIndex: Integer): TlqLVItem;
 begin
-  Result := TfpgLVItem(FItems.Items[AIndex]);
+  Result := TlqLVItem(FItems.Items[AIndex]);
 end;
 
-function TfpgLVItems.GetCapacity: Integer;
+function TlqLVItems.GetCapacity: Integer;
 begin
   Result := FItems.Capacity;
 end;
 
-procedure TfpgLVItems.SetCapacity(const AValue: Integer);
+procedure TlqLVItems.SetCapacity(const AValue: Integer);
 begin
   FItems.Capacity := AValue;
 end;
 
-procedure TfpgLVItems.SetItem(AIndex: Integer; const AValue: TfpgLVItem);
+procedure TlqLVItems.SetItem(AIndex: Integer; const AValue: TlqLVItem);
 begin
   FItems.Items[AIndex] := AValue;
 end;
 
-procedure TfpgLVItems.AddViewer(AValue: IfpgLVItemViewer);
+procedure TlqLVItems.AddViewer(AValue: IfpgLVItemViewer);
 begin
   if AValue <> nil then
     FViewers.Add(AValue);
 end;
 
-procedure TfpgLVItems.DeleteViewer(AValue: IfpgLVItemViewer);
+procedure TlqLVItems.DeleteViewer(AValue: IfpgLVItemViewer);
 var
   AIndex: Integer;
 begin
@@ -415,7 +415,7 @@ begin
     Free;
 end;
 
-procedure TfpgLVItems.DoChange(AItem: TfpgLVItem);
+procedure TlqLVItems.DoChange(AItem: TlqLVItem);
 var
   I: Integer;
   AIndex: Integer;
@@ -429,7 +429,7 @@ begin
   end;
 end;
 
-procedure TfpgLVItems.DoAdd(AItem: TfpgLVItem);
+procedure TlqLVItems.DoAdd(AItem: TlqLVItem);
 var
   I: Integer;
   AIndex: Integer;
@@ -443,7 +443,7 @@ begin
   end;
 end;
 
-procedure TfpgLVItems.DoDelete(AItem: TfpgLVItem);
+procedure TlqLVItems.DoDelete(AItem: TlqLVItem);
 var
   I: Integer;
   AIndex: Integer;
@@ -457,7 +457,7 @@ begin
   end;
 end;
 
-procedure TfpgLVItems.DoEndUpdate;
+procedure TlqLVItems.DoEndUpdate;
 var
   I: Integer;
 begin
@@ -469,33 +469,33 @@ begin
   end;
 end;
 
-constructor TfpgLVItems.Create(AViewer: IfpgLVItemViewer);
+constructor TlqLVItems.Create(AViewer: IfpgLVItemViewer);
 begin
   FItems := TObjectList.Create;
   FViewers := TList.Create;
   AddViewer(AViewer);
 end;
 
-destructor TfpgLVItems.Destroy;
+destructor TlqLVItems.Destroy;
 begin
   FItems.Free;
   FViewers.Free;
   inherited Destroy;
 end;
 
-function TfpgLVItems.Add(AItem: TfpgLVItem): Integer;
+function TlqLVItems.Add(AItem: TlqLVItem): Integer;
 begin
   Result := Count;
   InsertItem(AItem, Count);
   DoAdd(AItem);
 end;
 
-function TfpgLVItems.Count: Integer;
+function TlqLVItems.Count: Integer;
 begin
   Result := FItems.Count;
 end;
 
-procedure TfpgLVItems.Clear;
+procedure TlqLVItems.Clear;
 var
   i: integer;
 begin
@@ -504,13 +504,13 @@ begin
   FItems.Clear;
 end;
 
-procedure TfpgLVItems.Delete(AIndex: Integer);
+procedure TlqLVItems.Delete(AIndex: Integer);
 begin
   DoDelete(GetItem(AIndex));
   FItems.Delete(AIndex);
 end;
 
-function TfpgLVItems.IndexOf(AItem: TfpgLVItem): Integer;
+function TlqLVItems.IndexOf(AItem: TlqLVItem): Integer;
 begin
   Result := -1;
   // this checks for a index close to the old one whic can speed up
@@ -529,20 +529,20 @@ begin
   FCurrentIndexOf := Result;
 end;
 
-procedure TfpgLVItems.InsertItem(AItem: TfpgLVItem; AIndex: Integer);
+procedure TlqLVItems.InsertItem(AItem: TlqLVItem; AIndex: Integer);
 begin
-  if AItem.InheritsFrom(TfpgLVItem) then
+  if AItem.InheritsFrom(TlqLVItem) then
     FItems.Insert(AIndex, AItem)
   else
-    raise Exception.CreateFmt(rsErrItemOfWrongType, ['TfpgLVItem']);
+    raise Exception.CreateFmt(rsErrItemOfWrongType, ['TlqLVItem']);
 end;
 
-procedure TfpgLVItems.BeginUpdate;
+procedure TlqLVItems.BeginUpdate;
 begin
   Inc(FUpdateCount);
 end;
 
-procedure TfpgLVItems.EndUpdate;
+procedure TlqLVItems.EndUpdate;
 begin
   Dec(FUpdateCount);
   if FUpdateCount < 0 then
@@ -551,16 +551,16 @@ begin
     DoEndUpdate;
 end;
 
-procedure TfpgLVItems.Sort(Compare: TListSortCompare);
+procedure TlqLVItems.Sort(Compare: TListSortCompare);
 begin
   BeginUpdate;
   FItems.Sort(Compare);
   EndUpdate;
 end;
 
-{ TfpgLVItem }
+{ TlqLVItem }
 
-procedure TfpgLVItem.SetCaption(const AValue: String);
+procedure TlqLVItem.SetCaption(const AValue: String);
 begin
   if FCaption=AValue then
     Exit;
@@ -569,7 +569,7 @@ begin
     FItems.DoChange(Self);
 end;
 
-procedure TfpgLVItem.SetImageIndex(const AValue: Integer);
+procedure TlqLVItem.SetImageIndex(const AValue: Integer);
 begin
   if FImageIndex=AValue then exit;
   FImageIndex:=AValue;
@@ -577,33 +577,33 @@ begin
     FItems.DoChange(Self);
 end;
 
-function TfpgLVItem.GetSelected(ListView: TfpgListView): Boolean;
+function TlqLVItem.GetSelected(ListView: TlqListView): Boolean;
 begin
   Result := ListView.ItemGetSelected(Self);
 end;
 
-function TfpgLVItem.GetSubItems: TStrings;
+function TlqLVItem.GetSubItems: TStrings;
 begin
   if FSubItems = nil then
   begin
-    FSubItems := TfpgListViewSubitems.Create;
-    TfpgListViewSubitems(FSubItems).OnChange := @SubItemsChanged;
+    FSubItems := TlqListViewSubitems.Create;
+    TlqListViewSubitems(FSubItems).OnChange := @SubItemsChanged;
   end;
   Result := FSubItems;
 end;
 
-procedure TfpgLVItem.SetSelected(ListView: TfpgListView; const AValue: Boolean);
+procedure TlqLVItem.SetSelected(ListView: TlqListView; const AValue: Boolean);
 begin
   ListView.ItemSetSelected(Self, AValue);
 end;
 
-procedure TfpgLVItem.SubItemsChanged(Sender: TObject);
+procedure TlqLVItem.SubItemsChanged(Sender: TObject);
 begin
   if Assigned(FItems) then
     FItems.DoChange(Self);
 end;
 
-function TfpgLVItem.SubItemCount: Integer;
+function TlqLVItem.SubItemCount: Integer;
 begin
   Result := 0;
   if FSubItems = nil then
@@ -611,22 +611,22 @@ begin
   Result := FSubItems.Count;
 end;
 
-constructor TfpgLVItem.Create(Items: TfpgLVItems);
+constructor TlqLVItem.Create(Items: TlqLVItems);
 begin
   FItems := Items;
   ImageIndex := -1;
 end;
 
-destructor TfpgLVItem.Destroy;
+destructor TlqLVItem.Destroy;
 begin
   if Assigned(FSubItems) then
     FSubItems.Free;
   inherited Destroy;
 end;
 
-{ TfpgListView }
+{ TlqListView }
 
-procedure TfpgListView.SetShowHeaders(const AValue: Boolean);
+procedure TlqListView.SetShowHeaders(const AValue: Boolean);
 begin
   if FShowHeaders=AValue then
     Exit;
@@ -634,41 +634,41 @@ begin
   DoRePaint;
 end;
 
-function TfpgListView.SubItemGetImages(AIndex: integer): TfpgImageList;
+function TlqListView.SubItemGetImages(AIndex: integer): TlqImageList;
 begin
-  Result :=  FSubItemImages[TfpgLVItemStates(AIndex)];
+  Result :=  FSubItemImages[TlqLVItemStates(AIndex)];
 end;
 
-procedure TfpgListView.SubItemSetImages(AIndex: integer;
-  const AValue: TfpgImageList);
+procedure TlqListView.SubItemSetImages(AIndex: integer;
+  const AValue: TlqImageList);
 begin
-  if AValue = FSubItemImages[TfpgLVItemStates(AIndex)] then
+  if AValue = FSubItemImages[TlqLVItemStates(AIndex)] then
     Exit; // ==>
 
-  FSubItemImages[TfpgLVItemStates(AIndex)] := AValue;
+  FSubItemImages[TlqLVItemStates(AIndex)] := AValue;
   if HasHandle then
     Invalidate;
 end;
   
 
-procedure TfpgListView.VScrollChange(Sender: TObject; Position: Integer);
+procedure TlqListView.VScrollChange(Sender: TObject; Position: Integer);
 begin
   DoRepaint;
 end;
 
-procedure TfpgListView.HScrollChange(Sender: TObject; Position: Integer);
+procedure TlqListView.HScrollChange(Sender: TObject; Position: Integer);
 begin
   DoRepaint;
 end;
 
-function TfpgListView.FindImageForState(AItemIndex: Integer; AColumnIndex: Integer; AState: TfpgLVItemState): TfpgImage;
+function TlqListView.FindImageForState(AItemIndex: Integer; AColumnIndex: Integer; AState: TlqLVItemState): TlqImage;
 var
-  PreferredState: TfpgLVItemStates = lisHotTrack;
-  State: TfpgLVItemStates;
-  Item: TfpgLVItem;
-  ImgList: TfpgImageList;
+  PreferredState: TlqLVItemStates = lisHotTrack;
+  State: TlqLVItemStates;
+  Item: TlqLVItem;
+  ImgList: TlqImageList;
   ImgIndex: Integer;
-  ImagesArray: Array[TfpgLVItemStates] of TfpgImageList;
+  ImagesArray: Array[TlqLVItemStates] of TlqImageList;
 begin
   Result := nil;
   Item := Items.Item[AItemIndex];
@@ -683,7 +683,7 @@ begin
   begin
     ImagesArray := FSubItemImages;
     if (Item.SubItemCount > 0) and (AColumnIndex <= Item.SubItemCount) then
-      ImgIndex := TfpgListViewSubItems(Item.SubItems).ImageIndex[AColumnIndex-1];
+      ImgIndex := TlqListViewSubItems(Item.SubItems).ImageIndex[AColumnIndex-1];
   end;
 
   // later we will make the state preference order configurable
@@ -715,7 +715,7 @@ begin
 
 end;
 
-procedure TfpgListView.SetItems(const AValue: TfpgLVItems);
+procedure TlqListView.SetItems(const AValue: TlqLVItems);
 begin
   if AValue = FItems then
     Exit;
@@ -724,21 +724,21 @@ begin
   Fitems := AValue;
 end;
 
-procedure TfpgListView.SetMultiSelect(const AValue: Boolean);
+procedure TlqListView.SetMultiSelect(const AValue: Boolean);
 begin
   if FMultiSelect=AValue then
     Exit;
   FMultiSelect:=AValue;
 end;
 
-procedure TfpgListView.SetOnColumnClick(const AValue: TfpgLVColumnClickEvent);
+procedure TlqListView.SetOnColumnClick(const AValue: TlqLVColumnClickEvent);
 begin
   if FOnColumnClick=AValue then
     Exit;
   FOnColumnClick:=AValue;
 end;
 
-procedure TfpgListView.SetShiftIsPressed(const AValue: Boolean);
+procedure TlqListView.SetShiftIsPressed(const AValue: Boolean);
 begin
   if AValue = FShiftIsPressed then
     Exit;
@@ -760,9 +760,9 @@ begin
   end;
 end;
 
-function TfpgListView.HasImages: Boolean;
+function TlqListView.HasImages: Boolean;
 var
-  State: TfpgLVItemStates;
+  State: TlqLVItemStates;
 begin
   Result := False;
   for State := lisNoState to lisHotTrack do
@@ -771,28 +771,28 @@ begin
 
 end;
 
-function TfpgListView.GetItemHeight: Integer;
+function TlqListView.GetItemHeight: Integer;
 begin
   Result := Canvas.Font.Height + 4;
 end;
 
-function TfpgListView.GetImages(AIndex: integer): TfpgImageList;
+function TlqListView.GetImages(AIndex: integer): TlqImageList;
 begin
-  Result :=  FImages[TfpgLVItemStates(AIndex)];
+  Result :=  FImages[TlqLVItemStates(AIndex)];
 end;
 
-procedure TfpgListView.SetImages(AIndex: integer; const AValue: TfpgImageList);
+procedure TlqListView.SetImages(AIndex: integer; const AValue: TlqImageList);
 begin
-  if AValue = FImages[TfpgLVItemStates(AIndex)] then
+  if AValue = FImages[TlqLVItemStates(AIndex)] then
     Exit; // ==>
 
-  FImages[TfpgLVItemStates(AIndex)] := AValue;
+  FImages[TlqLVItemStates(AIndex)] := AValue;
   if HasHandle then
     Invalidate;
 end;
 
 
-procedure TfpgListView.SetItemIndex(const AValue: Integer);
+procedure TlqListView.SetItemIndex(const AValue: Integer);
 begin
   if FItemIndex=AValue then
     Exit;
@@ -800,30 +800,30 @@ begin
     FItemIndex:=AValue;
 end;
 
-procedure TfpgListView.ItemDeleted(AIndex: Integer);
+procedure TlqListView.ItemDeleted(AIndex: Integer);
 begin
   if FUpdateCount = 0 then
     DoRePaint;
 end;
 
-procedure TfpgListView.ItemAdded(AIndex: Integer);
+procedure TlqListView.ItemAdded(AIndex: Integer);
 begin
   if FUpdateCount = 0 then
     DoRePaint;
 end;
 
-procedure TfpgListView.ItemChanged(AIndex: Integer);
+procedure TlqListView.ItemChanged(AIndex: Integer);
 begin
   if FUpdateCount = 0 then
     DoRePaint;
 end;
 
-procedure TfpgListView.ItemsUpdated;
+procedure TlqListView.ItemsUpdated;
 begin
   DoRepaint;
 end;
 
-function TfpgListView.GetClientRect: TfpgRect;
+function TlqListView.GetClientRect: TlqRect;
 begin
   Result.Top := 2;
   Result.Left := 2;
@@ -831,7 +831,7 @@ begin
   Result.SetBottom(Height - 2);
 end;
 
-function TfpgListView.GetVisibleColumnsWidth: Integer;
+function TlqListView.GetVisibleColumnsWidth: Integer;
 var
   I: Integer;
 begin
@@ -841,7 +841,7 @@ begin
       Inc(Result, FColumns.Column[I].Width);
 end;
 
-function TfpgListView.GetItemAreaHeight: Integer;
+function TlqListView.GetItemAreaHeight: Integer;
 begin
   Result := Height - 4;
   if ShowHeaders then
@@ -851,7 +851,7 @@ begin
 end;
 
 
-procedure TfpgListView.SelectionSetRangeEnabled(AStart, AEnd: Integer; AValue: Boolean);
+procedure TlqListView.SelectionSetRangeEnabled(AStart, AEnd: Integer; AValue: Boolean);
 var
   TmpI: LongInt;
   I: LongInt;
@@ -872,7 +872,7 @@ begin
   end;
 end;
 
-procedure TfpgListView.SelectionToggleRange(AStart, AEnd: Integer;
+procedure TlqListView.SelectionToggleRange(AStart, AEnd: Integer;
   const ShiftState: TShiftState; IgnoreStartIndex: Boolean);
 var
  TmpI: Integer;
@@ -898,13 +898,13 @@ begin
     end;
 end;
 
-procedure TfpgListView.SelectionClear;
+procedure TlqListView.SelectionClear;
 var
-  Item: TfpgLVItem;
+  Item: TlqLVItem;
 begin
   while FSelected.Root <> nil do
   begin
-    Item := TfpgLVItem(FSelected.Root.Data);
+    Item := TlqLVItem(FSelected.Root.Data);
     FSelected.Delete(FSelected.Root);
     if Assigned(FOnSelectionChanged) then
       FOnSelectionChanged(Self, Item, Items.IndexOf(Item), False);
@@ -912,12 +912,12 @@ begin
 end;
 
 
-function TfpgListView.ItemGetSelected(const AItem: TfpgLVItem): Boolean;
+function TlqListView.ItemGetSelected(const AItem: TlqLVItem): Boolean;
 begin
   Result := FSelected.Find(Pointer(AItem)) <> nil;
 end;
 
-procedure TfpgListView.ItemSetSelected(const AItem: TfpgLVItem; const AValue: Boolean);
+procedure TlqListView.ItemSetSelected(const AItem: TlqLVItem; const AValue: Boolean);
 var
   Node: TAVLTreeNode;
   Changed: Boolean;
@@ -947,7 +947,7 @@ begin
     FOnSelectionChanged(Self, AItem, Items.IndexOf(AItem), AValue);
 end;
 
-function TfpgListView.ItemGetFromPoint(const X, Y: Integer): TfpgLVItem;
+function TlqListView.ItemGetFromPoint(const X, Y: Integer): TlqLVItem;
 var
   Index: Integer;
   ItemTop: Integer;
@@ -967,7 +967,7 @@ begin
   Result := FItems.Item[Index];
 end;
 
-function TfpgListView.ItemGetRect(AIndex: Integer): TfpgRect;
+function TlqListView.ItemGetRect(AIndex: Integer): TlqRect;
 begin
   Result.Top := 2 + (AIndex * ItemHeight) - FVScrollBar.Position;
   if ShowHeaders then
@@ -977,7 +977,7 @@ begin
   Result.Width := GetVisibleColumnsWidth;
 end;
 
-function TfpgListView.ItemIndexFromY(Y: Integer): Integer;
+function TlqListView.ItemIndexFromY(Y: Integer): Integer;
 var
   TopPos: Integer;
 begin
@@ -992,18 +992,18 @@ begin
     Result := -1;
 end;
 
-function TfpgListView.HeaderHeight: Integer;
+function TlqListView.HeaderHeight: Integer;
 begin
   Result := Canvas.Font.Height + 10;
 end;
 
-procedure TfpgListView.DoRepaint;
+procedure TlqListView.DoRepaint;
 begin
   if FUpdateCount = 0 then
     RePaint;
 end;
 
-procedure TfpgListView.DoColumnClick(Column: TfpgLVColumn; Button: Integer);
+procedure TlqListView.DoColumnClick(Column: TlqLVColumn; Button: Integer);
 begin
   if not Column.Clickable then
     Exit;
@@ -1014,14 +1014,14 @@ begin
   Repaint;
 end;
 
-procedure TfpgListView.HandleHeaderMouseMove(x, y: Integer; btnstate: word;
+procedure TlqListView.HandleHeaderMouseMove(x, y: Integer; btnstate: word;
   Shiftstate: TShiftState);
 var
   I: Integer;
   curLeft: Integer;
   curRight: Integer;
-  Column: TfpgLVColumn;
-  LastColumn: TfpgLVColumn;
+  Column: TlqLVColumn;
+  LastColumn: TlqLVColumn;
   HeaderX: Integer; // this is X from the headers point of view
   NewMouseCursor: TMouseCursor;
 begin
@@ -1074,7 +1074,7 @@ begin
 
 end;
 
-procedure TfpgListView.MsgPaint(var msg: TfpgMessageRec);
+procedure TlqListView.MsgPaint(var msg: TlqMessageRec);
 begin
   // Optimises painting and prevents Begin[End]Draw and OnPaint event firing
   // in not needed.
@@ -1082,10 +1082,10 @@ begin
     inherited MsgPaint(msg);
 end;
 
-procedure TfpgListView.HandleMouseScroll(x, y: integer;
+procedure TlqListView.HandleMouseScroll(x, y: integer;
   shiftstate: TShiftState; delta: smallint);
 var
-  cRect: TfpgRect;
+  cRect: TlqRect;
 begin
   cRect := GetClientRect;
   if FShowHeaders then
@@ -1099,17 +1099,17 @@ begin
   if not PtInRect(cRect, Point(X,Y)) then
     Exit;
 
-  TfpgScrollbarFriend(FVScrollBar).HandleMouseScroll(x, y, shiftstate, delta);
+  TlqScrollbarFriend(FVScrollBar).HandleMouseScroll(x, y, shiftstate, delta);
 end;
 
-procedure TfpgListView.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqListView.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
-  Item: TfpgLVItem;
-  cRect: TfpgRect;
+  Item: TlqLVItem;
+  cRect: TlqRect;
   curLeft, curRight: Integer;
   I: Integer;
-  Column: TfpgLVColumn;
-  LastColumn: TfpgLVColumn;
+  Column: TlqLVColumn;
+  LastColumn: TlqLVColumn;
   HeaderX: Integer;
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
@@ -1194,12 +1194,12 @@ begin
   DoRepaint;
 end;
 
-procedure TfpgListView.HandleRMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqListView.HandleRMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   I: Integer;
   cLeft, cRight: Integer;
-  cRect: TfpgRect;
-  Column: TfpgLVColumn;
+  cRect: TlqRect;
+  Column: TlqLVColumn;
 begin
   inherited HandleRMouseDown(x, y, shiftstate);
   ShiftIsPressed := ssShift in shiftstate;
@@ -1234,7 +1234,7 @@ begin
     Dec(cRect.Height, FHScrollBar.Height);
 end;
 
-procedure TfpgListView.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqListView.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
   I: Integer;
 begin
@@ -1248,7 +1248,7 @@ begin
   DoRepaint;
 end;
 
-procedure TfpgListView.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqListView.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 var
   I: Integer;
 begin
@@ -1260,10 +1260,10 @@ begin
   DoRepaint;
 end;
 
-procedure TfpgListView.HandleMouseMove(x, y: integer; btnstate: word;
+procedure TlqListView.HandleMouseMove(x, y: integer; btnstate: word;
   shiftstate: TShiftState);
 var
-  cRect: TfpgRect;
+  cRect: TlqRect;
 begin
   inherited HandleMouseMove(x, y, btnstate, shiftstate);
 
@@ -1284,7 +1284,7 @@ begin
   //if FHScrollBar.Visible then Dec(cRect.Height, FHScrollBar.Height);
 end;
 
-procedure TfpgListView.HandleKeyPress(var keycode: word;
+procedure TlqListView.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   iIndex: Integer;
@@ -1388,7 +1388,7 @@ begin
 
 end;
 
-procedure TfpgListView.HandleKeyRelease(var keycode: word;
+procedure TlqListView.HandleKeyRelease(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
   CacheShiftPressed: Boolean;
@@ -1401,9 +1401,9 @@ begin
 
 end;
 
-procedure TfpgListView.HandlePaint;
+procedure TlqListView.HandlePaint;
 var
-  ClipRect: TfpgRect;
+  ClipRect: TlqRect;
 begin
   //if FScrollBarNeedsUpdate then
     UpdateScrollBarPositions;
@@ -1434,22 +1434,22 @@ begin
     PaintHeaders;
 end;
 
-procedure TfpgListView.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqListView.HandleResize(awidth, aheight: TlqCoord);
 begin
   inherited HandleResize(awidth, aheight);
   FScrollBarNeedsUpdate := FScrollBarNeedsUpdate or FSizeIsDirty;
 end;
 
-procedure TfpgListView.PaintHeaders;
+procedure TlqListView.PaintHeaders;
 var
   I: Integer;
   cLeft,
   cTop: Integer;
-  Column: TfpgLVColumn;
-  Flags: TfpgButtonFlags;
-  ClipRect: TfpgRect;
-  cRect: TfpgRect;
-  PaintPart: TfpgLVItemPaintPart;
+  Column: TlqLVColumn;
+  Flags: TlqButtonFlags;
+  ClipRect: TlqRect;
+  cRect: TlqRect;
+  PaintPart: TlqLVItemPaintPart;
   tWidth,
   tLeft: Integer;
 begin
@@ -1500,25 +1500,25 @@ begin
   end;
 end;
 
-procedure TfpgListView.PaintItems;
+procedure TlqListView.PaintItems;
 var
   FirstIndex,
   LastIndex: Integer;
   I, J : Integer;
-  PaintPart: TfpgLVItemPaintPart;
-  ItemRect: TfpgRect;
-  ItemState: TfpgLVItemState;
-  Item: TfpgLVItem;
+  PaintPart: TlqLVItemPaintPart;
+  ItemRect: TlqRect;
+  ItemState: TlqLVItemState;
+  Item: TlqLVItem;
   TheText: String;
-  TheTextColor: TfpgColor;
-  oClipRect: TfpgRect;
-  iColumnClipRect: TfpgRect;
+  TheTextColor: TlqColor;
+  oClipRect: TlqRect;
+  iColumnClipRect: TlqRect;
   ColumnIndex: Integer;
   cBottom: Integer;
   vBottom: Integer;
   tLeft,
   tWidth: Integer;
-  Image, TmpImage: TfpgImage;
+  Image, TmpImage: TlqImage;
 begin
   FirstIndex := (FVScrollBar.Position) div ItemHeight;
   LastIndex := (FVScrollBar.Position+GetItemAreaHeight) div ItemHeight;
@@ -1573,7 +1573,7 @@ begin
     if lvppFocused in PaintPart then
     begin
       if lisSelected in ItemState then
-        Canvas.Color := TfpgColor(not clSelection)
+        Canvas.Color := TlqColor(not clSelection)
       else
         Canvas.Color := clSelection;
 
@@ -1676,7 +1676,7 @@ begin
   end;
 end;
 
-procedure TfpgListView.UpdateScrollBarPositions;
+procedure TlqListView.UpdateScrollBarPositions;
 var
   BevelSize: Integer;
   I: Integer;
@@ -1748,7 +1748,7 @@ begin
   FScrollBarNeedsUpdate := False;
 end;
 
-constructor TfpgListView.Create(AOwner: TComponent);
+constructor TlqListView.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWidth       := 120;
@@ -1756,21 +1756,21 @@ begin
   Focusable := True;
   FShowHeaders := True;
 
-  FVScrollBar := TfpgScrollBar.Create(Self);
+  FVScrollBar := TlqScrollBar.Create(Self);
   FVScrollBar.Orientation := orVertical;
   FVScrollBar.OnScroll := @VScrollChange;
   FVScrollBar.ScrollStep := 18;
   FVScrollBar.Position := 0;
   
-  FHScrollBar := TfpgScrollBar.Create(Self);
+  FHScrollBar := TlqScrollBar.Create(Self);
   FHScrollBar.Orientation := orHorizontal;
   FHScrollBar.OnScroll := @HScrollChange;
   FHScrollBar.ScrollStep := 18;
   FHScrollBar.Position := 0;
   
-  FColumns := TfpgLVColumns.Create(Self);
+  FColumns := TlqLVColumns.Create(Self);
 
-  FItems := TfpgLVItems.Create(Self);
+  FItems := TlqLVItems.Create(Self);
   FSelected := TAVLTree.Create;
   FOldSelected := TAVLTree.Create;
   FSelectionShiftStart := -1;
@@ -1779,7 +1779,7 @@ begin
   FScrollBarNeedsUpdate := True;
 end;
 
-destructor TfpgListView.Destroy;
+destructor TlqListView.Destroy;
 begin
   FItems.DeleteViewer(Self);
   FSelected.Free;
@@ -1788,13 +1788,13 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgListView.BeginUpdate;
+procedure TlqListView.BeginUpdate;
 begin
   Inc(FUpdateCount);
   FItems.BeginUpdate;
 end;
 
-procedure TfpgListView.EndUpdate;
+procedure TlqListView.EndUpdate;
 begin
   FItems.EndUpdate;
   Dec(FUpdateCount);
@@ -1804,7 +1804,7 @@ begin
     DoRePaint;
 end;
 
-procedure TfpgListView.MakeItemVisible(AIndex: Integer; PartialOK: Boolean);
+procedure TlqListView.MakeItemVisible(AIndex: Integer; PartialOK: Boolean);
 var
   iTop,
   iBottom: integer;
@@ -1830,54 +1830,54 @@ begin
     FVScrollBar.Position := iTop;
 end;
 
-function TfpgListView.ItemAdd: TfpgLVItem;
+function TlqListView.ItemAdd: TlqLVItem;
 begin
   Result := AddItem;
 end;
 
-function TfpgListView.AddItem: TfpgLVItem;
+function TlqListView.AddItem: TlqLVItem;
 begin
-  Result := TfpgLVItem.Create(FItems);
+  Result := TlqLVItem.Create(FItems);
   FItems.Add(Result);
 end;
 
-function TfpgListView.NewItem: TfpgLVItem;
+function TlqListView.NewItem: TlqLVItem;
 begin
-  Result := TfpgLVItem.Create(FItems);
+  Result := TlqLVItem.Create(FItems);
 end;
 
-{ TfpgLVColumns }
+{ TlqLVColumns }
 
-function TfpgLVColumns.GetColumn(AIndex: Integer): TfpgLVColumn;
+function TlqLVColumns.GetColumn(AIndex: Integer): TlqLVColumn;
 begin
-  Result := TfpgLVColumn(FColumns.Items[AIndex]);
+  Result := TlqLVColumn(FColumns.Items[AIndex]);
 end;
 
-procedure TfpgLVColumns.SetColumn(AIndex: Integer; const AValue: TfpgLVColumn);
+procedure TlqLVColumns.SetColumn(AIndex: Integer; const AValue: TlqLVColumn);
 begin
   FColumns.Items[AIndex] := AValue;
 end;
 
-constructor TfpgLVColumns.Create(AListView: TfpgListView);
+constructor TlqLVColumns.Create(AListView: TlqListView);
 begin
   FListView := AListView;
   FColumns := TObjectList.Create;
 end;
 
-destructor TfpgLVColumns.Destroy;
+destructor TlqLVColumns.Destroy;
 begin
   Clear; // needed since Colums can be share between ListViews
   FColumns.Free;
   inherited Destroy;
 end;
 
-function TfpgLVColumns.Add(AColumn: TfpgLVColumn): Integer;
+function TlqLVColumns.Add(AColumn: TlqLVColumn): Integer;
 begin
   Result := Count;
   Insert(AColumn, Count);
 end;
 
-procedure TfpgLVColumns.Clear;
+procedure TlqLVColumns.Clear;
 var
   i: integer;
 begin
@@ -1886,34 +1886,34 @@ begin
   FColumns.Clear;
 end;
 
-procedure TfpgLVColumns.Delete(AIndex: Integer);
+procedure TlqLVColumns.Delete(AIndex: Integer);
 begin
   Dec(Column[AIndex].Ref);
   FColumns.OwnsObjects := Column[AIndex].Ref < 1;
   FColumns.Delete(AIndex);
 end;
 
-procedure TfpgLVColumns.Insert(AColumn: TfpgLVColumn; AIndex: Integer);
+procedure TlqLVColumns.Insert(AColumn: TlqLVColumn; AIndex: Integer);
 begin
   FColumns.Insert(AIndex, AColumn);
   Inc(AColumn.Ref);
 end;
 
-function TfpgLVColumns.Count: Integer;
+function TlqLVColumns.Count: Integer;
 begin
   Result := FColumns.Count;
 end;
 
-{ TfpgLVColumn }
+{ TlqLVColumn }
 
-procedure TfpgLVColumn.SetCaption(const AValue: String);
+procedure TlqLVColumn.SetCaption(const AValue: String);
 begin
   if FCaption=AValue then
     Exit;
   FCaption:=AValue;
 end;
 
-procedure TfpgLVColumn.SetCaptionAlignment(const AValue: TAlignment);
+procedure TlqLVColumn.SetCaptionAlignment(const AValue: TAlignment);
 begin
   if FCaptionAlignment=AValue then exit;
   FCaptionAlignment:=AValue;
@@ -1922,38 +1922,38 @@ begin
 
 end;
 
-procedure TfpgLVColumn.SetColumnIndex(const AValue: Integer);
+procedure TlqLVColumn.SetColumnIndex(const AValue: Integer);
 begin
   if FColumnIndex=AValue then
     Exit;
   FColumnIndex:=AValue;
 end;
 
-procedure TfpgLVColumn.SetHeight(const AValue: Integer);
+procedure TlqLVColumn.SetHeight(const AValue: Integer);
 begin
   if FHeight=AValue then Exit;
   FHeight:=AValue;
 end;
 
-procedure TfpgLVColumn.SetResizable(const AValue: Boolean);
+procedure TlqLVColumn.SetResizable(const AValue: Boolean);
 begin
   if FResizable=AValue then exit;
   FResizable:=AValue;
 end;
 
-procedure TfpgLVColumn.SetVisible(const AValue: Boolean);
+procedure TlqLVColumn.SetVisible(const AValue: Boolean);
 begin
   if FVisible=AValue then exit;
   FVisible:=AValue;
 end;
 
-procedure TfpgLVColumn.SetAutoSize(const AValue: Boolean);
+procedure TlqLVColumn.SetAutoSize(const AValue: Boolean);
 begin
   if FAutoSize=AValue then exit;
   FAutoSize:=AValue;
 end;
 
-procedure TfpgLVColumn.SetAlignment(const AValue: TAlignment);
+procedure TlqLVColumn.SetAlignment(const AValue: TAlignment);
 begin
   if FAlignment=AValue then exit;
   FAlignment:=AValue;
@@ -1961,7 +1961,7 @@ begin
     FColumns.FListView.DoRepaint;
 end;
 
-procedure TfpgLVColumn.SetWidth(const AValue: Integer);
+procedure TlqLVColumn.SetWidth(const AValue: Integer);
 begin
   if FWidth=AValue then exit;
   FWidth:=AValue;
@@ -1969,7 +1969,7 @@ begin
     FWidth := 1;
 end;
 
-constructor TfpgLVColumn.Create(AColumns: TfpgLVColumns);
+constructor TlqLVColumn.Create(AColumns: TlqLVColumns);
 begin
   FVisible := True;
   FColumnIndex := -1;
@@ -1979,52 +1979,52 @@ begin
   FCaptionAlignment := taLeftJustify;
 end;
 
-destructor TfpgLVColumn.Destroy;
+destructor TlqLVColumn.Destroy;
 begin
   inherited Destroy;
 end;
 
-{ TfpgListViewSubitems }
+{ TlqListViewSubitems }
 
-function TfpgListViewSubitems.GetImageIndex(ASubIndex: Integer): Integer;
+function TlqListViewSubitems.GetImageIndex(ASubIndex: Integer): Integer;
 begin
   Result := PfpgLVSubitemRec(FList.Items[ASubIndex])^.AImageIndex;
 end;
 
-procedure TfpgListViewSubitems.SetImageIndex(ASubIndex: Integer;
+procedure TlqListViewSubitems.SetImageIndex(ASubIndex: Integer;
   const AValue: Integer);
 begin
   PfpgLVSubitemRec(FList.Items[ASubIndex])^.AImageIndex:=AValue;
   DoChange;
 end;
 
-procedure TfpgListViewSubitems.DoChange;
+procedure TlqListViewSubitems.DoChange;
 begin
   if Assigned(FOnChange) then
     FOnChange(Self);
 end;
 
-function TfpgListViewSubitems.GetObject(Index: Integer): TObject;
+function TlqListViewSubitems.GetObject(Index: Integer): TObject;
 begin
   Result:=PfpgLVSubitemRec(FList.Items[Index])^.AObject;
 end;
 
-function TfpgListViewSubitems.Get(Index: Integer): string;
+function TlqListViewSubitems.Get(Index: Integer): string;
 begin
   Result:=PfpgLVSubitemRec(FList.Items[Index])^.AText;
 end;
 
-function TfpgListViewSubitems.GetCount: Integer;
+function TlqListViewSubitems.GetCount: Integer;
 begin
   Result:=FList.Count;
 end;
 
-procedure TfpgListViewSubitems.Put(Index: Integer; const S: string);
+procedure TlqListViewSubitems.Put(Index: Integer; const S: string);
 begin
   PfpgLVSubitemRec(FList.Items[Index])^.AText:=S;
 end;
 
-procedure TfpgListViewSubitems.PutObject(Index: Integer; AObject: TObject);
+procedure TlqListViewSubitems.PutObject(Index: Integer; AObject: TObject);
 var
   SubItem: PfpgLVSubitemRec;
 begin
@@ -2033,7 +2033,7 @@ begin
   DoChange;
 end;
 
-procedure TfpgListViewSubitems.Insert(Index: Integer; const S: string);
+procedure TlqListViewSubitems.Insert(Index: Integer; const S: string);
 var
   SubItem: PfpgLVSubitemRec;
 begin
@@ -2045,19 +2045,19 @@ begin
   DoChange;
 end;
 
-constructor TfpgListViewSubitems.Create;
+constructor TlqListViewSubitems.Create;
 begin
   FList:= TFPList.Create;
 end;
 
-destructor TfpgListViewSubItems.Destroy;
+destructor TlqListViewSubItems.Destroy;
 begin
   Clear;
   FList.Free;
   inherited Destroy;
 end;
 
-procedure TfpgListViewSubitems.Delete(Index: Integer);
+procedure TlqListViewSubitems.Delete(Index: Integer);
 var
   SubItem: PfpgLVSubitemRec;
 begin
@@ -2067,7 +2067,7 @@ begin
   FList.Delete(Index);
 end;
 
-procedure TfpgListViewSubItems.Clear;
+procedure TlqListViewSubItems.Clear;
 var
   i: LongInt;
 begin

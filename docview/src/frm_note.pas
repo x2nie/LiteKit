@@ -15,24 +15,24 @@ uses
 
 type
 
-  TNoteForm = class(TfpgForm)
+  TNoteForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: NoteForm}
-    Memo1: TfpgMemo;
-    btnOK: TfpgButton;
-    btnHelp: TfpgButton;
-    btnCancel: TfpgButton;
-    btnDelete: TfpgButton;
+    Memo1: TlqMemo;
+    btnOK: TlqButton;
+    btnHelp: TlqButton;
+    btnCancel: TlqButton;
+    btnDelete: TlqButton;
     {@VFD_HEAD_END: NoteForm}
     FCanDelete: Boolean;
     procedure   FormShow(Sender: TObject);
-    function    GetText: TfpgString;
-    procedure   SetText(const AValue: TfpgString);
+    function    GetText: TlqString;
+    procedure   SetText(const AValue: TlqString);
     procedure   SetCanDelete(const AValue: boolean);
     procedure   btnHelpClicked(Sender: TObject);
   public
     procedure   AfterCreate; override;
-    property    Text: TfpgString read GetText write SetText;
+    property    Text: TlqString read GetText write SetText;
     property    CanDelete: boolean read FCanDelete write SetCanDelete;
   end;
 
@@ -47,12 +47,12 @@ begin
   Memo1.SetFocus;
 end;
 
-function TNoteForm.GetText: TfpgString;
+function TNoteForm.GetText: TlqString;
 begin
   Result := Memo1.Text;
 end;
 
-procedure TNoteForm.SetText(const AValue: TfpgString);
+procedure TNoteForm.SetText(const AValue: TlqString);
 begin
   Memo1.Text := AValue;
 end;
@@ -80,7 +80,7 @@ begin
   HelpType := htContext;
   HelpContext := 7;
 
-  Memo1 := TfpgMemo.Create(self);
+  Memo1 := TlqMemo.Create(self);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -91,7 +91,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -105,7 +105,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnHelp := TfpgButton.Create(self);
+  btnHelp := TlqButton.Create(self);
   with btnHelp do
   begin
     Name := 'btnHelp';
@@ -119,7 +119,7 @@ begin
     OnClick := @btnHelpClicked;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -133,7 +133,7 @@ begin
     TabOrder := 4;
   end;
 
-  btnDelete := TfpgButton.Create(self);
+  btnDelete := TlqButton.Create(self);
   with btnDelete do
   begin
     Name := 'btnDelete';

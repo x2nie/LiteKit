@@ -26,12 +26,12 @@ type
   TForm1 = class;
   TForm2 = class;
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    cal: TfpgComboBox;
-    btnClose: TfpgButton;
-    btnOpenForm1: TfpgButton;
-    edtTest: TfpgEdit;
+    cal: TlqComboBox;
+    btnClose: TlqButton;
+    btnOpenForm1: TlqButton;
+    edtTest: TlqEdit;
     procedure   btnCloseClick(Sender: TObject);
     procedure   btnOpenForm1Click(Sender: TObject);
   public
@@ -39,13 +39,13 @@ type
   end;
   
 
-  TForm1 = class(TfpgForm)
+  TForm1 = class(TlqForm)
   private
-    cal: TfpgComboBox;
-    Label1: TfpgLabel;
-    btnClose: TfpgButton;
-    btnOpenForm2: TfpgButton;
-    edtTest: TfpgEdit;
+    cal: TlqComboBox;
+    Label1: TlqLabel;
+    btnClose: TlqButton;
+    btnOpenForm2: TlqButton;
+    edtTest: TlqEdit;
     procedure   btnCloseClick(Sender: TObject);
     procedure   btnOpenForm2Click(Sender: TObject);
   public
@@ -53,11 +53,11 @@ type
   end;
   
   
-  TForm2 = class(TfpgForm)
+  TForm2 = class(TlqForm)
   private
-    Label1: TfpgLabel;
-    btnClose: TfpgButton;
-    edtTest: TfpgEdit;
+    Label1: TlqLabel;
+    btnClose: TlqButton;
+    edtTest: TlqEdit;
     procedure   btnCloseClick(Sender: TObject);
   public
     constructor Create(AOwner: TComponent); override;
@@ -125,7 +125,7 @@ begin
   
   btnOpenForm2 := CreateButton(self, 70, 100, 80, 'Open Form2', @btnOpenForm2Click);
   
-  cal := TfpgComboBox.Create(self);
+  cal := TlqComboBox.Create(self);
   cal.SetPosition(10, 10, 120, 23);
   
   edtTest := CreateEdit(self, 10, 60, 100, 23);
@@ -167,7 +167,7 @@ begin
   
   btnOpenForm1 := CreateButton(self, 100, 100, 80, 'Open Form1', @btnOpenForm1Click);
   
-  cal := TfpgComboBox.Create(self);
+  cal := TlqComboBox.Create(self);
   cal.SetPosition(10, 10, 120, 23);
   
   edtTest := CreateEdit(self, 10, 60, 100, 23);

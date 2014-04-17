@@ -16,15 +16,15 @@ uses
 
 type
 
-  TthreedeeEdit = class(TfpgEdit)
+  TthreedeeEdit = class(TlqEdit)
   private
-    FimgLeft: TfpgImage;
-    FimgTop: TfpgImage;
-    FimgLeftTop: TfpgImage;
+    FimgLeft: TlqImage;
+    FimgTop: TlqImage;
+    FimgLeftTop: TlqImage;
     FInError: boolean;
-    FErrorColor: TfpgColor;
-    procedure   Draw3DControlShadow(ARect: TfpgRect);
-    procedure   SetErrorColor(const AValue: TfpgColor);
+    FErrorColor: TlqColor;
+    procedure   Draw3DControlShadow(ARect: TlqRect);
+    procedure   SetErrorColor(const AValue: TlqColor);
     procedure   SetInError(const AValue: boolean);
   protected
     procedure   HandlePaint; override;
@@ -32,11 +32,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     property    InError: boolean read FInError write SetInError;
-    property    ErrorColor: TfpgColor read FErrorColor write SetErrorColor;
+    property    ErrorColor: TlqColor read FErrorColor write SetErrorColor;
   end;
   
 
-  TfrmMain = class(TfpgForm)
+  TfrmMain = class(TlqForm)
   private
     procedure TrackBarChanged(Sender: TObject; APosition: integer);
     procedure btnQuitClicked(Sender: TObject);
@@ -45,17 +45,17 @@ type
     procedure edtThreeDeeChanged(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: frmMain}
-    btnQuit: TfpgButton;
-    edtName1: TfpgEdit;
+    btnQuit: TlqButton;
+    edtName1: TlqEdit;
     edtThreeDee: TthreedeeEdit;
-    cbName1: TfpgCheckBox;
-    cbBGColor: TfpgCheckBox;
-    tb: TfpgTrackBar;
-    pb: TfpgProgressBar;
+    cbName1: TlqCheckBox;
+    cbBGColor: TlqCheckBox;
+    tb: TlqTrackBar;
+    pb: TlqProgressBar;
     Custom1: TthreedeeEdit;
     Custom2: TthreedeeEdit;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
     {@VFD_HEAD_END: frmMain}
 
     procedure AfterCreate; override;
@@ -116,8 +116,8 @@ Const
      176,176);
      
 { This procedure creates a sunken 3d effect in a rectangle with a color gradient }
-procedure FillRectGradient(Canvas: TfpgCanvas; X, Y, W, H: TfpgCoord;
-    Strip: Integer; Astart, Astop: TfpgColor);
+procedure FillRectGradient(Canvas: TlqCanvas; X, Y, W, H: TlqCoord;
+    Strip: Integer; Astart, Astop: TlqColor);
 var
   RGBStart: TFPColor;
   RGBStop: TFPColor;
@@ -125,9 +125,9 @@ var
   count: Integer;
   i: Integer;
   newcolor: TFPColor;
-  Hx, Hy: TfpgCoord; // Coordinates for Horizontal Lines
-  Vx, Vy: TfpgCoord; // Coordinates for Vertical Lines
-  avgcolor: TfpgColor;
+  Hx, Hy: TlqCoord; // Coordinates for Horizontal Lines
+  Vx, Vy: TlqCoord; // Coordinates for Vertical Lines
+  avgcolor: TlqColor;
 begin
   RGBStart := fpgColorToFPColor(fpgColorToRGB(AStart));
   RGBStop  := fpgColorToFPColor(fpgColorToRGB(AStop));
@@ -193,7 +193,7 @@ begin
   end;
   try
     if edtThreeDee.Text <> '' then
-      edtThreeDee.ErrorColor := TfpgColor(StrToInt64(edtThreeDee.Text));
+      edtThreeDee.ErrorColor := TlqColor(StrToInt64(edtThreeDee.Text));
   except
     on E: Exception do
       edtThreeDee.ErrorColor := clRed;
@@ -240,7 +240,7 @@ begin
   WindowPosition := wpScreenCenter;
   BackgroundColor := clM2DarkBlue;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -253,7 +253,7 @@ begin
     OnClick := @btnQuitClicked;
   end;
 
-  edtName1 := TfpgEdit.Create(self);
+  edtName1 := TlqEdit.Create(self);
   with edtName1 do
   begin
     Name := 'edtName1';
@@ -273,7 +273,7 @@ begin
     BackgroundColor := $F5F5F5;
   end;
 
-  cbName1 := TfpgCheckBox.Create(self);
+  cbName1 := TlqCheckBox.Create(self);
   with cbName1 do
   begin
     Name := 'cbName1';
@@ -284,7 +284,7 @@ begin
     OnChange := @cbChangeColor;
   end;
 
-  cbBGColor := TfpgCheckBox.Create(self);
+  cbBGColor := TlqCheckBox.Create(self);
   with cbBGColor do
   begin
     Name := 'cbBGColor';
@@ -295,7 +295,7 @@ begin
     OnChange := @BGColorChange;
   end;
 
-  tb := TfpgTrackBar.Create(self);
+  tb := TlqTrackBar.Create(self);
   with tb do
   begin
     Name := 'tb';
@@ -304,7 +304,7 @@ begin
     OnChange := @TrackBarChanged;
   end;
 
-  pb := TfpgProgressBar.Create(self);
+  pb := TlqProgressBar.Create(self);
   with pb do
   begin
     Name := 'pb';
@@ -332,7 +332,7 @@ begin
     BackgroundColor := $B0C4DE;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -342,7 +342,7 @@ begin
     BackgroundColor := clM2DarkBlue;
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -358,9 +358,9 @@ end;
 
 { TthreedeeEdit }
 
-procedure TthreedeeEdit.Draw3DControlShadow(ARect: TfpgRect);
+procedure TthreedeeEdit.Draw3DControlShadow(ARect: TlqRect);
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
 (*
   Canvas.DrawImage(ARect.Left, ARect.Top, FimgLeftTop);
@@ -371,10 +371,10 @@ begin
   r.SetRect(8, ARect.Top, Width+5, 8);
   Canvas.GradientFill(r, clM2Grey, BackgroundColor, gdVertical);
 *)
-  FillRectGradient(Canvas, ARect.Left, ARect.Top, ARect.Width, ARect.Height, 7, TfpgColor($777777), BackgroundColor);
+  FillRectGradient(Canvas, ARect.Left, ARect.Top, ARect.Width, ARect.Height, 7, TlqColor($777777), BackgroundColor);
 end;
 
-procedure TthreedeeEdit.SetErrorColor(const AValue: TfpgColor);
+procedure TthreedeeEdit.SetErrorColor(const AValue: TlqColor);
 begin
   if FErrorColor = AValue then
     Exit; //==>
@@ -392,10 +392,10 @@ end;
 
 procedure TthreedeeEdit.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   tw, tw2, st, len: integer;
   dtext: string;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   Canvas.BeginDraw;
   Canvas.ClearClipRect;

@@ -61,30 +61,30 @@ type
   end;
 
 
-  TProcedureListForm = class(TfpgForm)
+  TProcedureListForm = class(TlqForm)
   private
     procedure SearchTextChanged(Sender: TObject);
     procedure SearchEditKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure SetFilename(const AValue: string);
   private
     {@VFD_HEAD_BEGIN: ProcedureListForm}
-    Bevel1: TfpgBevel;
-    Bevel2: TfpgBevel;
-    lblSearch: TfpgLabel;
-    edtSearch: TfpgEdit;
-    cbObjects: TfpgComboBox;
-    lblObjects: TfpgLabel;
-    grdProcedures: TfpgStringGrid;
-    StatusBar: TfpgPanel;
+    Bevel1: TlqBevel;
+    Bevel2: TlqBevel;
+    lblSearch: TlqLabel;
+    edtSearch: TlqEdit;
+    cbObjects: TlqComboBox;
+    lblObjects: TlqLabel;
+    grdProcedures: TlqStringGrid;
+    StatusBar: TlqPanel;
     {@VFD_HEAD_END: ProcedureListForm}
-    FFilename: TfpgString;
+    FFilename: TlqString;
     FLanguage: TSourceLanguage;
     FSortOnColumn: Integer;
     FSearchAll: Boolean;
     FProcList: TStringList;
     FObjectStrings: TStringList;
-    FEditor: TfpgTextEdit;
-//    FImageList: TfpgImageList;
+    FEditor: TlqTextEdit;
+//    FImageList: TlqImageList;
     procedure   FormShow(Sender: TObject);
     procedure   LoadProcs;
     procedure   AddProcedure(ProcedureInfo: TProcInfo);
@@ -95,9 +95,9 @@ type
     procedure   FillListBox;
     function    GetMethodName(const ProcName: string): string;
     function    GetImageIndex(const ProcName, ProcClass: string): Integer;
-    procedure   GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+    procedure   GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
     property    Filename: string read FFilename write SetFilename;
-    property    Editor: TfpgTextEdit read FEditor write FEditor;
+    property    Editor: TlqTextEdit read FEditor write FEditor;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -107,7 +107,7 @@ type
 
 {@VFD_NEWFORM_DECL}
 
-function DisplayProcedureList(const AFilename: TfpgString; var AEditor: TfpgTextEdit): boolean;
+function DisplayProcedureList(const AFilename: TlqString; var AEditor: TlqTextEdit): boolean;
 
 
 implementation
@@ -133,7 +133,7 @@ const
 {$I proclistimages.}
 
 
-function DisplayProcedureList(const AFilename: TfpgString; var AEditor: TfpgTextEdit): boolean;
+function DisplayProcedureList(const AFilename: TlqString; var AEditor: TlqTextEdit): boolean;
 var
   frm: TProcedureListForm;
 begin
@@ -379,9 +379,9 @@ begin
     Result := ImageIndexFunction;
 end;
 
-procedure TProcedureListForm.GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TfpgRect; const AFlags: TfpgGridDrawState; var ADefaultDrawing: boolean);
+procedure TProcedureListForm.GridDrawCell(Sender: TObject; const ARow, ACol: Integer; const ARect: TlqRect; const AFlags: TlqGridDrawState; var ADefaultDrawing: boolean);
 var
-  img: TfpgImage;
+  img: TlqImage;
   i: integer;
   ProcInfo: TProcInfo;
 begin
@@ -1169,7 +1169,7 @@ begin
   OnShow  := @FormShow;
   FLanguage := ltPas;
   FSearchAll := True; // search anywhere in a method name
-//  FImageList := TfpgImageList.Create;
+//  FImageList := TlqImageList.Create;
 
 //  CreateImage_BMP(@grdimg_destructor_16, SizeOf(grdimg_destructor_16));
 
@@ -1220,7 +1220,7 @@ begin
   ShowHint := True;
   WindowPosition := wpOneThirdDown;
 
-  Bevel1 := TfpgBevel.Create(self);
+  Bevel1 := TlqBevel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -1230,7 +1230,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  Bevel2 := TfpgBevel.Create(self);
+  Bevel2 := TlqBevel.Create(self);
   with Bevel2 do
   begin
     Name := 'Bevel2';
@@ -1240,7 +1240,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  lblSearch := TfpgLabel.Create(Bevel2);
+  lblSearch := TlqLabel.Create(Bevel2);
   with lblSearch do
   begin
     Name := 'lblSearch';
@@ -1250,7 +1250,7 @@ begin
     Text := 'Search';
   end;
 
-  edtSearch := TfpgEdit.Create(Bevel2);
+  edtSearch := TlqEdit.Create(Bevel2);
   with edtSearch do
   begin
     Name := 'edtSearch';
@@ -1265,7 +1265,7 @@ begin
     OnKeyPress := @SearchEditKeyPressed;
   end;
 
-  cbObjects := TfpgComboBox.Create(Bevel2);
+  cbObjects := TlqComboBox.Create(Bevel2);
   with cbObjects do
   begin
     Name := 'cbObjects';
@@ -1277,7 +1277,7 @@ begin
     OnChange := @SearchTextChanged;
   end;
 
-  lblObjects := TfpgLabel.Create(Bevel2);
+  lblObjects := TlqLabel.Create(Bevel2);
   with lblObjects do
   begin
     Name := 'lblObjects';
@@ -1288,13 +1288,13 @@ begin
     Text := 'Objects';
   end;
 
-  grdProcedures := TfpgStringGrid.Create(self);
+  grdProcedures := TlqStringGrid.Create(self);
   with grdProcedures do
   begin
     Name := 'grdProcedures';
     SetPosition(4, 68, 556, 216);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('', 30, taLeftJustify);
     AddColumn('Procedure', 300, taLeftJustify);
     AddColumn('Type', 130, taLeftJustify);
@@ -1309,7 +1309,7 @@ begin
     OnDrawCell := @GridDrawCell;
   end;
 
-  StatusBar := TfpgPanel.Create(self);
+  StatusBar := TlqPanel.Create(self);
   with StatusBar do
   begin
     Name := 'StatusBar';

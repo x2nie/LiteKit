@@ -56,13 +56,13 @@ uses
   lq_imagelist;
 
 type
-  TfpgMsgDlgType = (mtAbout, mtWarning, mtError, mtInformation, mtConfirmation,
+  TlqMsgDlgType = (mtAbout, mtWarning, mtError, mtInformation, mtConfirmation,
       mtCustom);
       
-  TfpgMsgDlgBtn = (mbNoButton, mbOK, mbCancel, mbYes, mbNo, mbAbort,
+  TlqMsgDlgBtn = (mbNoButton, mbOK, mbCancel, mbYes, mbNo, mbAbort,
       mbRetry, mbIgnore, mbAll, mbNoToAll, mbYesToAll, mbHelp, mbClose);
       
-  TfpgMsgDlgButtons = set of TfpgMsgDlgBtn;
+  TlqMsgDlgButtons = set of TlqMsgDlgBtn;
 
 const
   mbYesNoCancel       = [mbYes, mbNo, mbCancel];
@@ -74,19 +74,19 @@ const
   sfdOpen = True;
   sfdSave = False;
 
-  cMsgDlgBtnText: array[TfpgMsgDlgBtn] of string =
+  cMsgDlgBtnText: array[TlqMsgDlgBtn] of string =
       ( '', rsOK, rsCancel, rsYes, rsNo, rsAbort, rsRetry, rsIgnore,
         rsAll, rsNoToAll, rsYesToAll, rsHelp, rsClose );
 
 type
 
-  TfpgMessageBox = class(TfpgForm)
+  TlqMessageBox = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MessageBox}
-    FButton: TfpgButton;
+    FButton: TlqButton;
     {@VFD_HEAD_END: MessageBox}
     FLines: TStringList;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FTextY: integer;
     FLineHeight: integer;
     FMaxLineWidth: integer;
@@ -106,12 +106,12 @@ type
   end;
   
 
-  TfpgBaseDialog = class(TfpgForm)
+  TlqBaseDialog = class(TlqForm)
   protected
     FSpacing: integer;
     FDefaultButtonWidth: integer;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     procedure   btnOKClick(Sender: TObject); virtual;
     procedure   btnCancelClick(Sender: TObject); virtual;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
@@ -121,23 +121,23 @@ type
   end;
 
 
-  TfpgFontSelectDialog = class(TfpgBaseDialog)
+  TlqFontSelectDialog = class(TlqBaseDialog)
   private
     FSampleText: string;
     FMode: Byte;    // 1 - Normal Fonts;  2 - Alias Fonts
-    lblLabel1: TfpgLabel;
-    lblTypeface: TfpgLabel;
-    lblSize: TfpgLabel;
-    lblLabel4: TfpgLabel;
-    lblLabel5: TfpgLabel;
-    lbCollection: TfpgListBox;
-    lbFaces: TfpgListBox;
-    lbSize: TfpgListBox;
-    cbBold: TfpgCheckBox;
-    cbItalic: TfpgCheckBox;
-    cbUnderline: TfpgCheckBox;
-    cbAntiAlias: TfpgCheckBox;
-    memSample: TfpgMemo;
+    lblLabel1: TlqLabel;
+    lblTypeface: TlqLabel;
+    lblSize: TlqLabel;
+    lblLabel4: TlqLabel;
+    lblLabel5: TlqLabel;
+    lbCollection: TlqListBox;
+    lbFaces: TlqListBox;
+    lbSize: TlqListBox;
+    cbBold: TlqCheckBox;
+    cbItalic: TlqCheckBox;
+    cbUnderline: TlqCheckBox;
+    cbAntiAlias: TlqCheckBox;
+    memSample: TlqMemo;
     procedure   OnCollectionChanged(Sender: TObject);
     procedure   OnParamChange(Sender: TObject);
     procedure   OnSameTextChanged(Sender: TObject);
@@ -154,26 +154,26 @@ type
   end;
   
   
-  TfpgFileDialog = class(TfpgBaseDialog)
+  TlqFileDialog = class(TlqBaseDialog)
   private
-    chlDir: TfpgComboBox;
-    grid: TfpgFileGrid;
-    btnUpDir: TfpgButton;
-    btnDirNew: TfpgButton;
-    btnShowHidden: TfpgButton;
-    btnGoHome: TfpgButton;
-    btnBookmark: TfpgButton;
-    pnlFileInfo: TfpgPanel;
-    edFilename: TfpgEdit;
-    chlFilter: TfpgComboBox;
-    lb1: TfpgLabel;
-    lb2: TfpgLabel;
+    chlDir: TlqComboBox;
+    grid: TlqFileGrid;
+    btnUpDir: TlqButton;
+    btnDirNew: TlqButton;
+    btnShowHidden: TlqButton;
+    btnGoHome: TlqButton;
+    btnBookmark: TlqButton;
+    pnlFileInfo: TlqPanel;
+    edFilename: TlqEdit;
+    chlFilter: TlqComboBox;
+    lb1: TlqLabel;
+    lb2: TlqLabel;
     FOpenMode: boolean;
     FFilterList: TStringList;
     FFilter: string;
     FInitialDir: string;
-    FBookmarkMenu: TfpgPopupMenu;
-    FIni: TfpgIniFile;
+    FBookmarkMenu: TlqPopupMenu;
+    FIni: TlqIniFile;
     procedure   SetFilter(const Value: string);
     function    GetFontDesc: string;
     function    GetShowHidden: boolean;
@@ -195,7 +195,7 @@ type
     procedure   edFilenameKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
     procedure   UpdateButtonState;
     function    HighlightFile(const AFilename: string): boolean;
-    function    CreatePopupMenu: TfpgPopupMenu;
+    function    CreatePopupMenu: TlqPopupMenu;
     procedure   BookmarkItemClicked(Sender: TObject);
     procedure   ShowConfigureBookmarks;
   protected
@@ -219,15 +219,15 @@ type
 {$define read_interface}
 {$undef read_implementation}
 
-{$I logo.}
-{$I messagedialog.}
-{$I newdirdialog.}
-{$I promptuserdialog.}
-{$I selectdirdialog.}
-{$I charmapdialog.}
-{$I colordialog.}
-{$I inputquerydialog.}
-{$I managebookmarksdialog.}
+{$I logo.inc}
+{$I messagedialog.inc}
+{$I newdirdialog.inc}
+{$I promptuserdialog.inc}
+{$I selectdirdialog.inc}
+{$I charmapdialog.inc}
+{$I colordialog.inc}
+{$I inputquerydialog.inc}
+{$I managebookmarksdialog.inc}
 
 
 
@@ -235,11 +235,11 @@ procedure ShowMessage(AMessage, ATitle: string; ACentreText: Boolean = False); o
 procedure ShowMessage(AMessage: string; ACentreText: Boolean = False); overload;
 
 function SelectFontDialog(var FontDesc: string): boolean;
-function SelectFileDialog(const ADialogType: boolean = sfdOpen; const AFilter: TfpgString = ''; const AInitialDir: TfpgString = ''): TfpgString;
-function SelectDirDialog(const AStartDir: TfpgString = ''): TfpgString;
-function fpgShowCharMap: TfpgString;
-function fpgSelectColorDialog(APresetColor: TfpgColor = clBlack): TfpgColor;
-function fpgInputQuery(const ACaption, APrompt: TfpgString; var Value: TfpgString): Boolean;
+function SelectFileDialog(const ADialogType: boolean = sfdOpen; const AFilter: TlqString = ''; const AInitialDir: TlqString = ''): TlqString;
+function SelectDirDialog(const AStartDir: TlqString = ''): TlqString;
+function fpgShowCharMap: TlqString;
+function fpgSelectColorDialog(APresetColor: TlqColor = clBlack): TlqColor;
+function fpgInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
 
 
 implementation
@@ -255,7 +255,7 @@ uses
   ;
   
   
-procedure WrapText(const AText: String; ALines: TStrings; AFont: TfpgFont;
+procedure WrapText(const AText: String; ALines: TStrings; AFont: TlqFont;
     const ALineWidth: Integer; out AWidth: Integer);
 var
   maxw: integer;
@@ -342,9 +342,9 @@ end;
 
 procedure ShowMessage(AMessage, ATitle: string; ACentreText: Boolean);
 var
-  frm: TfpgMessageBox;
+  frm: TlqMessageBox;
 begin
-  frm := TfpgMessageBox.Create(nil);
+  frm := TlqMessageBox.Create(nil);
   try
     frm.WindowTitle := ATitle;
     frm.CentreText := ACentreText;
@@ -362,10 +362,10 @@ end;
 
 function SelectFontDialog(var FontDesc: string): boolean;
 var
-  frm: TfpgFontSelectDialog;
+  frm: TlqFontSelectDialog;
 begin
   Result := False;
-  frm := TfpgFontSelectDialog.Create(nil);
+  frm := TlqFontSelectDialog.Create(nil);
   frm.SetFontDesc(FontDesc);
   if frm.ShowModal = mrOK then
   begin
@@ -375,14 +375,14 @@ begin
   frm.Free;
 end;
 
-function SelectFileDialog(const ADialogType: boolean = sfdOpen; const AFilter: TfpgString = ''; const AInitialDir: TfpgString = ''): TfpgString;
+function SelectFileDialog(const ADialogType: boolean = sfdOpen; const AFilter: TlqString = ''; const AInitialDir: TlqString = ''): TlqString;
 var
-  dlg: TfpgFileDialog;
+  dlg: TlqFileDialog;
   dres: boolean;
-  DefaultFilter: TfpgString;
+  DefaultFilter: TlqString;
 begin
   DefaultFilter := rsAllFiles+' ('+AllFilesMask+')'+'|'+AllFilesMask;
-  dlg := TfpgFileDialog.Create(nil);
+  dlg := TlqFileDialog.Create(nil);
   try
     if aFilter = '' then
       dlg.Filter := DefaultFilter
@@ -406,11 +406,11 @@ begin
   end;
 end;
 
-function SelectDirDialog(const AStartDir: TfpgString): TfpgString;
+function SelectDirDialog(const AStartDir: TlqString): TlqString;
 var
-  dlg: TfpgSelectDirDialog;
+  dlg: TlqSelectDirDialog;
 begin
-  dlg := TfpgSelectDirDialog.Create(nil);
+  dlg := TlqSelectDirDialog.Create(nil);
   try
     dlg.SelectedDir := AStartDir;
     if dlg.ShowModal = mrOK then
@@ -422,9 +422,9 @@ begin
   end;
 end;
 
-{ TfpgMessageBox }
+{ TlqMessageBox }
 
-procedure TfpgMessageBox.FormPaint(Sender: TObject);
+procedure TlqMessageBox.FormPaint(Sender: TObject);
 var
   n, y: integer;
   tw: integer;
@@ -442,12 +442,12 @@ begin
   end;
 end;
 
-procedure TfpgMessageBox.FormShow(Sender: TObject);
+procedure TlqMessageBox.FormShow(Sender: TObject);
 begin
   FButton.Text := cMsgDlgBtnText[mbOK]
 end;
 
-procedure TfpgMessageBox.FormKeyPressed(Sender: TObject; var KeyCode: word;
+procedure TlqMessageBox.FormKeyPressed(Sender: TObject; var KeyCode: word;
   var ShiftState: TShiftState; var Consumed: boolean);
 begin
   case CheckClipBoardKey(keycode, shiftstate) of
@@ -465,19 +465,19 @@ begin
   end;
 end;
 
-function TfpgMessageBox.GetFontDesc: string;
+function TlqMessageBox.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgMessageBox.SetFontDesc(const AValue: string);
+procedure TlqMessageBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   RePaint;
 end;
 
-constructor TfpgMessageBox.Create(AOwner: TComponent);
+constructor TlqMessageBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FLines        := TStringList.Create;
@@ -488,14 +488,14 @@ begin
   FCentreText   := False;
 end;
 
-destructor TfpgMessageBox.Destroy;
+destructor TlqMessageBox.Destroy;
 begin
   FFont.Free;
   FLines.Free;
   inherited Destroy;
 end;
 
-procedure TfpgMessageBox.AfterCreate;
+procedure TlqMessageBox.AfterCreate;
 begin
   inherited AfterCreate;
   {@VFD_BODY_BEGIN: MessageBox}
@@ -510,7 +510,7 @@ begin
   OnPaint := @FormPaint;
   OnKeyPress := @FormKeyPressed;
 
-  FButton := TfpgButton.Create(self);
+  FButton := TlqButton.Create(self);
   with FButton do
   begin
     Name := 'FButton';
@@ -527,7 +527,7 @@ begin
   {@VFD_BODY_END: MessageBox}
 end;
 
-procedure TfpgMessageBox.SetMessage(AMessage: string);
+procedure TlqMessageBox.SetMessage(AMessage: string);
 var
   outw: integer;
 begin
@@ -547,20 +547,20 @@ begin
   Height := FButton.Top + FButton.Height + FTextY;
 end;
 
-{ TfpgBaseDialog }
+{ TlqBaseDialog }
 
-procedure TfpgBaseDialog.btnOKClick(Sender: TObject);
+procedure TlqBaseDialog.btnOKClick(Sender: TObject);
 begin
   ModalResult := mrOK;
 end;
 
-procedure TfpgBaseDialog.btnCancelClick(Sender: TObject);
+procedure TlqBaseDialog.btnCancelClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
   Close;  // this shouldn't really be needed if we displayed form with ShowModal
 end;
 
-procedure TfpgBaseDialog.HandleKeyPress(var keycode: word;
+procedure TlqBaseDialog.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
   if keycode = keyEscape then   // Esc cancels the dialog
@@ -569,13 +569,13 @@ begin
     inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgBaseDialog.SetupCaptions;
+procedure TlqBaseDialog.SetupCaptions;
 begin
   btnCancel.Text  := rsCancel;
   btnOK.Text      := rsOK;
 end;
 
-constructor TfpgBaseDialog.Create(AOwner: TComponent);
+constructor TlqBaseDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Width     := 500;
@@ -602,9 +602,9 @@ begin
 end;
 
 
-{ TfpgFontSelectDialog }
+{ TlqFontSelectDialog }
 
-procedure TfpgFontSelectDialog.OnCollectionChanged(Sender: TObject);
+procedure TlqFontSelectDialog.OnCollectionChanged(Sender: TObject);
 begin
   if lbCollection.Text = rsCollectionFontAliases then
   begin
@@ -619,7 +619,7 @@ begin
   OnParamChange(nil);
 end;
 
-procedure TfpgFontSelectDialog.OnParamChange(Sender: TObject);
+procedure TlqFontSelectDialog.OnParamChange(Sender: TObject);
 var
   fdesc: string;
 begin
@@ -631,12 +631,12 @@ begin
     memSample.Lines.Add(fpgGetNamedFontDesc(UTF8Copy(fdesc, 2, UTF8Length(fdesc)-1)));
 end;
 
-procedure TfpgFontSelectDialog.OnSameTextChanged(Sender: TObject);
+procedure TlqFontSelectDialog.OnSameTextChanged(Sender: TObject);
 begin
   FSampleText := memSample.Text;
 end;
 
-procedure TfpgFontSelectDialog.CreateFontList;
+procedure TlqFontSelectDialog.CreateFontList;
 var
   fl: TStringList;
 begin
@@ -648,7 +648,7 @@ begin
   lbFaces.EndUpdate;
 end;
 
-procedure TfpgFontSelectDialog.CreateFontAliasList;
+procedure TlqFontSelectDialog.CreateFontAliasList;
 var
   fl: TStringList;
   i: integer;
@@ -663,7 +663,7 @@ begin
   lbFaces.EndUpdate;
 end;
 
-procedure TfpgFontSelectDialog.SetupUI(AMode: Byte);
+procedure TlqFontSelectDialog.SetupUI(AMode: Byte);
 begin
   FMode := AMode;
   case FMode of
@@ -690,7 +690,7 @@ begin
   end;
 end;
 
-function TfpgFontSelectDialog.GetFontDesc: string;
+function TlqFontSelectDialog.GetFontDesc: string;
 var
   s: string;
 begin
@@ -717,7 +717,7 @@ begin
   result := s;
 end;
 
-procedure TfpgFontSelectDialog.SetFontDesc(Desc: string);
+procedure TlqFontSelectDialog.SetFontDesc(Desc: string);
 var
   cp: integer;
   c: char;
@@ -832,12 +832,12 @@ begin
   OnParamChange(self);
 end;
 
-procedure TfpgFontSelectDialog.SetupCaptions;
+procedure TlqFontSelectDialog.SetupCaptions;
 begin
   inherited SetupCaptions;
 end;
 
-constructor TfpgFontSelectDialog.Create(AOwner: TComponent);
+constructor TlqFontSelectDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   WindowTitle := rsSelectAFont;
@@ -850,7 +850,7 @@ begin
   btnCancel.Left := Width - FDefaultButtonWidth - FSpacing;
   btnOK.Left     := btnCancel.Left - FDefaultButtonWidth - FSpacing;
 
-  lblLabel5 := TfpgLabel.Create(self);
+  lblLabel5 := TlqLabel.Create(self);
   with lblLabel5 do
   begin
     SetPosition(8, 8, 73, 16);
@@ -859,7 +859,7 @@ begin
   end;
 
   { TODO : This need to be fully implemented at some stage. }
-  lbCollection := TfpgListBox.Create(self);
+  lbCollection := TlqListBox.Create(self);
   with lbCollection do
   begin
     Name := 'lbCollection';
@@ -878,7 +878,7 @@ begin
 //    Enabled := False;
   end;
 
-  lblLabel1 := TfpgLabel.Create(self);
+  lblLabel1 := TlqLabel.Create(self);
   with lblLabel1 do
   begin
     SetPosition(161, 8, 73, 16);
@@ -886,7 +886,7 @@ begin
     Text := fpgAddColon(rsName);
   end;
 
-  lbFaces := TfpgListBox.Create(self);
+  lbFaces := TlqListBox.Create(self);
   with lbFaces do
   begin
     Name := 'lbFaces';
@@ -895,7 +895,7 @@ begin
     OnChange := @OnParamChange;
   end;
 
-  lblSize := TfpgLabel.Create(self);
+  lblSize := TlqLabel.Create(self);
   with lblSize do
   begin
     Name := 'lblSize';
@@ -904,7 +904,7 @@ begin
     Text := fpgAddColon(rsSize);
   end;
 
-  lbSize := TfpgListBox.Create(self);
+  lbSize := TlqListBox.Create(self);
   with lbSize do
   begin
     Name := 'lbSize';
@@ -932,7 +932,7 @@ begin
     OnChange  := @OnParamChange;
   end;
 
-  lblTypeface := TfpgLabel.Create(self);
+  lblTypeface := TlqLabel.Create(self);
   with lblTypeface do
   begin
     Name := 'lblTypeface';
@@ -941,7 +941,7 @@ begin
     Text := fpgAddColon(rsTypeface);
   end;
 
-  cbBold := TfpgCheckBox.Create(self);
+  cbBold := TlqCheckBox.Create(self);
   with cbBold do
   begin
     SetPosition(461, 32, 110, 20);
@@ -949,7 +949,7 @@ begin
     OnChange := @OnParamChange;
   end;
 
-  cbItalic := TfpgCheckBox.Create(self);
+  cbItalic := TlqCheckBox.Create(self);
   with cbItalic do
   begin
     SetPosition(461, 56, 110, 20);
@@ -957,7 +957,7 @@ begin
     OnChange := @OnParamChange;
   end;
 
-  cbUnderline := TfpgCheckBox.Create(self);
+  cbUnderline := TlqCheckBox.Create(self);
   with cbUnderline do
   begin
     SetPosition(461, 80, 110, 20);
@@ -965,7 +965,7 @@ begin
     OnChange := @OnParamChange;
   end;
 
-  cbAntiAlias := TfpgCheckBox.Create(self);
+  cbAntiAlias := TlqCheckBox.Create(self);
   with cbAntiAlias do
   begin
     SetPosition(461, 124, 110, 20);
@@ -974,7 +974,7 @@ begin
     OnChange := @OnParamChange;
   end;
 
-  lblLabel4 := TfpgLabel.Create(self);
+  lblLabel4 := TlqLabel.Create(self);
   with lblLabel4 do
   begin
     SetPosition(8, 268, 584, 16);
@@ -982,7 +982,7 @@ begin
     Text := fpgAddColon(rsExampleText);
   end;
 
-  memSample := TfpgMemo.Create(self);
+  memSample := TlqMemo.Create(self);
   with memSample do
   begin
     SetPosition(8, 288, 584, 65);
@@ -994,7 +994,7 @@ begin
   CreateFontList;
 end;
 
-procedure TfpgFontSelectDialog.SetSampleText(AText: string);
+procedure TlqFontSelectDialog.SetSampleText(AText: string);
 begin
   if FSampleText = AText then
     Exit; //==>
@@ -1006,9 +1006,9 @@ begin
 end;
 
 
-{ TfpgFileDialog }
+{ TlqFileDialog }
 
-procedure TfpgFileDialog.ListChanged(Sender: TObject; ARow: Integer);
+procedure TlqFileDialog.ListChanged(Sender: TObject; ARow: Integer);
 var
   s: string;
 begin
@@ -1026,7 +1026,7 @@ begin
   pnlFileInfo.Text := s;
 end;
 
-procedure TfpgFileDialog.GridDblClicked(Sender: TObject; AButton: TMouseButton;
+procedure TlqFileDialog.GridDblClicked(Sender: TObject; AButton: TMouseButton;
   AShift: TShiftState; const AMousePos: TPoint);
 var
   e: TFileEntry;
@@ -1041,29 +1041,29 @@ begin
     btnOKClick(Sender);
 end;
 
-procedure TfpgFileDialog.SetFilter(const Value: string);
+procedure TlqFileDialog.SetFilter(const Value: string);
 begin
   FFilter := Value;
   ProcessFilterString;
 end;
 
-function TfpgFileDialog.GetFontDesc: string;
+function TlqFileDialog.GetFontDesc: string;
 begin
   Result := grid.FontDesc;
 end;
 
-function TfpgFileDialog.GetShowHidden: boolean;
+function TlqFileDialog.GetShowHidden: boolean;
 begin
   Result := btnShowHidden.Down;
 end;
 
-procedure TfpgFileDialog.SetFontDesc(const AValue: string);
+procedure TlqFileDialog.SetFontDesc(const AValue: string);
 begin
   if grid.FontDesc <> AValue then
     grid.FontDesc := AValue;
 end;
 
-procedure TfpgFileDialog.SetInitialDir(const AValue: string);
+procedure TlqFileDialog.SetInitialDir(const AValue: string);
 begin
   if FInitialDir <> AValue then
   begin
@@ -1072,14 +1072,14 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.SetShowHidden(const Value: boolean);
+procedure TlqFileDialog.SetShowHidden(const Value: boolean);
 begin
   btnShowHidden.Down := Value;
 end;
 
-procedure TfpgFileDialog.InitializeComponents;
+procedure TlqFileDialog.InitializeComponents;
 begin
-  chlDir := TfpgComboBox.Create(self);
+  chlDir := TlqComboBox.Create(self);
   with chlDir do
   begin
     SetPosition(8, 12, 484, 24);
@@ -1088,7 +1088,7 @@ begin
     OnChange := @DirChange;
   end;
 
-  grid := TfpgFileGrid.Create(self);
+  grid := TlqFileGrid.Create(self);
   with grid do
   begin
     SetPosition(8, 44, 624, 202);
@@ -1098,7 +1098,7 @@ begin
     OnDoubleClick := @GridDblClicked;
   end;
 
-  btnUpDir := TfpgButton.Create(self);
+  btnUpDir := TlqButton.Create(self);
   with btnUpDir do
   begin
     SetPosition(500, 11, 24, 24);
@@ -1112,7 +1112,7 @@ begin
     OnClick := @UpDirClick;
   end;
 
-  btnDirNew := TfpgButton.Create(self);
+  btnDirNew := TlqButton.Create(self);
   with btnDirNew do
   begin
     SetPosition(526, 11, 24, 24);
@@ -1126,7 +1126,7 @@ begin
     OnClick := @btnDirNewClicked;
   end;
 
-  btnShowHidden := TfpgButton.Create(self);
+  btnShowHidden := TlqButton.Create(self);
   with btnShowHidden do
   begin
     SetPosition(552, 11, 24, 24);
@@ -1142,7 +1142,7 @@ begin
     OnClick := @DirChange;
   end;
 
-  btnGoHome := TfpgButton.Create(self);
+  btnGoHome := TlqButton.Create(self);
   with btnGoHome do
   begin
     SetPosition(578, 11, 24, 24);
@@ -1156,7 +1156,7 @@ begin
     OnClick := @btnGoHomeClicked;
   end;
 
-  btnBookmark := TfpgButton.Create(self);
+  btnBookmark := TlqButton.Create(self);
   with btnBookmark do
   begin
     SetPosition(604, 11, 24, 24);
@@ -1172,7 +1172,7 @@ begin
 
   { Create lower Panel details }
   
-  pnlFileInfo := TfpgPanel.Create(self);
+  pnlFileInfo := TlqPanel.Create(self);
   with pnlFileInfo do
   begin
     Name := 'pnlFileInfo';
@@ -1184,7 +1184,7 @@ begin
     Text := '';
   end;
 
-  edFilename := TfpgEdit.Create(self);
+  edFilename := TlqEdit.Create(self);
   with edFilename do
   begin
     SetPosition(8, 301, 624, 22);
@@ -1197,7 +1197,7 @@ begin
   
   { Filter section }
 
-  chlFilter := TfpgComboBox.Create(self);
+  chlFilter := TlqComboBox.Create(self);
   with chlFilter do
   begin
     SetPosition(8, 345, 624, 22);
@@ -1206,7 +1206,7 @@ begin
     OnChange := @FilterChange;
   end;
 
-  lb1 := TfpgLabel.Create(self);
+  lb1 := TlqLabel.Create(self);
   with lb1 do
   begin
     SetPosition(8, 283, 624, 16);
@@ -1215,7 +1215,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lb2 := TfpgLabel.Create(self);
+  lb2 := TlqLabel.Create(self);
   with lb2 do
   begin
     SetPosition(8, 327, 624, 16);
@@ -1230,7 +1230,7 @@ begin
   chlFilter.FocusItem := 0;
 end;
 
-procedure TfpgFileDialog.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
+procedure TlqFileDialog.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
 var
   e: TFileEntry;
 begin
@@ -1263,7 +1263,7 @@ begin
     inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgFileDialog.btnOKClick(Sender: TObject);
+procedure TlqFileDialog.btnOKClick(Sender: TObject);
 var
   e: TFileEntry;
 begin
@@ -1287,7 +1287,7 @@ begin
     FileName := grid.FileList.DirectoryName + edFileName.Text;
 end;
 
-constructor TfpgFileDialog.Create(AOwner: TComponent);
+constructor TlqFileDialog.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   WindowTitle := rsFileSelection;
@@ -1307,7 +1307,7 @@ begin
   btnOK.Top       := btnCancel.Top;
 end;
 
-destructor TfpgFileDialog.Destroy;
+destructor TlqFileDialog.Destroy;
 begin
   FIni.Free;
   FBookmarkMenu.Free;
@@ -1315,26 +1315,26 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgFileDialog.DirChange(Sender: TObject);
+procedure TlqFileDialog.DirChange(Sender: TObject);
 begin
   SetCurrentDirectory(chlDir.Text);
 end;
 
-procedure TfpgFileDialog.FilterChange(Sender: TObject);
+procedure TlqFileDialog.FilterChange(Sender: TObject);
 begin
   SetCurrentDirectory('.');
 end;
 
-procedure TfpgFileDialog.UpDirClick(Sender: TObject);
+procedure TlqFileDialog.UpDirClick(Sender: TObject);
 begin
   SetCurrentDirectory('..');
 end;
 
-procedure TfpgFileDialog.btnDirNewClicked(Sender: TObject);
+procedure TlqFileDialog.btnDirNewClicked(Sender: TObject);
 var
-  dlg: TfpgNewDirDialog;
+  dlg: TlqNewDirDialog;
 begin
-  dlg := TfpgNewDirDialog.Create(nil);
+  dlg := TlqNewDirDialog.Create(nil);
   try
     if dlg.ShowModal = mrOK then
     begin
@@ -1353,12 +1353,12 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.btnGoHomeClicked(Sender: TObject);
+procedure TlqFileDialog.btnGoHomeClicked(Sender: TObject);
 begin
   SetCurrentDirectory(GetUserDir);
 end;
 
-procedure TfpgFileDialog.btnBookmarkClicked(Sender: TObject);
+procedure TlqFileDialog.btnBookmarkClicked(Sender: TObject);
 begin
   if Assigned(FBookmarkMenu) then
     FBookmarkMenu.Free;
@@ -1366,12 +1366,12 @@ begin
   FBookmarkMenu.ShowAt(self, btnBookmark.Left, btnBookmark.Bottom);
 end;
 
-procedure TfpgFileDialog.edFilenameChanged(Sender: TObject);
+procedure TlqFileDialog.edFilenameChanged(Sender: TObject);
 begin
   UpdateButtonState;
 end;
 
-procedure TfpgFileDialog.edFilenameKeyPressed(Sender: TObject;
+procedure TlqFileDialog.edFilenameKeyPressed(Sender: TObject;
   var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
 begin
   if KeyCode = keyReturn then
@@ -1381,7 +1381,7 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.UpdateButtonState;
+procedure TlqFileDialog.UpdateButtonState;
 begin
   if FOpenMode then
     btnOK.Enabled := True
@@ -1389,7 +1389,7 @@ begin
     btnOK.Enabled := edFileName.Text <> '';
 end;
 
-procedure TfpgFileDialog.SetCurrentDirectory(const ADir: string);
+procedure TlqFileDialog.SetCurrentDirectory(const ADir: string);
 var
   fsel: string;
 begin
@@ -1428,7 +1428,7 @@ begin
     edFilename.Clear;
 end;
 
-function TfpgFileDialog.HighlightFile(const AFilename: string): boolean;
+function TlqFileDialog.HighlightFile(const AFilename: string): boolean;
 var
   n: integer;
 begin
@@ -1444,20 +1444,20 @@ begin
   Result := False;
 end;
 
-function TfpgFileDialog.CreatePopupMenu: TfpgPopupMenu;
+function TlqFileDialog.CreatePopupMenu: TlqPopupMenu;
 var
   i: integer;
-  s: TfpgString;
+  s: TlqString;
   lst: TStringList;
-  mi: TfpgMenuItem;
+  mi: TlqMenuItem;
 begin
-  Result := TfpgPopupMenu.Create(nil);
+  Result := TlqPopupMenu.Create(nil);
   with Result do
   begin
     lst := TStringList.Create;
     try
       if not Assigned(FIni) then
-        FIni := TfpgINIFile.CreateExt(fpgGetToolkitConfigDir + FPG_BOOKMARKS_FILE);
+        FIni := TlqINIFile.CreateExt(fpgGetToolkitConfigDir + FPG_BOOKMARKS_FILE);
       FIni.ReadSection(FPG_BOOKMARK_SECTION, lst);
       // add previous bookmarks to menu
       for i := 0 to lst.Count-1 do
@@ -1477,13 +1477,13 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.BookmarkItemClicked(Sender: TObject);
+procedure TlqFileDialog.BookmarkItemClicked(Sender: TObject);
 var
-  mi: TfpgMenuItem;
-  s: TfpgString;
+  mi: TlqMenuItem;
+  s: TlqString;
 begin
-  if Sender is TfpgMenuItem then
-   mi := TfpgMenuItem(Sender);
+  if Sender is TlqMenuItem then
+   mi := TlqMenuItem(Sender);
   if mi = nil then
     Exit;
   if mi.Tag = 1 then  // Add current directory
@@ -1501,7 +1501,7 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.ShowConfigureBookmarks;
+procedure TlqFileDialog.ShowConfigureBookmarks;
 var
   frm: TConfigureBookmarksForm;
 begin
@@ -1513,7 +1513,7 @@ begin
   end;
 end;
 
-procedure TfpgFileDialog.ProcessFilterString;
+procedure TlqFileDialog.ProcessFilterString;
 var
   p: integer;
   s: string;
@@ -1557,7 +1557,7 @@ begin
   chlFilter.OnChange := @FilterChange;
 end;
 
-function TfpgFileDialog.GetFileFilter: string;
+function TlqFileDialog.GetFileFilter: string;
 var
   i: integer;
 begin
@@ -1568,7 +1568,7 @@ begin
     Result := AllFilesMask;
 end;
 
-function TfpgFileDialog.RunOpenFile: boolean;
+function TlqFileDialog.RunOpenFile: boolean;
 var
   sdir: string;
   fname: string;
@@ -1594,7 +1594,7 @@ begin
     Result := False;
 end;
 
-function TfpgFileDialog.RunSaveFile: boolean;
+function TlqFileDialog.RunSaveFile: boolean;
 var
   sdir: string;
   fname: string;
@@ -1625,14 +1625,14 @@ end;
 {$define read_implementation}
 
 
-{$I messagedialog.}
-{$I newdirdialog.}
-{$I promptuserdialog.}
-{$I selectdirdialog.}
-{$I charmapdialog.}
-{$I colordialog.}
-{$I inputquerydialog.}
-{$I managebookmarksdialog.}
+{$I messagedialog.inc}
+{$I newdirdialog.inc}
+{$I promptuserdialog.inc}
+{$I selectdirdialog.inc}
+{$I charmapdialog.inc}
+{$I colordialog.inc}
+{$I inputquerydialog.inc}
+{$I managebookmarksdialog.inc}
 
 
 end.

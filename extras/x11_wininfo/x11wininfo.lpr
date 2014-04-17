@@ -11,29 +11,29 @@ uses
   xlib, x;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    Button1: TfpgButton;
-    PageControl1: TfpgPageControl;
-    TabSheet1: TfpgTabSheet;
-    Edit1: TfpgEdit;
-    Edit2: TfpgEdit;
-    Label1: TfpgLabel;
-    lblPos: TfpgLabel;
-    Label3: TfpgLabel;
-    lblSize: TfpgLabel;
-    Label2: TfpgLabel;
-    lblHandle: TfpgLabel;
-    Bevel1: TfpgBevel;
-    Label4: TfpgLabel;
+    Button1: TlqButton;
+    PageControl1: TlqPageControl;
+    TabSheet1: TlqTabSheet;
+    Edit1: TlqEdit;
+    Edit2: TlqEdit;
+    Label1: TlqLabel;
+    lblPos: TlqLabel;
+    Label3: TlqLabel;
+    lblSize: TlqLabel;
+    Label2: TlqLabel;
+    lblHandle: TlqLabel;
+    Bevel1: TlqBevel;
+    Label4: TlqLabel;
     {@VFD_HEAD_END: MainForm}
-    FTimer: TfpgTimer;
-    FOutlineGC: TfpgGContext;
+    FTimer: TlqTimer;
+    FOutlineGC: TlqGContext;
     FOutlineDrawn: Boolean;
-    newrect: TfpgRect;
-    lastRect: TfpgRect;
-    last_child: TfpgWinHandle;
+    newrect: TlqRect;
+    lastRect: TlqRect;
+    last_child: TlqWinHandle;
     procedure btnWinInfoClicked(Sender: TObject);
     procedure TimerFired(Sender: TObject);
     procedure InitOutline;
@@ -55,20 +55,20 @@ end;
 
 procedure TMainForm.TimerFired(Sender: TObject);
 type
-   AChildren = array[0..0] of TfpgWinHandle;
+   AChildren = array[0..0] of TlqWinHandle;
    PChildren = ^AChildren;
 var
-  rootw: TfpgWinHandle;
-  parentw: TfpgWinHandle;
+  rootw: TlqWinHandle;
+  parentw: TlqWinHandle;
   children: PChildren;
   cnum: longword;
-  ret_root: TfpgWinHandle;
-  ret_child: TfpgWinHandle;
+  ret_root: TlqWinHandle;
+  ret_child: TlqWinHandle;
   root_x, root_y: integer;
   child_x, child_y: integer;
   mask: longword;
   x: integer;
-  winrect: TfpgRect;
+  winrect: TlqRect;
   wa: TXWindowAttributes;
 begin
   rootw := DefaultRootWindow(fpgApplication.Display);
@@ -168,7 +168,7 @@ end;
 constructor TMainForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FTimer := TfpgTimer.Create(80);
+  FTimer := TlqTimer.Create(80);
   FTimer.OnTimer := @TimerFired;
   InitOutline;
 end;
@@ -188,7 +188,7 @@ begin
   WindowTitle := 'fpGUI Window Information';
   WindowPosition := wpUser;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -210,7 +210,7 @@ begin
     OnClick :=@btnWinInfoClicked;
   end;
 
-  PageControl1 := TfpgPageControl.Create(self);
+  PageControl1 := TlqPageControl.Create(self);
   with PageControl1 do
   begin
     Name := 'PageControl1';
@@ -220,7 +220,7 @@ begin
     TabOrder := 3;
   end;
 
-  TabSheet1 := TfpgTabSheet.Create(PageControl1);
+  TabSheet1 := TlqTabSheet.Create(PageControl1);
   with TabSheet1 do
   begin
     Name := 'TabSheet1';
@@ -228,7 +228,7 @@ begin
     Text := 'TabSheet1';
   end;
 
-  Edit1 := TfpgEdit.Create(TabSheet1);
+  Edit1 := TlqEdit.Create(TabSheet1);
   with Edit1 do
   begin
     Name := 'Edit1';
@@ -239,7 +239,7 @@ begin
     ParentShowHint := True;
   end;
 
-  Edit2 := TfpgEdit.Create(TabSheet1);
+  Edit2 := TlqEdit.Create(TabSheet1);
   with Edit2 do
   begin
     Name := 'Edit2';
@@ -250,7 +250,7 @@ begin
     ParentShowHint := True;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -264,7 +264,7 @@ begin
     WrapText := False;
   end;
 
-  lblPos := TfpgLabel.Create(self);
+  lblPos := TlqLabel.Create(self);
   with lblPos do
   begin
     Name := 'lblPos';
@@ -278,7 +278,7 @@ begin
     WrapText := False;
   end;
 
-  Label3 := TfpgLabel.Create(self);
+  Label3 := TlqLabel.Create(self);
   with Label3 do
   begin
     Name := 'Label3';
@@ -292,7 +292,7 @@ begin
     WrapText := False;
   end;
 
-  lblSize := TfpgLabel.Create(self);
+  lblSize := TlqLabel.Create(self);
   with lblSize do
   begin
     Name := 'lblSize';
@@ -306,7 +306,7 @@ begin
     WrapText := False;
   end;
 
-  Label2 := TfpgLabel.Create(self);
+  Label2 := TlqLabel.Create(self);
   with Label2 do
   begin
     Name := 'Label2';
@@ -320,7 +320,7 @@ begin
     WrapText := False;
   end;
 
-  lblHandle := TfpgLabel.Create(self);
+  lblHandle := TlqLabel.Create(self);
   with lblHandle do
   begin
     Name := 'lblHandle';
@@ -334,7 +334,7 @@ begin
     WrapText := False;
   end;
 
-  Bevel1 := TfpgBevel.Create(self);
+  Bevel1 := TlqBevel.Create(self);
   with Bevel1 do
   begin
     Name := 'Bevel1';
@@ -344,7 +344,7 @@ begin
     Style := bsRaised;
   end;
 
-  Label4 := TfpgLabel.Create(self);
+  Label4 := TlqLabel.Create(self);
   with Label4 do
   begin
     Name := 'Label4';

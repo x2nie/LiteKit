@@ -12,16 +12,16 @@ type
 
   { Note the tags for the UI Designer. This allows use to visually design
     our frame. }
-  TMyFrame = class(TfpgFrame)
+  TMyFrame = class(TlqFrame)
   private
     {@VFD_HEAD_BEGIN: MyFrame}
-    fraCheckBox1: TfpgCheckBox;
-    fraMenu1: TfpgMenuBar;
-    Button1: TfpgButton;
-    Memo1: TfpgMemo;
+    fraCheckBox1: TlqCheckBox;
+    fraMenu1: TlqMenuBar;
+    Button1: TlqButton;
+    Memo1: TlqMemo;
     {@VFD_HEAD_END: MyFrame}
-    framnuFile: TfpgPopupMenu;
-    framnuHelp: TfpgPopupMenu;
+    framnuFile: TlqPopupMenu;
+    framnuHelp: TlqPopupMenu;
     procedure miHelpAboutClicked(Sender: TObject);
   public
     destructor Destroy; override;
@@ -39,7 +39,7 @@ uses
 
 procedure TMyFrame.miHelpAboutClicked(Sender: TObject);
 begin
-  TfpgMessageDialog.AboutFPGui('');
+  TlqMessageDialog.AbouTlqui('');
 end;
 
 destructor TMyFrame.Destroy;
@@ -51,8 +51,8 @@ end;
 
 procedure TMyFrame.AfterCreate;
 var
-  miFile: TfpgMenuItem;
-  miHelp: TfpgMenuItem;
+  miFile: TlqMenuItem;
+  miHelp: TlqMenuItem;
 begin
   {%region 'Auto-generated GUI code' -fold}
   {@VFD_BODY_BEGIN: MyFrame}
@@ -61,7 +61,7 @@ begin
   WindowTitle := 'MyFrame';
   Hint := '';
 
-  fraCheckBox1 := TfpgCheckBox.Create(self);
+  fraCheckBox1 := TlqCheckBox.Create(self);
   with fraCheckBox1 do
   begin
     Name := 'fraCheckBox1';
@@ -72,7 +72,7 @@ begin
     Text := 'CheckBox';
   end;
 
-  fraMenu1 := TfpgMenuBar.Create(self);
+  fraMenu1 := TlqMenuBar.Create(self);
   with fraMenu1 do
   begin
     Name := 'fraMenu1';
@@ -83,7 +83,7 @@ begin
     miHelp := AddMenuItem('Help', nil);
   end;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -96,7 +96,7 @@ begin
     TabOrder := 2;
   end;
 
-  Memo1 := TfpgMemo.Create(self);
+  Memo1 := TlqMemo.Create(self);
   with Memo1 do
   begin
     Name := 'Memo1';
@@ -114,7 +114,7 @@ begin
   { There still seems to be a minor issue with Popup Menus used in a frame. So
     for now the work around is to manually maintain the life of the Popup
     Menus - so Owner is set to nil. }
-  framnuFile := TfpgPopupMenu.Create(nil);
+  framnuFile := TlqPopupMenu.Create(nil);
   with framnuFile do
   begin
     Name := 'framnuFile';
@@ -125,7 +125,7 @@ begin
   end;
   miFile.SubMenu := framnuFile;
 
-  framnuHelp := TfpgPopupMenu.Create(nil);
+  framnuHelp := TlqPopupMenu.Create(nil);
   with framnuHelp do
   begin
     Name := 'framnuHelp';

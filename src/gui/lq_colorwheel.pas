@@ -13,7 +13,7 @@
 
     Description:
       This unit implements color selectors using a ColorWheel and
-      a ValueBar. Color results are in HSV or TfpgColor format.
+      a ValueBar. Color results are in HSV or TlqColor format.
 }
 
 unit lq_colorwheel;
@@ -27,26 +27,26 @@ uses
 
 type
   // forward declaration
-  TfpgValueBar = class;
+  TlqValueBar = class;
 
-  TfpgColorWheel = class(TfpgWidget)
+  TlqColorWheel = class(TlqWidget)
   protected
-    FValueBar: TfpgValueBar;
+    FValueBar: TlqValueBar;
     FHue: longint;
     FSaturation: double;
     FMarginWidth: longint;
     FCursorSize: longint;
     FWhiteAreaPercent: longint; // 0 to 50 percent of circle radius that is pure white
     FOnChange: TNotifyEvent;
-    FImage: TfpgImage; // cached colorwheel image
+    FImage: TlqImage; // cached colorwheel image
     FRecalcWheel: Boolean; // should chached FImage be recalculated
     procedure   HSFromPoint(X, Y: longint; out H: longint; out S: double);
     procedure   DrawCursor;
     procedure   SetMarginWidth(NewWidth: longint);
     procedure   SetCursorSize(NewSize: longint);
-    procedure   SetValueBar(AValueBar: TfpgValueBar);
+    procedure   SetValueBar(AValueBar: TlqValueBar);
     procedure   SetWhiteAreaPercent(WhiteAreaPercent: longint);
-    procedure   SetBackgroundColor(const AValue: TfpgColor); override;
+    procedure   SetBackgroundColor(const AValue: TlqColor); override;
     procedure   Notification(AComponent: TComponent; Operation: TOperation); override;
     function    DrawWidth: longint;
     function    DrawHeight: longint;
@@ -60,12 +60,12 @@ type
     destructor  Destroy; override;
     property    Hue: longint Read FHue;
     property    Saturation: double Read FSaturation;
-    procedure   SetSelectedColor(const NewColor: TfpgColor);
+    procedure   SetSelectedColor(const NewColor: TlqColor);
   published
     property    Align;
     property    BackgroundColor;
     property    Enabled;
-    property    ValueBar: TfpgValueBar Read FValueBar Write SetValueBar;
+    property    ValueBar: TlqValueBar Read FValueBar Write SetValueBar;
     property    MarginWidth: longint Read FMarginWidth Write SetMarginWidth default 5;
     property    CursorSize: longint Read FCursorSize Write SetCursorSize default 5;
     property    WhiteAreaPercent: longint Read FWhiteAreaPercent Write SetWhiteAreaPercent default 10;
@@ -73,9 +73,9 @@ type
   end;
 
 
-  TfpgValueBar = class(TfpgWidget)
+  TlqValueBar = class(TlqWidget)
   protected
-    FColorWheel: TfpgColorWheel;
+    FColorWheel: TlqColorWheel;
     FHue: longint;
     FSaturation: double;
     FValue: double;
@@ -86,7 +86,7 @@ type
     procedure   SetMarginWidth(NewWidth: longint);
     procedure   SetValue(Value: double);
     procedure   SetCursorHeight(CursorHeight: longint);
-    function    GetSelectedColor: TfpgColor;
+    function    GetSelectedColor: TlqColor;
     procedure   Change;
     function    DrawWidth: longint;
     function    DrawHeight: longint;
@@ -104,7 +104,7 @@ type
     property    BackgroundColor;
     property    Enabled;
     property    Value: double Read FValue Write SetValue;
-    property    SelectedColor: TfpgColor Read GetSelectedColor;
+    property    SelectedColor: TlqColor Read GetSelectedColor;
     property    MarginWidth: longint Read FMarginWidth Write SetMarginWidth default 5;
     property    CursorHeight: longint Read FCursorHeight Write SetCursorHeight default 10;
     property    OnChange: TNotifyEvent Read FOnChange Write FOnChange;
@@ -150,19 +150,19 @@ begin
 end;
 
 
-{ TfpgColorWheel }
+{ TlqColorWheel }
 
-function TfpgColorWheel.DrawWidth: longint;
+function TlqColorWheel.DrawWidth: longint;
 begin
   Result := Width - FMarginWidth * 2;
 end;
 
-function TfpgColorWheel.DrawHeight: longint;
+function TlqColorWheel.DrawHeight: longint;
 begin
   Result := Height - FMarginWidth * 2;
 end;
 
-procedure TfpgColorWheel.SetSelectedColor(const NewColor: TfpgColor);
+procedure TlqColorWheel.SetSelectedColor(const NewColor: TlqColor);
 var
   Value: double;
 begin
@@ -172,7 +172,7 @@ begin
     FValueBar.Value := Value;
 end;
 
-procedure TfpgColorWheel.Change;
+procedure TlqColorWheel.Change;
 begin
   if FValueBar <> nil then
     FValueBar.SetHS(FHue, FSaturation);
@@ -181,12 +181,12 @@ begin
   Invalidate;
 end;
 
-procedure TfpgColorWheel.HandlePaint;
+procedure TlqColorWheel.HandlePaint;
 var
   x, y: longint;
   lHue: longint;
   lsaturation: double;
-  c:    TfpgColor;
+  c:    TlqColor;
 begin
   // clear background rectangle
   Canvas.Clear(BackgroundColor);
@@ -219,7 +219,7 @@ begin
     // we must only do this when needed, because it's very slow
     if FImage <> nil then
       FImage.Free;
-    FImage := TfpgImage.Create;
+    FImage := TlqImage.Create;
     FImage.AllocateImage(32, DrawWidth, DrawHeight);
     for X := 0 to DrawWidth - 1 do
     begin
@@ -252,7 +252,7 @@ begin
   DrawCursor;
 end;
 
-procedure TfpgColorWheel.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqColorWheel.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
   Dec(X, FMarginWidth);
@@ -264,7 +264,7 @@ begin
   CaptureMouse;
 end;
 
-procedure TfpgColorWheel.HandleMouseMove(x, y: integer; btnstate: word;
+procedure TlqColorWheel.HandleMouseMove(x, y: integer; btnstate: word;
   shiftstate: TShiftState);
 begin
   inherited HandleMouseMove(x, y, btnstate, shiftstate);
@@ -279,13 +279,13 @@ begin
   Change;
 end;
 
-procedure TfpgColorWheel.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqColorWheel.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   ReleaseMouse;
 end;
 
-constructor TfpgColorWheel.Create(AOwner: TComponent);
+constructor TlqColorWheel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FMarginWidth := 5;
@@ -297,7 +297,7 @@ begin
   FRecalcWheel := True;
 end;
 
-destructor TfpgColorWheel.Destroy;
+destructor TlqColorWheel.Destroy;
 begin
   if FImage <> nil then
     FImage.Free;
@@ -305,7 +305,7 @@ begin
 end;
 
 // Calculate hue and saturation for a given point in the color wheel
-procedure TfpgColorWheel.HSFromPoint(X, Y: longint; out H: longint; out S: double);
+procedure TlqColorWheel.HSFromPoint(X, Y: longint; out H: longint; out S: double);
 var
   xp, yp: double;
   halfw, halfh: longint;
@@ -322,7 +322,7 @@ begin
     S := 0;
 end;
 
-procedure TfpgColorWheel.DrawCursor;
+procedure TlqColorWheel.DrawCursor;
 var
   Angle: Double;
   X, Y: longint;
@@ -350,7 +350,7 @@ begin
   Canvas.XORFillRectangle($FFFFFF, X, Y-FCursorSize, 2, len);
 end;
 
-procedure TfpgColorWheel.SetMarginWidth(NewWidth: longint);
+procedure TlqColorWheel.SetMarginWidth(NewWidth: longint);
 begin
   FMarginWidth := NewWidth;
   if WinHandle = 0 then
@@ -358,7 +358,7 @@ begin
   Invalidate;
 end;
 
-procedure TfpgColorWheel.SetCursorSize(NewSize: longint);
+procedure TlqColorWheel.SetCursorSize(NewSize: longint);
 begin
   FCursorSize := NewSize;
   if WinHandle = 0 then
@@ -366,7 +366,7 @@ begin
   Invalidate;
 end;
 
-procedure TfpgColorWheel.SetValueBar(AValueBar: TfpgValueBar);
+procedure TlqColorWheel.SetValueBar(AValueBar: TlqValueBar);
 begin
   if FValueBar <> nil then
     // tell the old value bar it's no longer controlled by this wheel
@@ -381,7 +381,7 @@ begin
   end;
 end;
 
-procedure TfpgColorWheel.SetWhiteAreaPercent(WhiteAreaPercent: longint);
+procedure TlqColorWheel.SetWhiteAreaPercent(WhiteAreaPercent: longint);
 begin
   if WhiteAreaPercent > 50 then
     WhiteAreaPercent := 50;
@@ -393,13 +393,13 @@ begin
   Invalidate;
 end;
 
-procedure TfpgColorWheel.SetBackgroundColor(const AValue: TfpgColor);
+procedure TlqColorWheel.SetBackgroundColor(const AValue: TlqColor);
 begin
   FRecalcWheel := True;
   inherited SetBackgroundColor(AValue);
 end;
 
-procedure TfpgColorWheel.Notification(AComponent: TComponent; Operation: TOperation);
+procedure TlqColorWheel.Notification(AComponent: TComponent; Operation: TOperation);
 begin
   inherited Notification(AComponent, Operation);
   if Operation = opRemove then
@@ -410,12 +410,12 @@ begin
 end;
 
 
-{ TfpgValueBar }
+{ TlqValueBar }
 
-procedure TfpgValueBar.DrawLine(Y: longint);
+procedure TlqValueBar.DrawLine(Y: longint);
 var
   DrawVal: double;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   DrawVal := ValueFromY(Y);
   C := HSVToRGB(FHue, FSaturation, DrawVal);
@@ -423,10 +423,10 @@ begin
   Canvas.DrawLine(FMarginWidth, Y, Width - FMarginWidth - 1, Y);
 end;
 
-procedure TfpgValueBar.HandlePaint;
+procedure TlqValueBar.HandlePaint;
 var
   y: longint;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   //  inherited HandlePaint;
   Canvas.Clear(BackgroundColor);
@@ -479,7 +479,7 @@ begin
   DrawCursor;
 end;
 
-procedure TfpgValueBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqValueBar.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
   FValue := ValueFromY(Y);
@@ -487,7 +487,7 @@ begin
   CaptureMouse;
 end;
 
-procedure TfpgValueBar.HandleMouseMove(x, y: integer; btnstate: word;
+procedure TlqValueBar.HandleMouseMove(x, y: integer; btnstate: word;
   shiftstate: TShiftState);
 begin
   inherited HandleMouseMove(x, y, btnstate, shiftstate);
@@ -497,13 +497,13 @@ begin
   Change;
 end;
 
-procedure TfpgValueBar.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqValueBar.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   ReleaseMouse;
 end;
 
-constructor TfpgValueBar.Create(AOwner: TComponent);
+constructor TlqValueBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FMarginWidth := 5;
@@ -514,7 +514,7 @@ begin
   FCursorHeight := 10;
 end;
 
-procedure TfpgValueBar.SetHS(Hue: longint; Sat: double);
+procedure TlqValueBar.SetHS(Hue: longint; Sat: double);
 begin
   FHue := Hue;
   FSaturation := Sat;
@@ -522,26 +522,26 @@ begin
   Change;
 end;
 
-procedure TfpgValueBar.SetValue(Value: double);
+procedure TlqValueBar.SetValue(Value: double);
 begin
   FValue := Value;
   Change;
 end;
 
-function TfpgValueBar.DrawWidth: longint;
+function TlqValueBar.DrawWidth: longint;
 begin
   Result := Width - FMarginWidth * 2;
 end;
 
-function TfpgValueBar.DrawHeight: longint;
+function TlqValueBar.DrawHeight: longint;
 begin
   Result := Height - FMarginWidth * 2;
 end;
 
-procedure TfpgValueBar.DrawCursor;
+procedure TlqValueBar.DrawCursor;
 var
   Y: longint;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   if (Width < MarginWidth * 2) or
      (Height < MarginWidth * 2) then
@@ -557,7 +557,7 @@ begin
   Canvas.DrawControlFrame(r);
 end;
 
-procedure TfpgValueBar.SetMarginWidth(NewWidth: longint);
+procedure TlqValueBar.SetMarginWidth(NewWidth: longint);
 begin
   if MarginWidth < 0 then
     MarginWidth := 0;
@@ -565,7 +565,7 @@ begin
   Invalidate;
 end;
 
-procedure TfpgValueBar.SetCursorHeight(CursorHeight: longint);
+procedure TlqValueBar.SetCursorHeight(CursorHeight: longint);
 begin
   if CursorHeight < 3 then
     CursorHeight := 3;
@@ -573,12 +573,12 @@ begin
   Invalidate;
 end;
 
-function TfpgValueBar.GetSelectedColor: TfpgColor;
+function TlqValueBar.GetSelectedColor: TlqColor;
 begin
   Result := HSVToRGB(FHue, FSaturation, FValue);
 end;
 
-function TfpgValueBar.ValueFromY(Y: longint): real;
+function TlqValueBar.ValueFromY(Y: longint): real;
 begin
   Result := (Y - MarginWidth) / (DrawHeight - 1);
   if Result < 0 then
@@ -587,7 +587,7 @@ begin
     Result := 1.0;
 end;
 
-procedure TfpgValueBar.Change;
+procedure TlqValueBar.Change;
 begin
   Invalidate;
   if FOnChange <> nil then

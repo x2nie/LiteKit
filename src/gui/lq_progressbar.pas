@@ -29,14 +29,14 @@ uses
   lq_widget;
   
 type
-  TfpgCustomProgressBar = class(TfpgWidget)
+  TlqCustomProgressBar = class(TlqWidget)
   private
     FMax: longint;
     FMin: longint;
     FPosition: longint;
     FShowCaption: boolean;
     FStep: longint;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     procedure   SetMax(const AValue: longint);
     procedure   SetMin(const AValue: longint);
     procedure   SetPBPosition(const AValue: longint);
@@ -54,11 +54,11 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure   StepIt;
     procedure   StepBy(AStep: integer);
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   end;
   
   
-  TfpgProgressBar = class(TfpgCustomProgressBar)
+  TlqProgressBar = class(TlqCustomProgressBar)
   published
     property    Align;
     property    BackgroundColor default $c4c4c4;
@@ -79,9 +79,9 @@ type
 implementation
 
 
-{ TfpgCustomProgressBar }
+{ TlqCustomProgressBar }
 
-procedure TfpgCustomProgressBar.SetMax(const AValue: longint);
+procedure TlqCustomProgressBar.SetMax(const AValue: longint);
 begin
   if FMax = AValue then
     Exit; //==>
@@ -96,7 +96,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgCustomProgressBar.SetMin(const AValue: longint);
+procedure TlqCustomProgressBar.SetMin(const AValue: longint);
 begin
   if FMin = AValue then
     Exit; //==>
@@ -111,7 +111,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgCustomProgressBar.SetPBPosition(const AValue: longint);
+procedure TlqCustomProgressBar.SetPBPosition(const AValue: longint);
 begin
   if FPosition = AValue then
     Exit; //==>
@@ -127,7 +127,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgCustomProgressBar.SetShowCaption(const AValue: boolean);
+procedure TlqCustomProgressBar.SetShowCaption(const AValue: boolean);
 begin
   if FShowCaption = AValue then
     Exit; //==>
@@ -135,7 +135,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgCustomProgressBar.SetStep(const AValue: longint);
+procedure TlqCustomProgressBar.SetStep(const AValue: longint);
 begin
   if AValue < 1 then
     Exit; //==>
@@ -144,16 +144,16 @@ begin
   FStep := AValue;
 end;
 
-procedure TfpgCustomProgressBar.HandlePaint;
+procedure TlqCustomProgressBar.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   diff: integer;
   aPos: integer;  // absolute position
   pos: integer;
   percent: integer;
   txt: string;
-  x: TfpgCoord;
-  y: TfpgCoord;
+  x: TlqCoord;
+  y: TlqCoord;
 begin
   inherited HandlePaint;
   Canvas.ClearClipRect;
@@ -170,7 +170,7 @@ begin
 
   // Bluecurve theme  :)
   // outer dark border
-  Canvas.SetColor(TfpgColor($999999));
+  Canvas.SetColor(TlqColor($999999));
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawRectangle(r);
   InflateRect(r, -1, -1);
@@ -178,16 +178,16 @@ begin
   if FPosition > 0 then
   begin
     // left top
-    Canvas.SetColor(TfpgColor($98b2ed));
+    Canvas.SetColor(TlqColor($98b2ed));
     Canvas.DrawLine(r.Left, r.Bottom, r.Left, r.Top);  // left
     Canvas.DrawLine(r.Left, r.Top, r.Right, r.Top);    // top
     // right bottom
-    Canvas.SetColor(TfpgColor($3b4c71));
+    Canvas.SetColor(TlqColor($3b4c71));
     Canvas.DrawLine(r.Right, r.Top, r.Right, r.Bottom);   // right
     Canvas.DrawLine(r.Right, r.Bottom, r.Left, r.Bottom);   // bottom
     // inside gradient fill
     InflateRect(r, -1, -1);
-    Canvas.GradientFill(r, TfpgColor($425d9b), TfpgColor($97b0e8), gdVertical);
+    Canvas.GradientFill(r, TlqColor($425d9b), TlqColor($97b0e8), gdVertical);
   end;
   // paint percentage if required
   if FShowCaption then
@@ -201,7 +201,7 @@ begin
   end;
 end;
 
-constructor TfpgCustomProgressBar.Create(AOwner: TComponent);
+constructor TlqCustomProgressBar.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable := False;
@@ -211,18 +211,18 @@ begin
   FMax      := 100;
   FStep     := 1;
   FPosition := 0;
-  FBackgroundColor := TfpgColor($c4c4c4); // clListBox;
+  FBackgroundColor := TlqColor($c4c4c4); // clListBox;
   FTextColor := Parent.TextColor;
   FShowCaption := False;
   FFont     := fpgStyle.DefaultFont;
 end;
 
-procedure TfpgCustomProgressBar.StepIt;
+procedure TlqCustomProgressBar.StepIt;
 begin
   Position := Position + Step;
 end;
 
-procedure TfpgCustomProgressBar.StepBy(AStep: integer);
+procedure TlqCustomProgressBar.StepBy(AStep: integer);
 begin
   Position := Position + AStep;
 end;

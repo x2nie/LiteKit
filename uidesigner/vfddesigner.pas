@@ -43,11 +43,11 @@ uses
 
 type
 
-  TfpgEditMode = (emWidgetOrder, emTabOrder);
+  TlqEditMode = (emWidgetOrder, emTabOrder);
 
-  TOtherWidget = class(TfpgWidget)
+  TOtherWidget = class(TlqWidget)
   protected
-    FFont: TfpgFont;
+    FFont: TlqFont;
     procedure   HandlePaint; override;
   public
     wgClassName: string;
@@ -58,7 +58,7 @@ type
   TFormDesigner = class;    // forward declaration
 
 
-  TDesignedForm = class(TfpgForm)
+  TDesignedForm = class(TlqForm)
   public
     procedure   AfterCreate; override;
   end;
@@ -69,15 +69,15 @@ type
     procedure   SetSelected(const AValue: boolean);
   public
     FFormDesigner: TFormDesigner;
-    FWidget: TfpgWidget;
+    FWidget: TlqWidget;
     FVFDClass: TVFDWidgetClass;
     FSelected: boolean;
     resizer: array[1..8] of TwgResizer;
     other: TStringList;
-    constructor Create(AFormDesigner: TFormDesigner; wg: TfpgWidget; wgc: TVFDWidgetClass);
+    constructor Create(AFormDesigner: TFormDesigner; wg: TlqWidget; wgc: TVFDWidgetClass);
     destructor  Destroy; override;
     property    Selected: boolean read FSelected write SetSelected;
-    property    Widget: TfpgWidget read FWidget;
+    property    Widget: TlqWidget read FWidget;
     procedure   UpdateResizerPositions;
     property    FormDesigner: TFormDesigner read FFormDesigner;
   end;
@@ -88,21 +88,21 @@ type
     FOneClickMove: boolean;
   protected
     FWidgets: TList;
-    FForm: TfpgForm;
+    FForm: TlqForm;
     FFormOther: string;
     FDragging: boolean;
     FDragPosX,
-    FDragPosY: TfpgCoord;
+    FDragPosY: TlqCoord;
     FWasDrag: boolean;
   protected
     // messages of the designed widgets
-    procedure   MsgMouseDown(var msg: TfpgMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TfpgMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TfpgMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgKeyPress(var msg: TfpgMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgMove(var msg: TfpgMessageRec); message FPGM_MOVE;
-    procedure   MsgResize(var msg: TfpgMessageRec); message FPGM_RESIZE;
-    procedure   MsgActivate(var msg: TfpgMessageRec); message FPGM_ACTIVATE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
+    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
+    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
+    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
     procedure   DesignerKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
   public
     constructor Create;
@@ -110,16 +110,16 @@ type
     procedure   ClearForm;
     procedure   DefaultHandler(var msg); override;
     procedure   Show;
-    function    AddWidget(wg: TfpgWidget; wgc: TVFDWidgetClass): TWidgetDesigner;
-    function    WidgetDesigner(wg: TfpgWidget): TWidgetDesigner;
-    function    FindWidgetByName(const wgname: string): TfpgWidget;
+    function    AddWidget(wg: TlqWidget; wgc: TVFDWidgetClass): TWidgetDesigner;
+    function    WidgetDesigner(wg: TlqWidget): TWidgetDesigner;
+    function    FindWidgetByName(const wgname: string): TlqWidget;
     procedure   DeSelectAll;
     procedure   SelectAll;
     procedure   SelectNextWidget(fw: boolean);
     procedure   MoveResizeWidgets(dx, dy, dw, dh: integer);
     procedure   DeleteWidgets;
-    procedure   EditWidgetOrTabOrder(AMode: TfpgEditMode);
-    procedure   InsertWidget(pwg: TfpgWidget; x, y: integer; wgc: TVFDWidgetClass);
+    procedure   EditWidgetOrTabOrder(AMode: TlqEditMode);
+    procedure   InsertWidget(pwg: TlqWidget; x, y: integer; wgc: TVFDWidgetClass);
     procedure   UpdatePropWin;
     procedure   OnPropTextChange(Sender: TObject);
     procedure   OnPropNameChange(Sender: TObject);
@@ -128,13 +128,13 @@ type
     procedure   OnAnchorChange(Sender: TObject);
     procedure   OnEditWidget(Sender: TObject);
     function    GenerateNewName(namebase: string): string;
-    procedure   RunWidgetEditor(wgd: TWidgetDesigner; wg: TfpgWidget);
+    procedure   RunWidgetEditor(wgd: TWidgetDesigner; wg: TlqWidget);
     function    GetFormSourceDecl: string;
     function    GetFormSourceImpl: string;
     function    GetWidgetSourceImpl(wd: TWidgetDesigner; ident: string): string;
     // The widgets can be selected and dragged within one click
     property    OneClickMove: boolean read FOneClickMove write FOneClickMove;
-    property    Form: TfpgForm read FForm;
+    property    Form: TlqForm read FForm;
     property    FormOther: string read FFormOther write FFormOther;
   end;
 
@@ -148,7 +148,7 @@ uses
   lq_tree;
 
 const
-  cEditOrder: array[TfpgEditMode] of string = ('Widget Order', 'Tab Order');
+  cEditOrder: array[TlqEditMode] of string = ('Widget Order', 'Tab Order');
   
 
 { TWidgetDesigner }
@@ -184,7 +184,7 @@ begin
       resizer[n].Show;
 end;
 
-constructor TWidgetDesigner.Create(AFormDesigner: TFormDesigner; wg: TfpgWidget; wgc: TVFDWidgetClass);
+constructor TWidgetDesigner.Create(AFormDesigner: TFormDesigner; wg: TlqWidget; wgc: TVFDWidgetClass);
 var
   n: integer;
 begin
@@ -274,7 +274,7 @@ end;
 
 { TFormDesigner }
 
-procedure TFormDesigner.MsgMouseDown(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgMouseDown(var msg: TlqMessageRec);
 var
   wgd: TWidgetDesigner;
   shift: boolean;
@@ -289,7 +289,7 @@ begin
   if msg.dest = FForm then
     Exit;
 
-  wgd := WidgetDesigner(TfpgWidget(msg.dest));
+  wgd := WidgetDesigner(TlqWidget(msg.dest));
   if wgd = nil then
     Exit;
 
@@ -309,11 +309,11 @@ begin
   end;
 end;
 
-procedure TFormDesigner.MsgMouseUp(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgMouseUp(var msg: TlqMessageRec);
 var
   wgd: TWidgetDesigner;
   wgc: TVFDWidgetClass;
-  pwg: TfpgWidget;
+  pwg: TlqWidget;
   shift: boolean;
   x, y: integer;
 begin
@@ -323,8 +323,8 @@ begin
   shift := (ssShift in msg.Params.mouse.shiftstate);
 
   wgc := frmMain.SelectedWidget;
-  pwg := TfpgWidget(msg.dest);
-  wgd := WidgetDesigner(TfpgWidget(msg.dest));
+  pwg := TlqWidget(msg.dest);
+  wgd := WidgetDesigner(TlqWidget(msg.dest));
   if wgd = nil then
     pwg := FForm
   else if not wgd.FVFDClass.Container then
@@ -362,7 +362,7 @@ begin
   end
   else
   begin
-    wgd := WidgetDesigner(TfpgWidget(msg.dest));
+    wgd := WidgetDesigner(TlqWidget(msg.dest));
     if wgd = nil then
     begin
       DeSelectAll;
@@ -384,19 +384,19 @@ begin
 
   //if msg.Params.mouse.Buttons = 3 then {right mouse button }
   //begin
-    //if TfpgWidget(msg.Dest).ClassType = TfpgPageControl then
+    //if TlqWidget(msg.Dest).ClassType = TlqPageControl then
     //begin
       //writeln('Right click on page control');
-      //wgd := WidgetDesigner(TfpgWidget(msg.dest));
+      //wgd := WidgetDesigner(TlqWidget(msg.dest));
       //if wgd <> nil then
-        //pmenu := wgd.FVFDClass.CreatePopupMenu(TfpgWidget(msg.dest));
+        //pmenu := wgd.FVFDClass.CreatePopupMenu(TlqWidget(msg.dest));
         //if Assigned(pmenu) then
           //pmenu.ShowAt(wgd.Widget, msg.Params.mouse.x, msg.Params.mouse.y);
     //end;
   //end;
 end;
 
-procedure TFormDesigner.MsgMouseMove(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgMouseMove(var msg: TlqMessageRec);
 var
   dx, dy: integer;
   wgd: TWidgetDesigner;
@@ -410,7 +410,7 @@ begin
   dx := msg.Params.mouse.x - FDragPosX;
   dy := msg.Params.mouse.y - FDragPosY;
 
-  wgd := WidgetDesigner(TfpgWidget(msg.dest));
+  wgd := WidgetDesigner(TlqWidget(msg.dest));
   if (wgd = nil) or (not wgd.Selected) then
     Exit;
 
@@ -423,7 +423,7 @@ begin
   MoveResizeWidgets(dx, dy, 0, 0);
 end;
 
-procedure TFormDesigner.MsgKeyPress(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgKeyPress(var msg: TlqMessageRec);
 var
   key: word;
   ss: TShiftState;
@@ -438,14 +438,14 @@ begin
   DesignerKeyPress(key, ss, consumed);
 end;
 
-procedure TFormDesigner.MsgMove(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgMove(var msg: TlqMessageRec);
 begin
   if msg.dest = FForm then
     UpdatePropWin;
   msg.Stop  := True;
 end;
 
-procedure TFormDesigner.MsgResize(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgResize(var msg: TlqMessageRec);
 begin
   msg.Stop := True;
   if msg.dest = FForm then
@@ -505,19 +505,19 @@ begin
   UpdatePropWin;
 end;
 
-function TFormDesigner.AddWidget(wg: TfpgWidget; wgc: TVFDWidgetClass): TWidgetDesigner;
+function TFormDesigner.AddWidget(wg: TlqWidget; wgc: TVFDWidgetClass): TWidgetDesigner;
 var
   cd: TWidgetDesigner;
 begin
 //  writeln('TFormDesigner.AddWidget');
   cd     := TWidgetDesigner.Create(self, wg, wgc);
   FWidgets.Add(cd);
-  if wg is TfpgForm then
+  if wg is TlqForm then
     wg.FormDesigner := self;
   Result := cd;
 end;
 
-function TFormDesigner.WidgetDesigner(wg: TfpgWidget): TWidgetDesigner;
+function TFormDesigner.WidgetDesigner(wg: TlqWidget): TWidgetDesigner;
 var
   n: integer;
   cd: TWidgetDesigner;
@@ -640,21 +640,21 @@ begin
 end;
 
 
-procedure TFormDesigner.EditWidgetOrTabOrder(AMode: TfpgEditMode);
+procedure TFormDesigner.EditWidgetOrTabOrder(AMode: TlqEditMode);
 var
   frm: TWidgetOrderForm;
   n, fi: integer;
   cd: TWidgetDesigner;
   identlevel: integer;
-  lFocused: TfpgTreeNode;
-  lNode: TfpgTreeNode;
+  lFocused: TlqTreeNode;
+  lNode: TlqTreeNode;
   s: string;
 
-  procedure AddChildWidgets(AParent: TfpgWidget; ATreeNode: TfpgTreeNode);
+  procedure AddChildWidgets(AParent: TlqWidget; ATreeNode: TlqTreeNode);
   var
     f: integer;
     fcd: TWidgetDesigner;
-    lNode: TfpgTreeNode;
+    lNode: TlqTreeNode;
   begin
     for f := 0 to FWidgets.Count-1 do
     begin
@@ -775,7 +775,7 @@ procedure TFormDesigner.UpdatePropWin;
 var
   n, i: integer;
   cd, scd: TWidgetDesigner;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 
   wgcnt: integer;
   //btxt  : boolean;
@@ -906,7 +906,7 @@ procedure TFormDesigner.OnPropNameChange(Sender: TObject);
 var
   n: integer;
   cd: TWidgetDesigner;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   s: string;
 begin
   //  writeln('namechange');
@@ -945,12 +945,12 @@ end;
 procedure TFormDesigner.OnPropPosEdit(Sender: TObject);
 var
   frm: TEditPositionForm;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   n: integer;
   cd: TWidgetDesigner;
   posval: integer;
 
-  procedure SetNewPos(awg: TfpgWidget; pval: integer);
+  procedure SetNewPos(awg: TlqWidget; pval: integer);
   begin
     if Sender = frmProperties.btnLeft then
       awg.Left   := pval
@@ -1057,7 +1057,7 @@ procedure TFormDesigner.OnAnchorChange(Sender: TObject);
 var
   n: integer;
   cd: TWidgetDesigner;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   for n := 0 to FWidgets.Count - 1 do
   begin
@@ -1104,7 +1104,7 @@ begin
   Result := newname;
 end;
 
-procedure TFormDesigner.MsgActivate(var msg: TfpgMessageRec);
+procedure TFormDesigner.MsgActivate(var msg: TlqMessageRec);
 begin
   msg.Stop := True;
   maindsgn.SelectForm(self);
@@ -1130,14 +1130,14 @@ end;
 
 function TFormDesigner.GetFormSourceImpl: string;
 var
-  s: TfpgString;
+  s: TlqString;
   sl: TStringList;
   n: integer;
   wd: TWidgetDesigner;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   wgclass, pwgname: string;
 
-  t: TfpgString;
+  t: TlqString;
   i: integer;
   PropInfo: PPropInfo;
 begin
@@ -1234,7 +1234,7 @@ function TFormDesigner.GetWidgetSourceImpl(wd: TWidgetDesigner; ident: string): 
 var
   ts, cs: string;
   s: string;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   wgc: TVFDWidgetClass;
   n: integer;
 
@@ -1346,7 +1346,7 @@ procedure TFormDesigner.OnEditWidget(Sender: TObject);
 var
   n: integer;
   cd: TWidgetDesigner;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   for n := 0 to FWidgets.Count - 1 do
   begin
@@ -1382,30 +1382,30 @@ begin
   frmie.Free;
 end;
 
-procedure TFormDesigner.RunWidgetEditor(wgd: TWidgetDesigner; wg: TfpgWidget);
+procedure TFormDesigner.RunWidgetEditor(wgd: TWidgetDesigner; wg: TlqWidget);
 begin
-  if wg is TfpgMemo then
+  if wg is TlqMemo then
   begin
-    EditItems(TfpgMemo(wg).Lines);
+    EditItems(TlqMemo(wg).Lines);
     wg.Invalidate;
   end
-  else if wg is TfpgComboBox then
+  else if wg is TlqComboBox then
   begin
-    EditItems(TfpgComboBox(wg).Items);
+    EditItems(TlqComboBox(wg).Items);
     wg.Invalidate;
   end
-  else if wg is TfpgListBox then
+  else if wg is TlqListBox then
   begin
-    EditItems(TfpgListBox(wg).Items);
+    EditItems(TlqListBox(wg).Items);
     wg.Invalidate;
   end;
 end;
 
-procedure TFormDesigner.InsertWidget(pwg: TfpgWidget; x, y: integer; wgc: TVFDWidgetClass);
+procedure TFormDesigner.InsertWidget(pwg: TlqWidget; x, y: integer; wgc: TVFDWidgetClass);
 var
   cfrm: TInsertCustomForm;
   newname, newclassname: string;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   wgd: TWidgetDesigner;
 begin
 //  writeln('TFormDesigner.InsertWidget');
@@ -1419,7 +1419,7 @@ begin
     newclassname := '';
     cfrm         := TInsertCustomForm.Create(nil);
     cfrm.edName.Text := GenerateNewName(wgc.NameBase);
-    cfrm.edClass.Text := 'Tfpg';
+    cfrm.edClass.Text := 'Tlq';
     if cfrm.ShowModal = mrOK then
     begin
       newname      := cfrm.edName.Text;
@@ -1448,7 +1448,7 @@ begin
   end;
 end;
 
-function TFormDesigner.FindWidgetByName(const wgname: string): TfpgWidget;
+function TFormDesigner.FindWidgetByName(const wgname: string): TlqWidget;
 var
   n: integer;
   wgnameuc: string;
@@ -1496,7 +1496,7 @@ end;
 constructor TOtherWidget.Create(AOwner: TComponent);
 begin
   inherited;
-  wgClassName := 'TfpgWidget';
+  wgClassName := 'TlqWidget';
   FBackgroundColor := clUIDesignerGreen;
   FFont   := fpgStyle.DefaultFont;
   FWidth  := 120;

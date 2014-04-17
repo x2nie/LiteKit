@@ -9,23 +9,23 @@ uses
   
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    FEdit: TfpgEdit;
-    FAddButton: TfpgButton;
-    FListView: TfpgListView;
-    FSplitter: TfpgSplitter;
-    FTmpListView: TfpgListView;
-    FQuitButton: TfpgButton;
-    FCheck: TfpgCheckBox;
-    procedure LVColumnClicked(Listview: TfpgListView; Column: TfpgLVColumn; Button: Integer);
+    FEdit: TlqEdit;
+    FAddButton: TlqButton;
+    FListView: TlqListView;
+    FSplitter: TlqSplitter;
+    FTmpListView: TlqListView;
+    FQuitButton: TlqButton;
+    FCheck: TlqCheckBox;
+    procedure LVColumnClicked(Listview: TlqListView; Column: TlqLVColumn; Button: Integer);
     procedure CloseBttn(Sender: TObject);
     procedure AddBttn(Sender: TObject);
     procedure SortButton(Sender: TObject);
     procedure ShowHeadersChange(Sender: TObject);
-    procedure PaintItem(ListView: TfpgListView; ACanvas: TfpgCanvas; Item: TfpgLVItem;
-                                   ItemIndex: Integer; Area:TfpgRect; var PaintPart: TfpgLVItemPaintPart);
-    procedure ItemSelectionChanged(ListView: TfpgListView; Item: TfpgLVItem;
+    procedure PaintItem(ListView: TlqListView; ACanvas: TlqCanvas; Item: TlqLVItem;
+                                   ItemIndex: Integer; Area:TlqRect; var PaintPart: TlqLVItemPaintPart);
+    procedure ItemSelectionChanged(ListView: TlqListView; Item: TlqLVItem;
                                     ItemIndex: Integer; Selected: Boolean);
   public
     constructor Create(AOwner: TComponent); override;
@@ -35,7 +35,7 @@ type
 
 { TMainForm }
 
-procedure TMainForm.LVColumnClicked(Listview: TfpgListView; Column: TfpgLVColumn;
+procedure TMainForm.LVColumnClicked(Listview: TlqListView; Column: TlqLVColumn;
   Button: Integer);
 begin
   if Column.ColumnIndex = 0 then
@@ -51,7 +51,7 @@ end;
 
 procedure TMainForm.AddBttn(Sender: TObject);
 var
-  Item: TfpgLVItem;
+  Item: TlqLVItem;
   I: Integer;
 begin
   FListView.BeginUpdate;
@@ -72,10 +72,10 @@ end;
 
 function CompareProc(Item1, Item2: Pointer): Integer;
 var
-  a, b: TfpgLVItem;
+  a, b: TlqLVItem;
 begin
-  a := TfpgLVItem(Item1);
-  b := TfpgLVItem(Item2);
+  a := TlqLVItem(Item1);
+  b := TlqLVItem(Item2);
   if UTF8Length(a.Caption) < UTF8Length(b.Caption) then
     Result := -1
   else if UTF8Length(a.Caption) > UTF8Length(b.Caption) then
@@ -91,11 +91,11 @@ end;
 
 procedure TMainForm.ShowHeadersChange(Sender: TObject);
 begin
-  FListView.ShowHeaders := TfpgCheckBox(Sender).Checked;
+  FListView.ShowHeaders := TlqCheckBox(Sender).Checked;
 end;
 
-procedure TMainForm.PaintItem(ListView: TfpgListView; ACanvas: TfpgCanvas;
-  Item: TfpgLVItem; ItemIndex: Integer; Area: TfpgRect; var PaintPart: TfpgLVItemPaintPart);
+procedure TMainForm.PaintItem(ListView: TlqListView; ACanvas: TlqCanvas;
+  Item: TlqLVItem; ItemIndex: Integer; Area: TlqRect; var PaintPart: TlqLVItemPaintPart);
 begin
   if ItemIndex mod 2 = 0 then  ACanvas.TextColor := clRed;
   if ItemIndex mod 3 = 0 then  ACanvas.TextColor := clBlue;
@@ -103,22 +103,22 @@ begin
   if ItemIndex mod 5 = 0 then  ACanvas.TextColor := clPink;
 end;
 
-procedure TMainForm.ItemSelectionChanged(ListView: TfpgListView;
-  Item: TfpgLVItem; ItemIndex: Integer; Selected: Boolean);
+procedure TMainForm.ItemSelectionChanged(ListView: TlqListView;
+  Item: TlqLVItem; ItemIndex: Integer; Selected: Boolean);
 begin
   //WriteLn('Item changed: ', ItemIndex, ' ', Item.Caption, ' ',Selected);
 end;
 
 constructor TMainForm.Create(AOwner: TComponent);
 var
-  LVColumn: TfpgLVColumn;
+  LVColumn: TlqLVColumn;
   TopPanel,
-  BottomPanel: TfpgPanel;
+  BottomPanel: TlqPanel;
   IL: TStringList;
   i: Integer;
-  FImageList: TfpgImageList;
-  FSelectedImageList: TfpgImageList;
-  TmpImage: TfpgImage;
+  FImageList: TlqImageList;
+  FSelectedImageList: TlqImageList;
+  TmpImage: TlqImage;
 begin
   inherited Create(AOwner);
   Randomize;
@@ -130,8 +130,8 @@ begin
 
   fpgImages.ListImages(IL);
 
-  FImageList := TfpgImageList.Create;
-  FSelectedImageList := TfpgImageList.Create;
+  FImageList := TlqImageList.Create;
+  FSelectedImageList := TlqImageList.Create;
 
   for i := 0 to IL.Count-1 do
     FImageList.AddImage(fpgImages.GetImage(IL.Strings[i]));
@@ -146,19 +146,19 @@ begin
     FSelectedImageList.AddImage(TmpImage);
   end;
 
-  BottomPanel := TfpgPanel.Create(Self);
+  BottomPanel := TlqPanel.Create(Self);
   BottomPanel.Align  := alBottom;
   BottomPanel.Height := 40;
   BottomPanel.Parent := Self;
   BottomPanel.Text   := '';
 
-  TopPanel         := TfpgPanel.Create(Self);
+  TopPanel         := TlqPanel.Create(Self);
   TopPanel.Align   := alClient;
   TopPanel.Parent  := Self;
   TopPanel.Text    := '';
 
 
-  FListView := TfpgListView.Create(TopPanel);
+  FListView := TlqListView.Create(TopPanel);
   with FListView do begin
     Parent := TopPanel;
     Align := alLeft;
@@ -172,12 +172,12 @@ begin
     OnColumnClick  := @LVColumnClicked;
   end;
 
-  FSplitter := TfpgSplitter.Create(TopPanel);
+  FSplitter := TlqSplitter.Create(TopPanel);
   with FSplitter do begin
     Parent := TopPanel;
     Align:=alLeft;
   end;
-  FTmpListView := TfpgListView.Create(TopPanel);
+  FTmpListView := TlqListView.Create(TopPanel);
   with FTmpListView do begin
     Parent := TopPanel;
     Align := alClient;
@@ -186,7 +186,7 @@ begin
   end;
 
   
-  LVColumn := TfpgLVColumn.Create(FListView.Columns);
+  LVColumn := TlqLVColumn.Create(FListView.Columns);
   LVColumn.Caption := 'Column 1';
   LVColumn.Width := 150;
   LVColumn.Height := 50;
@@ -196,7 +196,7 @@ begin
   FListView.Columns.Add(LVColumn);
   FTmpListView.Columns.Add(LVColumn);
   
-  LVColumn := TfpgLVColumn.Create(FListView.Columns);
+  LVColumn := TlqLVColumn.Create(FListView.Columns);
   LVColumn.Caption := 'Column 2';
   LVColumn.Width := 100;
   LVColumn.Height := 50;
@@ -206,7 +206,7 @@ begin
   FListView.Columns.Add(LVColumn);
   //FTmpListView.Columns.Add(LVColumn);
 
-  LVColumn := TfpgLVColumn.Create(FListView.Columns);
+  LVColumn := TlqLVColumn.Create(FListView.Columns);
   LVColumn.Caption := 'Column 3';
   LVColumn.Width := 200;
   LVColumn.Height := 50;
@@ -218,7 +218,7 @@ begin
   FTmpListView.Columns.Add(LVColumn);
 
 
-  FEdit := TfpgEdit.Create(BottomPanel);
+  FEdit := TlqEdit.Create(BottomPanel);
   with FEdit do begin
     Parent := BottomPanel;
     Top := 10;
@@ -226,7 +226,7 @@ begin
     Width := 100;
   end;
 
-  FAddButton := TfpgButton.Create(BottomPanel);
+  FAddButton := TlqButton.Create(BottomPanel);
   with FAddButton do begin
     Parent := BottomPanel;
     Top := 10;
@@ -236,7 +236,7 @@ begin
     OnClick := @AddBttn;
   end;
 
-  FQuitButton := TfpgButton.Create(BottomPanel);
+  FQuitButton := TlqButton.Create(BottomPanel);
   with FQuitButton do begin
     Parent := BottomPanel;
     ImageName := 'stdimg.Quit';
@@ -249,7 +249,7 @@ begin
     OnClick := @CloseBttn;
   end;
   
-  FCheck := TfpgCheckBox.Create(BottomPanel);
+  FCheck := TlqCheckBox.Create(BottomPanel);
   with FCheck do begin
     Parent := BottomPanel;
     Top := 10;

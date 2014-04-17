@@ -42,26 +42,26 @@ type
 
   TPropertyDBColumns = class(TVFDWidgetProperty)
   public
-    function    ParseSourceLine(wg: TfpgWidget; const line: string): boolean; override;
-    function    GetPropertySource(wg: TfpgWidget; const ident: string): string; override;
-    function    GetValueText(wg: TfpgWidget): string; override;
+    function    ParseSourceLine(wg: TlqWidget; const line: string): boolean; override;
+    function    GetPropertySource(wg: TlqWidget; const ident: string): string; override;
+    function    GetValueText(wg: TlqWidget): string; override;
     function    CreateEditor(AOwner: TComponent): TVFDPropertyEditor; override;
-    procedure   OnExternalEdit(wg: TfpgWidget); override;
+    procedure   OnExternalEdit(wg: TlqWidget); override;
   end;
 
 
   // A normal grid's column information now become rows of data.
-  TColumnsGrid = class(TfpgCustomGrid)
+  TColumnsGrid = class(TlqCustomGrid)
   protected
     function    GetRowCount: Integer; override;
-    procedure   DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState);  override;
+    procedure   DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState);  override;
   public
-    dbgrid: TfpgStringGrid;
+    dbgrid: TlqStringGrid;
     constructor Create(AOwner: TComponent); override;
   end;
 
 
-  TColumnEditForm = class(TfpgForm)
+  TColumnEditForm = class(TlqForm)
   private
     procedure GridRowChange(Sender: TObject; row: Integer);
     procedure EditChange(Sender: TObject);
@@ -72,24 +72,24 @@ type
     procedure SaveColumn(row: integer);
   public
     {@VFD_HEAD_BEGIN: ColumnEditForm}
-    lbLabel1: TfpgLabel;
+    lbLabel1: TlqLabel;
     grid: TColumnsGrid;
-    lbLabel2: TfpgLabel;
-    lbLabel3: TfpgLabel;
-    lbLabel6: TfpgLabel;
-    lbLabel5: TfpgLabel;
-    lbCOLNO: TfpgLabel;
-    edTITLE: TfpgEdit;
-    edCOLWIDTH: TfpgEdit;
-    chlALIGN: TfpgComboBox;
-    btnNew: TfpgButton;
-    btnDelete: TfpgButton;
-    btnUP: TfpgButton;
-    btnDOWN: TfpgButton;
-    btnClose: TfpgButton;
+    lbLabel2: TlqLabel;
+    lbLabel3: TlqLabel;
+    lbLabel6: TlqLabel;
+    lbLabel5: TlqLabel;
+    lbCOLNO: TlqLabel;
+    edTITLE: TlqEdit;
+    edCOLWIDTH: TlqEdit;
+    chlALIGN: TlqComboBox;
+    btnNew: TlqButton;
+    btnDelete: TlqButton;
+    btnUP: TlqButton;
+    btnDOWN: TlqButton;
+    btnClose: TlqButton;
     {@VFD_HEAD_END: ColumnEditForm}
 
-    dbgrid: TfpgStringGrid;
+    dbgrid: TlqStringGrid;
     procedure AfterCreate; override;
   end;
 
@@ -97,7 +97,7 @@ type
 implementation
 
 
-procedure EditStringGridColumns(agrid: TfpgStringGrid);
+procedure EditStringGridColumns(agrid: TlqStringGrid);
 var
   frm: TColumnEditForm;
 begin
@@ -119,7 +119,7 @@ begin
   WindowTitle := 'Column editor';
   Sizeable := False;
 
-  lbLabel1 := TfpgLabel.Create(self);
+  lbLabel1 := TlqLabel.Create(self);
   with lbLabel1 do
   begin
     Name := 'lbLabel1';
@@ -137,7 +137,7 @@ begin
     OnRowChange := @GridRowChange;
   end;
 
-  lbLabel2 := TfpgLabel.Create(self);
+  lbLabel2 := TlqLabel.Create(self);
   with lbLabel2 do
   begin
     Name := 'lbLabel2';
@@ -147,7 +147,7 @@ begin
     AutoSize := True;
   end;
 
-  lbLabel3 := TfpgLabel.Create(self);
+  lbLabel3 := TlqLabel.Create(self);
   with lbLabel3 do
   begin
     Name := 'lbLabel3';
@@ -157,7 +157,7 @@ begin
     AutoSize := True;
   end;
 
-  lbLabel6 := TfpgLabel.Create(self);
+  lbLabel6 := TlqLabel.Create(self);
   with lbLabel6 do
   begin
     Name := 'lbLabel6';
@@ -167,7 +167,7 @@ begin
     AutoSize := True;
   end;
 
-  lbLabel5 := TfpgLabel.Create(self);
+  lbLabel5 := TlqLabel.Create(self);
   with lbLabel5 do
   begin
     Name := 'lbLabel5';
@@ -177,7 +177,7 @@ begin
     AutoSize := True;
   end;
 
-  lbCOLNO := TfpgLabel.Create(self);
+  lbCOLNO := TlqLabel.Create(self);
   with lbCOLNO do
   begin
     Name := 'lbCOLNO';
@@ -187,7 +187,7 @@ begin
     AutoSize := True;
   end;
 
-  edTITLE := TfpgEdit.Create(self);
+  edTITLE := TlqEdit.Create(self);
   with edTITLE do
   begin
     Name := 'edTITLE';
@@ -197,7 +197,7 @@ begin
     OnChange := @EditChange;
   end;
 
-  edCOLWIDTH := TfpgEdit.Create(self);
+  edCOLWIDTH := TlqEdit.Create(self);
   with edCOLWIDTH do
   begin
     Name := 'edCOLWIDTH';
@@ -207,7 +207,7 @@ begin
     OnChange := @EditChange;
   end;
 
-  chlALIGN := TfpgComboBox.Create(self);
+  chlALIGN := TlqComboBox.Create(self);
   with chlALIGN do
   begin
     Name := 'chlALIGN';
@@ -219,7 +219,7 @@ begin
     OnChange := @EditChange;
   end;
 
-  btnNew := TfpgButton.Create(self);
+  btnNew := TlqButton.Create(self);
   with btnNew do
   begin
     Name := 'btnNew';
@@ -230,7 +230,7 @@ begin
     OnClick := @NewButtonClick;
   end;
 
-  btnDelete := TfpgButton.Create(self);
+  btnDelete := TlqButton.Create(self);
   with btnDelete do
   begin
     Name := 'btnDelete';
@@ -241,7 +241,7 @@ begin
     OnClick := @DeleteButtonClick;
   end;
 
-  btnUP := TfpgButton.Create(self);
+  btnUP := TlqButton.Create(self);
   with btnUP do
   begin
     Name := 'btnUP';
@@ -252,7 +252,7 @@ begin
     OnClick := @UpDownButtonClick;
   end;
 
-  btnDOWN := TfpgButton.Create(self);
+  btnDOWN := TlqButton.Create(self);
   with btnDOWN do
   begin
     Name := 'btnDOWN';
@@ -263,7 +263,7 @@ begin
     OnClick := @UpDownButtonClick;
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';
@@ -281,7 +281,7 @@ end;
 procedure TColumnEditForm.GridRowChange(Sender: TObject; row: Integer);
 var
   i: integer;
-  c: TfpgStringColumn;
+  c: TlqStringColumn;
 begin
   c := dbgrid.Columns[row];
   if c = nil then
@@ -315,7 +315,7 @@ end;
 
 procedure TColumnEditForm.SaveColumn(row: integer);
 var
-  c: TfpgStringColumn;
+  c: TlqStringColumn;
 begin
   c := dbgrid.Columns[row];
   if c = nil then
@@ -392,11 +392,11 @@ begin
   end;
 end;
 
-procedure TColumnsGrid.DrawCell(ARow, ACol: Integer; ARect: TfpgRect; AFlags: TfpgGridDrawState);
+procedure TColumnsGrid.DrawCell(ARow, ACol: Integer; ARect: TlqRect; AFlags: TlqGridDrawState);
 var
   s: string;
   x: integer;
-  c: TfpgStringColumn;
+  c: TlqStringColumn;
 begin
 //  writeln('ARow=', ARow, '  ACol=', ACol);
   c := dbgrid.Columns[ARow{ - 1}];
@@ -446,24 +446,24 @@ begin
   Result := TExternalPropertyEditor.Create(AOwner, self);
 end;
 
-function TPropertyDBColumns.GetValueText(wg: TfpgWidget): string;
+function TPropertyDBColumns.GetValueText(wg: TlqWidget): string;
 begin
-  with TfpgStringGrid(wg) do
+  with TlqStringGrid(wg) do
     Result := '[' + IntToStr(ColumnCount) + ' columns]';
 end;
 
-procedure TPropertyDBColumns.OnExternalEdit(wg: TfpgWidget);
+procedure TPropertyDBColumns.OnExternalEdit(wg: TlqWidget);
 begin
   if not Assigned(wg) then
     raise Exception.Create('TPropertyDBColumns.OnExternalEdit(wg) - wg widget may not be nil.');
-  if not (wg is TfpgStringGrid) then
-    raise Exception.Create('TPropertyDBColumns.OnExternalEdit(wg) - wg widget is not a TfpgStringGrid.');
-  EditStringGridColumns(TfpgStringGrid(wg));
+  if not (wg is TlqStringGrid) then
+    raise Exception.Create('TPropertyDBColumns.OnExternalEdit(wg) - wg widget is not a TlqStringGrid.');
+  EditStringGridColumns(TlqStringGrid(wg));
 end;
 
-function TPropertyDBColumns.ParseSourceLine(wg: TfpgWidget; const line: string): boolean;
+function TPropertyDBColumns.ParseSourceLine(wg: TlqWidget; const line: string): boolean;
 var
-  c: TfpgStringColumn;
+  c: TlqStringColumn;
   s: string;
   sval: string;
 begin
@@ -472,7 +472,7 @@ begin
   if UpperCase(GetIdentifier(s)) <> UpperCase('ADDCOLUMN') then
     Exit;
 
-  c := TfpgStringColumn.Create;
+  c := TlqStringColumn.Create;
 
   Result := CheckSymbol(s, '(');
 
@@ -497,19 +497,19 @@ begin
   Result := Result and CheckSymbol(s, ';');
 
   if Result then
-    TfpgStringGrid(wg).AddColumn(c.Title, c.Width, c.Alignment);
+    TlqStringGrid(wg).AddColumn(c.Title, c.Width, c.Alignment);
 
   c.Free;
 end;
 
-function TPropertyDBColumns.GetPropertySource(wg: TfpgWidget; const ident: string): string;
+function TPropertyDBColumns.GetPropertySource(wg: TlqWidget; const ident: string): string;
 var
   f: integer;
-  c: TfpgStringColumn;
+  c: TlqStringColumn;
   alstr: string;
 begin
   Result := '';
-  with TfpgStringGrid(wg) do
+  with TlqStringGrid(wg) do
   begin
     for f := 0 to ColumnCount-1 do
     begin

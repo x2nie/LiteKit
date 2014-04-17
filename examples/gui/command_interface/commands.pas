@@ -24,9 +24,9 @@ type
 
   TAddCommand = class(TInterfacedObject, ICommand)
   private
-    FMemo: TfpgMemo;
+    FMemo: TlqMemo;
   public
-    constructor Create(AMemo: TfpgMemo); reintroduce;
+    constructor Create(AMemo: TlqMemo); reintroduce;
     procedure   Execute;
   end;
 
@@ -64,7 +64,7 @@ end;
 
 { TAddCommand }
 
-constructor TAddCommand.Create(AMemo: TfpgMemo);
+constructor TAddCommand.Create(AMemo: TlqMemo);
 begin
   inherited Create;
   FMemo := AMemo;

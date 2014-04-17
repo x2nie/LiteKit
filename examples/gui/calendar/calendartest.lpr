@@ -12,29 +12,29 @@ uses
   lq_panel, dateutils;
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnClear: TfpgButton;
-    lblWHoliday: TfpgLabel;
-    cbWHoliday: TfpgComboBox;
-    cbName1: TfpgComboBox;
-    cal: TfpgCalendarCombo;
-    btnDateFormat: TfpgButton;
-    edtDateFormat: TfpgEdit;
-    lblName4: TfpgLabel;
-    lblName5: TfpgLabel;
-    btnToday: TfpgButton;
-    edtMinDate: TfpgEdit;
-    edtMaxDate: TfpgEdit;
-    btnMinDate: TfpgButton;
-    btnMaxDate: TfpgButton;
-    cbCloseOnSelect: TfpgCheckBox;
-    lblName1: TfpgLabel;
-    bvlName1: TfpgBevel;
-    CalendarCombo1: TfpgCalendarCheckCombo;
-    Label1: TfpgLabel;
-    cbSingleClickClose: TfpgCheckBox;
+    btnClear: TlqButton;
+    lblWHoliday: TlqLabel;
+    cbWHoliday: TlqComboBox;
+    cbName1: TlqComboBox;
+    cal: TlqCalendarCombo;
+    btnDateFormat: TlqButton;
+    edtDateFormat: TlqEdit;
+    lblName4: TlqLabel;
+    lblName5: TlqLabel;
+    btnToday: TlqButton;
+    edtMinDate: TlqEdit;
+    edtMaxDate: TlqEdit;
+    btnMinDate: TlqButton;
+    btnMaxDate: TlqButton;
+    cbCloseOnSelect: TlqCheckBox;
+    lblName1: TlqLabel;
+    bvlName1: TlqBevel;
+    CalendarCombo1: TlqCalendarCheckCombo;
+    Label1: TlqLabel;
+    cbSingleClickClose: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure   btnDateFormatClicked(Sender: TObject);
     procedure   btnTodayClicked(Sender: TObject);
@@ -47,7 +47,7 @@ type
     procedure   btnClearClicked(Sender: TObject);
     procedure   DrawCalendar(month, year: integer);
   public
-    FDropDown: TfpgPopupCalendar;
+    FDropDown: TlqPopupCalendar;
     procedure   AfterCreate; override;
   end;
   
@@ -57,12 +57,12 @@ type
 
 procedure TMainForm.cbCloseOnSelectChanged(Sender: TObject);
 begin
-  cal.CloseOnSelect := TfpgCheckBox(Sender).Checked;
+  cal.CloseOnSelect := TlqCheckBox(Sender).Checked;
 end;
 
 procedure TMainForm.cbSingleClickCloseChanged(Sender: TObject);
 begin
-  cal.SingleClickSelect := TfpgCheckBox(Sender).Checked;
+  cal.SingleClickSelect := TlqCheckBox(Sender).Checked;
 end;
 
 procedure TMainForm.btnClearClicked(Sender: TObject);
@@ -191,7 +191,7 @@ begin
   Hint := '';
   WindowPosition := wpUser;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -205,7 +205,7 @@ begin
     OnClick := @btnClearClicked;
   end;
 
-  lblWHoliday := TfpgLabel.Create(self);
+  lblWHoliday := TlqLabel.Create(self);
   with lblWHoliday do
   begin
     Name := 'lblWHoliday';
@@ -215,7 +215,7 @@ begin
     Text := 'Weekly holiday';
   end;
 
-  cbWHoliday := TfpgComboBox.Create(self);
+  cbWHoliday := TlqComboBox.Create(self);
   with cbWHoliday do
   begin
     Name := 'cbWHoliday';
@@ -233,7 +233,7 @@ begin
     OnChange := @cbWHolidayChange;
   end;
 
-  cbName1 := TfpgComboBox.Create(self);
+  cbName1 := TlqComboBox.Create(self);
   with cbName1 do
   begin
     Name := 'cbName1';
@@ -252,7 +252,7 @@ begin
     OnChange := @cbName1Change;
   end;
 
-  cal := TfpgCalendarCombo.Create(self);
+  cal := TlqCalendarCombo.Create(self);
   with cal do
   begin
     Name := 'cal';
@@ -266,7 +266,7 @@ begin
     SelectedColor:= clYellow;
   end;
 
-  btnDateFormat := TfpgButton.Create(self);
+  btnDateFormat := TlqButton.Create(self);
   with btnDateFormat do
   begin
     Name := 'btnDateFormat';
@@ -279,7 +279,7 @@ begin
     OnClick := @btnDateFormatClicked;
   end;
 
-  edtDateFormat := TfpgEdit.Create(self);
+  edtDateFormat := TlqEdit.Create(self);
   with edtDateFormat do
   begin
     Name := 'edtDateFormat';
@@ -291,7 +291,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -301,7 +301,7 @@ begin
     Text := 'Week start day';
   end;
 
-  lblName5 := TfpgLabel.Create(self);
+  lblName5 := TlqLabel.Create(self);
   with lblName5 do
   begin
     Name := 'lblName5';
@@ -311,7 +311,7 @@ begin
     Text := 'Calendar Combo:';
   end;
 
-  btnToday := TfpgButton.Create(self);
+  btnToday := TlqButton.Create(self);
   with btnToday do
   begin
     Name := 'btnToday';
@@ -324,7 +324,7 @@ begin
     OnClick := @btnTodayClicked;
   end;
 
-  edtMinDate := TfpgEdit.Create(self);
+  edtMinDate := TlqEdit.Create(self);
   with edtMinDate do
   begin
     Name := 'edtMinDate';
@@ -336,7 +336,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  edtMaxDate := TfpgEdit.Create(self);
+  edtMaxDate := TlqEdit.Create(self);
   with edtMaxDate do
   begin
     Name := 'edtMaxDate';
@@ -348,7 +348,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnMinDate := TfpgButton.Create(self);
+  btnMinDate := TlqButton.Create(self);
   with btnMinDate do
   begin
     Name := 'btnMinDate';
@@ -361,7 +361,7 @@ begin
     OnClick := @btnMinDateClicked;
   end;
 
-  btnMaxDate := TfpgButton.Create(self);
+  btnMaxDate := TlqButton.Create(self);
   with btnMaxDate do
   begin
     Name := 'btnMaxDate';
@@ -374,7 +374,7 @@ begin
     OnClick := @btnMaxDateClicked;
   end;
 
-  cbCloseOnSelect := TfpgCheckBox.Create(self);
+  cbCloseOnSelect := TlqCheckBox.Create(self);
   with cbCloseOnSelect do
   begin
     Name := 'cbCloseOnSelect';
@@ -387,7 +387,7 @@ begin
     OnChange := @cbCloseOnSelectChanged;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -397,7 +397,7 @@ begin
     Text := 'Calendar Settings';
   end;
 
-  bvlName1 := TfpgBevel.Create(self);
+  bvlName1 := TlqBevel.Create(self);
   with bvlName1 do
   begin
     Name := 'bvlName1';
@@ -407,7 +407,7 @@ begin
     Style := bsLowered;
   end;
 
-  CalendarCombo1 := TfpgCalendarCheckCombo.Create(self);
+  CalendarCombo1 := TlqCalendarCheckCombo.Create(self);
   with CalendarCombo1 do
   begin
     Name := 'CalendarCombo1';
@@ -419,7 +419,7 @@ begin
     TabOrder := 18;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -429,7 +429,7 @@ begin
     Text := 'Optional date:';
   end;
 
-  cbSingleClickClose := TfpgCheckBox.Create(self);
+  cbSingleClickClose := TlqCheckBox.Create(self);
   with cbSingleClickClose do
   begin
     Name := 'cbSingleClickClose';

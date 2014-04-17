@@ -33,8 +33,8 @@ uses
 type 
   EJPEG = class(Exception);
   
-procedure ReadImage_JPG(img: TfpgImage; bmp: TStream; const AScale: integer = 1);
-function  LoadImage_JPG(const AFileName: String; const AScale: integer = 1): TfpgImage;
+procedure ReadImage_JPG(img: TlqImage; bmp: TStream; const AScale: integer = 1);
+function  LoadImage_JPG(const AFileName: String; const AScale: integer = 1): TlqImage;
   
 implementation
 uses
@@ -267,7 +267,7 @@ end;
 procedure write_jpeg_pixelrow (cinfo : j_decompress_ptr;
                                             dest : bmp_dest_ptr;
                                             rows_supplied : JDIMENSION;
-                                            img : TfpgImage);
+                                            img : TlqImage);
 var
   inptr: JSAMPLE_PTR;
   col : JDIMENSION;
@@ -310,7 +310,7 @@ begin
 end;
       
 
-procedure ReadImage_JPG(img: TfpgImage; bmp: TStream; const AScale: integer);
+procedure ReadImage_JPG(img: TlqImage; bmp: TStream; const AScale: integer);
 var
   cinfo : jpeg_decompress_struct;
   err   : my_error_mgr;
@@ -360,7 +360,7 @@ begin
   img.UpdateImage;   
 end;
 
-function LoadImage_JPG(const AFileName: String; const AScale: integer): TfpgImage;
+function LoadImage_JPG(const AFileName: String; const AScale: integer): TlqImage;
 var
   inFile: TStream;
 begin
@@ -370,7 +370,7 @@ begin
   
   inFile:=TFileStream.Create(AFileName,fmOpenRead);
  try
-  Result:=TfpgImage.Create;	
+  Result:=TlqImage.Create;	
   ReadImage_JPG(Result, inFile, AScale);
  finally
   inFile.Free;

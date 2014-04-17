@@ -11,19 +11,19 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    cbName1: TfpgComboBox;
-    lblName4: TfpgLabel;
-    btnName1: TfpgButton;
-    lbColorPick: TfpgColorListBox;
-    btnName2: TfpgButton;
-    btnName3: TfpgButton;
-    btnName4: TfpgButton;
-    lblName1: TfpgLabel;
-    chkColorName: TfpgCheckBox;
-    chkReorder: TfpgCheckBox;
+    cbName1: TlqComboBox;
+    lblName4: TlqLabel;
+    btnName1: TlqButton;
+    lbColorPick: TlqColorListBox;
+    btnName2: TlqButton;
+    btnName3: TlqButton;
+    btnName4: TlqButton;
+    lblName1: TlqLabel;
+    chkColorName: TlqCheckBox;
+    chkReorder: TlqCheckBox;
     {@VFD_HEAD_END: MainForm}
     procedure chkColorNameChange(Sender: TObject);
     procedure ckdReorderChanged(Sender: TObject);
@@ -73,7 +73,7 @@ end;
 
 procedure TMainForm.SetBGColor (Sender: TObject );
 begin
-  lbColorPick.Color := TfpgButton(Sender).BackgroundColor;
+  lbColorPick.Color := TlqButton(Sender).BackgroundColor;
   lbColorPick.SetFocus;
 end;
 
@@ -96,7 +96,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  cbName1 := TfpgComboBox.Create(self);
+  cbName1 := TlqComboBox.Create(self);
   with cbName1 do
   begin
     Name := 'cbName1';
@@ -106,7 +106,7 @@ begin
     TabOrder := 0;
   end;
 
-  lblName4 := TfpgLabel.Create(self);
+  lblName4 := TlqLabel.Create(self);
   with lblName4 do
   begin
     Name := 'lblName4';
@@ -116,7 +116,7 @@ begin
     Text := 'Predefined Color Palettes';
   end;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -129,7 +129,7 @@ begin
     OnClick := @btnName1Clicked;
   end;
 
-  lbColorPick := TfpgColorListBox.Create(self);
+  lbColorPick := TlqColorListBox.Create(self);
   with lbColorPick do
   begin
     Name := 'lbColorPick';
@@ -140,7 +140,7 @@ begin
     TabOrder := 4;
   end;
 
-  btnName2 := TfpgButton.Create(self);
+  btnName2 := TlqButton.Create(self);
   with btnName2 do
   begin
     Name := 'btnName2';
@@ -155,7 +155,7 @@ begin
     OnClick := @SetBGColor;
   end;
 
-  btnName3 := TfpgButton.Create(self);
+  btnName3 := TlqButton.Create(self);
   with btnName3 do
   begin
     Name := 'btnName3';
@@ -170,7 +170,7 @@ begin
     OnClick := @SetBGColor;
   end;
 
-  btnName4 := TfpgButton.Create(self);
+  btnName4 := TlqButton.Create(self);
   with btnName4 do
   begin
     Name := 'btnName4';
@@ -185,7 +185,7 @@ begin
     OnClick := @SetBGColor;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -195,7 +195,7 @@ begin
     Text := 'Set FocusItem Color';
   end;
 
-  chkColorName := TfpgCheckBox.Create(self);
+  chkColorName := TlqCheckBox.Create(self);
   with chkColorName do
   begin
     Name := 'chkColorName';
@@ -208,7 +208,7 @@ begin
     OnChange := @chkColorNameChange;
   end;
 
-  chkReorder := TfpgCheckBox.Create(self);
+  chkReorder := TlqCheckBox.Create(self);
   with chkReorder do
   begin
     Name := 'chkReorder';

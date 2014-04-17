@@ -73,7 +73,7 @@ type
   end;
 
 
-  THelpBitmap = class( TfpgImage )
+  THelpBitmap = class( TlqImage )
   protected
     _Header: INFBITMAPHEADER;
     _PaletteColorCount: longint;
@@ -281,7 +281,7 @@ var
   BitmapData: PBYTE;
   ptr: PByte;
   i: integer;
-  img: TfpgImage;
+  img: TlqImage;
 begin
   BitmapOutputPointer := nil;
   BitmapData := nil;

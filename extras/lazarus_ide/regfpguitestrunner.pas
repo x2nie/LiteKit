@@ -9,8 +9,8 @@ uses
   
 Type
 
-  { TfpGUITestRunnerProjectDescriptor }
-  TfpGUITestRunnerProjectDescriptor = class(TProjectDescriptor)
+  { TlqUITestRunnerProjectDescriptor }
+  TlqUITestRunnerProjectDescriptor = class(TProjectDescriptor)
   public
     constructor Create; override;
     function GetLocalizedName: string; override;
@@ -22,7 +22,7 @@ Type
   end;
   
 var
-  fpGUIFTestRunnerProjectDescriptor : TfpGUITestRunnerProjectDescriptor;
+  fpGUIFTestRunnerProjectDescriptor : TlqUITestRunnerProjectDescriptor;
   
 procedure Register;
 
@@ -35,29 +35,29 @@ uses FPCUnitLazIDEIntf;
 procedure Register;
 
 begin
-  fpGUIFTestRunnerProjectDescriptor:=TfpGUITestRunnerProjectDescriptor.Create;
+  fpGUIFTestRunnerProjectDescriptor:=TlqUITestRunnerProjectDescriptor.Create;
   RegisterProjectDescriptor(fpGUIFTestRunnerProjectDescriptor);
 end;
 
-{ TfpGUITestRunnerProjectDescriptor }
+{ TlqUITestRunnerProjectDescriptor }
 
-constructor TfpGUITestRunnerProjectDescriptor.Create;
+constructor TlqUITestRunnerProjectDescriptor.Create;
 begin
   inherited Create;
   Name:='FPCUnit fpGUI Application';
 end;
     
-function TfpGUITestRunnerProjectDescriptor.GetLocalizedName: string;
+function TlqUITestRunnerProjectDescriptor.GetLocalizedName: string;
 begin
   Result:='FPGUITestRunner';
 end;
 
-function TfpGUITestRunnerProjectDescriptor.GetLocalizedDescription: string;
+function TlqUITestRunnerProjectDescriptor.GetLocalizedDescription: string;
 begin
   Result:='FPCUnit test runner application using a fpGUI front-end';
 end;
 
-function TfpGUITestRunnerProjectDescriptor.InitProject(AProject: TLazProject
+function TlqUITestRunnerProjectDescriptor.InitProject(AProject: TLazProject
   ): TModalResult;
   
 Var
@@ -84,7 +84,7 @@ begin
       Add('  cthreads,');
       Add('  {$ENDIF}{$ENDIF}');
       Add('  Classes,');
-      Add('  fpg_main, fpg_guitestrunner;');
+      Add('  lq_main, lq_guitestrunner;');
       Add('');
       Add('procedure MainProc;');
       Add('');
@@ -118,7 +118,7 @@ begin
   Result:=mrOK;
 end;
 
-function TfpGUITestRunnerProjectDescriptor.CreateStartFiles(
+function TlqUITestRunnerProjectDescriptor.CreateStartFiles(
   AProject: TLazProject): TModalResult;
 begin
 {$ifdef uselazideintf}

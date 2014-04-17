@@ -30,13 +30,13 @@ uses
   
 type
 
-  TfpgBaseCheckBox = class(TfpgWidget)
+  TlqBaseCheckBox = class(TlqWidget)
   private
     FChecked: boolean;
     FOnChange: TNotifyEvent;
     FReadOnly: Boolean;
     FText: string;
-    FFont: TfpgFont;
+    FFont: TlqFont;
     FBoxLayout: TBoxLayout;
     FBoxSize: integer;
     FImgTextSpacing: integer;
@@ -63,11 +63,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
   end;
 
 
-  TfpgCheckBox = class(TfpgBaseCheckBox)
+  TlqCheckBox = class(TlqBaseCheckBox)
   published
     property    Align;
     property    BackgroundColor;
@@ -97,24 +97,24 @@ type
   end;
 
 
-function CreateCheckBox(AOwner: TComponent; x, y: TfpgCoord; AText: string): TfpgCheckBox;
+function CreateCheckBox(AOwner: TComponent; x, y: TlqCoord; AText: string): TlqCheckBox;
 
 
 implementation
 
 
-function CreateCheckBox(AOwner: TComponent; x, y: TfpgCoord; AText: string): TfpgCheckBox;
+function CreateCheckBox(AOwner: TComponent; x, y: TlqCoord; AText: string): TlqCheckBox;
 begin
-  Result := TfpgCheckBox.Create(AOwner);
+  Result := TlqCheckBox.Create(AOwner);
   Result.Top    := y;
   Result.Left   := x;
   Result.Text   := AText;
   Result.Width  := Result.Font.TextWidth(Result.Text) + 24;
 end;
 
-{ TfpgBaseCheckBox }
+{ TlqBaseCheckBox }
 
-procedure TfpgBaseCheckBox.SetChecked(const AValue: boolean);
+procedure TlqBaseCheckBox.SetChecked(const AValue: boolean);
 begin
   if ReadOnly then
     Exit; //==>
@@ -126,17 +126,17 @@ begin
     DoOnChange;
 end;
 
-function TfpgBaseCheckBox.GetBoxLayout: TBoxLayout;
+function TlqBaseCheckBox.GetBoxLayout: TBoxLayout;
 begin
   Result := FBoxLayout;
 end;
 
-function TfpgBaseCheckBox.GetFontDesc: string;
+function TlqBaseCheckBox.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgBaseCheckBox.SetBoxLayout(const AValue: TBoxLayout);
+procedure TlqBaseCheckBox.SetBoxLayout(const AValue: TBoxLayout);
 begin
   if FBoxLayout = AValue then
     Exit; //==>
@@ -144,7 +144,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseCheckBox.SetFontDesc(const AValue: string);
+procedure TlqBaseCheckBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
@@ -152,14 +152,14 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseCheckBox.SetReadOnly(const AValue: Boolean);
+procedure TlqBaseCheckBox.SetReadOnly(const AValue: Boolean);
 begin
   if FReadOnly=AValue then exit;
   FReadOnly:=AValue;
   RePaint;
 end;
 
-procedure TfpgBaseCheckBox.SetText(const AValue: string);
+procedure TlqBaseCheckBox.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit; //==>
@@ -167,18 +167,18 @@ begin
   RePaint;
 end;
 
-procedure TfpgBaseCheckBox.DoOnChange;
+procedure TlqBaseCheckBox.DoOnChange;
 begin
   if Assigned(FOnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgBaseCheckBox.HandlePaint;
+procedure TlqBaseCheckBox.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   ix: integer;
-  img: TfpgImage;
-  LFlags: TfpgTextFlags;
+  img: TlqImage;
+  LFlags: TlqTextFlags;
 begin
   inherited HandlePaint;
   Canvas.ClearClipRect;
@@ -252,21 +252,21 @@ begin
   end;
 end;
 
-procedure TfpgBaseCheckBox.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseCheckBox.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
   FIsPressed := True;
   Repaint;
 end;
 
-procedure TfpgBaseCheckBox.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqBaseCheckBox.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   FIsPressed := False;
   Checked := not FChecked;
 end;
 
-procedure TfpgBaseCheckBox.HandleKeyRelease(var keycode: word;
+procedure TlqBaseCheckBox.HandleKeyRelease(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 begin
   if (keycode = keySpace) or (keycode = keyReturn) or (keycode = keyPEnter) then
@@ -281,7 +281,7 @@ begin
   inherited HandleKeyRelease(keycode, shiftstate, consumed);
 end;
 
-constructor TfpgBaseCheckBox.Create(AOwner: TComponent);
+constructor TlqBaseCheckBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText       := 'CheckBox';
@@ -300,7 +300,7 @@ begin
   FReadOnly   := False;
 end;
 
-destructor TfpgBaseCheckBox.Destroy;
+destructor TlqBaseCheckBox.Destroy;
 begin
   FFont.Free;
   inherited Destroy;

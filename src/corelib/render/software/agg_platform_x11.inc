@@ -17,7 +17,7 @@
 
 
 {$ifdef uses_implementation}
-  fpg_x11,
+  lq_x11,
 {$endif}
 
 
@@ -25,24 +25,24 @@
 
 type
   // to get access to protected methods (seeing that FPC doesn't support Friend-classes)
-  TImageHack = class(TfpgImage);
+  TImageHack = class(TlqImage);
 
-procedure TAgg2D.DoPutBufferToScreen(x, y, w, h: TfpgCoord);
+procedure TAgg2D.DoPutBufferToScreen(x, y, w, h: TlqCoord);
 var
   drawgc: Tgc;
   GcValues: TXGcValues;
 begin
-  if TfpgWindow(FWindow).WinHandle <= 0 then
+  if TlqWindow(FWindow).WinHandle <= 0 then
   begin
     debugln('    no winhandle available');
     exit;
   end;
 
   FImg.UpdateImage;
-  drawgc := XCreateGc(fpgApplication.Display, TfpgWindow(FWindow).WinHandle, 0, @GcValues);
+  drawgc := XCreateGc(fpgApplication.Display, TlqWindow(FWindow).WinHandle, 0, @GcValues);
 
   // finally dump the image to screen!
-  XPutImage(fpgApplication.Display, TfpgWindow(FWindow).WinHandle,
+  XPutImage(fpgApplication.Display, TlqWindow(FWindow).WinHandle,
       drawgc, TImageHack(FImg).XImage, 0, 0, 0, 0,
       FWindow.Width, FWindow.Height);
 

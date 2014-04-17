@@ -32,13 +32,13 @@ uses
 type
   NaturalNumber = 1..High(Integer);
 
-  TfpgSnapEvent = procedure(Sender: TObject; const AClosed: boolean) of object;
+  TlqSnapEvent = procedure(Sender: TObject; const AClosed: boolean) of object;
 
-  TfpgSplitter = class(TfpgWidget)
+  TlqSplitter = class(TlqWidget)
   private
     FAutoSnap: Boolean;
-    FColorGrabBar: TfpgColor;
-    FControl: TfpgWidget;
+    FColorGrabBar: TlqColor;
+    FControl: TlqWidget;
     FDownPos: TPoint;
     FMinSize: NaturalNumber;
     FMaxSize: Integer;
@@ -46,10 +46,10 @@ type
     FOldSize: Integer;
     FSplit: Integer;
     FMouseOver: Boolean;
-    FOnSnap: TfpgSnapEvent;
+    FOnSnap: TlqSnapEvent;
     procedure   CalcSplitSize(X, Y: Integer; out NewSize, Split: Integer);
-    function    FindControl: TfpgWidget;
-    procedure   SetColorGrabBar(const AValue: TfpgColor);
+    function    FindControl: TlqWidget;
+    procedure   SetColorGrabBar(const AValue: TlqColor);
     procedure   UpdateControlSize;
     procedure   UpdateSize(const X, Y: Integer);
   protected
@@ -63,19 +63,19 @@ type
     procedure   HandleDoubleClick(x, y: integer; button: word; shiftstate: TShiftState); override;
     procedure   HandlePaint; override;
     procedure   StopSizing; dynamic;
-    Procedure   DrawGrabBar(ARect: TfpgRect); virtual;
+    Procedure   DrawGrabBar(ARect: TlqRect); virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
   published
     property    Align;
     property    AutoSnap: boolean read FAutoSnap write FAutoSnap default True;
-    property    ColorGrabBar: TfpgColor read FColorGrabBar write SetColorGrabBar default clSplitterGrabBar;
-    property    OnSnap: TfpgSnapEvent read FOnSnap write FOnSnap;
+    property    ColorGrabBar: TlqColor read FColorGrabBar write SetColorGrabBar default clSplitterGrabBar;
+    property    OnSnap: TlqSnapEvent read FOnSnap write FOnSnap;
   end;
 
-function CreateSplitter(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord;
-         AnAlign: TAlign): TfpgSplitter;
+function CreateSplitter(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord;
+         AnAlign: TAlign): TlqSplitter;
 
 implementation
 
@@ -83,10 +83,10 @@ const
   cSplitterWidth = 8;
 
 
-function CreateSplitter(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord;
-         AnAlign: TAlign): TfpgSplitter;
+function CreateSplitter(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord;
+         AnAlign: TAlign): TlqSplitter;
 begin
-  Result        := TfpgSplitter.Create(AOwner);
+  Result        := TlqSplitter.Create(AOwner);
   Result.Left   := ALeft;
   Result.Top    := ATop;
   Result.Width  := AWidth;
@@ -94,9 +94,9 @@ begin
   Result.Align  := AnAlign;
 end;
 
-{ TfpgSplitter }
+{ TlqSplitter }
 
-procedure TfpgSplitter.CalcSplitSize(X, Y: Integer; out NewSize, Split: Integer);
+procedure TlqSplitter.CalcSplitSize(X, Y: Integer; out NewSize, Split: Integer);
 var
   S: Integer;
 begin
@@ -126,12 +126,12 @@ begin
   end;
 end;
 
-function TfpgSplitter.FindControl: TfpgWidget;
+function TlqSplitter.FindControl: TlqWidget;
 var
   i: Integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
   p: TPoint;
-  r: TfpgRect;
+  r: TlqRect;
 begin
   Result := nil;
   case Align of
@@ -145,7 +145,7 @@ begin
 
   for i := 0 to Parent.ComponentCount-1 do
   begin
-    wg := TfpgWidget(Parent.Components[i]);
+    wg := TlqWidget(Parent.Components[i]);
     if (wg <> nil) and wg.Visible and wg.Enabled then
     begin
       Result := wg;
@@ -166,7 +166,7 @@ begin
   Result := nil;
 end;
 
-procedure TfpgSplitter.SetColorGrabBar(const AValue: TfpgColor);
+procedure TlqSplitter.SetColorGrabBar(const AValue: TlqColor);
 begin
   if FColorGrabBar = AValue then
     Exit; //==>
@@ -174,7 +174,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgSplitter.UpdateControlSize;
+procedure TlqSplitter.UpdateControlSize;
 begin
   if FNewSize <> FOldSize then
   begin
@@ -190,18 +190,18 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.UpdateSize(const X, Y: Integer);
+procedure TlqSplitter.UpdateSize(const X, Y: Integer);
 begin
   CalcSplitSize(X, Y, FNewSize, FSplit);
 end;
 
-procedure TfpgSplitter.DoOnSnap(const AClosed: Boolean);
+procedure TlqSplitter.DoOnSnap(const AClosed: Boolean);
 begin
   if Assigned(FOnSnap) then
     FOnSnap(self, AClosed);
 end;
 
-function TfpgSplitter.DoCanResize(var NewSize: Integer): Boolean;
+function TlqSplitter.DoCanResize(var NewSize: Integer): Boolean;
 begin
   // Result := CanResize(NewSize); // omit onCanResize call
   Result := True;
@@ -212,10 +212,10 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqSplitter.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   i: integer;
-  wg: TfpgWidget;
+  wg: TlqWidget;
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
 
@@ -229,7 +229,7 @@ begin
       FMaxSize := Parent.Width - FMinSize;
       for i := 0 to Parent.ComponentCount-1 do
       begin
-        wg := TfpgWidget(Parent.Components[i]);
+        wg := TlqWidget(Parent.Components[i]);
         if wg.Visible and (wg.Align in [alLeft, alRight]) then
           Dec(FMaxSize, Width);
       end;
@@ -240,7 +240,7 @@ begin
       FMaxSize := Parent.Height - FMinSize;
       for i := 0 to Parent.ComponentCount-1 do
       begin
-        wg := TfpgWidget(Parent.Components[i]);
+        wg := TlqWidget(Parent.Components[i]);
         if (wg.Align in [alTop, alBottom]) then
           Dec(FMaxSize, Height);
       end;
@@ -262,7 +262,7 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqSplitter.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
   if Assigned(FControl) then
@@ -276,7 +276,7 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.HandleMouseMove(x, y: integer; btnstate: word;
+procedure TlqSplitter.HandleMouseMove(x, y: integer; btnstate: word;
   shiftstate: TShiftState);
 var
   NewSize, Split: Integer;
@@ -297,7 +297,7 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.HandleMouseEnter;
+procedure TlqSplitter.HandleMouseEnter;
 begin
   FMouseOver := True;
   if Align in [alBottom, alTop] then
@@ -307,7 +307,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgSplitter.HandleMouseExit;
+procedure TlqSplitter.HandleMouseExit;
 begin
   FMouseOver := False;
   if FControl = nil then
@@ -315,7 +315,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgSplitter.HandleDoubleClick(x, y: integer; button: word;
+procedure TlqSplitter.HandleDoubleClick(x, y: integer; button: word;
   shiftstate: TShiftState);
 begin
   inherited HandleDoubleClick(x, y, button, shiftstate);
@@ -334,9 +334,9 @@ begin
   end;
 end;
 
-procedure TfpgSplitter.HandlePaint;
+procedure TlqSplitter.HandlePaint;
 var
-  lRect: TfpgRect;
+  lRect: TlqRect;
 begin
   Canvas.SetColor(clWindowBackground);
   Canvas.FillRectangle(GetClientRect);
@@ -371,7 +371,7 @@ begin
   DrawGrabBar(lRect);
 end;
 
-procedure TfpgSplitter.StopSizing;
+procedure TlqSplitter.StopSizing;
 begin
   if Assigned(FControl) then
   begin
@@ -388,10 +388,10 @@ begin
     FOnMoved(Self);}
 end;
 
-procedure TfpgSplitter.DrawGrabBar(ARect: TfpgRect);
+procedure TlqSplitter.DrawGrabBar(ARect: TlqRect);
 var
-  lFillRect: TfpgRect;
-  lSaveColor: TfpgColor;
+  lFillRect: TlqRect;
+  lSaveColor: TlqColor;
 begin
   lSaveColor := Canvas.Color;
 
@@ -486,7 +486,7 @@ begin
   Canvas.Color := lSaveColor;
 end;
 
-constructor TfpgSplitter.Create(AOwner: TComponent);
+constructor TlqSplitter.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FAutoSnap := True;
@@ -500,7 +500,7 @@ begin
   FColorGrabBar := clSplitterGrabBar;
 end;
 
-destructor TfpgSplitter.Destroy;
+destructor TlqSplitter.Destroy;
 begin
   inherited Destroy;
 end;

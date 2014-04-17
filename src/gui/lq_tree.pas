@@ -28,7 +28,7 @@ unit lq_tree;
       we want a main column covering the tree. Then extra columns for user
       text and data.
     * Implement event handlers the user can hook into and do custom drawing.
-    * TfpgTreeNode.HasChildren property is not fully implemented yet. The
+    * TlqTreeNode.HasChildren property is not fully implemented yet. The
       property is not update when you do .Append() or .AppendText() calls. It
       such cases .Count is prefered.
 }
@@ -49,138 +49,138 @@ uses
 
 type
 
-  TfpgNodeAttachMode = (naAdd, naAddFirst, naAddChild, naAddChildFirst, naInsert);
+  TlqNodeAttachMode = (naAdd, naAddFirst, naAddChild, naAddChildFirst, naInsert);
 
-  PfpgTreeColumnWidth = ^TfpgTreeColumnWidth;
-  TfpgTreeColumnWidth = record
+  PfpgTreeColumnWidth = ^TlqTreeColumnWidth;
+  TlqTreeColumnWidth = record
     next: PfpgTreeColumnWidth;
     width: word;
   end;
 
   // forward declaration
-  TfpgTreeView = class;
-  TfpgTreeNode = class;
+  TlqTreeView = class;
+  TlqTreeNode = class;
 
-  TfpgTreeNodeFindMethod = procedure(ANode: TfpgTreeNode; var AFound: boolean) of object;
-  TfpgTreeExpandEvent = procedure(Sender: TObject; ANode: TfpgTreeNode) of object;
-  TfpgStateImageClickedEvent = procedure(Sender: TObject; ANode: TfpgTreeNode) of object;
+  TlqTreeNodeFindMethod = procedure(ANode: TlqTreeNode; var AFound: boolean) of object;
+  TlqTreeExpandEvent = procedure(Sender: TObject; ANode: TlqTreeNode) of object;
+  TlqStateImageClickedEvent = procedure(Sender: TObject; ANode: TlqTreeNode) of object;
 
 
-  TfpgTreeNode = class(TObject)
+  TlqTreeNode = class(TObject)
   private
     FCollapsed: boolean;
     FData: Pointer;
-    FFirstSubNode: TfpgTreeNode; // the subnodes - for list implementation
+    FFirstSubNode: TlqTreeNode; // the subnodes - for list implementation
     FImageIndex: integer;
-    FInactSelColor: TfpgColor;
-    FInactSelTextColor: TfpgColor;
-    FLastSubNode: TfpgTreeNode;
-    FNext: TfpgTreeNode;
-    FParent: TfpgTreeNode;
-    FPrev: TfpgTreeNode;
-    FSelColor: TfpgColor;
-    FSelTextColor: TfpgColor;
+    FInactSelColor: TlqColor;
+    FInactSelTextColor: TlqColor;
+    FLastSubNode: TlqTreeNode;
+    FNext: TlqTreeNode;
+    FParent: TlqTreeNode;
+    FPrev: TlqTreeNode;
+    FSelColor: TlqColor;
+    FSelTextColor: TlqColor;
     FStateImageIndex: integer;
-    FText: TfpgString;
-    FTextColor: TfpgColor;
+    FText: TlqString;
+    FTextColor: TlqColor;
     FHasChildren: Boolean;
-    FTree: TfpgTreeView;
+    FTree: TlqTreeView;
     procedure   SetCollapsed(const AValue: boolean);
-    procedure   SetInactSelColor(const AValue: TfpgColor);
-    procedure   SetInactSelTextColor(const AValue: TfpgColor);
-    procedure   SetParent(const AValue: TfpgTreeNode);
-    procedure   SetSelColor(const AValue: TfpgColor);
-    procedure   SetSelTextColor(const AValue: TfpgColor);
-    procedure   SetText(const AValue: TfpgString);
-    procedure   SetTextColor(const AValue: TfpgColor);
+    procedure   SetInactSelColor(const AValue: TlqColor);
+    procedure   SetInactSelTextColor(const AValue: TlqColor);
+    procedure   SetParent(const AValue: TlqTreeNode);
+    procedure   SetSelColor(const AValue: TlqColor);
+    procedure   SetSelTextColor(const AValue: TlqColor);
+    procedure   SetText(const AValue: TlqString);
+    procedure   SetTextColor(const AValue: TlqColor);
     procedure   DoRePaint;
     procedure   SetHasChildren(const AValue: Boolean);
-    procedure   DoTreeCheck(ANode: TfpgTreeNode);
+    procedure   DoTreeCheck(ANode: TlqTreeNode);
     procedure   SetStateImageIndex(const AValue: integer);
   public
     constructor Create;
     destructor  Destroy; override;
     // node related
-    function    AppendText(AText: TfpgString): TfpgTreeNode;
+    function    AppendText(AText: TlqString): TlqTreeNode;
     function    Count: integer;
     function    CountRecursive: integer;
-    function    FindSubNode(AText: string; ARecursive: Boolean): TfpgTreeNode; overload;
-    function    FindSubNode(ATreeNodeFindMethod: TfpgTreeNodeFindMethod): TfpgTreeNode; overload;
-    function    FindSubNode(AData: TObject; ARecursive: Boolean): TfpgTreeNode; overload;
+    function    FindSubNode(AText: string; ARecursive: Boolean): TlqTreeNode; overload;
+    function    FindSubNode(ATreeNodeFindMethod: TlqTreeNodeFindMethod): TlqTreeNode; overload;
+    function    FindSubNode(AData: TObject; ARecursive: Boolean): TlqTreeNode; overload;
     function    GetMaxDepth: integer;
     function    GetMaxVisibleDepth: integer;
-    procedure   Append(var ANode: TfpgTreeNode);
+    procedure   Append(var ANode: TlqTreeNode);
     procedure   Clear;  // remove all nodes recursively
     procedure   Collapse;
     procedure   Expand;
-    procedure   Remove(var aNode: TfpgTreeNode);
-    procedure   MoveTo(Destination: TfpgTreeNode; Mode: TfpgNodeAttachMode);
-    procedure   UnregisterSubNode(aNode: TfpgTreeNode);
+    procedure   Remove(var aNode: TlqTreeNode);
+    procedure   MoveTo(Destination: TlqTreeNode; Mode: TlqNodeAttachMode);
+    procedure   UnregisterSubNode(aNode: TlqTreeNode);
     // parent color settings
-    function    ParentInactSelColor: TfpgColor;
-    function    ParentInactSelTextColor: TfpgColor;
-    function    ParentSelColor: TfpgColor;
-    function    ParentSelTextColor: TfpgColor;
-    function    ParentTextColor: TfpgColor;
+    function    ParentInactSelColor: TlqColor;
+    function    ParentInactSelTextColor: TlqColor;
+    function    ParentSelColor: TlqColor;
+    function    ParentSelTextColor: TlqColor;
+    function    ParentTextColor: TlqColor;
     // general properties
     property    Collapsed: boolean read FCollapsed write SetCollapsed;
     property    Data: Pointer read FData write FData;
-    property    FirstSubNode: TfpgTreeNode read FFirstSubNode;
+    property    FirstSubNode: TlqTreeNode read FFirstSubNode;
     property    ImageIndex: integer read FImageIndex write FImageIndex;
     property    StateImageIndex: integer read FStateImageIndex write SetStateImageIndex;
-    property    LastSubNode: TfpgTreeNode read FLastSubNode;
-    property    Next: TfpgTreeNode read FNext write FNext;
-    property    Parent: TfpgTreeNode read FParent write SetParent;
-    property    Prev: TfpgTreeNode read FPrev write FPrev;
-    property    Text: TfpgString read FText write SetText;
+    property    LastSubNode: TlqTreeNode read FLastSubNode;
+    property    Next: TlqTreeNode read FNext write FNext;
+    property    Parent: TlqTreeNode read FParent write SetParent;
+    property    Prev: TlqTreeNode read FPrev write FPrev;
+    property    Text: TlqString read FText write SetText;
     { determines the + or - image in the treeview }
     property    HasChildren: Boolean read FHasChildren write SetHasChildren;
     // color settings
-    property    InactSelColor: TfpgColor read FInactSelColor write SetInactSelColor;
-    property    InactSelTextColor: TfpgColor read FInactSelTextColor write SetInactSelTextColor;
-    property    SelColor: TfpgColor read FSelColor write SetSelColor;
-    property    SelTextColor: TfpgColor read FSelTextColor write SetSelTextColor;
-    property    TextColor: TfpgColor read FTextColor write SetTextColor;
+    property    InactSelColor: TlqColor read FInactSelColor write SetInactSelColor;
+    property    InactSelTextColor: TlqColor read FInactSelTextColor write SetInactSelTextColor;
+    property    SelColor: TlqColor read FSelColor write SetSelColor;
+    property    SelTextColor: TlqColor read FSelTextColor write SetSelTextColor;
+    property    TextColor: TlqColor read FTextColor write SetTextColor;
   end;
 
 
-  TfpgTreeView = class(TfpgWidget)
+  TlqTreeView = class(TlqWidget)
   private
-    FImageList: TfpgImageList;
-    FStateImageList: TfpgImageList;
+    FImageList: TlqImageList;
+    FStateImageList: TlqImageList;
     FColumnHeight: integer; // height of the column header
     FDefaultColumnWidth: word;
     FIndentNodeWithNoImage: boolean;
     FFirstColumn: PfpgTreeColumnWidth; // the list for column widths
-    FFont: TfpgFont;
-    FHScrollbar: TfpgScrollbar;
+    FFont: TlqFont;
+    FHScrollbar: TlqScrollbar;
     FMoving: boolean;
     FMovingCol: integer;
     FMovingPos: integer;
     FNoImageIndent: integer;
     FOnChange: TNotifyEvent;
-    FOnExpand: TfpgTreeExpandEvent;
-    FOnStateImageClicked: TfpgStateImageClickedEvent;
-    FRootNode: TfpgTreeNode;
+    FOnExpand: TlqTreeExpandEvent;
+    FOnStateImageClicked: TlqStateImageClickedEvent;
+    FRootNode: TlqTreeNode;
     FScrollWheelDelta: integer;
-    FSelection: TfpgTreeNode; // currently selected node
+    FSelection: TlqTreeNode; // currently selected node
     FShowColumns: boolean;
     FShowImages : boolean;
-    FTreeLineColor: TfpgColor;
-    FTreeLineStyle: TfpgLineStyle;
-    FVScrollbar: TfpgScrollbar;
+    FTreeLineColor: TlqColor;
+    FTreeLineStyle: TlqLineStyle;
+    FVScrollbar: TlqScrollbar;
     FXOffset: integer; // for repaint and scrollbar-calculation
     FYOffset: integer;
     FUpdateCount: integer;
     function    GetFontDesc: string;
-    function    GetRootNode: TfpgTreeNode;
+    function    GetRootNode: TlqTreeNode;
     procedure   SetDefaultColumnWidth(const AValue: word);
     procedure   SetFontDesc(const AValue: string);
-    procedure   SetSelection(const AValue: TfpgTreeNode);
+    procedure   SetSelection(const AValue: TlqTreeNode);
     procedure   SetShowColumns(const AValue: boolean);
     procedure   SetShowImages(const AValue: boolean);
-    procedure   SetTreeLineColor(const AValue: TfpgColor);
-    procedure   SetTreeLineStyle(const AValue: TfpgLineStyle);
+    procedure   SetTreeLineColor(const AValue: TlqColor);
+    procedure   SetTreeLineStyle(const AValue: TlqLineStyle);
     procedure   SetIndentNodeWithNoImage(const AValue: boolean);
     function    VisibleWidth: integer;
     function    VisibleHeight: integer;
@@ -188,10 +188,10 @@ type
     function    MaxNodeWidth: integer;
     function    GetNodeHeight: integer;
     // width of a node inclusive of image and state image
-    function    GetNodeWidth(ANode: TfpgTreeNode): integer;
-    function    NodeIsVisible(ANode: TfpgTreeNode): boolean;
+    function    GetNodeWidth(ANode: TlqTreeNode): integer;
+    function    NodeIsVisible(ANode: TlqTreeNode): boolean;
     // returns the node-top in pixels
-    function    GetAbsoluteNodeTop(ANode: TfpgTreeNode): integer;
+    function    GetAbsoluteNodeTop(ANode: TlqTreeNode): integer;
     function    GetColumnLeft(AIndex: integer): integer;
     procedure   PreCalcColumnLeft;
     procedure   VScrollbarScroll(Sender: TObject; position: integer);
@@ -202,8 +202,8 @@ type
     procedure   FreeAllTreeNodes;
   protected
     FColumnLeft: TList;
-    FPopupMenu: TfpgPopupMenu;
-    procedure   HandleResize(awidth, aheight: TfpgCoord); override;
+    FPopupMenu: TlqPopupMenu;
+    procedure   HandleResize(awidth, aheight: TlqCoord); override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseUp(x, y: integer; shiftstate: TShiftState); override;
@@ -212,12 +212,12 @@ type
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
     procedure   HandleShow; override;
     procedure   HandlePaint; override;
-    procedure   DrawHeader(ACol: integer; ARect: TfpgRect; AFlags: integer); virtual;
+    procedure   DrawHeader(ACol: integer; ARect: TlqRect; AFlags: integer); virtual;
     procedure   DoChange; virtual;
-    procedure   DoExpand(ANode: TfpgTreeNode); virtual;
+    procedure   DoExpand(ANode: TlqTreeNode); virtual;
     // the nodes between the given node and the direct next node
-    function    SpaceToVisibleNext(aNode: TfpgTreeNode): integer;
-    function    StepToRoot(aNode: TfpgTreeNode): integer;
+    function    SpaceToVisibleNext(aNode: TlqTreeNode): integer;
+    function    StepToRoot(aNode: TlqTreeNode): integer;
     procedure   RePaint; override;
   public
     constructor Create(AOwner: TComponent); override;
@@ -225,26 +225,26 @@ type
     procedure   SetColumnWidth(AIndex, AWidth: word);
     // the width of a column - aIndex of the rootnode = 0
     function    GetColumnWidth(AIndex: word): word;
-    function    GetNodeAt(const X, Y: integer): TfpgTreeNode;
+    function    GetNodeAt(const X, Y: integer): TlqTreeNode;
     procedure   GotoNextNodeUp;
     procedure   GotoNextNodeDown;
     procedure   FullCollapse;
     procedure   FullExpand;
     // any next node, even if node is collapsed
-    function    NextNode(ANode: TfpgTreeNode): TfpgTreeNode;
-    function    PrevNode(ANode: TfpgTreeNode): TfpgTreeNode;
+    function    NextNode(ANode: TlqTreeNode): TlqTreeNode;
+    function    PrevNode(ANode: TlqTreeNode): TlqTreeNode;
     // only visual (visible) nodes
-    function    NextVisualNode(ANode: TfpgTreeNode): TfpgTreeNode;
-    function    PrevVisualNode(ANode: TfpgTreeNode): TfpgTreeNode;
+    function    NextVisualNode(ANode: TlqTreeNode): TlqTreeNode;
+    function    PrevVisualNode(ANode: TlqTreeNode): TlqTreeNode;
     procedure   BeginUpdate;
     procedure   EndUpdate;
-    property    Font: TfpgFont read FFont;
+    property    Font: TlqFont read FFont;
     // Invisible node that starts the tree
-    property    RootNode: TfpgTreeNode read GetRootNode;
-    property    Selection: TfpgTreeNode read FSelection write SetSelection;
-    property    ImageList: TfpgImageList read FImageList write FImageList;
-    property    StateImageList: TfpgImageList read FStateImageList write FStateImageList;
-    property    PopupMenu: TfpgPopupMenu read FPopupMenu write FPopupMenu;
+    property    RootNode: TlqTreeNode read GetRootNode;
+    property    Selection: TlqTreeNode read FSelection write SetSelection;
+    property    ImageList: TlqImageList read FImageList write FImageList;
+    property    StateImageList: TlqImageList read FStateImageList write FStateImageList;
+    property    PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
   published
     property    Align;
     property    BackgroundColor default clListBox;
@@ -261,13 +261,13 @@ type
     property    ShowImages: boolean read FShowImages write SetShowImages default False;
     property    TabOrder;
     property    TextColor;
-    property    TreeLineColor: TfpgColor read FTreeLineColor write SetTreeLineColor default clShadow1;
-    property    TreeLineStyle: TfpgLineStyle read FTreeLineStyle write SetTreeLineStyle default lsDot;
+    property    TreeLineColor: TlqColor read FTreeLineColor write SetTreeLineColor default clShadow1;
+    property    TreeLineStyle: TlqLineStyle read FTreeLineStyle write SetTreeLineStyle default lsDot;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
-    property    OnExpand: TfpgTreeExpandEvent read FOnExpand write FOnExpand;
+    property    OnExpand: TlqTreeExpandEvent read FOnExpand write FOnExpand;
     property    OnDoubleClick;
     property    OnShowHint;
-    property    OnStateImageClicked: TfpgStateImageClickedEvent read FOnStateImageClicked write FOnStateImageClicked;
+    property    OnStateImageClicked: TlqStateImageClickedEvent read FOnStateImageClicked write FOnStateImageClicked;
   end;
 
 
@@ -282,9 +282,9 @@ type
   PColumnLeft = ^integer;
 
 
-{ TfpgTreeNode }
+{ TlqTreeNode }
 
-procedure TfpgTreeNode.SetInactSelColor(const AValue: TfpgColor);
+procedure TlqTreeNode.SetInactSelColor(const AValue: TlqColor);
 begin
   if AValue <> FInactSelColor then
   begin
@@ -293,7 +293,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetCollapsed(const AValue: boolean);
+procedure TlqTreeNode.SetCollapsed(const AValue: boolean);
 begin
   if aValue <> FCollapsed then
   begin
@@ -302,7 +302,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetInactSelTextColor(const AValue: TfpgColor);
+procedure TlqTreeNode.SetInactSelTextColor(const AValue: TlqColor);
 begin
   if AValue <> FInactSelTextColor then
   begin
@@ -311,7 +311,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetParent(const AValue: TfpgTreeNode);
+procedure TlqTreeNode.SetParent(const AValue: TlqTreeNode);
 begin
   if aValue <> FParent then
   begin
@@ -325,7 +325,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetSelColor(const AValue: TfpgColor);
+procedure TlqTreeNode.SetSelColor(const AValue: TlqColor);
 begin
   if FSelColor <> aValue then
   begin
@@ -334,7 +334,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetSelTextColor(const AValue: TfpgColor);
+procedure TlqTreeNode.SetSelTextColor(const AValue: TlqColor);
 begin
   if FTextColor <> aValue then
   begin
@@ -343,7 +343,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetText(const AValue: TfpgString);
+procedure TlqTreeNode.SetText(const AValue: TlqString);
 begin
   if AValue <> FText then
   begin
@@ -352,7 +352,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.SetTextColor(const AValue: TfpgColor);
+procedure TlqTreeNode.SetTextColor(const AValue: TlqColor);
 begin
   if FTextColor <> aValue then
   begin
@@ -361,12 +361,12 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.DoRePaint;
+procedure TlqTreeNode.DoRePaint;
 begin
 //  FTree.Invalidate;
 end;
 
-procedure TfpgTreeNode.SetHasChildren(const AValue: Boolean);
+procedure TlqTreeNode.SetHasChildren(const AValue: Boolean);
 begin
   if FHasChildren <> AValue then
   begin
@@ -375,13 +375,13 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.DoTreeCheck(ANode: TfpgTreeNode);
+procedure TlqTreeNode.DoTreeCheck(ANode: TlqTreeNode);
 begin
   if ANode.FTree <> FTree then
     raise Exception.Create('Nodes must be of the same tree');
 end;
 
-procedure TfpgTreeNode.SetStateImageIndex(const AValue: integer);
+procedure TlqTreeNode.SetStateImageIndex(const AValue: integer);
 begin
   if FStateImageIndex = AValue then
     exit;
@@ -389,7 +389,7 @@ begin
   DoRepaint;
 end;
 
-constructor TfpgTreeNode.Create;
+constructor TlqTreeNode.Create;
 begin
   FData           := nil;
   FFirstSubNode   := nil;
@@ -411,7 +411,7 @@ begin
   FInactSelTextColor  := clUnset;
 end;
 
-destructor TfpgTreeNode.Destroy;
+destructor TlqTreeNode.Destroy;
 begin
   if FParent <> nil then
     FParent.UnregisterSubNode(self);
@@ -425,9 +425,9 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgTreeNode.UnregisterSubNode(aNode: TfpgTreeNode);
+procedure TlqTreeNode.UnregisterSubNode(aNode: TlqTreeNode);
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   h := FFirstSubNode;
   while h <> nil do
@@ -448,7 +448,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeNode.Append(var ANode: TfpgTreeNode);
+procedure TlqTreeNode.Append(var ANode: TlqTreeNode);
 begin
   DoTreeCheck(ANode);
   ANode.Parent := self;
@@ -466,9 +466,9 @@ begin
   FHasChildren := True;
 end;
 
-function TfpgTreeNode.FindSubNode(AText: string; ARecursive: Boolean): TfpgTreeNode;
+function TlqTreeNode.FindSubNode(AText: string; ARecursive: Boolean): TlqTreeNode;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   result := nil;
   if ARecursive then
@@ -505,10 +505,10 @@ begin
   end;  { if/else }
 end;
 
-function TfpgTreeNode.FindSubNode(ATreeNodeFindMethod: TfpgTreeNodeFindMethod): TfpgTreeNode;
+function TlqTreeNode.FindSubNode(ATreeNodeFindMethod: TlqTreeNodeFindMethod): TlqTreeNode;
 var
   lFound: Boolean;
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   result := nil;
   lFound := False;
@@ -534,9 +534,9 @@ begin
   end;
 end;
 
-function TfpgTreeNode.FindSubNode(AData: TObject; ARecursive: Boolean): TfpgTreeNode;
+function TlqTreeNode.FindSubNode(AData: TObject; ARecursive: Boolean): TlqTreeNode;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   result := nil;
   if ARecursive then
@@ -573,23 +573,23 @@ begin
   end;  { if/else }
 end;
 
-function TfpgTreeNode.AppendText(AText: TfpgString): TfpgTreeNode;
+function TlqTreeNode.AppendText(AText: TlqString): TlqTreeNode;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
 begin
   {$IFDEF DEBUG}
   SendDebug(Classname + '.AppendText');
   {$ENDIF}
-  h := TfpgTreeNode.Create;
+  h := TlqTreeNode.Create;
   h.FTree := FTree;
   h.Text := AText;
   Append(h);
   result := h;
 end;
 
-function TfpgTreeNode.GetMaxDepth: integer;
+function TlqTreeNode.GetMaxDepth: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   a: integer;
   t: integer;
 begin
@@ -609,9 +609,9 @@ begin
   result := result + a;
 end;
 
-function TfpgTreeNode.GetMaxVisibleDepth: integer;
+function TlqTreeNode.GetMaxVisibleDepth: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   a: integer;
   t: integer;
 begin
@@ -633,19 +633,19 @@ begin
   result := result + a;
 end;
 
-procedure TfpgTreeNode.Collapse;
+procedure TlqTreeNode.Collapse;
 begin
   Collapsed := True;
 end;
 
-procedure TfpgTreeNode.Expand;
+procedure TlqTreeNode.Expand;
 begin
   Collapsed := False;
 end;
 
-function TfpgTreeNode.Count: integer;
+function TlqTreeNode.Count: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   i: integer;
 begin
   h := FirstSubNode;
@@ -658,9 +658,9 @@ begin
   result := i;
 end;
 
-function TfpgTreeNode.CountRecursive: integer;
+function TlqTreeNode.CountRecursive: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   i: integer;
 begin
   h := FFirstSubNode;
@@ -674,7 +674,7 @@ begin
   result := i;
 end;
 
-procedure TfpgTreeNode.Remove(var aNode: TfpgTreeNode);
+procedure TlqTreeNode.Remove(var aNode: TlqTreeNode);
 begin
   if FirstSubNode = aNode then
   begin
@@ -705,7 +705,7 @@ begin
   aNode.parent := nil;
 end;
 
-procedure TfpgTreeNode.MoveTo(Destination: TfpgTreeNode; Mode: TfpgNodeAttachMode);
+procedure TlqTreeNode.MoveTo(Destination: TlqTreeNode; Mode: TlqNodeAttachMode);
 begin
   if Destination = nil then
     Exit;
@@ -752,10 +752,10 @@ begin
   end;  { case }
 end;
 
-procedure TfpgTreeNode.Clear;
+procedure TlqTreeNode.Clear;
 var
-  n: TfpgTreeNode;
-  tn: TfpgTreeNode;
+  n: TlqTreeNode;
+  tn: TlqTreeNode;
 begin
   n := LastSubNode;
   while n <> nil do
@@ -768,7 +768,7 @@ begin
   FHasChildren := False;
 end;
 
-function TfpgTreeNode.ParentTextColor: TfpgColor;
+function TlqTreeNode.ParentTextColor: TlqColor;
 begin
   if TextColor <> clUnset then
     result := TextColor
@@ -781,7 +781,7 @@ begin
   end;
 end;
 
-function TfpgTreeNode.ParentSelTextColor: TfpgColor;
+function TlqTreeNode.ParentSelTextColor: TlqColor;
 begin
   if SelTextColor <> clUnset then
     result := SelTextColor
@@ -794,7 +794,7 @@ begin
   end;
 end;
 
-function TfpgTreeNode.ParentSelColor: TfpgColor;
+function TlqTreeNode.ParentSelColor: TlqColor;
 begin
   if SelColor <> clUnset then
     result := SelColor
@@ -807,7 +807,7 @@ begin
   end;
 end;
 
-function TfpgTreeNode.ParentInactSelTextColor: TfpgColor;
+function TlqTreeNode.ParentInactSelTextColor: TlqColor;
 begin
   if InactSelTextColor <> clUnset then
     result := InactSelTextColor
@@ -820,7 +820,7 @@ begin
   end;
 end;
 
-function TfpgTreeNode.ParentInactSelColor: TfpgColor;
+function TlqTreeNode.ParentInactSelColor: TlqColor;
 begin
   if InactSelColor <> clUnset then
     result := InactSelColor
@@ -833,9 +833,9 @@ begin
   end;
 end;
 
-{ TfpgTreeview }
+{ TlqTreeview }
 
-procedure TfpgTreeview.VScrollbarScroll(Sender: TObject; position: integer);
+procedure TlqTreeview.VScrollbarScroll(Sender: TObject; position: integer);
 begin
   {$IFDEF DEBUG}
   SendDebug(Classname + '.VScrollbarMove');
@@ -844,16 +844,16 @@ begin
   RePaint;
 end;
 
-function TfpgTreeview.GetFontDesc: string;
+function TlqTreeview.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-function TfpgTreeview.GetRootNode: TfpgTreeNode;
+function TlqTreeview.GetRootNode: TlqTreeNode;
 begin
   if FRootNode = nil then
   begin
-    FRootNode := TfpgTreeNode.Create;
+    FRootNode := TlqTreeNode.Create;
     FRootNode.FTree := self;
     FRootNode.Collapsed := False;
   end;
@@ -863,7 +863,7 @@ begin
   Result := FRootNode;
 end;
 
-procedure TfpgTreeview.SetDefaultColumnWidth(const AValue: word);
+procedure TlqTreeview.SetDefaultColumnWidth(const AValue: word);
 begin
   if (aValue <> FDefaultColumnWidth) and (aValue > 3) then
   begin
@@ -872,16 +872,16 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.SetFontDesc(const AValue: string);
+procedure TlqTreeview.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   RePaint;
 end;
 
-procedure TfpgTreeview.SetSelection(const AValue: TfpgTreeNode);
+procedure TlqTreeview.SetSelection(const AValue: TlqTreeNode);
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
   dy: integer;    // y delta - absolute top node
   nh: integer;    // node height
   vh: integer;    // visible height
@@ -931,7 +931,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.SetShowColumns(const AValue: boolean);
+procedure TlqTreeview.SetShowColumns(const AValue: boolean);
 begin
   if FShowColumns <> aValue then
   begin
@@ -940,7 +940,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.SetShowImages(const AValue: boolean);
+procedure TlqTreeview.SetShowImages(const AValue: boolean);
 begin
   if AValue <> FShowImages then
   begin
@@ -950,7 +950,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.SetTreeLineColor(const AValue: TfpgColor);
+procedure TlqTreeview.SetTreeLineColor(const AValue: TlqColor);
 begin
   if FTreeLineColor = AValue then
     Exit; //==>
@@ -958,7 +958,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgTreeview.SetTreeLineStyle(const AValue: TfpgLineStyle);
+procedure TlqTreeview.SetTreeLineStyle(const AValue: TlqLineStyle);
 begin
   if FTreeLineStyle = AValue then
     Exit; //==>
@@ -966,7 +966,7 @@ begin
   RePaint;
 end;
 
-procedure TfpgTreeView.SetIndentNodeWithNoImage(const AValue: boolean);
+procedure TlqTreeView.SetIndentNodeWithNoImage(const AValue: boolean);
 begin
   if AValue <> FIndentNodeWithNoImage then
   begin
@@ -976,14 +976,14 @@ begin
   end;
 end;
 
-function TfpgTreeview.VisibleWidth: integer;
+function TlqTreeview.VisibleWidth: integer;
 begin
   Result := Width - 2; // border width = 2 pixels
   if FVScrollbar.Visible then
      dec(Result, FVScrollbar.Width);
 end;
 
-function TfpgTreeview.VisibleHeight: integer;
+function TlqTreeview.VisibleHeight: integer;
 begin
   Result := Height - 2; // border width = 2 pixels
   if FShowColumns then
@@ -992,9 +992,9 @@ begin
     dec(Result, FHScrollbar.Height);
 end;
 
-function TfpgTreeview.GetNodeHeightSum: integer;
+function TlqTreeview.GetNodeHeightSum: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   i: integer;
 begin
   h := RootNode;
@@ -1028,9 +1028,9 @@ begin
   result := i;
 end;
 
-function TfpgTreeview.MaxNodeWidth: integer;
+function TlqTreeview.MaxNodeWidth: integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   w: integer;
   r: integer;
 begin
@@ -1068,14 +1068,14 @@ begin
   end;  { while }
 end;
 
-function TfpgTreeview.GetNodeHeight: integer;
+function TlqTreeview.GetNodeHeight: integer;
 begin
   Result := FFont.Height + 2;
 end;
 
-function TfpgTreeview.GetNodeWidth(ANode: TfpgTreeNode): integer;
+function TlqTreeview.GetNodeWidth(ANode: TlqTreeNode): integer;
 var
-  lImageItem: TfpgImageItem;
+  lImageItem: TlqImageItem;
 begin
   {$IFDEF DEBUG}
   SendDebug(Classname + '.GetNodeWidth');
@@ -1116,7 +1116,7 @@ begin
   end;  { if/else }
 end;
 
-function TfpgTreeview.NodeIsVisible(ANode: TfpgTreeNode): boolean;
+function TlqTreeview.NodeIsVisible(ANode: TlqTreeNode): boolean;
 begin
   Result := True;
   if ANode = nil then
@@ -1133,7 +1133,7 @@ begin
   end;
 end;
 
-function TfpgTreeview.GetAbsoluteNodeTop(ANode: TfpgTreeNode): integer;
+function TlqTreeview.GetAbsoluteNodeTop(ANode: TlqTreeNode): integer;
 var
   i: integer;
 begin
@@ -1146,7 +1146,7 @@ begin
   result := (i - 1) * GetNodeHeight;
 end;
 
-function TfpgTreeview.GetColumnLeft(AIndex: integer): integer;
+function TlqTreeview.GetColumnLeft(AIndex: integer): integer;
 begin
   if FColumnLeft = nil then
     PreCalcColumnLeft;
@@ -1162,7 +1162,7 @@ begin
   end;
 end;
 
-function TfpgTreeview.GetColumnWidth(AIndex: word): word;
+function TlqTreeview.GetColumnWidth(AIndex: word): word;
 var
   h: PfpgTreeColumnWidth;
   i: integer;
@@ -1193,14 +1193,14 @@ begin
     result := DefaultColumnWidth;
 end;
 
-function TfpgTreeView.GetNodeAt(const X, Y: integer): TfpgTreeNode;
+function TlqTreeView.GetNodeAt(const X, Y: integer): TlqTreeNode;
 var
   col: integer;
   lTop: integer;
   lLeft: integer;
   i, i1: integer;
   cancel: boolean;
-  last, node: TfpgTreeNode;
+  last, node: TlqTreeNode;
   w: integer;
   lNodeXOffset: integer;
 begin
@@ -1243,16 +1243,16 @@ begin
   end;
 end;
 
-procedure TfpgTreeView.GotoNextNodeUp;
+procedure TlqTreeView.GotoNextNodeUp;
 begin
   if Selection = RootNode.FirstSubNode then
     Exit;
   Selection := PrevNode(Selection);
 end;
 
-procedure TfpgTreeView.GotoNextNodeDown;
+procedure TlqTreeView.GotoNextNodeDown;
 var
-  lNode: TfpgTreeNode;
+  lNode: TlqTreeNode;
 begin
   if (Selection = RootNode.LastSubNode) and (RootNode.LastSubNode.CountRecursive = 0) then
     Exit;
@@ -1262,9 +1262,9 @@ begin
     Selection := lNode;
 end;
 
-procedure TfpgTreeView.FullCollapse;
+procedure TlqTreeView.FullCollapse;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := NextNode(RootNode);
   repeat
@@ -1277,9 +1277,9 @@ begin
   Repaint;
 end;
 
-procedure TfpgTreeView.FullExpand;
+procedure TlqTreeView.FullExpand;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := NextNode(RootNode);
   repeat
@@ -1292,9 +1292,9 @@ begin
   Repaint;
 end;
 
-procedure TfpgTreeview.PreCalcColumnLeft;
+procedure TlqTreeview.PreCalcColumnLeft;
 var
-  Aleft: TfpgCoord;
+  Aleft: TlqCoord;
   ACounter: integer;
   AColumnLeft: PColumnLeft;
 begin
@@ -1316,13 +1316,13 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.HScrollbarScroll(Sender: TObject; position: integer);
+procedure TlqTreeview.HScrollbarScroll(Sender: TObject; position: integer);
 begin
   FXOffset := Position;
   RePaint;
 end;
 
-procedure TfpgTreeview.UpdateScrollbars;
+procedure TlqTreeview.UpdateScrollbars;
 begin
   {$IFDEF DEBUG}
   SendDebug(Classname + '.UpdateScrollbars');
@@ -1355,7 +1355,7 @@ begin
     FHScrollBar.RepaintSlider;
 end;
 
-procedure TfpgTreeview.ResetScrollbar;
+procedure TlqTreeview.ResetScrollbar;
 const
   cSBarThickness = 16;
 begin
@@ -1370,7 +1370,7 @@ begin
   FHScrollbar.SetPosition(1, Height - cSBarThickness-1, Width - 2, cSBarThickness);
 end;
 
-procedure TfpgTreeView.ClearColumnLeft;
+procedure TlqTreeView.ClearColumnLeft;
 var
   i: integer;
   AColumnLeft: PColumnLeft;
@@ -1383,12 +1383,12 @@ begin
   FColumnLeft.Clear;
 end;
 
-procedure TfpgTreeView.FreeAllTreeNodes;
+procedure TlqTreeView.FreeAllTreeNodes;
 begin
   RootNode.Clear;
 end;
 
-procedure TfpgTreeview.HandleResize(awidth, aheight: TfpgCoord);
+procedure TlqTreeview.HandleResize(awidth, aheight: TlqCoord);
 begin
   {$IFDEF DEBUG}
   SendDebug(Classname + '.HandleResize');
@@ -1403,16 +1403,16 @@ begin
   RePaint;
 end;
 
-procedure TfpgTreeview.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqTreeview.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
   col: integer;
   i: integer;
   w: integer;
   i1: integer;
-  last: TfpgTreeNode;
-  node: TfpgTreeNode;
+  last: TlqTreeNode;
+  node: TlqTreeNode;
   cancel: boolean;
-  OldSel: TfpgTreeNode;
+  OldSel: TlqTreeNode;
   lNodeXOffset: integer;
 begin
   inherited HandleLMouseUp(x, y, shiftstate);
@@ -1498,7 +1498,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqTreeview.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 var
   xpos: integer;
   i: integer;
@@ -1525,14 +1525,14 @@ begin
   RePaint;
 end;
 
-procedure TfpgTreeView.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
+procedure TlqTreeView.HandleRMouseUp(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleRMouseUp(x, y, shiftstate);
   if Assigned(PopupMenu) then
     PopupMenu.ShowAt(self, x, y);
 end;
 
-procedure TfpgTreeview.HandleDoubleClick(x, y: integer; button: word;
+procedure TlqTreeview.HandleDoubleClick(x, y: integer; button: word;
   shiftstate: TShiftState);
 begin
   // to setup cursor co-ordinates and handle selection
@@ -1551,7 +1551,7 @@ begin
   end;
 end;
 
-procedure TfpgTreeview.HandleShow;
+procedure TlqTreeview.HandleShow;
 begin
   if (csLoading in ComponentState) then
     Exit;
@@ -1560,10 +1560,10 @@ begin
   inherited HandleShow;
 end;
 
-procedure TfpgTreeview.HandlePaint;
+procedure TlqTreeview.HandlePaint;
 var
-  r: TfpgRect;
-  h: TfpgTreeNode;
+  r: TlqRect;
+  h: TlqTreeNode;
   i: integer;
   i1: integer;
   w: integer;
@@ -1573,7 +1573,7 @@ var
   x: integer;
   imgx: integer;
   y: integer;
-  AImageItem: TfpgImageItem;
+  AImageItem: TlqImageItem;
   AVisibleHeight: integer;
 begin
   {$IFDEF DEBUG}
@@ -1854,18 +1854,18 @@ begin
   end; { while h <> nil }
 end;
 
-procedure TfpgTreeview.DrawHeader(ACol: integer; ARect: TfpgRect;
+procedure TlqTreeview.DrawHeader(ACol: integer; ARect: TlqRect;
   AFlags: integer);
 begin
   // Here we can implement a head style check
   Canvas.DrawButtonFace(ARect, [btfIsEmbedded]);
 end;
 
-procedure TfpgTreeview.HandleKeyPress(var keycode: word;
+procedure TlqTreeview.HandleKeyPress(var keycode: word;
   var shiftstate: TShiftState; var consumed: boolean);
 var
-  h: TfpgTreeNode;
-  OldSelection: TfpgTreeNode;
+  h: TlqTreeNode;
+  OldSelection: TlqTreeNode;
 begin
   OldSelection := Selection;
   if ShiftState = [] then
@@ -1951,7 +1951,7 @@ begin
     inherited HandleKeyPress(keycode, shiftstate, consumed);
 end;
 
-procedure TfpgTreeview.HandleMouseScroll(x, y: integer;
+procedure TlqTreeview.HandleMouseScroll(x, y: integer;
   shiftstate: TShiftState; delta: smallint);
 var
   i: integer;
@@ -1980,19 +1980,19 @@ begin
   RePaint;
 end;
 
-procedure TfpgTreeview.DoChange;
+procedure TlqTreeview.DoChange;
 begin
   if Assigned(FOnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgTreeview.DoExpand(ANode: TfpgTreeNode);
+procedure TlqTreeview.DoExpand(ANode: TlqTreeNode);
 begin
   if Assigned(FOnExpand) then
     FOnExpand(self, ANode);
 end;
 
-function TfpgTreeview.NextVisualNode(ANode: TfpgTreeNode): TfpgTreeNode;
+function TlqTreeview.NextVisualNode(ANode: TlqTreeNode): TlqTreeNode;
   //----------------
   procedure _FindNextNode;
   begin
@@ -2029,9 +2029,9 @@ begin
   end;
 end;
 
-function TfpgTreeview.PrevVisualNode(ANode: TfpgTreeNode): TfpgTreeNode;
+function TlqTreeview.PrevVisualNode(ANode: TlqTreeNode): TlqTreeNode;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := ANode;
   if ANode.Prev <> nil then
@@ -2053,13 +2053,13 @@ begin
   end;
 end;
 
-procedure TfpgTreeView.BeginUpdate;
+procedure TlqTreeView.BeginUpdate;
 begin
   Inc(FUpdateCount);
   Updating;
 end;
 
-procedure TfpgTreeView.EndUpdate;
+procedure TlqTreeView.EndUpdate;
 begin
   if FUpdateCount > 0 then
   begin
@@ -2072,7 +2072,7 @@ begin
   end;
 end;
 
-function TfpgTreeView.NextNode(ANode: TfpgTreeNode): TfpgTreeNode;
+function TlqTreeView.NextNode(ANode: TlqTreeNode): TlqTreeNode;
   //----------------
   procedure _FindNextNode;
   begin
@@ -2100,9 +2100,9 @@ begin
     _FindNextNode;
 end;
 
-function TfpgTreeView.PrevNode(ANode: TfpgTreeNode): TfpgTreeNode;
+function TlqTreeView.PrevNode(ANode: TlqTreeNode): TlqTreeNode;
 var
-  n: TfpgTreeNode;
+  n: TlqTreeNode;
 begin
   n := ANode;
   if ANode.Prev <> nil then
@@ -2124,9 +2124,9 @@ begin
   end;
 end;
 
-function TfpgTreeview.SpaceToVisibleNext(aNode: TfpgTreeNode): integer;
+function TlqTreeview.SpaceToVisibleNext(aNode: TlqTreeNode): integer;
 var
-  h: TfpgTreeNode;
+  h: TlqTreeNode;
   i: integer;
 begin
   result := 0;
@@ -2151,7 +2151,7 @@ begin
   result := i;
 end;
 
-function TfpgTreeview.StepToRoot(aNode: TfpgTreeNode): integer;
+function TlqTreeview.StepToRoot(aNode: TlqTreeNode): integer;
 var
   i: integer;
 begin
@@ -2164,14 +2164,14 @@ begin
   result := i;
 end;
 
-procedure TfpgTreeView.RePaint;
+procedure TlqTreeView.RePaint;
 begin
   if csUpdating in ComponentState then
     Exit;
   inherited RePaint;
 end;
 
-constructor TfpgTreeview.Create(AOwner: TComponent);
+constructor TlqTreeview.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FRootNode     := nil;
@@ -2185,14 +2185,14 @@ begin
   Height := 100;
   FUpdateCount := 0;
 
-  FHScrollbar := TfpgScrollbar.Create(self);
+  FHScrollbar := TlqScrollbar.Create(self);
   FHScrollbar.Orientation := orHorizontal;
   FHScrollbar.OnScroll    := @HScrollbarScroll;
   FHScrollbar.Visible     := False;
   FHScrollbar.Position    := 0;
   FHScrollbar.SliderSize  := 0.5;
 
-  FVScrollbar := TfpgScrollbar.Create(self);
+  FVScrollbar := TlqScrollbar.Create(self);
   FVScrollbar.Orientation := orVertical;
   FVScrollbar.OnScroll    := @VScrollbarScroll;
   FVScrollbar.Visible     := False;
@@ -2212,7 +2212,7 @@ begin
   FIndentNodeWithNoImage := True;
 end;
 
-destructor TfpgTreeView.Destroy;
+destructor TlqTreeView.Destroy;
 begin
   if Assigned(FColumnLeft) then
   begin
@@ -2225,7 +2225,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TfpgTreeview.SetColumnWidth(AIndex, AWidth: word);
+procedure TlqTreeview.SetColumnWidth(AIndex, AWidth: word);
 var
   h: PfpgTreeColumnWidth;
   n: PfpgTreeColumnWidth;

@@ -38,57 +38,57 @@ uses
 type
 
   // data object for grid columns
-  TfpgGridColumn = class(TObject)
+  TlqGridColumn = class(TObject)
   private
     FAlignment: TAlignment;
     FLayout: TLayout;
     FHMargin: Integer;
     FTitle: string;
     FWidth: integer;
-    FBackgroundColor: TfpgColor;
-    FTextColor: TfpgColor;
+    FBackgroundColor: TlqColor;
+    FTextColor: TlqColor;
   public
     constructor Create; virtual;
     property    Width: integer read FWidth write FWidth;
     property    Title: string read FTitle write FTitle;
     property    Alignment: TAlignment read FAlignment write FAlignment;
     property    Layout: TLayout read FLayout write FLayout;
-    property    BackgroundColor: TfpgColor read FBackgroundColor write FBackgroundColor;
+    property    BackgroundColor: TlqColor read FBackgroundColor write FBackgroundColor;
     property    HMargin: Integer read FHMargin write FHMargin;
-    property    TextColor: TfpgColor read FTextColor write FTextColor;
+    property    TextColor: TlqColor read FTextColor write FTextColor;
   end;
   
   
-  TfpgCustomGrid = class(TfpgBaseGrid)
+  TlqCustomGrid = class(TlqBaseGrid)
   protected
     FRowCount: Integer;
     FColumns: TFPList;
     procedure   HandleSetFocus; override;
-    procedure   SetTextColor(const AValue: TfpgColor); override;
-    function    GetColumns(AIndex: integer): TfpgGridColumn; virtual;
+    procedure   SetTextColor(const AValue: TlqColor); override;
+    function    GetColumns(AIndex: integer): TlqGridColumn; virtual;
     procedure   DoDeleteColumn(ACol: integer); virtual;
     procedure   DoSetRowCount(AValue: integer); virtual;
     procedure   DoAfterAddColumn(ACol: integer); virtual;
-    function    DoCreateColumnClass: TfpgGridColumn; virtual;
+    function    DoCreateColumnClass: TlqGridColumn; virtual;
     function    GetColumnCount: Integer; override;
     procedure   SetColumnCount(const AValue: Integer); virtual;
     function    GetRowCount: Integer; override;
     procedure   SetRowCount(const AValue: Integer); virtual;
     function    GetColumnWidth(ACol: Integer): integer; override;
     procedure   SetColumnWidth(ACol: Integer; const AValue: integer); override;
-    function    GetColumnBackgroundColor(ACol: Integer): TfpgColor; override;
-    procedure   SetColumnBackgroundColor(ACol: Integer; const AValue: TfpgColor); override;
-    function    GetColumnTextColor(ACol: Integer): TfpgColor; override;
-    procedure   SetColumnTextColor(ACol: Integer; const AValue: TfpgColor); override;
+    function    GetColumnBackgroundColor(ACol: Integer): TlqColor; override;
+    procedure   SetColumnBackgroundColor(ACol: Integer; const AValue: TlqColor); override;
+    function    GetColumnTextColor(ACol: Integer): TlqColor; override;
+    procedure   SetColumnTextColor(ACol: Integer; const AValue: TlqColor); override;
     function    GetHeaderText(ACol: Integer): string; override;
     property    RowCount: Integer read GetRowCount write SetRowCount;
     property    ColumnCount: Integer read GetColumnCount write SetColumnCount;
-    property    Columns[AIndex: integer]: TfpgGridColumn read GetColumns;
+    property    Columns[AIndex: integer]: TlqGridColumn read GetColumns;
 //    property AlternateColor: TColor read FAlternateColor write SetAlternateColor stored IsAltColorStored;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    function    AddColumn(ATitle: string; AWidth: integer): TfpgGridColumn; virtual;
+    function    AddColumn(ATitle: string; AWidth: integer): TlqGridColumn; virtual;
     procedure   DeleteColumn(AIndex: integer); virtual;
     procedure   DeleteRow(AIndex: integer); virtual;
     procedure   MoveColumn(oldindex, newindex: integer); virtual;
@@ -97,9 +97,9 @@ type
   
 implementation
 
-{ TfpgGridColumn }
+{ TlqGridColumn }
 
-constructor TfpgGridColumn.Create;
+constructor TlqGridColumn.Create;
 begin
   Width     := 65;
   Title     := '';
@@ -108,14 +108,14 @@ begin
   HMargin := 2;
 end;
 
-{ TfpgCustomGrid }
+{ TlqCustomGrid }
 
-function TfpgCustomGrid.GetRowCount: Integer;
+function TlqCustomGrid.GetRowCount: Integer;
 begin
   Result := FRowCount;
 end;
 
-procedure TfpgCustomGrid.HandleSetFocus;
+procedure TlqCustomGrid.HandleSetFocus;
 begin
   inherited HandleSetFocus;
   if (GetRowCount > 0) and (FocusRow = -1) then
@@ -127,55 +127,55 @@ begin
   end;
 end;
 
-procedure TfpgCustomGrid.SetTextColor(const AValue: TfpgColor);
+procedure TlqCustomGrid.SetTextColor(const AValue: TlqColor);
 var
   i: integer;
 begin
   inherited SetTextColor(AValue);
   for i := 0 to ColumnCount-1 do
   begin
-    TfpgGridColumn(FColumns.Items[i]).TextColor := AValue;
+    TlqGridColumn(FColumns.Items[i]).TextColor := AValue;
   end;
 //  Repaint;
   Update;
 end;
 
-function TfpgCustomGrid.GetColumns(AIndex: integer): TfpgGridColumn;
+function TlqCustomGrid.GetColumns(AIndex: integer): TlqGridColumn;
 begin
   if (AIndex < 0) or (AIndex > FColumns.Count-1) then
     Result := nil
   else
-    Result := TfpgGridColumn(FColumns[AIndex]);
+    Result := TlqGridColumn(FColumns[AIndex]);
 end;
 
-procedure TfpgCustomGrid.DoDeleteColumn(ACol: integer);
+procedure TlqCustomGrid.DoDeleteColumn(ACol: integer);
 begin
-  TfpgGridColumn(FColumns.Items[ACol]).Free;
+  TlqGridColumn(FColumns.Items[ACol]).Free;
   FColumns.Delete(ACol);
 end;
 
-procedure TfpgCustomGrid.DoSetRowCount(AValue: integer);
+procedure TlqCustomGrid.DoSetRowCount(AValue: integer);
 begin
   // do nothing yet
 end;
 
-procedure TfpgCustomGrid.DoAfterAddColumn(ACol: integer);
+procedure TlqCustomGrid.DoAfterAddColumn(ACol: integer);
 begin
   // do nothing yet
   // update empty cells in descendants
 end;
 
-function TfpgCustomGrid.DoCreateColumnClass: TfpgGridColumn;
+function TlqCustomGrid.DoCreateColumnClass: TlqGridColumn;
 begin
-  Result := TfpgGridColumn.Create;
+  Result := TlqGridColumn.Create;
 end;
 
-function TfpgCustomGrid.GetColumnCount: Integer;
+function TlqCustomGrid.GetColumnCount: Integer;
 begin
   Result := FColumns.Count;
 end;
 
-procedure TfpgCustomGrid.SetColumnCount(const AValue: Integer);
+procedure TlqCustomGrid.SetColumnCount(const AValue: Integer);
 var
   n: Integer;
 begin
@@ -212,7 +212,7 @@ begin
 
 end;
 
-procedure TfpgCustomGrid.SetRowCount(const AValue: Integer);
+procedure TlqCustomGrid.SetRowCount(const AValue: Integer);
 begin
   if FRowCount = AValue then
     Exit; //==>
@@ -227,19 +227,19 @@ begin
   end;
 end;
 
-function TfpgCustomGrid.GetColumnWidth(ACol: Integer): integer;
+function TlqCustomGrid.GetColumnWidth(ACol: Integer): integer;
 begin
   if (ACol >= 0) and (ACol < ColumnCount) then
-    Result := TfpgGridColumn(FColumns[ACol]).Width
+    Result := TlqGridColumn(FColumns[ACol]).Width
   else
     result := DefaultColWidth;
 end;
 
-procedure TfpgCustomGrid.SetColumnWidth(ACol: Integer; const AValue: integer);
+procedure TlqCustomGrid.SetColumnWidth(ACol: Integer; const AValue: integer);
 var
-  lCol: TfpgGridColumn;
+  lCol: TlqGridColumn;
 begin
-  lCol := TfpgGridColumn(FColumns[ACol]);
+  lCol := TlqGridColumn(FColumns[ACol]);
   
   if lCol.Width <> AValue then
   begin
@@ -253,19 +253,19 @@ begin
   end;
 end;
 
-function TfpgCustomGrid.GetColumnBackgroundColor(ACol: Integer): TfpgColor;
+function TlqCustomGrid.GetColumnBackgroundColor(ACol: Integer): TlqColor;
 begin
   if (ACol >= 0) and (ACol < ColumnCount) then
-    Result := TfpgGridColumn(FColumns[ACol]).FBackgroundColor
+    Result := TlqGridColumn(FColumns[ACol]).FBackgroundColor
   else
     Result := BackgroundColor;
 end;
 
-procedure TfpgCustomGrid.SetColumnBackgroundColor(ACol: Integer; const AValue: TfpgColor);
+procedure TlqCustomGrid.SetColumnBackgroundColor(ACol: Integer; const AValue: TlqColor);
 var
-  lCol: TfpgGridColumn;
+  lCol: TlqGridColumn;
 begin
-  lCol := TfpgGridColumn(FColumns[ACol]);
+  lCol := TlqGridColumn(FColumns[ACol]);
 
   if lCol.FBackgroundColor <> AValue then
   begin
@@ -275,19 +275,19 @@ begin
   end;
 end;
 
-function TfpgCustomGrid.GetColumnTextColor(ACol: Integer): TfpgColor;
+function TlqCustomGrid.GetColumnTextColor(ACol: Integer): TlqColor;
 begin
   if (ACol >= 0) and (ACol < ColumnCount) then
-    Result := TfpgGridColumn(FColumns[ACol]).FTextColor
+    Result := TlqGridColumn(FColumns[ACol]).FTextColor
   else
     result := TextColor;
 end;
 
-procedure TfpgCustomGrid.SetColumnTextColor(ACol: Integer; const AValue: TfpgColor);
+procedure TlqCustomGrid.SetColumnTextColor(ACol: Integer; const AValue: TlqColor);
 var
-  lCol: TfpgGridColumn;
+  lCol: TlqGridColumn;
 begin
-  lCol := TfpgGridColumn(FColumns[ACol]);
+  lCol := TlqGridColumn(FColumns[ACol]);
 
   if lCol.FTextColor <> AValue then
   begin
@@ -297,12 +297,12 @@ begin
   end;
 end;
 
-function TfpgCustomGrid.GetHeaderText(ACol: Integer): string;
+function TlqCustomGrid.GetHeaderText(ACol: Integer): string;
 begin
-  Result := TfpgGridColumn(FColumns[ACol]).Title;
+  Result := TlqGridColumn(FColumns[ACol]).Title;
 end;
 
-constructor TfpgCustomGrid.Create(AOwner: TComponent);
+constructor TlqCustomGrid.Create(AOwner: TComponent);
 begin
   FColumns := TFPList.Create;
   inherited Create(AOwner);
@@ -310,19 +310,19 @@ begin
   RowCount    := 0;
 end;
 
-destructor TfpgCustomGrid.Destroy;
+destructor TlqCustomGrid.Destroy;
 var
   i: integer;
 begin
   for i := FColumns.Count-1 downto 0 do
   begin
-    TfpgGridColumn(FColumns.Items[i]).Free;
+    TlqGridColumn(FColumns.Items[i]).Free;
   end;
   FColumns.Free;
   inherited Destroy;
 end;
 
-function TfpgCustomGrid.AddColumn(ATitle: string; AWidth: integer): TfpgGridColumn;
+function TlqCustomGrid.AddColumn(ATitle: string; AWidth: integer): TlqGridColumn;
 var
   i: integer;
 begin
@@ -341,9 +341,9 @@ begin
   //RePaint;
 end;
 
-procedure TfpgCustomGrid.DeleteColumn(AIndex: integer);
+procedure TlqCustomGrid.DeleteColumn(AIndex: integer);
 var
-  c: TfpgGridColumn;
+  c: TlqGridColumn;
 begin
   c := Columns[AIndex];
   if c <> nil then
@@ -354,15 +354,15 @@ begin
   end;
 end;
 
-procedure TfpgCustomGrid.DeleteRow(AIndex: integer);
+procedure TlqCustomGrid.DeleteRow(AIndex: integer);
 begin
   if (AIndex < 0) or (AIndex > FRowCount-1) then
     Exit;
   { This is just some sanity checking. Actual row deletion must occur in
-    descendant classed. See TfpgStringGrid for an example. }
+    descendant classed. See TlqStringGrid for an example. }
 end;
 
-procedure TfpgCustomGrid.MoveColumn(oldindex, newindex: integer);
+procedure TlqCustomGrid.MoveColumn(oldindex, newindex: integer);
 begin
   FColumns.Move(oldindex, newindex);
   if HasHandle then

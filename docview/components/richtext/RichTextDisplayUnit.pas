@@ -72,7 +72,7 @@ begin
   end;
 end;
 
-function InvertRGB( Arg: TfpgColor ): TfpgColor;
+function InvertRGB( Arg: TlqColor ): TlqColor;
 begin
   Result := fpgColorToRGB( Arg ); // in case it's a system color e.g. button face
   Result := Result xor $ffffff; // now invert the RGB components
@@ -81,7 +81,7 @@ end;
 // Draw a string at the given location with given color/selected state
 procedure DrawRichTextString( var FontManager: TCanvasFontManager; Layout: TRichTextLayout;
     var X: longint; Y: longint; S: PChar; Len: longint; Selected: Boolean;
-    PenColor: TfpgColor; BackColor: TfpgColor );
+    PenColor: TlqColor; BackColor: TlqColor );
 var
   Point: TPoint;
 begin
@@ -129,7 +129,7 @@ var
   NextP: PChar;
   EndP: PChar;
   BitmapIndex: longint;
-  Bitmap: TfpgImage;
+  Bitmap: TlqImage;
   BitmapRect: TRect;
   TextBlockStart: PChar;
   Selected: boolean;

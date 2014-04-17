@@ -28,7 +28,7 @@ uses
 
 type
 
-  TfpgWin2000Style = class(TfpgStyle)
+  TlqWin2000Style = class(TlqStyle)
 
   end;
 
@@ -40,8 +40,8 @@ uses
 
 
 initialization
-  fpgStyleManager.RegisterClass(cDefaultStyle, TfpgWin2000Style);   // TODO: This will change later
-  fpgStyleManager.RegisterClass('Win2000', TfpgWin2000Style);
+  fpgStyleManager.RegisterClass(cDefaultStyle, TlqWin2000Style);   // TODO: This will change later
+  fpgStyleManager.RegisterClass('Win2000', TlqWin2000Style);
 
 
 end.

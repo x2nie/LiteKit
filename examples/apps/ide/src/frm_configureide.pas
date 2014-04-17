@@ -26,60 +26,60 @@ uses
   lq_checkbox, lq_panel;
 
 type
-  TConfigureIDEForm = class(TfpgForm)
+  TConfigureIDEForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: ConfigureIDEForm}
-    btnCancel: TfpgButton;
-    btnOK: TfpgButton;
-    pcSettings: TfpgPageControl;
-    tsEnvironment: TfpgTabSheet;
-    tsEditor: TfpgTabSheet;
-    tsShortcuts: TfpgTabSheet;
-    Label1: TfpgLabel;
-    edtFPCSrcDir: TfpgDirectoryEdit;
-    edtFPGuiDir: TfpgDirectoryEdit;
-    edtFPGuiLibDir: TfpgDirectoryEdit;
-    edtSyntaxDefDir: TfpgDirectoryEdit;
-    edtTempateDir: TfpgDirectoryEdit;
-    edtCompiler: TfpgFileNameEdit;
-    edtDebugger: TfpgFileNameEdit;
-    Label2: TfpgLabel;
-    Label3: TfpgLabel;
-    Label4: TfpgLabel;
-    Label5: TfpgLabel;
-    Label6: TfpgLabel;
-    Label7: TfpgLabel;
-    Label8: TfpgLabel;
-    Label9: TfpgLabel;
-    Label11: TfpgLabel;
-    edtEditorFont: TfpgFontEdit;
-    edtExeExt: TfpgEdit;
-    edtTarget: TfpgEdit;
-    grdShortcuts: TfpgStringGrid;
-    tsSyntaxDefs: TfpgTabSheet;
-    tsFileFilters: TfpgTabSheet;
-    grdSyntaxDefs: TfpgStringGrid;
-    grdFileFilters: TfpgStringGrid;
-    tsExtTools: TfpgTabSheet;
-    Label10: TfpgLabel;
-    edtExtToolMenu: TfpgEdit;
-    Label12: TfpgLabel;
-    edtExtToolFile: TfpgFileNameEdit;
-    Label13: TfpgLabel;
-    edtExtToolParams: TfpgEdit;
-    btnExtToolAdd: TfpgButton;
-    btnExtToolDel: TfpgButton;
-    lbExtTools: TfpgListBox;
-    cbTabPosition: TfpgComboBox;
-    Label14: TfpgLabel;
-    cbSyntaxHighlighting: TfpgCheckBox;
-    lblActiveTabColor: TfpgLabel;
-    pnlActiveTabColor: TfpgPanel;
-    btnColor: TfpgButton;
+    btnCancel: TlqButton;
+    btnOK: TlqButton;
+    pcSettings: TlqPageControl;
+    tsEnvironment: TlqTabSheet;
+    tsEditor: TlqTabSheet;
+    tsShortcuts: TlqTabSheet;
+    Label1: TlqLabel;
+    edtFPCSrcDir: TlqDirectoryEdit;
+    edTlquiDir: TlqDirectoryEdit;
+    edTlquiLibDir: TlqDirectoryEdit;
+    edtSyntaxDefDir: TlqDirectoryEdit;
+    edtTempateDir: TlqDirectoryEdit;
+    edtCompiler: TlqFileNameEdit;
+    edtDebugger: TlqFileNameEdit;
+    Label2: TlqLabel;
+    Label3: TlqLabel;
+    Label4: TlqLabel;
+    Label5: TlqLabel;
+    Label6: TlqLabel;
+    Label7: TlqLabel;
+    Label8: TlqLabel;
+    Label9: TlqLabel;
+    Label11: TlqLabel;
+    edtEditorFont: TlqFontEdit;
+    edtExeExt: TlqEdit;
+    edtTarget: TlqEdit;
+    grdShortcuts: TlqStringGrid;
+    tsSyntaxDefs: TlqTabSheet;
+    tsFileFilters: TlqTabSheet;
+    grdSyntaxDefs: TlqStringGrid;
+    grdFileFilters: TlqStringGrid;
+    tsExtTools: TlqTabSheet;
+    Label10: TlqLabel;
+    edtExtToolMenu: TlqEdit;
+    Label12: TlqLabel;
+    edtExtToolFile: TlqFileNameEdit;
+    Label13: TlqLabel;
+    edtExtToolParams: TlqEdit;
+    btnExtToolAdd: TlqButton;
+    btnExtToolDel: TlqButton;
+    lbExtTools: TlqListBox;
+    cbTabPosition: TlqComboBox;
+    Label14: TlqLabel;
+    cbSyntaxHighlighting: TlqCheckBox;
+    lblActiveTabColor: TlqLabel;
+    pnlActiveTabColor: TlqPanel;
+    btnColor: TlqButton;
     {@VFD_HEAD_END: ConfigureIDEForm}
     // so we can get correct hints, but still undo with the Cancel button
     FInternalMacroList: TIDEMacroList;
-    procedure BeforeShowHint(Sender: TObject; var AHint: TfpgString);
+    procedure BeforeShowHint(Sender: TObject; var AHint: TlqString);
     procedure LoadSettings;
     procedure SaveSettings;
     procedure SaveToMacroList(AList: TIDEMacroList);
@@ -107,7 +107,7 @@ uses
 
 type
   // Used to get access to the Protected properties
-  TDirectoryEditFriend = class(TfpgDirectoryEdit);
+  TDirectoryEditFriend = class(TlqDirectoryEdit);
 
 
 procedure DisplayConfigureIDE;
@@ -130,17 +130,17 @@ end;
 
 {@VFD_NEWFORM_IMPL}
 
-procedure TConfigureIDEForm.BeforeShowHint(Sender: TObject; var AHint: TfpgString);
+procedure TConfigureIDEForm.BeforeShowHint(Sender: TObject; var AHint: TlqString);
 var
-  s: TfpgString;
-  c: TfpgWidget;
+  s: TlqString;
+  c: TlqWidget;
 begin
-  if Sender is TfpgWidget then
-    c := TfpgWidget(Sender)
+  if Sender is TlqWidget then
+    c := TlqWidget(Sender)
   else
     Exit;    // should never occur, but lets just be safe
 
-  if (c.Name = 'FEdit') and ((c.Parent is TfpgDirectoryEdit) or (c.Parent is TfpgFileNameEdit)) then
+  if (c.Name = 'FEdit') and ((c.Parent is TlqDirectoryEdit) or (c.Parent is TlqFileNameEdit)) then
   begin
     if c.Parent <> nil then
       c := c.Parent
@@ -149,12 +149,12 @@ begin
   end;
 
   // controls that may contain macros
-  if c is TfpgDirectoryEdit then
-    s := TfpgDirectoryEdit(c).Directory
-  else if c is TfpgFileNameEdit then
-    s := TfpgFileNameEdit(c).FileName
-  else if c is TfpgEdit then
-    s := TfpgEdit(c).Text;
+  if c is TlqDirectoryEdit then
+    s := TlqDirectoryEdit(c).Directory
+  else if c is TlqFileNameEdit then
+    s := TlqFileNameEdit(c).FileName
+  else if c is TlqEdit then
+    s := TlqEdit(c).Text;
 
   AHint := s;
 
@@ -168,8 +168,8 @@ end;
 procedure TConfigureIDEForm.LoadSettings;
 begin
   edtFPCSrcDir.Directory := gINI.ReadString(cEnvironment, 'FPCSrcDir', '');
-  edtFPGuiDir.Directory := gINI.ReadString(cEnvironment, 'FPGuiDir', '');
-  edtFPGuiLibDir.Directory := gINI.ReadString(cEnvironment, 'FPGuiLibDir', GMacroList.FindByName(cMacro_FPGuiLibDir).Value);
+  edTlquiDir.Directory := gINI.ReadString(cEnvironment, 'FPGuiDir', '');
+  edTlquiLibDir.Directory := gINI.ReadString(cEnvironment, 'FPGuiLibDir', GMacroList.FindByName(cMacro_FPGuiLibDir).Value);
   edtSyntaxDefDir.Directory := gINI.ReadString(cEnvironment, 'SyntaxDefDir', GMacroList.FindByName(cMacro_SyntaxDefDir).Value);
   edtTempateDir.Directory := gINI.ReadString(cEnvironment, 'TemplateDir', GMacroList.FindByName(cMacro_TemplateDir).Value);
   edtCompiler.Filename := gINI.ReadString(cEnvironment, 'Compiler', '');
@@ -185,8 +185,8 @@ end;
 procedure TConfigureIDEForm.SaveSettings;
 begin
   gINI.WriteString(cEnvironment, 'FPCSrcDir', edtFPCSrcDir.Directory);
-  gINI.WriteString(cEnvironment, 'FPGuiDir', edtFPGuiDir.Directory);
-  gINI.WriteString(cEnvironment, 'FPGuiLibDir', edtFPGuiLibDir.Directory);
+  gINI.WriteString(cEnvironment, 'FPGuiDir', edTlquiDir.Directory);
+  gINI.WriteString(cEnvironment, 'FPGuiLibDir', edTlquiLibDir.Directory);
   gINI.WriteString(cEnvironment, 'SyntaxDefDir', edtSyntaxDefDir.Directory);
   gINI.WriteString(cEnvironment, 'TemplateDir', edtTempateDir.Directory);
   gINI.WriteString(cEnvironment, 'Compiler', edtCompiler.Filename);
@@ -204,8 +204,8 @@ end;
 procedure TConfigureIDEForm.SaveToMacroList(AList: TIDEMacroList);
 begin
   AList.SetValue(cMacro_FPCSrcDir, edtFPCSrcDir.Directory);
-  AList.SetValue(cMacro_FPGuiDir, edtFPGuiDir.Directory);
-  AList.SetValue(cMacro_FPGuiLibDir, edtFPGuiLibDir.Directory);
+  AList.SetValue(cMacro_FPGuiDir, edTlquiDir.Directory);
+  AList.SetValue(cMacro_FPGuiLibDir, edTlquiLibDir.Directory);
   AList.SetValue(cMacro_SyntaxDefDir, edtSyntaxDefDir.Directory);
   AList.SetValue(cMacro_TemplateDir, edtTempateDir.Directory);
   AList.SetValue(cMacro_Compiler, edtCompiler.FileName);
@@ -249,7 +249,7 @@ begin
   ShowHint := True;
   WindowPosition := wpOneThirdDown;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -263,7 +263,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -277,7 +277,7 @@ begin
     TabOrder := 2;
   end;
 
-  pcSettings := TfpgPageControl.Create(self);
+  pcSettings := TlqPageControl.Create(self);
   with pcSettings do
   begin
     Name := 'pcSettings';
@@ -288,7 +288,7 @@ begin
     TabPosition := tpRight;
   end;
 
-  tsEnvironment := TfpgTabSheet.Create(pcSettings);
+  tsEnvironment := TlqTabSheet.Create(pcSettings);
   with tsEnvironment do
   begin
     Name := 'tsEnvironment';
@@ -297,7 +297,7 @@ begin
     Text := 'Environment';
   end;
 
-  tsEditor := TfpgTabSheet.Create(pcSettings);
+  tsEditor := TlqTabSheet.Create(pcSettings);
   with tsEditor do
   begin
     Name := 'tsEditor';
@@ -306,7 +306,7 @@ begin
     Text := 'Editor';
   end;
 
-  tsShortcuts := TfpgTabSheet.Create(pcSettings);
+  tsShortcuts := TlqTabSheet.Create(pcSettings);
   with tsShortcuts do
   begin
     Name := 'tsShortcuts';
@@ -315,7 +315,7 @@ begin
     Text := 'Shortcuts';
   end;
 
-  Label1 := TfpgLabel.Create(tsEnvironment);
+  Label1 := TlqLabel.Create(tsEnvironment);
   with Label1 do
   begin
     Name := 'Label1';
@@ -325,7 +325,7 @@ begin
     Text := 'FPC Source Directory ${FPCSRCDIR}';
   end;
 
-  edtFPCSrcDir := TfpgDirectoryEdit.Create(tsEnvironment);
+  edtFPCSrcDir := TlqDirectoryEdit.Create(tsEnvironment);
   with edtFPCSrcDir do
   begin
     Name := 'edtFPCSrcDir';
@@ -339,10 +339,10 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtFPGuiDir := TfpgDirectoryEdit.Create(tsEnvironment);
-  with edtFPGuiDir do
+  edTlquiDir := TlqDirectoryEdit.Create(tsEnvironment);
+  with edTlquiDir do
   begin
-    Name := 'edtFPGuiDir';
+    Name := 'edTlquiDir';
     SetPosition(8, 74, 342, 24);
     Anchors := [anLeft,anRight,anTop];
     Directory := '';
@@ -353,10 +353,10 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtFPGuiLibDir := TfpgDirectoryEdit.Create(tsEnvironment);
-  with edtFPGuiLibDir do
+  edTlquiLibDir := TlqDirectoryEdit.Create(tsEnvironment);
+  with edTlquiLibDir do
   begin
-    Name := 'edtFPGuiLibDir';
+    Name := 'edTlquiLibDir';
     SetPosition(8, 122, 342, 24);
     Anchors := [anLeft,anRight,anTop];
     Directory := '${FPGUIDIR}lib/';
@@ -367,7 +367,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtSyntaxDefDir := TfpgDirectoryEdit.Create(tsEnvironment);
+  edtSyntaxDefDir := TlqDirectoryEdit.Create(tsEnvironment);
   with edtSyntaxDefDir do
   begin
     Name := 'edtSyntaxDefDir';
@@ -381,7 +381,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtTempateDir := TfpgDirectoryEdit.Create(tsEnvironment);
+  edtTempateDir := TlqDirectoryEdit.Create(tsEnvironment);
   with edtTempateDir do
   begin
     Name := 'edtTempateDir';
@@ -395,7 +395,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtCompiler := TfpgFileNameEdit.Create(tsEnvironment);
+  edtCompiler := TlqFileNameEdit.Create(tsEnvironment);
   with edtCompiler do
   begin
     Name := 'edtCompiler';
@@ -410,7 +410,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtDebugger := TfpgFileNameEdit.Create(tsEnvironment);
+  edtDebugger := TlqFileNameEdit.Create(tsEnvironment);
   with edtDebugger do
   begin
     Name := 'edtDebugger';
@@ -425,7 +425,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  Label2 := TfpgLabel.Create(tsEnvironment);
+  Label2 := TlqLabel.Create(tsEnvironment);
   with Label2 do
   begin
     Name := 'Label2';
@@ -435,7 +435,7 @@ begin
     Text := 'fpGUI Root Directory ${FPGUIDIR}';
   end;
 
-  Label3 := TfpgLabel.Create(tsEnvironment);
+  Label3 := TlqLabel.Create(tsEnvironment);
   with Label3 do
   begin
     Name := 'Label3';
@@ -445,7 +445,7 @@ begin
     Text := '${FPGUILIBDIR}';
   end;
 
-  Label4 := TfpgLabel.Create(tsEnvironment);
+  Label4 := TlqLabel.Create(tsEnvironment);
   with Label4 do
   begin
     Name := 'Label4';
@@ -455,7 +455,7 @@ begin
     Text := '${SYNTAXDEFDIR}';
   end;
 
-  Label5 := TfpgLabel.Create(tsEnvironment);
+  Label5 := TlqLabel.Create(tsEnvironment);
   with Label5 do
   begin
     Name := 'Label5';
@@ -465,7 +465,7 @@ begin
     Text := '${TEMPLATEDIR}';
   end;
 
-  Label6 := TfpgLabel.Create(tsEnvironment);
+  Label6 := TlqLabel.Create(tsEnvironment);
   with Label6 do
   begin
     Name := 'Label6';
@@ -475,7 +475,7 @@ begin
     Text := '${COMPILER}';
   end;
 
-  Label7 := TfpgLabel.Create(tsEnvironment);
+  Label7 := TlqLabel.Create(tsEnvironment);
   with Label7 do
   begin
     Name := 'Label7';
@@ -485,7 +485,7 @@ begin
     Text := '${DEBUGGER}';
   end;
 
-  Label8 := TfpgLabel.Create(tsEnvironment);
+  Label8 := TlqLabel.Create(tsEnvironment);
   with Label8 do
   begin
     Name := 'Label8';
@@ -495,7 +495,7 @@ begin
     Text := '${EXEEXT}';
   end;
 
-  Label9 := TfpgLabel.Create(tsEnvironment);
+  Label9 := TlqLabel.Create(tsEnvironment);
   with Label9 do
   begin
     Name := 'Label9';
@@ -505,7 +505,7 @@ begin
     Text := '${TARGET}';
   end;
 
-  Label11 := TfpgLabel.Create(tsEditor);
+  Label11 := TlqLabel.Create(tsEditor);
   with Label11 do
   begin
     Name := 'Label11';
@@ -515,7 +515,7 @@ begin
     Text := 'Font';
   end;
 
-  edtEditorFont := TfpgFontEdit.Create(tsEditor);
+  edtEditorFont := TlqFontEdit.Create(tsEditor);
   with edtEditorFont do
   begin
     Name := 'edtEditorFont';
@@ -526,7 +526,7 @@ begin
     TabOrder := 2;
   end;
 
-  edtExeExt := TfpgEdit.Create(tsEnvironment);
+  edtExeExt := TlqEdit.Create(tsEnvironment);
   with edtExeExt do
   begin
     Name := 'edtExeExt';
@@ -539,7 +539,7 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  edtTarget := TfpgEdit.Create(tsEnvironment);
+  edtTarget := TlqEdit.Create(tsEnvironment);
   with edtTarget do
   begin
     Name := 'edtTarget';
@@ -552,13 +552,13 @@ begin
     OnShowHint := @BeforeShowHint;
   end;
 
-  grdShortcuts := TfpgStringGrid.Create(tsShortcuts);
+  grdShortcuts := TlqStringGrid.Create(tsShortcuts);
   with grdShortcuts do
   begin
     Name := 'grdShortcuts';
     SetPosition(8, 8, 428, 408);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('Action', 180, taLeftJustify);
     AddColumn('Shortcut', 110, taLeftJustify);
     AddColumn('Alternative', 110, taLeftJustify);
@@ -570,7 +570,7 @@ begin
     TabOrder := 1;
   end;
 
-  tsSyntaxDefs := TfpgTabSheet.Create(pcSettings);
+  tsSyntaxDefs := TlqTabSheet.Create(pcSettings);
   with tsSyntaxDefs do
   begin
     Name := 'tsSyntaxDefs';
@@ -579,7 +579,7 @@ begin
     Text := 'Syntax Highlighting';
   end;
 
-  tsFileFilters := TfpgTabSheet.Create(pcSettings);
+  tsFileFilters := TlqTabSheet.Create(pcSettings);
   with tsFileFilters do
   begin
     Name := 'tsFileFilters';
@@ -588,13 +588,13 @@ begin
     Text := 'File Filters';
   end;
 
-  grdSyntaxDefs := TfpgStringGrid.Create(tsSyntaxDefs);
+  grdSyntaxDefs := TlqStringGrid.Create(tsSyntaxDefs);
   with grdSyntaxDefs do
   begin
     Name := 'grdSyntaxDefs';
     SetPosition(8, 8, 428, 408);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('Syntax Definition File', 200, taLeftJustify);
     AddColumn('File Mask', 200, taLeftJustify);
     FontDesc := '#Grid';
@@ -605,13 +605,13 @@ begin
     TabOrder := 1;
   end;
 
-  grdFileFilters := TfpgStringGrid.Create(tsFileFilters);
+  grdFileFilters := TlqStringGrid.Create(tsFileFilters);
   with grdFileFilters do
   begin
     Name := 'grdFileFilters';
     SetPosition(8, 8, 428, 408);
     Anchors := [anLeft,anRight,anTop,anBottom];
-    BackgroundColor := TfpgColor($80000002);
+    BackgroundColor := TlqColor($80000002);
     AddColumn('Name', 150, taLeftJustify);
     AddColumn('File Mask', 200, taLeftJustify);
     FontDesc := '#Grid';
@@ -622,7 +622,7 @@ begin
     TabOrder := 1;
   end;
 
-  tsExtTools := TfpgTabSheet.Create(pcSettings);
+  tsExtTools := TlqTabSheet.Create(pcSettings);
   with tsExtTools do
   begin
     Name := 'tsExtTools';
@@ -631,7 +631,7 @@ begin
     Text := 'External Tools';
   end;
 
-  Label10 := TfpgLabel.Create(tsExtTools);
+  Label10 := TlqLabel.Create(tsExtTools);
   with Label10 do
   begin
     Name := 'Label10';
@@ -641,7 +641,7 @@ begin
     Text := 'Menu Caption';
   end;
 
-  edtExtToolMenu := TfpgEdit.Create(tsExtTools);
+  edtExtToolMenu := TlqEdit.Create(tsExtTools);
   with edtExtToolMenu do
   begin
     Name := 'edtExtToolMenu';
@@ -654,7 +654,7 @@ begin
     Text := '';
   end;
 
-  Label12 := TfpgLabel.Create(tsExtTools);
+  Label12 := TlqLabel.Create(tsExtTools);
   with Label12 do
   begin
     Name := 'Label12';
@@ -664,7 +664,7 @@ begin
     Text := 'Program';
   end;
 
-  edtExtToolFile := TfpgFileNameEdit.Create(tsExtTools);
+  edtExtToolFile := TlqFileNameEdit.Create(tsExtTools);
   with edtExtToolFile do
   begin
     Name := 'edtExtToolFile';
@@ -677,7 +677,7 @@ begin
     TabOrder := 5;
   end;
 
-  Label13 := TfpgLabel.Create(tsExtTools);
+  Label13 := TlqLabel.Create(tsExtTools);
   with Label13 do
   begin
     Name := 'Label13';
@@ -687,7 +687,7 @@ begin
     Text := 'Parameters';
   end;
 
-  edtExtToolParams := TfpgEdit.Create(tsExtTools);
+  edtExtToolParams := TlqEdit.Create(tsExtTools);
   with edtExtToolParams do
   begin
     Name := 'edtExtToolParams';
@@ -700,7 +700,7 @@ begin
     Text := '';
   end;
 
-  btnExtToolAdd := TfpgButton.Create(tsExtTools);
+  btnExtToolAdd := TlqButton.Create(tsExtTools);
   with btnExtToolAdd do
   begin
     Name := 'btnExtToolAdd';
@@ -714,7 +714,7 @@ begin
     TabOrder := 8;
   end;
 
-  btnExtToolDel := TfpgButton.Create(tsExtTools);
+  btnExtToolDel := TlqButton.Create(tsExtTools);
   with btnExtToolDel do
   begin
     Name := 'btnExtToolDel';
@@ -728,7 +728,7 @@ begin
     TabOrder := 9;
   end;
 
-  lbExtTools := TfpgListBox.Create(tsExtTools);
+  lbExtTools := TlqListBox.Create(tsExtTools);
   with lbExtTools do
   begin
     Name := 'lbExtTools';
@@ -739,7 +739,7 @@ begin
     TabOrder := 10;
   end;
 
-  cbTabPosition := TfpgComboBox.Create(tsEditor);
+  cbTabPosition := TlqComboBox.Create(tsEditor);
   with cbTabPosition do
   begin
     Name := 'cbTabPosition';
@@ -755,7 +755,7 @@ begin
     TabOrder := 3;
   end;
 
-  Label14 := TfpgLabel.Create(tsEditor);
+  Label14 := TlqLabel.Create(tsEditor);
   with Label14 do
   begin
     Name := 'Label14';
@@ -765,7 +765,7 @@ begin
     Text := 'Tab position';
   end;
 
-  cbSyntaxHighlighting := TfpgCheckBox.Create(tsEditor);
+  cbSyntaxHighlighting := TlqCheckBox.Create(tsEditor);
   with cbSyntaxHighlighting do
   begin
     Name := 'cbSyntaxHighlighting';
@@ -777,7 +777,7 @@ begin
     Text := 'Syntax highlighting';
   end;
 
-  lblActiveTabColor := TfpgLabel.Create(tsEditor);
+  lblActiveTabColor := TlqLabel.Create(tsEditor);
   with lblActiveTabColor do
   begin
     Name := 'lblActiveTabColor';
@@ -788,7 +788,7 @@ begin
     Text := 'Active tab color';
   end;
 
-  pnlActiveTabColor := TfpgPanel.Create(tsEditor);
+  pnlActiveTabColor := TlqPanel.Create(tsEditor);
   with pnlActiveTabColor do
   begin
     Name := 'pnlActiveTabColor';
@@ -799,7 +799,7 @@ begin
     Text := '';
   end;
 
-  btnColor := TfpgButton.Create(tsEditor);
+  btnColor := TlqButton.Create(tsEditor);
   with btnColor do
   begin
     Name := 'btnColor';

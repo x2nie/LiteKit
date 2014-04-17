@@ -8,8 +8,8 @@ uses
   Windows;
   
 type
-    TfpgWinHandle = HWND;
-    TfpgDCHandle  = HDC;
+    TlqWinHandle = HWND;
+    TlqDCHandle  = HDC;
 
 implementation
 

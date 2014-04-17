@@ -31,11 +31,11 @@ uses
 
 type
 
-  TfpgINIFile = class(TINIFile)
+  TlqINIFile = class(TINIFile)
   private
     FReadOnly: Boolean;
   public
-    constructor CreateExt(const AFileName: TfpgString = ''; AReadOnly: Boolean = False);
+    constructor CreateExt(const AFileName: TlqString = ''; AReadOnly: Boolean = False);
     function    ReadString(const ASection, AIdent, ADefault: string): string; override;
     function    ReadInteger(const ASection, AIdent: string; ADefault: longint): longint; override;
     function    ReadBool(const ASection, AIdent: string; ADefault: Boolean): Boolean; override;
@@ -43,12 +43,12 @@ type
     function    ReadDateTime(const ASection, AName: string; ADefault: TDateTime): TDateTime; override;
     function    ReadFloat(const ASection, AName: string; ADefault: double): double; override;
     function    ReadTime(const ASection, AName: string; ADefault: TDateTime): TDateTime; override;
-    procedure   ReadFormState(AForm: TfpgForm; AHeight: integer = -1; AWidth: integer = -1; const ASkipDimensions: Boolean = False);
-    procedure   WriteFormState(AForm: TfpgForm);
+    procedure   ReadFormState(AForm: TlqForm; AHeight: integer = -1; AWidth: integer = -1; const ASkipDimensions: Boolean = False);
+    procedure   WriteFormState(AForm: TlqForm);
   end;
 
 // singleton
-function gINI(const AFileName: TfpgString = ''): TfpgINIFile;
+function gINI(const AFileName: TlqString = ''): TlqINIFile;
 
 implementation
 
@@ -58,22 +58,22 @@ uses
   lq_utils;
 
 var
-  uINI: TfpgINIFile;
+  uINI: TlqINIFile;
 
 
-function gINI(const AFileName: TfpgString): TfpgINIFile;
+function gINI(const AFileName: TlqString): TlqINIFile;
 begin
   if uINI = nil then
-    uINI := TfpgINIFile.CreateExt(AFileName);
+    uINI := TlqINIFile.CreateExt(AFileName);
   Result := uINI;
 end;
 
-{ TfpgINIFile }
+{ TlqINIFile }
 
-constructor TfpgINIFile.CreateExt(const AFileName: TfpgString; AReadOnly: Boolean);
+constructor TlqINIFile.CreateExt(const AFileName: TlqString; AReadOnly: Boolean);
 var
-  lDir: TfpgString;
-  lFileName: TfpgString;
+  lDir: TlqString;
+  lFileName: TlqString;
 begin
   FReadOnly := AReadOnly;
   lDir      := fpgExtractFileDir(AFileName);
@@ -98,7 +98,7 @@ begin
   Create(lFileName);
 end;
 
-function TfpgINIFile.ReadString(const ASection, AIdent, ADefault: string): string;
+function TlqINIFile.ReadString(const ASection, AIdent, ADefault: string): string;
 begin
   Result := inherited ReadString(ASection, AIdent, ADefault);
   if (not ValueExists(ASection, AIdent)) and
@@ -106,7 +106,7 @@ begin
     WriteString(ASection, AIdent, ADefault);
 end;
 
-function TfpgINIFile.ReadInteger(const ASection, AIdent: string; ADefault: longint): longint;
+function TlqINIFile.ReadInteger(const ASection, AIdent: string; ADefault: longint): longint;
 begin
   if (not ValueExists(ASection, AIdent)) and
     (not FReadOnly) then
@@ -114,7 +114,7 @@ begin
   Result := inherited ReadInteger(ASection, AIdent, ADefault);
 end;
 
-function TfpgINIFile.ReadBool(const ASection, AIdent: string; ADefault: Boolean): Boolean;
+function TlqINIFile.ReadBool(const ASection, AIdent: string; ADefault: Boolean): Boolean;
 var
   lValueExists: Boolean;
 begin
@@ -125,7 +125,7 @@ begin
   Result := inherited ReadBool(ASection, AIdent, ADefault);
 end;
 
-function TfpgINIFile.ReadDate(const ASection, AName: string; ADefault: TDateTime): TDateTime;
+function TlqINIFile.ReadDate(const ASection, AName: string; ADefault: TDateTime): TDateTime;
 begin
   if (not ValueExists(ASection, AName)) and
     (not FReadOnly) then
@@ -133,7 +133,7 @@ begin
   Result := inherited ReadDate(ASection, AName, ADefault);
 end;
 
-function TfpgINIFile.ReadDateTime(const ASection, AName: string; ADefault: TDateTime): TDateTime;
+function TlqINIFile.ReadDateTime(const ASection, AName: string; ADefault: TDateTime): TDateTime;
 begin
   if (not ValueExists(ASection, AName)) and
     (not FReadOnly) then
@@ -141,7 +141,7 @@ begin
   Result := inherited ReadDateTime(ASection, AName, ADefault);
 end;
 
-function TfpgINIFile.ReadFloat(const ASection, AName: string; ADefault: double): double;
+function TlqINIFile.ReadFloat(const ASection, AName: string; ADefault: double): double;
 begin
   if (not ValueExists(ASection, AName)) and
     (not FReadOnly) then
@@ -149,7 +149,7 @@ begin
   Result := inherited ReadFloat(ASection, AName, ADefault);
 end;
 
-function TfpgINIFile.ReadTime(const ASection, AName: string; ADefault: TDateTime): TDateTime;
+function TlqINIFile.ReadTime(const ASection, AName: string; ADefault: TDateTime): TDateTime;
 begin
   if (not ValueExists(ASection, AName)) and
     (not FReadOnly) then
@@ -158,7 +158,7 @@ begin
 end;
 
 // Do NOT localize
-procedure TfpgINIFile.ReadFormState(AForm: TfpgForm; AHeight: integer; AWidth: integer; const ASkipDimensions: Boolean = False);
+procedure TlqINIFile.ReadFormState(AForm: TlqForm; AHeight: integer; AWidth: integer; const ASkipDimensions: Boolean = False);
 var
   LINISection: string;
   LTop: integer;
@@ -215,7 +215,7 @@ begin
 end;
 
 // Do NOT localize
-procedure TfpgINIFile.WriteFormState(AForm: TfpgForm);
+procedure TlqINIFile.WriteFormState(AForm: TlqForm);
 var
   LINISection: string;
 begin

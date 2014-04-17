@@ -12,7 +12,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     Description:
-      Some handly image manipulation functions to use with TfpgImage class.
+      Some handly image manipulation functions to use with TlqImage class.
       Included is a gray color conversion matrix.
 }
 
@@ -21,7 +21,7 @@ unit lq_imgutils;
 {$mode objfpc}{$H+}
 
 { TODO : Make the conversion matrix a plugable architecture. Similar to the
-         interpolation handling in TfpgCanvas. }
+         interpolation handling in TlqCanvas. }
 
 interface
 
@@ -47,17 +47,17 @@ const
   GCM_Photoshop: TGrayConvMatrix = (red:0.212671; green:0.715160; blue:0.072169);   // Y of YUV from B/W TV's
 
 
-procedure fpgApplyGreyFilter(var AImg: TfpgImage);
-function fpgCalculateGray(const AFrom: TfpgColor; const ABrighter: boolean = False; const APercent: integer = 0): TfpgColor;
+procedure fpgApplyGreyFilter(var AImg: TlqImage);
+function fpgCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
 
 
 implementation
 
 
-procedure fpgApplyGreyFilter(var AImg: TfpgImage);
+procedure fpgApplyGreyFilter(var AImg: TlqImage);
 var
   x, y: integer;
-  c: TfpgColor;
+  c: TlqColor;
 begin
   for x := 0 to AImg.Width-1 do
   begin
@@ -75,7 +75,7 @@ end;
   ABrighter = True goes to direction of White. False goes to direction of Black
   APercent =  0 zero is straight conversion to gray. 100% is pure black or
               white, depending on ABrighter value. }
-function fpgCalculateGray(const AFrom: TfpgColor; const ABrighter: boolean = False; const APercent: integer = 0): TfpgColor;
+function fpgCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
 var
   g: integer;
   rgb: TFPColor;

@@ -32,16 +32,16 @@ uses
 
 type
 
-  TfpgHyperlink = class(TfpgCustomLabel)
+  TlqHyperlink = class(TlqCustomLabel)
   private
-    FHotTrackColor: TfpgColor;
-    FOldColor: TfpgColor;
-    FOldFont: TfpgString;
-    FHTFont: TfpgString;
-    FUrl: TfpgString;
-    procedure   SetHotTrackColor(const AValue: TfpgColor);
-    procedure   SetHotTrackFont(const AValue: TfpgString);
-    procedure   SetURL(const Value: TfpgString);
+    FHotTrackColor: TlqColor;
+    FOldColor: TlqColor;
+    FOldFont: TlqString;
+    FHTFont: TlqString;
+    FUrl: TlqString;
+    procedure   SetHotTrackColor(const AValue: TlqColor);
+    procedure   SetHotTrackFont(const AValue: TlqString);
+    procedure   SetURL(const Value: TlqString);
   protected
     procedure   HandleMouseEnter; override;
     procedure   HandleMouseExit; override;
@@ -58,8 +58,8 @@ type
     property    FontDesc;
     property    Height;
     property    Hint;
-    property    HotTrackColor: TfpgColor read FHotTrackColor write SetHotTrackColor default clBlue;
-    property    HotTrackFont: TfpgString read FHTFont write SetHotTrackFont;
+    property    HotTrackColor: TlqColor read FHotTrackColor write SetHotTrackColor default clBlue;
+    property    HotTrackFont: TlqString read FHTFont write SetHotTrackFont;
     property    Layout;
     property    Left;
     property    Parent;
@@ -67,7 +67,7 @@ type
     property    ShowHint;
     property    Text;
     property    TextColor default clBlue;
-    property    URL: TfpgString read FUrl write SetURL;
+    property    URL: TlqString read FUrl write SetURL;
     property    Top;
     property    Width;
     property    WrapText;
@@ -83,9 +83,9 @@ uses
   lq_utils;
 
 
-{ TfpgHyperlink }
+{ TlqHyperlink }
 
-constructor TfpgHyperlink.Create(AOwner: TComponent);
+constructor TlqHyperlink.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Width           := 120;
@@ -97,33 +97,33 @@ begin
   FontDesc        := 'Arial-8:antialias=true:underline';
 end;
 
-procedure TfpgHyperlink.SetURL(const Value: TfpgString);
+procedure TlqHyperlink.SetURL(const Value: TlqString);
 begin
   if FUrl <> Value then
     FUrl := Value;
 end;
 
-procedure TfpgHyperlink.SetHotTrackFont(const AValue: TfpgString);
+procedure TlqHyperlink.SetHotTrackFont(const AValue: TlqString);
 begin
   if FHTFont = AValue then
     Exit;
   FHTFont := AValue;
 end;
 
-procedure TfpgHyperlink.SetHotTrackColor(const AValue: TfpgColor);
+procedure TlqHyperlink.SetHotTrackColor(const AValue: TlqColor);
 begin
   if FHotTrackColor = AValue then
     Exit;
   FHotTrackColor := AValue;
 end;
 
-procedure TfpgHyperlink.GoHyperLink;
+procedure TlqHyperlink.GoHyperLink;
 begin
   if URL <> '' then
     fpgOpenURL(URL);
 end;
 
-procedure TfpgHyperlink.HandleMouseEnter;
+procedure TlqHyperlink.HandleMouseEnter;
 begin
   inherited HandleMouseEnter;
   FOldColor   := TextColor;
@@ -133,7 +133,7 @@ begin
   MouseCursor := mcHand;
 end;
 
-procedure TfpgHyperlink.HandleMouseExit;
+procedure TlqHyperlink.HandleMouseExit;
 begin
   inherited HandleMouseExit;
   TextColor   := FOldColor;
@@ -141,7 +141,7 @@ begin
   FontDesc    := FOldFont;
 end;
 
-procedure TfpgHyperlink.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
+procedure TlqHyperlink.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   inherited HandleLMouseDown(x, y, shiftstate);
   if not Assigned(OnClick) then

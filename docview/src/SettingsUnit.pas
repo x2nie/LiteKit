@@ -37,7 +37,7 @@ Const
   //clLightCyan = $c0ffff;
   //clLightGreen = $e0ffe0;
 
-  DefaultColors: array[ 0 .. NumColorSettings - 1 ] of TfpgColor
+  DefaultColors: array[ 0 .. NumColorSettings - 1 ] of TlqColor
    = ( clLightCyan,
        clBlack,
        clBlue,
@@ -79,10 +79,10 @@ type
     ShowLeftPanel: boolean;
     ScrollDistance: integer;
     FileDialogSplit: Double;
-    Colors: array[ 0..NumColorSettings - 1 ] of TfpgColor;
-    NormalFontDesc: TfpgString;
-    FixedFontDesc: TfpgString;
-    Fonts: array[ 0..NumFontSettings - 1 ] of TfpgFont;
+    Colors: array[ 0..NumColorSettings - 1 ] of TlqColor;
+    NormalFontDesc: TlqString;
+    FixedFontDesc: TlqString;
+    Fonts: array[ 0..NumFontSettings - 1 ] of TlqFont;
     FixedFontSubstitution: boolean;
     FixedFontSubstitutes: string;  // semi-colon seperated list of INF fonts eg: 'Courier 10x12;Mono 8x10'
     IndexStyle: TIndexStyle;
@@ -145,7 +145,7 @@ end;
 Procedure LoadSettings;
 var
   ColorIndex: longint;
-  DefaultColor: TfpgColor;
+  DefaultColor: TlqColor;
   FontName: string;
   SettingString: string;
   MRUItem: TMRUItem;

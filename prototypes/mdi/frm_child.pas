@@ -10,25 +10,25 @@ uses
 
 type
 
-	TChildForm = class(TfpgFrame)
+	TChildForm = class(TlqFrame)
 	private
 		{@VFD_HEAD_BEGIN: ChildForm}
-		btnClose: TfpgButton;
-		CheckBox1: TfpgCheckBox;
-		CheckBox2: TfpgCheckBox;
-		RadioButton1: TfpgRadioButton;
-		RadioButton2: TfpgRadioButton;
-		Edit1: TfpgEdit;
-		Gauge1: TfpgGauge;
-		TrackBar1: TfpgTrackBar;
+		btnClose: TlqButton;
+		CheckBox1: TlqCheckBox;
+		CheckBox2: TlqCheckBox;
+		RadioButton1: TlqRadioButton;
+		RadioButton2: TlqRadioButton;
+		Edit1: TlqEdit;
+		Gauge1: TlqGauge;
+		TrackBar1: TlqTrackBar;
 		{@VFD_HEAD_END: ChildForm}
-		FWindowTitle: TfpgString;
+		FWindowTitle: TlqString;
 		procedure btnCloseClicked(Sender: TObject);
 		procedure TrackBarChanged(Sender: TObject; APosition: integer);
-		procedure SetWindowTitle(AValue: TfpgString);
+		procedure SetWindowTitle(AValue: TlqString);
 	public
 		procedure AfterCreate; override;
-		property WindowTitle: TfpgString read FWindowTitle write SetWindowTitle;
+		property WindowTitle: TlqString read FWindowTitle write SetWindowTitle;
 	end;
 
 {@VFD_NEWFORM_DECL}
@@ -46,17 +46,17 @@ begin
 	Gauge1.Progress := APosition;
 end;
 
-procedure TChildForm.SetWindowTitle(AValue: TfpgString);
+procedure TChildForm.SetWindowTitle(AValue: TlqString);
 begin
 	if FWindowTitle = AValue then
 		Exit;
 	FWindowTitle := AValue;
-	TfpgMDIChildForm(Owner.Owner).WindowTitle := FWindowTitle;
+	TlqMDIChildForm(Owner.Owner).WindowTitle := FWindowTitle;
 end;
 
 procedure TChildForm.btnCloseClicked(Sender: TObject);
 begin
-	TfpgMDIChildForm(Owner).Close;
+	TlqMDIChildForm(Owner).Close;
 end;
 
 procedure TChildForm.AfterCreate;
@@ -68,7 +68,7 @@ begin
 //	WindowTitle := 'ChildForm';
 	Hint := '';
 
-	btnClose := TfpgButton.Create(self);
+	btnClose := TlqButton.Create(self);
 	with btnClose do
 	begin
 		Name := 'btnClose';
@@ -81,7 +81,7 @@ begin
 		OnClick := @btnCloseClicked;
 	end;
 
-	CheckBox1 := TfpgCheckBox.Create(self);
+	CheckBox1 := TlqCheckBox.Create(self);
 	with CheckBox1 do
 	begin
 		Name := 'CheckBox1';
@@ -92,7 +92,7 @@ begin
 		Text := 'CheckBox';
 	end;
 
-	CheckBox2 := TfpgCheckBox.Create(self);
+	CheckBox2 := TlqCheckBox.Create(self);
 	with CheckBox2 do
 	begin
 		Name := 'CheckBox2';
@@ -103,7 +103,7 @@ begin
 		Text := 'CheckBox';
 	end;
 
-	RadioButton1 := TfpgRadioButton.Create(self);
+	RadioButton1 := TlqRadioButton.Create(self);
 	with RadioButton1 do
 	begin
 		Name := 'RadioButton1';
@@ -115,7 +115,7 @@ begin
 		Text := 'RadioButton';
 	end;
 
-	RadioButton2 := TfpgRadioButton.Create(self);
+	RadioButton2 := TlqRadioButton.Create(self);
 	with RadioButton2 do
 	begin
 		Name := 'RadioButton2';
@@ -127,7 +127,7 @@ begin
 		Text := 'RadioButton';
 	end;
 
-	Edit1 := TfpgEdit.Create(self);
+	Edit1 := TlqEdit.Create(self);
 	with Edit1 do
 	begin
 		Name := 'Edit1';
@@ -139,17 +139,17 @@ begin
 		Text := '';
 	end;
 
-	Gauge1 := TfpgGauge.Create(self);
+	Gauge1 := TlqGauge.Create(self);
 	with Gauge1 do
 	begin
 		Name := 'Gauge1';
 		SetPosition(12, 44, 116, 25);
-		Color := TfpgColor($C4C4C4);
+		Color := TlqColor($C4C4C4);
 		Hint := '';
 		Progress := 65;
 	end;
 
-	TrackBar1 := TfpgTrackBar.Create(self);
+	TrackBar1 := TlqTrackBar.Create(self);
 	with TrackBar1 do
 	begin
 		Name := 'TrackBar1';

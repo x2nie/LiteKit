@@ -17,7 +17,7 @@
 
       Ported this unit to fpGUI by Graeme Geldenhuys.
       TStringHashList is supposed to be faster than FPC's TFPObjectHashTable.
-      This unit is used in fpg_pofile unit.
+      This unit is used in lq_pofile unit.
 }
 
 unit lq_stringhashlist;

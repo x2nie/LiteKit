@@ -14,29 +14,29 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    btnAdd: TfpgButton;
-    memName1: TfpgMemo;
-    btnQuit: TfpgButton;
-    MainMenu: TfpgMenuBar;
-    mnuFile: TfpgPopupMenu;
-    btnShowBorderless: TfpgButton;
-    btnShowSplash: TfpgButton;
-    Label1: TfpgLabel;
+    btnAdd: TlqButton;
+    memName1: TlqMemo;
+    btnQuit: TlqButton;
+    MainMenu: TlqMenuBar;
+    mnuFile: TlqPopupMenu;
+    btnShowBorderless: TlqButton;
+    btnShowSplash: TlqButton;
+    Label1: TlqLabel;
     {@VFD_HEAD_END: MainForm}
   public
     procedure   AfterCreate; override;
   end;
 
 
-  TBorderLessForm = class(TfpgForm)
+  TBorderLessForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: BorderLessForm}
-    btnClose: TfpgButton;
-    Label1: TfpgLabel;
-    TrackBar1: TfpgTrackBar;
+    btnClose: TlqButton;
+    Label1: TlqLabel;
+    TrackBar1: TlqTrackBar;
     {@VFD_HEAD_END: BorderLessForm}
   public
     constructor Create(AOwner: TComponent); override;
@@ -72,7 +72,7 @@ begin
   Hint := '';
   WindowPosition := wpOneThirdDown;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';
@@ -85,7 +85,7 @@ begin
     TabOrder := 1;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -96,7 +96,7 @@ begin
     Text := 'Look Mom, no borders!';
   end;
 
-  TrackBar1 := TfpgTrackBar.Create(self);
+  TrackBar1 := TlqTrackBar.Create(self);
   with TrackBar1 do
   begin
     Name := 'TrackBar1';
@@ -134,7 +134,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  btnAdd := TfpgButton.Create(self);
+  btnAdd := TlqButton.Create(self);
   with btnAdd do
   begin
     Name := 'btnAdd';
@@ -146,7 +146,7 @@ begin
     TabOrder := 1;
   end;
 
-  memName1 := TfpgMemo.Create(self);
+  memName1 := TlqMemo.Create(self);
   with memName1 do
   begin
     Name := 'memName1';
@@ -157,7 +157,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnQuit := TfpgButton.Create(self);
+  btnQuit := TlqButton.Create(self);
   with btnQuit do
   begin
     Name := 'btnQuit';
@@ -169,7 +169,7 @@ begin
     TabOrder := 3;
   end;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -177,7 +177,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';
@@ -185,7 +185,7 @@ begin
     AddMenuItem('Quit', '', nil);
   end;
 
-  btnShowBorderless := TfpgButton.Create(self);
+  btnShowBorderless := TlqButton.Create(self);
   with btnShowBorderless do
   begin
     Name := 'btnShowBorderless';
@@ -197,7 +197,7 @@ begin
     TabOrder := 6;
   end;
 
-  btnShowSplash := TfpgButton.Create(self);
+  btnShowSplash := TlqButton.Create(self);
   with btnShowSplash do
   begin
     Name := 'btnShowSplash';
@@ -209,7 +209,7 @@ begin
     TabOrder := 7;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';

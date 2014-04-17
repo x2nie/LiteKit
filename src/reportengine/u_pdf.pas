@@ -200,12 +200,12 @@ type
 
   TPdfLineStyle = class(TPdfObjet)
   private
-    FDash: TfpgLineStyle;
+    FDash: TlqLineStyle;
     FPhase: integer;
   protected
     procedure WriteLineStyle(const AFlux: TStream);
   public
-    constructor CreateLineStyle(ADash: TfpgLineStyle; APhase: integer);
+    constructor CreateLineStyle(ADash: TlqLineStyle; APhase: integer);
     destructor Destroy; override;
   end;
 
@@ -218,7 +218,7 @@ type
   protected
     procedure WriteColor(const AFlux: TStream);
   public
-    constructor CreateColor(const AStroke: Boolean; AColor: TfpgColor);
+    constructor CreateColor(const AStroke: Boolean; AColor: TlqColor);
     destructor Destroy; override;
   end;
 
@@ -792,13 +792,13 @@ var
 begin
   WriteChaine(CRLF + 'stream' + CRLF, AFlux);
   BeginFlux := AFlux.Position;
-  for CptH := 0 to Pred(TfpgImage(Images[ANumber]).Height) do
+  for CptH := 0 to Pred(TlqImage(Images[ANumber]).Height) do
   begin
-    for CptW := 0 to Pred(TfpgImage(Images[ANumber]).Width) do
+    for CptW := 0 to Pred(TlqImage(Images[ANumber]).Width) do
     begin
-      AFlux.WriteByte(fpgGetRed(TfpgImage(Images[ANumber]).Colors[CptW, CptH]));
-      AFlux.WriteByte(fpgGetGreen(TfpgImage(Images[ANumber]).Colors[CptW, CptH]));
-      AFlux.WriteByte(fpgGetBlue(TfpgImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(fpgGetRed(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(fpgGetGreen(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(fpgGetBlue(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
     end;
   end;
   EndFlux := AFlux.Position;
@@ -846,7 +846,7 @@ begin
   WriteChaine('] ' + IntToStr(FPhase) + ' d' + CRLF, AFlux);
 end;
 
-constructor TPdfLineStyle.CreateLineStyle(ADash: TfpgLineStyle; APhase: integer);
+constructor TPdfLineStyle.CreateLineStyle(ADash: TlqLineStyle; APhase: integer);
 begin
   inherited Create;
   FDash  := ADash;
@@ -875,7 +875,7 @@ begin
   end;
 end;
 
-constructor TPdfColor.CreateColor(const AStroke: Boolean; AColor: TfpgColor);
+constructor TPdfColor.CreateColor(const AStroke: Boolean; AColor: TlqColor);
 begin
   inherited Create;
   FBlue   := FormatFloat('0.##', fpgGetBlue(AColor) / 256);
@@ -1972,7 +1972,7 @@ begin
   end;
   if Images.Count > 0 then
     for Cpt := 0 to Pred(Images.Count) do
-      CreateImage(TfpgImage(Images[Cpt]).Width, TfpgImage(Images[Cpt]).Height, Cpt);
+      CreateImage(TlqImage(Images[Cpt]).Width, TlqImage(Images[Cpt]).Height, Cpt);
   TPdfInteger(TPdfDicElement(Trailer.FElement[Trailer.ElementParCle('Size')]).FValue).FValue := FXRefObjets.Count;
 end;
 

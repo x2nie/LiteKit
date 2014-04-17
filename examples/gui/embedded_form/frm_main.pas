@@ -11,18 +11,18 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    BorderBevel: TfpgBevel;
-    Container: TfpgBevel;
-    btnExternal: TfpgButton;
-    btnEmbed1: TfpgButton;
-    CheckBox1: TfpgCheckBox;
-    MainMenu: TfpgMenubar;
-    mnuFile: TfpgPopupMenu;
-    mnuHelp: TfpgPopupMenu;
-    btnEmbed2: TfpgButton;
+    BorderBevel: TlqBevel;
+    Container: TlqBevel;
+    btnExternal: TlqButton;
+    btnEmbed1: TlqButton;
+    CheckBox1: TlqCheckBox;
+    MainMenu: TlqMenubar;
+    mnuFile: TlqPopupMenu;
+    mnuHelp: TlqPopupMenu;
+    btnEmbed2: TlqButton;
     {@VFD_HEAD_END: MainForm}
     frame: TMyFrame;
     procedure btnExternalClicked(Sender: TObject);
@@ -48,7 +48,7 @@ var
   indent: integer = 0;
 
 { Output component hierarchy and status of each component's Visible property }
-procedure PrintVisibleState(AComponent: TfpgWidget);
+procedure PrintVisibleState(AComponent: TlqWidget);
 var
   i: integer;
   { Create string equal to indentation level }
@@ -68,9 +68,9 @@ begin
   for i := 0 to AComponent.ComponentCount-1 do
   begin
     if AComponent.Components[i].ComponentCount > 0 then
-      PrintVisibleState(TfpgWidget(AComponent.Components[i]))
+      PrintVisibleState(TlqWidget(AComponent.Components[i]))
     else
-      writeln(Spaces + AComponent.Components[i].ClassName + ': ' + BoolToStr(TfpgWidget(AComponent.Components[i]).Visible, True));
+      writeln(Spaces + AComponent.Components[i].ClassName + ': ' + BoolToStr(TlqWidget(AComponent.Components[i]).Visible, True));
   end;
   dec(indent, 2);
 end;
@@ -95,16 +95,16 @@ end;
 
 procedure TMainForm.miHelpAboutClicked(Sender: TObject);
 begin
-  TfpgMessageDialog.Information('Embedded Frame Demo', 'A simple demo showing how to embed frames')
+  TlqMessageDialog.Information('Embedded Frame Demo', 'A simple demo showing how to embed frames')
 end;
 
 procedure TMainForm.btnExternalClicked(Sender: TObject);
 var
-  frm: TfpgForm;
+  frm: TlqForm;
   fra: TMyFrame;
 begin
   { create a form at runtime that will hold our frame. }
-  frm := TfpgForm.Create(nil);
+  frm := TlqForm.Create(nil);
   try
     frm.WindowPosition := wpOneThirdDown;
     frm.Width := 284;
@@ -169,7 +169,7 @@ begin
   Hint := '';
   ShowHint := True;
 
-  BorderBevel := TfpgBevel.Create(self);
+  BorderBevel := TlqBevel.Create(self);
   with BorderBevel do
   begin
     Name := 'BorderBevel';
@@ -179,7 +179,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  Container := TfpgBevel.Create(BorderBevel);
+  Container := TlqBevel.Create(BorderBevel);
   with Container do
   begin
     Name := 'Container';
@@ -190,7 +190,7 @@ begin
     Shape := bsSpacer;
   end;
 
-  btnExternal := TfpgButton.Create(self);
+  btnExternal := TlqButton.Create(self);
   with btnExternal do
   begin
     Name := 'btnExternal';
@@ -203,7 +203,7 @@ begin
     OnClick := @btnExternalClicked;
   end;
 
-  btnEmbed1 := TfpgButton.Create(self);
+  btnEmbed1 := TlqButton.Create(self);
   with btnEmbed1 do
   begin
     Name := 'btnEmbed1';
@@ -216,7 +216,7 @@ begin
     OnClick := @btnEmbed1Clicked;
   end;
 
-  CheckBox1 := TfpgCheckBox.Create(self);
+  CheckBox1 := TlqCheckBox.Create(self);
   with CheckBox1 do
   begin
     Name := 'CheckBox1';
@@ -229,7 +229,7 @@ begin
     OnChange  := @CheckBoxChanged;
   end;
 
-  MainMenu := TfpgMenubar.Create(self);
+  MainMenu := TlqMenubar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -237,7 +237,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  mnuFile := TfpgPopupMenu.Create(self);
+  mnuFile := TlqPopupMenu.Create(self);
   with mnuFile do
   begin
     Name := 'mnuFile';
@@ -245,7 +245,7 @@ begin
     AddMenuItem('Quit', '', @miQuitClicked);
   end;
 
-  mnuHelp := TfpgPopupMenu.Create(self);
+  mnuHelp := TlqPopupMenu.Create(self);
   with mnuHelp do
   begin
     Name := 'mnuHelp';
@@ -253,7 +253,7 @@ begin
     AddMenuItem('About...', '', @miHelpAboutClicked);
   end;
 
-  btnEmbed2 := TfpgButton.Create(self);
+  btnEmbed2 := TlqButton.Create(self);
   with btnEmbed2 do
   begin
     Name := 'btnEmbed2';

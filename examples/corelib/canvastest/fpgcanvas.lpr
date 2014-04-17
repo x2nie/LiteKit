@@ -15,12 +15,12 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
     {@VFD_HEAD_END: MainForm}
-    bmp: TfpgImage;
-    dst: TfpgImage;
+    bmp: TlqImage;
+    dst: TlqImage;
     procedure   FormPaint(Sender: TObject);
     procedure   CustomPaintJob;
   public
@@ -40,11 +40,11 @@ end;
 // the OnPaint event.fpgcanvas
 procedure TMainForm.CustomPaintJob;
 var
-  r: TfpgRect;
-  fnt: TfpgFont;
+  r: TlqRect;
+  fnt: TlqFont;
   y: integer;
-  c: TfpgColor;
-  lImage: TfpgImage;
+  c: TlqColor;
+  lImage: TlqImage;
 begin
   // Testing Rectangles
   Canvas.SetColor(clBlack);

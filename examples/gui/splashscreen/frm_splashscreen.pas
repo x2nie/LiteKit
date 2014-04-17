@@ -9,14 +9,14 @@ uses
   lq_label;
 
 type
-  TSplashForm = class(TfpgForm)
+  TSplashForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: SplashForm}
-    pnlName1: TfpgBevel;
-    lblName2: TfpgLabel;
-    lblName1: TfpgLabel;
+    pnlName1: TlqBevel;
+    lblName2: TlqLabel;
+    lblName1: TlqLabel;
     {@VFD_HEAD_END: SplashForm}
-    tmr: TfpgTimer;
+    tmr: TlqTimer;
     procedure   SplashFormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure   SplashFormShow(Sender: TObject);
     procedure   TimerFired(Sender: TObject);
@@ -63,7 +63,7 @@ begin
   WindowType := wtPopup;  // borderless but doesn't steal focus
   WindowAttributes := WindowAttributes + [waStayOnTop]; // well, it lets the window stay on top. :)
 
-  tmr := TfpgTimer.Create(3000);
+  tmr := TlqTimer.Create(3000);
   tmr.OnTimer := @TimerFired;
   
   OnShow := @SplashFormShow;
@@ -80,7 +80,7 @@ begin
   WindowPosition := wpScreenCenter;
   Sizeable := False;
 
-  pnlName1 := TfpgBevel.Create(self);
+  pnlName1 := TlqBevel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
@@ -88,7 +88,7 @@ begin
     OnClick := @TimerFired;
   end;
 
-  lblName2 := TfpgLabel.Create(pnlName1);
+  lblName2 := TlqLabel.Create(pnlName1);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -98,7 +98,7 @@ begin
     OnClick := @TimerFired;
   end;
 
-  lblName1 := TfpgLabel.Create(pnlName1);
+  lblName1 := TlqLabel.Create(pnlName1);
   with lblName1 do
   begin
     Name := 'lblName1';

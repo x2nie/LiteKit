@@ -23,13 +23,13 @@ resourcestring
 
 
 type
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
-    btnQuit: TfpgButton;
-    btnSelectFont: TfpgButton;
-    lbFontList: TfpgListBox;
-    edFontDesc: TfpgEdit;
-    lblFontList: TfpgLabel;
+    btnQuit: TlqButton;
+    btnSelectFont: TlqButton;
+    lbFontList: TlqListBox;
+    edFontDesc: TlqEdit;
+    lblFontList: TlqLabel;
     procedure   btnQuitClick(Sender: TObject);
     procedure   btnSelectFontClick(Sender: TObject);
     procedure   CreateFontList;
@@ -79,7 +79,7 @@ begin
   edFontDesc.Text := 'Bitstream Vera Sans-9';
 
   lblFontList := CreateLabel(self, 10, 80, rsMyFontList + ':');
-  lbFontList := TfpgListBox.Create(self);
+  lbFontList := TlqListBox.Create(self);
   with lbFontList do
   begin
     Name := 'lbFontList';

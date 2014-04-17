@@ -38,7 +38,7 @@ uses
 
 type
 
-  TVFDDialog = class(TfpgForm)
+  TVFDDialog = class(TlqForm)
   protected
     procedure HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
   end;
@@ -47,11 +47,11 @@ type
   TInsertCustomForm = class(TVFDDialog)
   public
     l1,
-    l2: TfpgLabel;
-    edClass: TfpgEdit;
-    edName: TfpgEdit;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    l2: TlqLabel;
+    edClass: TlqEdit;
+    edName: TlqEdit;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     procedure AfterCreate; override;
     procedure OnButtonClick(Sender: TObject);
   end;
@@ -61,10 +61,10 @@ type
   private
     procedure OnedNameKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
   public
-    l1: TfpgLabel;
-    edName: TfpgEdit;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    l1: TlqLabel;
+    edName: TlqEdit;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     procedure AfterCreate; override;
     procedure OnButtonClick(Sender: TObject);
   end;
@@ -74,10 +74,10 @@ type
   private
     procedure edPosKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
   public
-    lbPos: TfpgLabel;
-    edPos: TfpgEdit;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
+    lbPos: TlqLabel;
+    edPos: TlqEdit;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
     procedure AfterCreate; override;
     procedure OnButtonClick(Sender: TObject);
   end;
@@ -89,12 +89,12 @@ type
     procedure   SetTitle(const AValue: string);
   public
     {@VFD_HEAD_BEGIN: WidgetOrderForm}
-    lblTitle: TfpgLabel;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
-    btnUp: TfpgButton;
-    btnDown: TfpgButton;
-    TreeView1: TfpgTreeView;
+    lblTitle: TlqLabel;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
+    btnUp: TlqButton;
+    btnDown: TlqButton;
+    TreeView1: TlqTreeView;
     {@VFD_HEAD_END: WidgetOrderForm}
   public
     constructor Create(AOwner: TComponent); override;
@@ -105,7 +105,7 @@ type
   end;
 
 
-  TfrmVFDSetup = class(TfpgForm)
+  TfrmVFDSetup = class(TlqForm)
   private
     FINIVersion: integer;
     procedure   FormShow(Sender: TObject);
@@ -114,23 +114,23 @@ type
     procedure   btnOKClick(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: frmVFDSetup}
-    lb1: TfpgLabel;
-    chlGrid: TfpgComboBox;
-    btnOK: TfpgButton;
-    btnCancel: TfpgButton;
-    lblRecentFiles: TfpgLabel;
-    tbMRUFileCount: TfpgTrackBar;
-    chkFullPath: TfpgCheckBox;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    edtDefaultExt: TfpgEdit;
-    lblName3: TfpgLabel;
-    chkUndoOnExit: TfpgCheckBox;
-    chkOneClick: TfpgCheckBox;
-    Label1: TfpgLabel;
-    chkCodeRegions: TfpgCheckBox;
-    cbIndentationType: TfpgComboBox;
-    lblIndentType: TfpgLabel;
+    lb1: TlqLabel;
+    chlGrid: TlqComboBox;
+    btnOK: TlqButton;
+    btnCancel: TlqButton;
+    lblRecentFiles: TlqLabel;
+    tbMRUFileCount: TlqTrackBar;
+    chkFullPath: TlqCheckBox;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    edtDefaultExt: TlqEdit;
+    lblName3: TlqLabel;
+    chkUndoOnExit: TlqCheckBox;
+    chkOneClick: TlqCheckBox;
+    Label1: TlqLabel;
+    chkCodeRegions: TlqCheckBox;
+    cbIndentationType: TlqComboBox;
+    lblIndentType: TlqLabel;
     {@VFD_HEAD_END: frmVFDSetup}
     constructor Create(AOwner: TComponent); override;
     procedure   AfterCreate; override;
@@ -163,7 +163,7 @@ begin
 
   l1        := CreateLabel(self, 8, 4, 'Class name:');
   edClass   := CreateEdit(self, 8, 24, 150, 0);
-  edClass.Text := 'Tfpg';
+  edClass.Text := 'Tlq';
   l2        := CreateLabel(self, 8, 48, 'Name:');
   edName    := CreateEdit(self, 8, 68, 150, 0);
   btnOK     := CreateButton(self, 180, 20, 100, 'OK', @OnButtonClick);
@@ -279,7 +279,7 @@ begin
   Hint := '';
   WindowPosition := wpScreenCenter;
 
-  lblTitle := TfpgLabel.Create(self);
+  lblTitle := TlqLabel.Create(self);
   with lblTitle do
   begin
     Name := 'lblTitle';
@@ -289,7 +289,7 @@ begin
     Text := 'Form %s:';
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -303,7 +303,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -317,7 +317,7 @@ begin
     TabOrder := 3;
   end;
 
-  btnUp := TfpgButton.Create(self);
+  btnUp := TlqButton.Create(self);
   with btnUp do
   begin
     Name := 'btnUp';
@@ -331,7 +331,7 @@ begin
     OnClick := @OnButtonClick;
   end;
 
-  btnDown := TfpgButton.Create(self);
+  btnDown := TlqButton.Create(self);
   with btnDown do
   begin
     Name := 'btnDown';
@@ -345,7 +345,7 @@ begin
     OnClick := @OnButtonClick;
   end;
 
-  TreeView1 := TfpgTreeView.Create(self);
+  TreeView1 := TlqTreeView.Create(self);
   with TreeView1 do
   begin
     Name := 'TreeView1';
@@ -361,7 +361,7 @@ end;
 
 procedure TWidgetOrderForm.OnButtonClick(Sender: TObject);
 var
-  lNode: TfpgTreeNode;
+  lNode: TlqTreeNode;
 begin
   lNode := Treeview1.Selection;
   if lNode = nil then
@@ -458,7 +458,7 @@ begin
   MinHeight := 305;
   MinWidth := 335;
 
-  lb1 := TfpgLabel.Create(self);
+  lb1 := TlqLabel.Create(self);
   with lb1 do
   begin
     Name := 'lb1';
@@ -468,7 +468,7 @@ begin
     Text := 'Grid resolution:';
   end;
 
-  chlGrid := TfpgComboBox.Create(self);
+  chlGrid := TlqComboBox.Create(self);
   with chlGrid do
   begin
     Name := 'chlGrid';
@@ -483,7 +483,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnOK := TfpgButton.Create(self);
+  btnOK := TlqButton.Create(self);
   with btnOK do
   begin
     Name := 'btnOK';
@@ -497,7 +497,7 @@ begin
     OnClick := @btnOKClick;
   end;
 
-  btnCancel := TfpgButton.Create(self);
+  btnCancel := TlqButton.Create(self);
   with btnCancel do
   begin
     Name := 'btnCancel';
@@ -511,7 +511,7 @@ begin
     TabOrder := 7;
   end;
 
-  lblRecentFiles := TfpgLabel.Create(self);
+  lblRecentFiles := TlqLabel.Create(self);
   with lblRecentFiles do
   begin
     Name := 'lblRecentFiles';
@@ -521,7 +521,7 @@ begin
     Text := 'Recent files count:';
   end;
 
-  tbMRUFileCount := TfpgTrackBar.Create(self);
+  tbMRUFileCount := TlqTrackBar.Create(self);
   with tbMRUFileCount do
   begin
     Name := 'tbMRUFileCount';
@@ -534,7 +534,7 @@ begin
     TabOrder := 3;
   end;
 
-  chkFullPath := TfpgCheckBox.Create(self);
+  chkFullPath := TlqCheckBox.Create(self);
   with chkFullPath do
   begin
     Name := 'chkFullPath';
@@ -545,7 +545,7 @@ begin
     Text := 'Show the full file path';
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -555,7 +555,7 @@ begin
     Text := 'Form designer';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -565,7 +565,7 @@ begin
     Text := 'Open Recent menu settings';
   end;
 
-  edtDefaultExt := TfpgEdit.Create(self);
+  edtDefaultExt := TlqEdit.Create(self);
   with edtDefaultExt do
   begin
     Name := 'edtDefaultExt';
@@ -577,7 +577,7 @@ begin
     Text := '';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -587,7 +587,7 @@ begin
     Text := 'Various';
   end;
 
-  chkUndoOnExit := TfpgCheckBox.Create(self);
+  chkUndoOnExit := TlqCheckBox.Create(self);
   with chkUndoOnExit do
   begin
     Name := 'chkUndoOnExit';
@@ -598,7 +598,7 @@ begin
     Text := 'Undo on property editor exit';
   end;
 
-  chkOneClick := TfpgCheckBox.Create(self);
+  chkOneClick := TlqCheckBox.Create(self);
   with chkOneClick do
   begin
     Name := 'chkOneClick';
@@ -610,7 +610,7 @@ begin
     Text := 'One click select and move';
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -620,7 +620,7 @@ begin
     Text := 'Default file extension:';
   end;
 
-  chkCodeRegions := TfpgCheckBox.Create(self);
+  chkCodeRegions := TlqCheckBox.Create(self);
   with chkCodeRegions do
   begin
     Name := 'chkCodeRegions';
@@ -631,7 +631,7 @@ begin
     Text := 'Use code-folding regions in auto-generated code';
   end;
 
-  cbIndentationType := TfpgComboBox.Create(self);
+  cbIndentationType := TlqComboBox.Create(self);
   with cbIndentationType do
   begin
     Name := 'cbIndentationType';
@@ -645,7 +645,7 @@ begin
     TabOrder := 16;
   end;
 
-  lblIndentType := TfpgLabel.Create(self);
+  lblIndentType := TlqLabel.Create(self);
   with lblIndentType do
   begin
     Name := 'lblIndentType';

@@ -12,26 +12,26 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     procedure btnGoClicked(Sender: TObject);
     procedure btnResetClicked(Sender: TObject);
     procedure PanelResized(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: MainForm}
-    btnName1: TfpgButton;
-    btnName2: TfpgButton;
-    pnlName1: TfpgPanel;
-    btnName3: TfpgButton;
-    btnName4: TfpgButton;
-    btnName5: TfpgButton;
-    btnName6: TfpgButton;
-    lblName1: TfpgLabel;
-    pnlName2: TfpgPanel;
-    rbName1: TfpgRadioButton;
-    rbName2: TfpgRadioButton;
-    rbName3: TfpgRadioButton;
-    memName1: TfpgMemo;
+    btnName1: TlqButton;
+    btnName2: TlqButton;
+    pnlName1: TlqPanel;
+    btnName3: TlqButton;
+    btnName4: TlqButton;
+    btnName5: TlqButton;
+    btnName6: TlqButton;
+    lblName1: TlqLabel;
+    pnlName2: TlqPanel;
+    rbName1: TlqRadioButton;
+    rbName2: TlqRadioButton;
+    rbName3: TlqRadioButton;
+    memName1: TlqMemo;
     {@VFD_HEAD_END: MainForm}
     procedure AfterCreate; override;
   end;
@@ -79,7 +79,7 @@ begin
   WindowPosition := wpScreenCenter;
 //  Sizeable := False;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -90,7 +90,7 @@ begin
     OnClick := @btnGoClicked;
   end;
 
-  btnName2 := TfpgButton.Create(self);
+  btnName2 := TlqButton.Create(self);
   with btnName2 do
   begin
     Name := 'btnName2';
@@ -102,7 +102,7 @@ begin
     OnClick := @btnResetClicked;
   end;
 
-  pnlName1 := TfpgPanel.Create(self);
+  pnlName1 := TlqPanel.Create(self);
   with pnlName1 do
   begin
     Name := 'pnlName1';
@@ -112,7 +112,7 @@ begin
     OnResize := @PanelResized;
   end;
 
-  btnName3 := TfpgButton.Create(pnlName1);
+  btnName3 := TlqButton.Create(pnlName1);
   with btnName3 do
   begin
     Name := 'btnName3';
@@ -122,7 +122,7 @@ begin
     ImageName := '';
   end;
 
-  btnName4 := TfpgButton.Create(pnlName1);
+  btnName4 := TlqButton.Create(pnlName1);
   with btnName4 do
   begin
     Name := 'btnName4';
@@ -134,7 +134,7 @@ begin
     TabOrder := 1;
   end;
 
-  btnName5 := TfpgButton.Create(pnlName1);
+  btnName5 := TlqButton.Create(pnlName1);
   with btnName5 do
   begin
     Name := 'btnName5';
@@ -146,7 +146,7 @@ begin
     TabOrder := 2;
   end;
 
-  btnName6 := TfpgButton.Create(pnlName1);
+  btnName6 := TlqButton.Create(pnlName1);
   with btnName6 do
   begin
     Name := 'btnName6';
@@ -158,7 +158,7 @@ begin
     TabOrder := 3;
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -167,7 +167,7 @@ begin
     Text := 'Update method';
   end;
 
-  pnlName2 := TfpgPanel.Create(self);
+  pnlName2 := TlqPanel.Create(self);
   with pnlName2 do
   begin
     Name := 'pnlName2';
@@ -176,7 +176,7 @@ begin
     Text := '';
   end;
 
-  rbName1 := TfpgRadioButton.Create(self);
+  rbName1 := TlqRadioButton.Create(self);
   with rbName1 do
   begin
     Name := 'rbName1';
@@ -187,7 +187,7 @@ begin
     Text := 'SetPosition()';
   end;
 
-  rbName2 := TfpgRadioButton.Create(self);
+  rbName2 := TlqRadioButton.Create(self);
   with rbName2 do
   begin
     Name := 'rbName2';
@@ -197,7 +197,7 @@ begin
     Text := 'UpdateWindowPosition()';
   end;
 
-  rbName3 := TfpgRadioButton.Create(self);
+  rbName3 := TlqRadioButton.Create(self);
   with rbName3 do
   begin
     Name := 'rbName3';
@@ -207,7 +207,7 @@ begin
     Text := 'MoveAndResizeBy()';
   end;
 
-  memName1 := TfpgMemo.Create(self);
+  memName1 := TlqMemo.Create(self);
   with memName1 do
   begin
     Name := 'memName1';

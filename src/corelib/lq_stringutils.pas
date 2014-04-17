@@ -49,18 +49,18 @@ function  Pos8(const SearchForText, SearchInText: string): PtrInt;
 procedure Delete8(var S: string; Index, Size: PtrInt);
 procedure Insert8(const Source: string; var S: string; Index: PtrInt);
 
-function  fpgCharAt(const s: TfpgString; Index: PtrInt): TfpgChar;
-function  fpgAppendPathDelim(const Path: TfpgString): TfpgString;
-function  fpgRemovePathDelim(const Path: TfpgString): TfpgString;
-function  fpgTrimR(const AString, ATrim: TfpgString; ACaseSensitive: boolean = false): TfpgString;
+function  fpgCharAt(const s: TlqString; Index: PtrInt): TlqChar;
+function  fpgAppendPathDelim(const Path: TlqString): TlqString;
+function  fpgRemovePathDelim(const Path: TlqString): TlqString;
+function  fpgTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean = false): TlqString;
 
 
 // Encoding conversions
-function CP437ToUTF8(const s: string): TfpgString;  // DOS central europe
-function CP850ToUTF8(const s: string): TfpgString;  // DOS western europe
-function IBMGraphToUTF8(const s: string): TfpgString;  // IBM PC / DOS  http://www.unicode.org/Public/MAPPINGS/VENDORS/MISC/IBMGRAPH.TXT
-function IPFToUTF8(const s: string): TfpgString; // minor replacements to improve DocView output
-function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): TfpgString;
+function CP437ToUTF8(const s: string): TlqString;  // DOS central europe
+function CP850ToUTF8(const s: string): TlqString;  // DOS western europe
+function IBMGraphToUTF8(const s: string): TlqString;  // IBM PC / DOS  http://www.unicode.org/Public/MAPPINGS/VENDORS/MISC/IBMGRAPH.TXT
+function IPFToUTF8(const s: string): TlqString; // minor replacements to improve DocView output
+function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): TlqString;
 
 
 
@@ -379,12 +379,12 @@ begin
   UTF8Insert(Source, S, Index);
 end;
 
-function fpgCharAt(const s: TfpgString; Index: PtrInt): TfpgChar;
+function fpgCharAt(const s: TlqString; Index: PtrInt): TlqChar;
 begin
   Result := UTF8Copy(s, Index, 1);
 end;
 
-function fpgAppendPathDelim(const Path: TfpgString): TfpgString;
+function fpgAppendPathDelim(const Path: TlqString): TlqString;
 begin
   if (Path <> '') and (Path[Length(Path)] <> PathDelim) then
     Result := Path + PathDelim
@@ -392,7 +392,7 @@ begin
     Result := Path;
 end;
 
-function fpgRemovePathDelim(const Path: TfpgString): TfpgString;
+function fpgRemovePathDelim(const Path: TlqString): TlqString;
 begin
   if (Path <> '') and (Path[Length(Path)] = PathDelim) then
     Result := LeftStr(Path, Length(Path)-1)
@@ -400,7 +400,7 @@ begin
     Result := Path;
 end;
 
-function fpgTrimR(const AString, ATrim: TfpgString; ACaseSensitive: boolean): TfpgString;
+function fpgTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean): TlqString;
 var
   li: integer;
 begin
@@ -1455,22 +1455,22 @@ const
   );
 
 
-function CP437ToUTF8(const s: string): TfpgString;
+function CP437ToUTF8(const s: string): TlqString;
 begin
   Result := SingleByteToUTF8(s, ArrayCP437ToUTF8);
 end;
 
-function CP850ToUTF8(const s: string): TfpgString;
+function CP850ToUTF8(const s: string): TlqString;
 begin
   Result := SingleByteToUTF8(s, ArrayCP850ToUTF8);
 end;
 
-function IBMGraphToUTF8(const s: string): TfpgString;
+function IBMGraphToUTF8(const s: string): TlqString;
 begin
   Result := SingleByteToUTF8(s, ArrayIBMGraphToUTF8);
 end;
 
-function IPFToUTF8(const s: string): TfpgString;
+function IPFToUTF8(const s: string): TlqString;
   // Seaches <AValue> and replaces <ADel> with <AIns>. Case sensitive.
   function tiStrTran(AValue, ADel, AIns : string): string;
   var
@@ -1495,7 +1495,7 @@ begin
   Result := SingleByteToUTF8(s, ArrayIPFToUTF8);
 end;
 
-function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): TfpgString;
+function SingleByteToUTF8(const s: string; const Table: TCharToUTF8Table): TlqString;
 var
   len: Integer;
   i: Integer;

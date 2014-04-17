@@ -14,44 +14,44 @@ uses
 
 type
 
-  TfraGeneral = class(TfpgForm)
+  TfraGeneral = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: fraGeneral}
-    lblName1: TfpgLabel;
-    edtName1: TfpgEdit;
-    memName1: TfpgMemo;
-    btnName1: TfpgButton;
+    lblName1: TlqLabel;
+    edtName1: TlqEdit;
+    memName1: TlqMemo;
+    btnName1: TlqButton;
     {@VFD_HEAD_END: fraGeneral}
     procedure AfterCreate; override;
   end;
 
 
-  TfraAddress = class(TfpgForm)
+  TfraAddress = class(TlqForm)
   public
     {@VFD_HEAD_BEGIN: fraAddress}
-    edtName1: TfpgEdit;
-    lblName1: TfpgLabel;
-    lblName2: TfpgLabel;
-    lblName3: TfpgLabel;
-    cbName1: TfpgComboBox;
+    edtName1: TlqEdit;
+    lblName1: TlqLabel;
+    lblName2: TlqLabel;
+    lblName3: TlqLabel;
+    cbName1: TlqComboBox;
     {@VFD_HEAD_END: fraAddress}
     procedure AfterCreate; override;
   end;
 
 
-  TfrmTabTest = class(TfpgForm)
+  TfrmTabTest = class(TlqForm)
   private
     procedure btnCloseClicked(Sender: TObject);
   public
     {@VFD_HEAD_BEGIN: frmTabTest}
-    pcName1: TfpgPageControl;
-    btnClose: TfpgButton;
+    pcName1: TlqPageControl;
+    btnClose: TlqButton;
     {@VFD_HEAD_END: frmTabTest}
     
     // these must be added manually for now, until the GUI Designer is improved.
-    tsGeneral: TfpgTabSheet;
-    tsAddress: TfpgTabSheet;
-    tsAccounts: TfpgTabSheet;
+    tsGeneral: TlqTabSheet;
+    tsAddress: TlqTabSheet;
+    tsAccounts: TlqTabSheet;
     fraGeneral: TfraGeneral;
     fraAddress: TfraAddress;
     procedure AfterCreate; override;
@@ -71,7 +71,7 @@ begin
   SetPosition(602, 485, 208, 127);
   WindowTitle := 'fraAddress';
 
-  edtName1 := TfpgEdit.Create(self);
+  edtName1 := TlqEdit.Create(self);
   with edtName1 do
   begin
     Name := 'edtName1';
@@ -80,7 +80,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -89,7 +89,7 @@ begin
     FontDesc := '#Label2';
   end;
 
-  lblName2 := TfpgLabel.Create(self);
+  lblName2 := TlqLabel.Create(self);
   with lblName2 do
   begin
     Name := 'lblName2';
@@ -98,7 +98,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  lblName3 := TfpgLabel.Create(self);
+  lblName3 := TlqLabel.Create(self);
   with lblName3 do
   begin
     Name := 'lblName3';
@@ -107,7 +107,7 @@ begin
     FontDesc := '#Label1';
   end;
 
-  cbName1 := TfpgComboBox.Create(self);
+  cbName1 := TlqComboBox.Create(self);
   with cbName1 do
   begin
     Name := 'cbName1';
@@ -132,7 +132,7 @@ begin
   SetPosition(611, 290, 197, 165);
   WindowTitle := 'fraGeneral';
 
-  lblName1 := TfpgLabel.Create(self);
+  lblName1 := TlqLabel.Create(self);
   with lblName1 do
   begin
     Name := 'lblName1';
@@ -141,7 +141,7 @@ begin
     FontDesc := '#Label2';
   end;
 
-  edtName1 := TfpgEdit.Create(self);
+  edtName1 := TlqEdit.Create(self);
   with edtName1 do
   begin
     Name := 'edtName1';
@@ -151,7 +151,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  memName1 := TfpgMemo.Create(self);
+  memName1 := TlqMemo.Create(self);
   with memName1 do
   begin
     Name := 'memName1';
@@ -160,7 +160,7 @@ begin
     FontDesc := '#Edit1';
   end;
 
-  btnName1 := TfpgButton.Create(self);
+  btnName1 := TlqButton.Create(self);
   with btnName1 do
   begin
     Name := 'btnName1';
@@ -187,7 +187,7 @@ begin
   SetPosition(293, 290, 275, 198);
   WindowTitle := 'Tab Design Test';
 
-  pcName1 := TfpgPageControl.Create(self);
+  pcName1 := TlqPageControl.Create(self);
   with pcName1 do
   begin
     Name := 'pcName1';
@@ -202,7 +202,7 @@ begin
     ActivePage  := tsGeneral;
   end;
 
-  btnClose := TfpgButton.Create(self);
+  btnClose := TlqButton.Create(self);
   with btnClose do
   begin
     Name := 'btnClose';

@@ -49,14 +49,14 @@ uses
 type
 
 
-  TfpgAbstractSpinEdit = class(TfpgBevel)
+  TlqAbstractSpinEdit = class(TlqBevel)
   private
-    FButtonUp: TfpgButton;
-    FButtonDown: TfpgButton;
-    FArrowUpColor: TfpgColor;
-    FArrowDownColor: TfpgColor;
+    FButtonUp: TlqButton;
+    FButtonDown: TlqButton;
+    FArrowUpColor: TlqColor;
+    FArrowDownColor: TlqColor;
     FOnChange: TNotifyEvent;
-    FTimer: TfpgTimer;
+    FTimer: TlqTimer;
     FUp: Boolean;
     FDown: Boolean;
     FSteps: integer;
@@ -67,20 +67,20 @@ type
     procedure   DoOnChange; virtual;
     procedure   ResizeChildren; virtual;
     procedure   HandlePaint; override;
-    procedure   HandleResize(AWidth, AHeight: TfpgCoord); override;
+    procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
     function    IsMinLimitReached: Boolean; virtual; abstract;
     function    IsMaxLimitReached: Boolean; virtual; abstract;
-    function    GetButtonsBackgroundColor: TfpgColor;
-    procedure   SetButtonsBackgroundColor(const AValue: Tfpgcolor);
-    procedure   SetArrowUpColor(const AValue: Tfpgcolor);
-    procedure   SetArrowDownColor(const AValue: Tfpgcolor);
+    function    GetButtonsBackgroundColor: TlqColor;
+    procedure   SetButtonsBackgroundColor(const AValue: Tlqcolor);
+    procedure   SetArrowUpColor(const AValue: Tlqcolor);
+    procedure   SetArrowDownColor(const AValue: Tlqcolor);
     procedure   SetSpeedUp(const AValue: integer);
     procedure   DisableTimer;
     procedure   ButtonUpPaint(Sender: TObject);
     procedure   ButtonDownPaint(Sender: TObject);
-    property    ButtonsBackgroundColor: Tfpgcolor read GetButtonsBackgroundColor write SetButtonsBackgroundColor default clButtonFace;
-    property    ArrowUpColor: TfpgColor read FArrowUpColor write SetArrowUpColor;
-    property    ArrowDownColor: TfpgColor read FArrowDownColor write SetArrowDownColor;
+    property    ButtonsBackgroundColor: Tlqcolor read GetButtonsBackgroundColor write SetButtonsBackgroundColor default clButtonFace;
+    property    ArrowUpColor: TlqColor read FArrowUpColor write SetArrowUpColor;
+    property    ArrowDownColor: TlqColor read FArrowDownColor write SetArrowDownColor;
     property    ButtonWidth: integer read FButtonWidth write SetButtonWidth default 13;
     property    StepsSpeedUp: integer read FSpeedUpSteps write SetSpeedUp;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
@@ -89,9 +89,9 @@ type
   end;
 
 
-  TfpgSpinEditFloat = class(TfpgAbstractSpinEdit)
+  TlqSpinEditFloat = class(TlqAbstractSpinEdit)
   private
-    FEdit: TfpgEditFloat;
+    FEdit: TlqEditFloat;
     FLargeIncrement: extended;
     FMaxValue: extended;
     FMinValue: extended;
@@ -102,16 +102,16 @@ type
   protected
     function IsMinLimitReached: Boolean; override;
     function IsMaxLimitReached: Boolean; override;
-    function GetEditBackgroundColor: TfpgColor;
-    function GetTextColor: TfpgColor;
-    function GetNegativeColor: TfpgColor;
+    function GetEditBackgroundColor: TlqColor;
+    function GetTextColor: TlqColor;
+    function GetNegativeColor: TlqColor;
     function GetFontDesc: string;
     function GetDecimals: integer;
     function GetFixedDecimals: integer;
     procedure ResizeChildren; override;
-    procedure SetEditBackgroundColor(const AValue: Tfpgcolor);
-    procedure SetTextColor(const AValue: Tfpgcolor); override;
-    procedure SetNegativeColor(const AValue: Tfpgcolor);
+    procedure SetEditBackgroundColor(const AValue: Tlqcolor);
+    procedure SetTextColor(const AValue: Tlqcolor); override;
+    procedure SetNegativeColor(const AValue: Tlqcolor);
     procedure SetFontDesc(const AValue: string);
     procedure SetMaxValue(const AValue: extended);
     procedure SetMinValue(const AValue: extended);
@@ -120,7 +120,7 @@ type
     procedure SetValue(const AValue: extended);
     procedure SetDecimals(const AValue: integer);
     procedure SetFixedDecimals(const AValue: integer);
-    procedure SetHint(const AValue: TfpgString); override;
+    procedure SetHint(const AValue: TlqString); override;
     procedure ButtonUpClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
     procedure ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
@@ -136,11 +136,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
-    property EditBackgroundColor: Tfpgcolor read GetEditBackgroundColor write SetEditBackgroundColor default clBoxColor;
+    property EditBackgroundColor: Tlqcolor read GetEditBackgroundColor write SetEditBackgroundColor default clBoxColor;
     property ButtonsBackgroundColor;
     property ButtonWidth;
-    property TextColor: Tfpgcolor read GetTextColor write SetTextColor;
-    property NegativeColor: TfpgColor read GetNegativeColor write SetNegativeColor;
+    property TextColor: Tlqcolor read GetTextColor write SetTextColor;
+    property NegativeColor: TlqColor read GetNegativeColor write SetNegativeColor;
     property ArrowUpColor;
     property ArrowDownColor;
     property FontDesc: string read GetFontDesc write SetFontDesc;
@@ -164,9 +164,9 @@ type
   end;
 
 
-  TfpgSpinEdit = class(TfpgAbstractSpinEdit)
+  TlqSpinEdit = class(TlqAbstractSpinEdit)
   private
-    FEdit: TfpgEditInteger;
+    FEdit: TlqEditInteger;
     FLargeIncrement: integer;
     FMaxValue: integer;
     FMinValue: integer;
@@ -177,21 +177,21 @@ type
   protected
     function IsMinLimitReached: Boolean; override;
     function IsMaxLimitReached: Boolean; override;
-    function GetEditBackgroundColor: TfpgColor;
-    function GetTextColor: TfpgColor;
-    function GetNegativeColor: TfpgColor;
+    function GetEditBackgroundColor: TlqColor;
+    function GetTextColor: TlqColor;
+    function GetNegativeColor: TlqColor;
     function GetFontDesc: string;
     procedure ResizeChildren; override;
-    procedure SetEditBackgroundColor(const AValue: Tfpgcolor);
-    procedure SetTextColor(const AValue: Tfpgcolor); override;
-    procedure SetNegativeColor(const AValue: Tfpgcolor);
+    procedure SetEditBackgroundColor(const AValue: Tlqcolor);
+    procedure SetTextColor(const AValue: Tlqcolor); override;
+    procedure SetNegativeColor(const AValue: Tlqcolor);
     procedure SetFontDesc(const AValue: string);
     procedure SetMaxValue(const AValue: integer);
     procedure SetMinValue(const AValue: integer);
     procedure SetIncrement(const AValue: integer);
     procedure SetLargeIncrement(const AValue: integer);
     procedure SetValue(const AValue: integer);
-    procedure SetHint(const AValue: TfpgString); override;
+    procedure SetHint(const AValue: TlqString); override;
     procedure ButtonUpClick(Sender: TObject);
     procedure ButtonDownClick(Sender: TObject);
     procedure ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
@@ -207,11 +207,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
-    property EditBackgroundColor: Tfpgcolor read GetEditBackgroundColor write SetEditBackgroundColor default clBoxColor;
+    property EditBackgroundColor: Tlqcolor read GetEditBackgroundColor write SetEditBackgroundColor default clBoxColor;
     property ButtonsBackgroundColor;
     property ButtonWidth;
-    property TextColor: Tfpgcolor read GetTextColor write SetTextColor;
-    property NegativeColor: TfpgColor read GetNegativeColor write SetNegativeColor;
+    property TextColor: Tlqcolor read GetTextColor write SetTextColor;
+    property NegativeColor: TlqColor read GetNegativeColor write SetNegativeColor;
     property ArrowUpColor;
     property ArrowDownColor;
     property FontDesc: string read GetFontDesc write SetFontDesc;
@@ -233,12 +233,12 @@ type
   end;
 
 
-function CreateSpinEditFloat(AOwner: TComponent; x, y, w, h: TfpgCoord;
+function CreateSpinEditFloat(AOwner: TComponent; x, y, w, h: TlqCoord;
          AMinValue: extended = 0; AMaxValue: extended = 100; AIncrement: extended = 1; ALargeIncrement: extended = 10.0;
-         AFixedDecimals: integer = 1; AValue: extended = 0; ADecimals: integer = -1): TfpgSpinEditFloat;
-function CreateSpinEdit(AOwner: TComponent; x, y, w, h: TfpgCoord; AMinValue: integer = 0;
+         AFixedDecimals: integer = 1; AValue: extended = 0; ADecimals: integer = -1): TlqSpinEditFloat;
+function CreateSpinEdit(AOwner: TComponent; x, y, w, h: TlqCoord; AMinValue: integer = 0;
          AMaxValue: integer = 100; AIncrement: integer = 1; ALargeIncrement: integer = 10;
-         AValue: integer = 0): TfpgSpinEdit;
+         AValue: integer = 0): TlqSpinEdit;
 
 
 implementation
@@ -249,13 +249,13 @@ uses
   math;
 
 
-function CreateSpinEditFloat(AOwner: TComponent; x, y, w, h: TfpgCoord;
+function CreateSpinEditFloat(AOwner: TComponent; x, y, w, h: TlqCoord;
          AMinValue: extended = 0; AMaxValue: extended = 100; AIncrement: extended = 1; ALargeIncrement: extended = 10.0;
-         AFixedDecimals: integer = 1; AValue: extended = 0; ADecimals: integer = -1): TfpgSpinEditFloat;
+         AFixedDecimals: integer = 1; AValue: extended = 0; ADecimals: integer = -1): TlqSpinEditFloat;
 var
-  newh: TfpgCoord;
+  newh: TlqCoord;
 begin
-  Result       := TfpgSpinEditFloat.Create(AOwner);
+  Result       := TlqSpinEditFloat.Create(AOwner);
   if h < Result.FEdit.Font.Height + 6 then
     newh := Result.FEdit.Font.Height + 6
   else
@@ -275,13 +275,13 @@ begin
     Result.Value := AValue;
 end;
 
-function CreateSpinEdit(AOwner: TComponent; x, y, w, h: TfpgCoord; AMinValue: integer = 0;
+function CreateSpinEdit(AOwner: TComponent; x, y, w, h: TlqCoord; AMinValue: integer = 0;
          AMaxValue: integer = 100; AIncrement: integer = 1; ALargeIncrement: integer = 10;
-         AValue: integer = 0): TfpgSpinEdit;
+         AValue: integer = 0): TlqSpinEdit;
 var
-  newh: TfpgCoord;
+  newh: TlqCoord;
 begin
-  Result       := TfpgSpinEdit.Create(AOwner);
+  Result       := TlqSpinEdit.Create(AOwner);
   if h < Result.FEdit.Font.Height + 6 then
     newh := Result.FEdit.Font.Height + 6
   else
@@ -300,9 +300,9 @@ begin
 end;
 
 
-{ TfpgAbstractSpinEdit }
+{ TlqAbstractSpinEdit }
 
-procedure TfpgAbstractSpinEdit.SetButtonWidth(const AValue: integer);
+procedure TlqAbstractSpinEdit.SetButtonWidth(const AValue: integer);
 begin
   if FButtonWidth = AValue then
     Exit;
@@ -315,36 +315,36 @@ begin
   RePaint;
 end;
 
-procedure TfpgAbstractSpinEdit.DoOnChange;
+procedure TlqAbstractSpinEdit.DoOnChange;
 begin
   if Assigned(FOnChange) then
     FOnChange(self);
 end;
 
-procedure TfpgAbstractSpinEdit.ResizeChildren;
+procedure TlqAbstractSpinEdit.ResizeChildren;
 begin
   FButtonUp.SetPosition(Width - FButtonWidth, 0, FButtonWidth, Height div 2);
   FButtonDown.SetPosition(Width - FButtonWidth, Height div 2, FButtonWidth, Height div 2);
 end;
 
-procedure TfpgAbstractSpinEdit.HandlePaint;
+procedure TlqAbstractSpinEdit.HandlePaint;
 begin
   Canvas.Clear(BackgroundColor);
 end;
 
-procedure TfpgAbstractSpinEdit.HandleResize(AWidth, AHeight: TfpgCoord);
+procedure TlqAbstractSpinEdit.HandleResize(AWidth, AHeight: TlqCoord);
 begin
   inherited HandleResize(AWidth, AHeight);
   if not (csLoading in ComponentState) then
     ResizeChildren;
 end;
 
-function TfpgAbstractSpinEdit.GetButtonsBackgroundColor: TfpgColor;
+function TlqAbstractSpinEdit.GetButtonsBackgroundColor: TlqColor;
 begin
   Result := FButtonUp.BackgroundColor;
 end;
 
-procedure TfpgAbstractSpinEdit.SetButtonsBackgroundColor(const AValue: Tfpgcolor);
+procedure TlqAbstractSpinEdit.SetButtonsBackgroundColor(const AValue: Tlqcolor);
 begin
   if FButtonUp.BackgroundColor <> AValue then
   begin
@@ -353,25 +353,25 @@ begin
   end;
 end;
 
-procedure TfpgAbstractSpinEdit.SetArrowUpColor(const AValue: Tfpgcolor);
+procedure TlqAbstractSpinEdit.SetArrowUpColor(const AValue: Tlqcolor);
 begin
   if FArrowUpColor <> AValue then
     FArrowUpColor := AValue;
 end;
 
-procedure TfpgAbstractSpinEdit.SetArrowDownColor(const AValue: Tfpgcolor);
+procedure TlqAbstractSpinEdit.SetArrowDownColor(const AValue: Tlqcolor);
 begin
   if FArrowDownColor <> AValue then
     FArrowDownColor := AValue;
 end;
 
-procedure TfpgAbstractSpinEdit.SetSpeedUp(const AValue: integer);
+procedure TlqAbstractSpinEdit.SetSpeedUp(const AValue: integer);
 begin
   if FSpeedUpSteps <> AValue then
     FSpeedUpSteps := AValue;
 end;
 
-procedure TfpgAbstractSpinEdit.DisableTimer;
+procedure TlqAbstractSpinEdit.DisableTimer;
 begin
   FUp:= False;
   FDown:= False;
@@ -379,9 +379,9 @@ begin
     FTimer.Enabled:= False;
 end;
 
-function GetButtonRect(AButton: TfpgButton): TRect;
+function GetButtonRect(AButton: TlqButton): TRect;
 var
-  r: TfpgRect;
+  r: TlqRect;
 begin
   r := AButton.GetClientRect;
 
@@ -392,12 +392,12 @@ begin
   Result := fpgRectToRect(r);
 end;
 
-procedure TfpgAbstractSpinEdit.ButtonUpPaint(Sender: TObject);
+procedure TlqAbstractSpinEdit.ButtonUpPaint(Sender: TObject);
 var
-  btn: TfpgButton;
+  btn: TlqButton;
   r: TRect;
 begin
-  btn := TfpgButton(Sender);
+  btn := TlqButton(Sender);
   if btn.Enabled then
     btn.Canvas.SetColor(FArrowUpColor)
   else
@@ -408,12 +408,12 @@ begin
 //  fpgStyle.DrawDirectionArrow(btn.Canvas, r.Top, r.Left, r.Width, r.Height, adUp);
 end;
 
-procedure TfpgAbstractSpinEdit.ButtonDownPaint(Sender: TObject);
+procedure TlqAbstractSpinEdit.ButtonDownPaint(Sender: TObject);
 var
-  btn: TfpgButton;
+  btn: TlqButton;
   r: TRect;
 begin
-  btn := TfpgButton(Sender);
+  btn := TlqButton(Sender);
   if btn.Enabled {and (not IsMinLimitReached)} then
     btn.Canvas.SetColor(FArrowDownColor)
   else
@@ -421,16 +421,16 @@ begin
 
   r := GetButtonRect(btn);
   PaintTriangle(btn.Canvas, r, degtorad(270.0));
-//  fpgStyle.DrawDirectionArrow(TfpgButton(Sender).Canvas, 0, 0, TfpgButton(Sender).Width - 3, TfpgButton(Sender).Height, adDown);
+//  fpgStyle.DrawDirectionArrow(TlqButton(Sender).Canvas, 0, 0, TlqButton(Sender).Width - 3, TlqButton(Sender).Height, adDown);
 end;
 
-constructor TfpgAbstractSpinEdit.Create(AOwner: TComponent);
+constructor TlqAbstractSpinEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FButtonWidth := 13; // width of spin buttons
   Shape := bsSpacer;
 
-  FButtonUp := TfpgButton.Create(Self);
+  FButtonUp := TlqButton.Create(Self);
   with FButtonUp do
   begin
     SetPosition(Width - FButtonWidth, 0, FButtonWidth, Height div 2);
@@ -440,7 +440,7 @@ begin
     OnPaint   := @ButtonUpPaint;
   end;
   FArrowUpColor := clText1;
-  FButtonDown := TfpgButton.Create(Self);
+  FButtonDown := TlqButton.Create(Self);
   with FButtonDown do
   begin
     SetPosition(Width - FButtonWidth, Height div 2, FButtonWidth, Height div 2);
@@ -450,15 +450,15 @@ begin
     OnPaint   := @ButtonDownPaint;
   end;
   FArrowDownColor := clText1;
-  FTimer         := TfpgTimer.Create(200);
+  FTimer         := TlqTimer.Create(200);
   FTimer.Enabled := False;
   FSpeedUpSteps  := 10;
 end;
 
 
-{ TfpgSpinEditFloat }
+{ TlqSpinEditFloat }
 
-procedure TfpgSpinEditFloat.EnableButtons;
+procedure TlqSpinEditFloat.EnableButtons;
 begin
   FButtonUp.Enabled := True;
   FButtonDown.Enabled := True;
@@ -469,71 +469,71 @@ begin
       FButtonDown.Enabled := False;
 end;
 
-function TfpgSpinEditFloat.IsMinLimitReached: Boolean;
+function TlqSpinEditFloat.IsMinLimitReached: Boolean;
 begin
   Result := FValue = FMinValue;
 end;
 
-function TfpgSpinEditFloat.IsMaxLimitReached: Boolean;
+function TlqSpinEditFloat.IsMaxLimitReached: Boolean;
 begin
   Result := FValue = FMaxValue;
 end;
 
-function TfpgSpinEditFloat.GetEditBackgroundColor: TfpgColor;
+function TlqSpinEditFloat.GetEditBackgroundColor: TlqColor;
 begin
   Result := FEdit.BackgroundColor;
 end;
 
-function TfpgSpinEditFloat.GetTextColor: TfpgColor;
+function TlqSpinEditFloat.GetTextColor: TlqColor;
 begin
   Result := FEdit.TextColor;
 end;
 
-function TfpgSpinEditFloat.GetNegativeColor: TfpgColor;
+function TlqSpinEditFloat.GetNegativeColor: TlqColor;
 begin
   Result := FEdit.NegativeColor;
 end;
 
-function TfpgSpinEditFloat.GetFontDesc: string;
+function TlqSpinEditFloat.GetFontDesc: string;
 begin
   Result := FEdit.FontDesc;
 end;
 
-function TfpgSpinEditFloat.GetDecimals: integer;
+function TlqSpinEditFloat.GetDecimals: integer;
 begin
   Result := FEdit.Decimals;
 end;
 
-function TfpgSpinEditFloat.GetFixedDecimals: integer;
+function TlqSpinEditFloat.GetFixedDecimals: integer;
 begin
   Result := FEdit.FixedDecimals;
 end;
 
-procedure TfpgSpinEditFloat.ResizeChildren;
+procedure TlqSpinEditFloat.ResizeChildren;
 begin
   FEdit.SetPosition(0, 0, Width - FButtonWidth, Height);
   inherited ResizeChildren;
 end;
 
-procedure TfpgSpinEditFloat.SetEditBackgroundColor(const AValue: Tfpgcolor);
+procedure TlqSpinEditFloat.SetEditBackgroundColor(const AValue: Tlqcolor);
 begin
   if FEdit.BackgroundColor <> AValue then
     FEdit.BackgroundColor := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetTextColor(const AValue: Tfpgcolor);
+procedure TlqSpinEditFloat.SetTextColor(const AValue: Tlqcolor);
 begin
   if FEdit.OldColor <> AValue then
     FEdit.OldColor := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetNegativeColor(const AValue: Tfpgcolor);
+procedure TlqSpinEditFloat.SetNegativeColor(const AValue: Tlqcolor);
 begin
   if FEdit.NegativeColor <> AValue then
     FEdit.NegativeColor := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetFontDesc(const AValue: string);
+procedure TlqSpinEditFloat.SetFontDesc(const AValue: string);
 begin
   if FEdit.FontDesc <> AValue then
   begin
@@ -548,7 +548,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEditFloat.SetMaxValue(const AValue: extended);
+procedure TlqSpinEditFloat.SetMaxValue(const AValue: extended);
 begin
   if (FMaxValue <> AValue) and (AValue > FMinValue) then
   begin
@@ -561,7 +561,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEditFloat.SetMinValue(const AValue: extended);
+procedure TlqSpinEditFloat.SetMinValue(const AValue: extended);
 begin
   if (FMinValue <> AValue) and (AValue < FMaxValue) then
   begin
@@ -574,7 +574,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEditFloat.SetIncrement(const AValue: extended);
+procedure TlqSpinEditFloat.SetIncrement(const AValue: extended);
 begin
   if FIncrement <> AValue then
   begin
@@ -584,14 +584,14 @@ begin
   end;
 end;
 
-procedure TfpgSpinEditFloat.SetLargeIncrement(const AValue: extended);
+procedure TlqSpinEditFloat.SetLargeIncrement(const AValue: extended);
 begin
   if FLargeIncrement <> AValue then
     if FIncrement <= AValue then
       FLargeIncrement := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetValue(const AValue: extended);
+procedure TlqSpinEditFloat.SetValue(const AValue: extended);
 begin
   if (FValue <> AValue) and (AValue <= FMaxValue) and (AValue >= FMinValue) then
   begin
@@ -601,7 +601,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEditFloat.SetDecimals(const AValue: integer);
+procedure TlqSpinEditFloat.SetDecimals(const AValue: integer);
 begin
   if AValue < 0 then
     Exit; // =>
@@ -609,7 +609,7 @@ begin
     FEdit.Decimals := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetFixedDecimals(const AValue: integer);
+procedure TlqSpinEditFloat.SetFixedDecimals(const AValue: integer);
 begin
   if AValue < 0 then
     Exit; // =>
@@ -617,7 +617,7 @@ begin
     FEdit.FixedDecimals := AValue;
 end;
 
-procedure TfpgSpinEditFloat.SetHint(const AValue: TfpgString);
+procedure TlqSpinEditFloat.SetHint(const AValue: TlqString);
 begin
   inherited SetHint(AValue);
   // let child component use the same hint
@@ -626,7 +626,7 @@ begin
   FButtonDown.Hint := AValue;
 end;
 
-procedure TfpgSpinEditFloat.ButtonUpClick(Sender: TObject);
+procedure TlqSpinEditFloat.ButtonUpClick(Sender: TObject);
 begin
   if FValue + FIncrement <= FMaxValue then
   begin
@@ -642,7 +642,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEditFloat.ButtonDownClick(Sender: TObject);
+procedure TlqSpinEditFloat.ButtonDownClick(Sender: TObject);
 begin
   if FValue - FIncrement >= FMinValue then
   begin
@@ -658,7 +658,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEditFloat.ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEditFloat.ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   FUp := True;
   FTimer.Enabled := True;
@@ -666,12 +666,12 @@ begin
   FTempIncrement := Increment;
 end;
 
-procedure TfpgSpinEditFloat.ButtonUpMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEditFloat.ButtonUpMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   DisableTimer;
 end;
 
-procedure TfpgSpinEditFloat.ButtonDownMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEditFloat.ButtonDownMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   FDown          := True;
   FTimer.Enabled := True;
@@ -679,12 +679,12 @@ begin
   FTempIncrement := Increment;
 end;
 
-procedure TfpgSpinEditFloat.ButtonDownMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEditFloat.ButtonDownMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   DisableTimer;
 end;
 
-procedure TfpgSpinEditFloat.EditKeyPress(Sender: TObject; var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
+procedure TlqSpinEditFloat.EditKeyPress(Sender: TObject; var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
 begin
   if (KeyCode = KeyReturn) or (KeyCode = KeyPEnter) then
     if FEdit.Text = '' then
@@ -736,7 +736,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEditFloat.EditExit(Sender: TObject);
+procedure TlqSpinEditFloat.EditExit(Sender: TObject);
 begin
   if FEdit.Text = '' then
   begin
@@ -750,20 +750,20 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEditFloat.MouseEnter(Sender: TObject);
+procedure TlqSpinEditFloat.MouseEnter(Sender: TObject);
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   b: boolean;
 begin
   fillchar(msgp, sizeof(msgp), 0);
-  if Sender is TfpgEditFloat then
-    with Sender as TfpgEditFloat do
+  if Sender is TlqEditFloat then
+    with Sender as TlqEditFloat do
       if Assigned(Parent) then
         b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
         b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if Assigned(Parent) then
         b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
@@ -773,9 +773,9 @@ begin
   fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
 end;
 
-procedure TfpgSpinEditFloat.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEditFloat.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
 begin
   fillchar(msgp, sizeof(msgp), 0);
   msgp.user.Param1 := 2;
@@ -783,8 +783,8 @@ begin
   msgp.user.Param3 := AMousePos.y+2;
 
   { Only send message if really needed. }
-  if Sender is TfpgEditFloat then
-    with Sender as TfpgEditFloat do
+  if Sender is TlqEditFloat then
+    with Sender as TlqEditFloat do
       if Assigned(Parent) then
       begin
         if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
@@ -793,8 +793,8 @@ begin
       else
         if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
           fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if Assigned(Parent) then
       begin
         if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
@@ -805,19 +805,19 @@ begin
           fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
 end;
 
-procedure TfpgSpinEditFloat.MouseExit(Sender: TObject);
+procedure TlqSpinEditFloat.MouseExit(Sender: TObject);
 begin
-  if Sender is TfpgEditFloat then
-    with Sender as TfpgEditFloat do
+  if Sender is TlqEditFloat then
+    with Sender as TlqEditFloat do
       if FShowHint then
         fpgApplication.HideHint;
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if FShowHint then
         fpgApplication.HideHint;
 end;
 
-procedure TfpgSpinEditFloat.TimerStep(Sender: TObject);
+procedure TlqSpinEditFloat.TimerStep(Sender: TObject);
 begin
   if FUp then
   begin
@@ -865,7 +865,7 @@ begin
   end;
 end;
 
-constructor TfpgSpinEditFloat.Create(AOwner: TComponent);
+constructor TlqSpinEditFloat.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 
@@ -906,9 +906,9 @@ begin
 end;
 
 
-{ TfpgSpinEdit }
+{ TlqSpinEdit }
 
-procedure TfpgSpinEdit.EnableButtons;
+procedure TlqSpinEdit.EnableButtons;
 begin
   FButtonUp.Enabled := True;
   FButtonDown.Enabled := True;
@@ -919,61 +919,61 @@ begin
       FButtonDown.Enabled := False;
 end;
 
-function TfpgSpinEdit.IsMinLimitReached: Boolean;
+function TlqSpinEdit.IsMinLimitReached: Boolean;
 begin
   Result := FValue = FMinValue;
 end;
 
-function TfpgSpinEdit.IsMaxLimitReached: Boolean;
+function TlqSpinEdit.IsMaxLimitReached: Boolean;
 begin
   Result:= FValue = FMaxValue;
 end;
 
-function TfpgSpinEdit.GetEditBackgroundColor: TfpgColor;
+function TlqSpinEdit.GetEditBackgroundColor: TlqColor;
 begin
   Result := FEdit.BackgroundColor;
 end;
 
-function TfpgSpinEdit.GetTextColor: TfpgColor;
+function TlqSpinEdit.GetTextColor: TlqColor;
 begin
   Result := FEdit.TextColor;
 end;
 
-function TfpgSpinEdit.GetNegativeColor: TfpgColor;
+function TlqSpinEdit.GetNegativeColor: TlqColor;
 begin
   Result := FEdit.NegativeColor;
 end;
 
-function TfpgSpinEdit.GetFontDesc: string;
+function TlqSpinEdit.GetFontDesc: string;
 begin
   Result := FEdit.FontDesc;
 end;
 
-procedure TfpgSpinEdit.ResizeChildren;
+procedure TlqSpinEdit.ResizeChildren;
 begin
   FEdit.SetPosition(0, 0, Width - FButtonWidth, Height);
   inherited ResizeChildren;
 end;
 
-procedure TfpgSpinEdit.SetEditBackgroundColor(const AValue: Tfpgcolor);
+procedure TlqSpinEdit.SetEditBackgroundColor(const AValue: Tlqcolor);
 begin
   if FEdit.BackgroundColor <> AValue then
     FEdit.BackgroundColor := AValue;
 end;
 
-procedure TfpgSpinEdit.SetTextColor(const AValue: Tfpgcolor);
+procedure TlqSpinEdit.SetTextColor(const AValue: Tlqcolor);
 begin
   if FEdit.OldColor <> AValue then
     FEdit.OldColor := AValue;
 end;
 
-procedure TfpgSpinEdit.SetNegativeColor(const AValue: Tfpgcolor);
+procedure TlqSpinEdit.SetNegativeColor(const AValue: Tlqcolor);
 begin
   if FEdit.NegativeColor <> AValue then
     FEdit.NegativeColor := AValue;
 end;
 
-procedure TfpgSpinEdit.SetFontDesc(const AValue: string);
+procedure TlqSpinEdit.SetFontDesc(const AValue: string);
 begin
   if FEdit.FontDesc <> AValue then
   begin
@@ -988,7 +988,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEdit.SetMaxValue(const AValue: integer);
+procedure TlqSpinEdit.SetMaxValue(const AValue: integer);
 begin
   if (FMaxValue <> AValue) and (AValue > FMinValue) then
   begin
@@ -1001,7 +1001,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEdit.SetMinValue(const AValue: integer);
+procedure TlqSpinEdit.SetMinValue(const AValue: integer);
 begin
   if (FMinValue <> AValue) and (AValue < FMaxValue) then
   begin
@@ -1014,7 +1014,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEdit.SetIncrement(const AValue: integer);
+procedure TlqSpinEdit.SetIncrement(const AValue: integer);
 begin
   if FIncrement <> AValue then
   begin
@@ -1024,14 +1024,14 @@ begin
   end;
 end;
 
-procedure TfpgSpinEdit.SetLargeIncrement(const AValue: integer);
+procedure TlqSpinEdit.SetLargeIncrement(const AValue: integer);
 begin
   if FLargeIncrement <> AValue then
     if FIncrement <= AValue then
       FLargeIncrement := AValue;
 end;
 
-procedure TfpgSpinEdit.SetValue(const AValue: integer);
+procedure TlqSpinEdit.SetValue(const AValue: integer);
 begin
   if (FValue <> AValue) and (AValue <= FMaxValue) and (AValue >= FMinValue) then
   begin
@@ -1041,7 +1041,7 @@ begin
   end;
 end;
 
-procedure TfpgSpinEdit.SetHint(const AValue: TfpgString);
+procedure TlqSpinEdit.SetHint(const AValue: TlqString);
 begin
   inherited SetHint(AValue);
   // let child component use the same hint
@@ -1050,7 +1050,7 @@ begin
   FButtonDown.Hint := AValue;
 end;
 
-procedure TfpgSpinEdit.ButtonUpClick(Sender: TObject);
+procedure TlqSpinEdit.ButtonUpClick(Sender: TObject);
 begin
   if FValue + FIncrement <= FMaxValue then
   begin
@@ -1066,7 +1066,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEdit.ButtonDownClick(Sender: TObject);
+procedure TlqSpinEdit.ButtonDownClick(Sender: TObject);
 begin
   if FValue - FIncrement >= FMinValue then
   begin
@@ -1082,7 +1082,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEdit.ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEdit.ButtonUpMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   FUp := True;
   FTimer.Enabled := True;
@@ -1090,12 +1090,12 @@ begin
   FTempIncrement := Increment;
 end;
 
-procedure TfpgSpinEdit.ButtonUpMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEdit.ButtonUpMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   DisableTimer;
 end;
 
-procedure TfpgSpinEdit.ButtonDownMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEdit.ButtonDownMouseDown(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   FDown          := True;
   FTimer.Enabled := True;
@@ -1103,12 +1103,12 @@ begin
   FTempIncrement := Increment;
 end;
 
-procedure TfpgSpinEdit.ButtonDownMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEdit.ButtonDownMouseUp(Sender: TObject; AButton: TMouseButton; AShift: TShiftState; const AMousePos: TPoint);
 begin
   DisableTimer;
 end;
 
-procedure TfpgSpinEdit.EditKeyPress(Sender: TObject; var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
+procedure TlqSpinEdit.EditKeyPress(Sender: TObject; var keycode: word; var shiftstate: TShiftState; var consumed: Boolean);
 begin
   if (KeyCode = KeyReturn) or (KeyCode = KeyPEnter) then
     if FEdit.Text = '' then
@@ -1170,7 +1170,7 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEdit.EditExit(Sender: TObject);
+procedure TlqSpinEdit.EditExit(Sender: TObject);
 begin
   if FEdit.Text = '' then
   begin
@@ -1184,20 +1184,20 @@ begin
   EnableButtons;
 end;
 
-procedure TfpgSpinEdit.MouseEnter(Sender: TObject);
+procedure TlqSpinEdit.MouseEnter(Sender: TObject);
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
   b: boolean;
 begin
   fillchar(msgp, sizeof(msgp), 0);
-  if Sender is TfpgEditInteger then
-    with Sender as TfpgEditInteger do
+  if Sender is TlqEditInteger then
+    with Sender as TlqEditInteger do
       if Assigned(Parent) then
         b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
         b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if Assigned(Parent) then
         b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
@@ -1207,9 +1207,9 @@ begin
   fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
 end;
 
-procedure TfpgSpinEdit.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
+procedure TlqSpinEdit.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
 var
-  msgp: TfpgMessageParams;
+  msgp: TlqMessageParams;
 begin
   fillchar(msgp, sizeof(msgp), 0);
   msgp.user.Param1 := 2;
@@ -1217,8 +1217,8 @@ begin
   msgp.user.Param3 := AMousePos.y+2;
 
   { Only send message if really needed. }
-  if Sender is TfpgEditInteger then
-    with Sender as TfpgEditInteger do
+  if Sender is TlqEditInteger then
+    with Sender as TlqEditInteger do
       if Assigned(Parent) then
       begin
         if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
@@ -1227,8 +1227,8 @@ begin
       else
         if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
           fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if Assigned(Parent) then
       begin
         if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
@@ -1239,19 +1239,19 @@ begin
           fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
 end;
 
-procedure TfpgSpinEdit.MouseExit(Sender: TObject);
+procedure TlqSpinEdit.MouseExit(Sender: TObject);
 begin
-  if Sender is TfpgEditInteger then
-    with Sender as TfpgEditInteger do
+  if Sender is TlqEditInteger then
+    with Sender as TlqEditInteger do
       if FShowHint then
         fpgApplication.HideHint;
-  if Sender is TfpgButton then
-    with Sender as TfpgButton do
+  if Sender is TlqButton then
+    with Sender as TlqButton do
       if FShowHint then
         fpgApplication.HideHint;
 end;
 
-procedure TfpgSpinEdit.TimerStep(Sender: TObject);
+procedure TlqSpinEdit.TimerStep(Sender: TObject);
 begin
   if FUp then
   begin
@@ -1299,7 +1299,7 @@ begin
   end;
 end;
 
-constructor TfpgSpinEdit.Create(AOwner: TComponent);
+constructor TlqSpinEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 

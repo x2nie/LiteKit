@@ -10,21 +10,21 @@ uses
 
 type
 
-  TMainForm = class(TfpgForm)
+  TMainForm = class(TlqForm)
   private
     {@VFD_HEAD_BEGIN: MainForm}
-    MainMenu: TfpgMenuBar;
-    FilenameEdit1: TfpgFileNameEdit;
-    memImages: TfpgMemo;
-    Button1: TfpgButton;
-    pmFile: TfpgPopupMenu;
-    btnClear: TfpgButton;
-    Label1: TfpgLabel;
-    btnCopy: TfpgButton;
+    MainMenu: TlqMenuBar;
+    FilenameEdit1: TlqFileNameEdit;
+    memImages: TlqMemo;
+    Button1: TlqButton;
+    pmFile: TlqPopupMenu;
+    btnClear: TlqButton;
+    Label1: TlqLabel;
+    btnCopy: TlqButton;
     {@VFD_HEAD_END: MainForm}
     procedure miFileQuit(Sender: TObject);
     procedure MemoDragEnter(Sender, Source: TObject; AMimeList: TStringList;
-      var AMimeChoice: TfpgString; var ADropAction: TfpgDropAction;
+      var AMimeChoice: TlqString; var ADropAction: TlqDropAction;
       var Accept: Boolean);
     procedure MemoDragDrop(Sender, Source: TObject; X, Y: integer; AData: variant);
     function ConvertImage(const AFileName: string): string;
@@ -50,8 +50,8 @@ begin
 end;
 
 procedure TMainForm.MemoDragEnter(Sender, Source: TObject;
-  AMimeList: TStringList; var AMimeChoice: TfpgString;
-  var ADropAction: TfpgDropAction; var Accept: Boolean);
+  AMimeList: TStringList; var AMimeChoice: TlqString;
+  var ADropAction: TlqDropAction; var Accept: Boolean);
 var
   s: string;
 begin
@@ -178,7 +178,7 @@ begin
   ShowHint := True;
   DNDEnabled := True;
 
-  MainMenu := TfpgMenuBar.Create(self);
+  MainMenu := TlqMenuBar.Create(self);
   with MainMenu do
   begin
     Name := 'MainMenu';
@@ -186,7 +186,7 @@ begin
     Anchors := [anLeft,anRight,anTop];
   end;
 
-  FilenameEdit1 := TfpgFileNameEdit.Create(self);
+  FilenameEdit1 := TlqFileNameEdit.Create(self);
   with FilenameEdit1 do
   begin
     Name := 'FilenameEdit1';
@@ -198,7 +198,7 @@ begin
     TabOrder := 3;
   end;
 
-  memImages := TfpgMemo.Create(self);
+  memImages := TlqMemo.Create(self);
   with memImages do
   begin
     Name := 'memImages';
@@ -212,7 +212,7 @@ begin
     OnDragDrop  := @MemoDragDrop;
   end;
 
-  Button1 := TfpgButton.Create(self);
+  Button1 := TlqButton.Create(self);
   with Button1 do
   begin
     Name := 'Button1';
@@ -225,7 +225,7 @@ begin
     OnClick := @btnConvertClicked;
   end;
 
-  pmFile := TfpgPopupMenu.Create(self);
+  pmFile := TlqPopupMenu.Create(self);
   with pmFile do
   begin
     Name := 'pmFile';
@@ -235,7 +235,7 @@ begin
     AddMenuItem('Quit', 'Ctrl+Q', @miFileQuit);
   end;
 
-  btnClear := TfpgButton.Create(self);
+  btnClear := TlqButton.Create(self);
   with btnClear do
   begin
     Name := 'btnClear';
@@ -249,7 +249,7 @@ begin
     OnClick  := @btnClearClicked;
   end;
 
-  Label1 := TfpgLabel.Create(self);
+  Label1 := TlqLabel.Create(self);
   with Label1 do
   begin
     Name := 'Label1';
@@ -259,7 +259,7 @@ begin
     Text := 'Drop one or more images on the text area below:';
   end;
 
-  btnCopy := TfpgButton.Create(self);
+  btnCopy := TlqButton.Create(self);
   with btnCopy do
   begin
     Name := 'btnCopy';

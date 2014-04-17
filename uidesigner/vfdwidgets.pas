@@ -73,11 +73,11 @@ uses
 type
   TVFDPageControlWidgetClass = class(TVFDWidgetClass)
   private
-    FWidget: TfpgPageControl;
+    FWidget: TlqPageControl;
     procedure AddTabSClicked(Sender: TObject);
     procedure DeleteTabClicked(Sender: TObject);
   public
-    function CreatePopupMenu(AWidget: TfpgWidget): TfpgPopupMenu; override;
+    function CreatePopupMenu(AWidget: TlqWidget): TlqPopupMenu; override;
   end;
 
 { TVFDPageControlWidgetClass }
@@ -94,10 +94,10 @@ begin
   FWidget.RemoveTabSheet(FWidget.ActivePage);
 end;
 
-function TVFDPageControlWidgetClass.CreatePopupMenu(AWidget: TfpgWidget): TfpgPopupMenu;
+function TVFDPageControlWidgetClass.CreatePopupMenu(AWidget: TlqWidget): TlqPopupMenu;
 begin
-  FWidget := TfpgPageControl(AWidget);
-  Result := TfpgPopupMenu.Create(nil);
+  FWidget := TlqPageControl(AWidget);
+  Result := TlqPopupMenu.Create(nil);
   { TODO : These are disabled for now, because a TabSheet component are used
            instead of a menu item - for adding tabs. }
   Result.AddMenuItem('Add Tab', '', @AddTabSClicked).Enabled := False;
@@ -338,7 +338,7 @@ var
 begin
   LoadIcons;
 
-  wc          := TVFDWidgetClass.Create(TfpgForm);
+  wc          := TVFDWidgetClass.Create(TlqForm);
   wc.NameBase := 'frm';
   wc.AddProperty('WindowTitle', TPropertyString, '');
   wc.AddProperty('Hint', TPropertyString, 'Tooltip hint');
@@ -355,7 +355,7 @@ begin
   FVFDFormWidget := wc;
 
   // Label
-  wc          := TVFDWidgetClass.Create(TfpgLabel);
+  wc          := TVFDWidgetClass.Create(TlqLabel);
   wc.NameBase := 'Label';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Alignment', TPropertyEnum, 'Horizontal text alignment');
@@ -373,7 +373,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Edit
-  wc          := TVFDWidgetClass.Create(TfpgEdit);
+  wc          := TVFDWidgetClass.Create(TlqEdit);
   wc.NameBase := 'Edit';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('AutoSelect', TPropertyBoolean, 'On receiving focus, auto select text');
@@ -395,7 +395,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Memo
-  wc          := TVFDWidgetClass.Create(TfpgMemo);
+  wc          := TVFDWidgetClass.Create(TlqMemo);
   wc.NameBase := 'Memo';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -412,7 +412,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Button
-  wc          := TVFDWidgetClass.Create(TfpgButton);
+  wc          := TVFDWidgetClass.Create(TlqButton);
   wc.NameBase := 'Button';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Text', TPropertyString, 'Initial text');
@@ -439,7 +439,7 @@ begin
   RegisterVFDWidget(wc);
 
   // CheckBox
-  wc          := TVFDWidgetClass.Create(TfpgCheckBox);
+  wc          := TVFDWidgetClass.Create(TlqCheckBox);
   wc.NameBase := 'CheckBox';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -457,7 +457,7 @@ begin
   RegisterVFDWidget(wc);
 
   // RadioButton
-  wc          := TVFDWidgetClass.Create(TfpgRadioButton);
+  wc          := TVFDWidgetClass.Create(TlqRadioButton);
   wc.NameBase := 'RadioButton';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -476,7 +476,7 @@ begin
   RegisterVFDWidget(wc);
 
   // ComboBox
-  wc          := TVFDWidgetClass.Create(TfpgComboBox);
+  wc          := TVFDWidgetClass.Create(TlqComboBox);
   wc.NameBase := 'ComboBox';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('AutoSize', TPropertyBoolean, 'Change Height based on FontDesc being set');
@@ -496,7 +496,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Calendar ComboBox
-  wc          := TVFDWidgetClass.Create(TfpgCalendarCombo);
+  wc          := TVFDWidgetClass.Create(TlqCalendarCombo);
   wc.NameBase := 'CalendarCombo';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -516,7 +516,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Calendar ComboBox Checkbox
-  wc          := TVFDWidgetClass.Create(TfpgCalendarCheckCombo);
+  wc          := TVFDWidgetClass.Create(TlqCalendarCheckCombo);
   wc.NameBase := 'CalendarCombo';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -537,7 +537,7 @@ begin
   RegisterVFDWidget(wc);
 
   // ListBox
-  wc          := TVFDWidgetClass.Create(TfpgListBox);
+  wc          := TVFDWidgetClass.Create(TlqListBox);
   wc.NameBase := 'ListBox';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('AutoHeight', TPropertyBoolean, '');
@@ -556,7 +556,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Color ListBox
-  wc          := TVFDWidgetClass.Create(TfpgColorListBox);
+  wc          := TVFDWidgetClass.Create(TlqColorListBox);
   wc.NameBase := 'ColorListBox';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('AutoHeight', TPropertyBoolean, '');
@@ -577,7 +577,7 @@ begin
   RegisterVFDWidget(wc);
 
   // StringGrid
-  wc := TVFDWidgetClass.Create(TfpgStringGrid);
+  wc := TVFDWidgetClass.Create(TlqStringGrid);
   wc.NameBase := 'Grid';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('AlternateBGColor', TPropertyColor, 'The color of every alternative row. Dependent on grid Options property.');
@@ -600,7 +600,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Bevel
-  wc           := TVFDWidgetClass.Create(TfpgBevel);
+  wc           := TVFDWidgetClass.Create(TlqBevel);
   wc.NameBase  := 'Bevel';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -617,7 +617,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Panel
-  wc           := TVFDWidgetClass.Create(TfpgPanel);
+  wc           := TVFDWidgetClass.Create(TlqPanel);
   wc.NameBase  := 'Panel';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Alignment', TPropertyEnum, 'Text alignment');
@@ -641,7 +641,7 @@ begin
   RegisterVFDWidget(wc);
 
   // GroupBox
-  wc           := TVFDWidgetClass.Create(TfpgGroupBox);
+  wc           := TVFDWidgetClass.Create(TlqGroupBox);
   wc.NameBase  := 'GroupBox';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Alignment', TPropertyEnum, 'Text alignment');
@@ -661,7 +661,7 @@ begin
   RegisterVFDWidget(wc);
 
   // ProgressBar
-  wc          := TVFDWidgetClass.Create(TfpgProgressBar);
+  wc          := TVFDWidgetClass.Create(TlqProgressBar);
   wc.NameBase := 'ProgressBar';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -678,7 +678,7 @@ begin
   RegisterVFDWidget(wc);
 
   // TrackBar
-  wc          := TVFDWidgetClass.Create(TfpgTrackBar);
+  wc          := TVFDWidgetClass.Create(TlqTrackBar);
   wc.NameBase := 'TrackBar';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -697,7 +697,7 @@ begin
   RegisterVFDWidget(wc);
 
   // ListView
-  wc := TVFDWidgetClass.Create(TfpgListView);
+  wc := TVFDWidgetClass.Create(TlqListView);
   wc.NameBase := 'ListView';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -711,7 +711,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Treeview
-  wc := TVFDWidgetClass.Create(TfpgTreeView);
+  wc := TVFDWidgetClass.Create(TlqTreeView);
   wc.NameBase := 'TreeView';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -731,7 +731,7 @@ begin
   RegisterVFDWidget(wc);
   
   // PageControl
-  wc          := TVFDPageControlWidgetClass.Create(TfpgPageControl);
+  wc          := TVFDPageControlWidgetClass.Create(TlqPageControl);
   wc.NameBase := 'PageControl';
   wc.AddProperty('ActivePageIndex', TPropertyInteger, '');
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
@@ -752,7 +752,7 @@ begin
   RegisterVFDWidget(wc);
 
   // TabSheet
-  wc          := TVFDWidgetClass.Create(TfpgTabSheet);
+  wc          := TVFDWidgetClass.Create(TlqTabSheet);
   wc.NameBase := 'TabSheet';
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -762,7 +762,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Gauge
-  wc          := TVFDWidgetClass.Create(TfpgGauge);
+  wc          := TVFDWidgetClass.Create(TlqGauge);
   wc.NameBase := 'Gauge';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Color', TPropertyColor, '');
@@ -782,7 +782,7 @@ begin
 
 
   // Integer Edit
-  wc          := TVFDWidgetClass.Create(TfpgEditInteger);
+  wc          := TVFDWidgetClass.Create(TlqEditInteger);
   wc.NameBase := 'EditInteger';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -801,7 +801,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Float Edit
-  wc          := TVFDWidgetClass.Create(TfpgEditFloat);
+  wc          := TVFDWidgetClass.Create(TlqEditFloat);
   wc.NameBase := 'EditFloat';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.Addproperty('Decimals', TPropertyInteger, '');
@@ -823,7 +823,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Currency Edit
-  wc          := TVFDWidgetClass.Create(TfpgEditCurrency);
+  wc          := TVFDWidgetClass.Create(TlqEditCurrency);
   wc.NameBase := 'EditCurrency';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.Addproperty('Decimals', TPropertyInteger, '');
@@ -845,7 +845,7 @@ begin
 
   { TODO : UI Designer still has problems with components that have child components. }
   // Spin Edit
-  //wc          := TVFDWidgetClass.Create(TfpgSpinEdit);
+  //wc          := TVFDWidgetClass.Create(TlqSpinEdit);
   //wc.NameBase := 'SpinEdit';
   //wc.AddProperty('ButtonWidth', TPropertyInteger, 'Spin button width');
   //wc.AddProperty('FontDesc', TPropertyFontDesc, 'The font used for displaying the text');
@@ -862,7 +862,7 @@ begin
   //RegisterVFDWidget(wc);
 
   // Spin Edit Float
-  //wc          := TVFDWidgetClass.Create(TfpgSpinEditFloat);
+  //wc          := TVFDWidgetClass.Create(TlqSpinEditFloat);
   //wc.NameBase := 'SpinEditFloat';
   //wc.AddProperty('ButtonWidth', TPropertyInteger, 'Spin button width');
   //wc.Addproperty('Decimals', TPropertyInteger, '');
@@ -881,7 +881,7 @@ begin
   //RegisterVFDWidget(wc);
 
   // Filename Edit
-  wc          := TVFDWidgetClass.Create(TfpgFileNameEdit);
+  wc          := TVFDWidgetClass.Create(TlqFileNameEdit);
   wc.NameBase := 'FilenameEdit';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -894,7 +894,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Directory Edit
-  wc          := TVFDWidgetClass.Create(TfpgDirectoryEdit);
+  wc          := TVFDWidgetClass.Create(TlqDirectoryEdit);
   wc.NameBase := 'DirectoryEdit';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Directory', TPropertyString, 'Preset directory name in edit component');
@@ -906,7 +906,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Font Edit
-  wc          := TVFDWidgetClass.Create(TfpgFontEdit);
+  wc          := TVFDWidgetClass.Create(TlqFontEdit);
   wc.NameBase := 'DirectoryEdit';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -917,7 +917,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Edit Button
-  wc          := TVFDWidgetClass.Create(TfpgEditButton);
+  wc          := TVFDWidgetClass.Create(TlqEditButton);
   wc.NameBase := 'EditButton';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Enabled', TPropertyBoolean, '');
@@ -928,7 +928,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Color wheel
-  wc          := TVFDWidgetClass.Create(TfpgColorWheel);
+  wc          := TVFDWidgetClass.Create(TlqColorWheel);
   wc.NameBase := 'ColorWheel';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -940,7 +940,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Value Bar - works in accordance with color wheel
-  wc          := TVFDWidgetClass.Create(TfpgValueBar);
+  wc          := TVFDWidgetClass.Create(TlqValueBar);
   wc.NameBase := 'ValueBar';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('BackgroundColor', TPropertyColor, '');
@@ -952,7 +952,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Splitter - works in accordance with color wheel
-  wc          := TVFDWidgetClass.Create(TfpgSplitter);
+  wc          := TVFDWidgetClass.Create(TlqSplitter);
   wc.NameBase := 'Splitter';
   wc.AddProperty('Align', TPropertyEnum, '');
   wc.AddProperty('ColorGrabBar', TPropertyColor, '');
@@ -961,7 +961,7 @@ begin
   RegisterVFDWidget(wc);
 
   // Hyperlink
-  wc          := TVFDWidgetClass.Create(TfpgHyperlink);
+  wc          := TVFDWidgetClass.Create(TlqHyperlink);
   wc.NameBase := 'Hyperlink';
   wc.AddProperty('Align', TPropertyEnum, 'Component alignment');
   wc.AddProperty('Alignment', TPropertyEnum, 'Horizontal text alignment');

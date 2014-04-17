@@ -39,7 +39,7 @@ type
   TPanelBorder = (bsSingle, bsDouble);
 
 
-  TfpgAbstractPanel = class(TfpgWidget)
+  TlqAbstractPanel = class(TlqWidget)
   private
     FPanelStyle: TPanelStyle;
     FPanelBorder: TPanelBorder;
@@ -54,11 +54,11 @@ type
     property    ParentBackgroundColor: Boolean read FParentBackgroundColor write SetParentBackgroundColor default False;
   public
     constructor Create(AOwner: TComponent); override;
-    function    GetClientRect: TfpgRect; override;
+    function    GetClientRect: TlqRect; override;
   end;
   
 
-  TfpgBevel = class(TfpgAbstractPanel)
+  TlqBevel = class(TlqAbstractPanel)
   private
     FPanelShape: TPanelShape;
     procedure   SetPanelShape(const AValue: TPanelShape);
@@ -109,7 +109,7 @@ type
   end;
   
 
-  TfpgPanel = class(TfpgAbstractPanel)
+  TlqPanel = class(TlqAbstractPanel)
   private
     FAlignment: TAlignment;
     FLayout: TLayout;
@@ -130,15 +130,15 @@ type
     function    GetWrapText: boolean;
     procedure   SetWrapText(const AValue: boolean);
   protected
-    FFont: TfpgFont;
+    FFont: TlqFont;
     function    GetFontDesc: string; virtual;
     procedure   SetFontDesc(const AValue: string); virtual;
     procedure   HandlePaint; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    function    GetClientRect: TfpgRect; override;
-    property    Font: TfpgFont read FFont;
+    function    GetClientRect: TlqRect; override;
+    property    Font: TlqFont read FFont;
   published
     property    AcceptDrops;
     property    Align;
@@ -181,7 +181,7 @@ type
   end;
   
 
-  TfpgGroupBox = class(TfpgAbstractPanel)
+  TlqGroupBox = class(TlqAbstractPanel)
   private
     FAlignment: TAlignment;
     FMargin: integer;
@@ -195,13 +195,13 @@ type
     function    GetMargin: integer;
     procedure   SetMargin(const AValue: integer);
   protected
-    FFont: TfpgFont;
+    FFont: TlqFont;
     procedure   HandlePaint; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    function    GetClientRect: TfpgRect; override;
-    property    Font: TfpgFont read FFont;
+    function    GetClientRect: TlqRect; override;
+    property    Font: TlqFont read FFont;
   published
     property    AcceptDrops;
     property    Align;
@@ -240,16 +240,16 @@ type
   end;
 
 
-  { A panel that could replace a TfpgForm. Very handly for embedding
+  { A panel that could replace a TlqForm. Very handly for embedding
     "forms" inside other forms. You should also be able to design such
     frames with the UI designer too. }
-  TfpgFrame = class(TfpgAbstractPanel)
+  TlqFrame = class(TlqAbstractPanel)
   private
     FOnClose: TNotifyEvent;
     FOnShow: TNotifyEvent;
     FOnCreate: TNotifyEvent;
   protected
-    WindowTitle: TfpgString;
+    WindowTitle: TlqString;
     procedure   HandleShow; override;
   public
     procedure   AfterConstruction; override;
@@ -291,45 +291,45 @@ type
     property    OnShowHint;
   end;
 
-  TfpgFrameClass = class of TfpgFrame;
+  TlqFrameClass = class of TlqFrame;
 
 
-  TfpgImagePanel = class(TfpgWidget)
+  TlqImagePanel = class(TlqWidget)
   private
-    FImage: TfpgImage;
+    FImage: TlqImage;
     FOwnsImage: Boolean;
     FScaleImage: Boolean;
-    procedure   SetImage(const AValue: TfpgImage);
+    procedure   SetImage(const AValue: TlqImage);
     procedure   SetScaleImage(const AValue: Boolean);
   protected
     procedure   HandlePaint; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Image: TfpgImage read FImage write SetImage;
+    property    Image: TlqImage read FImage write SetImage;
     property    OwnsImage: Boolean read FOwnsImage write FOwnsImage;
     property    ScaleImage: Boolean read FScaleImage write SetScaleImage;
   end;
 
 
 
-function CreateBevel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AShape: TPanelShape;
-         AStyle: TPanelStyle): TfpgBevel;
+function CreateBevel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AShape: TPanelShape;
+         AStyle: TPanelStyle): TlqBevel;
 
-function CreatePanel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AText: string;
+function CreatePanel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AText: string;
          AStyle: TPanelStyle = bsRaised; AALignment: TAlignment= taCenter; ALayout: TLayout= tlCenter;
-         AMargin: integer= 2; ALineSpace: integer= 2): TfpgPanel;
+         AMargin: integer= 2; ALineSpace: integer= 2): TlqPanel;
 
-function CreateGroupBox(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AText: string;
-         AStyle: TPanelStyle; AALignment: TAlignment= taCenter; AMargin: integer= 2): TfpgGroupBox;
+function CreateGroupBox(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AText: string;
+         AStyle: TPanelStyle; AALignment: TAlignment= taCenter; AMargin: integer= 2): TlqGroupBox;
 
 
 implementation
 
-function CreateBevel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AShape: TPanelShape;
-         AStyle: TPanelStyle): TfpgBevel;
+function CreateBevel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AShape: TPanelShape;
+         AStyle: TPanelStyle): TlqBevel;
 begin
-  Result        := TfpgBevel.Create(AOwner);
+  Result        := TlqBevel.Create(AOwner);
   Result.Left   := ALeft;
   Result.Top    := ATop;
   Result.Width  := AWidth;
@@ -338,11 +338,11 @@ begin
   Result.Style  := AStyle;
 end;
 
-function CreatePanel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AText: string;
+function CreatePanel(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AText: string;
          AStyle: TPanelStyle; AALignment: TAlignment= taCenter; ALayout: TLayout= tlCenter;
-         AMargin: integer= 2; ALineSpace: integer= 2): TfpgPanel;
+         AMargin: integer= 2; ALineSpace: integer= 2): TlqPanel;
 begin
-  Result          := TfpgPanel.Create(AOwner);
+  Result          := TlqPanel.Create(AOwner);
   Result.Left     := ALeft;
   Result.Top      := ATop;
   Result.Width    := AWidth;
@@ -355,10 +355,10 @@ begin
   Result.FLineSpace:= ALineSpace;
 end;
 
-function CreateGroupBox(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TfpgCoord; AText: string;
-         AStyle: TPanelStyle; AALignment: TAlignment= taCenter; AMargin: integer= 2): TfpgGroupBox;
+function CreateGroupBox(AOwner: TComponent; ALeft, ATop, AWidth, AHeight: TlqCoord; AText: string;
+         AStyle: TPanelStyle; AALignment: TAlignment= taCenter; AMargin: integer= 2): TlqGroupBox;
 begin
-  Result            := TfpgGroupBox.Create(AOwner);
+  Result            := TlqGroupBox.Create(AOwner);
   Result.Left       := ALeft;
   Result.Top        := ATop;
   Result.Width      := AWidth;
@@ -369,9 +369,9 @@ begin
   Result.FMargin    := AMargin;
 end;
 
-{ TfpgFrame }
+{ TlqFrame }
 
-procedure TfpgFrame.HandleShow;
+procedure TlqFrame.HandleShow;
 begin
   inherited HandleShow;
   HandleAlignments(0, 0);
@@ -379,7 +379,7 @@ begin
     FOnShow(self);
 end;
 
-procedure TfpgFrame.AfterConstruction;
+procedure TlqFrame.AfterConstruction;
 begin
   AfterCreate;
   inherited AfterConstruction;
@@ -387,31 +387,31 @@ begin
     FOnCreate(self);
 end;
 
-procedure TfpgFrame.AfterCreate;
+procedure TlqFrame.AfterCreate;
 begin
   // do nothing here
 end;
 
-procedure TfpgFrame.Close;
+procedure TlqFrame.Close;
 begin
   HandleHide;
   if Assigned(FOnClose) then
     FOnClose(self);
 end;
 
-procedure TfpgFrame.Show;
+procedure TlqFrame.Show;
 begin
   HandleShow;
 end;
 
-{TfpgAbstractPanel}
+{TlqAbstractPanel}
 
-function TfpgAbstractPanel.GetClientRect: TfpgRect;
+function TlqAbstractPanel.GetClientRect: TlqRect;
 begin
   Result.SetRect(2, 2, Width - 4, Height - 4);
 end;
 
-procedure TfpgAbstractPanel.SetPanelStyle(const AValue: TPanelStyle);
+procedure TlqAbstractPanel.SetPanelStyle(const AValue: TPanelStyle);
 begin
   if FPanelStyle <> AValue then
   begin
@@ -420,7 +420,7 @@ begin
   end;
 end;
 
-procedure TfpgAbstractPanel.SetPanelBorder(const AValue: TPanelBorder);
+procedure TlqAbstractPanel.SetPanelBorder(const AValue: TPanelBorder);
 begin
   if FPanelBorder <> AValue then
   begin
@@ -429,14 +429,14 @@ begin
   end;
 end;
 
-procedure TfpgAbstractPanel.SetParentBackgroundColor(const AValue: Boolean);
+procedure TlqAbstractPanel.SetParentBackgroundColor(const AValue: Boolean);
 begin
   if FParentBackgroundColor = AValue then exit;
   FParentBackgroundColor := AValue;
   RePaint;
 end;
 
-procedure TfpgAbstractPanel.HandlePaint;
+procedure TlqAbstractPanel.HandlePaint;
 begin
   inherited HandlePaint;
   if FParentBackgroundColor then
@@ -445,7 +445,7 @@ begin
     Canvas.Clear(BackgroundColor);
 end;
 
-constructor TfpgAbstractPanel.Create(AOwner: TComponent);
+constructor TlqAbstractPanel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FPanelStyle      := bsRaised;
@@ -457,9 +457,9 @@ begin
   FIsContainer     := True;
 end;
 
-{TfpgBevel}
+{TlqBevel}
 
-procedure TfpgBevel.SetPanelShape(const AValue: TPanelShape);
+procedure TlqBevel.SetPanelShape(const AValue: TPanelShape);
 begin
   if FPanelShape <> AValue then
   begin
@@ -468,7 +468,7 @@ begin
   end;
 end;
 
-procedure TfpgBevel.DrawBox;
+procedure TlqBevel.DrawBox;
 begin
   if FPanelBorder = bsSingle then
     Canvas.SetLineStyle(1, lsSolid)
@@ -497,7 +497,7 @@ begin
   Canvas.DrawLine(0, Height - 1, Width, Height - 1);
 end;
 
-procedure TfpgBevel.DrawFrame;
+procedure TlqBevel.DrawFrame;
 begin
   Canvas.SetLineStyle(1, lsSolid);
 
@@ -517,7 +517,7 @@ begin
   Canvas.DrawLine(0, Height - 1, Width, Height - 1);
 end;
 
-procedure TfpgBevel.DrawTopLine;
+procedure TlqBevel.DrawTopLine;
 begin
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawLine(0, 0, Width, 0);
@@ -530,7 +530,7 @@ begin
   Canvas.DrawLine(0, 1, Width, 1);
 end;
 
-procedure TfpgBevel.DrawBottomLine;
+procedure TlqBevel.DrawBottomLine;
 begin
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawLine(0, Height - 2, Width, Height - 2);
@@ -543,7 +543,7 @@ begin
   Canvas.DrawLine(0, Height - 1, Width, Height - 1);
 end;
 
-procedure TfpgBevel.DrawLeftLine;
+procedure TlqBevel.DrawLeftLine;
 begin
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawLine(0, 1, 0, Height - 1);
@@ -556,7 +556,7 @@ begin
   Canvas.DrawLine(1, 1, 1, Height - 1);
 end;
 
-procedure TfpgBevel.DrawRightLine;
+procedure TlqBevel.DrawRightLine;
 begin
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.DrawLine(Width - 2, 0, Width - 2, Height - 1);
@@ -569,7 +569,7 @@ begin
   Canvas.DrawLine(Width - 1, 0, Width - 1, Height - 1);
 end;
 
-procedure TfpgBevel.DrawSpacer;
+procedure TlqBevel.DrawSpacer;
 begin
   // To make it more visible in the UI Designer
   if csDesigning in ComponentState then
@@ -580,7 +580,7 @@ begin
   end;
 end;
 
-procedure TfpgBevel.DrawVerDivider;
+procedure TlqBevel.DrawVerDivider;
 
   procedure PaintLine(px, py: integer);
   begin
@@ -607,7 +607,7 @@ begin
     PaintLine(3, 0);
 end;
 
-procedure TfpgBevel.HandlePaint;
+procedure TlqBevel.HandlePaint;
 begin
   inherited HandlePaint;
 
@@ -628,20 +628,20 @@ begin
   end;
 end;
 
-constructor TfpgBevel.Create(AOwner: TComponent);
+constructor TlqBevel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FPanelShape := bsBox;
 end;
 
-{TfpgPanel}
+{TlqPanel}
 
-function TfpgPanel.GetAlignment: TAlignment;
+function TlqPanel.GetAlignment: TAlignment;
 begin
   Result := FAlignment;
 end;
 
-procedure TfpgPanel.SetAlignment(const AValue: TAlignment);
+procedure TlqPanel.SetAlignment(const AValue: TAlignment);
 begin
   if FAlignment <> AValue then
   begin
@@ -650,12 +650,12 @@ begin
   end;
 end;
 
-function TfpgPanel.GetLayout: TLayout;
+function TlqPanel.GetLayout: TLayout;
 begin
   Result := FLayout;
 end;
 
-procedure TfpgPanel.SetLayout(const AValue: TLayout);
+procedure TlqPanel.SetLayout(const AValue: TLayout);
 begin
   if FLayout <> AValue then
   begin
@@ -664,12 +664,12 @@ begin
   end;
 end;
 
-function TfpgPanel.GetText: string;
+function TlqPanel.GetText: string;
 begin
   Result := FText;
 end;
 
-procedure TfpgPanel.SetText(const AValue: string);
+procedure TlqPanel.SetText(const AValue: string);
 begin
   if FText <> AValue then
   begin
@@ -678,24 +678,24 @@ begin
   end;
 end;
 
-function TfpgPanel.GetFontDesc: string;
+function TlqPanel.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgPanel.SetFontDesc(const AValue: string);
+procedure TlqPanel.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   Repaint;
 end;
 
-function TfpgPanel.GetLineSpace: integer;
+function TlqPanel.GetLineSpace: integer;
 begin
   Result := FLineSpace;
 end;
 
-procedure TfpgPanel.SetLineSpace(const AValue: integer);
+procedure TlqPanel.SetLineSpace(const AValue: integer);
 begin
   if FLineSpace <> AValue then
   begin
@@ -704,12 +704,12 @@ begin
   end;
 end;
 
-function TfpgPanel.GetMargin: integer;
+function TlqPanel.GetMargin: integer;
 begin
   Result := FMargin;
 end;
 
-procedure TfpgPanel.SetMargin(const AValue: integer);
+procedure TlqPanel.SetMargin(const AValue: integer);
 begin
   if FMargin <> AValue then
   begin
@@ -718,12 +718,12 @@ begin
   end;
 end;
 
-function Tfpgpanel.GetWrapText: boolean;
+function Tlqpanel.GetWrapText: boolean;
 begin
   Result := FWrapText;
 end;
 
-procedure Tfpgpanel.SetWrapText(const AValue: boolean);
+procedure Tlqpanel.SetWrapText(const AValue: boolean);
 begin
   if FWrapText <> AValue then
   begin
@@ -732,9 +732,9 @@ begin
   end;
 end;
 
-procedure TfpgPanel.HandlePaint;
+procedure TlqPanel.HandlePaint;
 var
-  lTxtFlags: TfpgTextFlags;
+  lTxtFlags: TlqTextFlags;
 begin
   inherited HandlePaint;
 
@@ -801,7 +801,7 @@ begin
   Canvas.DrawText(FMargin, FMargin, Width - FMargin * 2, Height - FMargin * 2, FText, lTxtFlags, FLineSpace);
 end;
 
-constructor TfpgPanel.Create(Aowner: TComponent);
+constructor TlqPanel.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
   FText             := 'Panel';
@@ -816,14 +816,14 @@ begin
   FMargin           := 2;
 end;
 
-destructor TfpgPanel.Destroy;
+destructor TlqPanel.Destroy;
 begin
   FText := '';
   FFont.Free;
   inherited Destroy;
 end;
 
-function TfpgPanel.GetClientRect: TfpgRect;
+function TlqPanel.GetClientRect: TlqRect;
 begin
   if Style = bsFlat then
     Result.SetRect(0, 0, Width, Height)
@@ -831,14 +831,14 @@ begin
     Result := inherited GetClientRect;
 end;
 
-{TfpgGroupBox}
+{TlqGroupBox}
 
-function TfpgGroupBox.GetAlignment: TAlignment;
+function TlqGroupBox.GetAlignment: TAlignment;
 begin
   Result := FAlignment;
 end;
 
-procedure TfpgGroupBox.SetAlignment(const AValue: TAlignment);
+procedure TlqGroupBox.SetAlignment(const AValue: TAlignment);
 begin
   if FAlignment <> AValue then
   begin
@@ -847,12 +847,12 @@ begin
   end;
 end;
 
-function TfpgGroupBox.GetText: string;
+function TlqGroupBox.GetText: string;
 begin
   Result := FText;
 end;
 
-procedure TfpgGroupBox.SetText(const AValue: string);
+procedure TlqGroupBox.SetText(const AValue: string);
 begin
   if FText <> AValue then
   begin
@@ -861,24 +861,24 @@ begin
   end;
 end;
 
-function TfpgGroupBox.GetFontDesc: string;
+function TlqGroupBox.GetFontDesc: string;
 begin
   Result := FFont.FontDesc;
 end;
 
-procedure TfpgGroupBox.SetFontDesc(const AValue: string);
+procedure TlqGroupBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
   FFont := fpgGetFont(AValue);
   Repaint;
 end;
 
-function TfpgGroupBox.GetMargin: integer;
+function TlqGroupBox.GetMargin: integer;
 begin
   Result := FMargin;
 end;
 
-procedure TfpgGroupBox.SetMargin(const AValue: integer);
+procedure TlqGroupBox.SetMargin(const AValue: integer);
 begin
   if FMargin <> AValue then
   begin
@@ -887,7 +887,7 @@ begin
   end;
 end;
 
-function TfpgGroupBox.GetClientRect: TfpgRect;
+function TlqGroupBox.GetClientRect: TlqRect;
 var
   h: integer;
 begin
@@ -895,11 +895,11 @@ begin
   Result.SetRect(2, h, Width - 4, Height - (h + 2));
 end;
 
-procedure TfpgGroupBox.HandlePaint;
+procedure TlqGroupBox.HandlePaint;
 var
-  r: TfpgRect;
+  r: TlqRect;
   w: integer;
-  lTxtFlags: TfpgTextFlags;
+  lTxtFlags: TlqTextFlags;
 begin
   inherited HandlePaint;
 
@@ -1047,7 +1047,7 @@ begin
     end;
 end;
 
-constructor TfpgGroupBox.Create(Aowner: TComponent);
+constructor TlqGroupBox.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
   FText             := 'Group box';
@@ -1061,15 +1061,15 @@ begin
   FMargin           := 2;
 end;
 
-destructor TfpgGroupBox.Destroy;
+destructor TlqGroupBox.Destroy;
 begin
   FFont.Free;
   inherited Destroy;
 end;
 
-{ TfpgImagePanel }
+{ TlqImagePanel }
 
-procedure TfpgImagePanel.SetImage(const AValue: TfpgImage);
+procedure TlqImagePanel.SetImage(const AValue: TlqImage);
 begin
   if FOwnsImage and Assigned(FImage) then
     FImage.Free;
@@ -1077,7 +1077,7 @@ begin
   Repaint;
 end;
 
-procedure TfpgImagePanel.SetScaleImage(const AValue: Boolean);
+procedure TlqImagePanel.SetScaleImage(const AValue: Boolean);
 begin
   if FScaleImage = AValue then
     Exit;
@@ -1086,7 +1086,7 @@ begin
     Repaint;
 end;
 
-procedure TfpgImagePanel.HandlePaint;
+procedure TlqImagePanel.HandlePaint;
 var
   x: integer;
   y: integer;
@@ -1104,14 +1104,14 @@ begin
   end;
 end;
 
-constructor TfpgImagePanel.Create(AOwner: TComponent);
+constructor TlqImagePanel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FImage := nil;
   FOwnsImage := False;
 end;
 
-destructor TfpgImagePanel.Destroy;
+destructor TlqImagePanel.Destroy;
 begin
   if FOwnsImage then
     FImage.Free;

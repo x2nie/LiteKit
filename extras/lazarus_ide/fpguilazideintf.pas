@@ -35,7 +35,7 @@ uses
 
 type
 
-  TfpGUIApplicationDescriptor = class(TProjectDescriptor)
+  TlqUIApplicationDescriptor = class(TProjectDescriptor)
   public
     constructor Create; override;
     function GetLocalizedName: string; override;
@@ -46,7 +46,7 @@ type
   
 
 var
-  ProjectDescriptorfpGUIApplication: TfpGUIApplicationDescriptor;
+  ProjectDescriptorfpGUIApplication: TlqUIApplicationDescriptor;
 
 procedure Register;
 
@@ -56,25 +56,25 @@ implementation
 
 procedure Register;
 begin
-  ProjectDescriptorfpGUIApplication := TfpGUIApplicationDescriptor.Create;
+  ProjectDescriptorfpGUIApplication := TlqUIApplicationDescriptor.Create;
   RegisterProjectDescriptor(ProjectDescriptorfpGUIApplication);
 end;
 
 
-{ TfpGUIApplicationDescriptor }
+{ TlqUIApplicationDescriptor }
 
-constructor TfpGUIApplicationDescriptor.Create;
+constructor TlqUIApplicationDescriptor.Create;
 begin
   inherited Create;
   Name := 'fpGUI Application';
 end;
 
-function TfpGUIApplicationDescriptor.GetLocalizedName: string;
+function TlqUIApplicationDescriptor.GetLocalizedName: string;
 begin
   Result := 'fpGUI Toolkit Application';
 end;
 
-function TfpGUIApplicationDescriptor.GetLocalizedDescription: string;
+function TlqUIApplicationDescriptor.GetLocalizedDescription: string;
 var
   le: string;
 begin
@@ -84,7 +84,7 @@ begin
            +'The program file is automatically maintained by Lazarus.';
 end;
 
-function TfpGUIApplicationDescriptor.InitProject(AProject: TLazProject): TModalResult;
+function TlqUIApplicationDescriptor.InitProject(AProject: TLazProject): TModalResult;
 var
   le: string;
   NewSource: String;
@@ -107,11 +107,11 @@ begin
     +'  {$IFDEF UNIX}{$IFDEF UseCThreads}'+le
     +'  cthreads,'+le
     +'  {$ENDIF}{$ENDIF}'+le
-    +'  Classes, fpg_base, fpg_main, fpg_form;'+le
+    +'  Classes, lq_base, lq_main, lq_form;'+le
     +le
     +'type'+le
     +le
-    +'  TMainForm = class(TfpgForm)'+le
+    +'  TMainForm = class(TlqForm)'+le
     +'  private'+le
     +'    {@VFD_HEAD_BEGIN: MainForm}'+le
     +'    {@VFD_HEAD_END: MainForm}'+le
@@ -171,7 +171,7 @@ begin
 end;
 
 {
-function TfpGUIApplicationDescriptor.CreateStartFiles(AProject: TLazProject): TModalResult;
+function TlqUIApplicationDescriptor.CreateStartFiles(AProject: TLazProject): TModalResult;
 begin
   LazarusIDE.DoNewEditorFile(FileDescriptorfpGUIUnit,'','',
                          [nfIsPartOfProject,nfOpenInEditor,nfCreateDefaultSrc]);

@@ -16,7 +16,7 @@
       could implement DB aware components for fpGUI.
 }
 
-unit fpgui_db;
+unit lq_db;
 
 {$mode objfpc}{$H+}
 
@@ -29,13 +29,13 @@ uses
   Classes,
   db,
   lq_widget,
-  {lq_label, fpg_edit};
+  lq_label{, lq_edit};
   
 type
 
-  TfpgFieldDataLink = class(TDataLink)
+  TlqFieldDataLink = class(TDataLink)
   private
-    FWidget: TfpgWidget;
+    FWidget: TlqWidget;
     FField: TField;
     FFieldName: string;
     FOnDataChange: TNotifyEvent;
@@ -46,18 +46,18 @@ type
     procedure   ActiveChanged; override;
     procedure   RecordChanged(AField: TField); override;
   public
-    constructor Create(AWidget: TfpgWidget);
+    constructor Create(AWidget: TlqWidget);
     property    CanModify: Boolean read GetCanModify;
     property    Field: TField read FField;
     property    FieldName: string read FFieldName write SetFieldName;
-    property    Widget: TfpgWidget read FWidget write FWidget;
+    property    Widget: TlqWidget read FWidget write FWidget;
     property    OnDataChange: TNotifyEvent read FOnDataChange write FOnDataChange;
   end;
   
   
-  TfpgDBLabel = class(TfpgCustomLabel)
+  TlqDBLabel = class(TlqCustomLabel)
   private
-    FDataLink: TfpgFieldDataLink;
+    FDataLink: TlqFieldDataLink;
     function    GetDataField: String;
     function    GetField: TField;
     procedure   SetDataField(const ADataField: String);
@@ -80,10 +80,10 @@ type
   end;
 
 {
-  // TfpgEdit needs to be refactor some more first!!
-  TfpgDBEdit = class(TfpgCustomEdit)
+  // TlqEdit needs to be refactor some more first!!
+  TlqDBEdit = class(TlqCustomEdit)
   private
-    FDataLink: TfpgFieldDataLink;
+    FDataLink: TlqFieldDataLink;
     function    GetDataField: string;
     function    GetDataSource: TDataSource;
     function    GetField: TField;
@@ -113,14 +113,14 @@ type
 implementation
 
 
-{ TfpgFieldDataLink }
+{ TlqFieldDataLink }
 
-function TfpgFieldDataLink.GetCanModify: Boolean;
+function TlqFieldDataLink.GetCanModify: Boolean;
 begin
   Result := not ReadOnly and (Field <> nil) and Field.CanModify;
 end;
 
-procedure TfpgFieldDataLink.SetFieldName(const AFieldName: string);
+procedure TlqFieldDataLink.SetFieldName(const AFieldName: string);
 begin
   if AFieldName <> FieldName then
   begin
@@ -129,7 +129,7 @@ begin
   end;
 end;
 
-procedure TfpgFieldDataLink.UpdateField;
+procedure TlqFieldDataLink.UpdateField;
 begin
   {$IFDEF DEBUG} WriteLn('## UpdateField. DataSet: ', DataSource.DataSet.ClassName); {$ENDIF}
   FField := DataSource.DataSet.FindField(FieldName);
@@ -137,54 +137,54 @@ begin
     OnDataChange(Self);
 end;
 
-procedure TfpgFieldDataLink.ActiveChanged;
+procedure TlqFieldDataLink.ActiveChanged;
 begin
   inherited ActiveChanged;
   UpdateField;
 end;
 
-procedure TfpgFieldDataLink.RecordChanged(AField: TField);
+procedure TlqFieldDataLink.RecordChanged(AField: TField);
 begin
   inherited RecordChanged(AField);
   if Assigned(OnDataChange) then
     OnDataChange(Self);
 end;
 
-constructor TfpgFieldDataLink.Create(AWidget: TfpgWidget);
+constructor TlqFieldDataLink.Create(AWidget: TlqWidget);
 begin
   inherited Create;
   FWidget := AWidget;
 end;
 
 
-{ TfpgDBLabel }
+{ TlqDBLabel }
 
-function TfpgDBLabel.GetDataField: String;
+function TlqDBLabel.GetDataField: String;
 begin
   Result := FDataLink.FieldName;
 end;
 
-function TfpgDBLabel.GetField: TField;
+function TlqDBLabel.GetField: TField;
 begin
   Result := FDataLink.Field;
 end;
 
-procedure TfpgDBLabel.SetDataField(const ADataField: String);
+procedure TlqDBLabel.SetDataField(const ADataField: String);
 begin
   FDataLink.FieldName := ADataField;
 end;
 
-function TfpgDBLabel.GetDataSource: TDataSource;
+function TlqDBLabel.GetDataSource: TDataSource;
 begin
   Result := FDataLink.DataSource;
 end;
 
-procedure TfpgDBLabel.SetDataSource(ADataSource: TDataSource);
+procedure TlqDBLabel.SetDataSource(ADataSource: TDataSource);
 begin
   FDataLink.DataSource := ADataSource;
 end;
 
-procedure TfpgDBLabel.DataChange(Sender: TObject);
+procedure TlqDBLabel.DataChange(Sender: TObject);
 begin
   {$IFDEF DEBUG} Write(Classname + '.DataChange'); {$ENDIF}
   if Assigned(FDataLink.Field) then
@@ -199,14 +199,14 @@ begin
   end;
 end;
 
-constructor TfpgDBLabel.Create(AOwner: TComponent);
+constructor TlqDBLabel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FDataLink := TfpgFieldDataLink.Create(Self);
+  FDataLink := TlqFieldDataLink.Create(Self);
   FDataLink.OnDataChange := @DataChange;
 end;
 
-destructor TfpgDBLabel.Destroy;
+destructor TlqDBLabel.Destroy;
 begin
   FDataLink.Free;
   inherited Destroy;

@@ -26,8 +26,8 @@ uses
   x;
   
 type
-    TfpgWinHandle = TXID;
-    TfpgDCHandle  = TXID;
+    TlqWinHandle = TXID;
+    TlqDCHandle  = TXID;
 
 
 implementation

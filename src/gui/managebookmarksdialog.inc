@@ -65,13 +65,13 @@ var
   lst: TStringList;
 begin
   lst := TStringList.Create;
-  FIni.ReadSection(FPG_BOOKMARK_SECTION, lst);
+  FIni.ReadSection(LQ_BOOKMARK_SECTION, lst);
   grdBookmarks.RowCount := lst.Count;
   grdBookmarks.BeginUpdate;
   for i := 0 to lst.Count-1 do
   begin
     grdBookmarks.Cells[0, i] := lst[i];
-    grdBookmarks.Cells[1, i] := FIni.ReadString(FPG_BOOKMARK_SECTION, lst[i], '');
+    grdBookmarks.Cells[1, i] := FIni.ReadString(LQ_BOOKMARK_SECTION, lst[i], '');
   end;
   grdBookmarks.EndUpdate;
   lst.Free;
@@ -81,10 +81,10 @@ procedure TConfigureBookmarksForm.UpdateINIFile;
 var
   i: integer;
 begin
-  FIni.EraseSection(FPG_BOOKMARK_SECTION);
+  FIni.EraseSection(LQ_BOOKMARK_SECTION);
   for i := 0 to grdBookmarks.RowCount-1 do
   begin
-    FIni.WriteString(FPG_BOOKMARK_SECTION, grdBookmarks.Cells[0, i], grdBookmarks.Cells[1, i]);
+    FIni.WriteString(LQ_BOOKMARK_SECTION, grdBookmarks.Cells[0, i], grdBookmarks.Cells[1, i]);
   end;
 end;
 
@@ -95,7 +95,7 @@ begin
   if (grdBookmarks.RowCount = 0) or (grdBookmarks.FocusRow = -1) then
     Exit;
   s := grdBookmarks.Cells[0, grdBookmarks.FocusRow];
-  if fpgInputQuery('Bookmark', 'Enter new bookmark name', s) then
+  if lqInputQuery('Bookmark', 'Enter new bookmark name', s) then
   begin
     s := StringReplace(s, '=', '-', [rfReplaceAll]); // don't allow '=' sign in name (ini file requirement)  
     grdBookmarks.Cells[0, grdBookmarks.FocusRow] := s;

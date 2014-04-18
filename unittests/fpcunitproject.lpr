@@ -15,11 +15,11 @@ var
   frm: TGUITestRunnerForm;
 
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TGUITestRunnerForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

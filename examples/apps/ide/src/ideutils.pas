@@ -226,7 +226,7 @@ end;
 
 function ExtractUpperFileExt(const FileName: string): string;
 begin
-  Result := UpperCase(fpgExtractFileExt(FileName));
+  Result := UpperCase(lqExtractFileExt(FileName));
 end;
 
 function CompressWhiteSpace(const Str: string): string;

@@ -249,7 +249,7 @@ end;
 procedure TlqBaseComboBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   if FAutoSize then
   begin
     Height := FFont.Height + (FMargin * 2);
@@ -276,7 +276,7 @@ procedure TlqBaseComboBox.DisableShowHint;
 begin
   FStoredShowHint := ShowHint;
   ShowHint := False;
-  fpgApplication.HideHint; // make sure Application hint timer doesn't fire
+  lqApplication.HideHint; // make sure Application hint timer doesn't fire
 end;
 
 procedure TlqBaseComboBox.RestoreShowHint;
@@ -303,7 +303,7 @@ begin
   FAutoSize := AValue;
   if FAutoSize then
   begin
-    r := fpgStyle.GetControlFrameBorders;
+    r := lqStyle.GetControlFrameBorders;
     FHeight := FFont.Height + (Margin*2) + (r.Top+r.Bottom);
     CalculateInternalButtonRect;
     UpdateWindowPosition;
@@ -406,7 +406,7 @@ begin
     OffsetRect(ar, 1, 1);
   end;
   // paint button face
-  fpgStyle.DrawButtonFace(Canvas,
+  lqStyle.DrawButtonFace(Canvas,
       FInternalBtnRect.Left,
       FInternalBtnRect.Top,
       FInternalBtnRect.Width,
@@ -417,7 +417,7 @@ begin
     Canvas.SetColor(clShadow1);
 
   // paint arrow
-  fpgStyle.DrawDirectionArrow(Canvas, ar.Left, ar.Top, ar.Width, ar.Height, adDown);
+  lqStyle.DrawDirectionArrow(Canvas, ar.Left, ar.Top, ar.Width, ar.Height, adDown);
   Canvas.EndDraw(FInternalBtnRect);
 end;
 
@@ -429,17 +429,17 @@ begin
   pt := WindowToScreen(AParent, Point(AComboBox.Left, AComboBox.Bottom));
 
   // dropdown will not fit below combobox so we place it above
-  if (pt.y + ADropDown.Height) > fpgApplication.ScreenHeight then
+  if (pt.y + ADropDown.Height) > lqApplication.ScreenHeight then
     Result.Top := AComboBox.Top - ADropDown.Height
   else
     Result.Top := AComboBox.Bottom;
 
   // dropdown height doesn't fit in screen height so shrink it
-  if (ADropDown.Height > fpgApplication.ScreenHeight) then
+  if (ADropDown.Height > lqApplication.ScreenHeight) then
   begin
     // 50 is just some spacing for taskbars (top or bottom aligned)
     Result.Top    := AComboBox.Top - pt.y + 50;
-    Result.Height := fpgApplication.ScreenHeight - 50;
+    Result.Height := lqApplication.ScreenHeight - 50;
   end
   else
     Result.Height := ADropDown.Height;
@@ -460,7 +460,7 @@ begin
   FReadOnly       := False;
   FItems := TStringList.Create;
   FItems.OnChange := @InternalItemsChanged;
-  FFont := fpgGetFont('#List');
+  FFont := lqGetFont('#List');
   FOptions := [];
   FBtnPressed := False;
   FOnChange := nil;

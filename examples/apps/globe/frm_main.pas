@@ -295,7 +295,7 @@ begin
   FStep := 5;
   FShowGrid := True;
   OnKeyPress := @FormKeyPressed;
-  fpgImages.AddMaskedBMP(  // 16x16 image
+  lqImages.AddMaskedBMP(  // 16x16 image
             'usr.toggle_grid',
             @usr_toggle_grid,
       sizeof(usr_toggle_grid), 0, 0);

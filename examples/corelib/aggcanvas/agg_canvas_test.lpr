@@ -234,14 +234,14 @@ begin
   y := y + Canvas.Font.Height;
   Canvas.DrawString(5, y, 'Russian (UTF-8) text: Невозможно создать директорию');
   y := y + Canvas.Font.Height;
-  fnt := fpgApplication.GetFont('Times-14:bold');
+  fnt := lqApplication.GetFont('Times-14:bold');
   Canvas.Font := fnt;
   Canvas.DrawString(5, y, 'Font used is ' + Canvas.Font.FontDesc);
   y := y + Canvas.Font.Height;
 
 
   // Testing basic style drawings
-  Canvas.Font := fpgApplication.DefaultFont;
+  Canvas.Font := lqApplication.DefaultFont;
   Canvas.DrawString(320, 3, 'DrawButtonFace():');
 
   r.SetRect(300, 20, 75, 25);
@@ -366,7 +366,7 @@ begin
   {@VFD_BODY_END: MainForm}
   {%endregion}
 
-  fpgApplication.HelpKey := keyNul;
+  lqApplication.HelpKey := keyNul;
 end;
 
 
@@ -374,11 +374,11 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
 
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

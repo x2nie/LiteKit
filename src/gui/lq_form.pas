@@ -62,9 +62,9 @@ type
     FWindowTitle: string;
     FSizeable: boolean;
     procedure   SetWindowTitle(const ATitle: string); override;
-    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
-    procedure   MsgDeActivate(var msg: TlqMessageRec); message FPGM_DEACTIVATE;
-    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
+    procedure   MsgActivate(var msg: TlqMessageRec); message LQM_ACTIVATE;
+    procedure   MsgDeActivate(var msg: TlqMessageRec); message LQM_DEACTIVATE;
+    procedure   MsgClose(var msg: TlqMessageRec); message LQM_CLOSE;
     procedure   HandlePaint; override;
     procedure   HandleClose; virtual;
     procedure   HandleHide; override;
@@ -210,7 +210,7 @@ begin
   {$IFDEF DEBUG}
   DebugLn(Classname + ' ' + Name + '.BaseForm - MsgActivate');
   {$ENDIF}
-  if (fpgApplication.TopModalForm = nil) or (fpgApplication.TopModalForm = self) then
+  if (lqApplication.TopModalForm = nil) or (lqApplication.TopModalForm = self) then
   begin
     {$IFDEF DEBUG}
     DebugLn('Inside if block');
@@ -250,8 +250,8 @@ end;
 
 procedure TlqBaseForm.AdjustWindowStyle;
 begin
-  if fpgApplication.MainForm = nil then
-    fpgApplication.MainForm := self;
+  if lqApplication.MainForm = nil then
+    lqApplication.MainForm := self;
 
   if FWindowPosition = wpAuto then
     Include(FWindowAttributes, waAutoPos)
@@ -304,7 +304,7 @@ end;
 
 destructor TlqBaseForm.Destroy;
 begin
-  fpgApplication.RemoveWindowFromModalStack(Self);
+  lqApplication.RemoveWindowFromModalStack(Self);
   inherited Destroy;
 end;
 
@@ -320,7 +320,7 @@ var
 begin
   lEventHandled := False;
   lSucceeded := False;
-  lSucceeded := DoOnHelp(HelpType, HelpContext, HelpKeyword, fpgApplication.HelpFile, lEventHandled);
+  lSucceeded := DoOnHelp(HelpType, HelpContext, HelpKeyword, lqApplication.HelpFile, lEventHandled);
   if (not lSucceeded) or (not lEventHandled) then
     inherited InvokeHelp;
 end;
@@ -343,28 +343,28 @@ var
   lCloseAction: TCloseAction;
 begin
   FWindowType := wtModalForm;
-  fpgApplication.PushModalForm(self);
+  lqApplication.PushModalForm(self);
   ModalResult := mrNone;
 
   try
     Show;
     // processing messages until this form ends.
     // delivering the remaining messages
-    fpgApplication.ProcessMessages;
+    lqApplication.ProcessMessages;
     try
       repeat
-        fpgWaitWindowMessage;
+        lqWaitWindowMessage;
       until (ModalResult <> mrNone) or (not Visible);
     except
       on E: Exception do
       begin
         Visible := False;
-        fpgApplication.HandleException(self);
+        lqApplication.HandleException(self);
       end;
     end;  { try..except }
   finally
     { we have to pop the form even in an error occurs }
-    fpgApplication.PopModalForm;
+    lqApplication.PopModalForm;
     Result := ModalResult;
   end;  { try..finally }
   
@@ -534,7 +534,7 @@ var
 begin
   if CloseQuery then  // May we close the form? User could override decision
   begin
-    IsMainForm := fpgApplication.MainForm = self;
+    IsMainForm := lqApplication.MainForm = self;
     if IsMainForm then
       CloseAction := caFree
     else
@@ -554,10 +554,10 @@ begin
         begin
           HandleHide;
           if IsMainForm then
-            fpgApplication.Terminate
+            lqApplication.Terminate
           else
             // We can't free ourselves, somebody else needs to do it
-            fpgPostMessage(Self, fpgApplication, FPGM_FREEME);
+            lqPostMessage(Self, lqApplication, LQM_FREEME);
         end;
     end;  { case CloseAction }
   end;  { if CloseQuery }

@@ -16,11 +16,11 @@ procedure MainProc;
 var
   frm: TF_Demo;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TF_Demo.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

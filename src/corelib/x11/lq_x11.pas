@@ -413,7 +413,7 @@ type
   end;
 
 
-function fpgColorToX(col: TlqColor): longword;
+function lqColorToX(col: TlqColor): longword;
 
 
 implementation
@@ -447,7 +447,7 @@ var
   uDragSource: TlqWidget;  { points to the Source widget of the DND when drop is inside the same app }
 
 const
-  FPG_XDND_VERSION: culong = 4; // our supported XDND version
+  LQ_XDND_VERSION: culong = 4; // our supported XDND version
 
  // some externals
 
@@ -477,12 +477,12 @@ begin
   Result := Result or ((rgb and $F80000) shr 8);
 end;
 
-function fpgColorToX(col: TlqColor): longword;
+function lqColorToX(col: TlqColor): longword;
 var
   xc: TXColor;
   c: TlqColor;
 begin
-  c := fpgColorToRGB(col);
+  c := lqColorToRGB(col);
 
   if xapplication.DisplayDepth >= 24 then
     Result   := c and $FFFFFF       { No Alpha channel information }
@@ -505,7 +505,7 @@ procedure SetXftColor(col: TlqColor; var colxft: TXftColor);
 var
   c: TlqColor;
 begin
-  c := fpgColorToRGB(col);
+  c := lqColorToRGB(col);
 
   colxft.color.blue  := (c and $000000FF) shl 8;
   colxft.color.green := (c and $0000FF00);
@@ -653,15 +653,15 @@ begin
         @data);
     s := data;
 
-    fpgClipboard.FClipboardText := s;
+    lqClipboard.FClipboardText := s;
     XFree(data);
   end
   else
   begin
-    fpgClipboard.FClipboardText := '';
+    lqClipboard.FClipboardText := '';
   end;
 
-  fpgClipboard.FWaitingForSelection := false;
+  lqClipboard.FWaitingForSelection := false;
 end;
 
 // clipboard event
@@ -686,7 +686,7 @@ begin
   else
   begin
     XChangeProperty(xapplication.Display, e.requestor, e._property, e.target,
-        8, PropModeReplace, PByte(@fpgClipboard.FClipboardText[1]), Length(fpgClipboard.FClipboardText));
+        8, PropModeReplace, PByte(@lqClipboard.FClipboardText[1]), Length(lqClipboard.FClipboardText));
   end;
 
   XSendEvent(xapplication.Display, e.requestor, false, 0, @e );
@@ -761,7 +761,7 @@ var
   ClassHint: PXClassHint;
 begin
   ClassHint := XAllocClassHint;
-  ClassHint^.res_name := PChar(fpgGetExecutableName);
+  ClassHint^.res_name := PChar(lqGetExecutableName);
   ClassHint^.res_class := PChar(ApplicationName);
   XSetClassHint(xapplication.display, AWindow, ClassHint);
   XFree(ClassHint);
@@ -956,7 +956,7 @@ begin
   if FLastDropTarget <> 0 then
   begin
     fillchar(msgp, sizeof(msgp), 0);
-    fpgPostMessage(nil, FindWindowByHandle(FLastDropTarget), FPGM_DROPEXIT, msgp);
+    lqPostMessage(nil, FindWindowByHandle(FLastDropTarget), LQM_DROPEXIT, msgp);
   end;
   FDNDTypeList.Clear;
   FActionType     := 0;
@@ -982,23 +982,23 @@ begin
   {$ENDIF}
   ResetDNDVariables;
   FSrcWinHandle := ASource;
-  FDNDVersion := min(FPG_XDND_VERSION, (ev.xclient.data.l[1] and $FF000000) shr 24);
+  FDNDVersion := min(LQ_XDND_VERSION, (ev.xclient.data.l[1] and $FF000000) shr 24);
   {$IFDEF DNDDEBUG}
   writeln(Format('  ver(%d) check-XdndTypeList(%s) data=%xh,%d,%d,%d,%d',
       [ FDNDVersion,
-        BoolToStr(fpgIsBitSet(ev.xclient.data.l[1], 0), True),
+        BoolToStr(lqIsBitSet(ev.xclient.data.l[1], 0), True),
         ev.xclient.data.l[0],
         ev.xclient.data.l[1],
         ev.xclient.data.l[2],
         ev.xclient.data.l[3],
         ev.xclient.data.l[4]  ]));
   writeln(Format('  * We will be using XDND v%d protocol *', [FDNDVersion]));
-  if fpgIsBitSet(ev.xclient.data.l[1], 0) then
+  if lqIsBitSet(ev.xclient.data.l[1], 0) then
     writeln('  ** We need to fetch XdndTypeList (>3 types)');
   {$ENDIF}
 
   // read typelist
-  if fpgIsBitSet(ev.xclient.data.l[1], 0) then
+  if lqIsBitSet(ev.xclient.data.l[1], 0) then
   begin
     // now fetch the data
     XGetWindowProperty(Display, FSrcWinHandle,
@@ -1148,7 +1148,7 @@ begin
           end;
           fillchar(msgp, sizeof(msgp), 0);
           { Notify the widget so it can reset its looks if needed }
-          fpgPostMessage(nil, wg2, FPGM_DROPEXIT, msgp);
+          lqPostMessage(nil, wg2, LQM_DROPEXIT, msgp);
         end;
       end;
       FLastDropTarget := lTargetWinHandle;
@@ -1187,7 +1187,7 @@ begin
           fillchar(msgp, sizeof(msgp), 0);
           msgp.mouse.x := dx;
           msgp.mouse.y := dy;
-          fpgPostMessage(nil, w, FPGM_DROPENTER, msgp);
+          lqPostMessage(nil, w, LQM_DROPENTER, msgp);
         end;
       end;
     end;
@@ -1430,7 +1430,7 @@ end;
 function TlqX11Application.MessagesPending: boolean;
 begin
   Result := (XPending(display) > 0);
-  fpgCheckTimers;
+  lqCheckTimers;
 end;
 
 function GetParentWindow(wh: TlqWinHandle; var pw, rw: TlqWinHandle): boolean;
@@ -1679,19 +1679,19 @@ begin
 
           if ev._type = X.KeyPress then
           begin
-            fpgPostMessage(nil, w, FPGM_KEYPRESS, msgp);
+            lqPostMessage(nil, w, LQM_KEYPRESS, msgp);
 
             if (ev.xkey.state and (ControlMask or Mod1Mask)) = 0 then
             begin
               for i := 1 to UTF8Length(FComposeBuffer) do
               begin
                 msgp.keyboard.keychar := UTF8Copy(FComposeBuffer, i, 1);
-                fpgPostMessage(nil, w, FPGM_KEYCHAR, msgp);
+                lqPostMessage(nil, w, LQM_KEYCHAR, msgp);
               end;
             end;
           end { if }
           else if ev._type = X.KeyRelease then
-            fpgPostMessage(nil, w, FPGM_KEYRELEASE, msgp);
+            lqPostMessage(nil, w, LQM_KEYRELEASE, msgp);
         end;
 
     X.ButtonPress,
@@ -1773,7 +1773,7 @@ begin
                 end;
 
                 msgp.mouse.delta := i;
-                fpgPostMessage(nil, w, FPGM_SCROLL, msgp);
+                lqPostMessage(nil, w, LQM_SCROLL, msgp);
               end;
             end
             else
@@ -1783,16 +1783,16 @@ begin
                 {$IFDEF DEBUG}
                 writeln('****  PostMessage MouseUp ', w.ClassName, ' - ', w.Name);
                 {$ENDIF}
-                mcode := FPGM_MOUSEUP;
+                mcode := LQM_MOUSEUP;
               end
               else
               begin
                 {$IFDEF DEBUG}
                 writeln('**** PostMessage MouseDown ', w.ClassName, ' - ', w.Name);
                 {$ENDIF}
-                mcode := FPGM_MOUSEDOWN;
+                mcode := LQM_MOUSEDOWN;
               end;
-              fpgPostMessage(nil, w, mcode, msgp);
+              lqPostMessage(nil, w, mcode, msgp);
             end;  { if/else }
           end;  { if not blocking }
         end;
@@ -1804,7 +1804,7 @@ begin
           until not XCheckTypedWindowEvent(display, ev.xexpose.window, X.Expose, @ev);
           if ev.xexpose.count = 0 then
           begin
-            fpgPostMessage(nil, FindWindowByHandle(ev.xexpose.window), FPGM_PAINT);
+            lqPostMessage(nil, FindWindowByHandle(ev.xexpose.window), LQM_PAINT);
           end;
         end;
 
@@ -1815,7 +1815,7 @@ begin
           until not XCheckTypedWindowEvent(display, ev.xexpose.window, X.GraphicsExpose, @ev);
           if ev.xgraphicsexpose.count = 0 then
           begin
-            fpgPostMessage(nil, FindWindowByHandle(ev.xgraphicsexpose.drawable), FPGM_PAINT);
+            lqPostMessage(nil, FindWindowByHandle(ev.xgraphicsexpose.drawable), LQM_PAINT);
           end;
         end;
 
@@ -1846,7 +1846,7 @@ begin
               msgp.mouse.y          := ev.xmotion.y;
               msgp.mouse.Buttons    := (ev.xmotion.state and $FF00) shr 8;
               msgp.mouse.shiftstate := ConvertShiftState(ev.xmotion.state);
-              fpgPostMessage(nil, w, FPGM_MOUSEMOVE, msgp);
+              lqPostMessage(nil, w, LQM_MOUSEMOVE, msgp);
             end;
           end;
         end;
@@ -1877,7 +1877,7 @@ begin
               end;
 
               if not blockmsg then
-                fpgPostMessage(nil, FindWindowByHandle(ev.xclient.window), FPGM_CLOSE);
+                lqPostMessage(nil, FindWindowByHandle(ev.xclient.window), LQM_CLOSE);
              end;
           end
           { XDND protocol - XdndEnter }
@@ -1912,7 +1912,7 @@ begin
               Drag.HandleDNDStatus(
                   ev.xclient.data.l[0],
                   ev.xclient.data.l[1] and 1,
-                  fpgRect(
+                  lqRect(
                     (ev.xclient.data.l[2] shr 16) and $FFFF,
                     ev.xclient.data.l[2] and $FFFF,
                     (ev.xclient.data.l[3] shr 16) and $FFFF,
@@ -1983,10 +1983,10 @@ begin
             end;
 
             if (w.FWidth <> msgp.rect.Width) or (w.FHeight <> msgp.rect.Height) then
-              fpgPostMessage(nil, w, FPGM_RESIZE, msgp);
+              lqPostMessage(nil, w, LQM_RESIZE, msgp);
 
             if (w.FLeft <> msgp.rect.Left) or (w.FTop <> msgp.rect.Top) then
-              fpgPostMessage(nil, w, FPGM_MOVE, msgp);
+              lqPostMessage(nil, w, LQM_MOVE, msgp);
           end;
         end;
 
@@ -2028,22 +2028,22 @@ begin
           { TODO : Not sure if I am handling this correctly? }
           if ev.xselectionclear.selection = xia_clipboard then
           begin
-            fpgClipboard.FClipboardText := '';
+            lqClipboard.FClipboardText := '';
             Exit;
           end;
         end;
 
     X.FocusIn:
-        fpgPostMessage(nil, FindWindowByHandle(ev.xfocus.window), FPGM_ACTIVATE);
+        lqPostMessage(nil, FindWindowByHandle(ev.xfocus.window), LQM_ACTIVATE);
 
     X.FocusOut:
-        fpgPostMessage(nil, FindWindowByHandle(ev.xfocus.window), FPGM_DEACTIVATE);
+        lqPostMessage(nil, FindWindowByHandle(ev.xfocus.window), LQM_DEACTIVATE);
 
     X.EnterNotify:
-        fpgPostMessage(nil, FindWindowByHandle(ev.xcrossing.window), FPGM_MOUSEENTER);
+        lqPostMessage(nil, FindWindowByHandle(ev.xcrossing.window), LQM_MOUSEENTER);
 
     X.LeaveNotify:
-        fpgPostMessage(nil, FindWindowByHandle(ev.xcrossing.window), FPGM_MOUSEEXIT);
+        lqPostMessage(nil, FindWindowByHandle(ev.xcrossing.window), LQM_MOUSEEXIT);
 
     X.MapNotify:
         begin
@@ -2060,7 +2060,7 @@ begin
           //  msgp.rect.Top    := w.Top;
           //  msgp.rect.Width  := w.Width;
           //  msgp.rect.Height := w.Height;
-          //  fpgPostMessage(nil, w, FPGM_RESIZE, msgp);
+          //  lqPostMessage(nil, w, LQM_RESIZE, msgp);
           //end;
         end;
 
@@ -2220,7 +2220,7 @@ begin
   if AParent = nil then // is a toplevel window
   begin
     { setup a window icon }
-    IconPixMap := XCreateBitmapFromData(fpgApplication.Display, FWinHandle,
+    IconPixMap := XCreateBitmapFromData(lqApplication.Display, FWinHandle,
       @IconBitmapBits, IconBitmapWidth, IconBitmapHeight);
 
     WMHints := XAllocWMHints;
@@ -2235,7 +2235,7 @@ begin
     end;
 
 
-    XSetWMProperties(fpgApplication.Display, FWinHandle, nil, nil, nil, 0, nil, WMHints, nil);
+    XSetWMProperties(lqApplication.Display, FWinHandle, nil, nil, nil, 0, nil, WMHints, nil);
 
     if (not (waX11SkipWMHints in FWindowAttributes)) and (FWindowType = wtWindow) then
     begin
@@ -2246,8 +2246,8 @@ begin
     end;
 
     { so newish window manager can close unresponsive programs }
-    fpgApplication.netlayer.WindowSetPID(FWinHandle, GetProcessID);
-    fpgApplication.netlayer.WindowSetSupportPING(FWinHandle);
+    lqApplication.netlayer.WindowSetPID(FWinHandle, GetProcessID);
+    lqApplication.netlayer.WindowSetSupportPING(FWinHandle);
 
     XFree(WMHints);
 
@@ -2298,7 +2298,7 @@ begin
 
   if FWindowType <> wtChild then
     // send close event instead of quiting the whole application...
-    fpgApplication.netlayer.WindowAddProtocol(FWinHandle, xapplication.xia_wm_delete_window);
+    lqApplication.netlayer.WindowAddProtocol(FWinHandle, xapplication.xia_wm_delete_window);
 
   // for modal windows, this is necessary
   if FWindowType = wtModalForm then
@@ -2306,8 +2306,8 @@ begin
     if Parent = nil then
     begin
       lmwh := 0;
-      if fpgApplication.PrevModalForm <> nil then
-        lmwh := TlqX11Window(fpgApplication.PrevModalForm).WinHandle
+      if lqApplication.PrevModalForm <> nil then
+        lmwh := TlqX11Window(lqApplication.PrevModalForm).WinHandle
 { 2011-03-24: Graeme Geldenhuys
   I commented code this code because it caused more problems that it solved
   when multiple modal dialogs or prompts are shown in succession.
@@ -2315,19 +2315,19 @@ begin
   alternative solution to the original problem. }
 //      else if FocusRootWidget <> nil then
 //        lmwh := TlqX11Window(FocusRootWidget).WinHandle
-      else if fpgApplication.MainForm <> nil then
-        lmwh := TlqX11Window(fpgApplication.MainForm).WinHandle;
+      else if lqApplication.MainForm <> nil then
+        lmwh := TlqX11Window(lqApplication.MainForm).WinHandle;
       if lmwh <> 0 then
       begin
         XSetTransientForHint(xapplication.display, FWinHandle, lmwh);
-        fpgApplication.netlayer.WindowSetModal(FWinHandle, True);
+        lqApplication.netlayer.WindowSetModal(FWinHandle, True);
       end;
     end;
   end;
 
   if (FWindowType = wtPopup) and (waStayOnTop in FWindowAttributes) then
     // we have a Splash screen
-    fpgApplication.netlayer.WindowSetType(FWinHandle, [nwtSplash]);
+    lqApplication.netlayer.WindowSetType(FWinHandle, [nwtSplash]);
 
   // process Borderless forms
   if ((FWindowType = wtWindow) or (FWindowType = wtModalForm)) and (waBorderless in FWindowAttributes) and not (waX11SkipWMHints in FWindowAttributes) then
@@ -2402,7 +2402,7 @@ begin
     Include(FWinFlags, xwsfMapped);
     // Fullscreen can only be set on visible (already mapped) windows.
     if waFullScreen in FWindowAttributes then
-      fpgApplication.netlayer.WindowSetFullscreen(FWinHandle, True);
+      lqApplication.netlayer.WindowSetFullscreen(FWinHandle, True);
   end
   else
   begin
@@ -2502,7 +2502,7 @@ begin
   if AValue then
   begin
     if HasHandle then
-      XChangeProperty(xapplication.Display, WinHandle, xapplication.XdndAware, XA_ATOM, 32, PropModeReplace, @FPG_XDND_VERSION, 1)
+      XChangeProperty(xapplication.Display, WinHandle, xapplication.XdndAware, XA_ATOM, 32, PropModeReplace, @LQ_XDND_VERSION, 1)
     else
       QueueEnabledDrops := True; // we need to do this once we have a winhandle
   end
@@ -2581,7 +2581,7 @@ var
 begin
   if FWinHandle <= 0 then
     Exit;
-  fpgApplication.netlayer.WindowSetName(FWinHandle, PChar(ATitle));
+  lqApplication.netlayer.WindowSetName(FWinHandle, PChar(ATitle));
 
   // Required for titles to work in IceWM. The above netlayer doesn't do the trick.
   tp.value    := PCUChar(ATitle);
@@ -2630,7 +2630,7 @@ end;
 procedure TlqX11Window.SetFullscreen(AValue: Boolean);
 begin
   inherited SetFullscreen(AValue);
-  fpgApplication.netlayer.WindowSetFullscreen(FWinHandle, AValue);
+  lqApplication.netlayer.WindowSetFullscreen(FWinHandle, AValue);
 end;
 
 procedure TlqX11Window.BringToFront;
@@ -2949,13 +2949,13 @@ end;
 
 procedure TlqX11Canvas.DoSetTextColor(cl: TlqColor);
 begin
-  { We use fpgColorToX() because we don't want Alpha channel information for X11 text }
-  SetXftColor(fpgColorToX(cl), FColorTextXft);
+  { We use lqColorToX() because we don't want Alpha channel information for X11 text }
+  SetXftColor(lqColorToX(cl), FColorTextXft);
 end;
 
 procedure TlqX11Canvas.DoSetColor(cl: TlqColor);
 begin
-  XSetForeGround(xapplication.display, Fgc, fpgColorToX(cl));
+  XSetForeGround(xapplication.display, Fgc, lqColorToX(cl));
 end;
 
 procedure TlqX11Canvas.DoSetLineStyle(awidth: integer; astyle: TlqLineStyle);
@@ -3035,7 +3035,7 @@ end;
 
 procedure TlqX11Canvas.DoXORFillRectangle(col: TlqColor; x, y, w, h: TlqCoord);
 begin
-  XSetForeGround(xapplication.display, Fgc, fpgColorToX(fpgColorToRGB(col)));
+  XSetForeGround(xapplication.display, Fgc, lqColorToX(lqColorToRGB(col)));
   XSetFunction(xapplication.display, Fgc, GXxor);
   XFillRectangle(xapplication.display, FDrawHandle, Fgc, x, y, w, h);
   XSetForeGround(xapplication.display, Fgc, 0);
@@ -3208,7 +3208,7 @@ begin
 
       // only truecolor 24/32 displays supported now, otherwise color conversion required!
       // this must be match for the display !!!
-      depth          := fpgApplication.DisplayDepth;
+      depth          := lqApplication.DisplayDepth;
       bits_per_pixel := 32;
 
       // Shouldn't we rather get this from XDefaultVisualOfScreen(). PVisual?
@@ -3271,11 +3271,11 @@ begin
       XA_STRING, xapplication.xia_clipboard, FClipboardWndHandle, 0);
 
   FWaitingForSelection := True;
-  fpgDeliverMessages; // delivering the remaining messages
+  lqDeliverMessages; // delivering the remaining messages
 
   repeat
-    fpgWaitWindowMessage;
-    fpgDeliverMessages;
+    lqWaitWindowMessage;
+    lqDeliverMessages;
   until not FWaitingForSelection;
 
   Result := FClipboardText;
@@ -3470,11 +3470,11 @@ begin
   end;
 
   lversion := Integer(data[0]);
-  FUseVersion := min(Integer(FPG_XDND_VERSION), Integer(lversion));
+  FUseVersion := min(Integer(LQ_XDND_VERSION), Integer(lversion));
   Result := True;
 
   {$IFDEF DNDDEBUG}
-  writeln(Format('IsDNDAware theirs:%d  ours:%d  using:%d', [lversion, FPG_XDND_VERSION, FUseVersion]));
+  writeln(Format('IsDNDAware theirs:%d  ours:%d  using:%d', [lversion, LQ_XDND_VERSION, FUseVersion]));
   {$ENDIF}
 end;
 
@@ -3770,4 +3770,7 @@ initialization
   xapplication := nil;
 
 end.
+
+
+
 

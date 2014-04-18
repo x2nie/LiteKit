@@ -34,7 +34,7 @@ begin
 
   FImg.UpdateImage;
   destdc := Windows.GetDC(TlqWindow(FWindow).WinHandle);
-  srcdc := CreateCompatibleDC(fpgApplication.Display);
+  srcdc := CreateCompatibleDC(lqApplication.Display);
   SelectObject(srcdc, TImageHack(FImg).BMPHandle);
   BitBlt(destdc, x, y, w, h, srcdc, 0, 0, SRCCOPY);
   DeleteDC(srcdc);

@@ -71,7 +71,7 @@ type
 
 
 { Lazy-man's singleton }
-function fpgStyleManager: TlqStyleManager;
+function lqStyleManager: TlqStyleManager;
 
 
 implementation
@@ -85,7 +85,7 @@ var
 
 
 { Creation is deferred to the first request }
-function fpgStyleManager: TlqStyleManager;
+function lqStyleManager: TlqStyleManager;
 begin
   if uStyleManager = nil then
     uStyleManager := TlqStyleManager.Create;

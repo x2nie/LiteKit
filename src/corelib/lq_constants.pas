@@ -85,11 +85,11 @@ const
   DEFAULT_HINT_PAUSE = 500;   // in milliseconds
 
   { Default LiteKit help viewer }
-  FPG_HELPVIEWER = 'docview';
+  LQ_HELPVIEWER = 'docview';
 
-  FPG_CONFIG_DIR = 'fpgui_toolkit' + PathDelim;
-  FPG_BOOKMARKS_FILE = 'bookmarks.ini';
-  FPG_BOOKMARK_SECTION = 'bookmarks';
+  LQ_CONFIG_DIR = 'fpgui_toolkit' + PathDelim;
+  LQ_BOOKMARKS_FILE = 'bookmarks.ini';
+  LQ_BOOKMARK_SECTION = 'bookmarks';
   
   // Used for the internal message queue
   cMessageQueueSize = 2048;

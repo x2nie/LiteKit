@@ -309,9 +309,9 @@ var
   achar: string;
 begin
   if not Enabled then
-    ACanvas.SetFont(fpgStyle.MenuDisabledFont)
+    ACanvas.SetFont(lqStyle.MenuDisabledFont)
   else
-    ACanvas.SetFont(fpgStyle.MenuFont);
+    ACanvas.SetFont(lqStyle.MenuFont);
 
   achar := '&';
   s := Text;
@@ -321,24 +321,24 @@ begin
     if p > 0 then
     begin
       // first part of text before the & sign
-      fpgStyle.DrawString(ACanvas, x, y, UTF8Copy(s, 1, p-1), Enabled);
+      lqStyle.DrawString(ACanvas, x, y, UTF8Copy(s, 1, p-1), Enabled);
 
-      inc(x, fpgStyle.MenuFont.TextWidth(UTF8Copy(s, 1, p-1)));
+      inc(x, lqStyle.MenuFont.TextWidth(UTF8Copy(s, 1, p-1)));
       if UTF8Copy(s, p+1, 1) = achar then
       begin
         // Do we need to paint a actual & sign (create via && in item text)
-        fpgStyle.DrawString(ACanvas, x, y, achar, Enabled);
-        inc(x, fpgStyle.MenuFont.TextWidth(achar));
+        lqStyle.DrawString(ACanvas, x, y, achar, Enabled);
+        inc(x, lqStyle.MenuFont.TextWidth(achar));
       end
       else
       begin
         // Draw the HotKey text
         if Enabled then
-          ACanvas.SetFont(fpgStyle.MenuAccelFont);
-        fpgStyle.DrawString(ACanvas, x, y, UTF8Copy(s, p+1, 1), Enabled);
+          ACanvas.SetFont(lqStyle.MenuAccelFont);
+        lqStyle.DrawString(ACanvas, x, y, UTF8Copy(s, p+1, 1), Enabled);
         inc(x, ACanvas.Font.TextWidth(UTF8Copy(s, p+1, 1)));
         if Enabled then
-          ACanvas.SetFont(fpgStyle.MenuFont);
+          ACanvas.SetFont(lqStyle.MenuFont);
       end;
       s := UTF8Copy(s, p+2, UTF8Length(s));
     end;  { if }
@@ -346,7 +346,7 @@ begin
 
   // Draw the remaining text after the & sign
   if UTF8Length(s) > 0 then
-    fpgStyle.DrawString(ACanvas, x, y, s, Enabled);
+    lqStyle.DrawString(ACanvas, x, y, s, Enabled);
 end;
 
 function TlqMenuItem.GetCommand: ICommand;
@@ -550,7 +550,7 @@ begin
   Canvas.BeginDraw;
 
   r.SetRect(0, 0, Width, Height);
-  fpgStyle.DrawMenuBar(Canvas, r, FBackgroundColor);
+  lqStyle.DrawMenuBar(Canvas, r, FBackgroundColor);
 
   for n := 0 to VisibleCount-1 do
     DrawColumn(n, n = FocusItem);
@@ -582,7 +582,7 @@ begin
   FBackgroundColor  := Parent.BackgroundColor;
   FTextColor        := Parent.TextColor;
   // calculate the best height based on font
-  FHeight := fpgStyle.MenuFont.Height + 6; // 3px margin top and bottom
+  FHeight := lqStyle.MenuFont.Height + 6; // 3px margin top and bottom
   FMenuOptions := [];
   FMouseIsOver := False;
 end;
@@ -595,7 +595,7 @@ end;
 
 function TlqMenuBar.ItemWidth(mi: TlqMenuItem): integer;
 begin
-  Result := fpgStyle.MenuFont.TextWidth(mi.Text) + (2*6);
+  Result := lqStyle.MenuFont.TextWidth(mi.Text) + (2*6);
 end;
 
 procedure TlqMenuBar.InternalReset;
@@ -622,7 +622,7 @@ begin
     begin
       if focus then
       begin
-        fpgStyle.DrawBevel(Canvas, r.left, r.top, r.width, r.height, False);
+        lqStyle.DrawBevel(Canvas, r.left, r.top, r.width, r.height, False);
         Canvas.SetColor(BackgroundColor);
         Canvas.SetTextColor(clMenuText);
       end
@@ -688,7 +688,7 @@ begin
   begin
     ActivateMenu;
     // showing the submenu
-    mi.SubMenu.ShowAt(self, GetItemPosX(FocusItem)+2, fpgStyle.MenuFont.Height+4);
+    mi.SubMenu.ShowAt(self, GetItemPosX(FocusItem)+2, lqStyle.MenuFont.Height+4);
     mi.SubMenu.OpenerPopup      := nil;
     mi.SubMenu.OpenerMenuBar    := self;
     mi.SubMenu.DontCloseWidget  := self;
@@ -1071,7 +1071,7 @@ begin
   lFlags := AFlags;
   if mi.Separator then
   begin
-    fpgStyle.DrawMenuItemSeparator(Canvas, rect);
+    lqStyle.DrawMenuItemSeparator(Canvas, rect);
   end
   else
   begin
@@ -1079,7 +1079,7 @@ begin
     if mi.Checked then
     begin
       lFlags := lFlags + [mifChecked];
-      fpgStyle.DrawMenuItemImage(Canvas, rect.Left, rect.Top, rect, lFlags);
+      lqStyle.DrawMenuItemImage(Canvas, rect.Left, rect.Top, rect, lFlags);
       lFlags := lFlags - [mifChecked];
     end;
 
@@ -1092,14 +1092,14 @@ begin
     if mi.HotKeyDef <> '' then
     begin
       s := mi.HotKeyDef;
-      fpgStyle.DrawString(Canvas, rect.Right-FMenuFont.TextWidth(s)-FTextMargin, rect.Top, s, mi.Enabled);
+      lqStyle.DrawString(Canvas, rect.Right-FMenuFont.TextWidth(s)-FTextMargin, rect.Top, s, mi.Enabled);
     end;
 
     // process menu item submenu arrow image
     if mi.SubMenu <> nil then
     begin
       lFlags := lFlags + [mifSubMenu];
-      fpgStyle.DrawMenuItemImage(Canvas, rect.Left, rect.Top, rect, lFlags);
+      lqStyle.DrawMenuItemImage(Canvas, rect.Left, rect.Top, rect, lFlags);
       lFlags := lFlags - [mifSubMenu];
     end;
   end;
@@ -1160,7 +1160,7 @@ begin
           Canvas.SetTextColor(clMenuDisabled);
         end;
       end;
-      fpgStyle.DrawMenuRow(Canvas, r, lFlags);
+      lqStyle.DrawMenuRow(Canvas, r, lFlags);
       DrawItem(mi, r, lFlags);
 
       Exit; //==>
@@ -1340,9 +1340,9 @@ begin
   FItems      := TList.Create;
 
   // fonts
-  FMenuFont         := fpgStyle.MenuFont;
-  FMenuAccelFont    := fpgStyle.MenuAccelFont;
-  FMenuDisabledFont := fpgStyle.MenuDisabledFont;
+  FMenuFont         := lqStyle.MenuFont;
+  FMenuAccelFont    := lqStyle.MenuAccelFont;
+  FMenuDisabledFont := lqStyle.MenuDisabledFont;
   FSymbolWidth      := FMenuFont.Height+2;
 
   FBeforeShow   := nil;

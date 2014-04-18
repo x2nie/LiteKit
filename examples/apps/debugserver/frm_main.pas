@@ -172,11 +172,11 @@ begin
     try
       i := StrToInt(grdMessages.Cells[ACol, ARow]);
       case i of
-        -1:  img := fpgImages.GetImage('dbs.state.stop');
-         0:  img := fpgImages.GetImage('dbs.state.info');
-         1:  img := fpgImages.GetImage('dbs.state.warning');
-         2:  img := fpgImages.GetImage('dbs.state.error');
-         3:  img := fpgImages.GetImage('dbs.state.identify');
+        -1:  img := lqImages.GetImage('dbs.state.stop');
+         0:  img := lqImages.GetImage('dbs.state.info');
+         1:  img := lqImages.GetImage('dbs.state.warning');
+         2:  img := lqImages.GetImage('dbs.state.error');
+         3:  img := lqImages.GetImage('dbs.state.identify');
       end;
       dx := (grdMessages.ColumnWidth[ACol] - 16) div 2;
       grdMessages.Canvas.DrawImage(ARect.Left + dx, ARect.Top {+ y}, img);
@@ -196,13 +196,13 @@ begin
   FIPCSrv.Global := True;
   FIPCSrv.Active := True;
   FIPCSrv.StartServer;
-  fpgApplication.OnIdle := @CheckMessages;
+  lqApplication.OnIdle := @CheckMessages;
 //  ITMessages.Enabled:=True;
 end;
 
 procedure TMainForm.StopServer;
 begin
-  fpgApplication.OnIdle := nil;
+  lqApplication.OnIdle := nil;
 //  ITMessages.Enabled := False;
   FreeAndNil(FIPCSrv);
 end;
@@ -289,16 +289,16 @@ begin
   FShowOnMessage := False;
   StartServer;
 
-  fpgImages.AddMaskedBMP('dbs.clean', @DBS_clean, sizeof(DBS_clean), 15, 0);
-  fpgImages.AddMaskedBMP('dbs.stop', @DBS_stop, sizeof(DBS_stop), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.pause', @DBS_pause, sizeof(DBS_pause), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.run', @DBS_run, sizeof(DBS_run), 0, 0);
+  lqImages.AddMaskedBMP('dbs.clean', @DBS_clean, sizeof(DBS_clean), 15, 0);
+  lqImages.AddMaskedBMP('dbs.stop', @DBS_stop, sizeof(DBS_stop), 0, 0);
+  lqImages.AddMaskedBMP('dbs.pause', @DBS_pause, sizeof(DBS_pause), 0, 0);
+  lqImages.AddMaskedBMP('dbs.run', @DBS_run, sizeof(DBS_run), 0, 0);
 
-  fpgImages.AddMaskedBMP('dbs.state.info', @DBS_state_info, sizeof(DBS_state_info), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.state.warning', @DBS_state_warning, sizeof(DBS_state_warning), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.state.error', @DBS_state_error, sizeof(DBS_state_error), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.state.identify', @DBS_state_lightbulb, sizeof(DBS_state_lightbulb), 0, 0);
-  fpgImages.AddMaskedBMP('dbs.state.stop', @DBS_state_lightbulb_off, sizeof(DBS_state_lightbulb_off), 0, 0);
+  lqImages.AddMaskedBMP('dbs.state.info', @DBS_state_info, sizeof(DBS_state_info), 0, 0);
+  lqImages.AddMaskedBMP('dbs.state.warning', @DBS_state_warning, sizeof(DBS_state_warning), 0, 0);
+  lqImages.AddMaskedBMP('dbs.state.error', @DBS_state_error, sizeof(DBS_state_error), 0, 0);
+  lqImages.AddMaskedBMP('dbs.state.identify', @DBS_state_lightbulb, sizeof(DBS_state_lightbulb), 0, 0);
+  lqImages.AddMaskedBMP('dbs.state.stop', @DBS_state_lightbulb_off, sizeof(DBS_state_lightbulb_off), 0, 0);
 end;
 
 destructor TMainForm.Destroy;

@@ -156,7 +156,7 @@ var
 begin
   s := AFontNameSize;
   ApplyFontAttributes(s, Attrs);
-  Result := fpgGetFont(s);
+  Result := lqGetFont(s);
 end;
 
 // Add attributes to font name
@@ -211,7 +211,7 @@ var
   i: integer;
 begin
   FontDesc := '';
-  sl := fpgApplication.GetFontFaceList;
+  sl := lqApplication.GetFontFaceList;
   for i := 0 to sl.Count-1 do
   begin
     if Pos(FaceName, sl[i]) > 0 then
@@ -222,7 +222,7 @@ begin
 
   // if nothing found, use default font of LiteKit
   if FontDesc = '' then
-    FontDesc := fpgApplication.DefaultFont.FontDesc;
+    FontDesc := lqApplication.DefaultFont.FontDesc;
 end;
 
 
@@ -233,14 +233,14 @@ begin
   inherited Create;
   FCanvas := ACanvas;
   FWidget := AWidget;
-  FDefaultFont := fpgGetFont(DefaultTopicFont);
+  FDefaultFont := lqGetFont(DefaultTopicFont);
   FCanvas.Font := FDefaultFont;
   FFont := nil;
 end;
 
 destructor TCanvasFontManager.Destroy;
 begin
-  FCanvas.Font := fpgApplication.DefaultFont;
+  FCanvas.Font := lqApplication.DefaultFont;
   FDefaultFont.Free;
   FFont.Free;
   inherited Destroy;
@@ -274,7 +274,7 @@ begin
 
   if Assigned(FFont) then
     FFont.Free;
-  FFont := fpgGetFont(AFontDesc);
+  FFont := lqGetFont(AFontDesc);
   FCanvas.Font := FFont;
 end;
 

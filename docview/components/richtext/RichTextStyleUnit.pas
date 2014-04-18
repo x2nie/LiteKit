@@ -356,11 +356,11 @@ Procedure TRichTextSettings.SetupComponent;
 begin
   Name := 'RichTextSettings';
 
-  FNormalFont   := fpgGetFont(Settings.NormalFontDesc);
-  FFixedFont    := fpgGetFont(Settings.FixedFontDesc);
-  FHeading1Font := fpgGetFont(DefaultTopicFontName + '-20');
-  FHeading2Font := fpgGetFont(DefaultTopicFontName + '-14');
-  FHeading3Font := fpgGetFont(DefaultTopicFontName + '-10:bold');
+  FNormalFont   := lqGetFont(Settings.NormalFontDesc);
+  FFixedFont    := lqGetFont(Settings.FixedFontDesc);
+  FHeading1Font := lqGetFont(DefaultTopicFontName + '-20');
+  FHeading2Font := lqGetFont(DefaultTopicFontName + '-14');
+  FHeading3Font := lqGetFont(DefaultTopicFontName + '-10:bold');
 
   FDefaultColor := clBlack;
   FDefaultBackgroundColor := clBoxColor;
@@ -470,7 +470,7 @@ end;
 Procedure TRichTextSettings.AssignFont(var AFont: TlqFont; NewFont: TlqFont );
 begin
   If NewFont = Nil Then
-    NewFont := fpgApplication.DefaultFont;
+    NewFont := lqApplication.DefaultFont;
 
   if FontSame( NewFont, AFont ) then
   begin

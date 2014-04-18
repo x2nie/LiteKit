@@ -100,7 +100,7 @@ type
 
   TlqPopupCalendar = class(TlqPopupWindow)
   private
-    {@VFD_HEAD_BEGIN: fpgPopupCalendar}
+    {@VFD_HEAD_BEGIN: lqPopupCalendar}
     edtYear: TlqEdit;
     btnYearUp: TlqButton;
     btnYearDown: TlqButton;
@@ -109,7 +109,7 @@ type
     btnMonthDown: TlqButton;
     btnToday: TlqButton;
     grdName1: TlqStringGrid;
-    {@VFD_HEAD_END: fpgPopupCalendar}
+    {@VFD_HEAD_END: lqPopupCalendar}
     FMonthOffset: integer;
     FDate: TDateTime;
     FMaxDate: TDateTime;
@@ -973,7 +973,7 @@ begin
   Canvas.BeginDraw;
   inherited HandlePaint;
   if PopupFrame then
-    Canvas.SetClipRect(fpgRect(1, 1, Width-2, Height-2));
+    Canvas.SetClipRect(lqRect(1, 1, Width-2, Height-2));
   Canvas.Clear(clWindowBackground);
   Canvas.ClearClipRect;
   Canvas.EndDraw;
@@ -1108,7 +1108,7 @@ begin
   pt := WindowToScreen(self, Point(edtMonth.Left, edtMonth.Bottom));
   TPopupMenuFriend(FMonthsPopupMenu).PrepareToShow;  // forces height calculation
   // If dropdown will not fit below Edit, then we place it above
-  if (pt.y + FMonthsPopupMenu.Height) > fpgApplication.ScreenHeight then
+  if (pt.y + FMonthsPopupMenu.Height) > lqApplication.ScreenHeight then
     pt.y := pt.y - edtMonth.Height - FMonthsPopupMenu.Height;
 
 //  SetDefaultPopupMenuItemsState;
@@ -1118,8 +1118,8 @@ end;
 constructor TlqPopupCalendar.Create(AOwner: TComponent; AOrigFocusWin: TlqWidget);
 begin
   inherited Create(AOwner);
-  FntNorm:= fpgApplication.GetFont('arial-9');
-  FntBold:= fpgApplication.GetFont('arial-9:bold');
+  FntNorm:= lqApplication.GetFont('arial-9');
+  FntBold:= lqApplication.GetFont('arial-9:bold');
 
   FOrigFocusWin := AOrigFocusWin;
   AfterCreate;
@@ -1149,7 +1149,7 @@ end;
 procedure TlqPopupCalendar.AfterCreate;
 begin
   {%region 'Auto-generated GUI code' -fold}
-  {@VFD_BODY_BEGIN: fpgPopupCalendar}
+  {@VFD_BODY_BEGIN: lqPopupCalendar}
   Name := 'fpgPopupCalendar';
   SetPosition(370, 182, 233, 142);
   Hint := '';
@@ -1289,7 +1289,7 @@ begin
     OnDrawCell := @grdName1DrawCell;
   end;
 
-  {@VFD_BODY_END: fpgPopupCalendar}
+  {@VFD_BODY_END: lqPopupCalendar}
   {%endregion}
 
   btnToday.Text := rsToday;
@@ -1445,7 +1445,7 @@ begin
     on E: Exception do
     begin
       FDateFormat := OldFormat;
-      fpgApplication.HandleException(self);
+      lqApplication.HandleException(self);
     end;
   end;
 end;
@@ -1572,7 +1572,7 @@ begin
     ix := (2 + (Ord(FChecked) * 2)) - Ord(FChecked);
 
   // paint the check (in this case a X)
-  img := fpgImages.GetImage('sys.checkboxes');    // Do NOT localize
+  img := lqImages.GetImage('sys.checkboxes');    // Do NOT localize
   Canvas.DrawImagePart(FCheckBoxRect.Left, FCheckBoxRect.Top, img, ix*13, 0, 13, 13);
 end;
 

@@ -155,7 +155,7 @@ begin
   begin
     ADefaultDrawing := False;
     StringGrid.Canvas.SetColor(clGreen);
-    fpgStyle.DrawDirectionArrow(StringGrid.Canvas, ARect.Left, ARect.Top,
+    lqStyle.DrawDirectionArrow(StringGrid.Canvas, ARect.Left, ARect.Top,
         ARect.Height, ARect.Height, adRight);
     StringGrid.Canvas.SetTextColor(clTeal);
     StringGrid.Canvas.DrawString(ARect.Height + ARect.Left + 2, ARect.Top, StringGrid.Cells[ACol, ARow]);
@@ -435,10 +435,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

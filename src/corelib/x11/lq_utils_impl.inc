@@ -5,17 +5,17 @@ uses
 
 // X11 specific filesystem implementations of encoding functions
 
-function fpgToOSEncoding(aString: TlqString): string;
+function lqToOSEncoding(aString: TlqString): string;
 begin
   Result := aString;
 end;
 
-function fpgFromOSEncoding(aString: string): TlqString;
+function lqFromOSEncoding(aString: string): TlqString;
 begin
   Result := aString;
 end;
 
-procedure fpgOpenURL(const aURL: TlqString);
+procedure lqOpenURL(const aURL: TlqString);
 var
   Helper: string;
 begin
@@ -44,7 +44,7 @@ begin
     fpSystem(Helper + ' ' + aURL + '&');
 end;
 
-function fpgFileSize(const AFilename: TlqString): integer;
+function lqFileSize(const AFilename: TlqString): integer;
 var
   st: baseunix.stat;
 begin

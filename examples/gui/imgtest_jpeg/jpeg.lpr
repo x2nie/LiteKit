@@ -10,10 +10,10 @@ uses
 
 procedure MainProc;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frmMain := TfrmMain.Create(nil);
   frmMain.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frmMain.Free;
 end;
 

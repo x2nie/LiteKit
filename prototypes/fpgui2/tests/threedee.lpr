@@ -18,11 +18,11 @@ procedure MainProc;
 var
   frm: TfrmMain;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TfrmMain.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

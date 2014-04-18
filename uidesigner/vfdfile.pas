@@ -280,7 +280,7 @@ var
   fs: TFileStream;
 begin
   Result := False;
-  fs := TFileStream.Create(fpgToOSEncoding(fname), fmOpenRead);
+  fs := TFileStream.Create(lqToOSEncoding(fname), fmOpenRead);
   try
     FFileData := ''; // make sure it is empty
     SetLength(FFileData, fs.Size);

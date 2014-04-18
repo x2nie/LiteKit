@@ -5,7 +5,7 @@
     1) (optional) Check if a style was specified via a command line parameter
     2) If (1) was false, set the new default which will instantiate the new
        style class and automatically free the old one.
-    3) Assign our new style instance to the fpgStyle variable
+    3) Assign our new style instance to the lqStyle variable
 
 
   Example:
@@ -14,18 +14,18 @@
     var
       frm: TMainForm;
     begin
-      fpgApplication.Initialize;
+      lqApplication.Initialize;
 
       { Set our new style as the default (before we create any forms), unless
         a the end-user specified a different style via the command line. }
       if not gCommandLineParams.IsParam('style') then
-        if fpgStyleManager.SetStyle('Demo Style') then
-          fpgStyle := fpgStyleManager.Style;
+        if lqStyleManager.SetStyle('Demo Style') then
+          lqStyle := lqStyleManager.Style;
 
       frm := TMainForm.Create(nil);
       try
         frm.Show;
-        fpgApplication.Run;
+        lqApplication.Run;
       finally
         frm.Free;
       end;
@@ -67,7 +67,7 @@ uses
 constructor TMyStyle.Create;
 begin
   inherited Create;
-  fpgSetNamedColor(clWindowBackground, TlqColor($eeeeec));
+  lqSetNamedColor(clWindowBackground, TlqColor($eeeeec));
 end;
 
 procedure TMyStyle.DrawControlFrame(ACanvas: TlqCanvas; x, y, w, h: TlqCoord);
@@ -93,7 +93,7 @@ begin
     ACanvas.DrawRectangle(r);
     InflateRect(r, -1, -1);
     Exclude(AFlags, btfIsDefault);
-    fpgStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
+    lqStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
     Exit; //==>
   end;
 
@@ -152,7 +152,7 @@ end;
 
 
 initialization
-  fpgStyleManager.RegisterClass('Demo Style', TMyStyle);
+  lqStyleManager.RegisterClass('Demo Style', TMyStyle);
 
 end.
 

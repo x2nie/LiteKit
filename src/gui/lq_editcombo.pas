@@ -394,7 +394,7 @@ var
 begin
   if FAllowNew= anNo then
     Exit;
-  s := fpgShowCharMap;
+  s := lqShowCharMap;
   if s <> '' then
     //SetText(s);
     DoPaste(s);
@@ -447,7 +447,7 @@ begin
   //    else if itm.Name = ipmCopy then
   //      itm.Enabled := FSelOffset <> 0
   //    else if itm.Name = ipmPaste then
-  //      itm.Enabled := (not ReadOnly) and (fpgClipboard.Text <> '')
+  //      itm.Enabled := (not ReadOnly) and (lqClipboard.Text <> '')
   //    else if itm.Name = ipmClearAll then
   //      itm.Enabled := (not ReadOnly) and (Text <> '')
   //    else if itm.Name = ipmCharmap then
@@ -753,10 +753,10 @@ var
     r.SetRect(-FDrawOffset + FMargin + tw, 3, tw2 - tw, Font.Height);
     Canvas.AddClipRect(r);
     Canvas.SetTextColor(clWhite);
-    fpgStyle.DrawString(Canvas, -FDrawOffset + FMargin, 3, Text, Enabled);
+    lqStyle.DrawString(Canvas, -FDrawOffset + FMargin, 3, Text, Enabled);
     Canvas.ClearClipRect;
 }
-    Canvas.XORFillRectangle(fpgColorToRGB(lcolor) xor $FFFFFF,
+    Canvas.XORFillRectangle(lqColorToRGB(lcolor) xor $FFFFFF,
       -FDrawOffset + FMargin + tw, 3, tw2 - tw, Font.Height);
   end;
 
@@ -814,11 +814,11 @@ begin
   if not AutoCompletion then
   begin
     if HasText then
-      fpgStyle.DrawString(Canvas, FMargin+1, FMargin, Text, Enabled)
+      lqStyle.DrawString(Canvas, FMargin+1, FMargin, Text, Enabled)
     else
       begin
       Canvas.SetTextColor(clShadow1);
-      fpgStyle.DrawString(Canvas, FMargin+1, FMargin, ExtraHint, Enabled);
+      lqStyle.DrawString(Canvas, FMargin+1, FMargin, ExtraHint, Enabled);
       end;
   end
   else
@@ -826,7 +826,7 @@ begin
     if HasText then
     begin
       FSelOffset := 0;
-      fpgStyle.DrawString(Canvas, FMargin+1, FMargin, Text, Enabled);
+      lqStyle.DrawString(Canvas, FMargin+1, FMargin, Text, Enabled);
     end
     else
     begin
@@ -836,13 +836,13 @@ begin
         begin
           FSelOffset := Font.TextWidth(UTF8Copy(Items[FSelectedItem], UTF8Length(FText) + 1,
             UTF8Length(Items[FSelectedItem]) - UTF8Length(FText)));
-          fpgStyle.DrawString(Canvas, FMargin+1, FMargin, FText + UTF8Copy(Items[FSelectedItem],
+          lqStyle.DrawString(Canvas, FMargin+1, FMargin, FText + UTF8Copy(Items[FSelectedItem],
             UTF8Length(FText) + 1, UTF8Length(Items[FSelectedItem]) - UTF8Length(FText)), Enabled);
         end
         else
         begin
           FSelOffset := 0;
-          fpgStyle.DrawString(Canvas, FMargin+1, FMargin, FText, Enabled);
+          lqStyle.DrawString(Canvas, FMargin+1, FMargin, FText, Enabled);
         end;
     end;
 
@@ -855,10 +855,10 @@ begin
       // drawing cursor
       FCursorPos:= UTF8Length(FText);
       tw := Font.TextWidth(UTF8Copy(FText, 1, FCursorPos));
-      fpgCaret.SetCaret(Canvas, -FDrawOffset + FMargin + tw, FMargin, fpgCaret.Width, Font.Height);
+      lqCaret.SetCaret(Canvas, -FDrawOffset + FMargin + tw, FMargin, lqCaret.Width, Font.Height);
     end
     else
-      fpgCaret.UnSetCaret(Canvas);
+      lqCaret.UnSetCaret(Canvas);
   end;
 
   Canvas.EndDraw;

@@ -814,7 +814,7 @@ begin
   end;
   dx := Canvas.Font.TextWidth(s) + BLOCK_SIZE;
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TlqColor(i));
+  c := lqColorToRGB(TlqColor(i));
   { paint the color square }
   Canvas.Color := c;
   Canvas.FillRectangle(rect.Left+dx, rect.Top+((rect.Height-BLOCK_SIZE) div 2), BLOCK_SIZE, BLOCK_SIZE);
@@ -860,11 +860,11 @@ begin
   i := GetOrdProp(wg, Name);
   if PropInfo^.Default <> i then
   begin
-    if fpgIsNamedColor(TlqColor(i)) then
+    if lqIsNamedColor(TlqColor(i)) then
       Result := ident + Name + ' := TlqColor($' + IntToHex(i, 8) + ');' + LineEnding
     else
     begin
-      c := fpgColorToRGB(TlqColor(i));
+      c := lqColorToRGB(TlqColor(i));
       Result := ident + Name + ' := TlqColor($' + IntToHex(c, 6) + ');' + LineEnding;
     end;
   end
@@ -880,7 +880,7 @@ var
 begin
   PropInfo := GetPropInfo(wg.ClassType, Name);
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TlqColor(i));
+  c := lqColorToRGB(TlqColor(i));
   Result := '$' + IntToHex(c, 6);
 end;
 
@@ -897,8 +897,8 @@ var
 begin
   PropInfo := GetPropInfo(wg.ClassType, Name);
   i := GetOrdProp(wg, Name);
-  c := fpgColorToRGB(TlqColor(i));
-  c := fpgSelectColorDialog(c);
+  c := lqColorToRGB(TlqColor(i));
+  c := lqSelectColorDialog(c);
   SetOrdProp(wg, Name, c);
 end;
 

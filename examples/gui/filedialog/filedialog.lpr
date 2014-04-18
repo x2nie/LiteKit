@@ -94,7 +94,7 @@ begin
           'User=' + dlg.UserID + #13 +
           'Pass=' + dlg.Password +  #13 +
           'Database=' + dlg.Database, [mbOK]);
-//      fpgApplication.ProcessMessages;
+//      lqApplication.ProcessMessages;
     end;
   finally
     dlg.Free;
@@ -105,7 +105,7 @@ procedure TMainForm.btnUserInputClicked(Sender: TObject);
 var
   lAnswer: TlqString;
 begin
-  if fpgInputQuery('Caption here', 'And the prompt goes here', lAnswer) then
+  if lqInputQuery('Caption here', 'And the prompt goes here', lAnswer) then
     ShowMessage(Format('User entered <%s>', [lAnswer]));
 end;
 
@@ -283,10 +283,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

@@ -96,13 +96,13 @@ type
     FWasDrag: boolean;
   protected
     // messages of the designed widgets
-    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
-    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
-    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message LQM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message LQM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message LQM_MOUSEMOVE;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message LQM_KEYPRESS;
+    procedure   MsgMove(var msg: TlqMessageRec); message LQM_MOVE;
+    procedure   MsgResize(var msg: TlqMessageRec); message LQM_RESIZE;
+    procedure   MsgActivate(var msg: TlqMessageRec); message LQM_ACTIVATE;
     procedure   DesignerKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
   public
     constructor Create;
@@ -1498,7 +1498,7 @@ begin
   inherited;
   wgClassName := 'TlqWidget';
   FBackgroundColor := clUIDesignerGreen;
-  FFont   := fpgStyle.DefaultFont;
+  FFont   := lqStyle.DefaultFont;
   FWidth  := 120;
   FHeight := 32;
 end;

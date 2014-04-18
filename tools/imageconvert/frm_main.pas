@@ -119,7 +119,7 @@ var
 begin
   InStream := TFileStream.Create(AFileName, fmOpenRead);
   try
-    ConstName := 'newimg_' + ChangeFileExt(fpgExtractFileName(AFileName), '');
+    ConstName := 'newimg_' + ChangeFileExt(lqExtractFileName(AFileName), '');
     WriteStrLn('');
     WriteStrLn('const');
 
@@ -164,7 +164,7 @@ end;
 
 procedure TMainForm.btnCopyClicked(Sender: TObject);
 begin
-  fpgClipboard.Text := memImages.Text;
+  lqClipboard.Text := memImages.Text;
 end;
 
 procedure TMainForm.AfterCreate;

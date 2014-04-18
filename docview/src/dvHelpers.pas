@@ -31,8 +31,8 @@ uses
 function GetOwnHelpFileName: String;
 begin
   { TODO -oGraeme -cown help : Maybe later we will have different language versions }
-  result := fpgExtractFilePath(ParamStr(0)) + cDocViewHelpFile;
-  if not fpgFileExists(Result) then
+  result := lqExtractFilePath(ParamStr(0)) + cDocViewHelpFile;
+  if not lqFileExists(Result) then
   begin
      Result := FindHelpFile(cDocViewHelpFile);
   end;
@@ -54,38 +54,38 @@ begin
   Result := '';
 
   AlternativeFileName := '';
-  if fpgExtractFileExt( lFilename ) = '' then
+  if lqExtractFileExt( lFilename ) = '' then
   begin
-    lFilename := fpgChangeFileExt(lFilename, '.inf');
-    AlternativeFileName := fpgChangeFileExt(lFilename, '.hlp');
+    lFilename := lqChangeFileExt(lFilename, '.inf');
+    AlternativeFileName := lqChangeFileExt(lFilename, '.hlp');
   end;
 
-  if fpgExtractFilePath( lFileName ) <> '' then
+  if lqExtractFilePath( lFileName ) <> '' then
   begin
     // Path specified; just see if it exists
 
     // expand out relative paths
-    lFilename := fpgExpandFileName( lFileName );
-    AlternativeFilename := fpgExpandFileName( AlternativeFilename );
+    lFilename := lqExpandFileName( lFileName );
+    AlternativeFilename := lqExpandFileName( AlternativeFilename );
 
-    if fpgFileExists( lFilename ) then
+    if lqFileExists( lFilename ) then
       Result := lFilename
-    else if fpgFileExists( AlternativeFilename ) then
+    else if lqFileExists( AlternativeFilename ) then
       Result := AlternativeFilename;
 
   end
   else
   begin
     // Path not specified; search current
-    if fpgFileExists( fpgExpandFileName( lFileName ) ) then
+    if lqFileExists( lqExpandFileName( lFileName ) ) then
     begin
-      Result := fpgExpandFileName( lFileName );
+      Result := lqExpandFileName( lFileName );
       exit;
     end;
 
-    if (AlternativeFilename <> '') and fpgFileExists(fpgExpandFileName(AlternativeFilename)) then
+    if (AlternativeFilename <> '') and lqFileExists(lqExpandFileName(AlternativeFilename)) then
     begin
-      Result := fpgExpandFileName( AlternativeFilename );
+      Result := lqExpandFileName( AlternativeFilename );
       exit;
     end;
 
@@ -124,9 +124,9 @@ begin
                           ResultFilename );
   if ( not Result ) and IncludeAppDir then
   begin
-    ResultFilename := fpgAppendPathDelim(GetApplicationDir)
+    ResultFilename := lqAppendPathDelim(GetApplicationDir)
                       + Filename;
-    Result := fpgFileExists( ResultFilename );
+    Result := lqFileExists( ResultFilename );
     if not Result then
       ResultFilename := '';
   end;
@@ -135,7 +135,7 @@ end;
 
 function GetApplicationDir: TlqString;
 begin
-  Result := fpgExtractFilePath(ParamStr(0));
+  Result := lqExtractFilePath(ParamStr(0));
 end;
 
 function SearchPath( PathEnvVar: TlqString; Filename: TlqString; var FilenameFound: string ): boolean;
@@ -155,7 +155,7 @@ begin
   TStringList(fl).Sort;
   for i := 0 to fl.Count-1 do
   begin
-    lFilename := fpgExtractFileName(fl[i]);
+    lFilename := lqExtractFileName(fl[i]);
     if SameText(lFilename, Filename) then
     begin
       FilenameFound := fl[i];

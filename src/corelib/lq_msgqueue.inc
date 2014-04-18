@@ -52,7 +52,7 @@ begin
     Elem.Prev.Next := Elem.Next;
 end;
 
-function fpgAllocateMessage: PfpgMessageRec;
+function lqAllocateMessage: PfpgMessageRec;
 var
   e: TMessageListElement;
 begin
@@ -67,11 +67,11 @@ begin
     result := nil;
 end;
 
-procedure fpgDeleteFirstMessage;
+procedure lqDeleteFirstMessage;
 var
   e: TMessageListElement;
 begin
-  fpgApplication.Lock;
+  lqApplication.Lock;
   try
     e := UsedFirstMessage;
     if e <> nil then
@@ -80,24 +80,24 @@ begin
       MsgListInsertElement(e, FreeFirstMessage, FreeLastMessage);
     end;
   finally
-    fpgApplication.Unlock;
+    lqApplication.Unlock;
   end;
 end;
 
-function fpgGetFirstMessage: PfpgMessageRec;
+function lqGetFirstMessage: PfpgMessageRec;
 begin
-  fpgApplication.Lock;
+  lqApplication.Lock;
   try
     if UsedFirstMessage <> nil then
       Result := @(UsedFirstMessage.msg)
     else
       Result := nil;
   finally
-    fpgApplication.Unlock;
+    lqApplication.Unlock;
   end;
 end;
 
-procedure fpgInitMsgQueue;
+procedure lqInitMsgQueue;
 var
   n: integer;
   e: TMessageListElement;
@@ -117,15 +117,15 @@ begin
   end;
 end;
 
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
+procedure lqPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 var
   p: PfpgMessageRec;
 begin
   if Dest = nil then
     Exit; //==>
-  fpgApplication.Lock;
+  lqApplication.Lock;
   try
-    p := fpgAllocateMessage;
+    p := lqAllocateMessage;
     if p <> nil then
     begin
       p^.MsgCode := MsgCode;
@@ -136,20 +136,20 @@ begin
     else
       raise Exception.Create('THE LiteKit MESSAGE QUEUE IS FULL.');
   finally
-    fpgApplication.Unlock;
+    lqApplication.Unlock;
   end;
 end;
 
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer); overload;
+procedure lqPostMessage(Sender, Dest: TObject; MsgCode: integer); overload;
 var
   p: PfpgMessageRec;
 begin
   if Dest = nil then
     Exit; //==>
 
-  fpgApplication.Lock;
+  lqApplication.Lock;
   try
-    p := fpgAllocateMessage;
+    p := lqAllocateMessage;
     if p <> nil then
     begin
       p^.MsgCode := MsgCode;
@@ -160,11 +160,11 @@ begin
     else
       raise Exception.Create('THE LiteKit MESSAGE QUEUE IS FULL.');
   finally
-    fpgApplication.Unlock;
+    lqApplication.Unlock;
   end;
 end;
 
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
+procedure lqSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
 var
   m: TlqMessageRec;
 begin
@@ -176,10 +176,10 @@ begin
   m.Dest    := Dest;
   m.Params  := aparams;
 
-  fpgDeliverMessage(m);
+  lqDeliverMessage(m);
 end;
 
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
+procedure lqSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
 var
   m: TlqMessageRec;
 begin
@@ -190,24 +190,24 @@ begin
   m.Sender  := Sender;
   m.Dest    := Dest;
 
-  fpgDeliverMessage(m);
+  lqDeliverMessage(m);
 end;
 
-procedure fpgDeliverMessage(var msg: TlqMessageRec);
+procedure lqDeliverMessage(var msg: TlqMessageRec);
 var
   oItem: TMsgHookItem;
   i: integer;
 begin
-  if msg.MsgCode = FPGM_KILLME then
+  if msg.MsgCode = LQM_KILLME then
     msg.Dest.Free
   else
   begin
     msg.Dest.Dispatch(msg);
-    if fpgApplication.FMessageHookList.Count > 0 then
+    if lqApplication.FMessageHookList.Count > 0 then
     begin
-      for i := 0 to fpgApplication.FMessageHookList.Count - 1 do
+      for i := 0 to lqApplication.FMessageHookList.Count - 1 do
       begin
-        oItem := TMsgHookItem(fpgApplication.FMessageHookList.Items[i]);
+        oItem := TMsgHookItem(lqApplication.FMessageHookList.Items[i]);
         if (msg.Dest = oItem.Dest) and (msg.MsgCode = oItem.MsgCode) then
           oItem.Listener.Dispatch(msg);
       end;
@@ -215,18 +215,18 @@ begin
   end;
 end;
 
-procedure fpgDeliverMessages;
+procedure lqDeliverMessages;
 var
   mp: PfpgMessageRec;
   m: TlqMessageRec;
 begin
   repeat
-    mp := fpgGetFirstMessage;
+    mp := lqGetFirstMessage;
     if mp <> nil then
     begin
       m := mp^;
-      fpgDeleteFirstMessage;
-      fpgDeliverMessage(m);
+      lqDeleteFirstMessage;
+      lqDeliverMessage(m);
     end;
   until mp = nil;
 end;

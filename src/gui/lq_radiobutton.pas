@@ -159,7 +159,7 @@ end;
 procedure TlqRadioButton.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   RePaint;
 end;
 
@@ -214,7 +214,7 @@ begin
     ix := (2 + (Ord(FChecked) * 2)) - Ord(FChecked);
 
   // paint the radio button
-  img := fpgImages.GetImage('sys.radiobuttons');    // Do NOT localize
+  img := lqImages.GetImage('sys.radiobuttons');    // Do NOT localize
   Canvas.DrawImagePart(r.Left, r.Top, img, ix*FBoxSize, 0, FBoxSize, FBoxSize);
 
   r := GetClientRect;
@@ -236,7 +236,7 @@ begin
     LFlags := [txtLeft, txtVCenter]
   else
     LFlags := [txtLeft, txtVCenter, txtDisabled];
-  Canvas.DrawText(r, FText, LFlags);   { internally this still calls fpgStyle.DrawString(), so theming will be applied }
+  Canvas.DrawText(r, FText, LFlags);   { internally this still calls lqStyle.DrawString(), so theming will be applied }
 
   if FFocused then
   begin
@@ -252,7 +252,7 @@ begin
       r.Width := r.Width + 2;
     end;
     { undo the 2px focusrect-to-text margin, so we simply use the clip rect }
-    fpgStyle.DrawFocusRect(Canvas, r);
+    lqStyle.DrawFocusRect(Canvas, r);
   end;
 end;
 
@@ -397,7 +397,7 @@ constructor TlqRadioButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText       := 'RadioButton';
-  FFont       := fpgGetFont('#Label1');
+  FFont       := lqGetFont('#Label1');
   FHeight     := FFont.Height + 4;
   FWidth      := 120;
   FTextColor  := Parent.TextColor;

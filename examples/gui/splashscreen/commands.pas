@@ -91,7 +91,7 @@ end;
 
 procedure TExitCommand.Execute;
 begin
-  fpgApplication.Terminated := True;
+  lqApplication.Terminated := True;
 end;
 
 { TShowSplashCommand }

@@ -70,7 +70,7 @@ var
   imga: TFPCustomImage;
 begin
   Result := nil;
-  if not fpgFileExists(AFileName) then
+  if not lqFileExists(AFileName) then
     Exit; //==>
 
   imga := TFPMemoryImage.Create(0, 0);
@@ -151,7 +151,7 @@ var
   xlocal, ylocal: integer;
 begin
   Result := nil;
-  if not fpgFileExists(AFileName) then
+  if not lqFileExists(AFileName) then
     Exit; //==>
 
           // Maximum image size of AMaxWidth by AMaxHeight.

@@ -76,8 +76,8 @@ var
   lFileName: TlqString;
 begin
   FReadOnly := AReadOnly;
-  lDir      := fpgExtractFileDir(AFileName);
-  lFileName := fpgExtractFileName(AFileName);
+  lDir      := lqExtractFileDir(AFileName);
+  lFileName := lqExtractFileName(AFileName);
 
   if lDir = '' then
     lDir := GetAppConfigDir(False);
@@ -85,13 +85,13 @@ begin
     lDir := lDir + PathDelim;
 
   { We used a non-Global config dir, so should be able to create the dir }
-  if not fpgForceDirectories(lDir) then
+  if not lqForceDirectories(lDir) then
     raise Exception.CreateFmt(rsErrFailedToCreateDir, [lDir]);
 
 
   if lFileName = '' then
     lFileName := ApplicationName + '.ini'
-  else if fpgExtractFileExt(lFileName) = '' then
+  else if lqExtractFileExt(lFileName) = '' then
     lFileName := lFileName + '.ini';
 
   lFileName := lDir + lFileName;
@@ -179,7 +179,7 @@ begin
     AForm.WindowPosition := wpUser;
     // No form pos in the ini file, so default to screen center
   end
-  else if Assigned(fpgApplication.MainForm) and (fpgApplication.MainForm <> AForm) then
+  else if Assigned(lqApplication.MainForm) and (lqApplication.MainForm <> AForm) then
     AForm.WindowPosition := wpAuto
   else
     AForm.WindowPosition := wpScreenCenter;

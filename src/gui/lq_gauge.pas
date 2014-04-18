@@ -141,8 +141,8 @@ begin
     Exit; //==>
   end;
 
-  RGBStart := fpgColorToRGBTriple(fpgColorToRGB(AStart));
-  RGBStop  := fpgColorToRGBTriple(fpgColorToRGB(AStop));
+  RGBStart := lqColorToRGBTriple(lqColorToRGB(AStart));
+  RGBStop  := lqColorToRGBTriple(lqColorToRGB(AStop));
 
   count := min(H,W);
   count := count div 2;
@@ -574,7 +574,7 @@ begin
   FPosition     := 0;
   FShowText     := True;
   FBorderStyle  := bsNone;
-  FFont         := fpgStyle.DefaultFont;
+  FFont         := lqStyle.DefaultFont;
 end;
 
 procedure TlqBaseGauge.AddProgress(AValue: Longint);

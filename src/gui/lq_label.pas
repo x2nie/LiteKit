@@ -183,7 +183,7 @@ end;
 procedure TlqCustomLabel.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   ResizeLabel;
 end;
 
@@ -211,7 +211,7 @@ constructor TlqCustomLabel.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText             := 'Label';
-  FFont             := fpgGetFont('#Label1');
+  FFont             := lqGetFont('#Label1');
   Height            := FFont.Height;
   Width             := 80;
   FTextColor        := Parent.TextColor;

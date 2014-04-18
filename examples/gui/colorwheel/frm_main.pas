@@ -126,7 +126,7 @@ var
   c: TlqColor;
 begin
   c := ValueBar1.SelectedColor;
-  rgb := fpgColorToFPColor(c);
+  rgb := lqColorToFPColor(c);
   edR.Text := IntToStr(rgb.Red);
   edG.Text := IntToStr(rgb.Green);
   edB.Text := IntToStr(rgb.Blue);

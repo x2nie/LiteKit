@@ -39,14 +39,14 @@ begin
   end;
 
   FImg.UpdateImage;
-  drawgc := XCreateGc(fpgApplication.Display, TlqWindow(FWindow).WinHandle, 0, @GcValues);
+  drawgc := XCreateGc(lqApplication.Display, TlqWindow(FWindow).WinHandle, 0, @GcValues);
 
   // finally dump the image to screen!
-  XPutImage(fpgApplication.Display, TlqWindow(FWindow).WinHandle,
+  XPutImage(lqApplication.Display, TlqWindow(FWindow).WinHandle,
       drawgc, TImageHack(FImg).XImage, 0, 0, 0, 0,
       FWindow.Width, FWindow.Height);
 
-  XFreeGc(fpgApplication.Display, drawgc);
+  XFreeGc(lqApplication.Display, drawgc);
 end;
 
 

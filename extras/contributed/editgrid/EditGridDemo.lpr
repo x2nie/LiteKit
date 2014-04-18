@@ -13,7 +13,7 @@ fpgApplication.Initialize;
 F_Demo:= TF_Demo.Create(nil);
 try
   F_Demo.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
 finally
   F_Demo.Free;
   end;

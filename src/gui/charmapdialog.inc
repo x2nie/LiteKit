@@ -55,7 +55,7 @@
 {$IFDEF read_implementation}
 
 
-function fpgShowCharMap: TlqString;
+function lqShowCharMap: TlqString;
 var
   frm: TCharMapForm;
 begin

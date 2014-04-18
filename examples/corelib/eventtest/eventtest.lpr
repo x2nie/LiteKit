@@ -25,22 +25,22 @@ type
     FMoveEventCount: integer;
     function    ShiftStateToStr(Shift: TShiftState): string;
     function    MouseState(AShift: TShiftState; const AMousePos: TPoint): string;
-    procedure   MsgActivate(var msg: TlqMessageRec); message FPGM_ACTIVATE;
-    procedure   MsgDeActivate(var msg: TlqMessageRec); message FPGM_DEACTIVATE;
-    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
-    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
-    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
-    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
-    procedure   MsgKeyChar(var msg: TlqMessageRec); message FPGM_KEYCHAR;
-    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgKeyRelease(var msg: TlqMessageRec); message FPGM_KEYRELEASE;
-    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgDoubleClick(var msg: TlqMessageRec); message FPGM_DOUBLECLICK;
-    procedure   MsgMouseEnter(var msg: TlqMessageRec); message FPGM_MOUSEENTER;
-    procedure   MsgMouseExit(var msg: TlqMessageRec); message FPGM_MOUSEEXIT;
-    procedure   MsgScroll(var msg: TlqMessageRec); message FPGM_SCROLL;
+    procedure   MsgActivate(var msg: TlqMessageRec); message LQM_ACTIVATE;
+    procedure   MsgDeActivate(var msg: TlqMessageRec); message LQM_DEACTIVATE;
+    procedure   MsgClose(var msg: TlqMessageRec); message LQM_CLOSE;
+    procedure   MsgPaint(var msg: TlqMessageRec); message LQM_PAINT;
+    procedure   MsgResize(var msg: TlqMessageRec); message LQM_RESIZE;
+    procedure   MsgMove(var msg: TlqMessageRec); message LQM_MOVE;
+    procedure   MsgKeyChar(var msg: TlqMessageRec); message LQM_KEYCHAR;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message LQM_KEYPRESS;
+    procedure   MsgKeyRelease(var msg: TlqMessageRec); message LQM_KEYRELEASE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message LQM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message LQM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message LQM_MOUSEMOVE;
+    procedure   MsgDoubleClick(var msg: TlqMessageRec); message LQM_DOUBLECLICK;
+    procedure   MsgMouseEnter(var msg: TlqMessageRec); message LQM_MOUSEENTER;
+    procedure   MsgMouseExit(var msg: TlqMessageRec); message LQM_MOUSEEXIT;
+    procedure   MsgScroll(var msg: TlqMessageRec); message LQM_SCROLL;
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -236,10 +236,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

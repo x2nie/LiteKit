@@ -171,7 +171,7 @@ begin
   end;
 
   if AFile <> '' then
-    ProjectName := fpgExtractFileName(AFile);
+    ProjectName := lqExtractFileName(AFile);
 
   FIniFile.WriteString(cProjectOptions, 'ProjectName', ProjectName);
   FIniFile.WriteString(cProjectOptions, 'MainUnit', MainUnit);
@@ -269,9 +269,9 @@ begin
   if not Assigned(FIniFile) then
     FIniFile := TlqINIFile.CreateExt(AProjectFile);
 
-  ProjectDir := fpgExtractFilePath(AProjectFile);
-  fpgSetCurrentDir(ProjectDir);
-  ProjectName := FIniFile.ReadString(cProjectOptions, 'ProjectName', fpgChangeFileExt(fpgExtractFileName(AProjectFile), ''));
+  ProjectDir := lqExtractFilePath(AProjectFile);
+  lqSetCurrentDir(ProjectDir);
+  ProjectName := FIniFile.ReadString(cProjectOptions, 'ProjectName', lqChangeFileExt(lqExtractFileName(AProjectFile), ''));
   MainUnit := FIniFile.ReadString(cProjectOptions, 'MainUnit', '');
   TargetFile := FIniFile.ReadString(cProjectOptions, 'TargetFile', '');
   DefaultMake := FIniFile.ReadInteger(cProjectOptions, 'DefaultMake', 0);
@@ -329,7 +329,7 @@ begin
     begin
       u := TUnit.Create;
       s := tiToken(sl[j], ',', 1);
-      u.FileName := fpgExpandFileName(ProjectDir + s);
+      u.FileName := lqExpandFileName(ProjectDir + s);
       u.Opened := Boolean(StrToInt(tiToken(sl[j], ',', 2)));  // 1 = True, 0 = False
       UnitList.Add(u);
     end;

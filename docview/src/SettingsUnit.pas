@@ -219,7 +219,7 @@ begin
         FontName := 'Font' + IntToStr( i );
         Fonts[ i ] := nil;
         if ReadBool( FontsSection, FontName + 'Customised', false ) then
-          Fonts[ i ] := fpgGetFont(ReadString(FontsSection, FontName + 'Desc', DefaultTopicFont));
+          Fonts[ i ] := lqGetFont(ReadString(FontsSection, FontName + 'Desc', DefaultTopicFont));
       end;
 
       FixedFontSubstitution := ReadBool( FontsSection, 'FixedFontSubstitution', true );
@@ -459,9 +459,9 @@ procedure WriteSettingsDetailsTo(aStrings : TStrings);
 Begin
   aStrings.Add('');
   aStrings.Add('---- Settings ----');
-  aStrings.Add('info: Screenwidth=' + IntToStr(fpgApplication.ScreenWidth));
-  aStrings.Add('info: Screenheight=' + IntToStr(fpgApplication.ScreenHeight));
-  aStrings.Add('info: dpi=' + IntToStr(fpgApplication.Screen_dpi));
+  aStrings.Add('info: Screenwidth=' + IntToStr(lqApplication.ScreenWidth));
+  aStrings.Add('info: Screenheight=' + IntToStr(lqApplication.ScreenHeight));
+  aStrings.Add('info: dpi=' + IntToStr(lqApplication.Screen_dpi));
 
   aStrings.Add('LastOpenDirectory: ' + Settings.LastOpenDirectory);
   aStrings.Add('LastSaveDirectory: ' + Settings.LastSaveDirectory);

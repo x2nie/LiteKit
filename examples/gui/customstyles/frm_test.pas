@@ -261,7 +261,7 @@ begin
 
   miSubMenu.SubMenu := pmSubMenu1;
 
-  fpgStyleManager.AssignStyleTypes(memStyles.Lines);
+  lqStyleManager.AssignStyleTypes(memStyles.Lines);
 end;
 
 

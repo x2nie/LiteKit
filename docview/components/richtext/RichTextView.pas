@@ -36,12 +36,12 @@ Uses
 
 const
   // for dragtext support, primarily.
-  RT_QUERYTEXT    = FPGM_USER + 500;
+  RT_QUERYTEXT    = LQM_USER + 500;
     // Param1: pointer to buffer (may be nil)
     // Param2: buffer size (-1 to ignore)
     // Returns: number of bytes copied
 
-  RT_QUERYSELTEXT = FPGM_USER + 501;
+  RT_QUERYSELTEXT = LQM_USER + 501;
     // Param1: pointer to buffer (may be nil)
     // Param2: buffer size (-1 to ignore)
     // Returns: number of bytes copied
@@ -678,13 +678,13 @@ Var
     if AFontDesc <> '' then
     begin
       oldf := Canvas.Font.FontDesc; // save original font
-      Canvas.Font := fpgGetFont(AFontDesc); // set new font
+      Canvas.Font := lqGetFont(AFontDesc); // set new font
     end;
     Canvas.TextColor := AColor; // set new color
     Canvas.DrawString(x, 10, AText);
     x := x + Canvas.Font.TextWidth(AText);  // calc x offset for next text
     if oldf <> '' then
-      Canvas.Font := fpgGetFont(oldf);  // restore original font
+      Canvas.Font := lqGetFont(oldf);  // restore original font
   end;
 
 begin
@@ -735,7 +735,7 @@ begin
         end;
       ebsDefault:
         begin
-          rect := fpgStyle.GetControlFrameBorders;
+          rect := lqStyle.GetControlFrameBorders;
           x := rect.Right;
           y := rect.Bottom;
         end;
@@ -758,7 +758,7 @@ end;
 
 procedure TRichTextView.HandleHide;
 begin
-//  fpgCaret.UnSetCaret (Canvas);
+//  lqCaret.UnSetCaret (Canvas);
   inherited HandleHide;
 end;
 
@@ -1417,12 +1417,12 @@ begin
     CursorHeight := DrawHeight - Y + 1;
   end;
 
-//  fpgCaret.SetCaret(Canvas, TextRect.Left + X, TextRect.Bottom + Y, 2, CursorHeight);
+//  lqCaret.SetCaret(Canvas, TextRect.Left + X, TextRect.Bottom + Y, 2, CursorHeight);
 end;
 
 procedure TRichTextView.RemoveCursor;
 begin
-//  fpgCaret.UnSetCaret(Canvas);
+//  lqCaret.UnSetCaret(Canvas);
 end;
 
 Function TRichTextView.GetLineDownPosition: longint;
@@ -2380,7 +2380,7 @@ begin
 
   CopySelectionToBuffer( Buffer, SelLength + 1 );
 
-  fpgClipboard.Text := Buffer;
+  lqClipboard.Text := Buffer;
 
   StrDispose( Buffer );
 end;
@@ -2904,7 +2904,7 @@ begin
         end;
     ebsDefault:
         begin
-          r := fpgStyle.GetControlFrameBorders;
+          r := lqStyle.GetControlFrameBorders;
           InflateRect(Result, -r.Left, -r.Top);  { assuming borders are even on opposite sides }
         end;
     ebsSingle:

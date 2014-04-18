@@ -50,10 +50,10 @@ type
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   PrepareLayout;
   public
-    {@VFD_HEAD_BEGIN: fpgMessageDialog}
+    {@VFD_HEAD_BEGIN: lqMessageDialog}
     lblName1: TlqLabel;
     pnlIcon: TlqBevel;
-    {@VFD_HEAD_END: fpgMessageDialog}
+    {@VFD_HEAD_END: lqMessageDialog}
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     procedure   AfterCreate; override;
@@ -277,22 +277,22 @@ begin
 
     mtError:
         begin
-          Canvas.DrawImage(12, 12, fpgImages.GetImage('stdimg.dlg.critical'));    // Do NOT localize
+          Canvas.DrawImage(12, 12, lqImages.GetImage('stdimg.dlg.critical'));    // Do NOT localize
         end;
 
     mtConfirmation:
         begin
-          Canvas.DrawImage(12, 12, fpgImages.GetImage('stdimg.dlg.help'));        // Do NOT localize
+          Canvas.DrawImage(12, 12, lqImages.GetImage('stdimg.dlg.help'));        // Do NOT localize
         end;
 
     mtWarning:
         begin
-          Canvas.DrawImage(12, 12, fpgImages.GetImage('stdimg.dlg.warning'));     // Do NOT localize
+          Canvas.DrawImage(12, 12, lqImages.GetImage('stdimg.dlg.warning'));     // Do NOT localize
         end;
 
     else
         begin // default to Information
-          Canvas.DrawImage(12, 12, fpgImages.GetImage('stdimg.dlg.info'));        // Do NOT localize
+          Canvas.DrawImage(12, 12, lqImages.GetImage('stdimg.dlg.info'));        // Do NOT localize
         end;
   end;
 
@@ -333,7 +333,7 @@ begin
   case CheckClipBoardKey(keycode, shiftstate) of
     ckCopy:
         begin
-          fpgClipboard.Text := Text + LineEnding + LineEnding + InformativeText;
+          lqClipboard.Text := Text + LineEnding + LineEnding + InformativeText;
           Consumed := True;
         end;
   else
@@ -357,7 +357,7 @@ begin
 
   FButtonList := TList.Create;
   FMaxLineWidth := 400;
-  FFont         := fpgGetFont('#Label1');
+  FFont         := lqGetFont('#Label1');
   FTextY        := 60;
   FLineHeight   := FFont.Height + 4;
 end;
@@ -520,7 +520,7 @@ end;
 
 procedure TlqMessageDialog.AfterCreate;
 begin
-  {@VFD_BODY_BEGIN: fpgMessageDialog}
+  {@VFD_BODY_BEGIN: lqMessageDialog}
   Name := 'fpgMessageDialog';
   WindowTitle := rsMessage;
   Sizeable  := False;
@@ -548,7 +548,7 @@ begin
     OnPaint := @pnlIconPaint;
   end;
 
-  {@VFD_BODY_END: fpgMessageDialog}
+  {@VFD_BODY_END: lqMessageDialog}
 end;
 
 {$ENDIF read_implementation}

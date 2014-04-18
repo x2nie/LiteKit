@@ -23,12 +23,12 @@ type
 
   TlqQueryDialog = class(TlqForm)
   private
-    {@VFD_HEAD_BEGIN: fpgQueryDialog}
+    {@VFD_HEAD_BEGIN: lqQueryDialog}
     lblText: TlqLabel;
     edtText: TlqEdit;
     btnOK: TlqButton;
     btnCancel: TlqButton;
-    {@VFD_HEAD_END: fpgQueryDialog}
+    {@VFD_HEAD_END: lqQueryDialog}
     procedure SetupCaptions;
     procedure edtTextKeyPressed(Sender: TObject; var KeyCode: word; var ShiftState: TShiftState; var Consumed: boolean);
   protected
@@ -42,7 +42,7 @@ type
 
 {$IFDEF read_implementation}
 
-function fpgInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
+function lqInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
 var
   dlg: TlqQueryDialog;
 begin
@@ -85,7 +85,7 @@ end;
 procedure TlqQueryDialog.AfterCreate;
 begin
   {%region 'Auto-generated GUI code' -fold}
-  {@VFD_BODY_BEGIN: fpgQueryDialog}
+  {@VFD_BODY_BEGIN: lqQueryDialog}
   Name := 'fpgQueryDialog';
   SetPosition(300, 150, 340, 97);
   WindowTitle := 'QueryDialog';
@@ -145,7 +145,7 @@ begin
     TabOrder := 4;
   end;
 
-  {@VFD_BODY_END: fpgQueryDialog}
+  {@VFD_BODY_END: lqQueryDialog}
   {%endregion}
 
   SetupCaptions;

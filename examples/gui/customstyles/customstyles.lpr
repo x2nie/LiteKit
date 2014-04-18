@@ -47,18 +47,18 @@ procedure MainProc;
 var
   frm: TTestForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
 
   { Set our new style as the default (before we create any forms), unless
     a the end-user specified a different style via the command line. }
   if not gCommandLineParams.IsParam('style') then
-    if fpgStyleManager.SetStyle('Demo Style') then
-      fpgStyle := fpgStyleManager.Style;
+    if lqStyleManager.SetStyle('Demo Style') then
+      lqStyle := lqStyleManager.Style;
 
   frm := TTestForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

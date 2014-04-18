@@ -532,19 +532,19 @@ begin
   SetPosition(43, 150, 250, 450);
   gINI.ReadFormState(self);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.anchorleft', @vfd_anchorleft,
     sizeof(vfd_anchorleft), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.anchorright', @vfd_anchorright,
     sizeof(vfd_anchorright), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.anchortop', @vfd_anchortop,
     sizeof(vfd_anchortop), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.anchorbottom', @vfd_anchorbottom,
     sizeof(vfd_anchorbottom), 0, 0);
 

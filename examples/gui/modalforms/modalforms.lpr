@@ -178,10 +178,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

@@ -75,12 +75,12 @@ var
 begin
   unitdir := GProject.ProjectDir + GProject.UnitOutputDir;
   unitdir := GMacroList.ExpandMacro(unitdir);
-  if not fpgDirectoryExists(unitdir) then
+  if not lqDirectoryExists(unitdir) then
   begin
     {$IFDEF DEBUG}
     writeln('DEBUG:  TBuilderThread.Execute - Creating dir: ' + unitdir);
     {$ENDIF}
-    fpgForceDirectories(unitDir);
+    lqForceDirectories(unitDir);
   end;
 
   p := TProcess.Create(nil);

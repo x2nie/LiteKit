@@ -98,7 +98,7 @@ begin
   if FImageName <> '' then
   begin
     { request a reference to already loaded image }
-    img := fpgImages.GetImage(FImageName);
+    img := lqImages.GetImage(FImageName);
     if Assigned(img) then
     begin
       FCanvas.DrawImage((Width-img.Width) div 2, (Height-img.Height) div 2, img);

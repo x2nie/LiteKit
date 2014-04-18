@@ -37,7 +37,7 @@ procedure TMainForm.chkShowHiddenChanged(Sender: TObject);
 begin
   FGrid.FileList.ShowHidden := chkShowHidden.Checked;
   FGrid.FileList.ReadDirectory('');
-  fpgSendMessage(self, FGrid, FPGM_PAINT);
+  lqSendMessage(self, FGrid, LQM_PAINT);
 end;
 
 procedure TMainForm.btnQuitClicked(Sender: TObject);
@@ -86,10 +86,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

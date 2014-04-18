@@ -40,8 +40,8 @@ uses
 
 
 initialization
-  fpgStyleManager.RegisterClass(cDefaultStyle, TlqWin2000Style);   // TODO: This will change later
-  fpgStyleManager.RegisterClass('Win2000', TlqWin2000Style);
+  lqStyleManager.RegisterClass(cDefaultStyle, TlqWin2000Style);   // TODO: This will change later
+  lqStyleManager.RegisterClass('Win2000', TlqWin2000Style);
 
 
 end.

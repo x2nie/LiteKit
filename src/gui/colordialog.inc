@@ -64,7 +64,7 @@ type
 {$IFDEF read_implementation}
 
 
-function fpgSelectColorDialog(APresetColor: TlqColor): TlqColor;
+function lqSelectColorDialog(APresetColor: TlqColor): TlqColor;
 var
   frm: TlqColorSelectDialog;
 begin
@@ -122,7 +122,7 @@ var
   c: TlqColor;
 begin
   c := ValueBar.SelectedColor;
-  rgb := fpgColorToFPColor(c);
+  rgb := lqColorToFPColor(c);
   edR.Value := rgb.Red;
   edG.Value := rgb.Green;
   edB.Value := rgb.Blue;

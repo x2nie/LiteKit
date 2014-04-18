@@ -70,7 +70,7 @@ type
     FMouseDragging: boolean;
     FFirstItem: integer;
     FMargin: integer;
-    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message LQM_PAINT;
     procedure   UpdateScrollBar;
     procedure   FollowFocus;
     function    ListHeight: TlqCoord;
@@ -377,7 +377,7 @@ end;
 procedure TlqBaseListBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   if FAutoHeight then
     Height:= ((Height - 6) div RowHeight) * RowHeight + 6;
   RePaint;
@@ -802,7 +802,7 @@ end;
 constructor TlqBaseListBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FFont := fpgGetFont('#List');
+  FFont := lqGetFont('#List');
   FBackgroundColor    := clListBox;
   FTextColor          := Parent.TextColor;
 
@@ -911,7 +911,7 @@ procedure TlqTextListBox.DrawItem(num: integer; rect: TlqRect; flags: integer);
 begin
   //if num < 0 then
     //Exit; //==>
-  fpgStyle.DrawString(Canvas, rect.left+2, rect.top+1, FItems.Strings[num], Enabled);
+  lqStyle.DrawString(Canvas, rect.left+2, rect.top+1, FItems.Strings[num], Enabled);
 end;
 
 procedure TlqTextListBox.Exchange (Index1, Index2: Integer);
@@ -1243,7 +1243,7 @@ begin
   Canvas.DrawRectangle(rect.Left + 2, rect.Top + 4, FColorBoxWidth, FColorboxHeight);
   // color text
   if FShowColorNames then
-    fpgStyle.DrawString(Canvas, FColorboxWidth + 8 + rect.left, rect.top+1, itm.ColorName, Enabled);
+    lqStyle.DrawString(Canvas, FColorboxWidth + 8 + rect.left, rect.top+1, itm.ColorName, Enabled);
 end;
 
 procedure TlqBaseColorListBox.Exchange (Index1, Index2: Integer);

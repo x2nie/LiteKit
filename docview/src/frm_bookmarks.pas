@@ -93,7 +93,7 @@ begin
     exit;
 
   lName := Bookmark.Name;
-  if fpgInputQuery( 'Rename Bookmark', 'Enter the new name of the bookmark', lName ) then
+  if lqInputQuery( 'Rename Bookmark', 'Enter the new name of the bookmark', lName ) then
   begin
     Bookmark.Name := lName;
     if Assigned(OnBookmarksChanged) then

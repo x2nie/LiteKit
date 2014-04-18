@@ -214,7 +214,7 @@ begin
   begin
     if grdCompilerDirs.Cells[ACol, ARow] = cCheck then
     begin
-      img := fpgImages.GetImage('stdimg.check');
+      img := lqImages.GetImage('stdimg.check');
       if (gdSelected in AFlags) and (gdFocused in AFlags) then
         img.Invert;
       grdCompilerDirs.Canvas.DrawImage(ARect.Left, ARect.Top, img);
@@ -294,7 +294,7 @@ begin
   begin
     if grdCompilerMakeOptions.Cells[ACol, ARow] = cCheck then
     begin
-      img := fpgImages.GetImage('stdimg.check');
+      img := lqImages.GetImage('stdimg.check');
       if (gdSelected in AFlags) and (gdFocused in AFlags) then
         img.Invert;
       grdCompilerMakeOptions.Canvas.DrawImage(ARect.Left, ARect.Top, img);
@@ -373,7 +373,7 @@ begin
   begin
     if grdUserMacros.Cells[ACol, ARow] = cCheck then
     begin
-      img := fpgImages.GetImage('stdimg.check');
+      img := lqImages.GetImage('stdimg.check');
       if (gdSelected in AFlags) and (gdFocused in AFlags) then
         img.Invert;
       grdUserMacros.Canvas.DrawImage(ARect.Left, ARect.Top, img);

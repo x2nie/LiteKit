@@ -58,7 +58,7 @@ type
 
 
 procedure TranslateResourceStrings(const BaseAppName, BaseDirectory, CustomLang: string);
-function  fpgMatchLocale(const ALanguageID: TlqString): boolean;
+function  lqMatchLocale(const ALanguageID: TlqString): boolean;
 
 
 implementation
@@ -92,7 +92,7 @@ begin
   TranslationList.Add('en');
   // search existing translations
 
-  SearchMask := fpgAddTrailingValue(BaseDir, PathDelim, false) + BaseAppName + '.*.po';
+  SearchMask := lqAddTrailingValue(BaseDir, PathDelim, false) + BaseAppName + '.*.po';
   //writeln('CollectTranslations ',SearchMask);
   if SysUtils.FindFirst(SearchMask, faAnyFile, FileInfo) = 0
   then begin
@@ -139,7 +139,7 @@ begin
     FallbackLang := '';
   end;
 //  writeln('TranslateResourceStrings A Lang=',Lang,' FallbackLang=',FallbackLang);
-  Dir := fpgAddTrailingValue(BaseDirectory, PathDelim, false);
+  Dir := lqAddTrailingValue(BaseDirectory, PathDelim, false);
 
   {$IFDEF DEBUG}
   writeln('Lang = ' + Lang);
@@ -168,7 +168,7 @@ begin
     ALanguageID := Copy(ALanguageID, 0, lpos-1);
 end;
 
-function fpgMatchLocale(const ALanguageID: TlqString): boolean;
+function lqMatchLocale(const ALanguageID: TlqString): boolean;
 var
   s: TlqString;
 begin

@@ -25,7 +25,7 @@
       generateincfiles - generates include files from po files.
 
   Synopsis:
-      generateincfiles fpgui_base_dir
+      generateincfiles lqui_base_dir
 
   Description:
       generateincfiles will generate the lang_<langID>.inc files in the
@@ -534,7 +534,7 @@ begin
   Files:=nil;
   if not ParamsValid then
   begin
-    writeln('Usage: ',ExtractFileName(ParamStr(0)), ' fpgui_base_dir');
+    writeln('Usage: ',ExtractFileName(ParamStr(0)), ' lqui_base_dir');
     Exit;
   end
   else

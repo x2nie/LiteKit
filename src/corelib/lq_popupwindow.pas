@@ -43,7 +43,7 @@ type
     procedure   SetPopupFrame(const AValue: boolean);
     function    GetDisplayPos(AReferenceWindow: TlqWidget; const x, y: integer): TPoint;
   protected
-    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
+    procedure   MsgClose(var msg: TlqMessageRec); message LQM_CLOSE;
     procedure   HandleClose; virtual;
     procedure   HandleShow; override;
     procedure   HandlePaint; override;
@@ -222,11 +222,11 @@ begin
   Result := WindowToScreen(AReferenceWindow, Point(x, y));
 
   // popup window will not fit below (x,y) so we place it above (x,y)
-  if (Result.y + self.Height) > fpgApplication.ScreenHeight then
+  if (Result.y + self.Height) > lqApplication.ScreenHeight then
     Result.y := Result.y - self.Height;
 
   // popup window will not fit to right of (x,y) so we place it to left of (x,y)
-  if (Result.x + self.Width) > fpgApplication.ScreenWidth then
+  if (Result.x + self.Width) > lqApplication.ScreenWidth then
     Result.x := Result.x - self.Width;
 end;
 
@@ -294,7 +294,7 @@ procedure TlqPopupWindow.DoPaintPopupFrame;
 var
   lColor: TlqColor;
 begin
-  lColor := fpgColorToRGB(BackgroundColor);
+  lColor := lqColorToRGB(BackgroundColor);
   Canvas.SetLineStyle(1, lsSolid);
   Canvas.SetColor(clWidgetFrame);
   Canvas.DrawRectangle(0, 0, Width, Height);

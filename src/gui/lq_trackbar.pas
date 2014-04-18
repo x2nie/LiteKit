@@ -582,7 +582,7 @@ begin
     if FShowPosition then
     begin
       Canvas.SetTextColor(TextColor);
-      fpgStyle.DrawString(Canvas, Width - tw, (Height - FFont.Height) div 2, IntToStr(Position), Enabled);
+      lqStyle.DrawString(Canvas, Width - tw, (Height - FFont.Height) div 2, IntToStr(Position), Enabled);
     end;
   end;
 end;
@@ -597,7 +597,7 @@ begin
   FSliderLength := 11;
   FScrollStep   := 1;
   FShowPosition := False;
-  FFont         := fpgGetFont('#Grid');
+  FFont         := lqGetFont('#Grid');
 end;
 
 destructor TlqTrackBar.Destroy;

@@ -193,9 +193,9 @@ begin
 //  else
     Language := ltPas;
 
-  LoadTime := fpgGetTickCount;
+  LoadTime := lqGetTickCount;
   InitializeForm;
-  LoadTime := fpgGetTickCount - LoadTime;
+  LoadTime := lqGetTickCount - LoadTime;
   StatusBar.Text := Format(SParseStatistics, [LoadTime / 1000]);
 end;
 
@@ -397,10 +397,10 @@ begin
   ImageIndexFunction = 4;
 }
     case i of
-      1:  img := fpgImages.GetImage('ide.grid.constr');
-      2:  img := fpgImages.GetImage('ide.grid.destr');
-      3:  img := fpgImages.GetImage('ide.grid.gears');
-      4:  img := fpgImages.GetImage('ide.grid.func');
+      1:  img := lqImages.GetImage('ide.grid.constr');
+      2:  img := lqImages.GetImage('ide.grid.destr');
+      3:  img := lqImages.GetImage('ide.grid.gears');
+      4:  img := lqImages.GetImage('ide.grid.func');
     end;
     if Assigned(img) then
       grdProcedures.Canvas.DrawImage((ARect.Width-16) div 2, ARect.Top, img);
@@ -1011,7 +1011,7 @@ begin
         ltPas: Parser.Origin := MemStream.Memory;
 //        ltCpp: CParser.SetOrigin(MemStream.Memory, MemStream.Size);
       end;
-      WindowTitle := WindowTitle + ' - ' + fpgExtractFileName(FFileName);
+      WindowTitle := WindowTitle + ' - ' + lqExtractFileName(FFileName);
 
       ClearObjectStrings;
       try
@@ -1173,22 +1173,22 @@ begin
 
 //  CreateImage_BMP(@grdimg_destructor_16, SizeOf(grdimg_destructor_16));
 
-  fpgImages.AddMaskedBMP(  // 16x16 image
+  lqImages.AddMaskedBMP(  // 16x16 image
           'ide.grid.destr',
           @grdimg_destructor_16,
     sizeof(grdimg_destructor_16), 0, 0);
 
-  fpgImages.AddMaskedBMP(  // 16x16 image
+  lqImages.AddMaskedBMP(  // 16x16 image
           'ide.grid.constr',
           @grdimg_constructor_16,
     sizeof(grdimg_constructor_16), 0, 0);
 
-  fpgImages.AddMaskedBMP(  // 16x16 image
+  lqImages.AddMaskedBMP(  // 16x16 image
           'ide.grid.func',
           @grdimg_function_16,
     sizeof(grdimg_function_16), 0, 0);
 
-  fpgImages.AddMaskedBMP(  // 16x16 image
+  lqImages.AddMaskedBMP(  // 16x16 image
           'ide.grid.gears',
           @grdimg_gears_16,
     sizeof(grdimg_gears_16), 0, 0);

@@ -248,8 +248,8 @@ type
     FStartDragDistance: integer;
     procedure   SetHintPause(const AValue: Integer);
     procedure   SetupLocalizationStrings;
-    procedure   InternalMsgFreeMe(var msg: TlqMessageRec); message FPGM_FREEME;
-    procedure   InternalMsgHintTimer(var msg: TlqMessageRec); message FPGM_HINTTIMER;
+    procedure   InternalMsgFreeMe(var msg: TlqMessageRec); message LQM_FREEME;
+    procedure   InternalMsgHintTimer(var msg: TlqMessageRec); message LQM_HINTTIMER;
     procedure   CreateHintWindow;
     procedure   HintTimerFired(Sender: TObject);
     procedure   SetShowHint(const AValue: boolean);
@@ -353,46 +353,46 @@ type
 
 
 var
-  fpgStyle:  TlqStyle;   { TODO -ograemeg : move this into fpgApplication }
-  fpgCaret:  TlqCaret;   { TODO -ograemeg : move this into fpgApplication }
-  fpgImages: TlqImages;  { TODO -ograemeg : move this into fpgApplication }
+  lqStyle:  TlqStyle;   { TODO -ograemeg : move this into lqApplication }
+  lqCaret:  TlqCaret;   { TODO -ograemeg : move this into lqApplication }
+  lqImages: TlqImages;  { TODO -ograemeg : move this into lqApplication }
 
   DefaultCanvasClass: TlqCanvasBaseClass = nil;
 
 // Application & Clipboard singletons
-function  fpgApplication: TlqApplication;
-function  fpgClipboard: TlqClipboard;
+function  lqApplication: TlqApplication;
+function  lqClipboard: TlqClipboard;
 
 // Fonts (easy access function)
-function  fpgGetFont(const afontdesc: TlqString): TlqFont;
+function  lqGetFont(const afontdesc: TlqString): TlqFont;
 
 // Message Queue  (easy access function)
-procedure fpgWaitWindowMessage;
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
-procedure fpgPostMessage(Sender, Dest: TObject; MsgCode: integer); overload;
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
-procedure fpgSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
-procedure fpgDeliverMessage(var msg: TlqMessageRec);
-procedure fpgDeliverMessages;
-function  fpgGetFirstMessage: PfpgMessageRec;
-procedure fpgDeleteFirstMessage;
+procedure lqWaitWindowMessage;
+procedure lqPostMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
+procedure lqPostMessage(Sender, Dest: TObject; MsgCode: integer); overload;
+procedure lqSendMessage(Sender, Dest: TObject; MsgCode: integer; var aparams: TlqMessageParams); overload;
+procedure lqSendMessage(Sender, Dest: TObject; MsgCode: integer); overload;
+procedure lqDeliverMessage(var msg: TlqMessageRec);
+procedure lqDeliverMessages;
+function  lqGetFirstMessage: PfpgMessageRec;
+procedure lqDeleteFirstMessage;
 
 // Color & Font routines
-function  fpgColorToRGB(col: TlqColor): TlqColor;
-function  fpgGetNamedColor(col: TlqColor): TlqColor;
-procedure fpgSetNamedColor(colorid, rgbvalue: longword);
-function  fpgIsNamedColor(col: TlqColor): boolean;
-function  fpgGetNamedFontDesc(afontid: string): string;
-procedure fpgSetNamedFont(afontid, afontdesc: string);
-function  fpgGetNamedFontList: TStringlist;
+function  lqColorToRGB(col: TlqColor): TlqColor;
+function  lqGetNamedColor(col: TlqColor): TlqColor;
+procedure lqSetNamedColor(colorid, rgbvalue: longword);
+function  lqIsNamedColor(col: TlqColor): boolean;
+function  lqGetNamedFontDesc(afontid: string): string;
+procedure lqSetNamedFont(afontid, afontdesc: string);
+function  lqGetNamedFontList: TStringlist;
 
 // Timers rountines
-procedure fpgInitTimers;
-function  fpgCheckTimers: Boolean;
-procedure fpgResetAllTimers;
-function  fpgClosestTimer(ctime: TDateTime; amaxtime: integer): integer;
-function  fpgGetTickCount: DWord;
-procedure fpgPause(MilliSeconds: Cardinal);
+procedure lqInitTimers;
+function  lqCheckTimers: Boolean;
+procedure lqResetAllTimers;
+function  lqClosestTimer(ctime: TDateTime; amaxtime: integer): integer;
+function  lqGetTickCount: DWord;
+procedure lqPause(MilliSeconds: Cardinal);
 
 // Rectangle, Point & Size routines
 function  InflateRect(var Rect: TRect; dx: Integer; dy: Integer): Boolean;
@@ -401,10 +401,10 @@ function  OffsetRect(var Rect: TRect; dx: Integer; dy: Integer): Boolean;
 function  OffsetRect(var Rect: TlqRect; dx: Integer; dy: Integer): Boolean;
 function  CenterPoint(const Rect: TRect): TPoint;
 function  CenterPoint(const Rect: TlqRect): TPoint;
-function  fpgRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
-function  fpgRectToRect(const ARect: TlqRect): TRect;
-function  fpgPoint(const AX, AY: integer): TlqPoint;
-function  fpgSize(const AWidth, AHeight: integer): TlqSize;
+function  lqRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
+function  lqRectToRect(const ARect: TlqRect): TRect;
+function  lqPoint(const AX, AY: integer): TlqPoint;
+function  lqSize(const AWidth, AHeight: integer): TlqSize;
 
 // Debug rountines
 procedure PrintRect(const Rect: TRect);
@@ -475,9 +475,9 @@ uses
   lq_style_motif;   // :TODO This needs to be !removed
 
 var
-  fpgTimers: TList;
-  fpgNamedColors: array[0..255] of TlqColor;
-  fpgNamedFonts: TList;
+  lqTimers: TList;
+  lqNamedColors: array[0..255] of TlqColor;
+  lqNamedFonts: TList;
   uApplication: TlqApplication;
   uClipboard: TlqClipboard;
   uMsgQueueList: TList;
@@ -536,58 +536,58 @@ end;
 
 // Timer support
 
-procedure fpgInitTimers;
+procedure lqInitTimers;
 begin
-  if fpgTimers = nil then
-    fpgTimers := TList.Create;
+  if lqTimers = nil then
+    lqTimers := TList.Create;
 end;
 
-function fpgCheckTimers: Boolean;
+function lqCheckTimers: Boolean;
 var
   i: integer;
   ctime: TDateTime;
 begin
-  if fpgTimers = nil then
+  if lqTimers = nil then
     Exit;
   ctime := now;
-  i := fpgTimers.Count;
+  i := lqTimers.Count;
   Result := i > 0;
   while i > 0 do
   begin
     dec(i);
-    if fpgTimers[i] = nil then
-      fpgTimers.Delete(i)
+    if lqTimers[i] = nil then
+      lqTimers.Delete(i)
     else
-      TlqTimer(fpgTimers[i]).CheckAlarm(ctime);
+      TlqTimer(lqTimers[i]).CheckAlarm(ctime);
   end;
 end;
 
-procedure fpgResetAllTimers;
+procedure lqResetAllTimers;
 var
   i: integer;
 begin
-  if fpgTimers = nil then
+  if lqTimers = nil then
     Exit;
-  for i := 0 to fpgTimers.Count-1 do
-    TlqTimer(fpgTimers[i]).Reset;
+  for i := 0 to lqTimers.Count-1 do
+    TlqTimer(lqTimers[i]).Reset;
 end;
 
-function fpgClosestTimer(ctime: TDateTime; amaxtime: integer): integer;
+function lqClosestTimer(ctime: TDateTime; amaxtime: integer): integer;
 var
   i: integer;
   t: TlqTimer;
   dt: TDateTime;
   tb: Boolean;
 begin
-  if fpgTimers = nil then
+  if lqTimers = nil then
     Exit;
   // returns -1 if no timers are pending
   dt := ctime + amaxtime * ONE_MILISEC;
   tb := False;
 
-  for i := 0 to fpgTimers.Count-1 do
+  for i := 0 to lqTimers.Count-1 do
   begin
-    t := TlqTimer(fpgTimers[i]);
+    t := TlqTimer(lqTimers[i]);
     if (t <> nil) and t.Enabled and (t.NextAlarm < dt) then
     begin
       dt := t.NextAlarm;
@@ -605,19 +605,19 @@ begin
     Result := -1;
 end;
 
-function fpgGetTickCount: DWord;
+function lqGetTickCount: DWord;
 begin
   Result := DWord(Trunc(Now * MSecsPerDay));
 end;
 
 { blocking function for the caller, but still processes framework messages }
-procedure fpgPause(MilliSeconds: Cardinal);
+procedure lqPause(MilliSeconds: Cardinal);
 var
   lStart: TDateTime;
 begin
    lStart := Now * MSecsPerDay;
    repeat
-     fpgApplication.ProcessMessages;
+     lqApplication.ProcessMessages;
    until ((Now*MSecsPerDay)-lStart) > MilliSeconds;
 end;
 
@@ -697,12 +697,12 @@ begin
   Result.Y := (Rect.Top + Rect.Bottom) div 2;
 end;
 
-function fpgRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
+function lqRect(ALeft, ATop, AWidth, AHeight: integer): TlqRect;
 begin
   Result.SetRect(ALeft, ATop, AWidth, AHeight);
 end;
 
-function fpgRectToRect(const ARect: TlqRect): TRect;
+function lqRectToRect(const ARect: TlqRect): TRect;
 begin
   Result.Left   := ARect.Left;
   Result.Top    := ARect.Top;
@@ -710,12 +710,12 @@ begin
   Result.Bottom := ARect.Bottom;
 end;
 
-function fpgPoint(const AX, AY: integer): TlqPoint;
+function lqPoint(const AX, AY: integer): TlqPoint;
 begin
   Result.SetPoint(AX, AY);
 end;
 
-function fpgSize(const AWidth, AHeight: integer): TlqSize;
+function lqSize(const AWidth, AHeight: integer): TlqSize;
 begin
   Result.SetSize(AWidth, AHeight);
 end;
@@ -739,7 +739,7 @@ var
       Result      := GetEnvironmentVariable(EnvVarName);
     end;
     if (Result <> '') then
-      Result := fpgExpandFileName(Result);
+      Result := lqExpandFileName(Result);
   end;
 
 begin
@@ -747,12 +747,12 @@ begin
   uDebugText := nil;
   DebugFileName := GetDebugFileName;
   if (DebugFileName <> '') and
-     (fpgDirectoryExists(fpgExtractFileDir(DebugFileName))) then
+     (lqDirectoryExists(lqExtractFileDir(DebugFileName))) then
   begin
     new(uDebugText);
     try
       Assign(uDebugText^, DebugFileName);
-      if fpgFileExists(DebugFileName) then
+      if lqFileExists(DebugFileName) then
         Append(uDebugText^)
       else
         Rewrite(uDebugText^);
@@ -924,7 +924,7 @@ begin
   if not Assigned(uDebugText) then
     Exit; //==>
   s := DupeString(' ', uDebugIndent);
-  writeln(uDebugText^, s + fpgConvertLineEndings(s1));
+  writeln(uDebugText^, s + lqConvertLineEndings(s1));
 end;
 
 procedure DebugLn(const s1, s2: TlqString);
@@ -1093,21 +1093,21 @@ end;
 constructor TlqTimer.Create(AInterval: integer);
 begin
   inherited Create(AInterval);
-  fpgTimers.Add(self);
+  lqTimers.Add(self);
 end;
 
 destructor TlqTimer.Destroy;
 var
   i: integer;
 begin
-  i := fpgTimers.IndexOf(self);
+  i := lqTimers.IndexOf(self);
   if i > -1 then
-    fpgTimers[i] := nil; // we free the item in fpgCheckTimers
+    lqTimers[i] := nil; // we free the item in lqCheckTimers
   inherited Destroy;
 end;
 
 
-function fpgApplication: TlqApplication;
+function lqApplication: TlqApplication;
 begin
   if not Assigned(uApplication) then
     uApplication := TlqApplication.Create;
@@ -1115,7 +1115,7 @@ begin
 end;
 
 
-function fpgClipboard: TlqClipboard;
+function lqClipboard: TlqClipboard;
 begin
   if not Assigned(uClipboard) then
     uClipboard := TlqClipboard.Create;
@@ -1123,34 +1123,34 @@ begin
 end;
 
 
-function fpgColorToRGB(col: TlqColor): TlqColor;
+function lqColorToRGB(col: TlqColor): TlqColor;
 begin
   if (((col shr 24) and $FF) = $80) and ((col and $FFFFFF) <= $FF) then
-    Result := fpgNamedColors[col and $FF] or (col and $7F000000)// named color keeping alpha
+    Result := lqNamedColors[col and $FF] or (col and $7F000000)// named color keeping alpha
   else
     Result := col;
 end;
 
 
-function fpgGetNamedColor(col: TlqColor): TlqColor;
+function lqGetNamedColor(col: TlqColor): TlqColor;
 begin
-  if fpgIsNamedColor(col) then
+  if lqIsNamedColor(col) then
     Result := col  // nothing to do, it is already a named color
   else
-    Result := fpgNamedColors[col and $FF];
+    Result := lqNamedColors[col and $FF];
 end;
 
-procedure fpgSetNamedColor(colorid, rgbvalue: longword);
+procedure lqSetNamedColor(colorid, rgbvalue: longword);
 var
   i: longword;
 begin
   if (colorid and cl_BaseNamedColor) = 0 then
     Exit;
   i := colorid and $FF;
-  fpgNamedColors[i] := rgbvalue;
+  lqNamedColors[i] := rgbvalue;
 end;
 
-function fpgIsNamedColor(col: TlqColor): boolean;
+function lqIsNamedColor(col: TlqColor): boolean;
 begin
   if (((col shr 24) and $FF) = $80) and ((col and $FFFFFF) <= $FF) then
     Result := True
@@ -1158,62 +1158,62 @@ begin
     Result := False;
 end;
 
-function fpgGetNamedFontDesc(afontid: string): string;
+function lqGetNamedFontDesc(afontid: string): string;
 var
   n: integer;
 begin
-  for n := 0 to fpgNamedFonts.Count - 1 do
-    if (lowercase(TNamedFontItem(fpgNamedFonts[n]).FontID) = lowercase(afontid)) then
+  for n := 0 to lqNamedFonts.Count - 1 do
+    if (lowercase(TNamedFontItem(lqNamedFonts[n]).FontID) = lowercase(afontid)) then
     begin // found
-      Result := TNamedFontItem(fpgNamedFonts[n]).FontDesc;
+      Result := TNamedFontItem(lqNamedFonts[n]).FontDesc;
       Exit; //==>
     end;
 
   {$IFDEF DEBUG}
   SendDebug('GetNamedFontDesc error: "' + afontid + '" is missing. Default is used.');
   {$ENDIF}
-  Result := FPG_DEFAULT_FONT_DESC;
+  Result := LQ_DEFAULT_FONT_DESC;
 end;
 
-procedure fpgSetNamedFont(afontid, afontdesc: string);
+procedure lqSetNamedFont(afontid, afontdesc: string);
 var
   n: integer;
 begin
   n := 0;
-  while (n < fpgNamedFonts.Count) and (lowercase(TNamedFontItem(fpgNamedFonts[n]).FontID) <> lowercase(afontid)) do
+  while (n < lqNamedFonts.Count) and (lowercase(TNamedFontItem(lqNamedFonts[n]).FontID) <> lowercase(afontid)) do
     Inc(n);
 
-  if n < fpgNamedFonts.Count then
-    TNamedFontItem(fpgNamedFonts[n]).FontDesc := afontdesc// already defined
+  if n < lqNamedFonts.Count then
+    TNamedFontItem(lqNamedFonts[n]).FontDesc := afontdesc// already defined
   else
-    fpgNamedFonts.Add(TNamedFontItem.Create(afontid, afontdesc));
+    lqNamedFonts.Add(TNamedFontItem.Create(afontid, afontdesc));
 end;
 
-function fpgGetNamedFontList: TStringlist;
+function lqGetNamedFontList: TStringlist;
 var
   n: integer;
   oFont: TNamedFontItem;
 begin
-  if fpgNamedFonts.Count > 0 then
+  if lqNamedFonts.Count > 0 then
     Result := TStringList.Create
   else
     Exit; //==>
   
-  for n := 0 to fpgNamedFonts.Count-1 do
+  for n := 0 to lqNamedFonts.Count-1 do
   begin
-    oFont := TNamedFontItem(fpgNamedFonts[n]);
+    oFont := TNamedFontItem(lqNamedFonts[n]);
     Result.Add(Format('#%s=%s', [oFont.FontID, oFont.FontDesc]));
   end;
 end;
 
-procedure fpgWaitWindowMessage;
+procedure lqWaitWindowMessage;
 begin
-  fpgApplication.WaitWindowMessage(500);
+  lqApplication.WaitWindowMessage(500);
 end;
 
-function fpgGetFont(const afontdesc: TlqString): TlqFont;
+function lqGetFont(const afontdesc: TlqString): TlqFont;
 begin
-  Result := fpgApplication.GetFont(afontdesc);
+  Result := lqApplication.GetFont(afontdesc);
 end;
 
 constructor TlqApplication.Create(const AParams: string);
@@ -1259,19 +1259,19 @@ begin
 
   DestroyComponents;  // while message queue is still active
 
-  for i := 0 to (fpgNamedFonts.Count - 1) do
-    TNamedFontItem(fpgNamedFonts.Items[i]).Free;
-  fpgNamedFonts.Free;
+  for i := 0 to (lqNamedFonts.Count - 1) do
+    TNamedFontItem(lqNamedFonts.Items[i]).Free;
+  lqNamedFonts.Free;
 
-  fpgImages.Free;
-  fpgStyleManager.FreeStyleInstance;
-  fpgStyle := nil;
-  fpgCaret.Free;
+  lqImages.Free;
+  lqStyleManager.FreeStyleInstance;
+  lqStyle := nil;
+  lqCaret.Free;
   
-  for i := fpgTimers.Count-1 downto 0 do
-    if fpgTimers[i] <> nil then
-      TlqTimer(fpgTimers[i]).Free;
-  fpgTimers.Free;
+  for i := lqTimers.Count-1 downto 0 do
+    if lqTimers[i] <> nil then
+      TlqTimer(lqTimers[i]).Free;
+  lqTimers.Free;
 
   FDefaultFont.Free;
 
@@ -1307,7 +1307,7 @@ begin
   fdesc := afontdesc;
 
   if copy(fdesc, 1, 1) = '#' then   // A # (hash) denotes a named font
-    fdesc := fpgGetNamedFontDesc(copy(afontdesc, 2, length(afontdesc)));
+    fdesc := lqGetNamedFontDesc(copy(afontdesc, 2, length(afontdesc)));
 
   Result := nil;
 
@@ -1560,19 +1560,19 @@ end;
 
 procedure TlqApplication.InternalInit;
 begin
-  FDefaultFont := GetFont(FPG_DEFAULT_FONT_DESC);
-  fpgInitTimers;
-  fpgNamedFonts := TList.Create;
+  FDefaultFont := GetFont(LQ_DEFAULT_FONT_DESC);
+  lqInitTimers;
+  lqNamedFonts := TList.Create;
 
   { If the end-user passed in a style, try and create an instance of it }
   if gCommandLineParams.IsParam('style') then
-    fpgStyleManager.SetStyle(gCommandLineParams.GetParam('style'));
-  fpgStyle := fpgStyleManager.Style;
+    lqStyleManager.SetStyle(gCommandLineParams.GetParam('style'));
+  lqStyle := lqStyleManager.Style;
 
-  fpgCaret      := TlqCaret.Create;
-  fpgImages     := TlqImages.Create;
+  lqCaret      := TlqCaret.Create;
+  lqImages     := TlqImages.Create;
 
-  fpgCreateStandardImages;
+  lqCreateStandardImages;
 
   // This will process Application and LiteKit Toolkit translation (*.po) files
   TranslateResourceStrings(ApplicationName, ExtractFilePath(ParamStr(0)), '');
@@ -1671,9 +1671,9 @@ begin
   if IsMultiThread then
     CheckSynchronize;  // execute the to-be synchronized method
 
-  DoWaitWindowMessage(fpgClosestTimer(now, atimeoutms));
-  fpgDeliverMessages;
-  fpgCheckTimers;
+  DoWaitWindowMessage(lqClosestTimer(now, atimeoutms));
+  lqDeliverMessages;
+  lqCheckTimers;
 end;
 
 procedure TlqApplication.RunMessageLoop;
@@ -1693,7 +1693,7 @@ end;
 destructor TlqFont.Destroy;
 begin
   if TlqFontResource(FFontRes).DecRefCount <= 0 then
-    fpgApplication.FreeFontRes(TlqFontResource(FFontRes));
+    lqApplication.FreeFontRes(TlqFontResource(FFontRes));
   inherited Destroy;
 end;
 
@@ -1776,14 +1776,14 @@ end;
 
 destructor TlqCanvas.Destroy;
 begin
-  if fpgCaret.FCanvas = self then
-    fpgCaret.UnSetCaret(self);
+  if lqCaret.FCanvas = self then
+    lqCaret.UnSetCaret(self);
   inherited Destroy;
 end;
 
 procedure TlqCanvas.DrawButtonFace(x, y, w, h: TlqCoord; AFlags: TlqButtonFlags);
 begin
-  fpgStyle.DrawButtonFace(self, x, y, w, h, AFlags);
+  lqStyle.DrawButtonFace(self, x, y, w, h, AFlags);
 end;
 
 procedure TlqCanvas.DrawButtonFace(r: TlqRect; AFlags: TlqButtonFlags);
@@ -1793,7 +1793,7 @@ end;
 
 procedure TlqCanvas.DrawControlFrame(x, y, w, h: TlqCoord);
 begin
-  fpgStyle.DrawControlFrame(self, x, y, w, h);
+  lqStyle.DrawControlFrame(self, x, y, w, h);
 end;
 
 procedure TlqCanvas.DrawControlFrame(r: TlqRect);
@@ -1803,7 +1803,7 @@ end;
 
 procedure TlqCanvas.DrawBevel(x, y, w, h: TlqCoord; ARaised: Boolean);
 begin
-  fpgStyle.DrawBevel(self, x, y, w, h, ARaised);
+  lqStyle.DrawBevel(self, x, y, w, h, ARaised);
 end;
 
 procedure TlqCanvas.DrawBevel(r: TlqRect; ARaised: Boolean);
@@ -1813,7 +1813,7 @@ end;
 
 procedure TlqCanvas.DrawDirectionArrow(x, y, w, h: TlqCoord; direction: TArrowDirection);
 begin
-  fpgStyle.DrawDirectionArrow(self, x, y, w, h, direction);
+  lqStyle.DrawDirectionArrow(self, x, y, w, h, direction);
 end;
 
 procedure TlqCanvas.DrawDirectionArrow(r: TlqRect; direction: TArrowDirection);
@@ -1823,7 +1823,7 @@ end;
 
 procedure TlqCanvas.DrawFocusRect(r: TlqRect);
 begin
-  fpgStyle.DrawFocusRect(self, r);
+  lqStyle.DrawFocusRect(self, r);
 end;
 
 function TlqCanvas.DrawText(x, y, w, h: TlqCoord; const AText: TlqString;
@@ -1886,7 +1886,7 @@ begin
     else // txtTop is default
       ny := y + l;
 
-    fpgStyle.DrawString(self, nx, ny, wraplst[i], lEnabled);
+    lqStyle.DrawString(self, nx, ny, wraplst[i], lEnabled);
   end;
   
   wraplst.Free;
@@ -1963,59 +1963,59 @@ end;
 constructor TlqStyle.Create;
 begin
   // Setup font aliases
-  fpgSetNamedFont('Label1', FPG_DEFAULT_FONT_DESC);
-  fpgSetNamedFont('Label2', FPG_DEFAULT_FONT_DESC + ':bold');
-  fpgSetNamedFont('Edit1', FPG_DEFAULT_FONT_DESC);
-  fpgSetNamedFont('Edit2', 'Courier New-10');
-  fpgSetNamedFont('List', FPG_DEFAULT_FONT_DESC);
-  fpgSetNamedFont('Grid', FPG_DEFAULT_SANS + '-9');
-  fpgSetNamedFont('GridHeader', FPG_DEFAULT_SANS + '-9:bold');
-  fpgSetNamedFont('Menu', FPG_DEFAULT_FONT_DESC);
-  fpgSetNamedFont('MenuAccel', FPG_DEFAULT_FONT_DESC + ':underline');
-  fpgSetNamedFont('MenuDisabled', FPG_DEFAULT_FONT_DESC);
+  lqSetNamedFont('Label1', LQ_DEFAULT_FONT_DESC);
+  lqSetNamedFont('Label2', LQ_DEFAULT_FONT_DESC + ':bold');
+  lqSetNamedFont('Edit1', LQ_DEFAULT_FONT_DESC);
+  lqSetNamedFont('Edit2', 'Courier New-10');
+  lqSetNamedFont('List', LQ_DEFAULT_FONT_DESC);
+  lqSetNamedFont('Grid', LQ_DEFAULT_SANS + '-9');
+  lqSetNamedFont('GridHeader', LQ_DEFAULT_SANS + '-9:bold');
+  lqSetNamedFont('Menu', LQ_DEFAULT_FONT_DESC);
+  lqSetNamedFont('MenuAccel', LQ_DEFAULT_FONT_DESC + ':underline');
+  lqSetNamedFont('MenuDisabled', LQ_DEFAULT_FONT_DESC);
 
   {$Note Refactor this so under Windows it can detect the system colors instead.
     Also under Linux (KDE and Gnome) we should be able to detect the system colors.}
-  fpgSetNamedColor(clWindowBackground, $FFD5D2CD);
-  fpgSetNamedColor(clBoxColor, $FFFFFFFF);
-  fpgSetNamedColor(clShadow1, $FF848284);       // medium
-  fpgSetNamedColor(clShadow2, $FF424142);       // dark
-  fpgSetNamedColor(clHilite1, $FFE0E0E0);       // light
-  fpgSetNamedColor(clHilite2, $FFFFFFFF);       // white
-  fpgSetNamedColor(clText1, $FF000000);
-  fpgSetNamedColor(clText2, $FF000040);
-  fpgSetNamedColor(clText3, $FF800000);
-  fpgSetNamedColor(clText4, $FF404000);
-  fpgSetNamedColor(clSelection, $FF08246A);
-  fpgSetNamedColor(clSelectionText, $FFFFFFFF);
-  fpgSetNamedColor(clInactiveSel, $FF99A6BF);  // win 2000 buttonface = $D4D0C8
-  fpgSetNamedColor(clInactiveSelText, $FF000000);
-  fpgSetNamedColor(clScrollBar, $FFE8E4DB);
-  fpgSetNamedColor(clButtonFace, $FFD5D2CD);
-  fpgSetNamedColor(clListBox, $FFFFFFFF);
-  fpgSetNamedColor(clGridLines, $FFA0A0A0);
-  fpgSetNamedColor(clGridHeader, $FFD5D2CD);
-  fpgSetNamedColor(clWidgetFrame, $FF000000);
-  fpgSetNamedColor(clInactiveWgFrame, $FFA0A0A0);
-  fpgSetNamedColor(clTextCursor, $FF000000);
-  fpgSetNamedColor(clChoiceListBox, $FFE8E8E8);
-  fpgSetNamedColor(clUnset, $FF99A6BF);                   // dull (gray) blue
-  fpgSetNamedColor(clMenuText, $FF000000);
-  fpgSetNamedColor(clMenuDisabled, $FF909090);
-  fpgSetNamedColor(clHintWindow, $FFFFFFBF);
-  fpgSetNamedColor(clGridSelection, $FF08246A);           // same as clSelection
-  fpgSetNamedColor(clGridSelectionText, $FFFFFFFF);       // same as clSelectionText
-  fpgSetNamedColor(clGridInactiveSel, $FF99A6BF);         // same as clInactiveSel
-  fpgSetNamedColor(clGridInactiveSelText, $FF000000);     // same as clInactiveSelText
-  fpgSetNamedColor(clSplitterGrabBar, $FF839EFE);         // pale blue
+  lqSetNamedColor(clWindowBackground, $FFD5D2CD);
+  lqSetNamedColor(clBoxColor, $FFFFFFFF);
+  lqSetNamedColor(clShadow1, $FF848284);       // medium
+  lqSetNamedColor(clShadow2, $FF424142);       // dark
+  lqSetNamedColor(clHilite1, $FFE0E0E0);       // light
+  lqSetNamedColor(clHilite2, $FFFFFFFF);       // white
+  lqSetNamedColor(clText1, $FF000000);
+  lqSetNamedColor(clText2, $FF000040);
+  lqSetNamedColor(clText3, $FF800000);
+  lqSetNamedColor(clText4, $FF404000);
+  lqSetNamedColor(clSelection, $FF08246A);
+  lqSetNamedColor(clSelectionText, $FFFFFFFF);
+  lqSetNamedColor(clInactiveSel, $FF99A6BF);  // win 2000 buttonface = $D4D0C8
+  lqSetNamedColor(clInactiveSelText, $FF000000);
+  lqSetNamedColor(clScrollBar, $FFE8E4DB);
+  lqSetNamedColor(clButtonFace, $FFD5D2CD);
+  lqSetNamedColor(clListBox, $FFFFFFFF);
+  lqSetNamedColor(clGridLines, $FFA0A0A0);
+  lqSetNamedColor(clGridHeader, $FFD5D2CD);
+  lqSetNamedColor(clWidgetFrame, $FF000000);
+  lqSetNamedColor(clInactiveWgFrame, $FFA0A0A0);
+  lqSetNamedColor(clTextCursor, $FF000000);
+  lqSetNamedColor(clChoiceListBox, $FFE8E8E8);
+  lqSetNamedColor(clUnset, $FF99A6BF);                   // dull (gray) blue
+  lqSetNamedColor(clMenuText, $FF000000);
+  lqSetNamedColor(clMenuDisabled, $FF909090);
+  lqSetNamedColor(clHintWindow, $FFFFFFBF);
+  lqSetNamedColor(clGridSelection, $FF08246A);           // same as clSelection
+  lqSetNamedColor(clGridSelectionText, $FFFFFFFF);       // same as clSelectionText
+  lqSetNamedColor(clGridInactiveSel, $FF99A6BF);         // same as clInactiveSel
+  lqSetNamedColor(clGridInactiveSelText, $FF000000);     // same as clInactiveSelText
+  lqSetNamedColor(clSplitterGrabBar, $FF839EFE);         // pale blue
 
 
   // Global Font Objects
-  DefaultFont      := fpgGetFont(fpgGetNamedFontDesc('Label1'));
-  FixedFont        := fpgGetFont(fpgGetNamedFontDesc('Edit2'));
-  MenuFont         := fpgGetFont(fpgGetNamedFontDesc('Menu'));
-  MenuAccelFont    := fpgGetFont(fpgGetNamedFontDesc('MenuAccel'));
-  MenuDisabledFont := fpgGetFont(fpgGetNamedFontDesc('MenuDisabled'));
+  DefaultFont      := lqGetFont(lqGetNamedFontDesc('Label1'));
+  FixedFont        := lqGetFont(lqGetNamedFontDesc('Edit2'));
+  MenuFont         := lqGetFont(lqGetNamedFontDesc('Menu'));
+  MenuAccelFont    := lqGetFont(lqGetNamedFontDesc('MenuAccel'));
+  MenuDisabledFont := lqGetFont(lqGetNamedFontDesc('MenuDisabled'));
 end;
 
 destructor TlqStyle.Destroy;
@@ -2041,7 +2041,7 @@ begin
     ACanvas.DrawRectangle(r);
     InflateRect(r, -1, -1);
     Exclude(AFlags, btfIsDefault);
-    fpgStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
+    lqStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
     Exit; //==>
   end;
 
@@ -2227,7 +2227,7 @@ begin
 }
 
   r2.SetRect(x, y, w, h);
-  r := fpgRectToRect(r2);
+  r := lqRectToRect(r2);
 
   if direction = adRight then
     rad := DegToRad(0)
@@ -2313,7 +2313,7 @@ var
 begin
   if mifChecked in AFlags then
   begin
-    img := fpgImages.GetImage('stdimg.check');    // Do NOT localize
+    img := lqImages.GetImage('stdimg.check');    // Do NOT localize
     if mifSelected in AFlags then
       img.Invert;  // invert modifies the original image, so we must restore it later
     ACanvas.DrawImage(x, y, img);
@@ -2322,7 +2322,7 @@ begin
   end;
   if mifSubMenu in AFlags then
   begin
-    img := fpgImages.GetImage('sys.sb.right');    // Do NOT localize
+    img := lqImages.GetImage('sys.sb.right');    // Do NOT localize
     lx := (r.height div 2) - 3;
     lx := r.right-lx-2;
     ly := y + ((r.Height-img.Height) div 2);
@@ -2558,7 +2558,7 @@ end;
 function TlqImage.CreateDisabledImage: TlqImage;
 begin
   Result := ImageFromSource;
-  fpgApplyGreyFilter(Result);
+  lqApplyGreyFilter(Result);
 end;
 
 function TlqImage.ImageFromSource: TlqImage;
@@ -2663,12 +2663,12 @@ initialization
   uApplication    := nil;
   uClipboard      := nil;
   uMsgQueueList   := nil;
-  fpgTimers       := nil;
-  fpgCaret        := nil;
-  fpgImages       := nil;
+  lqTimers       := nil;
+  lqCaret        := nil;
+  lqImages       := nil;
   iCallTrace      := -1;
   InitializeDebugOutput;
-  fpgInitMsgQueue;
+  lqInitMsgQueue;
 {$ifdef AGGCanvas}
   DefaultCanvasClass := TAgg2D;
 {$else}

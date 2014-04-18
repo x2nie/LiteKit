@@ -32,13 +32,13 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-//  FPG_DEFAULT_FONT_DESC := 'DejaVu Sans-9';
-  fpgApplication.Initialize;
+//  LQ_DEFAULT_FONT_DESC := 'DejaVu Sans-9';
+  lqApplication.Initialize;
   RegisterIDEImages;
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

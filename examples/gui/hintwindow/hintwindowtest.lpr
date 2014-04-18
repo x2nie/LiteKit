@@ -123,7 +123,7 @@ type
 
 function TMainForm.GetHintWnd: TlqHintWindow;
 begin
-  Result := TlqHintWindow(fpgApplication.HintWindow);
+  Result := TlqHintWindow(lqApplication.HintWindow);
 end;
 
 procedure TMainForm.btnQuitClicked(Sender: TObject);
@@ -228,7 +228,7 @@ end;
 
 procedure TMainForm.chbAppShowHintChange(Sender: TObject);
 begin
-  fpgApplication.ShowHint := chbAppShowHint.Checked;
+  lqApplication.ShowHint := chbAppShowHint.Checked;
 end;
 
 procedure TMainForm.rb_border_1Change(Sender: TObject);
@@ -377,7 +377,7 @@ begin
     HintWindowClass := TMyHintWindow
   else
     HintWindowClass := TlqHintWindow;
-  fpgApplication.RecreateHintWindow;
+  lqApplication.RecreateHintWindow;
 end;
 
 procedure TMainForm.AfterCreate;
@@ -732,7 +732,7 @@ begin
   chbShowhint.OnChange:= @chbShowHintChange;
 
   chbAppShowHint := CreateCheckBox(Self,10,540,'Application.ShowHint');
-  chbAppShowHint.Checked := fpgApplication.ShowHint;
+  chbAppShowHint.Checked := lqApplication.ShowHint;
   chbAppShowhint.OnChange:= @chbAppShowHintChange;
 
   chbCustomHint := CreateCheckBox(self, 200, 520, 'Custom Hint Window');
@@ -758,7 +758,7 @@ begin
   r := GetClientRect;
   InflateRect(r, -Border, -Border);
   Canvas.GradientFill(r, clLavender, clWhite, gdVertical);
-  img := fpgImages.GetImage('stdimg.dlg.info');
+  img := lqImages.GetImage('stdimg.dlg.info');
   Canvas.TextColor := clMagenta;
   Canvas.DrawImage(10, 10, img);
   Canvas.DrawText(img.Width + 10, 10+(img.Height div 2), 'I am a custom hint window');
@@ -782,14 +782,14 @@ var
   frm: TMainForm;
 begin
   // To apply custom hint window, uncomment the two lines below
-//  fpgApplication;
+//  lqApplication;
 //  HintWindowClass := TMyHintWindow;
 
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

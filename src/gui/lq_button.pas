@@ -420,7 +420,7 @@ end;
 procedure TlqBaseButton.SetImageName(const AValue: string);
 begin
   FImageName := AValue;
-  FImage     := fpgImages.GetImage(FImageName);
+  FImage     := lqImages.GetImage(FImageName);
   Repaint;
 end;
 
@@ -473,7 +473,7 @@ end;
 procedure TlqBaseButton.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   RePaint;
 end;
 
@@ -481,7 +481,7 @@ constructor TlqBaseButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FText         := 'Button';
-  FFont         := fpgGetFont('#Label1');
+  FFont         := lqGetFont('#Label1');
   Height        := FFont.Height + 8;
   Width         := 80;
   FFocusable    := True;
@@ -531,7 +531,7 @@ begin
   Canvas.ClearClipRect;
 
   r.SetRect(0, 0, Width, Height);
-  border := fpgStyle.GetButtonBorders;
+  border := lqStyle.GetButtonBorders;
 
   lBtnFlags := [];
   if FDown then
@@ -551,7 +551,7 @@ begin
     else if FFlat then
       Include(lBtnFlags, btfFlat);
 
-    if (not FFlat) and (not FDown) and fpgStyle.HasButtonHoverEffect then
+    if (not FFlat) and (not FDown) and lqStyle.HasButtonHoverEffect then
     begin
       if FState = 1 then
         Include(lBtnFlags, btfHover);
@@ -569,18 +569,18 @@ begin
 
   if FBackgroundColor <> clButtonFace then
   begin
-    clr := fpgColorToRGB(clButtonFace);
-    fpgSetNamedColor(clButtonface, FBackgroundColor);
-    fpgStyle.DrawButtonFace(Canvas, r, lBtnFlags);
-    fpgSetNamedColor(clButtonface, clr);
+    clr := lqColorToRGB(clButtonFace);
+    lqSetNamedColor(clButtonface, FBackgroundColor);
+    lqStyle.DrawButtonFace(Canvas, r, lBtnFlags);
+    lqSetNamedColor(clButtonface, clr);
   end
   else
-    fpgStyle.DrawButtonFace(Canvas, r, lBtnFlags);
+    lqStyle.DrawButtonFace(Canvas, r, lBtnFlags);
 
   if FFocused and (not FEmbedded) then
   begin
     InflateRect(r, -border.Left, -border.Top);
-    fpgStyle.DrawFocusRect(Canvas, r);
+    lqStyle.DrawFocusRect(Canvas, r);
   end;
 
   Canvas.SetTextColor(FTextColor);
@@ -590,7 +590,7 @@ begin
   Canvas.SetFont(Font);
 
   if FDown then
-    offset := fpgStyle.GetButtonShift
+    offset := lqStyle.GetButtonShift
   else
     offset := Point(0, 0);
 
@@ -629,10 +629,10 @@ begin
     lTextFlags := [txtHCenter, txtVCenter];
     if not Enabled then
       lTextFlags += [txtDisabled];
-    Canvas.DrawText(r, Text, lTextFlags);  { DrawText does use fpgStyle }
+    Canvas.DrawText(r, Text, lTextFlags);  { DrawText does use lqStyle }
   end
   else
-    fpgStyle.DrawString(Canvas, tx+offset.x, ty+offset.y, Text, Enabled);
+    lqStyle.DrawString(Canvas, tx+offset.x, ty+offset.y, Text, Enabled);
 end;
 
 procedure TlqBaseButton.DoPush;
@@ -671,7 +671,7 @@ begin
     begin
       FDown := False;
       RePaint;
-      fpgApplication.ProcessMessages;
+      lqApplication.ProcessMessages;
       if PtInRect(r, Point(x, y)) and FOnClickPending then
         Click;
     end;
@@ -682,7 +682,7 @@ begin
     begin
       FDown := False;
       RePaint;
-      fpgApplication.ProcessMessages;
+      lqApplication.ProcessMessages;
       if PtInRect(r, Point(x, y)) and FOnClickPending then
         Click;
     end;
@@ -753,7 +753,7 @@ begin
     FDown := False;
     Repaint;
   end
-  else if FFlat or fpgStyle.HasButtonHoverEffect then
+  else if FFlat or lqStyle.HasButtonHoverEffect then
   begin
     if Enabled then
       Repaint;
@@ -772,7 +772,7 @@ begin
     FDown := True;
     Repaint;
   end
-  else if FFlat or fpgStyle.HasButtonHoverEffect then
+  else if FFlat or lqStyle.HasButtonHoverEffect then
   begin
     if Enabled then
       Repaint;

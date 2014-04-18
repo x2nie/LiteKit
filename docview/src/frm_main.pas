@@ -398,8 +398,8 @@ end;
 
 procedure TMainForm.UpdateRichViewFromSettings;
 begin
-  RichView.RichTextSettings.NormalFont := fpgGetFont(Settings.NormalFontDesc);
-  RichView.RichTextSettings.FixedFont := fpgGetFont(Settings.FixedFontDesc);
+  RichView.RichTextSettings.NormalFont := lqGetFont(Settings.NormalFontDesc);
+  RichView.RichTextSettings.FixedFont := lqGetFont(Settings.FixedFontDesc);
   RichView.ScrollDistance := Settings.ScrollDistance;
 end;
 
@@ -485,7 +485,7 @@ begin
     for i := 0 to CurrentOpenFiles.Count-1 do
     begin
       f := THelpFile(CurrentOpenFiles[i]);
-      if SameText(fpgExtractFileName(f.Filename), lHelpFileName) then
+      if SameText(lqExtractFileName(f.Filename), lHelpFileName) then
         lFound := True;
     end;
     if not lFound then
@@ -507,7 +507,7 @@ begin
     // format is always:  'url "<uri>"'
     lURL := StringReplace(Link, 'url "', '', []);
     lURL := UTF8Copy(lURL, 0, UTF8Length(lURL)-1);
-    fpgOpenURL(lURL);
+    lqOpenURL(lURL);
   end
   else
   begin
@@ -624,7 +624,7 @@ var
   s: TlqString;
 begin
   OpenAdditionalFile := False;
-  if fpgInputQuery('Open Special...', 'Enter Environment Variable or Directory Path to open', s) then
+  if lqInputQuery('Open Special...', 'Enter Environment Variable or Directory Path to open', s) then
   begin
     if s <> '' then
       OpenFile(s, '', True);
@@ -749,7 +749,7 @@ begin
     begin
       Add('<b><u>Filename:</u></b> <blue>' + f.Filename + '</blue>');
       Add('<b>Title:</b> ' + f.Title);
-      Add('<b>File size:</b> ' + IntToStr(fpgFileSize(f.Filename)) + ' bytes');
+      Add('<b>File size:</b> ' + IntToStr(lqFileSize(f.Filename)) + ' bytes');
       Add('<b>INF/HLP file version</b> ' + f.FormatVersion);
       Add('<b>Dictionary count:</b> ' + IntToStr(f.DictionaryCount));
       Add('<b>Topic count:</b> ' + IntToStr(f.TopicCount));
@@ -778,7 +778,7 @@ var
   ResourceIDString: string;
   ResourceID: word;
 begin
-  if not fpgInputQuery('Find Resource ID', 'Enter the resource ID to find', ResourceIDString) then
+  if not lqInputQuery('Find Resource ID', 'Enter the resource ID to find', ResourceIDString) then
     exit;
   try
     ResourceID := StrToInt(ResourceIDString);
@@ -795,7 +795,7 @@ procedure TMainForm.miToolsFindTopifByName(Sender: TObject);
 var
   TopicNameString: string;
 Begin
-  if not fpgInputQuery( 'Find Topic By Name',
+  if not lqInputQuery( 'Find Topic By Name',
                        'Enter the topic name to search for',
                        TopicNameString ) then
     exit;
@@ -875,7 +875,7 @@ begin
     begin
       sl.Add('"' + f.DictionaryWords[j] + '"');
     end;
-    sl.SaveToFile(GetTempDir + fpgExtractFileName(f.Filename) + '.dictionary');
+    sl.SaveToFile(GetTempDir + lqExtractFileName(f.Filename) + '.dictionary');
   end;
   sl.Free;
 end;
@@ -1429,7 +1429,7 @@ end;
 procedure TMainForm.SetMainCaption;
 begin
   WindowTitle:= MainTitle;
-  fpgApplication.ProcessMessages;
+  lqApplication.ProcessMessages;
 end;
 
 procedure TMainForm.DisplayFiles(NewFiles: TList; var FirstContentsNode: TlqTreeNode);
@@ -1490,7 +1490,7 @@ begin
 
     if dlg.RunOpenFile then
     begin
-      Settings.LastOpenDirectory := fpgExtractFilePath(dlg.Filename);
+      Settings.LastOpenDirectory := lqExtractFilePath(dlg.Filename);
       OpenFile(dlg.Filename, '', true);
     end;
     { TODO -oGraeme : Add support for multiple files. }
@@ -1761,9 +1761,9 @@ begin
     exit;
 
   AHelpFile.NotesLoaded := true;
-  NotesFileName := fpgChangeFileExt(AHelpFile.FileName, NOTES_FILE_EXTENSION);
+  NotesFileName := lqChangeFileExt(AHelpFile.FileName, NOTES_FILE_EXTENSION);
 
-  if not fpgFileExists(NotesFileName) then
+  if not lqFileExists(NotesFileName) then
     exit; // no notes
 
   NotesFile := TStringList.Create;
@@ -2273,7 +2273,7 @@ begin
     exit;
 
   ProfileEvent('Really saving');
-  NotesFileName := fpgChangeFileExt(AHelpFile.FileName, NOTES_FILE_EXTENSION);
+  NotesFileName := lqChangeFileExt(AHelpFile.FileName, NOTES_FILE_EXTENSION);
 
   FileNoteCount := 0;
   for  NoteIndex := 0 to Notes.Count-1 do
@@ -2286,8 +2286,8 @@ begin
   if FileNoteCount = 0 then
   begin
     // no notes. delete notes file if it already exists.
-    if fpgFileExists( NotesFileName ) then
-      fpgDeleteFile( NotesFileName );
+    if lqFileExists( NotesFileName ) then
+      lqDeleteFile( NotesFileName );
     exit;
   end;
 
@@ -2627,8 +2627,8 @@ var
   img: TlqImage;
 begin
   inherited Create(AOwner);
-  fpgApplication.OnException  := @MainFormException;
-  fpgApplication.HelpFile := cDocViewHelpFile;
+  lqApplication.OnException  := @MainFormException;
+  lqApplication.HelpFile := cDocViewHelpFile;
   OnShow  := @MainFormShow;
   OnDestroy := @MainFormDestroy;
 //  Files := TList.Create;
@@ -2655,23 +2655,23 @@ begin
 
 
   // load toolbar images
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'dv.arrowleft', @usr_arrow_left,
     sizeof(usr_arrow_left), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'dv.arrowright', @usr_arrow_right,
     sizeof(usr_arrow_right), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'dv.arrowup', @usr_arrow_up,
     sizeof(usr_arrow_up), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'dv.arrowdown', @usr_arrow_down,
     sizeof(usr_arrow_down), 0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'dv.notegreen', @usr_notegreen,
     sizeof(usr_notegreen), 0, 0);
 
@@ -3790,7 +3790,7 @@ begin
       for FileNameIndex := 0 to MRUItem.Filenames.Count - 1 do
       begin
         FileName := MRUItem.Filenames[ FileNameIndex ];
-        FileName := fpgExtractFileName(FileName);
+        FileName := lqExtractFileName(FileName);
         FileName := ChangeFileExt( FileName, '' );// remove extension
 
         if FileNameIndex > 0 then
@@ -3835,9 +3835,9 @@ var
 begin
   ProfileEvent( 'Load bookmarks for ' + AHelpFile.Filename );
 
-  BookmarksFileName := fpgChangeFileExt(AHelpFile.FileName, BOOKMARK_FILE_EXTENSION);
+  BookmarksFileName := lqChangeFileExt(AHelpFile.FileName, BOOKMARK_FILE_EXTENSION);
 
-  if not fpgFileExists( BookmarksFileName ) then
+  if not lqFileExists( BookmarksFileName ) then
     Exit;
 
   FileMode := fmInput;
@@ -3885,7 +3885,7 @@ var
 begin
   ProfileEvent( 'Save bookmarks for ' + AHelpFile.Filename );
 
-  BookmarksFileName:= fpgChangeFileExt(AHelpFile.FileName, BOOKMARK_FILE_EXTENSION);
+  BookmarksFileName:= lqChangeFileExt(AHelpFile.FileName, BOOKMARK_FILE_EXTENSION);
 
   BookmarkCount := 0;
   for i := 0 to Bookmarks.Count - 1 do
@@ -3897,8 +3897,8 @@ begin
 
   if BookmarkCount = 0 then
   begin
-    if fpgFileExists( BookmarksFileName ) then
-      fpgDeleteFile( BookmarksFileName );
+    if lqFileExists( BookmarksFileName ) then
+      lqDeleteFile( BookmarksFileName );
     Exit;
   end;
 

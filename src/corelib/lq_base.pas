@@ -98,29 +98,29 @@ const
   MOUSE_MIDDLE     = 2;
 
   // Platform independent messages used by LiteKit (TlqWidget)
-  FPGM_PAINT       = 1;
-  FPGM_ACTIVATE    = 2;
-  FPGM_DEACTIVATE  = 3;
-  FPGM_KEYPRESS    = 4;
-  FPGM_KEYRELEASE  = 5;
-  FPGM_KEYCHAR     = 6;
-  FPGM_MOUSEDOWN   = 7;
-  FPGM_MOUSEUP     = 8;
-  FPGM_MOUSEMOVE   = 9;
-  FPGM_DOUBLECLICK = 10;
-  FPGM_MOUSEENTER  = 11;
-  FPGM_MOUSEEXIT   = 12;
-  FPGM_CLOSE       = 13;
-  FPGM_SCROLL      = 14;
-  FPGM_RESIZE      = 15;
-  FPGM_MOVE        = 16;
-  FPGM_POPUPCLOSE  = 17;
-  FPGM_HINTTIMER   = 18;
-  FPGM_FREEME      = 19;
-  FPGM_DROPENTER   = 20;
-  FPGM_DROPEXIT    = 21;
-  FPGM_USER        = 50000;
-  FPGM_KILLME      = MaxInt;
+  LQM_PAINT       = 1;
+  LQM_ACTIVATE    = 2;
+  LQM_DEACTIVATE  = 3;
+  LQM_KEYPRESS    = 4;
+  LQM_KEYRELEASE  = 5;
+  LQM_KEYCHAR     = 6;
+  LQM_MOUSEDOWN   = 7;
+  LQM_MOUSEUP     = 8;
+  LQM_MOUSEMOVE   = 9;
+  LQM_DOUBLECLICK = 10;
+  LQM_MOUSEENTER  = 11;
+  LQM_MOUSEEXIT   = 12;
+  LQM_CLOSE       = 13;
+  LQM_SCROLL      = 14;
+  LQM_RESIZE      = 15;
+  LQM_MOVE        = 16;
+  LQM_POPUPCLOSE  = 17;
+  LQM_HINTTIMER   = 18;
+  LQM_FREEME      = 19;
+  LQM_DROPENTER   = 20;
+  LQM_DROPEXIT    = 21;
+  LQM_USER        = 50000;
+  LQM_KILLME      = MaxInt;
 
   // The special keys, based on the well-known keyboard scan codes
   {$I keys.inc}
@@ -128,12 +128,12 @@ const
 
 var
   {$IFDEF MSWINDOWS}
-  FPG_DEFAULT_FONT_DESC: string = 'Arial-8:antialias=true';
-  FPG_DEFAULT_SANS: string = 'Arial';
+  LQ_DEFAULT_FONT_DESC: string = 'Arial-8:antialias=true';
+  LQ_DEFAULT_SANS: string = 'Arial';
   {$ENDIF}
   {$IFDEF UNIX}
-  FPG_DEFAULT_FONT_DESC: string = 'Liberation Sans-10:antialias=true';
-  FPG_DEFAULT_SANS: string = 'Liberation Sans';
+  LQ_DEFAULT_FONT_DESC: string = 'Liberation Sans-10:antialias=true';
+  LQ_DEFAULT_SANS: string = 'Liberation Sans';
   {$ENDIF}
 
 const
@@ -749,19 +749,19 @@ function  KeycodeToText(AKey: Word; AShiftState: TShiftState): string;
 function  CheckClipboardKey(AKey: Word;  AShiftstate: TShiftState): TClipboardKeyType;
 
 { Color }
-function  fpgColorToRGBTriple(const AColor: TlqColor): TRGBTriple;
-function  fpgColorToFPColor(const AColor: TlqColor): TFPColor; deprecated;
+function  lqColorToRGBTriple(const AColor: TlqColor): TRGBTriple;
+function  lqColorToFPColor(const AColor: TlqColor): TFPColor; deprecated;
 function  RGBTripleTofpgColor(const AColor: TRGBTriple): TlqColor;
 function  FPColorTofpgColor(const AColor: TFPColor): TlqColor; deprecated;
-function  fpgGetRed(const AColor: TlqColor): byte;
-function  fpgGetGreen(const AColor: TlqColor): byte;
-function  fpgGetBlue(const AColor: TlqColor): byte;
-function  fpgGetAlpha(const AColor: TlqColor): byte;
-function  fpgGetAvgColor(const AColor1, AColor2: TlqColor): TlqColor;
-function  fpgColor(const ARed, AGreen, ABlue: byte): TlqColor;
-function  fpgColor(const ARed, AGreen, ABlue, AAlpha: byte): TlqColor;
-function  fpgDarker(const AColor: TlqColor; APercent: Byte = 50): TlqColor;
-function  fpgLighter(const AColor: TlqColor; APercent: Byte = 50): TlqColor;
+function  lqGetRed(const AColor: TlqColor): byte;
+function  lqGetGreen(const AColor: TlqColor): byte;
+function  lqGetBlue(const AColor: TlqColor): byte;
+function  lqGetAlpha(const AColor: TlqColor): byte;
+function  lqGetAvgColor(const AColor1, AColor2: TlqColor): TlqColor;
+function  lqColor(const ARed, AGreen, ABlue: byte): TlqColor;
+function  lqColor(const ARed, AGreen, ABlue, AAlpha: byte): TlqColor;
+function  lqDarker(const AColor: TlqColor; APercent: Byte = 50): TlqColor;
+function  lqLighter(const AColor: TlqColor; APercent: Byte = 50): TlqColor;
 
 
 { Points }
@@ -775,8 +775,8 @@ procedure SortRect(var left, top, right, bottom: integer);
 implementation
 
 uses
-  lq_main,  // needed for fpgApplication & fpgNamedColor
-  lq_utils, // needed for fpgFileList
+  lq_main,  // needed for lqApplication & lqNamedColor
+  lq_utils, // needed for lqFileList
   lq_constants,
   lq_form,  // needed for .()fpgApplicationCreateForms
   typinfo,
@@ -971,25 +971,25 @@ begin
   end  { if/else }
 end;
 
-function fpgColorToRGBTriple(const AColor: TlqColor): TRGBTriple;
+function lqColorToRGBTriple(const AColor: TlqColor): TRGBTriple;
 begin
   with Result do
   begin
-    Red   := fpgGetRed(AColor);
-    Green := fpgGetGreen(AColor);
-    Blue  := fpgGetBlue(AColor);
-    Alpha := fpgGetAlpha(AColor);
+    Red   := lqGetRed(AColor);
+    Green := lqGetGreen(AColor);
+    Blue  := lqGetBlue(AColor);
+    Alpha := lqGetAlpha(AColor);
   end
 end;
 
-function fpgColorToFPColor(const AColor: TlqColor): TFPColor; deprecated;
+function lqColorToFPColor(const AColor: TlqColor): TFPColor; deprecated;
 begin
   with Result do
   begin
-    Red   := fpgGetRed(AColor);
-    Green := fpgGetGreen(AColor);
-    Blue  := fpgGetBlue(AColor);
-    Alpha := fpgGetAlpha(AColor);
+    Red   := lqGetRed(AColor);
+    Green := lqGetGreen(AColor);
+    Blue  := lqGetBlue(AColor);
+    Alpha := lqGetAlpha(AColor);
   end
 end;
 
@@ -1003,49 +1003,49 @@ begin
   Result := AColor.Blue or (AColor.Green shl 8) or (AColor.Red shl 16) or (AColor.Alpha shl 24);
 end;
 
-function fpgGetRed(const AColor: TlqColor): byte;
+function lqGetRed(const AColor: TlqColor): byte;
 var
   c: TlqColor;
 begin
-  c := fpgColorToRGB(AColor);
+  c := lqColorToRGB(AColor);
   // AARRGGBB format
   Result := (c shr 16) and $FF;
 end;
 
-function fpgGetGreen(const AColor: TlqColor): byte;
+function lqGetGreen(const AColor: TlqColor): byte;
 var
   c: TlqColor;
 begin
-  c := fpgColorToRGB(AColor);
+  c := lqColorToRGB(AColor);
   // AARRGGBB format
   Result := (c shr 8) and $FF;
 end;
 
-function fpgGetBlue(const AColor: TlqColor): byte;
+function lqGetBlue(const AColor: TlqColor): byte;
 var
   c: TlqColor;
 begin
-  c := fpgColorToRGB(AColor);
+  c := lqColorToRGB(AColor);
   // AARRGGBB format
   Result := c and $FF;
 end;
 
-function fpgGetAlpha(const AColor: TlqColor): byte;
+function lqGetAlpha(const AColor: TlqColor): byte;
 var
   c: TlqColor;
 begin
-  c := fpgColorToRGB(AColor);
+  c := lqColorToRGB(AColor);
   // AARRGGBB format
   Result := (c shr 24) and $FF;
 end;
 
-function fpgGetAvgColor(const AColor1, AColor2: TlqColor): TlqColor;
+function lqGetAvgColor(const AColor1, AColor2: TlqColor): TlqColor;
 var
   c1, c2: TRGBTriple;
   avg: TRGBTriple;
 begin
-  c1 := fpgColorToRGBTriple(AColor1);
-  c2 := fpgColorToRGBTriple(AColor2);
+  c1 := lqColorToRGBTriple(AColor1);
+  c2 := lqColorToRGBTriple(AColor2);
   avg.Red   := c1.Red + (c2.Red - c1.Red) div 2;
   avg.Green := c1.Green + (c2.Green - c1.Green) div 2;
   avg.Blue  := c1.Blue + (c2.Blue - c1.Blue) div 2;
@@ -1053,37 +1053,37 @@ begin
   Result := RGBTripleTofpgColor(avg);
 end;
 
-function fpgColor(const ARed, AGreen, ABlue: byte): TlqColor;
+function lqColor(const ARed, AGreen, ABlue: byte): TlqColor;
 begin
   { color is always fully opaque }
   Result := ABlue or (AGreen shl 8) or (ARed shl 16) or ($FF shl 24);
 end;
 
-function fpgColor(const ARed, AGreen, ABlue, AAlpha: byte): TlqColor;
+function lqColor(const ARed, AGreen, ABlue, AAlpha: byte): TlqColor;
 begin
   Result := ABlue or (AGreen shl 8) or (ARed shl 16) or (AAlpha shl 24);
 end;
 
-function fpgDarker(const AColor: TlqColor; APercent: Byte): TlqColor;
+function lqDarker(const AColor: TlqColor; APercent: Byte): TlqColor;
 var
   lColor: TRGBTriple;
 begin
-  lColor.Red := fpgGetRed(AColor);
-  lColor.Green := fpgGetGreen(AColor);
-  lColor.Blue := fpgGetBlue(AColor);
+  lColor.Red := lqGetRed(AColor);
+  lColor.Green := lqGetGreen(AColor);
+  lColor.Blue := lqGetBlue(AColor);
   lColor.Red := Round(lColor.Red*APercent/100);
   lColor.Green := Round(lColor.Green*APercent/100);
   lColor.Blue := Round(lColor.Blue*APercent/100);
   Result := RGBTripleTofpgColor(lColor);
 end;
 
-function fpgLighter(const AColor: TlqColor; APercent: Byte): TlqColor;
+function lqLighter(const AColor: TlqColor; APercent: Byte): TlqColor;
 var
   lColor: TRGBTriple;
 begin
-  lColor.Red := fpgGetRed(AColor);
-  lColor.Green := fpgGetGreen(AColor);
-  lColor.Blue := fpgGetBlue(AColor);
+  lColor.Red := lqGetRed(AColor);
+  lColor.Green := lqGetGreen(AColor);
+  lColor.Blue := lqGetBlue(AColor);
   lColor.Red := Round((lColor.Red*APercent/100) + (255 - APercent/100*255));
   lColor.Green := Round((lColor.Green*APercent/100) + (255 - APercent/100*255));
   lColor.Blue := Round((lColor.Blue*APercent/100) + (255 - APercent/100*255));
@@ -1733,8 +1733,8 @@ var
   i: Integer;
   newcolor: TRGBTriple;
 begin
-  RGBStart := fpgColorToRGBTriple(AStart);
-  RGBStop  := fpgColorToRGBTriple(AStop);
+  RGBStart := lqColorToRGBTriple(AStart);
+  RGBStop  := lqColorToRGBTriple(AStop);
 
   if ADirection = gdVertical then
     count := ARect.Bottom - ARect.Top
@@ -1854,7 +1854,7 @@ begin
 
     SetColor(clText1);
     SetTextColor(clText1);
-    SetFont(fpgApplication.DefaultFont);
+    SetFont(lqApplication.DefaultFont);
     SetLineStyle(0, lsSolid);
 
     FBeginDrawCount := 0;
@@ -2009,7 +2009,7 @@ begin
         with contributions[r] do
         begin
           c   := image.colors[place, y];
-          rgb := fpgColorToRGBTriple(c);
+          rgb := lqColorToRGBTriple(c);
           a     := weight; // * rgb.Alpha / $FFFF;
           re    := re + a * rgb.Red;
           gr    := gr + a * rgb.Green;
@@ -2080,7 +2080,7 @@ begin
         with contributions[r] do
         begin
           c := tempimage.colors[x, place];
-          rgb := fpgColorToRGBTriple(c);
+          rgb := lqColorToRGBTriple(c);
           a     := weight;// * rgb.alpha / $FFFF;
           re    := re + a * rgb.red;
           gr    := gr + a * rgb.green;
@@ -2413,8 +2413,8 @@ var
 begin
   // Default location is in same directory as current running application
   // This location might change in the future.
-  ext := fpgExtractFileExt(ParamStr(0));
-  Result := fpgExtractFilePath(ParamStr(0)) + FPG_HELPVIEWER + ext;
+  ext := lqExtractFileExt(ParamStr(0));
+  Result := lqExtractFilePath(ParamStr(0)) + LQ_HELPVIEWER + ext;
 end;
 
 constructor TlqApplicationBase.Create(const AParams: string);
@@ -2521,7 +2521,7 @@ begin
   // make sure all forms are closed before main form
   for i := FormCount - 1 downto 0 do
     if Forms[i] <> MainForm then
-      fpgSendMessage(Self, Forms[i], FPGM_CLOSE); // SendMessage waits for it to complete. Post doesn't.
+      lqSendMessage(Self, Forms[i], LQM_CLOSE); // SendMessage waits for it to complete. Post doesn't.
   Terminated := True;
 end;
 
@@ -2549,11 +2549,11 @@ var
   p: TProcess;
 begin
   Result := False;
-  if not fpgFileExists(GetHelpViewer) then
+  if not lqFileExists(GetHelpViewer) then
     raise ELiteKitUserFeedbackException.Create(rsfailedtofindhelpviewer);
   p := TProcess.Create(nil);
   try
-    if fpgFileExists(HelpFile) then
+    if lqFileExists(HelpFile) then
     begin
       if AHelpContext = 0 then
         p.CommandLine := GetHelpViewer + ' ' + HelpFile
@@ -2577,11 +2577,11 @@ var
   p: TProcess;
 begin
   Result := False;
-  if not fpgFileExists(GetHelpViewer) then
+  if not lqFileExists(GetHelpViewer) then
     raise ELiteKitUserFeedbackException.Create(rsfailedtofindhelpviewer);
   p := TProcess.Create(nil);
   try
-    if fpgFileExists(HelpFile) then
+    if lqFileExists(HelpFile) then
     begin
       p.CommandLine := GetHelpViewer + ' ' + HelpFile + ' -s ' + AHelpKeyword;
       {$ifdef GDEBUG}
@@ -2720,8 +2720,8 @@ var
   e: TFileEntry;
 begin
   e := TFileEntry.Create;
-  e.Name        := fpgFromOSEncoding(sr.Name);
-  e.Extension   := fpgExtractFileExt(e.Name);
+  e.Name        := lqFromOSEncoding(sr.Name);
+  e.Extension   := lqExtractFileExt(e.Name);
   e.Size        := sr.Size;
   // e.Attributes  := sr.Attr; // this is incorrect and needs to improve!
   e.ModTime     := FileDateToDateTime(sr.Time);
@@ -2818,12 +2818,12 @@ begin
   Result:=False;
   // default parameter value is current directory
   if aDirectory <> '' then
-    dir := fpgExpandFileName(aDirectory)
+    dir := lqExpandFileName(aDirectory)
   else
-    dir := fpgGetCurrentDir;
+    dir := lqGetCurrentDir;
 
   // vvzh: now we have to use SetCurrentDir in order to make ExpandFileName work
-  if not fpgSetCurrentDir(dir) then
+  if not lqSetCurrentDir(dir) then
     Exit; //==>
 
   // Add PathDelim to end if it doesn't yet exist
@@ -2834,10 +2834,10 @@ begin
   try
     // The extra 'or' includes Normal attribute files under Windows. faAnyFile doesn't return those.
     // Reported to FPC as bug 9440 in Mantis.
-    if fpgFindFirst(FDirectoryName + AllFilesMask, faAnyFile or $00000080, SearchRec) = 0 then
+    if lqFindFirst(FDirectoryName + AllFilesMask, faAnyFile or $00000080, SearchRec) = 0 then
     begin
       AddEntry(SearchRec);
-      while fpgFindNext(SearchRec) = 0 do
+      while lqFindNext(SearchRec) = 0 do
       begin
         AddEntry(SearchRec);
       end;
@@ -3218,4 +3218,8 @@ end;
 
 
 end.
+
+
+
+
 

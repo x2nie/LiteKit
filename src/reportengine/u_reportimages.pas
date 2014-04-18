@@ -375,34 +375,34 @@ const
 procedure CreateReportImages;
 begin
 
-  fpgImages.AddMaskedBMP('repimg.Last',@repimg_Last,sizeof(repimg_Last),0,0);
+  lqImages.AddMaskedBMP('repimg.Last',@repimg_Last,sizeof(repimg_Last),0,0);
 
-  fpgImages.AddMaskedBMP('repimg.Printer',@repimg_Printer,sizeof(repimg_Printer),0,0);
+  lqImages.AddMaskedBMP('repimg.Printer',@repimg_Printer,sizeof(repimg_Printer),0,0);
 
-  fpgImages.AddMaskedBMP('repimg.Previous',@repimg_Previous,sizeof(repimg_Previous),0,0);
+  lqImages.AddMaskedBMP('repimg.Previous',@repimg_Previous,sizeof(repimg_Previous),0,0);
 
-  fpgImages.AddMaskedBMP('repimg.Stop',@repimg_Stop,sizeof(repimg_Stop),0,0);
+  lqImages.AddMaskedBMP('repimg.Stop',@repimg_Stop,sizeof(repimg_Stop),0,0);
 
-  fpgImages.AddMaskedBMP('repimg.Next',@repimg_Next,sizeof(repimg_Next),0,0);
+  lqImages.AddMaskedBMP('repimg.Next',@repimg_Next,sizeof(repimg_Next),0,0);
 
-  fpgImages.AddMaskedBMP('repimg.First',@repimg_First,sizeof(repimg_First),0,0);
+  lqImages.AddMaskedBMP('repimg.First',@repimg_First,sizeof(repimg_First),0,0);
 
 end;
 
 function DeleteReportImages: Boolean;
 begin
 
-  fpgImages.DeleteImage('repimg.Last',True);
+  lqImages.DeleteImage('repimg.Last',True);
 
-  fpgImages.DeleteImage('repimg.Printer',True);
+  lqImages.DeleteImage('repimg.Printer',True);
 
-  fpgImages.DeleteImage('repimg.Previous',True);
+  lqImages.DeleteImage('repimg.Previous',True);
 
-  fpgImages.DeleteImage('repimg.Stop',True);
+  lqImages.DeleteImage('repimg.Stop',True);
 
-  fpgImages.DeleteImage('repimg.Next',True);
+  lqImages.DeleteImage('repimg.Next',True);
 
-  fpgImages.DeleteImage('repimg.First',True);
+  lqImages.DeleteImage('repimg.First',True);
 
 end;
 

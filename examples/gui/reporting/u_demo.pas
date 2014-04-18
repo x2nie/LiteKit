@@ -1218,8 +1218,8 @@ begin
   //fpgSetNamedColor(clText1, clBlue);
   //fpgSetNamedColor(clSelection, clSkyBlue);
   //fpgSetNamedColor(clSelectionText, clDarkBlue);
-  fpgSetNamedFont('Label1', 'bitstream vera sans-10');
-  fpgSetNamedFont('Edit1', 'bitstream vera sans-10');
+  lqSetNamedFont('Label1', 'bitstream vera sans-10');
+  lqSetNamedFont('Edit1', 'bitstream vera sans-10');
   L_Pdf           := CreateLabel(Self, 50, 5, 'Print to PDF', 150, 20, taCenter);
   Bt_PdfEmptyPage := CreateButton(Self, 50, 30, 150, 'Empty page', @Bt_PdfEmptyPageClick, 'stdimg.Adobe_pdf');
   Bt_PdfSimpleText := CreateButton(Self, 50, 70, 150, 'Simple text', @Bt_PdfSimpleTextClick, 'stdimg.Adobe_pdf');

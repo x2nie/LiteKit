@@ -60,7 +60,7 @@ var
   i: integer;
 begin
   lbFontList.Items.Clear;
-  fl := fpgApplication.GetFontFaceList;
+  fl := lqApplication.GetFontFaceList;
   for i := 0 to fl.Count-1 do
     lbFontList.Items.Add(fl.Strings[i]);
   fl.Free;
@@ -104,10 +104,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

@@ -151,11 +151,11 @@ procedure MainProc;
 var
   frmSplitterTest: TfrmSplitterTest;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frmSplitterTest := TfrmSplitterTest.Create(nil);
   try
     frmSplitterTest.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frmSplitterTest.Free;
   end;

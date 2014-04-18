@@ -162,8 +162,8 @@ begin
   ToolkitOnly := False;
 
   // build correct filename for LiteKit Toolkit translations.
-  lPath := fpgExtractFilePath(AFilename);
-  lFile := fpgExtractFileName(AFilename);
+  lPath := lqExtractFilePath(AFilename);
+  lFile := lqExtractFileName(AFilename);
   lPos := Pos('.', lFile);
   lFile := lPath + 'fpgui' + Copy(lFile, lPos, Length(lFile)-lPos+1);
   {$IFDEF DEBUG}
@@ -172,14 +172,14 @@ begin
   writeln('  AFilename="', AFilename, '"');
   {$ENDIF}
 
-  if {(ResUnitName = '') or} (AFilename = '') or (not fpgFileExists(AFilename)) then
+  if {(ResUnitName = '') or} (AFilename = '') or (not lqFileExists(AFilename)) then
     ToolkitOnly := True;  // we don't have a application translation file
   try
     po := nil;
     // read .po file
     if ToolkitOnly then
     begin
-      if not fpgFileExists(lFile) then
+      if not lqFileExists(lFile) then
         Exit;
       {$IFDEF DEBUG}
       writeln('  ************  Only translating the toolkit   ***********');
@@ -416,7 +416,7 @@ var
   f: TStream;
 begin
   // Now LiteKit translation
-  if (AFilename = '') or (not fpgFileExists(AFilename)) then
+  if (AFilename = '') or (not lqFileExists(AFilename)) then
     Exit;
   f := TFileStream.Create(AFilename, fmOpenRead or fmShareDenyNone);
   try

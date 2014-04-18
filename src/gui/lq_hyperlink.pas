@@ -120,7 +120,7 @@ end;
 procedure TlqHyperlink.GoHyperLink;
 begin
   if URL <> '' then
-    fpgOpenURL(URL);
+    lqOpenURL(URL);
 end;
 
 procedure TlqHyperlink.HandleMouseEnter;

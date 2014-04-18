@@ -6,18 +6,18 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, fpgfx, tabtest;
+  Classes, lqfx, tabtest;
 
 
 procedure MainProc;
 var
   frm: TfrmTabTest;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TfrmTabTest.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

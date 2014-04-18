@@ -53,7 +53,7 @@ end;
 
 procedure TTextForm.btnCopyClicked(Sender: TObject);
 begin
-  fpgClipboard.Text := Memo1.Lines.Text;
+  lqClipboard.Text := Memo1.Lines.Text;
 end;
 
 procedure TTextForm.AfterCreate;

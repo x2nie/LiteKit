@@ -113,7 +113,7 @@ type
 
     if FUnitName <> '' then
       FUnitCode := FUnitCode +
-        '  fpgImages.AddMaskedBMP('                 +LineEnding+
+        '  lqImages.AddMaskedBMP('                 +LineEnding+
         '      '''+FPrefix+'.'+iname+''','          +LineEnding+
         '      @'+S+','                             +LineEnding+
         '      sizeof('+S+'), '+FMaskSamplePos+');' +LineEnding+LineEnding;

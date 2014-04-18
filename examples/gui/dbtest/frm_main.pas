@@ -7,7 +7,7 @@ interface
 uses
   SysUtils, Classes, lq_main,
   lq_widget, lq_form, lq_label, lq_button,
-  lq_listbox, lq_panel, fpgui_db, db, {dbf, dbf_fields};
+  lq_listbox, lq_panel, lqui_db, db, {dbf, dbf_fields};
 
 type
 

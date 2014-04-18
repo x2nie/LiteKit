@@ -134,12 +134,12 @@ end;
 
 procedure TConfigurationForm.btnSearchHighlightClicked(Sender: TObject);
 begin
-  pnlSearchHighlight.BackgroundColor := fpgSelectColorDialog(pnlSearchHighlight.BackgroundColor);
+  pnlSearchHighlight.BackgroundColor := lqSelectColorDialog(pnlSearchHighlight.BackgroundColor);
 end;
 
 procedure TConfigurationForm.btnNotesColorClicked(Sender: TObject);
 begin
-  pnlNotesColor.BackgroundColor := fpgSelectColorDialog(pnlNotesColor.BackgroundColor);
+  pnlNotesColor.BackgroundColor := lqSelectColorDialog(pnlNotesColor.BackgroundColor);
 end;
 
 procedure TConfigurationForm.ResetColorsButtonOnClick(Sender: TObject);

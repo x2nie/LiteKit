@@ -19,7 +19,7 @@ type
 		FVerBar: TlqScrollbar;
 		FList: TList;
 		FActiveWindow: TlqMDIChildForm;
-		procedure InternalMsgFreeMe(var msg: TlqMessageRec); message FPGM_FREEME;
+		procedure InternalMsgFreeMe(var msg: TlqMessageRec); message LQM_FREEME;
 		procedure SetActiveWindow(AValue: TlqMDIChildForm);
 		function GetChildWindowCount: integer;
 	protected
@@ -331,7 +331,7 @@ end;
 procedure TlqMDIChildForm.Close;
 begin
 	// We can't free ourselves, somebody else needs to do it
-	fpgPostMessage(Self, FMDIWorkArea, FPGM_FREEME);
+	fpgPostMessage(Self, FMDIWorkArea, LQM_FREEME);
 end;
 
 { TlqMDIWorkArea }

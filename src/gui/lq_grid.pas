@@ -222,17 +222,17 @@ begin
   case ACol of
     0:  begin
           if e.EntryType = etDir then
-            img := fpgImages.GetImage('stdimg.folder')          // Do NOT localize
+            img := lqImages.GetImage('stdimg.folder')          // Do NOT localize
           else if e.IsExecutable then
-            img := fpgImages.GetImage('stdimg.executable')      // Do NOT localize
+            img := lqImages.GetImage('stdimg.executable')      // Do NOT localize
           else
-            img := fpgImages.GetImage('stdimg.document');       // Do NOT localize
+            img := lqImages.GetImage('stdimg.document');       // Do NOT localize
 
           if img <> nil then
             Canvas.DrawImage(ARect.Left + (picture_width - img.Width) div 2,
                y + (ARect.Height - img.Height) div 2, img);
           if e.IsLink then  // paint shortcut link symbol over existing image
-            Canvas.DrawImage(ARect.Left+1, ARect.Top+1, fpgImages.GetImage('stdimg.link'));
+            Canvas.DrawImage(ARect.Left+1, ARect.Top+1, lqImages.GetImage('stdimg.link'));
           x := ARect.Left + picture_width;
           s := e.Name;
         end;
@@ -276,7 +276,7 @@ begin
   inherited Create(AOwner);
   ColumnCount := 0;
   RowCount := 0;
-  FFixedFont := fpgGetFont('Courier New-9');
+  FFixedFont := lqGetFont('Courier New-9');
   
   if FFileList.HasFileMode then
     AddColumn(rsName, 220)  // save space for file mode, owner and group
@@ -296,7 +296,7 @@ begin
     AddColumn(rsFileAttributes, 78);
     
   RowSelect := True;
-  DefaultRowHeight := fpgImages.GetImage('stdimg.document').Height + 2;
+  DefaultRowHeight := lqImages.GetImage('stdimg.document').Height + 2;
 end;
 
 destructor TlqFileGrid.Destroy;

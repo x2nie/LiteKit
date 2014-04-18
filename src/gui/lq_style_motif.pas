@@ -51,10 +51,10 @@ constructor TlqMotifStyle.Create;
 begin
   inherited Create;
 
-  fpgSetNamedColor(clWindowBackground, $999999);
-  fpgSetNamedColor(clButtonFace, $999999);
-  fpgSetNamedColor(clBoxColor, $999999);
-  fpgSetNamedColor(clListBox, $999999);
+  lqSetNamedColor(clWindowBackground, $999999);
+  lqSetNamedColor(clButtonFace, $999999);
+  lqSetNamedColor(clBoxColor, $999999);
+  lqSetNamedColor(clListBox, $999999);
 
 end;
 
@@ -112,7 +112,7 @@ begin
     ACanvas.DrawRectangle(r);
     InflateRect(r, -1, -1);
     Exclude(AFlags, btfIsDefault);
-    fpgStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
+    lqStyle.DrawButtonFace(ACanvas, r.Left, r.Top, r.Width, r.Height, AFlags);
     Exit; //==>
   end;
 
@@ -199,7 +199,7 @@ end;
 
 
 initialization
-  fpgStyleManager.RegisterClass('Motif', TlqMotifStyle);
+  lqStyleManager.RegisterClass('Motif', TlqMotifStyle);
 
 end.
 

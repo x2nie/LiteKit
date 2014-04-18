@@ -23,17 +23,17 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
 
   // always load custom style for help viewer
-  //if Assigned(fpgStyle) then
-  //  fpgStyle.Free;
+  //if Assigned(lqStyle) then
+  //  lqStyle.Free;
   //fpgStyle := TMyStyle.Create;
 
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

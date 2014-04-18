@@ -173,7 +173,7 @@ end;
 
 function TUnit.GetUnitName: TlqString;
 begin
-  Result := fpgExtractFileName(Filename);
+  Result := lqExtractFileName(Filename);
 end;
 
 constructor TUnit.Create;

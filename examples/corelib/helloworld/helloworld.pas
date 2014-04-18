@@ -33,10 +33,10 @@ type
 
   TMainWindow = class(TlqWindow)
   private
-    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
-    procedure   MsgClose(var msg: TlqMessageRec); message FPGM_CLOSE;
-    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
-    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
+    procedure   MsgPaint(var msg: TlqMessageRec); message LQM_PAINT;
+    procedure   MsgClose(var msg: TlqMessageRec); message LQM_CLOSE;
+    procedure   MsgResize(var msg: TlqMessageRec); message LQM_RESIZE;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message LQM_MOUSEUP;
   public
     constructor Create(AOwner: TComponent); override;
     procedure   Show;
@@ -71,7 +71,7 @@ begin
   r.SetRect(0, 0, Width, Height);
   Canvas.GradientFill(r, clBlue, clBlack, gdVertical);
 
-  fnt := fpgGetFont('Arial-20');
+  fnt := lqGetFont('Arial-20');
   try
     Canvas.Font := fnt;
 
@@ -86,7 +86,7 @@ begin
     fnt.Free;
   end;
 
-  fnt := fpgGetFont('Arial-10');
+  fnt := lqGetFont('Arial-10');
   try
     Canvas.Font := fnt;
     Canvas.DrawString((Width - Canvas.Font.TextWidth(ClickToClose)) div 2 - 1,
@@ -101,7 +101,7 @@ end;
 procedure TMainWindow.MsgClose(var msg: TlqMessageRec);
 begin
   ReleaseWindowHandle;
-  fpgApplication.Terminate;
+  lqApplication.Terminate;
 end;
 
 procedure TMainWindow.MsgResize(var msg: TlqMessageRec);
@@ -120,11 +120,11 @@ end;
 var
   MainWindow: TMainWindow;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   MainWindow := TMainWindow.Create(nil);
-  fpgApplication.MainForm := MainWindow;
+  lqApplication.MainForm := MainWindow;
   MainWindow.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   MainWindow.Free;
 end.
 

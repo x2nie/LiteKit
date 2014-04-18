@@ -129,8 +129,8 @@ var
   Vx, Vy: TlqCoord; // Coordinates for Vertical Lines
   avgcolor: TlqColor;
 begin
-  RGBStart := fpgColorToFPColor(fpgColorToRGB(AStart));
-  RGBStop  := fpgColorToFPColor(fpgColorToRGB(AStop));
+  RGBStart := lqColorToFPColor(lqColorToRGB(AStart));
+  RGBStop  := lqColorToFPColor(lqColorToRGB(AStop));
 
   count := Strip;
   Hx := X;
@@ -423,7 +423,7 @@ begin
   dtext := GetDrawText;
   Canvas.SetTextColor(clText1);
   Canvas.SetFont(Font);
-  fpgStyle.DrawString(Canvas, -FDrawOffset + FSideMargin, 3, dtext, Enabled);
+  lqStyle.DrawString(Canvas, -FDrawOffset + FSideMargin, 3, dtext, Enabled);
 
   if Focused then
   begin
@@ -440,16 +440,16 @@ begin
 
       tw  := Font.TextWidth(UTF8copy(dtext, 1, st));
       tw2 := Font.TextWidth(UTF8copy(dtext, 1, st + len));
-      Canvas.XORFillRectangle(fpgColorToRGB(clSelection) xor $FFFFFF, -FDrawOffset +
+      Canvas.XORFillRectangle(lqColorToRGB(clSelection) xor $FFFFFF, -FDrawOffset +
         FSideMargin + tw, 3, tw2 - tw, Font.Height);
     end;
 
     // drawing cursor
     tw := Font.TextWidth(UTF8copy(dtext, 1, FCursorPos));
-    fpgCaret.SetCaret(Canvas, -FDrawOffset + FSideMargin + tw, 3, fpgCaret.Width, Font.Height);
+    lqCaret.SetCaret(Canvas, -FDrawOffset + FSideMargin + tw, 3, lqCaret.Width, Font.Height);
   end
   else
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
 
   Canvas.EndDraw;
 end;

@@ -102,10 +102,10 @@ type
   private
     FDrawing: boolean;
     FBufferBitmap: HBitmap;
-    FDrawWindow: TlqGDIWindow;
-    Fgc: TlqDCHandle;
-    FBufgc: TlqDCHandle;
-    FWinGC: TlqDCHandle;
+    FDrawWindow: TlqGDIWindow;  //Widget to draw to
+    Fgc: TlqDCHandle;     //Graphic Context for canvas drawing operation
+    FBufgc: TlqDCHandle;  //Buffer, storage GC
+    FWinGC: TlqDCHandle;  //Windowed GC
     FBackgroundColor: TlqColor;
     FCurFontRes: TlqGDIFontResource;
     FClipRect: TlqRect;
@@ -135,7 +135,7 @@ type
     function    DoGetClipRect: TlqRect; override;
     procedure   DoAddClipRect(const ARect: TlqRect); override;
     procedure   DoClearClipRect; override;
-    procedure   DoBeginDraw(awin: TlqWindowBase; buffered: boolean); override;
+    procedure   DoBeginDraw(AWin: TlqWindowBase; ABuffered: boolean); override;
     procedure   DoPutBufferToScreen(x, y, w, h: TlqCoord); override;
     procedure   DoEndDraw; override;
     function    GetPixel(X, Y: integer): TlqColor; override;
@@ -145,7 +145,7 @@ type
     procedure   DoDrawPolygon(Points: PPoint; NumPts: Integer; Winding: boolean = False); override;
     property    DCHandle: TlqDCHandle read Fgc;
   public
-    constructor Create(awin: TlqWindowBase); override;
+    constructor Create(AWin: TlqWindowBase); override;
     destructor  Destroy; override;
   end;
 
@@ -379,11 +379,11 @@ begin
 end;
 {$ENDIF}
 
-function fpgColorToWin(col: TlqColor): longword;
+function lqColorToWin(col: TlqColor): longword;
 var
   c: dword;
 begin
-  c      := fpgColorToRGB(col);
+  c      := lqColorToRGB(col);
   //swapping bytes (Red and Blue colors)
   Result := ((c and $FF0000) shr 16) or (c and $00FF00) or ((c and $0000FF) shl 16);
 end;
@@ -409,15 +409,19 @@ begin
   wg := TlqWidget(Windows.GetWindowLongPtr(wh, GWL_USERDATA));
   if (wh <> 0) and (MainInstance = GetWindowLongPtr(wh, GWL_HINSTANCE))
     and (wg is TlqWidget)
+    then
+    Result := wg
+  else
+    Result := nil;
   {$ELSE}
   wg := TlqWidget(Windows.GetWindowLong(wh, GWL_USERDATA));
   if (wh <> 0) and (MainInstance = longword(GetWindowLong(wh, GWL_HINSTANCE)))
     and (wg is TlqWidget)
-  {$ENDIF}
   then
     Result := wg
   else
     Result := nil;
+  {$ENDIF}    
 end;
 
 { Use CenterPoint to get the Center-Point of any rectangle. It is primarily
@@ -456,6 +460,7 @@ function LineEndPoint(StartPoint: TPoint; Angle, Length: Extended): TPoint;
 begin
   if Angle > 360*16 then
     Angle := Frac(Angle / 360*16) * 360*16;
+
 
   if Angle < 0 then
     Angle := 360*16 - abs(Angle);
@@ -660,7 +665,7 @@ begin
   dy := (2 * by) + bt;
 end;
 
-function fpgCBTProc(nCode: longint; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
+function lqCBTProc(nCode: longint; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
 begin
   if nCode < 0 then
   begin
@@ -686,7 +691,7 @@ begin
     Result := CallNextHookEx(wapplication.ActivationHook, nCode, wParam, lParam);
 end;
 
-function fpgWindowProc(hwnd: HWND; uMsg: UINT; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
+function lqWindowProc(hwnd: HWND; uMsg: UINT; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
 var
   w: TlqGDIWindow;
   pw: TlqGDIWindow;
@@ -765,12 +770,12 @@ begin
     // seems to vary on whether opening the clipboard is necessary or
     // is in fact wrong:
     // fall through...
-    h := GlobalAlloc(GHND, Length(fpgClipboard.FClipboardText)+1);
+    h := GlobalAlloc(GHND, Length(lqClipboard.FClipboardText)+1);
     if (h <> 0) then
     begin
       p := GlobalLock(h);
-      Move(fpgClipboard.FClipboardText[1], p^, Length(fpgClipboard.FClipboardText));
-      inc(p, Length(fpgClipboard.FClipboardText));
+      Move(lqClipboard.FClipboardText[1], p^, Length(lqClipboard.FClipboardText));
+      inc(p, Length(lqClipboard.FClipboardText));
       p^ := #0;
       GlobalUnlock(h);
       SetClipboardData(CF_TEXT, h);
@@ -820,7 +825,7 @@ begin
 
           if (uMsg = WM_KEYDOWN) or (uMsg = WM_SYSKEYDOWN) then
           begin
-            fpgSendMessage(nil, w, FPGM_KEYPRESS, msgp);
+            lqSendMessage(nil, w, LQM_KEYPRESS, msgp);
 
             // generating WM_CHAR
             fillchar(wmsg, sizeof(wmsg), 0);
@@ -838,17 +843,17 @@ begin
             begin
               msgp.keyboard.keychar := #127;
               msgp.keyboard.keycode := 0;
-              fpgSendMessage(nil, w, FPGM_KEYCHAR, msgp);
+              lqSendMessage(nil, w, LQM_KEYCHAR, msgp);
             end;
 
           end
           else if (uMsg = WM_KEYUP) or (uMsg = WM_SYSKEYUP) then
-            fpgSendMessage(nil, w, FPGM_KEYRELEASE, msgp)
+            lqSendMessage(nil, w, LQM_KEYRELEASE, msgp)
           else if uMsg = WM_CHAR then
           begin
             tmpW := WideChar(wParam);
             msgp.keyboard.keychar := UTF8Encode(tmpW);
-            fpgSendMessage(nil, w, FPGM_KEYCHAR, msgp);
+            lqSendMessage(nil, w, LQM_KEYCHAR, msgp);
           end;
           
           // Allow Alt+F4 and other system key combinations
@@ -942,7 +947,7 @@ begin
             case uMsg of
               WM_MOUSEMOVE:
                   begin
-                    mcode := FPGM_MOUSEMOVE;
+                    mcode := LQM_MOUSEMOVE;
                   end;
 
               WM_LBUTTONDBLCLK,
@@ -960,7 +965,7 @@ begin
                       if TlqWidget(w).FormDesigner <> nil then
                         w.CaptureMouse;
                     end;
-                    mcode := FPGM_MOUSEDOWN;
+                    mcode := LQM_MOUSEDOWN;
                   end;
                   
               WM_LBUTTONUP,
@@ -977,7 +982,7 @@ begin
                       if TlqWidget(w).FormDesigner <> nil then
                         w.ReleaseMouse;
                     end;
-                    mcode := FPGM_MOUSEUP;
+                    mcode := LQM_MOUSEUP;
                   end;
               else
                   mcode := 0;
@@ -1016,7 +1021,7 @@ begin
               w.DoMouseEnterLeaveCheck(w, uMsg, wParam, lParam);
 
             if mcode <> 0 then
-              fpgSendMessage(nil, w, mcode, msgp);
+              lqSendMessage(nil, w, mcode, msgp);
           end;  { if blockmsg }
         end;
 
@@ -1040,7 +1045,7 @@ begin
           {$ENDIF}
           // skip minimize...
           if lparam <> 0 then
-            fpgSendMessage(nil, w, FPGM_RESIZE, msgp);
+            lqSendMessage(nil, w, LQM_RESIZE, msgp);
         end;
 
     WM_MOVE:
@@ -1065,7 +1070,7 @@ begin
             msgp.rect.Top  := smallint((lParam and $FFFF0000) shr 16);
           end;
 
-          fpgSendMessage(nil, w, FPGM_MOVE, msgp);
+          lqSendMessage(nil, w, LQM_MOVE, msgp);
         end;
 
     WM_MOUSEWHEEL:
@@ -1102,7 +1107,7 @@ begin
             msgp.mouse.Buttons := i;
             msgp.mouse.shiftstate := GetKeyboardShiftState;
 
-            fpgSendMessage(nil, mw, FPGM_SCROLL, msgp)
+            lqSendMessage(nil, mw, LQM_SCROLL, msgp)
           end;
         end;
 (*
@@ -1112,9 +1117,9 @@ begin
             SendDebug(w.ClassName + ': WM_ACTIVATE');
           {$ENDIF}
           if (Lo(wParam) = WA_INACTIVE) then
-            fpgSendMessage(nil, w, FPGM_DEACTIVATE)
+            lqSendMessage(nil, w, LQM_DEACTIVATE)
           else
-            fpgSendMessage(nil, w, FPGM_ACTIVATE);
+            lqSendMessage(nil, w, LQM_ACTIVATE);
         end;
 *)
     WM_TIMER:
@@ -1129,7 +1134,7 @@ begin
           SendDebug(w.ClassName + ': WM_TIMECHANGE');
           {$ENDIF}
           writeln('LiteKit/GDI: ' + w.ClassName + ': WM_TIMECHANGE');
-          fpgResetAllTimers;
+          lqResetAllTimers;
         end;
 
     WM_NCACTIVATE:
@@ -1138,9 +1143,9 @@ begin
             SendDebugFmt('%s: WM_NCACTIVATE wparam=%d', [w.ClassName, wParam]);
           {$ENDIF}
           if (wParam = 0) then
-            fpgSendMessage(nil, w, FPGM_DEACTIVATE)
+            lqSendMessage(nil, w, LQM_DEACTIVATE)
           else
-            fpgSendMessage(nil, w, FPGM_ACTIVATE);
+            lqSendMessage(nil, w, LQM_ACTIVATE);
 
           if (PopupListFirst <> nil) and (PopupListFirst.Visible) then
           begin
@@ -1180,7 +1185,7 @@ begin
           {$IFDEF DEBUG}
             SendDebug(w.ClassName + ': WM_Close');
           {$ENDIF}
-          fpgSendMessage(nil, w, FPGM_CLOSE, msgp);
+          lqSendMessage(nil, w, LQM_CLOSE, msgp);
         end;
 
     WM_PAINT:
@@ -1189,7 +1194,7 @@ begin
             SendDebug(w.ClassName + ': WM_PAINT');
           {$ENDIF}
           Windows.BeginPaint(w.WinHandle, @PaintStruct);
-          fpgSendMessage(nil, w, FPGM_PAINT, msgp);
+          lqSendMessage(nil, w, LQM_PAINT, msgp);
           Windows.EndPaint(w.WinHandle, @PaintStruct);
         end;
 
@@ -1279,7 +1284,7 @@ begin
   with WindowClass do
   begin
     style         := CS_HREDRAW or CS_VREDRAW or CS_OWNDC or CS_DBLCLKS;
-    lpfnWndProc   := WndProc(@fpgWindowProc);
+    lpfnWndProc   := WndProc(@lqWindowProc);
     hInstance     := MainInstance;
     // hIcon         := LoadIcon(0, IDI_APPLICATION);
     hIcon         := LoadIcon(hInstance, 'MAINICON');
@@ -1292,7 +1297,7 @@ begin
   with WidgetClass do
   begin
     style         := CS_OWNDC or CS_DBLCLKS;
-    lpfnWndProc   := WndProc(@fpgWindowProc);
+    lpfnWndProc   := WndProc(@lqWindowProc);
     hInstance     := MainInstance;
     hIcon         := 0;
     hCursor       := 0;
@@ -1316,7 +1321,7 @@ begin
 
   FHiddenWindow := 0;
 
-  ActivationHook := SetWindowsHookEx(WH_CBT, HOOKPROC(@fpgCBTProc), 0, GetCurrentThreadId);
+  ActivationHook := SetWindowsHookEx(WH_CBT, HOOKPROC(@lqCBTProc), 0, GetCurrentThreadId);
 
   FIsInitialized := True;
   wapplication   := TlqApplication(self);
@@ -1482,7 +1487,7 @@ begin
       fillchar(msgp, sizeof(msgp), 0);
       msgp.mouse.x := PT.x;
       msgp.mouse.y := PT.y;
-      fpgPostMessage(nil, wg, FPGM_DROPENTER, msgp);
+      lqPostMessage(nil, wg, LQM_DROPENTER, msgp);
     end;
   end;
 end;
@@ -1507,7 +1512,7 @@ begin
     fillchar(msgp, sizeof(msgp), 0);
     msgp.mouse.x := PT.x;
     msgp.mouse.y := PT.y;
-    fpgPostMessage(nil, wg, FPGM_DROPENTER, msgp);
+    lqPostMessage(nil, wg, LQM_DROPENTER, msgp);
   end;
 end;
 
@@ -1582,7 +1587,7 @@ begin
   // vvzh: this method currently cannot receive mouse events when mouse pointer
   // is outside of the application window. We could try to play with
   // TrackMouseEvent to catch such events and then
-  //  - send FPGM_MOUSEEXIT/FPGM_MOUSEENTER
+  //  - send LQM_MOUSEEXIT/LQM_MOUSEENTER
   //  - set uLastWindowHndl to 0
   // An example:
   // var tme: TTrackMouseEvent;
@@ -1612,7 +1617,7 @@ begin
     LastWindow := GetMyWidgetFromHandle(uLastWindowHndl);
     // check if last window still exits. eg: Dialog window could be closed.
     if LastWindow <> nil then
-      fpgSendMessage(nil, LastWindow, FPGM_MOUSEEXIT, msgp);
+      lqSendMessage(nil, LastWindow, LQM_MOUSEEXIT, msgp);
 
     // if some window captured mouse input, we should not send mouse events to other windows
     MouseCaptureWHndl := GetCapture;
@@ -1620,7 +1625,7 @@ begin
     begin
       CurrentWindow := GetMyWidgetFromHandle(CurrentWindowHndl);
       if (CurrentWindow <> nil) then
-        fpgSendMessage(nil, CurrentWindow, FPGM_MOUSEENTER, msgp);
+        lqSendMessage(nil, CurrentWindow, LQM_MOUSEENTER, msgp);
     end;
   end;
   
@@ -2115,9 +2120,9 @@ end;
 
 { TlqGDICanvas }
 
-constructor TlqGDICanvas.Create(awin: TlqWindowBase);
+constructor TlqGDICanvas.Create(AWin: TlqWindowBase);
 begin
-  inherited Create(awin);
+  inherited Create(AWin);
   FDrawing      := False;
   FDrawWindow   := nil;
   FBufferBitmap := 0;
@@ -2131,18 +2136,18 @@ begin
   inherited;
 end;
 
-procedure TlqGDICanvas.DoBeginDraw(awin: TlqWindowBase; buffered: boolean);
+procedure TlqGDICanvas.DoBeginDraw(AWin: TlqWindowBase; ABuffered: boolean);
 var
   ARect: TlqRect;
   bmsize: Windows.TSIZE;
 begin
-  if FDrawing and buffered and (FBufferBitmap > 0) then
+  if FDrawing and ABuffered and (FBufferBitmap > 0) then
   begin
     // check if the dimensions are ok
     {$IFNDEF wince}
     GetBitmapDimensionEx(FBufferBitmap, bmsize);
     {$ENDIF}
-    FDrawWindow := TlqGDIWindow(awin);
+    FDrawWindow := TlqGDIWindow(AWin);
     DoGetWinRect(ARect);
     if (bmsize.cx <> (ARect.Right-ARect.Left+1)) or
        (bmsize.cy <> (ARect.Bottom-ARect.Top+1)) then
@@ -2151,10 +2156,10 @@ begin
 
   if not FDrawing then
   begin
-    FDrawWindow := TlqGDIWindow(awin);
+    FDrawWindow := TlqGDIWindow(AWin);
     FWinGC      := Windows.GetDC(FDrawWindow.FWinHandle);
 
-    if buffered then
+    if ABuffered then
     begin
       DoGetWinRect(ARect);
       if (FastDoubleBuffer = False) or (FBufferBitmap = 0)
@@ -2181,10 +2186,10 @@ begin
     FPen        := CreatePen(PS_SOLID, 0, 0); // defaults to black
     FClipRegion := CreateRectRgn(0, 0, 1, 1);
 
-    FColor           := fpgColorToWin(clText1);
+    FColor           := lqColorToWin(clText1);
     FLineStyle       := lsSolid;
     FLineWidth       := 1;
-    FBackgroundColor := fpgColorToWin(clBoxColor);
+    FBackgroundColor := lqColorToWin(clBoxColor);
   end;
 
   FDrawing := True;
@@ -2219,7 +2224,7 @@ end;
 
 procedure TlqGDICanvas.SetPixel(X, Y: integer; const AValue: TlqColor);
 begin
-  Windows.SetPixel(Fgc, X, Y, fpgColorToWin(AValue));
+  Windows.SetPixel(Fgc, X, Y, lqColorToWin(AValue));
 end;
 
 procedure TlqGDICanvas.DoDrawArc(x, y, w, h: TlqCoord; a1, a2: Extended);
@@ -2403,7 +2408,7 @@ end;
 procedure TlqGDICanvas.DoSetColor(cl: TlqColor);
 begin
   DeleteObject(FBrush);
-  FWindowsColor := fpgColorToWin(cl);
+  FWindowsColor := lqColorToWin(cl);
   FBrush := CreateSolidBrush(FWindowsColor);
   DoSetLineStyle(FLineWidth, FLineStyle);
   SelectObject(Fgc, FBrush);
@@ -2449,7 +2454,7 @@ end;
 
 procedure TlqGDICanvas.DoSetTextColor(cl: TlqColor);
 begin
-  Windows.SetTextColor(Fgc, fpgColorToWin(cl));
+  Windows.SetTextColor(Fgc, lqColorToWin(cl));
 end;
 
 procedure TlqGDICanvas.TryFreeBackBuffer;
@@ -2503,7 +2508,7 @@ var
   hb: HBRUSH;
   nullpen: HPEN;
 begin
-  hb      := CreateSolidBrush(fpgColorToWin(fpgColorToRGB(col)));
+  hb      := CreateSolidBrush(lqColorToWin(lqColorToRGB(col)));
   nullpen := CreatePen(PS_NULL, 0, 0);
 
   SetROP2(Fgc, R2_XORPEN);
@@ -3092,7 +3097,7 @@ end;
 procedure TimerCallBackProc(window_hwnd : hwnd; msg : DWORD; idEvent: UINT; dwTime: DWORD); stdcall;
 begin
   { idEvent contains the handle to the timer that got triggered }
-  fpgCheckTimers;
+  lqCheckTimers;
 end;
 
 { TlqGDITimer }
@@ -3177,4 +3182,8 @@ finalization
     OleUninitialize;
 
 end.
+
+
+
+
 

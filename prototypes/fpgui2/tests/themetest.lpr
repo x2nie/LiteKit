@@ -216,7 +216,7 @@ begin
   begin
     buttonoptions.Rect.Left := tx+offset;
     buttonoptions.Rect.Top := ty+offset;
-//    fpgStyle.DrawString(Canvas, tx+pofs, ty+pofs, Text, Enabled);
+//    lqStyle.DrawString(Canvas, tx+pofs, ty+pofs, Text, Enabled);
   end;
 
   FStyle.DrawControl(cePushButtonLabel, buttonoptions, Canvas, self);
@@ -857,10 +857,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
 end;
 
 begin

@@ -80,19 +80,19 @@ begin
   FImageList := TlqImageList.Create;
 
   { make copies of standard LiteKit images, and add them to our imagelist }
-  img_ref := fpgImages.GetImage('stdimg.folderhome');
+  img_ref := lqImages.GetImage('stdimg.folderhome');
   img := img_ref.ImageFromSource;
   FImageList.AddImage(img);
 
-  img_ref := fpgImages.GetImage('stdimg.ok');
+  img_ref := lqImages.GetImage('stdimg.ok');
   img := img_ref.ImageFromSource;
   FImageList.AddImage(img);
 
-  img_ref := fpgImages.GetImage('stdimg.dlg.warning');
+  img_ref := lqImages.GetImage('stdimg.dlg.warning');
   img := img_ref.ImageFromSource;
   FImageList.AddImage(img);
 
-  img_ref := fpgImages.GetImage('stdimg.dlg.info');
+  img_ref := lqImages.GetImage('stdimg.dlg.info');
   img := img_ref.ImageFromSource;
   FImageList.AddImage(img);
 
@@ -135,11 +135,11 @@ begin
     Anchors := [anLeft,anRight,anTop,anBottom];
     ScrollDistance := 80;
     Images := FImageList;
-    RichTextSettings.Heading1Font := fpgGetFont('Arial-18:bold');
-    RichTextSettings.Heading2Font := fpgGetFont('Arial-14:bold');
-    RichTextSettings.Heading3Font := fpgGetFont('Arial-12:bold');
-    RichTextSettings.NormalFont := fpgGetFont(FPG_DEFAULT_FONT_DESC);
-    RichTextSettings.FixedFont := fpgGetFont('Courier New-10:antialiased=true');
+    RichTextSettings.Heading1Font := lqGetFont('Arial-18:bold');
+    RichTextSettings.Heading2Font := lqGetFont('Arial-14:bold');
+    RichTextSettings.Heading3Font := lqGetFont('Arial-12:bold');
+    RichTextSettings.NormalFont := lqGetFont(LQ_DEFAULT_FONT_DESC);
+    RichTextSettings.FixedFont := lqGetFont('Courier New-10:antialiased=true');
     OnClickLink :=@LinkClicked;
   end;
 
@@ -189,11 +189,11 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

@@ -237,7 +237,7 @@ begin
         end
         else
           // point is outside wheel. Also incase color is alias, lookup the RGB values.
-          FImage.Colors[x, y] := fpgColorToRGB(BackgroundColor);
+          FImage.Colors[x, y] := lqColorToRGB(BackgroundColor);
       end;
       FImage.UpdateImage;
     end;

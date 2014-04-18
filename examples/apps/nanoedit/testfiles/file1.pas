@@ -5,7 +5,7 @@ unit file1;
 interface
 
 uses
-  SysUtils, Classes, gfxbase, fpgfx, gui_edit, 
+  SysUtils, Classes, gfxbase, lqfx, gui_edit, 
   gfx_widget, gui_form, gui_label, gui_button,
   gui_listbox, gui_memo, gui_combobox, gui_grid, 
   gui_dialogs, gui_checkbox, gui_tree, gui_trackbar, 

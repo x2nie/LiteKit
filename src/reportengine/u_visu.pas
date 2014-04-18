@@ -477,16 +477,16 @@ begin
   Name           := 'F_Visu';
   WindowTitle    := rsReportPreview;
   WindowPosition := wpAuto;
-  if fpgApplication.ScreenWidth < 1055 then
-    w := fpgApplication.ScreenWidth
+  if lqApplication.ScreenWidth < 1055 then
+    w := lqApplication.ScreenWidth
   else
     w := 1055;
-  if fpgApplication.ScreenHeight < 940 then
-    h := fpgApplication.ScreenHeight - 66 { some taskbar height I guess }
+  if lqApplication.ScreenHeight < 940 then
+    h := lqApplication.ScreenHeight - 66 { some taskbar height I guess }
   else
     h := 940;
   SetPosition(0, 0, w, h);
-  BackgroundColor := fpgColor(51,51,51); // black/brown or should we use clShadow2 for theming abilities??
+  BackgroundColor := lqColor(51,51,51); // black/brown or should we use clShadow2 for theming abilities??
   MinHeight := 350;
   MinWidth := 640;
   OnShow   := @FormShow;

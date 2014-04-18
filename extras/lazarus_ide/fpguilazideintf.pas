@@ -142,11 +142,11 @@ begin
     +'var'+le
     +'  frm: TMainForm;'+le
     +'begin'+le
-    +'  fpgApplication.Initialize;'+le
+    +'  lqApplication.Initialize;'+le
     +'  frm := TMainForm.Create(nil);'+le
     +'  try'+le
     +'    frm.Show;'+le
-    +'    fpgApplication.Run;'+le
+    +'    lqApplication.Run;'+le
     +'  finally'+le
     +'    frm.Free;'+le
     +'  end;'+le

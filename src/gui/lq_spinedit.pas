@@ -389,7 +389,7 @@ begin
   if AButton.Down then
     OffsetRect(r, 1, 1);
 
-  Result := fpgRectToRect(r);
+  Result := lqRectToRect(r);
 end;
 
 procedure TlqAbstractSpinEdit.ButtonUpPaint(Sender: TObject);
@@ -405,7 +405,7 @@ begin
 
   r := GetButtonRect(btn);
   PaintTriangle(btn.Canvas, r, degtorad(90.0));
-//  fpgStyle.DrawDirectionArrow(btn.Canvas, r.Top, r.Left, r.Width, r.Height, adUp);
+//  lqStyle.DrawDirectionArrow(btn.Canvas, r.Top, r.Left, r.Width, r.Height, adUp);
 end;
 
 procedure TlqAbstractSpinEdit.ButtonDownPaint(Sender: TObject);
@@ -421,7 +421,7 @@ begin
 
   r := GetButtonRect(btn);
   PaintTriangle(btn.Canvas, r, degtorad(270.0));
-//  fpgStyle.DrawDirectionArrow(TlqButton(Sender).Canvas, 0, 0, TlqButton(Sender).Width - 3, TlqButton(Sender).Height, adDown);
+//  lqStyle.DrawDirectionArrow(TlqButton(Sender).Canvas, 0, 0, TlqButton(Sender).Width - 3, TlqButton(Sender).Height, adDown);
 end;
 
 constructor TlqAbstractSpinEdit.Create(AOwner: TComponent);
@@ -759,18 +759,18 @@ begin
   if Sender is TlqEditFloat then
     with Sender as TlqEditFloat do
       if Assigned(Parent) then
-        b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
+        b := Enabled and lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
-        b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
+        b := Enabled and lqApplication.ShowHint and FShowHint and (FHint <> '');
   if Sender is TlqButton then
     with Sender as TlqButton do
       if Assigned(Parent) then
-        b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
+        b := Enabled and lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
-        b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
+        b := Enabled and lqApplication.ShowHint and FShowHint and (FHint <> '');
 
   msgp.user.Param1 := Ord(b);
-  fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+  lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
 end;
 
 procedure TlqSpinEditFloat.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
@@ -787,22 +787,22 @@ begin
     with Sender as TlqEditFloat do
       if Assigned(Parent) then
       begin
-        if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
       end
       else
-        if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and FShowHint and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
   if Sender is TlqButton then
     with Sender as TlqButton do
       if Assigned(Parent) then
       begin
-        if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
       end
       else
-        if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and FShowHint and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
 end;
 
 procedure TlqSpinEditFloat.MouseExit(Sender: TObject);
@@ -810,11 +810,11 @@ begin
   if Sender is TlqEditFloat then
     with Sender as TlqEditFloat do
       if FShowHint then
-        fpgApplication.HideHint;
+        lqApplication.HideHint;
   if Sender is TlqButton then
     with Sender as TlqButton do
       if FShowHint then
-        fpgApplication.HideHint;
+        lqApplication.HideHint;
 end;
 
 procedure TlqSpinEditFloat.TimerStep(Sender: TObject);
@@ -1193,18 +1193,18 @@ begin
   if Sender is TlqEditInteger then
     with Sender as TlqEditInteger do
       if Assigned(Parent) then
-        b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
+        b := Enabled and lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
-        b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
+        b := Enabled and lqApplication.ShowHint and FShowHint and (FHint <> '');
   if Sender is TlqButton then
     with Sender as TlqButton do
       if Assigned(Parent) then
-        b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
+        b := Enabled and lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '')
       else
-        b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
+        b := Enabled and lqApplication.ShowHint and FShowHint and (FHint <> '');
 
   msgp.user.Param1 := Ord(b);
-  fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+  lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
 end;
 
 procedure TlqSpinEdit.MouseMove(Sender: TObject; AShift: TShiftState; const AMousePos: TPoint);
@@ -1221,22 +1221,22 @@ begin
     with Sender as TlqEditInteger do
       if Assigned(Parent) then
       begin
-        if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
       end
       else
-        if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and FShowHint and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
   if Sender is TlqButton then
     with Sender as TlqButton do
       if Assigned(Parent) then
       begin
-        if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.Parent.ShowHint)) and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
       end
       else
-        if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
-          fpgPostMessage(Sender, fpgApplication, FPGM_HINTTIMER, msgp);
+        if lqApplication.ShowHint and FShowHint and (FHint <> '') then
+          lqPostMessage(Sender, lqApplication, LQM_HINTTIMER, msgp);
 end;
 
 procedure TlqSpinEdit.MouseExit(Sender: TObject);
@@ -1244,11 +1244,11 @@ begin
   if Sender is TlqEditInteger then
     with Sender as TlqEditInteger do
       if FShowHint then
-        fpgApplication.HideHint;
+        lqApplication.HideHint;
   if Sender is TlqButton then
     with Sender as TlqButton do
       if FShowHint then
-        fpgApplication.HideHint;
+        lqApplication.HideHint;
 end;
 
 procedure TlqSpinEdit.TimerStep(Sender: TObject);

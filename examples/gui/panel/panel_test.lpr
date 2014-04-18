@@ -14,11 +14,11 @@ procedure MainProc;
 var
   frmMain: TfrmMain;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frmMain:= TfrmMain.Create(nil);
   try
     frmMain.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frmMain.Free;
   end;

@@ -144,7 +144,7 @@ begin
   if Trim(AValue) = '' then
     Exit; //==>
 
-  if not fpgFileExists(AValue) then
+  if not lqFileExists(AValue) then
     raise Exception.CreateFmt('The file <%s> does not exist.', [AValue])
   else
     FImageFilename := AValue;

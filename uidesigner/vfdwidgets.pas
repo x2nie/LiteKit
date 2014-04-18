@@ -132,193 +132,193 @@ end;
 
 procedure LoadIcons;
 begin
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.arrow', @stdimg_vfd_arrow,
     sizeof(stdimg_vfd_arrow),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.label', @stdimg_vfd_label,
     sizeof(stdimg_vfd_label),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.edit', @stdimg_vfd_edit,
     sizeof(stdimg_vfd_edit),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.memo', @stdimg_vfd_memo,
     sizeof(stdimg_vfd_memo),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.button', @stdimg_vfd_button,
     sizeof(stdimg_vfd_button),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.checkbox', @stdimg_vfd_checkbox,
     sizeof(stdimg_vfd_checkbox),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.listbox', @stdimg_vfd_listbox,
     sizeof(stdimg_vfd_listbox),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.colorlistbox', @stdimg_vfd_colorlistbox,
     sizeof(stdimg_vfd_colorlistbox),
     0, 0);
 
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.combobox', @stdimg_vfd_combobox,
     sizeof(stdimg_vfd_combobox),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.panel', @stdimg_vfd_panel,
     sizeof(stdimg_vfd_panel),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.other', @stdimg_vfd_other,
     sizeof(stdimg_vfd_other),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.dbgrid', @stdimg_vfd_dbgrid,
     sizeof(stdimg_vfd_dbgrid),
     15,0 );
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.progressbar', @stdimg_vfd_progressbar,
     sizeof(stdimg_vfd_progressbar),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.trackbar', @stdimg_vfd_trackbar,
     sizeof(stdimg_vfd_trackbar),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.gauge', @stdimg_vfd_gauge,
     sizeof(stdimg_vfd_gauge),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.menubar', @stdimg_vfd_menubar,
     sizeof(stdimg_vfd_menubar),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.listview', @stdimg_vfd_listview,
     sizeof(stdimg_vfd_listview),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.stringgrid', @stdimg_vfd_stringgrid,
     sizeof(stdimg_vfd_stringgrid),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.radiobutton', @stdimg_vfd_radiobutton,
     sizeof(stdimg_vfd_radiobutton),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.pagecontrol', @stdimg_vfd_pagecontrol,
     sizeof(stdimg_vfd_pagecontrol),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.treeview', @stdimg_vfd_treeview,
     sizeof(stdimg_vfd_treeview),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.newform', @stdimg_vfd_newform,
     sizeof(stdimg_vfd_newform),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.combodateedit', @stdimg_vfd_dateedit,
     sizeof(stdimg_vfd_dateedit),
     0, 0);
     
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.bevel', @stdimg_vfd_bevel,
     sizeof(stdimg_vfd_bevel),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.tabsheet', @stdimg_vfd_tabsheet,
     sizeof(stdimg_vfd_tabsheet),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editinteger', @stdimg_vfd_editinteger,
     sizeof(stdimg_vfd_editinteger),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editfloat', @stdimg_vfd_editfloat,
     sizeof(stdimg_vfd_editfloat),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editcurrency', @stdimg_vfd_editcurrency,
     sizeof(stdimg_vfd_editcurrency),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.groupbox', @stdimg_vfd_groupbox,
     sizeof(stdimg_vfd_groupbox),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.combodatecheckedit', @stdimg_vfd_combodatecheckedit,
     sizeof(stdimg_vfd_combodatecheckedit),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editfilename', @stdimg_vfd_editfilename,
     sizeof(stdimg_vfd_editfilename),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editdirectory', @stdimg_vfd_editdirectory,
     sizeof(stdimg_vfd_editdirectory),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editfont', @stdimg_vfd_editfont,
     sizeof(stdimg_vfd_editfont),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.editbutton', @stdimg_vfd_editbutton,
     sizeof(stdimg_vfd_editbutton),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.colorwheel', @stdimg_vfd_colorwheel,
     sizeof(stdimg_vfd_colorwheel),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.valuebar', @stdimg_vfd_valuebar,
     sizeof(stdimg_vfd_valuebar),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.splitter', @stdimg_vfd_splitter,
     sizeof(stdimg_vfd_splitter),
     0, 0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
     'vfd.hyperlink', @stdimg_vfd_hyperlink,
     sizeof(stdimg_vfd_hyperlink),
     0, 0);

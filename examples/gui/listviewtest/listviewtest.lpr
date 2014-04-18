@@ -128,13 +128,13 @@ begin
 
   IL := TStringList.Create;
 
-  fpgImages.ListImages(IL);
+  lqImages.ListImages(IL);
 
   FImageList := TlqImageList.Create;
   FSelectedImageList := TlqImageList.Create;
 
   for i := 0 to IL.Count-1 do
-    FImageList.AddImage(fpgImages.GetImage(IL.Strings[i]));
+    FImageList.AddImage(lqImages.GetImage(IL.Strings[i]));
 
   IL.Free;
 
@@ -263,11 +263,11 @@ begin
 end;
 
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   with TMainForm.Create(nil) do
   begin
     Show;
-    fpgApplication.Run;
+    lqApplication.Run;
     Free;
   end;
 end.

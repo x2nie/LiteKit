@@ -6,7 +6,7 @@ uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,
   {$ENDIF}{$ENDIF}
-  Classes, frm_menutest, fpgfx;
+  Classes, frm_menutest, lqfx;
 
 
 
@@ -14,10 +14,10 @@ procedure MainProc;
 var
   frm: TfrmMain;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TfrmMain.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
 end;
 
 begin

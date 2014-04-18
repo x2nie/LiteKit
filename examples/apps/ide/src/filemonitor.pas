@@ -211,7 +211,7 @@ begin
         for i := lst.Count-1 downto 0 do
         begin
           lFile := TMonitoredFile(lst[i]);
-          if fpgFileExists(lFile.Name) then
+          if lqFileExists(lFile.Name) then
           begin
             if lFile.SHA1 <> lFile.GetNewSHA1 then
             begin

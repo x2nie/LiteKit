@@ -172,7 +172,7 @@ end;
 procedure TlqHintWindow.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
 end;
 
 procedure TlqHintWindow.HandleShow;
@@ -194,7 +194,7 @@ begin
   // Do we need to resize?
   PaintBorder;
   if FBorder > 0 then
-    Canvas.SetClipRect(fpgRect(FBorder, FBorder, Width-(FBorder*2), Height-(FBorder*2)));
+    Canvas.SetClipRect(lqRect(FBorder, FBorder, Width-(FBorder*2), Height-(FBorder*2)));
   PaintHintText;
 end;
 
@@ -226,7 +226,7 @@ begin
   WindowType := wtPopup;
   Sizeable := False;
   BackgroundColor:= clHintWindow; //clBlack;  // This becomes the hint border so don't set to clHintWindow
-  FFont := fpgGetFont('#Label1');
+  FFont := lqGetFont('#Label1');
   FMargin := 3;
   FBorder := 1;
   FShadow := 0; // no shadow by default

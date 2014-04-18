@@ -172,7 +172,7 @@ begin
   barColor := clRed;
 
   tvTests.Invalidate;
-  fpgApplication.ProcessMessages;
+  lqApplication.ProcessMessages;
 end;
 
 procedure TGUITestRunnerForm.StartTest(ATest: TTest);
@@ -185,7 +185,7 @@ begin
     n.Clear;
     n.ImageIndex := 1; // green
     tvTests.Invalidate;
-    fpgApplication.ProcessMessages;
+    lqApplication.ProcessMessages;
   end
   else
     writeln('  Failed to find Node for test');
@@ -195,7 +195,7 @@ procedure TGUITestRunnerForm.EndTest(ATest: TTest);
 begin
   pbName1.Position := pbName1.Position + 1;
   pbName1.Invalidate;
-  fpgApplication.ProcessMessages;
+  lqApplication.ProcessMessages;
 end;
 
 procedure TGUITestRunnerForm.StartTestSuite(ATestSuite: TTestSuite);
@@ -305,7 +305,7 @@ begin
   tvTests.RootNode.FirstSubNode.Clear;
   BuildTree(tvTests.RootNode.FirstSubNode, GetTestRegistry);
   tvTests.Invalidate;
-  fpgApplication.ProcessMessages;
+  lqApplication.ProcessMessages;
 end;
 
 procedure TGUITestRunnerForm.btnRunClicked(Sender: TObject);

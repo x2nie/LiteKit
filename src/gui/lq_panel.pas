@@ -686,7 +686,7 @@ end;
 procedure TlqPanel.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   Repaint;
 end;
 
@@ -805,7 +805,7 @@ constructor TlqPanel.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
   FText             := 'Panel';
-  FFont             := fpgGetFont('#Label1');
+  FFont             := lqGetFont('#Label1');
   FPanelStyle       := bsRaised;
   FWidth            := 80;
   FHeight           := 80;
@@ -869,7 +869,7 @@ end;
 procedure TlqGroupBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   Repaint;
 end;
 
@@ -1051,7 +1051,7 @@ constructor TlqGroupBox.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
   FText             := 'Group box';
-  FFont             := fpgGetFont('#Label1');
+  FFont             := lqGetFont('#Label1');
   FPanelStyle       := bsRaised;
   FWidth            := 80;
   FHeight           := 80;

@@ -343,7 +343,7 @@ begin
     dy := 0;
   end;
   Canvas.SetColor(clText1);
-  img := fpgImages.GetImage(imgname);
+  img := lqImages.GetImage(imgname);
   if img <> nil then
   begin
     if ButtonEnabled then

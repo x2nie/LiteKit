@@ -227,7 +227,7 @@ end;
 
 function GetFileSize(const AFilename: string): integer;
 begin
-  Result := fpgFileSize(AFilename);
+  Result := lqFileSize(AFilename);
 end;
 
 function IsDigit(const AChar: TlqChar): boolean;
@@ -331,7 +331,7 @@ begin
   begin
     tmpMask := tmpFilterParts[i];
     tmpDirectory := IncludeTrailingPathDelimiter(aDirectory);
-    tmpRC := fpgFindFirst(tmpDirectory + tmpMask, faAnyFile, tmpSearchResults);
+    tmpRC := lqFindFirst(tmpDirectory + tmpMask, faAnyFile, tmpSearchResults);
 
     while tmpRC = 0 do
     begin
@@ -343,7 +343,7 @@ begin
           aList.Add(tmpSearchResults.Name);
       end;
 
-      tmpRC := fpgFindNext(tmpSearchResults);
+      tmpRC := lqFindNext(tmpSearchResults);
     end;
 
     FindClose(tmpSearchResults);
@@ -373,7 +373,7 @@ begin
       LogEvent(LogStartup, '    Environment var found; translated to: "' + tmpEnvironmentVarValue + '"');
       ParseAndExpandFileNames(tmpEnvironmentVarValue, aResult);
     end
-    else if fpgDirectoryExists(tmpItem) then
+    else if lqDirectoryExists(tmpItem) then
     begin
       ListFilesInDirectory(tmpItem, '*' + INF_FILE_EXTENSION, true, aResult);
     end

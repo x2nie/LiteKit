@@ -352,7 +352,7 @@ var
 begin
   if ReadOnly then
     Exit;
-  s := fpgShowCharMap;
+  s := lqShowCharMap;
   if s <> '' then
     SetSelectionText(s);
 end;
@@ -381,7 +381,7 @@ begin
       else if itm.Name = ipmCopy then
         itm.Enabled := b
       else if itm.Name = ipmPaste then
-        itm.Enabled := (not ReadOnly) and (fpgClipboard.Text <> '')
+        itm.Enabled := (not ReadOnly) and (lqClipboard.Text <> '')
       else if itm.Name = ipmClearAll then
         itm.Enabled := (not ReadOnly) and (Text <> '')
       else if itm.Name = ipmCharmap then
@@ -460,7 +460,7 @@ constructor TlqMemo.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable   := True;
-  FFont       := fpgGetFont('#Edit1');
+  FFont       := lqGetFont('#Edit1');
   FHeight     := FFont.Height * 3 + 4;
   FWidth      := 120;
   FLineHeight := FFont.Height + 2;
@@ -608,7 +608,7 @@ begin
   if FSelEndLine < 0 then
     Exit;
 
-  fpgClipboard.Text := SelectionText;
+  lqClipboard.Text := SelectionText;
 end;
 
 procedure TlqMemo.SetSelectionText(const AText: TlqString);
@@ -796,7 +796,7 @@ end;
 procedure TlqMemo.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   RePaint;
 end;
 
@@ -890,7 +890,7 @@ end;
 
 procedure TlqMemo.HandleHide;
 begin
-  fpgCaret.UnSetCaret(Canvas);
+  lqCaret.UnSetCaret(Canvas);
   inherited;
 end;
 
@@ -1016,7 +1016,7 @@ begin
 
         tw  := FFont.TextWidth(UTF8Copy(ls, 1, st));
         tw2 := FFont.TextWidth(UTF8Copy(ls, 1, st + len));
-        Canvas.XORFillRectangle(fpgColorToRGB(clSelection) xor $FFFFFF, -FDrawOffset +
+        Canvas.XORFillRectangle(lqColorToRGB(clSelection) xor $FFFFFF, -FDrawOffset +
           FSideMargin + tw, yp, tw2 - tw, LineHeight);
       end;
 
@@ -1025,7 +1025,7 @@ begin
       begin
         // drawing cursor
         tw := FFont.TextWidth(UTF8Copy(ls, 1, FCursorPos));
-        fpgCaret.SetCaret(Canvas, -FDrawOffset + FSideMargin + tw, yp, fpgCaret.Width, FFont.Height);
+        lqCaret.SetCaret(Canvas, -FDrawOffset + FSideMargin + tw, yp, lqCaret.Width, FFont.Height);
       end;
     end;  { if }
 
@@ -1036,10 +1036,10 @@ begin
 
   // Special case because it never entered the for loop above
   if (LineCount = 0) and Focused then
-    fpgCaret.SetCaret(Canvas, FSideMargin, 3, fpgCaret.Width, FFont.Height);
+    lqCaret.SetCaret(Canvas, FSideMargin, 3, lqCaret.Width, FFont.Height);
 
   if not Focused then
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
     
   // The little square in the bottom right corner
   if FHScrollBar.Visible and FVScrollBar.Visible then
@@ -1104,7 +1104,7 @@ var
   ls2: string;
   hasChanged: boolean;
 begin
-  fpgApplication.HideHint;
+  lqApplication.HideHint;
   Consumed := True;
   hasChanged := False;
   case CheckClipBoardKey(keycode, shiftstate) of
@@ -1114,7 +1114,7 @@ begin
         end;
     ckPaste:
         begin
-          SetSelectionText(fpgClipboard.Text);
+          SetSelectionText(lqClipboard.Text);
           if not ReadOnly then
             hasChanged := True;
         end;
@@ -1640,7 +1640,7 @@ end;
 
 procedure TlqMemo.PasteFromClipboard;
 begin
-  SetSelectionText(fpgClipboard.Text);
+  SetSelectionText(lqClipboard.Text);
 end;
 
 procedure TlqMemo.Clear;

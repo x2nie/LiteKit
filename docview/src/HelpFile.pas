@@ -1096,7 +1096,7 @@ begin
                                          + ': '
                                          + e.Message );}
       begin
-        Bitmap := THelpBitmap(fpgImages.GetImage('stdimg.dlg.critical'));
+        Bitmap := THelpBitmap(lqImages.GetImage('stdimg.dlg.critical'));
       end;
     end;
 
@@ -1238,7 +1238,7 @@ var
   fstream: TFileStream;
   Ext: string;
 begin
-  Ext := fpgExtractFileExt( Filename );
+  Ext := lqExtractFileExt( Filename );
   Result := '';
 
   if    SameText( Ext, '.inf' )

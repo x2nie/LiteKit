@@ -62,7 +62,7 @@ begin
 
     { This shouldn't really be here.  fpmake will install to the local
       fpc installation, i.e. /usr/[local]/lib/fpc/<version>/units/<cpu-os>/fpgui
-      if we set the package name to fpgui as above.  This base install dir
+      if we set the package name to lqui as above.  This base install dir
       can be overridden by passing -B to fpmake.  The line below will cause
       the units to be output in ../lib/<cpu-os>/fpgui  }
 //    Defaults.UnitInstallDir := Format('../lib/%s-%s/', [CurrentCPU, CurrentOS]);

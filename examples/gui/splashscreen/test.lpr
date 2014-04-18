@@ -13,13 +13,13 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   Randomize;
   frm := TMainForm.Create(nil);
 
   // This is needed otherwise Splashscreen becomes main form. Rules are, the
   // first form displayed is the main form.
-  fpgApplication.MainForm := frm;
+  lqApplication.MainForm := frm;
   
   // Now create and show the splashscreen before the main form.
   frmSplash := TSplashForm.Create(nil);
@@ -27,7 +27,7 @@ begin
 
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

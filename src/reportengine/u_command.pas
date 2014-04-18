@@ -756,7 +756,7 @@ end;
 constructor T_Font.Create(AFont: string; AColor: TlqColor);
 begin
   inherited Create;
-  FFont  := fpgApplication.GetFont(AFont);
+  FFont  := lqApplication.GetFont(AFont);
   FColor := AColor;
   FSize  := ExtractFontSize(AFont);
 end;

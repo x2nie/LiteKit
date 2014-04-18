@@ -70,7 +70,7 @@ begin
   //          @stdimg_arrow_up,
   //    sizeof(stdimg_arrow_up));
 
-  fpgImages.AddMaskedBMP(  // 60x12 in total.  5 images of 12x12 each.
+  lqImages.AddMaskedBMP(  // 60x12 in total.  5 images of 12x12 each.
             'ide.guttervertical',
             @ide_gutter_vertical,
       sizeof(ide_gutter_vertical), 0,0);

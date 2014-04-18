@@ -82,7 +82,7 @@ end;
 procedure TExitCommand.Execute;
 begin
   DebugLn('>> TExitComand.Execute');
-  fpgApplication.Terminated := True;
+  lqApplication.Terminated := True;
 end;
 
 end.

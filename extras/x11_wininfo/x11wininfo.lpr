@@ -71,16 +71,16 @@ var
   winrect: TlqRect;
   wa: TXWindowAttributes;
 begin
-  rootw := DefaultRootWindow(fpgApplication.Display);
+  rootw := DefaultRootWindow(lqApplication.Display);
 
   x := 1;
-  XQueryPointer(fpgApplication.Display, rootw, @ret_root, @ret_child,
+  XQueryPointer(lqApplication.Display, rootw, @ret_root, @ret_child,
       @root_x, @root_y, @child_x, @child_y, @mask);
 
   while ret_child <> 0 do
   begin
     last_child := ret_child;
-    if XQueryPointer(fpgApplication.Display, ret_child, @ret_root, @ret_child,
+    if XQueryPointer(lqApplication.Display, ret_child, @ret_root, @ret_child,
         @root_x, @root_y, @child_x, @child_y, @mask) then
     begin
 //      writeln('X=', x);
@@ -89,13 +89,13 @@ begin
 //      writeln('WinHandle under pointer: ', IntToHex(ret_child, 6));
     end;
   end;
-  XGetWindowAttributes(fpgApplication.Display, last_child, @wa);
+  XGetWindowAttributes(lqApplication.Display, last_child, @wa);
   winrect.SetRect(wa.x, wa.y, wa.width, wa.height);
 //  writeln('----start----');
 //  PrintRect(winrect);
 
-  XTranslateCoordinates(fpgApplication.Display,
-      last_child, DefaultRootWindow(fpgApplication.Display),
+  XTranslateCoordinates(lqApplication.Display,
+      last_child, DefaultRootWindow(lqApplication.Display),
       wa.X, wa.Y, @root_x, @root_y, @ret_child);
 
   newrect.SetRect(root_x-wa.X, root_y-wa.Y, wa.width, wa.height);
@@ -108,8 +108,8 @@ begin
   exit; //==>
   children := nil;
   if XQueryTree(
-      fpgApplication.Display,
-      DefaultRootWindow(fpgApplication.Display),
+      lqApplication.Display,
+      DefaultRootWindow(lqApplication.Display),
       @rootw, @parentw, @children, @cnum) <> 0 then
   begin
 
@@ -126,10 +126,10 @@ begin
    gcValues.subwindow_mode := IncludeInferiors;
    gcValues.line_width := 2;
    FOutlineGC := XCreateGC(
-      fpgApplication.Display,
-      DefaultRootWindow(fpgApplication.Display),
+      lqApplication.Display,
+      DefaultRootWindow(lqApplication.Display),
       GCFunction or GCSubwindowMode or GCLineWidth, @gcValues);
-   XSetForeGround(fpgApplication.display, FOutlineGC, fpgColorToX(clRed));
+   XSetForeGround(lqApplication.display, FOutlineGC, lqColorToX(clRed));
   FOutlineDrawn := False;
 end;
 
@@ -137,10 +137,10 @@ procedure TMainForm.DrawOutline;
 begin
   if not FOutlineDrawn then
   begin
-    XSync(fpgApplication.Display, False);
+    XSync(lqApplication.Display, False);
     XDrawRectangle(
-        fpgApplication.Display,
-        DefaultRootWindow(fpgApplication.Display),
+        lqApplication.Display,
+        DefaultRootWindow(lqApplication.Display),
         FOutlineGC,
         newrect.Left, newrect.Top, newrect.Width, newrect.Height);
     lastrect := newrect;
@@ -156,12 +156,12 @@ begin
   if FOutlineDrawn then
   begin
     XDrawRectangle(
-        fpgApplication.Display,
-        DefaultRootWindow(fpgApplication.Display),
+        lqApplication.Display,
+        DefaultRootWindow(lqApplication.Display),
         FOutlineGC,
         lastrect.Left, lastrect.Top, lastrect.Width, lastrect.Height);
     FOutlineDrawn := False;
-    XSync(fpgApplication.Display, False);
+    XSync(lqApplication.Display, False);
   end;
 end;
 
@@ -176,7 +176,7 @@ end;
 destructor TMainForm.Destroy;
 begin
   ClearOutine;
-  XFreeGC(fpgApplication.Display, FOutlineGC);
+  XFreeGC(lqApplication.Display, FOutlineGC);
   inherited Destroy;
 end;
 
@@ -366,11 +366,11 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

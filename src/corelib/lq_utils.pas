@@ -28,48 +28,48 @@ uses
 
 // *** Platform specific functions ***
 
-function  fpgToOSEncoding(aString: TlqString): string;
-function  fpgFromOSEncoding(aString: string): TlqString;
-procedure fpgOpenURL(const aURL: TlqString);
-function  fpgFileSize(const AFilename: TlqString): integer;
+function  lqToOSEncoding(aString: TlqString): string;
+function  lqFromOSEncoding(aString: string): TlqString;
+procedure lqOpenURL(const aURL: TlqString);
+function  lqFileSize(const AFilename: TlqString): integer;
 
 
 // *** Common functions for all platforms ***
 
-function fpgAddTrailingValue(const ALine, AValue: TlqString; ADuplicates: Boolean = True): TlqString;
-function fpgAppendPathDelim(const Path: TlqString): TlqString;
-function fpgHasSubDirs(const Dir: TlqString; AShowHidden: Boolean): Boolean;
-function fpgAllFilesMask: TlqString;
-function fpgConvertLineEndings(const s: TlqString): TlqString;
-function fpgGetToolkitConfigDir: TlqString;
+function lqAddTrailingValue(const ALine, AValue: TlqString; ADuplicates: Boolean = True): TlqString;
+function lqAppendPathDelim(const Path: TlqString): TlqString;
+function lqHasSubDirs(const Dir: TlqString; AShowHidden: Boolean): Boolean;
+function lqAllFilesMask: TlqString;
+function lqConvertLineEndings(const s: TlqString): TlqString;
+function lqGetToolkitConfigDir: TlqString;
 { This is so that when we support LTR and RTL languages, the colon will be
   added at the correct place. }
-function fpgAddColon(const AText: TlqString): TlqString;
-function fpgIsBitSet(const AData: integer; const AIndex: integer): boolean;
+function lqAddColon(const AText: TlqString): TlqString;
+function lqIsBitSet(const AData: integer; const AIndex: integer): boolean;
 
 
  // RTL wrapper filesystem functions with platform independant encoding
- // These functions are common for all platforms and rely on fpgXXXPlatformEncoding
+ // These functions are common for all platforms and rely on lqXXXPlatformEncoding
 
-function fpgFindFirst(const Path: TlqString; Attr: longint; out Rslt: TSearchRec): longint;
-function fpgFindNext(var Rslt: TSearchRec): longint;
-function fpgGetCurrentDir: TlqString;
-function fpgSetCurrentDir(const NewDir: TlqString): Boolean;
-function fpgExpandFileName(const FileName: TlqString): TlqString;
-function fpgFileExists(const FileName: TlqString): Boolean;
-function fpgDeleteFile(const FileName: TlqString): Boolean;
-function fpgDirectoryExists(const ADirectory: TlqString): Boolean;
-function fpgExtractFileDir(const FileName: TlqString): TlqString;
-function fpgExtractFilePath(const FileName: TlqString): TlqString;
-function fpgExtractFileName(const FileName: TlqString): TlqString;
-function fpgExtractFileExt(const FileName: TlqString): TlqString;
-function fpgExtractRelativepath(const ABaseName, ADestName: TlqString): TlqString;
-function fpgForceDirectories(const ADirectory: TlqString): Boolean;
-function fpgChangeFileExt(const FileName, Extension: TlqString): TlqString;
-function fpgGetAppConfigDir(const Global: Boolean): TlqString;
-function fpgGetAppConfigFile(const Global: Boolean; const SubDir: Boolean): TlqString;
-function fpgGetExecutableName: TlqString;
-function fpgRenameFile(const OldName, NewName: TlqString): Boolean;
+function lqFindFirst(const Path: TlqString; Attr: longint; out Rslt: TSearchRec): longint;
+function lqFindNext(var Rslt: TSearchRec): longint;
+function lqGetCurrentDir: TlqString;
+function lqSetCurrentDir(const NewDir: TlqString): Boolean;
+function lqExpandFileName(const FileName: TlqString): TlqString;
+function lqFileExists(const FileName: TlqString): Boolean;
+function lqDeleteFile(const FileName: TlqString): Boolean;
+function lqDirectoryExists(const ADirectory: TlqString): Boolean;
+function lqExtractFileDir(const FileName: TlqString): TlqString;
+function lqExtractFilePath(const FileName: TlqString): TlqString;
+function lqExtractFileName(const FileName: TlqString): TlqString;
+function lqExtractFileExt(const FileName: TlqString): TlqString;
+function lqExtractRelativepath(const ABaseName, ADestName: TlqString): TlqString;
+function lqForceDirectories(const ADirectory: TlqString): Boolean;
+function lqChangeFileExt(const FileName, Extension: TlqString): TlqString;
+function lqGetAppConfigDir(const Global: Boolean): TlqString;
+function lqGetAppConfigFile(const Global: Boolean; const SubDir: Boolean): TlqString;
+function lqGetExecutableName: TlqString;
+function lqRenameFile(const OldName, NewName: TlqString): Boolean;
 
 
 implementation
@@ -81,7 +81,7 @@ implementation
 {$I lq_utils_impl.inc}
 
 
-function fpgAddTrailingValue(const ALine, AValue: TlqString; ADuplicates: Boolean = True): TlqString;
+function lqAddTrailingValue(const ALine, AValue: TlqString; ADuplicates: Boolean = True): TlqString;
 begin
   if ALine = '' then
   begin
@@ -101,106 +101,106 @@ begin
     Result := ALine;
 end;
 
-function fpgFindFirst(const Path: TlqString; Attr: longint; out Rslt: TSearchRec): longint;
+function lqFindFirst(const Path: TlqString; Attr: longint; out Rslt: TSearchRec): longint;
 begin
-  Result    := FindFirst(fpgToOSEncoding(Path), Attr, Rslt);
-  Rslt.Name := fpgFromOSEncoding(Rslt.Name);
+  Result    := FindFirst(lqToOSEncoding(Path), Attr, Rslt);
+  Rslt.Name := lqFromOSEncoding(Rslt.Name);
 end;
 
-function fpgFindNext(var Rslt: TSearchRec): longint;
+function lqFindNext(var Rslt: TSearchRec): longint;
 begin
   Result    := FindNext(Rslt);
-  Rslt.Name := fpgFromOSEncoding(Rslt.Name);
+  Rslt.Name := lqFromOSEncoding(Rslt.Name);
 end;
 
-function fpgGetCurrentDir: TlqString;
+function lqGetCurrentDir: TlqString;
 begin
-  Result := fpgFromOSEncoding(GetCurrentDir);
+  Result := lqFromOSEncoding(GetCurrentDir);
 end;
 
-function fpgSetCurrentDir(const NewDir: TlqString): Boolean;
+function lqSetCurrentDir(const NewDir: TlqString): Boolean;
 begin
-  Result := SetCurrentDir(fpgToOSEncoding(NewDir));
+  Result := SetCurrentDir(lqToOSEncoding(NewDir));
 end;
 
-function fpgExpandFileName(const FileName: TlqString): TlqString;
+function lqExpandFileName(const FileName: TlqString): TlqString;
 begin
-  Result := fpgFromOSEncoding(ExpandFileName(fpgToOSEncoding(FileName)));
+  Result := lqFromOSEncoding(ExpandFileName(lqToOSEncoding(FileName)));
 end;
 
-function fpgFileExists(const FileName: TlqString): Boolean;
+function lqFileExists(const FileName: TlqString): Boolean;
 begin
-  Result := FileExists(fpgToOSEncoding(FileName));
+  Result := FileExists(lqToOSEncoding(FileName));
 end;
 
-function fpgDeleteFile(const FileName: TlqString): Boolean;
+function lqDeleteFile(const FileName: TlqString): Boolean;
 begin
   { Don't remove 'SysUtils.' prefix, it is required under Windows, other
     FPC tries to use Windows.DeleteFile API - which is wrong }
-  Result := SysUtils.DeleteFile(fpgToOSEncoding(FileName));
+  Result := SysUtils.DeleteFile(lqToOSEncoding(FileName));
 end;
 
-function fpgDirectoryExists(const ADirectory: TlqString): Boolean;
+function lqDirectoryExists(const ADirectory: TlqString): Boolean;
 begin
-  Result := DirectoryExists(fpgToOSEncoding(ADirectory));
+  Result := DirectoryExists(lqToOSEncoding(ADirectory));
 end;
 
-function fpgExtractFileDir(const FileName: TlqString): TlqString;
+function lqExtractFileDir(const FileName: TlqString): TlqString;
 begin
-  Result := ExtractFileDir(fpgToOSEncoding(FileName));
+  Result := ExtractFileDir(lqToOSEncoding(FileName));
 end;
 
-function fpgExtractFilePath(const FileName: TlqString): TlqString;
+function lqExtractFilePath(const FileName: TlqString): TlqString;
 begin
-  Result := ExtractFilePath(fpgToOSEncoding(Filename));
+  Result := ExtractFilePath(lqToOSEncoding(Filename));
 end;
 
-function fpgExtractFileName(const FileName: TlqString): TlqString;
+function lqExtractFileName(const FileName: TlqString): TlqString;
 begin
-  Result := ExtractFileName(fpgToOSEncoding(Filename));
+  Result := ExtractFileName(lqToOSEncoding(Filename));
 end;
 
-function fpgExtractFileExt(const FileName: TlqString): TlqString;
+function lqExtractFileExt(const FileName: TlqString): TlqString;
 begin
-  Result := ExtractFileExt(fpgToOSEncoding(Filename));
+  Result := ExtractFileExt(lqToOSEncoding(Filename));
 end;
 
-function fpgExtractRelativepath(const ABaseName, ADestName: TlqString): TlqString;
+function lqExtractRelativepath(const ABaseName, ADestName: TlqString): TlqString;
 begin
-  Result := ExtractRelativepath(fpgToOSEncoding(ABaseName), fpgToOSEncoding(ADestName));
+  Result := ExtractRelativepath(lqToOSEncoding(ABaseName), lqToOSEncoding(ADestName));
 end;
 
-function fpgForceDirectories(const ADirectory: TlqString): Boolean;
+function lqForceDirectories(const ADirectory: TlqString): Boolean;
 begin
-  Result := ForceDirectories(fpgToOSEncoding(ADirectory));
+  Result := ForceDirectories(lqToOSEncoding(ADirectory));
 end;
 
-function fpgChangeFileExt(const FileName, Extension: TlqString): TlqString;
+function lqChangeFileExt(const FileName, Extension: TlqString): TlqString;
 begin
-  Result := ChangeFileExt(fpgToOSEncoding(Filename), Extension);
+  Result := ChangeFileExt(lqToOSEncoding(Filename), Extension);
 end;
 
-function fpgGetAppConfigDir(const Global: Boolean): TlqString;
+function lqGetAppConfigDir(const Global: Boolean): TlqString;
 begin
-  Result := fpgFromOSEncoding(GetAppConfigDir(Global));
+  Result := lqFromOSEncoding(GetAppConfigDir(Global));
 end;
 
-function fpgGetAppConfigFile(const Global: Boolean; const SubDir: Boolean): TlqString;
+function lqGetAppConfigFile(const Global: Boolean; const SubDir: Boolean): TlqString;
 begin
-  Result := fpgFromOSEncoding(GetAppConfigFile(Global, SubDir));
+  Result := lqFromOSEncoding(GetAppConfigFile(Global, SubDir));
 end;
 
-function fpgGetExecutableName: TlqString;
+function lqGetExecutableName: TlqString;
 begin
-  Result := fpgChangeFileExt(fpgExtractFileName(Paramstr(0)), '');
+  Result := lqChangeFileExt(lqExtractFileName(Paramstr(0)), '');
 end;
 
-function fpgRenameFile(const OldName, NewName: TlqString): Boolean;
+function lqRenameFile(const OldName, NewName: TlqString): Boolean;
 begin
-  Result := RenameFile(fpgToOSEncoding(OldName), fpgToOSEncoding(NewName));
+  Result := RenameFile(lqToOSEncoding(OldName), lqToOSEncoding(NewName));
 end;
 
-function fpgAppendPathDelim(const Path: TlqString): TlqString;
+function lqAppendPathDelim(const Path: TlqString): TlqString;
 begin
   if (Path <> '') and (Path[length(Path)] <> PathDelim) then
     Result := Path + PathDelim
@@ -208,8 +208,8 @@ begin
     Result := Path;
 end;
 
-{function fpgHasSubDirs returns True if the directory passed has subdirectories}
-function fpgHasSubDirs(const Dir: TlqString; AShowHidden: Boolean): Boolean;
+{function lqHasSubDirs returns True if the directory passed has subdirectories}
+function lqHasSubDirs(const Dir: TlqString; AShowHidden: Boolean): Boolean;
 var
   FileInfo: TSearchRec;
   FCurrentDir: TlqString;
@@ -218,10 +218,10 @@ begin
   Result := False;
   if Dir <> '' then
   begin
-    FCurrentDir := fpgAppendPathDelim(Dir);
-    FCurrentDir := FCurrentDir + fpgAllFilesMask;
+    FCurrentDir := lqAppendPathDelim(Dir);
+    FCurrentDir := FCurrentDir + lqAllFilesMask;
     try
-      if fpgFindFirst(FCurrentDir, faAnyFile or $00000080, FileInfo) = 0 then
+      if lqFindFirst(FCurrentDir, faAnyFile or $00000080, FileInfo) = 0 then
         repeat
           if FileInfo.Name = '' then
             Continue;
@@ -239,20 +239,20 @@ begin
           //We found at least one non special dir, that's all we need.
           if Result then
             break;
-        until fpgFindNext(FileInfo) <> 0;
+        until lqFindNext(FileInfo) <> 0;
     finally
       SysUtils.FindClose(FileInfo);
     end;
   end;
 end;
 
-function fpgAllFilesMask: TlqString;
+function lqAllFilesMask: TlqString;
 begin
   { Since FPC 2.2.2 we have the AllFilesMask variable, which is part of the RTL }
   Result := AllFilesMask;
 end;
 
-function fpgConvertLineEndings(const s: TlqString): TlqString;
+function lqConvertLineEndings(const s: TlqString): TlqString;
 var
   i: integer;
   EndingStart: longint;
@@ -277,18 +277,18 @@ begin
       Inc(i);
 end;
 
-function fpgGetToolkitConfigDir: TlqString;
+function lqGetToolkitConfigDir: TlqString;
 begin
-  Result := fpgTrimR(fpgGetAppConfigDir(False), ApplicationName, True) + FPG_CONFIG_DIR;
+  Result := lqTrimR(lqGetAppConfigDir(False), ApplicationName, True) + LQ_CONFIG_DIR;
 end;
 
-function fpgAddColon(const AText: TlqString): TlqString;
+function lqAddColon(const AText: TlqString): TlqString;
 begin
   { TODO : Check language direction and add colon at appropriate end. This is very crude! }
   Result := AText + ':';
 end;
 
-function fpgIsBitSet(const AData: integer; const AIndex: integer): boolean;
+function lqIsBitSet(const AData: integer; const AIndex: integer): boolean;
 begin
   Result := (AData and (1 shl AIndex) <> 0);
 end;

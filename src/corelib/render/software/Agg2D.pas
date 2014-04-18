@@ -641,7 +641,7 @@ type
 
  function  BitmapAlphaTransparency(bitmap : TlqImage; alpha : byte ) : boolean;
 
- function  fpgColor2AggColor(c: TlqColor): TAggColor;
+ function  lqColor2AggColor(c: TlqColor): TAggColor;
  
 
 IMPLEMENTATION
@@ -990,12 +990,12 @@ begin
 {$ENDIF }
 end;
 
-function fpgColor2AggColor(c: TlqColor): TAggColor;
+function lqColor2AggColor(c: TlqColor): TAggColor;
 var
   t: TRGBTriple;
   c1: TlqColor;
 begin
-  t := fpgColorToRGBTriple(c);
+  t := lqColorToRGBTriple(c);
   Result.Construct(t.Red, t.Green, t.Blue, t.Alpha);
 end;
 
@@ -3552,8 +3552,8 @@ var
   t: TRGBTriple;
   c: TlqColor;
 begin
-  c := fpgColorToRGB(cl);
-  t := fpgColorToRGBTriple(c);
+  c := lqColorToRGB(cl);
+  t := lqColorToRGBTriple(c);
 
   FillColor(t.Red, t.Green, t.Blue{, t.Alpha});
 end;
@@ -3563,8 +3563,8 @@ var
   t: TRGBTriple;
   c: TlqColor;
 begin
-  c := fpgColorToRGB(cl);
-  t := fpgColorToRGBTriple(c);
+  c := lqColorToRGB(cl);
+  t := lqColorToRGBTriple(c);
 
   LineColor(t.Red, t.Green, t.Blue{, t.Alpha});
 end;

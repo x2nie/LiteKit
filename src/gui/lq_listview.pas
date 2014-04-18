@@ -269,7 +269,7 @@ type
     procedure   HandleHeaderMouseMove(x, y: Integer; btnstate: word; Shiftstate: TShiftState);
     property    ShiftIsPressed: Boolean read FShiftIsPressed write SetShiftIsPressed;
   protected
-    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message LQM_PAINT;
     procedure   HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint); override;
     procedure   HandleLMouseDown(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseDown(x, y: integer; shiftstate: TShiftState); override;
@@ -1407,7 +1407,7 @@ var
 begin
   //if FScrollBarNeedsUpdate then
     UpdateScrollBarPositions;
-  fpgStyle.DrawControlFrame(Canvas, 0, 0, Width, Height);
+  lqStyle.DrawControlFrame(Canvas, 0, 0, Width, Height);
   
   ClipRect.SetRect(2, 2, Width-4, Height-4);
   Canvas.SetClipRect(ClipRect);
@@ -1473,7 +1473,7 @@ begin
       cRect.Left := cLeft;
       cRect.Width := Column.Width;
       cRect.Height := HeaderHeight;
-      fpgStyle.DrawButtonFace(Canvas,cLeft, cRect.Top, cRect.Width, cRect.Height, Flags);
+      lqStyle.DrawButtonFace(Canvas,cLeft, cRect.Top, cRect.Width, cRect.Height, Flags);
       PaintPart := [lvppText];
       
       if Assigned(FOnPaintColumn) then
@@ -1488,7 +1488,7 @@ begin
           taCenter: Inc(tLeft, (Column.Width - tWidth - 5) div 2);
           taLeftJustify: Inc(tLeft, 5);
         end;
-        fpgStyle.DrawString(Canvas, tLeft, cTop+5, Column.Caption, Enabled);
+        lqStyle.DrawString(Canvas, tLeft, cTop+5, Column.Caption, Enabled);
       end;
       Inc(cLeft, Column.Width);
     end;
@@ -1636,7 +1636,7 @@ begin
                    Inc(tLeft,  Max(Image.Width, ItemHeight)-5);
                end;
             end;
-            fpgStyle.DrawString(Canvas, tLeft, ItemRect.Top+2, TheText, Enabled);
+            lqStyle.DrawString(Canvas, tLeft, ItemRect.Top+2, TheText, Enabled);
           end;
 
           Inc(ItemRect.Left, FColumns.Column[J].Width);

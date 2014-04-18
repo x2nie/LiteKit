@@ -237,9 +237,9 @@ procedure ShowMessage(AMessage: string; ACentreText: Boolean = False); overload;
 function SelectFontDialog(var FontDesc: string): boolean;
 function SelectFileDialog(const ADialogType: boolean = sfdOpen; const AFilter: TlqString = ''; const AInitialDir: TlqString = ''): TlqString;
 function SelectDirDialog(const AStartDir: TlqString = ''): TlqString;
-function fpgShowCharMap: TlqString;
-function fpgSelectColorDialog(APresetColor: TlqColor = clBlack): TlqColor;
-function fpgInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
+function lqShowCharMap: TlqString;
+function lqSelectColorDialog(APresetColor: TlqColor = clBlack): TlqColor;
+function lqInputQuery(const ACaption, APrompt: TlqString; var Value: TlqString): Boolean;
 
 
 implementation
@@ -453,7 +453,7 @@ begin
   case CheckClipBoardKey(keycode, shiftstate) of
     ckCopy:
         begin
-          fpgClipboard.Text := FLines.Text;
+          lqClipboard.Text := FLines.Text;
           Consumed := True;
         end;
   else
@@ -473,7 +473,7 @@ end;
 procedure TlqMessageBox.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   RePaint;
 end;
 
@@ -481,7 +481,7 @@ constructor TlqMessageBox.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FLines        := TStringList.Create;
-  FFont         := fpgGetFont('#Label1');
+  FFont         := lqGetFont('#Label1');
   FTextY        := 10;
   FLineHeight   := FFont.Height + 4;
   FMaxLineWidth := 500;
@@ -628,7 +628,7 @@ begin
   memSample.FontDesc := fdesc;
   memSample.Text := FSampleText;
   if FMode = 2 then
-    memSample.Lines.Add(fpgGetNamedFontDesc(UTF8Copy(fdesc, 2, UTF8Length(fdesc)-1)));
+    memSample.Lines.Add(lqGetNamedFontDesc(UTF8Copy(fdesc, 2, UTF8Length(fdesc)-1)));
 end;
 
 procedure TlqFontSelectDialog.OnSameTextChanged(Sender: TObject);
@@ -641,7 +641,7 @@ var
   fl: TStringList;
 begin
   lbFaces.BeginUpdate;
-  fl := fpgApplication.GetFontFaceList;
+  fl := lqApplication.GetFontFaceList;
   lbFaces.Items.Assign(fl);
   fl.Free;
   lbFaces.FocusItem := 0;
@@ -654,7 +654,7 @@ var
   i: integer;
 begin
   lbFaces.BeginUpdate;
-  fl := fpgGetNamedFontList;
+  fl := lqGetNamedFontList;
   lbFaces.Items.Clear;
   for i := 0 to fl.Count-1 do
     lbFaces.Items.Add(fl.Names[i]);
@@ -855,7 +855,7 @@ begin
   begin
     SetPosition(8, 8, 73, 16);
     AutoSize := True;
-    Text := fpgAddColon(rsCollection);
+    Text := lqAddColon(rsCollection);
   end;
 
   { TODO : This need to be fully implemented at some stage. }
@@ -883,7 +883,7 @@ begin
   begin
     SetPosition(161, 8, 73, 16);
     AutoSize := True;
-    Text := fpgAddColon(rsName);
+    Text := lqAddColon(rsName);
   end;
 
   lbFaces := TlqListBox.Create(self);
@@ -901,7 +901,7 @@ begin
     Name := 'lblSize';
     SetPosition(401, 8, 54, 16);
     AutoSize := True;
-    Text := fpgAddColon(rsSize);
+    Text := lqAddColon(rsSize);
   end;
 
   lbSize := TlqListBox.Create(self);
@@ -938,7 +938,7 @@ begin
     Name := 'lblTypeface';
     SetPosition(461, 8, 54, 16);
     AutoSize := True;
-    Text := fpgAddColon(rsTypeface);
+    Text := lqAddColon(rsTypeface);
   end;
 
   cbBold := TlqCheckBox.Create(self);
@@ -979,7 +979,7 @@ begin
   begin
     SetPosition(8, 268, 584, 16);
     AutoSize := True;
-    Text := fpgAddColon(rsExampleText);
+    Text := lqAddColon(rsExampleText);
   end;
 
   memSample := TlqMemo.Create(self);
@@ -1211,7 +1211,7 @@ begin
   begin
     SetPosition(8, 283, 624, 16);
     Anchors := [anLeft, anBottom];
-    Text := fpgAddColon(rsFileName);
+    Text := lqAddColon(rsFileName);
     FontDesc := '#Label1';
   end;
 
@@ -1220,7 +1220,7 @@ begin
   begin
     SetPosition(8, 327, 624, 16);
     Anchors := [anLeft, anBottom];
-    Text := fpgAddColon(rsFileType);
+    Text := lqAddColon(rsFileType);
     FontDesc := '#Label1';
   end;
 
@@ -1277,13 +1277,13 @@ begin
     end;
   end;
 
-  if not FOpenMode or fpgFileExists(edFileName.Text) then
+  if not FOpenMode or lqFileExists(edFileName.Text) then
   begin
     ModalResult := mrOK;
   end;
 
   if ModalResult = mrOK then
-    // FileName := fpgExpandFileName(edFileName.Text);
+    // FileName := lqExpandFileName(edFileName.Text);
     FileName := grid.FileList.DirectoryName + edFileName.Text;
 end;
 
@@ -1457,8 +1457,8 @@ begin
     lst := TStringList.Create;
     try
       if not Assigned(FIni) then
-        FIni := TlqINIFile.CreateExt(fpgGetToolkitConfigDir + FPG_BOOKMARKS_FILE);
-      FIni.ReadSection(FPG_BOOKMARK_SECTION, lst);
+        FIni := TlqINIFile.CreateExt(lqGetToolkitConfigDir + LQ_BOOKMARKS_FILE);
+      FIni.ReadSection(LQ_BOOKMARK_SECTION, lst);
       // add previous bookmarks to menu
       for i := 0 to lst.Count-1 do
       begin
@@ -1488,7 +1488,7 @@ begin
     Exit;
   if mi.Tag = 1 then  // Add current directory
   begin
-    FIni.WriteString(FPG_BOOKMARK_SECTION, grid.FileList.DirectoryName, grid.FileList.DirectoryName);
+    FIni.WriteString(LQ_BOOKMARK_SECTION, grid.FileList.DirectoryName, grid.FileList.DirectoryName);
   end
   else if mi.Tag = 2 then  // configure bookmarks
   begin
@@ -1496,7 +1496,7 @@ begin
   end
   else
   begin // bookmark has been clicked
-    s := FIni.ReadString(FPG_BOOKMARK_SECTION, mi.Text, '.');
+    s := FIni.ReadString(LQ_BOOKMARK_SECTION, mi.Text, '.');
     SetCurrentDirectory(s);
   end;
 end;
@@ -1574,12 +1574,12 @@ var
   fname: string;
 begin
   FOpenMode := True;
-  sdir := fpgExtractFileDir(FileName);
+  sdir := lqExtractFileDir(FileName);
   if sdir = '' then
     sdir := '.';
 
   SetCurrentDirectory(sdir);
-  fname := fpgExtractFileName(FileName);
+  fname := lqExtractFileName(FileName);
 
   if not HighlightFile(fname) then
     edFilename.Text := fname;
@@ -1600,11 +1600,11 @@ var
   fname: string;
 begin
   FOpenMode := False;
-  sdir := fpgExtractFileDir(FileName);
+  sdir := lqExtractFileDir(FileName);
   if sdir = '' then
     sdir := '.';
   SetCurrentDirectory(sdir);
-  fname := fpgExtractFileName(FileName);
+  fname := lqExtractFileName(FileName);
   if not HighlightFile(fname) then
     edFilename.Text := fname;
 

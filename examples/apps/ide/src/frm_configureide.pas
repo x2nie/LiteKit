@@ -222,7 +222,7 @@ end;
 
 procedure TConfigureIDEForm.btnActiveTabColorClicked(Sender: TObject);
 begin
-  pnlActiveTabColor.BackgroundColor := fpgSelectColorDialog(pnlActiveTabColor.BackgroundColor);
+  pnlActiveTabColor.BackgroundColor := lqSelectColorDialog(pnlActiveTabColor.BackgroundColor);
 end;
 
 constructor TConfigureIDEForm.Create(AOwner: TComponent);

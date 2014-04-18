@@ -47,14 +47,14 @@ const
   GCM_Photoshop: TGrayConvMatrix = (red:0.212671; green:0.715160; blue:0.072169);   // Y of YUV from B/W TV's
 
 
-procedure fpgApplyGreyFilter(var AImg: TlqImage);
-function fpgCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
+procedure lqApplyGreyFilter(var AImg: TlqImage);
+function lqCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
 
 
 implementation
 
 
-procedure fpgApplyGreyFilter(var AImg: TlqImage);
+procedure lqApplyGreyFilter(var AImg: TlqImage);
 var
   x, y: integer;
   c: TlqColor;
@@ -64,7 +64,7 @@ begin
     for y := 0 to AImg.Height-1 do
     begin
       c := AImg.Colors[x, y];
-      AImg.Colors[x, y] := fpgCalculateGray(c, GrayBrightness, GrayBrightnessPercentage);
+      AImg.Colors[x, y] := lqCalculateGray(c, GrayBrightness, GrayBrightnessPercentage);
     end;
   end;
   AImg.UpdateImage;
@@ -75,14 +75,14 @@ end;
   ABrighter = True goes to direction of White. False goes to direction of Black
   APercent =  0 zero is straight conversion to gray. 100% is pure black or
               white, depending on ABrighter value. }
-function fpgCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
+function lqCalculateGray(const AFrom: TlqColor; const ABrighter: boolean = False; const APercent: integer = 0): TlqColor;
 var
   g: integer;
   rgb: TFPColor;
 begin
   with GrayConvMatrix do
   begin
-    rgb := fpgColorToFPColor(AFrom);
+    rgb := lqColorToFPColor(AFrom);
     g := round(red*rgb.red + green*rgb.green + blue*rgb.blue);
 
     if ABrighter then

@@ -229,7 +229,7 @@ end;
 procedure TlqBaseGrid.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   if DefaultRowHeight < FFont.Height + 2 then
     DefaultRowHeight := FFont.Height + 2;
   RePaint;
@@ -238,7 +238,7 @@ end;
 procedure TlqBaseGrid.SetHeaderFontDesc(const AValue: string);
 begin
   FHeaderFont.Free;
-  FHeaderFont := fpgGetFont(AValue);
+  FHeaderFont := lqGetFont(AValue);
   if FHeaderHeight < FHeaderFont.Height + 2 then
     FHeaderHeight := FHeaderFont.Height + 2;
   RePaint;
@@ -440,7 +440,7 @@ begin
     if x < 1 then
       x := 1;
   end;
-  fpgStyle.DrawString(Canvas, x, ARect.Top+1, s, Enabled);
+  lqStyle.DrawString(Canvas, x, ARect.Top+1, s, Enabled);
 end;
 
 procedure TlqBaseGrid.DrawGrid(ARow, ACol: Integer; ARect: TlqRect;
@@ -855,7 +855,7 @@ var
 begin
   if consumed then
     exit;
-  fpgApplication.HideHint;
+  lqApplication.HideHint;
 
   case keycode of
     keyRight:
@@ -1306,8 +1306,8 @@ begin
   FHeaderStyle := ghsButton;
   FBorderStyle := ebsDefault;
 
-  FFont       := fpgGetFont('#Grid');
-  FHeaderFont := fpgGetFont('#GridHeader');
+  FFont       := lqGetFont('#Grid');
+  FHeaderFont := lqGetFont('#GridHeader');
   
   FTemp             := 50;  // Just to prove that ColumnWidth does adjust.
   FDefaultColWidth  := 64;

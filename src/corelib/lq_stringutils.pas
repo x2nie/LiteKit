@@ -49,10 +49,10 @@ function  Pos8(const SearchForText, SearchInText: string): PtrInt;
 procedure Delete8(var S: string; Index, Size: PtrInt);
 procedure Insert8(const Source: string; var S: string; Index: PtrInt);
 
-function  fpgCharAt(const s: TlqString; Index: PtrInt): TlqChar;
-function  fpgAppendPathDelim(const Path: TlqString): TlqString;
-function  fpgRemovePathDelim(const Path: TlqString): TlqString;
-function  fpgTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean = false): TlqString;
+function  lqCharAt(const s: TlqString; Index: PtrInt): TlqChar;
+function  lqAppendPathDelim(const Path: TlqString): TlqString;
+function  lqRemovePathDelim(const Path: TlqString): TlqString;
+function  lqTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean = false): TlqString;
 
 
 // Encoding conversions
@@ -379,12 +379,12 @@ begin
   UTF8Insert(Source, S, Index);
 end;
 
-function fpgCharAt(const s: TlqString; Index: PtrInt): TlqChar;
+function lqCharAt(const s: TlqString; Index: PtrInt): TlqChar;
 begin
   Result := UTF8Copy(s, Index, 1);
 end;
 
-function fpgAppendPathDelim(const Path: TlqString): TlqString;
+function lqAppendPathDelim(const Path: TlqString): TlqString;
 begin
   if (Path <> '') and (Path[Length(Path)] <> PathDelim) then
     Result := Path + PathDelim
@@ -392,7 +392,7 @@ begin
     Result := Path;
 end;
 
-function fpgRemovePathDelim(const Path: TlqString): TlqString;
+function lqRemovePathDelim(const Path: TlqString): TlqString;
 begin
   if (Path <> '') and (Path[Length(Path)] = PathDelim) then
     Result := LeftStr(Path, Length(Path)-1)
@@ -400,7 +400,7 @@ begin
     Result := Path;
 end;
 
-function fpgTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean): TlqString;
+function lqTrimR(const AString, ATrim: TlqString; ACaseSensitive: boolean): TlqString;
 var
   li: integer;
 begin

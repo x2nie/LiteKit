@@ -1,4 +1,4 @@
-program fpgcanvas;
+program lqcanvas;
 
 {$mode objfpc}{$H+}
 
@@ -96,7 +96,7 @@ begin
   // Testing Text and Fonts
   y := 60;
   Canvas.SetTextColor(clBlack);
-  Canvas.DrawString(5, y, 'This text must be black and default font (' + fpgApplication.DefaultFont.FontDesc + ')');
+  Canvas.DrawString(5, y, 'This text must be black and default font (' + lqApplication.DefaultFont.FontDesc + ')');
 
   // red dot indicates top/left corner of where previous text was started
   Canvas.Pixels[5,y] := clRed;
@@ -110,14 +110,14 @@ begin
   y := y + Canvas.Font.Height;
   Canvas.DrawString(5, y, 'Russian (UTF-8) text -> Òåñò');
   y := y + Canvas.Font.Height;
-  fnt := fpgApplication.GetFont('Times-14:bold');
+  fnt := lqApplication.GetFont('Times-14:bold');
   Canvas.Font := fnt;
   Canvas.DrawString(5, y, 'Font used is ' + Canvas.Font.FontDesc);
   y := y + Canvas.Font.Height;
 
 
   // Testing basic style drawings
-  Canvas.Font := fpgApplication.DefaultFont;
+  Canvas.Font := lqApplication.DefaultFont;
   Canvas.DrawString(320, 3, 'DrawButtonFace():');
 
   r.SetRect(300, 20, 75, 25);
@@ -246,10 +246,10 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

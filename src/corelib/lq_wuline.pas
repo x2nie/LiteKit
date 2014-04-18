@@ -52,7 +52,7 @@ begin
     Exit; // clipping
 
   LMinusRatio := 1 - ARatio;
-  LBack       := fpgColorToRGBTriple(ACanvas.Pixels[X, Y]);
+  LBack       := lqColorToRGBTriple(ACanvas.Pixels[X, Y]);
   LNew.Blue   := round(B*ARatio + LBack.Blue*LMinusRatio);
   LNew.Green  := round(G*ARatio + LBack.Green*LMinusRatio);
   LNew.Red    := round(R*ARatio + LBack.Red*LMinusRatio);
@@ -81,9 +81,9 @@ begin
     ACanvas.DrawLine(x1, y1, x2, y2);
     Exit; //==>
   end;
-  LR := fpgGetRed(AColor);
-  LG := fpgGetGreen(AColor);
-  LB := fpgGetBlue(AColor);
+  LR := lqGetRed(AColor);
+  LG := lqGetGreen(AColor);
+  LB := lqGetBlue(AColor);
   if deltax > deltay then
   begin // horizontal or vertical
     if y2 > y1 then // determine rise and run

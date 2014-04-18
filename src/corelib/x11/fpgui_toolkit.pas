@@ -2,7 +2,7 @@
   This source is only used to compile and install the package.
  }
 
-unit fpgui_toolkit;
+unit lqui_toolkit;
 
 interface
 
@@ -15,7 +15,7 @@ uses
   lq_customgrid, lq_dialogs, lq_editcombo, lq_edit, lq_form, lq_gauge, lq_grid, 
   lq_hyperlink, lq_iniutils, lq_label, lq_listbox, lq_listview, lq_memo, lq_menu, 
   lq_mru, lq_panel, lq_popupcalendar, lq_progressbar, lq_radiobutton, 
-  lq_scrollbar, lq_style, lq_tab, lq_trackbar, lq_tree, fpgui_db, lq_splitter, 
+  lq_scrollbar, lq_style, lq_tab, lq_trackbar, lq_tree, lqui_db, lq_splitter, 
   lq_hint, lq_spinedit, lq_extgraphics, lq_colormapping, lq_colorwheel, 
   lq_interface, lq_editbtn, lq_imgfmt_jpg, lq_imgutils, lq_stylemanager, 
   lq_style_win2k, lq_style_motif, lq_style_clearlooks, lq_style_bluecurve, 

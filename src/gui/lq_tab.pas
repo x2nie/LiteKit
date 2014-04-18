@@ -409,7 +409,7 @@ var
   msg: TlqMessageParams;
 begin
   // PageControl has bevelled edges in some themes
-  r := fpgStyle.GetControlFrameBorders;
+  r := lqStyle.GetControlFrameBorders;
 
   { Calculate and set Width and Height }
   if TabPosition in [tpTop, tpBottom] then
@@ -1144,7 +1144,7 @@ begin
   inherited HandleRMouseUp(x, y, shiftstate);
 
   { store the position for later usage }
-  FLastRClickPos := fpgPoint(x,y);
+  FLastRClickPos := lqPoint(x,y);
 
   if to_PMenuClose in FTabOptions then
   begin
@@ -1208,7 +1208,7 @@ end;
 constructor TlqPageControl.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FFont   := fpgStyle.DefaultFont;
+  FFont   := lqStyle.DefaultFont;
   FPages  := TList.Create;
   Width   := 150;
   Height  := 100;

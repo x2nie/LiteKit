@@ -61,7 +61,7 @@ var
   AImageDataSize: integer;
 begin
   Result := nil;
-  if not fpgFileExists(AFileName) then
+  if not lqFileExists(AFileName) then
     Exit; //==>
 
   AssignFile(AFile, AFileName);

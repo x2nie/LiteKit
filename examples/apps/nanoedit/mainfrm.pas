@@ -128,7 +128,7 @@ var
   sValue: string;
   i: integer;
 begin
-  if fpgInputQuery('Go to line', 'Go to line number?', sValue) then
+  if lqInputQuery('Go to line', 'Go to line number?', sValue) then
   begin
     try
       i := StrToInt(sValue);

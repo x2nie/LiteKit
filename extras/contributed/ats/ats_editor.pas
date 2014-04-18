@@ -504,18 +504,18 @@ end;
 
 procedure MainProc;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   
   //atsTexts.LoadFromFile('test.ats');
   
   //atsTexts.LoadFromArray(langtabledata);
-  if fpgFileExists('atstable.inc')  then
+  if lqFileExists('atstable.inc')  then
     atsTexts.LoadFromPascalFile('atstable.inc');
   
   frmMain := TfrmLangTable.Create(nil);
   
   frmMain.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frmMain.Free;
 end;
 

@@ -276,11 +276,11 @@ procedure MainProc;
 var
   frm: TGaugeTest;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TGaugeTest.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

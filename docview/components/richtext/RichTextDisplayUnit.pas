@@ -74,7 +74,7 @@ end;
 
 function InvertRGB( Arg: TlqColor ): TlqColor;
 begin
-  Result := fpgColorToRGB( Arg ); // in case it's a system color e.g. button face
+  Result := lqColorToRGB( Arg ); // in case it's a system color e.g. button face
   Result := Result xor $ffffff; // now invert the RGB components
 end;
 

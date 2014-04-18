@@ -2688,12 +2688,12 @@ begin
     end;
     PaintImage(Horiz, Verti, ColNum, RefImage, zHeader);
   end
-  else if fpgImages.GetImage(ImgFileName) <> nil then
+  else if lqImages.GetImage(ImgFileName) <> nil then
   begin
     RefImage := ImageNames.IndexOf(IntToStr(Scale) + ImgFileName);
     if RefImage = -1 then
     begin
-      Image    := fpgImages.GetImage(ImgFileName);
+      Image    := lqImages.GetImage(ImgFileName);
       Scale    := 1;
       RefImage := ImageNames.Add(IntToStr(Scale) + ImgFileName);
       Images.Add(Image);
@@ -2729,13 +2729,13 @@ begin
     end;
     PaintImage(Horiz, Verti, ColNum, RefImage, zPage);
   end
-  else if fpgImages.GetImage(ImgFileName) <> nil then
+  else if lqImages.GetImage(ImgFileName) <> nil then
   begin
     RefImage := ImageNames.IndexOf(IntToStr(Scale) + ImgFileName);
     if RefImage = -1 then
     begin
       { This returns a refence to an existing image }
-      TempImage := fpgImages.GetImage(ImgFileName);
+      TempImage := lqImages.GetImage(ImgFileName);
       Scale := 1;
       RefImage := ImageNames.Add(IntToStr(Scale) + ImgFileName);
       { Clone the image because we don't want to free LiteKit registered images,
@@ -2773,12 +2773,12 @@ begin
     end;
     PaintImage(Horiz, Verti, ColNum, RefImage, zFooter);
   end
-  else if fpgImages.GetImage(ImgFileName) <> nil then
+  else if lqImages.GetImage(ImgFileName) <> nil then
   begin
     RefImage := ImageNames.IndexOf(IntToStr(Scale) + ImgFileName);
     if RefImage = -1 then
     begin
-      Image    := fpgImages.GetImage(ImgFileName);
+      Image    := lqImages.GetImage(ImgFileName);
       Scale    := 1;
       RefImage := ImageNames.Add(IntToStr(Scale) + ImgFileName);
       Images.Add(Image);
@@ -2802,14 +2802,14 @@ begin
   end;
 
   Fd_SavePdf          := TlqFileDialog.Create(nil);
-  Fd_SavePdf.InitialDir := fpgExtractFilePath(ParamStr(0));
+  Fd_SavePdf.InitialDir := lqExtractFilePath(ParamStr(0));
   Fd_SavePdf.Filter   := rsFileTypePDF + ' |*.pdf';
   Fd_SavePdf.FileName := DefaultFile;
   try
     if Fd_SavePdf.RunSaveFile then
     begin
       PdfFile := Fd_SavePdf.FileName;
-      if Lowercase(fpgExtractFileExt(PdfFile)) <> '.pdf' then
+      if Lowercase(lqExtractFileExt(PdfFile)) <> '.pdf' then
         PdfFile := PdfFile + '.pdf';
       Document := TPdfDocument.CreateDocument(Layout, Zoom, Prefer);
       with Document do
@@ -2819,8 +2819,8 @@ begin
         PdfFileStream.Free;
         Free;
       end;
-      { TODO: Create a cross-platform fpgViewFile() method or something }
-      fpgOpenURL(PdfFile);
+      { TODO: Create a cross-platform lqViewFile() method or something }
+      lqOpenURL(PdfFile);
     end;
   finally
     Fd_SavePdf.Free;

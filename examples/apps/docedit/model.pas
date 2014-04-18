@@ -58,7 +58,7 @@ type
   end;
   
   
-  TModule = class(TDocNode)         // eg: fpgfx
+  TModule = class(TDocNode)         // eg: lqfx
   end;
 
 

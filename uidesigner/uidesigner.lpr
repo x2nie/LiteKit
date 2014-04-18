@@ -30,7 +30,7 @@ uses
 
 procedure MainProc;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   try
     RegisterWidgets;
     PropList := TPropertyList.Create;
@@ -38,14 +38,14 @@ begin
     maindsgn.CreateWindows;
 
     // Note:  This needs improving!!
-    fpgApplication.MainForm := frmMain;
+    lqApplication.MainForm := frmMain;
 
     { If file passed in as param, load it! }
     maindsgn.EditedFileName := ParamStr(1);
     if FileExists(maindsgn.EditedFileName) then
       maindsgn.OnLoadFile(maindsgn);
 
-    fpgApplication.Run;
+    lqApplication.Run;
     
     PropList.Free;
     

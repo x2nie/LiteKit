@@ -127,11 +127,11 @@ begin
   if Dir <> '' then
   begin
     FCurrentDir := Dir;
-    FCurrentDir := fpgAppendPathDelim(FCurrentDir);
+    FCurrentDir := lqAppendPathDelim(FCurrentDir);
     i           := length(FCurrentDir);
     FCurrentDir := FCurrentDir + AllFilesMask;
     try
-      if fpgFindFirst(FCurrentDir, faAnyFile or $00000080, FileInfo) = 0 then
+      if lqFindFirst(FCurrentDir, faAnyFile or $00000080, FileInfo) = 0 then
       begin
         try
           SortList        := TStringList.Create;
@@ -156,7 +156,7 @@ begin
 
               SortList.Add(FileInfo.Name);
             end;
-          until fpgFindNext(FileInfo) <> 0;
+          until lqFindNext(FileInfo) <> 0;
           for i := 0 to SortList.Count - 1 do
           begin
             NewNode := Node.AppendText(SortList[i]);
@@ -164,7 +164,7 @@ begin
 //            NewNode := TV.Items.AddChild(Node, SortList[i]);
             // if subdirectories then indicate so.
 { Todo: Fix this by adding HasChildren to Treeview }
-            NewNode.HasChildren := fpgHasSubDirs(fpgAppendPathDelim(Dir) + NewNode.Text, FShowHidden);
+            NewNode.HasChildren := lqHasSubDirs(lqAppendPathDelim(Dir) + NewNode.Text, FShowHidden);
           end;
         finally
           SortList.Free;
@@ -201,7 +201,7 @@ var
 begin
   if AValue = '' then
     Exit;
-  s := fpgAppendPathDelim(AValue);
+  s := lqAppendPathDelim(AValue);
   prevn := tv.RootNode;
   nextn := prevn;
   while nextn <> nil do
@@ -254,7 +254,7 @@ begin
   inherited Create(AOwner);
   FShowHidden := False;
   FImagelist := TlqImageList.Create;
-  img := fpgImages.GetImage('stdimg.folder').ImageFromSource;
+  img := lqImages.GetImage('stdimg.folder').ImageFromSource;
   FImageList.AddImage(img);
 end;
 

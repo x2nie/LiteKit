@@ -796,9 +796,9 @@ begin
   begin
     for CptW := 0 to Pred(TlqImage(Images[ANumber]).Width) do
     begin
-      AFlux.WriteByte(fpgGetRed(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
-      AFlux.WriteByte(fpgGetGreen(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
-      AFlux.WriteByte(fpgGetBlue(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(lqGetRed(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(lqGetGreen(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
+      AFlux.WriteByte(lqGetBlue(TlqImage(Images[ANumber]).Colors[CptW, CptH]));
     end;
   end;
   EndFlux := AFlux.Position;
@@ -878,9 +878,9 @@ end;
 constructor TPdfColor.CreateColor(const AStroke: Boolean; AColor: TlqColor);
 begin
   inherited Create;
-  FBlue   := FormatFloat('0.##', fpgGetBlue(AColor) / 256);
-  FGreen  := FormatFloat('0.##', fpgGetGreen(AColor) / 256);
-  FRed    := FormatFloat('0.##', fpgGetRed(AColor) / 256);
+  FBlue   := FormatFloat('0.##', lqGetBlue(AColor) / 256);
+  FGreen  := FormatFloat('0.##', lqGetGreen(AColor) / 256);
+  FRed    := FormatFloat('0.##', lqGetRed(AColor) / 256);
   FStroke := AStroke;
 end;
 
@@ -1441,7 +1441,7 @@ var
   FileTxt: TextFile;
   Ligne: WideString;
 begin
-  if fpgFileExists(FontDirectory + NomFonte + '.fnt') then
+  if lqFileExists(FontDirectory + NomFonte + '.fnt') then
   begin
     AssignFile(FileTxt, FontDirectory + NomFonte + '.fnt');
     Reset(FileTxt);
@@ -1738,7 +1738,7 @@ begin
           begin
             Fnt          := TPdfFonte.CreateFonte(FontName, FontSize);
             // adjust font size to display device
-            Fnt.FTxtSize := IntToStr(Round((StrToInt(FontSize) * fpgApplication.Screen_dpi_y) div 72));
+            Fnt.FTxtSize := IntToStr(Round((StrToInt(FontSize) * lqApplication.Screen_dpi_y) div 72));
             TPdfStream(TPdfXRef(FXRefObjets[PageNum]).FStream).AddItem(Fnt);
             Clr          := TPdfColor.CreateColor(True, Couleur);
             TPdfStream(TPdfXRef(FXRefObjets[PageNum]).FStream).AddItem(Clr);

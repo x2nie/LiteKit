@@ -113,13 +113,13 @@ begin
   MyTime := Now;
   repeat
     MoveWindow(Left - MovingPixels, Top);
-    fpgApplication.ProcessMessages;
+    lqApplication.ProcessMessages;
     Sleep(aSleep);
     MoveWindow(Left + MovingPixels * 2, Top);
-    fpgApplication.ProcessMessages;
+    lqApplication.ProcessMessages;
     Sleep(aSleep);
     MoveWindow(Left - MovingPixels, Top);
-    fpgApplication.ProcessMessages;
+    lqApplication.ProcessMessages;
   until SecondsBetween(Now, MyTime) >= Seconds;
 end;
 

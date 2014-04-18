@@ -214,7 +214,7 @@ begin
   FBackgroundColor := TlqColor($c4c4c4); // clListBox;
   FTextColor := Parent.TextColor;
   FShowCaption := False;
-  FFont     := fpgStyle.DefaultFont;
+  FFont     := lqStyle.DefaultFont;
 end;
 
 procedure TlqCustomProgressBar.StepIt;

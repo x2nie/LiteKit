@@ -244,9 +244,9 @@ begin
   inherited Create(AOwner);
   // create a image list
   FImagelist := TlqImageList.Create;
-  if fpgFileExists('../../../images/folder_16.bmp') then
+  if lqFileExists('../../../images/folder_16.bmp') then
     FImagelist.AddItemFromFile(SetDirSeparators('../../../images/folder_16.bmp'), 0);
-  if fpgFileExists('../../../images/menu_preferences_16.bmp') then
+  if lqFileExists('../../../images/menu_preferences_16.bmp') then
   begin
     FImagelist.AddItemFromFile(SetDirSeparators('../../../images/menu_preferences_16.bmp'), 1);
     FImagelist.Items[1].Image.CreateMaskFromSample(0, 0);
@@ -255,8 +255,8 @@ begin
 
   InitializeCustomImages;
   FStateImagelist := TlqImageList.Create;
-  FStateImagelist.AddImage(fpgImages.GetImage('usr.state0'));
-  FStateImagelist.AddImage(fpgImages.GetImage('usr.state1'));
+  FStateImagelist.AddImage(lqImages.GetImage('usr.state0'));
+  FStateImagelist.AddImage(lqImages.GetImage('usr.state1'));
 
 end;
 
@@ -557,11 +557,11 @@ procedure MainProc;
 var
   frm: TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   try
     frm.Show;
-    fpgApplication.Run;
+    lqApplication.Run;
   finally
     frm.Free;
   end;

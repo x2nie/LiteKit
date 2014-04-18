@@ -206,7 +206,7 @@ var
   FInternalMacroList: TIDEMacroList;
   i: integer;
 begin
-  if fpgInputQuery('New Unit', 'Please give the new unit a file name', newunit) then
+  if lqInputQuery('New Unit', 'Please give the new unit a file name', newunit) then
   begin
     if GProject.UnitList.FileExists(newunit) then
     begin
@@ -216,7 +216,7 @@ begin
     sl := TStringList.Create;
     try
       sl.LoadFromFile(GMacroList.ExpandMacro('${TEMPLATEDIR}default/unit.pas'));
-      sl.Text := StringReplace(sl.Text, '${UNITNAME}', fpgChangeFileExt(fpgExtractFileName(newunit), ''), [rfReplaceAll, rfIgnoreCase]);
+      sl.Text := StringReplace(sl.Text, '${UNITNAME}', lqChangeFileExt(lqExtractFileName(newunit), ''), [rfReplaceAll, rfIgnoreCase]);
       sl.SaveToFile(GProject.ProjectDir + newunit);
     finally
       sl.Free;
@@ -323,7 +323,7 @@ begin
   edt := TlqTextEdit(pcEditor.ActivePage.Components[0]);
   if not Assigned(edt) then
     Exit;
-  if fpgInputQuery('Go to line', 'Go to line number?', sValue) then
+  if lqInputQuery('Go to line', 'Go to line number?', sValue) then
   begin
     try
       i := StrToInt(sValue);
@@ -441,7 +441,7 @@ end;
 procedure TMainForm.miViewDebug(Sender: TObject);
 begin
   if not Assigned(DebugForm) then
-    fpgApplication.CreateForm(TDebugForm, TlqWindowBase(DebugForm));
+    lqApplication.CreateForm(TDebugForm, TlqWindowBase(DebugForm));
   DebugForm.Show;
 end;
 
@@ -518,7 +518,7 @@ begin
   s := SelectFileDialog(sfdSave, Format(cFileFilterTemplate, ['Project Files', cProjectFiles, cProjectFiles]));
   if s <> '' then
   begin
-    if fpgExtractFileExt(s) = '' then
+    if lqExtractFileExt(s) = '' then
       s := s + cProjectExt;
     try
       GProject.Save(s);
@@ -547,7 +547,7 @@ begin
   GProject.UnitList.Add(u);
   // add reference to tabsheet
   pcEditor.ActivePage.TagPointer := u;
-  s := fpgExtractRelativepath(GProject.ProjectDir, u.FileName);
+  s := lqExtractRelativepath(GProject.ProjectDir, u.FileName);
   r := GetUnitsNode;
   n := r.AppendText(s);
   // add reference to treenode
@@ -599,7 +599,7 @@ begin
     s := '';
     for i := 0 to grdMessages.RowCount-1 do
       s := s + grdMessages.Cells[0, i] + LineEnding;
-    fpgClipboard.Text := s;
+    lqClipboard.Text := s;
   end;
 end;
 
@@ -653,7 +653,7 @@ begin
   begin
     for i := 0 to GProject.UnitList.Count-1 do
     begin
-      s := fpgExtractRelativepath(GProject.ProjectDir, GProject.UnitList[i].FileName);
+      s := lqExtractRelativepath(GProject.ProjectDir, GProject.UnitList[i].FileName);
       n := r.AppendText(s);
       n.Data := GProject.UnitList[i];
     end;
@@ -678,7 +678,7 @@ begin
   grdMessages.Cells[0,grdMessages.RowCount-1] := AMsg;
   grdMessages.FocusRow := grdMessages.RowCount;
   grdMessages.EndUpdate;
-//  fpgApplication.ProcessMessages;
+//  lqApplication.ProcessMessages;
 end;
 
 procedure TMainForm.ClearMessagesWindow;
@@ -758,7 +758,7 @@ var
   editor: TlqTextEdit;
 begin
   s := AFilename;
-  f := fpgExtractFileName(s);
+  f := lqExtractFileName(s);
   found := False;
   for i := 0 to pcEditor.PageCount-1 do
   begin
@@ -793,12 +793,12 @@ begin
     ts := CreateNewEditorTab(f);
     editor := ts.Components[0] as TlqTextEdit;
     editor.Lines.BeginUpdate;
-    if fpgFileExists(s) then
+    if lqFileExists(s) then
       editor.Lines.LoadFromFile(s);
     editor.Lines.EndUpdate;
     if gINI.ReadBool(cEditor, 'SyntaxHighlighting', True) then
     begin
-      ext := fpgExtractFileExt(AFilename);
+      ext := lqExtractFileExt(AFilename);
       if (ext = '.pas') or (ext = '.pp') or (ext = '.inc') or (ext = '.lpr') or (ext = '.dpr') then
       begin
         TlqTextEdit(ts.Components[0]).OnDrawLine := @HighlightObjectPascal;
@@ -890,7 +890,7 @@ begin
 
   { syntax highlighting for: keywords }
   if not Assigned(FKeywordFont) then
-    FKeywordFont := fpgGetFont(edt.FontDesc + ':bold');
+    FKeywordFont := lqGetFont(edt.FontDesc + ':bold');
   ACanvas.Font := FKeywordFont;
   FRegex.Expression := cKeywords1;
   FRegex.ModifierI := True;

@@ -145,7 +145,7 @@ begin
   end;
   FDesigners.Clear;
   
-  if not fpgFileExists(fname) then
+  if not lqFileExists(fname) then
   begin
     ShowMessage('File does not exists.', 'Error loading form');
     Exit;
@@ -205,14 +205,14 @@ begin
 
   EditedFileName := fname;
 
-  if fpgFileExists(fname) then
+  if lqFileExists(fname) then
   begin
     FFile.LoadFile(fname);
     FFile.GetBlocks;
   end
   else
   begin
-    uname := fpgExtractFileName(fname);
+    uname := lqExtractFileName(fname);
     i     := pos('.pas', LowerCase(uname));
     if i > 0 then
       uname := copy(uname, 1, i - 1);
@@ -230,7 +230,7 @@ begin
 
   fdata := FFile.MergeBlocks;
 
-  AssignFile(ff, fpgToOSEncoding(fname));
+  AssignFile(ff, lqToOSEncoding(fname));
   try
     Rewrite(ff, 1);
     try
@@ -473,7 +473,7 @@ begin
   DefaultPasExt   := gINI.ReadString('Options', 'DefaultFileExt', '.pas');
   UndoOnPropExit  := gINI.ReadBool('Options', 'UndoOnExit', DefUndoOnPropExit);
   OneClickMove    := gINI.ReadBool('Options', 'OneClickMove', True);
-  fpgApplication.HintPause := 1000;
+  lqApplication.HintPause := 1000;
 end;
 
 end.

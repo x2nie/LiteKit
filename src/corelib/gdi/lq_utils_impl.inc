@@ -5,17 +5,17 @@ uses
   
 // GDI specific implementations of encoding functions
 
-function fpgToOSEncoding(aString: TlqString): string;
+function lqToOSEncoding(aString: TlqString): string;
 begin
   Result := Utf8ToAnsi(aString);
 end;
 
-function fpgFromOSEncoding(aString: string): TlqString;
+function lqFromOSEncoding(aString: string): TlqString;
 begin
   Result := AnsiToUtf8(aString);
 end;
 
-procedure fpgOpenURL(const aURL: TlqString);
+procedure lqOpenURL(const aURL: TlqString);
 begin
   try
     {$IFNDEF wince}
@@ -26,7 +26,7 @@ begin
   end;
 end;
 
-function fpgFileSize(const AFilename: TlqString): integer;
+function lqFileSize(const AFilename: TlqString): integer;
 var
   FindData: TWIN32FindDataW;
   FindHandle: THandle;

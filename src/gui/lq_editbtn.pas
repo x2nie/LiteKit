@@ -181,9 +181,9 @@ begin
     FEdit.Visible := False;
     FButton.Visible := False;
     Canvas.Clear(clBoxColor);
-    fpgStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
-    fpgStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
-    Canvas.SetFont(fpgApplication.DefaultFont);
+    lqStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
+    lqStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
+    Canvas.SetFont(lqApplication.DefaultFont);
     if Text <> '' then
     begin
       Canvas.TextColor := clText3;
@@ -194,7 +194,7 @@ begin
       Canvas.TextColor := clShadow1;
       Canvas.DrawText(0, 0, Width - Height, Height, ClassName, [txtHCenter, txtVCenter]);
     end;
-    img := fpgImages.GetImage('stdimg.ellipse'); // don't free the img instance - we only got a reference
+    img := lqImages.GetImage('stdimg.ellipse'); // don't free the img instance - we only got a reference
     if img <> nil then
       Canvas.DrawImage(Width-Height+((Height-img.Width) div 2), (Height-img.Height) div 2, img);
   end;
@@ -352,9 +352,9 @@ begin
     FEdit.Visible := False;
     FButton.Visible := False;
     Canvas.Clear(clBoxColor);
-    fpgStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
-    fpgStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
-    Canvas.SetFont(fpgApplication.DefaultFont);
+    lqStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
+    lqStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
+    Canvas.SetFont(lqApplication.DefaultFont);
     if Filename <> '' then
     begin
       Canvas.TextColor := clText3;
@@ -365,7 +365,7 @@ begin
       Canvas.TextColor := clShadow1;
       Canvas.DrawText(0, 0, Width - Height, Height, ClassName, [txtHCenter, txtVCenter]);
     end;
-    img := fpgImages.GetImage('stdimg.folderfile'); // don't free the img instance - we only got a reference
+    img := lqImages.GetImage('stdimg.folderfile'); // don't free the img instance - we only got a reference
     if img <> nil then
       Canvas.DrawImage(Width-Height+((Height-img.Width) div 2), (Height-img.Height) div 2, img);
   end;
@@ -387,7 +387,7 @@ begin
     else
     begin
       // Use path of existing filename
-      dlg.InitialDir := fpgExtractFilePath(FileName);
+      dlg.InitialDir := lqExtractFilePath(FileName);
       if dlg.InitialDir = '' then    // FileName had no path
         dlg.InitialDir := FInitialDir;
     end;
@@ -437,9 +437,9 @@ begin
     FEdit.Visible := False;
     FButton.Visible := False;
     Canvas.Clear(clBoxColor);
-    fpgStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
-    fpgStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
-    Canvas.SetFont(fpgApplication.DefaultFont);
+    lqStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
+    lqStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
+    Canvas.SetFont(lqApplication.DefaultFont);
     if Directory <> '' then
     begin
       Canvas.TextColor := clText3;
@@ -450,7 +450,7 @@ begin
       Canvas.TextColor := clShadow1;
       Canvas.DrawText(0, 0, Width - Height, Height, ClassName, [txtHCenter, txtVCenter]);
     end;
-    img := fpgImages.GetImage('stdimg.folder'); // don't free the img instance - we only got a reference
+    img := lqImages.GetImage('stdimg.folder'); // don't free the img instance - we only got a reference
     if img <> nil then
       Canvas.DrawImage(Width-Height+((Height-img.Width) div 2), (Height-img.Height) div 2, img);
   end;
@@ -499,12 +499,12 @@ begin
     FEdit.Visible := False;
     FButton.Visible := False;
     Canvas.Clear(clBoxColor);
-    fpgStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
-    fpgStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
+    lqStyle.DrawControlFrame(Canvas, 0, 0, Width - Height, Height);
+    lqStyle.DrawButtonFace(Canvas, Width - Height, 0, Height, Height, [btfIsEmbedded]);
     Canvas.TextColor := clShadow1;
-    Canvas.SetFont(fpgApplication.DefaultFont);
+    Canvas.SetFont(lqApplication.DefaultFont);
     Canvas.DrawText(0, 0, Width - Height, Height, ClassName, [txtHCenter, txtVCenter]);
-    img := fpgImages.GetImage('stdimg.font'); // don't free the img instance - we only got a reference
+    img := lqImages.GetImage('stdimg.font'); // don't free the img instance - we only got a reference
     if img <> nil then
       Canvas.DrawImage(Width-Height+((Height-img.Width) div 2), (Height-img.Height) div 2, img);
   end;

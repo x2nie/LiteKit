@@ -256,7 +256,7 @@ begin
   RetX := 0;
   for I := PosX to UTF8Length(SLine) do
   begin
-    c := fpgCharAt(SLine, I);
+    c := lqCharAt(SLine, I);
     { TODO -cUnicode Error : We need to fix c[i] usage. Also improve ValidChars definition. }
     if not FindNext and not (c[1] in ValidChars) then
     begin
@@ -362,7 +362,7 @@ begin
   msg.mouse.y := y;
   msg.mouse.shiftstate := shiftstate;
   msg.mouse.delta := delta;
-  fpgPostMessage(self, FOwner.FVScrollBar, FPGM_SCROLL, msg);
+  lqPostMessage(self, FOwner.FVScrollBar, LQM_SCROLL, msg);
 end;
 
 constructor TlqGutter.CreateGutter(AOwner: TlqBaseTextEdit);
@@ -437,7 +437,7 @@ end;
 procedure TlqBaseTextEdit.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   Invalidate;
 end;
 
@@ -1186,7 +1186,7 @@ begin
 
   // normal house keeping
   Canvas.Clear(clBoxColor);
-  fpgStyle.DrawControlFrame(Canvas, 0, 0, Width, Height);
+  lqStyle.DrawControlFrame(Canvas, 0, 0, Width, Height);
   Canvas.Font := FFont;
   Canvas.SetClipRect(GetClientRect);
 
@@ -1525,7 +1525,7 @@ procedure TlqBaseTextEdit.CopyToClipboard;
 begin
   if not FSelected then
     Exit;
-  fpgClipboard.Text := GetSelectedText;
+  lqClipboard.Text := GetSelectedText;
 end;
 
 procedure TlqBaseTextEdit.CutToClipboard;
@@ -1540,7 +1540,7 @@ procedure TlqBaseTextEdit.PasteFromClipboard;
 begin
   if FSelected then
     DeleteSelection;
-  InsertTextAtPos(fpgClipboard.Text, CaretPos.X, CaretPos.Y);
+  InsertTextAtPos(lqClipboard.Text, CaretPos.X, CaretPos.Y);
 end;
 
 procedure TlqBaseTextEdit.HandleMouseScroll(x, y: integer; shiftstate: TShiftState;
@@ -1563,7 +1563,7 @@ begin
 
   msg.mouse.delta := ldelta;
 
-  fpgPostMessage(self, FVScrollBar, FPGM_SCROLL, msg);
+  lqPostMessage(self, FVScrollBar, LQM_SCROLL, msg);
 end;
 
 procedure TlqBaseTextEdit.HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean);
@@ -1905,7 +1905,7 @@ begin
     begin
       R.SetRect(X, Y, UTF8Length(S) * FChrW, FChrH);
       Canvas.TextColor := clWhite;
-      Canvas.Color := fpgColorToRGB(clSelection);
+      Canvas.Color := lqColorToRGB(clSelection);
       Canvas.FillRectangle(R);
       Canvas.DrawText(R, S);
     end
@@ -1922,7 +1922,7 @@ begin
           SS := UTF8Copy(S, Si + 1, Ei - Si);
         R.SetRect(X+(Si * FChrW), Y, (UTF8Length(SS) * FChrW), FChrH);
         Canvas.TextColor := clWhite;
-        Canvas.Color := fpgColorToRGB(clSelection);
+        Canvas.Color := lqColorToRGB(clSelection);
         Canvas.FillRectangle(R);
         Canvas.DrawText(R, SS);
       end
@@ -1933,7 +1933,7 @@ begin
           SS := UTF8Copy(S, Si + 1, UTF8Length(S) - Si);
           R.SetRect(X+(Si * FChrW), Y, (UTF8Length(SS) * FChrW), FChrH);
           Canvas.TextColor := clWhite;
-          Canvas.Color := fpgColorToRGB(clSelection);
+          Canvas.Color := lqColorToRGB(clSelection);
           Canvas.FillRectangle(R);
           Canvas.DrawText(R, SS);
         end
@@ -1946,7 +1946,7 @@ begin
             SS := UTF8Copy(S, 1, Ei);
             R.SetRect(X, Y, (UTF8Length(SS) * FChrW), FChrH);
             Canvas.TextColor := clWhite;
-            Canvas.Color := fpgColorToRGB(clSelection);
+            Canvas.Color := lqColorToRGB(clSelection);
             Canvas.FillRectangle(R);
             Canvas.DrawText(R, SS);
           end;
@@ -1975,7 +1975,7 @@ begin
 
   if (Y < FTopLine) or (Y > FTopLine + FVisLines) then
   begin
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
     Exit;  //==>
   end;
   Yp := ((Y - FTopLine) * FChrH) + 1;
@@ -1985,7 +1985,7 @@ begin
     Xp := Xp + FGutterPan.Width;
   if (Xp < 0) or (Xp > GetClientRect.Width) then
   begin
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
     Exit; //==>
   end;
   //with Canvas do
@@ -2007,9 +2007,9 @@ begin
     //Pen.Mode := pmCopy;
   //end;
   if Focused then
-    fpgCaret.SetCaret(Canvas, Xp, Yp, fpgCaret.Width, FFont.Height)
+    lqCaret.SetCaret(Canvas, Xp, Yp, lqCaret.Width, FFont.Height)
   else
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
 
   if not FSelected then
   begin
@@ -2022,7 +2022,7 @@ constructor TlqBaseTextEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   Focusable     := True;
-  FFont         := fpgGetFont('#Edit1');
+  FFont         := lqGetFont('#Edit1');
   Width         := 320;
   Height        := 240;
   FLines        := TStringList.Create;
@@ -2404,7 +2404,7 @@ begin
       Replace := (P > 0) and (SLine <> '');
       if Replace then
       begin
-        while (fpgCharAt(SLine, P) = ' ') do
+        while (lqCharAt(SLine, P) = ' ') do
         begin
           UTF8Delete(SLine, P, 1);
           P := UTF8Length(SLine);
@@ -2420,7 +2420,7 @@ end;
 
 procedure TlqBaseTextEdit.LoadFromFile(const AFileName: TlqString);
 begin
-  if not fpgFileExists(AFileName) then
+  if not lqFileExists(AFileName) then
     Exit; //==>
   Clear;
   FLines.LoadFromFile(AFileName);

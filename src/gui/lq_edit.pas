@@ -707,7 +707,7 @@ begin
   Canvas.FillRectangle(rs);
   Canvas.SetTextColor(clWhite);
   Canvas.AddClipRect(rs);
-  fpgStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FVisibleText, Enabled);
+  lqStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FVisibleText, Enabled);
   Canvas.ClearClipRect;
 end;
 
@@ -726,7 +726,7 @@ begin
     ebsDefault:
         begin
           Canvas.DrawControlFrame(r);
-          rect := fpgStyle.GetControlFrameBorders;
+          rect := lqStyle.GetControlFrameBorders;
           InflateRect(r, -rect.Left, -rect.Top);  { assuming borders are even on opposite sides }
         end;
     ebsSingle:
@@ -738,7 +738,7 @@ begin
   end;
   Canvas.SetClipRect(r);
 
-  fpgStyle.DrawEditBox(Canvas, r, Enabled, ReadOnly, FBackgroundColor);
+  lqStyle.DrawEditBox(Canvas, r, Enabled, ReadOnly, FBackgroundColor);
   Canvas.SetFont(FFont);
 end;
 
@@ -796,7 +796,7 @@ var
 
 begin
   hasChanged := False;
-  fpgApplication.HideHint;
+  lqApplication.HideHint;
 
   Consumed := True;
   case CheckClipBoardKey(keycode, shiftstate) of
@@ -806,7 +806,7 @@ begin
         end;
     ckPaste:
         begin
-          DoPaste(fpgClipboard.Text);
+          DoPaste(lqClipboard.Text);
           if not ReadOnly then
             hasChanged := True;
         end;
@@ -936,7 +936,7 @@ end;
 
 procedure TlqBaseEdit.HandleLMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
-  fpgApplication.HideHint;
+  lqApplication.HideHint;
   inherited HandleLMouseDown(x, y, shiftstate);
 
   FCursorPx := x;
@@ -1025,7 +1025,7 @@ end;
 
 procedure TlqBaseEdit.HandleHide;
 begin
-  fpgCaret.UnSetCaret (Canvas);
+  lqCaret.UnSetCaret (Canvas);
   inherited;
 end;
 
@@ -1045,7 +1045,7 @@ end;
 constructor TlqBaseEdit.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FFont               := fpgGetFont('#Edit1');  // owned object !
+  FFont               := lqGetFont('#Edit1');  // owned object !
   Focusable           := True;
   FHeight             := 24;
   FWidth              := 120;
@@ -1112,7 +1112,7 @@ end;
 procedure TlqBaseEdit.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   if AutoSize then
   begin
     case BorderStyle of
@@ -1222,7 +1222,7 @@ var
 begin
   if ReadOnly then
     Exit;
-  s := fpgShowCharMap;
+  s := lqShowCharMap;
   if s <> '' then
     DoPaste(s);
 end;
@@ -1243,7 +1243,7 @@ begin
       else if itm.Name = ipmCopy then
         itm.Enabled := FSelOffset <> 0
       else if itm.Name = ipmPaste then
-        itm.Enabled := (not ReadOnly) and (fpgClipboard.Text <> '')
+        itm.Enabled := (not ReadOnly) and (lqClipboard.Text <> '')
       else if itm.Name = ipmClearAll then
         itm.Enabled := (not ReadOnly) and (Text <> '')
       else if itm.Name = ipmCharmap then
@@ -1268,7 +1268,7 @@ begin
   FAutoSize := AValue;
   if FAutoSize then
   begin
-    r := fpgStyle.GetControlFrameBorders;
+    r := lqStyle.GetControlFrameBorders;
     FHeight := FFont.Height + (FHeightMargin*2) + (r.Top+r.Bottom);
     UpdateWindowPosition;
   end;
@@ -1341,7 +1341,7 @@ procedure TlqBaseEdit.DoCopy;
 begin
   if FSelOffset = 0 then
     Exit; //==>
-  fpgClipboard.Text := SelectionText;
+  lqClipboard.Text := SelectionText;
 end;
 
 procedure TlqBaseEdit.DoPaste(const AText: TlqString);
@@ -1430,7 +1430,7 @@ end;
 
 procedure TlqBaseEdit.PasteFromClipboard;
 begin
-  DoPaste(fpgClipboard.Text);
+  DoPaste(lqClipboard.Text);
 end;
 
 { TlqBaseTextEdit }
@@ -1445,12 +1445,12 @@ begin
   if Enabled and (FVisibleText = '') and (not Focused) then
   begin
     Canvas.SetTextColor(clShadow1);
-    fpgStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FExtraHint, Enabled);
+    lqStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FExtraHint, Enabled);
   end
   else
   begin
     Canvas.SetTextColor(FTextColor);
-    fpgStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FVisibleText, Enabled);
+    lqStyle.DrawString(Canvas, -FDrawOffset + GetMarginAdjustment, r.Top + FHeightMargin, FVisibleText, Enabled);
   end;
 
   if Focused then
@@ -1459,14 +1459,14 @@ begin
     if FSelOffset <> 0 then
       DrawSelection;
     // drawing cursor
-    fpgCaret.SetCaret(Canvas, FCursorPx, r.Top + FHeightMargin, fpgCaret.Width, FFont.Height);
+    lqCaret.SetCaret(Canvas, FCursorPx, r.Top + FHeightMargin, lqCaret.Width, FFont.Height);
   end
   else
   begin
     // drawing selection
     if (AutoSelect = False) and (FSelOffset <> 0) and (HideSelection = False) then
       DrawSelection;
-    fpgCaret.UnSetCaret(Canvas);
+    lqCaret.UnSetCaret(Canvas);
   end;
 end;
 
@@ -1737,7 +1737,7 @@ begin
     else
     begin
       for i := 1 to UTF8Length(txt) do
-        if fpgCharAt(txt, i) = FThousandSeparator then
+        if lqCharAt(txt, i) = FThousandSeparator then
         begin
           txt:= UTF8Copy(txt, 1, i - 1) + UTF8Copy(txt, i + 1, long - i);
           dec(long);
@@ -1746,7 +1746,7 @@ begin
       texte := '';
       repeat
         if i > 0 then
-          if ((i mod 3) = 0) and (fpgCharAt(txt,UTF8Length(txt)-UTF8Length(texte)) <> FThousandSeparator) then
+          if ((i mod 3) = 0) and (lqCharAt(txt,UTF8Length(txt)-UTF8Length(texte)) <> FThousandSeparator) then
           begin
             texte := FThousandSeparator + texte;
             if fText[1] = '-' then
@@ -1823,7 +1823,7 @@ begin
     Canvas.SetFont(Font);
     Canvas.SetTextColor(TextColor);
     x := r.Width - Font.TextWidth(Text) - FSideMargin;
-    fpgStyle.DrawString(Canvas, x, r.Top + FHeightMargin, Text, Enabled);
+    lqStyle.DrawString(Canvas, x, r.Top + FHeightMargin, Text, Enabled);
 
     if Focused then
     begin
@@ -1831,14 +1831,14 @@ begin
       if FSelOffset <> 0 then
         DrawSelection;
       // drawing cursor
-      fpgCaret.SetCaret(Canvas, FCursorPx, r.Top + FHeightMargin, fpgCaret.Width, FFont.Height);
+      lqCaret.SetCaret(Canvas, FCursorPx, r.Top + FHeightMargin, lqCaret.Width, FFont.Height);
     end
     else
     begin
       // drawing selection
       if (AutoSelect = False) and (FSelOffset <> 0) and (HideSelection = False) then
         DrawSelection;
-      fpgCaret.UnSetCaret(Canvas);
+      lqCaret.UnSetCaret(Canvas);
     end;
   end;
 end;

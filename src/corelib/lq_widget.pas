@@ -68,21 +68,21 @@ type
     procedure   SetFormDesigner(const AValue: TObject);
     procedure   SetAlign(const AValue: TAlign);
   protected
-    procedure   MsgPaint(var msg: TlqMessageRec); message FPGM_PAINT;
-    procedure   MsgResize(var msg: TlqMessageRec); message FPGM_RESIZE;
-    procedure   MsgMove(var msg: TlqMessageRec); message FPGM_MOVE;
-    procedure   MsgKeyChar(var msg: TlqMessageRec); message FPGM_KEYCHAR;
-    procedure   MsgKeyPress(var msg: TlqMessageRec); message FPGM_KEYPRESS;
-    procedure   MsgKeyRelease(var msg: TlqMessageRec); message FPGM_KEYRELEASE;
-    procedure   MsgMouseDown(var msg: TlqMessageRec); message FPGM_MOUSEDOWN;
-    procedure   MsgMouseUp(var msg: TlqMessageRec); message FPGM_MOUSEUP;
-    procedure   MsgMouseMove(var msg: TlqMessageRec); message FPGM_MOUSEMOVE;
-    procedure   MsgDoubleClick(var msg: TlqMessageRec); message FPGM_DOUBLECLICK;
-    procedure   MsgMouseEnter(var msg: TlqMessageRec); message FPGM_MOUSEENTER;
-    procedure   MsgMouseExit(var msg: TlqMessageRec); message FPGM_MOUSEEXIT;
-    procedure   MsgMouseScroll(var msg: TlqMessageRec); message FPGM_SCROLL;
-    procedure   MsgDropEnter(var msg: TlqMessageRec); message FPGM_DROPENTER;
-    procedure   MsgDropExit(var msg: TlqMessageRec); message FPGM_DROPEXIT;
+    procedure   MsgPaint(var msg: TlqMessageRec); message LQM_PAINT;
+    procedure   MsgResize(var msg: TlqMessageRec); message LQM_RESIZE;
+    procedure   MsgMove(var msg: TlqMessageRec); message LQM_MOVE;
+    procedure   MsgKeyChar(var msg: TlqMessageRec); message LQM_KEYCHAR;
+    procedure   MsgKeyPress(var msg: TlqMessageRec); message LQM_KEYPRESS;
+    procedure   MsgKeyRelease(var msg: TlqMessageRec); message LQM_KEYRELEASE;
+    procedure   MsgMouseDown(var msg: TlqMessageRec); message LQM_MOUSEDOWN;
+    procedure   MsgMouseUp(var msg: TlqMessageRec); message LQM_MOUSEUP;
+    procedure   MsgMouseMove(var msg: TlqMessageRec); message LQM_MOUSEMOVE;
+    procedure   MsgDoubleClick(var msg: TlqMessageRec); message LQM_DOUBLECLICK;
+    procedure   MsgMouseEnter(var msg: TlqMessageRec); message LQM_MOUSEENTER;
+    procedure   MsgMouseExit(var msg: TlqMessageRec); message LQM_MOUSEEXIT;
+    procedure   MsgMouseScroll(var msg: TlqMessageRec); message LQM_SCROLL;
+    procedure   MsgDropEnter(var msg: TlqMessageRec); message LQM_DROPENTER;
+    procedure   MsgDropExit(var msg: TlqMessageRec); message LQM_DROPEXIT;
   protected
     FFormDesigner: TObject;
     FVisible: boolean;
@@ -438,20 +438,20 @@ begin
     htKeyword:
       if HelpKeyword <> '' then
       begin
-        fpgApplication.KeywordHelp(HelpKeyword);
+        lqApplication.KeywordHelp(HelpKeyword);
         Exit; //==>
       end;
     htContext:
       if HelpContext <> 0 then
       begin
-        fpgApplication.ContextHelp(HelpContext);
+        lqApplication.ContextHelp(HelpContext);
         Exit; //==>
       end;
   end;
   if Parent <> nil then
     Parent.InvokeHelp
   else
-    fpgApplication.InvokeHelp;
+    lqApplication.InvokeHelp;
 end;
 
 procedure TlqWidget.Realign;
@@ -620,14 +620,14 @@ begin
     begin
       { only do this if the top-level form is not Modal }
       if (wg is TlqForm) and (TlqForm(wg).WindowType <> wtModalForm) then
-        if wg <> fpgApplication.MainForm then
-          TlqFormFriend(fpgApplication.MainForm).DoKeyShortcut(self, key, ss, consumed);
+        if wg <> lqApplication.MainForm then
+          TlqFormFriend(lqApplication.MainForm).DoKeyShortcut(self, key, ss, consumed);
     end;
   end;
 
-  { now finaly, lets give fpgApplication a chance }
-  if (not consumed) and Assigned(fpgApplication.OnKeyPress) then
-    fpgApplication.OnKeyPress(self, key, ss, consumed);
+  { now finaly, lets give lqApplication a chance }
+  if (not consumed) and Assigned(lqApplication.OnKeyPress) then
+    lqApplication.OnKeyPress(self, key, ss, consumed);
 end;
 
 procedure TlqWidget.MsgKeyRelease(var msg: TlqMessageRec);
@@ -725,7 +725,7 @@ begin
         FOnClickPending := True;
         mb := mbLeft;
         if (uLastClickWidget = self) and (not FIgnoreDblClicks) then
-          IsDblClick := ((fpgGetTickCount - uLastClickTime) <= DOUBLECLICK_MS)
+          IsDblClick := ((lqGetTickCount - uLastClickTime) <= DOUBLECLICK_MS)
             and (Abs(uLastClickPoint.x - msg.Params.mouse.x) <= DOUBLECLICK_DISTANCE)
             and (Abs(uLastClickPoint.y - msg.Params.mouse.y) <= DOUBLECLICK_DISTANCE)
           // we detected a double click
@@ -733,7 +733,7 @@ begin
           uLastClickWidget := self;
 
         uLastClickPoint := Point(msg.Params.mouse.x, msg.Params.mouse.y);
-        uLastClickTime := fpgGetTickCount;
+        uLastClickTime := lqGetTickCount;
         if IsDblClick then
         begin
           FOnClickPending := False; { When Double Click occurs we don't want single click }
@@ -777,7 +777,7 @@ begin
 
   if ((msg.Params.mouse.Buttons and MOUSE_LEFT) = MOUSE_LEFT) and (self = uMouseDownSourceWidget) then
   begin
-    if not FDragActive and (FDragStartPos.ManhattanLength(fpgPoint(msg.Params.mouse.x, msg.Params.mouse.y)) > fpgApplication.StartDragDistance) then
+    if not FDragActive and (FDragStartPos.ManhattanLength(lqPoint(msg.Params.mouse.x, msg.Params.mouse.y)) > lqApplication.StartDragDistance) then
     begin
       FDragActive := True;
       // In Windows dragging is a blocking function, so FDragActive is false after this call
@@ -923,7 +923,7 @@ end;
 procedure TlqWidget.RePaint;
 begin
   if HasHandle then
-    fpgSendMessage(self, self, FPGM_PAINT);
+    lqSendMessage(self, self, LQM_PAINT);
 end;
 
 procedure TlqWidget.SetFocus;
@@ -960,7 +960,7 @@ begin
 
   dir := 0;
 
-  if not consumed and (keycode = fpgApplication.HelpKey) and (shiftstate=[]) then
+  if not consumed and (keycode = lqApplication.HelpKey) and (shiftstate=[]) then
   begin
     InvokeHelp;
     consumed := True;
@@ -1085,7 +1085,7 @@ var
   w: TlqWidget;
 begin
   if FShowHint then
-    fpgApplication.HideHint;
+    lqApplication.HideHint;
 
   // setting the focus through all parents
   pw := Parent;
@@ -1102,7 +1102,7 @@ end;
 procedure TlqWidget.HandleRMouseDown(x, y: integer; shiftstate: TShiftState);
 begin
   if FShowHint then
-    fpgApplication.HideHint;
+    lqApplication.HideHint;
   // keyMenu was pressed
   if shiftstate = [ssExtra1] then
     HandleRMouseUp(x, y, []);
@@ -1137,13 +1137,13 @@ begin
   { Only send message if really needed. }
   if Assigned(Parent) then
   begin
-    if fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.ShowHint)) and (FHint <> '') then
-      fpgPostMessage(Self, fpgApplication, FPGM_HINTTIMER, msgp);
+    if lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.ShowHint)) and (FHint <> '') then
+      lqPostMessage(Self, lqApplication, LQM_HINTTIMER, msgp);
   end
   else
   begin
-    if fpgApplication.ShowHint and FShowHint and (FHint <> '') then
-      fpgPostMessage(Self, fpgApplication, FPGM_HINTTIMER, msgp);
+    if lqApplication.ShowHint and FShowHint and (FHint <> '') then
+      lqPostMessage(Self, lqApplication, LQM_HINTTIMER, msgp);
   end;
 end;
 
@@ -1166,12 +1166,12 @@ begin
   fillchar(msgp, sizeof(msgp), 0);
 
   if Assigned(Parent) then
-    b := Enabled and fpgApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.ShowHint)) and (FHint <> '')
+    b := Enabled and lqApplication.ShowHint and (FShowHint or (FParentShowHint and Parent.ShowHint)) and (FHint <> '')
   else
-    b := Enabled and fpgApplication.ShowHint and FShowHint and (FHint <> '');
+    b := Enabled and lqApplication.ShowHint and FShowHint and (FHint <> '');
 
   msgp.user.Param1 := Ord(b);
-  fpgPostMessage(Self, fpgApplication, FPGM_HINTTIMER, msgp);
+  lqPostMessage(Self, lqApplication, LQM_HINTTIMER, msgp);
 end;
 
 procedure TlqWidget.HandleMouseExit;
@@ -1180,7 +1180,7 @@ begin
   writeln('TlqWidget.HandleMouseExit: ' + ClassName);
   {$ENDIF}
   if FShowHint then
-    fpgApplication.HideHint;
+    lqApplication.HideHint;
 end;
 
 procedure TlqWidget.HandleMouseScroll(x, y: integer; shiftstate: TShiftState; delta: smallint);

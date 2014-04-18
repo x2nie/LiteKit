@@ -116,12 +116,12 @@ Const
 
 procedure InitializeCustomImages;
 begin
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
       'usr.state0',
       @usr_state0,
       sizeof(usr_state0), 0,0);
 
-  fpgImages.AddMaskedBMP(
+  lqImages.AddMaskedBMP(
       'usr.state1',
       @usr_state1,
       sizeof(usr_state1), 0,0);

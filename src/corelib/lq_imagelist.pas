@@ -157,7 +157,7 @@ begin
   writeln('TlqImageList.AddItemFromFile');
   {$ENDIF}
   
-  if not fpgFileExists(AFileName) then
+  if not lqFileExists(AFileName) then
     Exit; //==>
   
   AImageItem := TlqImageItem.Create;

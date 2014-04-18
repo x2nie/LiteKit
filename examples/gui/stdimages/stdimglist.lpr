@@ -54,7 +54,7 @@ begin
   sl  := TStringList.Create;
   x   := 8;
   y   := 8;
-  fpgImages.ListImages(sl);
+  lqImages.ListImages(sl);
   
   for n := 0 to sl.Count-1 do
   begin
@@ -80,10 +80,10 @@ procedure MainProc;
 var
   frm : TMainForm;
 begin
-  fpgApplication.Initialize;
+  lqApplication.Initialize;
   frm := TMainForm.Create(nil);
   frm.Show;
-  fpgApplication.Run;
+  lqApplication.Run;
   frm.Free;
 end;
 

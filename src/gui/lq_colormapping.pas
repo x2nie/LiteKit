@@ -47,7 +47,7 @@ var
   d:   longint;
   rgb: TFPColor;
 begin
-  rgb   := fpgColorToFPColor(C);
+  rgb   := lqColorToFPColor(C);
   r     := rgb.Red;
   g     := rgb.Green;
   b     := rgb.Blue;

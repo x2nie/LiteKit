@@ -875,7 +875,7 @@ end;
 procedure TlqTreeview.SetFontDesc(const AValue: string);
 begin
   FFont.Free;
-  FFont := fpgGetFont(AValue);
+  FFont := lqGetFont(AValue);
   RePaint;
 end;
 
@@ -2180,7 +2180,7 @@ begin
   FShowColumns  := False;
   FDefaultColumnWidth := 15;
   FFirstColumn  := nil;
-  FFont := fpgGetFont('#Label1');
+  FFont := lqGetFont('#Label1');
   Width := 150;
   Height := 100;
   FUpdateCount := 0;

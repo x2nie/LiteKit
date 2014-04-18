@@ -440,7 +440,7 @@ type
 
   TlqWindowBase = class(TlqComponent)
   private
-    FParent: TlqWindowBase;
+    //FParent: TlqWindowBase;
     procedure   SetMouseCursor(const AValue: TMouseCursor);
     function    ConstraintWidth(NewWidth: TlqCoord): TlqCoord;
     function    ConstraintHeight(NewHeight: TlqCoord): TlqCoord;
@@ -482,10 +482,10 @@ type
     function    GetWindowState: TlqWindowState; virtual;
     procedure   SetWindowState(const AValue: TlqWindowState); virtual;
     procedure   DoDragStartDetected; virtual;
-    procedure   SetParent(const AValue: TlqWindowBase); virtual;
-    function    GetParent: TlqWindowBase; virtual;
+    //procedure   SetParent(const AValue: TlqWindowBase); virtual;
+    //function    GetParent: TlqWindowBase; virtual;
     function    GetCanvas: TlqCanvasBase; virtual;
-    procedure   AllocateWindowHandle;
+    procedure   AllocateWindowHandle; virtual; abstract;
     procedure   ReleaseWindowHandle;
     procedure   SetWindowTitle(const ATitle: string); virtual;
     procedure   SetTop(const AValue: TlqCoord);
@@ -510,7 +510,7 @@ type
     procedure   UpdateWindowPosition;
     procedure   MoveWindow(const x: TlqCoord; const y: TlqCoord);
     function    WindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint;
-    function    HasParent: Boolean; override;
+    //function    HasParent: Boolean; override;
     function    GetClientRect: TlqRect; virtual;
     function    GetBoundsRect: TlqRect; virtual;
     procedure   ActivateWindow; virtual; abstract;
@@ -530,7 +530,7 @@ type
     property    MaxWidth: TlqCoord read FMaxWidth write FMaxWidth default 0;
     property    MaxHeight: TlqCoord read FMaxHeight write FMaxHeight default 0;
     property    Canvas: TlqCanvasBase read GetCanvas;
-    property    Parent: TlqWindowBase read GetParent write SetParent;
+    //property    Parent: TlqWindowBase read GetParent write SetParent;
     property    MouseCursor: TMouseCursor read FMouseCursor write SetMouseCursor;
   end;
 
@@ -1268,7 +1268,7 @@ begin
     FOnDragStartDetected(self);
 end;
 
-procedure TlqWindowBase.SetParent(const AValue: TlqWindowBase);
+{procedure TlqWindowBase.SetParent(const AValue: TlqWindowBase);
 begin
   FParent := AValue;
 end;
@@ -1276,19 +1276,20 @@ end;
 function TlqWindowBase.GetParent: TlqWindowBase;
 begin
   result := FParent;
-end;
+end;}
 
 function TlqWindowBase.GetCanvas: TlqCanvasBase;
 begin
   Result := FCanvas;
 end;
 
+{//FIXME: Move it to lq_main
 procedure TlqWindowBase.AllocateWindowHandle;
 begin
   DoAllocateWindowHandle(FParent);
   if FMouseCursorIsDirty then
     DoSetMouseCursor;
-end;
+end; }
 
 procedure TlqWindowBase.ReleaseWindowHandle;
 begin
@@ -1429,11 +1430,6 @@ end;
 function TlqWindowBase.WindowToScreen(ASource: TlqWindowBase; const AScreenPos: TPoint): TPoint;
 begin
   Result := DoWindowToScreen(ASource, AScreenPos);
-end;
-
-function TlqWindowBase.HasParent: Boolean;
-begin
-  Result := FParent <> nil;
 end;
 
 function TlqWindowBase.GetClientRect: TlqRect;

@@ -694,7 +694,8 @@ end;
 function lqWindowProc(hwnd: HWND; uMsg: UINT; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
 var
   w: TlqGDIWindow;
-  pw: TlqGDIWindow;
+  //pw: TlqGDIWindow;
+  pw : TlqWidget;
   kwg: TlqWidget;
   mw: TlqGDIWindow;
   kcode: integer;
@@ -920,9 +921,9 @@ begin
               ClientToScreen(w.WinHandle, pt);
               h     := WindowFromPoint(pt);
               mw    := GetMyWidgetFromHandle(h);
-              pw    := mw;
+              pw    := TlqWidget(mw);
               while (pw <> nil) and (pw.Parent <> nil) do
-                pw := TlqGDIWindow(pw.Parent);
+                pw := TlqWidget(pw.Parent);
 
               if ((pw = nil) or (PopupListFind(pw.WinHandle) = nil)) and
                  (not PopupDontCloseWidget(TlqWidget(mw))) and

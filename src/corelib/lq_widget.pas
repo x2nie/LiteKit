@@ -39,6 +39,8 @@ type
   TlqDragDropEvent = procedure(Sender, Source: TObject; X, Y: integer; AData: variant) of object;
 
 
+  { TlqWidget }
+
   TlqWidget = class(TlqWindow)
   private
     FAcceptDrops: boolean;
@@ -63,6 +65,7 @@ type
     FOnShowHint: THintEvent;
     FDragStartPos: TlqPoint;
     alist: TList;
+    function    GetChildrenWidget(Index: integer): TlqWidget;
     procedure   SetActiveWidget(const AValue: TlqWidget);
     function    IsShowHintStored: boolean;
     procedure   SetFormDesigner(const AValue: TObject);
@@ -101,13 +104,16 @@ type
     FIsContainer: Boolean;
     FOnClickPending: Boolean;
     FIgnoreDblClicks: Boolean;
+    FParent: TlqWidget;
+
+    procedure   AllocateWindowHandle; override;    
     procedure   SetAcceptDrops(const AValue: boolean); virtual;
     function    GetOnShowHint: THintEvent; virtual;
     procedure   SetOnShowHint(const AValue: THintEvent); virtual;
     procedure   SetBackgroundColor(const AValue: TlqColor); virtual;
     procedure   SetTextColor(const AValue: TlqColor); virtual;
-    function    GetParent: TlqWidget; reintroduce;
-    procedure   SetParent(const AValue: TlqWidget); reintroduce;
+    //function    GetParent: TlqWidget; reintroduce;
+    procedure   SetParent(const AValue: TlqWidget); virtual;
     procedure   SetEnabled(const AValue: boolean); virtual;
     procedure   SetVisible(const AValue: boolean); virtual;
     procedure   SetShowHint(const AValue: boolean); virtual;
@@ -140,7 +146,6 @@ type
     procedure   InternalHandleShow; virtual;
     procedure   HandleHide; virtual;
     procedure   MoveAndResize(ALeft, ATop, AWidth, AHeight: TlqCoord);
-    procedure   RePaint; virtual;
     { property events }
     property    OnClick: TNotifyEvent read FOnClick write FOnClick;
     property    OnDoubleClick: TMouseButtonEvent read FOnDoubleClick write FOnDoubleClick;
@@ -156,11 +161,25 @@ type
     property    OnPaint: TPaintEvent read FOnPaint write FOnPaint;
     property    OnResize: TNotifyEvent read FOnResize write FOnResize;
     property    OnShowHint: THintEvent read GetOnShowHint write SetOnShowHint;
+  protected
+    {requires by IDE}
+    FChilds: TList; // list of Widget
+    procedure   SetParentComponent(Value: TComponent); override;
+    procedure   GetChildren(Proc: TGetChildProc; Root: TComponent); override;
+  public
+    {requires by IDE}
+    function    ChildrenCount: integer;
+
+    function    HasParent: Boolean; override;
+    function    GetParentComponent: TComponent; override;
+    property    Children[Index: integer]: TlqWidget read GetChildrenWidget; //GetChildren has been reserved
+    property    Parent: TlqWidget read FParent write SetParent;           
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
     procedure   AfterConstruction; override;
     function    InDesigner: boolean;
+    procedure   RePaint; virtual;
     procedure   InvokeHelp; virtual;
     procedure   Realign;
     procedure   SetFocus;
@@ -169,7 +188,7 @@ type
     procedure   SetPosition(aleft, atop, awidth, aheight: TlqCoord); virtual;
     procedure   Invalidate; // double check this works as developers expect????
     property    FormDesigner: TObject read FFormDesigner write SetFormDesigner;
-    property    Parent: TlqWidget read GetParent write SetParent;
+
     property    AcceptDrops: boolean read FAcceptDrops write SetAcceptDrops default False;
     property    ActiveWidget: TlqWidget read FActiveWidget write SetActiveWidget;
     property    IsContainer: Boolean read FIsContainer;
@@ -293,6 +312,11 @@ begin
   FActiveWidget := AValue;
   if FActiveWidget <> nil then
     FActiveWidget.HandleSetFocus;
+end;
+
+function TlqWidget.GetChildrenWidget(Index: integer): TlqWidget;
+begin
+  Result:=TlqWidget(FChilds[Index]);
 end;
 
 procedure TlqWidget.SetAcceptDrops(const AValue: boolean);
@@ -460,14 +484,24 @@ begin
   RePaint;
 end;
 
-function TlqWidget.GetParent: TlqWidget;
+{function TlqWidget.GetParent: TlqWidget;
 begin
   Result := TlqWidget(inherited GetParent);
-end;
+end;}
+
 
 procedure TlqWidget.SetParent(const AValue: TlqWidget);
 begin
-  inherited SetParent(AValue);
+if FParent=AValue then exit;
+  if FParent<>nil then begin
+    Invalidate;
+    FParent.FChilds.Remove(Self);
+  end;
+  FParent:=AValue;
+  if FParent<>nil then begin
+    FParent.FChilds.Add(Self);
+  end;
+  Invalidate;
 end;
 
 constructor TlqWidget.Create(AOwner: TComponent);
@@ -1424,6 +1458,16 @@ begin
   UpdateWindowPosition;
 end;
 
+function TlqWidget.ChildrenCount: integer;
+begin
+  Result:=FChilds.Count;
+end;
+
+function TlqWidget.GetParentComponent: TComponent;
+begin
+  Result:=inherited GetParentComponent;
+end;
+
 procedure TlqWidget.MoveAndResizeBy(const dx, dy, dw, dh: TlqCoord);
 begin
   if (dx <> 0) or (dy <> 0) or
@@ -1540,6 +1584,69 @@ begin
   RePaint;
 end;
 
+
+function TlqWidget.HasParent: Boolean;
+begin
+  Result:=Parent<>nil;
+end;
+
+procedure TlqWidget.GetChildren(Proc: TGetChildProc; Root: TComponent);
+var
+  i: Integer;
+  OwnedComponent: TComponent;
+begin
+  {for i := 0 to ComponentCount-1 do
+  begin
+    if Components[i].Owner=Root then
+      Proc(Components[i]);
+  end;}
+  //inherited GetChildren(Proc, Root);
+  {if Root = Self then begin
+    for I := 0 to ComponentCount - 1 do
+    begin
+      OwnedComponent := Components[I];
+      if not OwnedComponent.HasParent then Proc(OwnedComponent);
+    end;
+  end;}
+  {for I := 0 to ControlCount - 1 do
+  begin
+    Control := Controls[I];
+    if Control.Owner = Root then Proc(Control);
+  end;]}
+  for i:=0 to ChildrenCount-1 do
+      if Children[i].Owner=Root then
+        Proc(Children[i]);
+
+  if Root = Self then
+    for I := 0 to ComponentCount - 1 do
+    begin
+      OwnedComponent := Components[I];
+      if not OwnedComponent.HasParent then Proc(OwnedComponent);
+    end;
+  {
+  if self is TMyForm then
+  begin
+    for i := 0 to ComponentCount-1 do
+        if not (Components[i] is TpgfWidget) then
+           Proc(Components[i])
+  end}
+
+end;
+
+
+procedure TlqWidget.SetParentComponent(Value: TComponent);
+begin
+  if Value is TlqWidget then
+    Parent:=TlqWidget(Value);
+end;
+
+procedure TlqWidget.AllocateWindowHandle;
+//moved here because FParent is introduced here
+begin
+  DoAllocateWindowHandle(FParent);
+  if FMouseCursorIsDirty then
+    DoSetMouseCursor;
+end;
 
 initialization
   FocusRootWidget := nil;

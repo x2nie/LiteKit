@@ -37,6 +37,10 @@ uses
   lq_impl;
 
 type
+  //TRANSFER TYPE
+  TlqComponent = lq_base.TlqComponent;
+
+type
   TOrientation = (orVertical, orHorizontal);
 
   TAlign = (alNone, alTop, alBottom, alLeft, alRight, alClient);
@@ -126,14 +130,14 @@ type
 
   TlqWindow = class(TlqWindowImpl)
   protected
-    procedure   SetParent(const AValue: TlqWindow); reintroduce;
-    function    GetParent: TlqWindow; reintroduce;
+    //procedure   SetParent(const AValue: TlqWindow); reintroduce;
+    //function    GetParent: TlqWindow; reintroduce;
     function    GetCanvas: TlqCanvas; reintroduce;
     function    CreateCanvas: TlqCanvasBase; virtual;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
-    property    Parent: TlqWindow read GetParent write SetParent;
+    //property    Parent: TlqWindow read GetParent write SetParent;
     property    Canvas: TlqCanvas read GetCanvas;
     property    WinHandle;  // surface this property from TlqXXXImpl class in it's native format
   end;
@@ -1942,7 +1946,7 @@ begin
   inherited Destroy;
 end;
 
-procedure TlqWindow.SetParent(const AValue: TlqWindow);
+{procedure TlqWindow.SetParent(const AValue: TlqWindow);
 begin
   inherited SetParent(AValue);
 end;
@@ -1950,7 +1954,7 @@ end;
 function TlqWindow.GetParent: TlqWindow;
 begin
   result := TlqWindow(inherited GetParent);
-end;
+end;}
 
 function TlqWindow.GetCanvas: TlqCanvas;
 begin

@@ -361,14 +361,17 @@ var
   lqCaret:  TlqCaret;   { TODO -ograemeg : move this into lqApplication }
   lqImages: TlqImages;  { TODO -ograemeg : move this into lqApplication }
 
+  LQHIDEALLWINDOW : Boolean = False;
   DefaultCanvasClass: TlqCanvasBaseClass = nil;
 
 // Application & Clipboard singletons
 function  lqApplication: TlqApplication;
 function  lqClipboard: TlqClipboard;
 
+
 // Fonts (easy access function)
 function  lqGetFont(const afontdesc: TlqString): TlqFont;
+procedure lqFontDescValues(Proc: TGetStrProc);
 
 // Message Queue  (easy access function)
 procedure lqWaitWindowMessage;
@@ -1218,6 +1221,14 @@ end;
 function lqGetFont(const afontdesc: TlqString): TlqFont;
 begin
   Result := lqApplication.GetFont(afontdesc);
+end;
+
+procedure lqFontDescValues(Proc: TGetStrProc);
+var
+  I: Integer;
+begin
+  for I := 0 to lqNamedFonts.Count-1 do
+      Proc('#'+TNamedFontItem(lqNamedFonts[I]).FontID);
 end;
 
 constructor TlqApplication.Create(const AParams: string);

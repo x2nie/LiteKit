@@ -526,6 +526,7 @@ begin
   FAcceptDrops    := False;
   FOnClickPending := False;
   FIgnoreDblClicks := False;
+  FParent         := nil;
 
   inherited Create(AOwner);
 
@@ -542,6 +543,7 @@ begin
     FWindowType := wtChild;
     FShowHint   := Parent.ShowHint;
   end;
+  FChilds:=TList.Create;
 end;
 
 destructor TlqWidget.Destroy;
@@ -956,7 +958,7 @@ end;
 
 procedure TlqWidget.RePaint;
 begin
-  if HasHandle then
+  if HasHandle or LQU_PREVENTWND then
     lqSendMessage(self, self, LQM_PAINT);
 end;
 

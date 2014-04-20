@@ -110,12 +110,15 @@ type
   
   TlqForm = class(TlqBaseForm)
   published
+    property    Left;
+    property    Top;
+    property    Width;
+    property    Height;
+
     property    BackgroundColor;
     property    DNDEnabled;
     property    FullScreen;
-    property    Height;
     property    Hint;
-    property    Left;
     property    MaxHeight;
     property    MaxWidth;
     property    MinHeight;
@@ -124,8 +127,7 @@ type
     property    ShowHint;
     property    Sizeable;
     property    TextColor;
-    property    Top;
-    property    Width;
+
     property    WindowPosition;
     property    WindowState;
     property    WindowTitle;
@@ -246,6 +248,9 @@ procedure TlqBaseForm.HandlePaint;
 begin
   inherited HandlePaint;
   Canvas.Clear(FBackgroundColor);
+  Canvas.Color := clBisque;
+    //Canvas.Brush.Style:= bsDiagCross;
+    Canvas.FillRectangle(0,0,width,height);
 end;
 
 procedure TlqBaseForm.AdjustWindowStyle;
@@ -300,6 +305,8 @@ begin
   FFullScreen      := False;
   FIsContainer     := True;
   FDNDEnabled      := False;
+  FWidth := 320;
+  FHeight := 240;
 end;
 
 destructor TlqBaseForm.Destroy;

@@ -21,14 +21,8 @@ uses
   lq_imgutils, lq_stylemanager, lq_style_win2k, lq_style_motif, 
   lq_style_clearlooks, lq_style_bluecurve, lq_style_bitmap, lq_readonly, 
   lq_imgfmt_png, U_Command, U_Pdf, U_Report, U_ReportImages, U_Visu, 
-  lq_trayicon, Agg2D, LazarusPackageIntf;
+  lq_trayicon, Agg2D;
 
 implementation
 
-procedure Register;
-begin
-end;
-
-initialization
-  RegisterPackage('Laz_lq_runtime', @Register);
 end.

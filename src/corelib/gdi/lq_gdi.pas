@@ -1326,7 +1326,8 @@ begin
 
   FIsInitialized := True;
   wapplication   := TlqApplication(self);
-  WakeMainThread := @DoWakeMainThread;
+  if not LQU_PREVENTWND then
+     WakeMainThread := @DoWakeMainThread;
 end;
 
 destructor TlqGDIApplication.Destroy;
@@ -1635,6 +1636,9 @@ end;
 
 procedure TlqGDIWindow.WindowSetFullscreen(aFullScreen, aUpdate: boolean);
 begin
+  if LQU_PREVENTWND then
+    Exit; //temporary. move it to lqmain
+    
   if aFullScreen = FFullscreenIsSet then
     Exit; //==>
   if aFullScreen then
@@ -1904,6 +1908,8 @@ end;
 
 procedure TlqGDIWindow.DoMoveWindow(const x: TlqCoord; const y: TlqCoord);
 begin
+  if LQU_PREVENTWND then
+    Exit; //temporary. move it to lqmain
   if HandleIsValid then
     Windows.SetWindowPos(
       WinHandle, HWND_TOP,
@@ -2063,6 +2069,8 @@ end;
 
 procedure TlqGDIWindow.ActivateWindow;
 begin
+  if LQU_PREVENTWND then
+    Exit; //temporary. move it to lqmain
     Windows.SetWindowPos(
       WinHandle, HWND_NOTOPMOST,
       FLeft, FTop, FWidth, FHeight,
@@ -2090,6 +2098,8 @@ end;
 
 procedure TlqGDIWindow.BringToFront;
 begin
+  if LQU_PREVENTWND then
+    Exit; //temporary. move it to lqmain
   if HasHandle then
     Windows.SetWindowPos(
       WinHandle, HWND_TOP,
@@ -2106,6 +2116,8 @@ procedure TlqGDIWindow.DoUpdateWindowPosition;
 var
   bx, by: integer;
 begin
+  if LQU_PREVENTWND then
+    Exit; //temporary. move it to lqmain
   if HasHandle then
   begin
     FSkipResizeMessage := True;

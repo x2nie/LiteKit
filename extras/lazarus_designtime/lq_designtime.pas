@@ -7,7 +7,7 @@ unit lq_designtime;
 interface
 
 uses
-  lq_descriptors, lq_designer, LazarusPackageIntf;
+  lq_descriptors, lq_designer, lq_canvas_designer, LazarusPackageIntf;
 
 implementation
 

@@ -48,8 +48,8 @@ implementation
 uses Controls, PropEdits, lq_propedits,
   lq_button,lq_progressbar, lq_trackbar, lq_edit, lq_memo,
   lq_listbox, //lq_combobox,
-  lq_menu
-
+  lq_menu,
+  lq_canvas_designer
   ;
 
 procedure Register;
@@ -59,7 +59,7 @@ begin
   TlpProgressbar, TlpTrackbar, //TlpCombobox
   TlpMenuBar, TlpPopupMenu
   ]); *)
-  RegisterComponents('Standard',[TlqButton]);
+  RegisterComponents('Standard',[TlqButton,TlqMenuBar, TlqPopupMenu]);
 
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Caption', TStringMultilinePropertyEditor);
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Text', TStringMultilinePropertyEditor);
@@ -85,7 +85,14 @@ var
   Mediator: TlqMediator;
 begin
   ///pgfOpenDisplay('');
+  //lqApplication.Initialize;
   //pgfDesigning := true;
+  //lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
+  //LQU_PREVENTWND := true;
+  lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
+  LQU_PREVENTWND := true;
+  lqApplication.Initialize;
+
 
   Result:=inherited CreateMediator(TheOwner, aForm);
   Mediator:=TlqMediator(Result);
@@ -178,7 +185,7 @@ var Bmp : TBitmap;
       // caption
       TextOut(5,2,AWidget.Caption);}
 
-      AWidget.Canvas.BeginDraw;
+      //AWidget.Canvas.BeginDraw;
       //TlqWidgetAccess(AWidget).HandlePaint;
       //fillchar(msgp,sizeof(msgp),0);
       //pgfSendMessage(self, AWidget, PGFM_PAINT, msgp);
@@ -200,8 +207,9 @@ var Bmp : TBitmap;
       bmp.SaveToFile('c:\'+AWidget.Name+'.bmp' );
       bmp.Free;}
 ///      AWidget.Canvas.PaintTo({LCLForm.Canvas.}Handle, 0,0, AWidget.Width, AWidget.Height);
+      ////Bmp.Canvas.Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
 
-      AWidget.Canvas.EndDraw;
+      //AWidget.Canvas.EndDraw;
 
       //if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
       //self.GetClientArea(Awidget, r, p );
@@ -247,9 +255,9 @@ begin
   Bmp := TBitmap.Create;
   Bmp.SetSize(LCLForm.Width, LCLForm.Height);
   //Bmp.BeginUpdate;
-  FlpForm.show();//allocate windowhandle
+  //FlpForm.show();//allocate windowhandle
   PaintWidget(FlpForm);
-  FlpForm.Hide();
+  //FlpForm.Hide();
 
   //Bmp.EndUpdate;
   LCLForm.Canvas.Draw(0,0,Bmp);
@@ -316,9 +324,11 @@ end;
 
 constructor TlqMediator.Create(AOwner: TComponent);
 begin
-  lqApplication.Initialize;
+
   //pgfOpenDisplay('');
-  LQHIDEALLWINDOW := true;
+  lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
+  LQU_PREVENTWND := true;
+  lqApplication.Initialize;  
   inherited Create(AOwner);
 end;
 

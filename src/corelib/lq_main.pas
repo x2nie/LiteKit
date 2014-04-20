@@ -134,6 +134,11 @@ type
     //function    GetParent: TlqWindow; reintroduce;
     function    GetCanvas: TlqCanvas; reintroduce;
     function    CreateCanvas: TlqCanvasBase; virtual;
+
+    // designer
+    procedure   DoUpdateWindowPosition; override;
+    procedure   DoAllocateWindowHandle(AParent: TlqWindowBase); override;
+    //procedure   DoReleaseWindowHandle; override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -361,7 +366,8 @@ var
   lqCaret:  TlqCaret;   { TODO -ograemeg : move this into lqApplication }
   lqImages: TlqImages;  { TODO -ograemeg : move this into lqApplication }
 
-  LQHIDEALLWINDOW : Boolean = False;
+  //LQHIDEALLWINDOW : Boolean = False;
+  LQU_PREVENTWND  : Boolean = False;    //whether AllocateWinHandle required. True = all done by Designer
   DefaultCanvasClass: TlqCanvasBaseClass = nil;
 
 // Application & Clipboard singletons
@@ -1268,9 +1274,12 @@ begin
     FHintWindow.Free;
     FHintWindow := nil;
   end;
+  if Assigned(FHintTimer) then
+  begin
   FHintTimer.Enabled := False;
   FHintTimer.OnTimer := nil;
   FHintTimer.Free;
+  end;
 
   DestroyComponents;  // while message queue is still active
 
@@ -1516,6 +1525,9 @@ end;
 
 procedure TlqApplication.CreateHintWindow;
 begin
+  if LQU_PREVENTWND then
+     exit;
+
   if not Assigned(FHintWindow) then
   begin
     FHintWindow := HintWindowClass.Create(nil);
@@ -1972,6 +1984,20 @@ begin
   Result := TlqCanvas(inherited GetCanvas);
 end;
 
+
+procedure TlqWindow.DoAllocateWindowHandle(AParent: TlqWindowBase);
+begin
+  if not LQU_PREVENTWND then
+    inherited;
+
+end;
+
+procedure TlqWindow.DoUpdateWindowPosition;
+begin
+  if not LQU_PREVENTWND then
+    inherited;
+
+end;
 
 { TlqStyle }
 

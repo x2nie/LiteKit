@@ -2,8 +2,9 @@
 <CONFIG>
   <Package Version="4">
     <PathDelim Value="\"/>
-    <Name Value="Laz_lq_runtime"/>
+    <Name Value="lq_runtime"/>
     <Author Value="Graeme Geldenhuys"/>
+    <AutoUpdate Value="Manually"/>
     <CompilerOptions>
       <Version Value="11"/>
       <PathDelim Value="\"/>

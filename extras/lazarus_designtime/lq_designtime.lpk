@@ -36,10 +36,10 @@
         <UnitName Value="lq_canvas_designer"/>
       </Item3>
     </Files>
-    <Type Value="RunAndDesignTime"/>
+    <Type Value="DesignTime"/>
     <RequiredPkgs Count="3">
       <Item1>
-        <PackageName Value="Laz_lq_runtime"/>
+        <PackageName Value="lq_runtime"/>
       </Item1>
       <Item2>
         <PackageName Value="IDEIntf"/>

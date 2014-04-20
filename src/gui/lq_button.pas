@@ -146,13 +146,13 @@ type
     property    Flat;
     property    FontDesc;
     property    GroupIndex;
-    property    Height;
-    property    Hint;
+    //property    Height;
+    //property    Hint;
     property    ImageLayout;
     property    ImageMargin;
     property    ImageName;
     property    ImageSpacing;
-    property    Left;
+    //property    Left;
     property    MaxHeight;
     property    MaxWidth;
     property    MinHeight;
@@ -164,8 +164,8 @@ type
     property    TabOrder;
     property    Text;
     property    TextColor;
-    property    Top;
-    property    Width;
+    //property    Top;
+    //property    Width;
     property    OnClick;
     property    OnDragEnter;
     property    OnDragLeave;

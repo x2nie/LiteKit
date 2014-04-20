@@ -200,7 +200,7 @@ type
     property    Focused: boolean read FFocused write FFocused default False;
     property    Anchors: TAnchors read FAnchors write FAnchors default [anLeft, anTop];
     property    Align: TAlign read FAlign write SetAlign default alNone;
-    property    Hint: TlqString read GetHint write SetHint;
+
     property    IgnoreDblClicks: Boolean read FIgnoreDblClicks write FIgnoreDblClicks default False;
     property    ShowHint: boolean read FShowHint write SetShowHint stored IsShowHintStored;
     property    ParentShowHint: boolean read FParentShowHint write SetParentShowHint default True;
@@ -209,6 +209,12 @@ type
     property    OnDragEnter: TlqDragEnterEvent read FOnDragEnter write FOnDragEnter;
     property    OnDragLeave: TNotifyEvent read FOnDragLeave write FOnDragLeave;
     property    OnDragDrop: TlqDragDropEvent read FOnDragDrop write FOnDragDrop;
+  published
+    property    Left;
+    property    Top;
+    property    Width;
+    property    Height;
+    property    Hint: TlqString read GetHint write SetHint;
   end;
 
 
@@ -1583,6 +1589,8 @@ end;
 
 procedure TlqWidget.Invalidate;
 begin
+  if csLoading in ComponentState then
+     exit;
   RePaint;
 end;
 

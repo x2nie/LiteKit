@@ -21,6 +21,7 @@ unit lq_form;
 {$mode objfpc}{$H+}
 
 {.$Define CStackDebug}
+{$define STREAMEDFORM}
 
 interface
 
@@ -108,12 +109,16 @@ type
   end;
   
   
+  { TlqForm }
+
   TlqForm = class(TlqBaseForm)
+  public
+    constructor Create(AOwner: TComponent); override;
   published
-    property    Left;
+    {property    Left;
     property    Top;
     property    Width;
-    property    Height;
+    property    Height;}
 
     property    BackgroundColor;
     property    DNDEnabled;
@@ -190,6 +195,21 @@ begin
     w := w.Parent;
   end;
   Result := nil;
+end;
+
+{ TlqForm }
+
+constructor TlqForm.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  {$ifdef STREAMEDFORM}
+  //InitInheritedComponent (Self , TlqForm);
+  //if (ClassType<>TlqForm) and ([csDesignInstance, csDesigning]*ComponentState=[]) then
+  begin
+    if not InitInheritedComponent(Self, TlqForm) then
+      //raise EResNotFound.CreateFmt(rsResourceNotFound, [ClassName]);
+  end
+  {$endif}
 end;
 
 { TlqBaseForm }
@@ -307,6 +327,7 @@ begin
   FDNDEnabled      := False;
   FWidth := 320;
   FHeight := 240;
+
 end;
 
 destructor TlqBaseForm.Destroy;

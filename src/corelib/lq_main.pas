@@ -277,6 +277,7 @@ type
   public
     constructor Create(const AParams: string = ''); override;
     destructor  Destroy; override;
+    procedure   CreateForm(InstanceClass: TComponentClass; out Reference);
     function    GetFont(const afontdesc: TlqString): TlqFont;
     procedure   ActivateHint(APos: TPoint; AHint: TlqString);
     procedure   RecreateHintWindow;
@@ -484,6 +485,7 @@ uses
   lq_cmdlineparams,
   lq_imgutils,
   lq_stylemanager,
+  lq_form,          //for InitInheritedComponent
   lq_style_win2k,   // :TODO This needs to be !removed
   lq_style_motif;   // :TODO This needs to be !removed
 
@@ -2699,6 +2701,36 @@ begin
 end;
 
 
+
+procedure TlqApplication.CreateForm(InstanceClass: TComponentClass;
+  out Reference);
+var
+  Instance: TComponent;
+  ok: boolean;
+  //AForm: TForm;
+begin
+  // Allocate the instance, without calling the constructor
+  Instance := TComponent(InstanceClass.NewInstance);
+  // set the Reference before the constructor is called, so that
+  // events and constructors can refer to it
+  TComponent(Reference) := Instance;
+
+  ok:=false;
+  try
+    Instance.Create(Self);
+    if Instance is TlqForm then
+       if TlqForm(instance).Visible then
+           TlqForm(instance).Show;
+    ok:=true;
+  finally
+    if not ok then begin
+      TComponent(Reference) := nil;
+      //if FCreatingForm=Instance then
+        //FCreatingForm:=nil;
+    end;
+  end;
+
+end;
 
 initialization
   uApplication    := nil;

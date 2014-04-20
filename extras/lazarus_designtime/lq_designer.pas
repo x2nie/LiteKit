@@ -207,7 +207,7 @@ var Bmp : TBitmap;
       bmp.SaveToFile('c:\'+AWidget.Name+'.bmp' );
       bmp.Free;}
 ///      AWidget.Canvas.PaintTo({LCLForm.Canvas.}Handle, 0,0, AWidget.Width, AWidget.Height);
-      ////Bmp.Canvas.Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
+      Bmp.Canvas.Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
 
       //AWidget.Canvas.EndDraw;
 

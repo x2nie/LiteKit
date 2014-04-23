@@ -201,7 +201,7 @@ constructor TlqLazCanvas.Create(AWin: TlqWindowBase);
 begin
   inherited Create(AWin);
   FDrawing      := False;
-  FDrawWindow   := nil;
+  FDrawWindow   := TlqWindow(AWin);
 end;
 
 destructor TlqLazCanvas.Destroy;
@@ -217,18 +217,18 @@ var
   ARect: TlqRect;
   //bmsize: Windows.TSIZE;
 begin
-  (*if FDrawing and ABuffered and assigned(FBufferBitmap) then
+  if FDrawing and ABuffered and assigned(FBufferBitmap) then
   begin
     // check if the dimensions are ok
     {$IFNDEF wince}
     //GetBitmapDimensionEx(FBufferBitmap, bmsize);
     {$ENDIF}
     FDrawWindow := TlqWindow(AWin);
-    DoGetWinRect(ARect);
+    {DoGetWinRect(ARect);
     if (bmsize.cx <> (ARect.Right-ARect.Left+1)) or
-       (bmsize.cy <> (ARect.Bottom-ARect.Top+1)) then
+       (bmsize.cy <> (ARect.Bottom-ARect.Top+1)) then  }
       DoEndDraw;
-  end;*)
+  end;
 
   if not FDrawing then
   begin
@@ -266,7 +266,9 @@ begin
 
     TryFreeBackBuffer;
     FBufferBitmap := TBitmap.Create;
+    FBufferBitmap.PixelFormat:= pf24bit;
     FBufferBitmap.setsize(FDrawWindow.Width, FDrawWindow.Height);
+    FBufferBitmap.BeginUpdate(True);
 
     Canvas.Brush.Color:= clBlack;
     Canvas.Brush.Style:= bsSolid;
@@ -294,11 +296,12 @@ begin
     Windows.ReleaseDC(FDrawWindow.FWinHandle, FWingc); }
     Canvas.Brush.Color:= clRed;
     Canvas.Brush.Style:= bsDiagCross;
-    Canvas.FillRect(10,10,30,30);
+    Canvas.FillRect(10,10,15,15);
     Canvas.Pen.Color:=clYellow;
     Canvas.Line(1,1, FWindow.Width, FWindow.Height);
+    FBufferBitmap.EndUpdate();
     FDrawing    := False;
-    FDrawWindow := nil;
+    //FDrawWindow := nil;
   end;
 end;
 
@@ -438,11 +441,14 @@ var
   WideText: widestring;
 begin
   if UTF8Length(txt) < 1 then
-    Exit; //==>
+    Exit; //==>     ,
 
   WideText := Utf8Decode(txt);
   Canvas.TextOut(x, y, WideText);
-
+  Canvas.TextOut(0, 0, WideText);
+  //debug
+  Canvas.Pen.Color:= clRed;
+  Canvas.Line(0,self.FWindow.Height, self.FWindow.Width,0);
 end;
 
 procedure TlqLazCanvas.DoFillRectangle(x, y, w, h: TlqCoord);

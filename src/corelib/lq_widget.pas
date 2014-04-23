@@ -192,7 +192,6 @@ type
     property    AcceptDrops: boolean read FAcceptDrops write SetAcceptDrops default False;
     property    ActiveWidget: TlqWidget read FActiveWidget write SetActiveWidget;
     property    IsContainer: Boolean read FIsContainer;
-    property    Visible: boolean read FVisible write SetVisible default True;
     property    Enabled: boolean read FEnabled write SetEnabled default True;
     property    TabOrder: integer read FTabOrder write FTabOrder;
     { Is the widget allowed to receive keyboard focus. }
@@ -214,6 +213,7 @@ type
     property    Top;
     property    Width;
     property    Height;
+    property    Visible: boolean read FVisible write SetVisible default True;
     property    Hint: TlqString read GetHint write SetHint;
   end;
 
@@ -1478,7 +1478,8 @@ end;
 
 function TlqWidget.GetParentComponent: TComponent;
 begin
-  Result:=inherited GetParentComponent;
+  //Result:=inherited GetParentComponent;
+  Result := Parent;      
 end;
 
 procedure TlqWidget.MoveAndResizeBy(const dx, dy, dw, dh: TlqCoord);

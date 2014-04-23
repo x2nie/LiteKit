@@ -214,10 +214,15 @@ var Bmp : TBitmap;
 
       //AWidget.Canvas.EndDraw;
 
-      //if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
-      //self.GetClientArea(Awidget, r, p );
-      //Pen.Color:=clRed;
+      if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
+      self.GetClientArea(Awidget, r, p );
+      //r:= Rect(0,0, AWidget.Width, AWidget.Height);
+      Pen.Style:=psDot;
+      Pen.Color:=clRed;
       //Rectangle(r);
+      Bmp.Canvas.MoveTo(r.TopLeft);
+      bmp.canvas.LineTo(r.BottomRight);
+
       if AWidget is TlqForm then
          PaintFormGrid(AWidget);
 

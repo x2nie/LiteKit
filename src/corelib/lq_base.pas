@@ -1851,7 +1851,7 @@ begin
     SetColor(clText1);
     SetTextColor(clText1);
     SetFont(lqApplication.DefaultFont);
-    SetLineStyle(0, lsSolid);
+    SetLineStyle(1, lsSolid);
 
     FBeginDrawCount := 0;
   end;

@@ -65,7 +65,8 @@ begin
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Text', TStringMultilinePropertyEditor);
 ///  RegisterPropertyEditor(TypeInfo(lq_main.TCursor), TlqWidget, 'Cursor', TCursorPropertyEditor);
   RegisterPropertyEditor(TypeInfo(string), TlqWidget, 'FontDesc', TFontDescPropertyEditor);
-
+  LQU_PREVENTWND := true;
+  lqApplication.Initialize;
 end;
 
 
@@ -163,6 +164,8 @@ var Bmp : TBitmap;
     r : TRect;
     p : TPoint;
   begin
+    if [csLoading, csDestroying] * AWidget.ComponentState <> [] then
+       exit;
     //with LCLForm.Canvas do
     With Bmp.Canvas do
     begin

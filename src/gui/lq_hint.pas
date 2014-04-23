@@ -95,7 +95,7 @@ implementation
 
 
 type
-  TlqHintShadow = class(TlqForm)
+  TlqHintShadow = class(TlqBaseForm)
   public
     constructor Create(AOwner: TComponent); override;
   end;

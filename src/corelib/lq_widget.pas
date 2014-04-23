@@ -497,6 +497,11 @@ end;}
 
 
 procedure TlqWidget.SetParent(const AValue: TlqWidget);
+   procedure Invalidate_ifPossible;
+   begin
+
+   end;
+
 begin
 if FParent=AValue then exit;
   if FParent<>nil then begin
@@ -1589,7 +1594,7 @@ end;
 
 procedure TlqWidget.Invalidate;
 begin
-  if csLoading in ComponentState then
+  if [csLoading, csDestroying] * self.ComponentState <> [] then
      exit;
   RePaint;
 end;

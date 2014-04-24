@@ -56,7 +56,7 @@ type
     procedure   SetFontDesc(const AValue: string);
     procedure   SetImageLayout(const AValue: TImageLayout);
     procedure   SetImageName(const AValue: string);
-    procedure   SetText(const AValue: string);
+    //procedure   SetText(const AValue: string);
     procedure   SetDown(AValue: Boolean);
     procedure   SetImageMargin(const Value: integer);
     procedure   SetImageSpacing(const Value: integer);
@@ -72,7 +72,7 @@ type
     FEmbedded: Boolean;
     FDown: Boolean;
     FImage: TlqImage;
-    FText: string;
+    //FText: string;
     FFont: TlqFont;
     FDefault: boolean;
     FState: integer;  // 0 - normal  // 1 - hover
@@ -108,7 +108,7 @@ type
     property    ImageLayout: TImageLayout read FImageLayout write SetImageLayout default ilImageLeft;
     property    ModalResult: TlqModalResult read FModalResult write FModalResult default mrNone;
     property    ShowImage: Boolean read FShowImage write SetShowImage default True;
-    property    Text: string read FText write SetText;
+    //property    Text: string read FText write SetText;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -409,13 +409,13 @@ begin
   end;
 end;
 
-procedure TlqBaseButton.SetText(const AValue: string);
+{procedure TlqBaseButton.SetText(const AValue: string);
 begin
   if FText = AValue then
     Exit;
   FText := AValue;
   RePaint;
-end;
+end;}
 
 procedure TlqBaseButton.SetImageName(const AValue: string);
 begin
@@ -480,7 +480,7 @@ end;
 constructor TlqBaseButton.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  FText         := 'Button';
+  //FText         := 'Button';
   FFont         := lqGetFont('#Label1');
   Height        := FFont.Height + 8;
   Width         := 80;

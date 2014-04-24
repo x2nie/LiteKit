@@ -24,7 +24,7 @@ type
   TlqMessageDialog = class(TlqForm)
   private
     FInformativeText: TStringList;
-    FText: string;
+    //FText: string;
     FButtons: TlqMsgDlgButtons;
     FDefaultButton: TlqMsgDlgBtn;
     FDialogType: TlqMsgDlgType;

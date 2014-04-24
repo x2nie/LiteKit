@@ -44,10 +44,10 @@ type
     function    GetFontDesc: string;
     procedure   SetAutoSize(const AValue: boolean);
     procedure   SetFontDesc(const AValue: string);
-    procedure   SetText(const AValue: TlqString);
+    //procedure   SetText(const AValue: TlqString);
     procedure   ResizeLabel;
   protected
-    FText: TlqString;
+    //FText: TlqString;
     FFont: TlqFont;
     FTextHeight: integer;
     procedure   HandlePaint; override;
@@ -56,7 +56,7 @@ type
     property    AutoSize: boolean read FAutoSize write SetAutoSize default False;
     property    Layout: TLayout read FLayout write SetLayout default tlTop;
     property    FontDesc: string read GetFontDesc write SetFontDesc;
-    property    Text: TlqString read FText write SetText;
+    //property    Text: TlqString read FText write SetText;
     property    LineSpace: integer read FLineSpace write FLineSpace default 2;
   public
     constructor Create(AOwner: TComponent); override;
@@ -187,14 +187,14 @@ begin
   ResizeLabel;
 end;
 
-procedure TlqCustomLabel.SetText(const AValue: TlqString);
+{procedure TlqCustomLabel.SetText(const AValue: TlqString);
 begin
   if FText <> AValue then
   begin
     FText := AValue;
     ResizeLabel;
   end;
-end;
+end;}
 
 procedure TlqCustomLabel.ResizeLabel;
 begin

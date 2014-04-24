@@ -164,8 +164,12 @@ type
   protected
     {requires by IDE}
     FChilds: TList; // list of Widget
+    FText:      string;
+    procedure   SetText(const AValue: string); virtual;
     procedure   SetParentComponent(Value: TComponent); override;
     procedure   GetChildren(Proc: TGetChildProc; Root: TComponent); override;
+    procedure   SetName(const NewName: TComponentName); override;
+    property    Text : string read FText write SetText;
   public
     {requires by IDE}
     function    ChildrenCount: integer;
@@ -1657,6 +1661,26 @@ begin
   DoAllocateWindowHandle(FParent);
   if FMouseCursorIsDirty then
     DoSetMouseCursor;
+end;
+
+procedure TlqWidget.SetName(const NewName: TComponentName);
+var
+  ChangeText: Boolean;
+begin
+  if Name=NewName then exit;
+  ChangeText :=
+    {(csSetCaption in ControlStyle) and} not (csLoading in ComponentState) and
+    (Name = Text) and
+    ((Owner = nil) or not (Owner is TlqWidget) or not (csLoading in TlqWidget(Owner).ComponentState));
+  inherited SetName(NewName);
+  if ChangeText then Text := NewName;
+end;
+
+procedure TlqWidget.SetText(const AValue: string);
+begin
+  if FText=AValue then Exit;
+  FText:=AValue;
+  Invalidate;
 end;
 
 initialization

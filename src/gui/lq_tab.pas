@@ -53,7 +53,7 @@ type
   TlqTabSheet = class(TlqWidget)
   private
     FPageControl: TlqPageControl;
-    FText: string;
+    //FText: string;
     FTabVisible: boolean;
     function    GetPageControl: TlqPageControl;
     function    GetPageIndex: Integer;

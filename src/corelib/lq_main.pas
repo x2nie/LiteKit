@@ -138,6 +138,7 @@ type
     // designer
     procedure   DoUpdateWindowPosition; override;
     procedure   DoAllocateWindowHandle(AParent: TlqWindowBase); override;
+    procedure   DoSetWindowTitle(const ATitle: string); override;
     //procedure   DoReleaseWindowHandle; override;
   public
     constructor Create(AOwner: TComponent); override;
@@ -2000,6 +2001,12 @@ begin
   if not LQU_PREVENTWND then
     inherited;
 
+end;
+
+procedure TlqWindow.DoSetWindowTitle(const ATitle: string);
+begin
+  if not LQU_PREVENTWND then
+    inherited;
 end;
 
 { TlqStyle }

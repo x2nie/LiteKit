@@ -37,7 +37,7 @@ type
     FFont: TlqFont;
     FGroupIndex: integer;
     FOnChange: TNotifyEvent;
-    FText: string;
+    //FText: string;
     FBoxLayout: TBoxLayout;
     FBoxSize: integer;
     FIsPressed: boolean;
@@ -48,7 +48,6 @@ type
     procedure   SetAutoSize(const AValue: boolean);
     procedure   SetChecked(const AValue: boolean);
     procedure   SetFontDesc(const AValue: string);
-    procedure   SetText(const AValue: string);
     procedure   DoAdjustWidth;
     function    FindNeighbour(direction: TFocusSearchDirection): TlqRadioButton;
   protected
@@ -57,6 +56,7 @@ type
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
     procedure   HandleKeyRelease(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
+    procedure   SetText(const AValue: string); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -74,7 +74,7 @@ type
     property    ParentShowHint;
     property    ShowHint;
     property    TabOrder;
-    property    Text: string read FText write SetText;
+    property    Text; //: string read FText write SetText;
     property    TextColor;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
     property    OnShowHint;

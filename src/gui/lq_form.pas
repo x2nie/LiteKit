@@ -92,6 +92,9 @@ type
     property    OnHelp: TlqHelpEvent read FOnHelp write FOnHelp;
     property    OnHide: TNotifyEvent read FOnHide write FOnHide;
     property    OnShow: TNotifyEvent read FOnShow write FOnShow;
+  protected
+    {designer need}
+    procedure SetName(const NewName: TComponentName); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -314,7 +317,7 @@ constructor TlqBaseForm.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
   FWindowPosition  := wpAuto;
-  FWindowTitle     := '';
+  //FWindowTitle     := '';
   FSizeable        := True;
   FParentForm      := nil;
   FBackgroundColor := clWindowBackground;
@@ -598,6 +601,21 @@ begin
     FOnCloseQuery(self, Result);
 end;
 
+
+procedure TlqBaseForm.SetName(const NewName: TComponentName);
+var
+  LText : string;
+  ChangeText : boolean;
+begin
+  //Form has both Caption and Text, we take care both
+  ChangeText :=
+    {(csSetCaption in ControlStyle) and} not (csLoading in ComponentState) and
+    (Name = WindowTitle);
+  LText := Text; //save
+  inherited SetName(NewName);
+  Text := LText; //restore
+  if ChangeText then WindowTitle := NewName;
+end;
 
 end.
 

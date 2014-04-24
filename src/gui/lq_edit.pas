@@ -47,7 +47,7 @@ type
     FHideSelection: Boolean;
     FPopupMenu: TlqPopupMenu;
     FDefaultPopupMenu: TlqPopupMenu;
-    FText: string;
+    //FText: string;
     FPasswordMode: Boolean;
     FBorderStyle: TlqEditBorderStyle;
     FOnChange: TNotifyEvent;

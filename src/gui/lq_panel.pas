@@ -116,7 +116,7 @@ type
     FWrapText: boolean;
     FLineSpace: integer;
     FMargin: integer;
-    FText: string;
+    //FText: string;
     function    GetAlignment: TAlignment;
     procedure   SetAlignment(const AValue: TAlignment);
     function    GetLayout: TLayout;
@@ -185,7 +185,7 @@ type
   private
     FAlignment: TAlignment;
     FMargin: integer;
-    FText: string;
+    //FText: string;
     function    GetAlignment: TAlignment;
     procedure   SetAlignment(const AValue: TAlignment);
     function    GetText: string;

@@ -69,7 +69,7 @@ type
   private
     FAutoCompletion: Boolean;
     FAllowNew: TAllowNew;
-    FText: string;
+    //FText: string;
     FSelectedItem: integer;
     FMaxLength: integer;
     FNewItem: boolean;
@@ -90,7 +90,7 @@ type
     procedure   DoDropDown; override;
     function    GetText: string; virtual;
     function    HasText: boolean; virtual;
-    procedure   SetText(const AValue: string); virtual;
+    procedure   SetText(const AValue: string); override;
     procedure   ShowDefaultPopupMenu(const x, y: integer; const shiftstate: TShiftState); virtual;
     procedure   HandleResize(AWidth, AHeight: TlqCoord); override;
     procedure   HandleKeyChar(var AText: TlqChar; var shiftstate: TShiftState; var consumed: Boolean); override;

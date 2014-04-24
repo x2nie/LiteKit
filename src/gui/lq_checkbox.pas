@@ -35,7 +35,7 @@ type
     FChecked: boolean;
     FOnChange: TNotifyEvent;
     FReadOnly: Boolean;
-    FText: string;
+    //FText: string;
     FFont: TlqFont;
     FBoxLayout: TBoxLayout;
     FBoxSize: integer;

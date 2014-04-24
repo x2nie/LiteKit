@@ -40,7 +40,7 @@ type
     FMargin: Integer;
     FTimer: TlqTimer;
     FHintTextRec: TlqRect;
-    FText: TlqString;
+    //FText: TlqString;
     procedure   FormShow(Sender: TObject);
     procedure   FormHide(Sender: TObject);
     function    GetText: TlqString;

@@ -63,12 +63,12 @@ end;
 
 function TFileDescPascalUnitWithLpForm.GetInterfaceUsesSection: string;
 begin
-  Result:='Classes, SysUtils, lq_defs, lq_main, lq_form';
+  Result:='Classes, SysUtils, lq_base, lq_main, lq_form';
 end;
 
 function TFileDescPascalUnitWithLpForm.GetLocalizedName: string;
 begin
-  Result:='lpForm';
+  Result:='lqForm';
 end;
 
 function TFileDescPascalUnitWithLpForm.GetLocalizedDescription: string;
@@ -145,7 +145,7 @@ begin
     //+'  cthreads,'+LineEnding
     //+'  {$ENDIF}{$ENDIF}'+LineEnding
     //+'  Interfaces, // this includes the LCL widgetset'+LineEnding
-    +'  lq_defs, lq_main, lq_form '+LineEnding
+    +'  lq_base, lq_main, lq_form '+LineEnding
     +'  { you can add units after this };'+LineEnding
     +LineEnding
     +'begin'+LineEnding

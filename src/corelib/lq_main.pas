@@ -1241,6 +1241,7 @@ end;
 
 constructor TlqApplication.Create(const AParams: string);
 begin
+  lqNamedFonts := TList.Create;
   FFontResList    := TList.Create;
   FDisplayParams  := AParams;
   FScreenWidth    := -1;
@@ -1591,7 +1592,7 @@ procedure TlqApplication.InternalInit;
 begin
   FDefaultFont := GetFont(LQ_DEFAULT_FONT_DESC);
   lqInitTimers;
-  lqNamedFonts := TList.Create;
+
 
   { If the end-user passed in a style, try and create an instance of it }
   if gCommandLineParams.IsParam('style') then

@@ -496,12 +496,7 @@ begin
 end;}
 
 
-procedure TlqWidget.SetParent(const AValue: TlqWidget);
-   procedure Invalidate_ifPossible;
-   begin
-
-   end;
-
+procedure TlqWidget.SetParent(const AValue: TlqWidget);   
 begin
 if FParent=AValue then exit;
   if FParent<>nil then begin

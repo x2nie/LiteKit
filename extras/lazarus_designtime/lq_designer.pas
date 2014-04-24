@@ -2,6 +2,8 @@ unit lq_designer;
 
 {$mode objfpc}{$H+}
 
+//enable to integrate with ObjectInspector, need modified OI.
+{.$Define OiImageIndex}
 interface
 
 uses
@@ -31,7 +33,9 @@ type
     function ParentAcceptsChild(Parent: TComponent;
                 Child: TComponentClass): boolean; override;
   public
+    {$IfDef OiImageIndex}
     procedure OiNodeGetImageIndex(APersistent: TPersistent; var AIndex: integer); override;
+    {$endif}
   public
     // needed by TlqWidget
     constructor Create(AOwner: TComponent); override;
@@ -306,6 +310,7 @@ begin
     //and (TlqWidget(Parent).AcceptChildsAtDesignTime);
 end;
 
+{$IfDef OiImageIndex}
 procedure TlqMediator.OiNodeGetImageIndex(APersistent: TPersistent;
   var AIndex: integer);
 begin
@@ -329,6 +334,7 @@ begin
          AIndex := 2;
     end;
 end;
+{$endif}
 
 constructor TlqMediator.Create(AOwner: TComponent);
 begin

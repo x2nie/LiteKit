@@ -271,9 +271,6 @@ procedure TlqBaseForm.HandlePaint;
 begin
   inherited HandlePaint;
   Canvas.Clear(FBackgroundColor);
-  Canvas.Color := clBisque;
-    //Canvas.Brush.Style:= bsDiagCross;
-    Canvas.FillRectangle(0,0,width,height);
 end;
 
 procedure TlqBaseForm.AdjustWindowStyle;

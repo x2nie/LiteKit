@@ -70,7 +70,9 @@ begin
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Text', TStringMultilinePropertyEditor);
 ///  RegisterPropertyEditor(TypeInfo(lq_main.TCursor), TlqWidget, 'Cursor', TCursorPropertyEditor);
   RegisterPropertyEditor(TypeInfo(string), TlqWidget, 'FontDesc', TFontDescPropertyEditor);
-  LQU_PREVENTWND := true;
+
+  lq_main.LQU_PREVENTWND := true;
+  lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
   lqApplication.Initialize;
 end;
 
@@ -95,9 +97,9 @@ begin
   //pgfDesigning := true;
   //lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
   //LQU_PREVENTWND := true;
-  lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
-  LQU_PREVENTWND := true;
-  lqApplication.Initialize;
+  //lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
+  //LQU_PREVENTWND := true;
+  //lqApplication.Initialize;
 
 
   Result:=inherited CreateMediator(TheOwner, aForm);

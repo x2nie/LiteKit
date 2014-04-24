@@ -176,14 +176,14 @@ var Bmp : TBitmap;
     With LCanvas do
     begin
       // fill background
-      Brush.Style:=bsSolid;
+      {Brush.Style:=bsSolid;
       Brush.Color:= clBtnFace;
       FillRect(0,0,AWidget.Width,AWidget.Height);
 
       // outer frame
       Pen.Color:=clGray;
       Rectangle(0,0,AWidget.Width,AWidget.Height);
-
+      }
       {// inner frame
       if AWidget.AcceptChildsAtDesignTime then begin
         Pen.Color:=clMaroon;
@@ -219,15 +219,15 @@ var Bmp : TBitmap;
       Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
 
       //AWidget.Canvas.EndDraw;
-      Pen.Color:=clGreen;
-      if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
-      self.GetClientArea(Awidget, r, p );
+      //Pen.Color:=clGreen;
+      //if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
+      //self.GetClientArea(Awidget, r, p );
       //r:= Rect(0,0, AWidget.Width, AWidget.Height);
-      Pen.Style:=psDot;
+      {Pen.Style:=psDot;
       Pen.Color:=clRed;
       //Rectangle(r);
       MoveTo(r.TopLeft);
-      LineTo(r.BottomRight);
+      LineTo(r.BottomRight);}
 
       if AWidget is TlqForm then
          PaintFormGrid(AWidget);
@@ -270,7 +270,7 @@ begin
 
 {$ifdef LBuffered__Paint}
   Bmp := TBitmap.Create;
-  Bmp.Monochrome:=False;
+  //Bmp.Monochrome:=False;
   Bmp.Transparent:=False;
   Bmp.SetSize(LCLForm.Width, LCLForm.Height);
   LCanvas := bmp.Canvas;

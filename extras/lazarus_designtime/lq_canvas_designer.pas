@@ -7,7 +7,9 @@ interface
 uses
   Classes, SysUtils,
   lq_base, lq_main,
-  Forms, Controls, Graphics;
+  Forms, Controls,
+  FPCanvas, //for temporary brush style
+  Graphics;
 
 type
 
@@ -25,7 +27,7 @@ type
     FCurFontRes: TlqFontResource;
     FClipRect: TlqRect;
     FClipRectSet: Boolean;
-    FWindowsColor: longword;
+    FWindowsColor: TColor;
     //FBrush: HBRUSH;
     //FPen: HPEN;
     //FClipRegion: HRGN;
@@ -298,11 +300,11 @@ begin
     TryFreeBackBuffer;
 
     Windows.ReleaseDC(FDrawWindow.FWinHandle, FWingc); }
-    Canvas.Brush.Color:= clRed;
+    {Canvas.Brush.Color:= clRed;
     Canvas.Brush.Style:= bsDiagCross;
     Canvas.FillRect(10,10,15,15);
     Canvas.Pen.Color:=clYellow;
-    Canvas.Line(1,1, FWindow.Width, FWindow.Height);
+    Canvas.Line(1,1, FWindow.Width, FWindow.Height);}
     FBufferBitmap.EndUpdate();
     FDrawing    := False;
     //FDrawWindow := nil;
@@ -443,16 +445,17 @@ end;
 procedure TlqLazCanvas.DoDrawString(x, y: TlqCoord; const txt: string);
 var
   WideText: widestring;
+  LBrushStyle : TFPBrushStyle;
 begin
   if UTF8Length(txt) < 1 then
     Exit; //==>     ,
 
+  LBrushStyle:=Canvas.Brush.Style;
+  Canvas.Brush.Style:=bsClear; //save
+
   WideText := Utf8Decode(txt);
   Canvas.TextOut(x, y, WideText);
-  Canvas.TextOut(0, 0, WideText);
-  //debug
-  Canvas.Pen.Color:= clRed;
-  Canvas.Line(0,self.FWindow.Height, self.FWindow.Width,0);
+  Canvas.Brush.Style:=LBrushStyle; //restore
 end;
 
 procedure TlqLazCanvas.DoFillRectangle(x, y, w, h: TlqCoord);
@@ -513,9 +516,9 @@ procedure TlqLazCanvas.DoSetColor(cl: TlqColor);
 begin
   //DeleteObject(FBrush);
   FWindowsColor := lqColorToWin(cl);
-  {FBrush := CreateSolidBrush(FWindowsColor);
+  //FBrush := CreateSolidBrush(FWindowsColor);
   DoSetLineStyle(FLineWidth, FLineStyle);
-  SelectObject(Fgc, FBrush); }
+  //SelectObject(Fgc, FBrush); 
   CAnvas.Brush.Color:=FWindowsColor;
 end;
 
@@ -533,6 +536,7 @@ begin
   logBrush.lbColor := FWindowsColor;
   logBrush.lbHatch := 0;
   DeleteObject(FPen); }
+  Canvas.Pen.Color := FWindowsColor;
   case AStyle of
     lsDot:
       begin

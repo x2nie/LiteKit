@@ -5,7 +5,9 @@ unit lq_canvas_designer;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, lq_base, lq_main;
+  Classes, SysUtils,
+  lq_base, lq_main,
+  Forms, Controls, Graphics;
 
 type
 
@@ -73,7 +75,7 @@ implementation
 uses math, lq_stringutils;
 
 { misc }
-function lqColorToWin(col: TlqColor): longword;
+function lqColorToWin(col: TlqColor): TColor;
 var
   c: dword;
 begin
@@ -267,6 +269,8 @@ begin
     TryFreeBackBuffer;
     FBufferBitmap := TBitmap.Create;
     FBufferBitmap.PixelFormat:= pf24bit;
+    FBufferBitmap.Monochrome:=False;
+    FBufferBitmap.Transparent:=False;
     FBufferBitmap.setsize(FDrawWindow.Width, FDrawWindow.Height);
     FBufferBitmap.BeginUpdate(True);
 

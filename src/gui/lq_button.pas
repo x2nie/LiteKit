@@ -633,11 +633,6 @@ begin
   end
   else
     lqStyle.DrawString(Canvas, tx+offset.x, ty+offset.y, Text, Enabled);
-
-    //debug
-//  Canvas.Pen.Color:= clYellow;
-  Canvas.Color:= clYellow;
-  Canvas.DrawLine(0,Height div 2, Width div 2, Height div 2);
 end;
 
 procedure TlqBaseButton.DoPush;

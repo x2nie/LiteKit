@@ -7,7 +7,7 @@ unit lq_designer;
 interface
 
 uses
-  LCLProc, LCLType, Classes, SysUtils, FormEditingIntf, LCLIntf, Graphics,
+  LCLProc, LCLType, Classes, SysUtils, FormEditingIntf, LCLIntf, //Graphics,
   ProjectIntf, lq_base, lq_main, lq_widget, lq_form, {hd_edit, hd_memo}
   LResources;
 
@@ -53,7 +53,8 @@ uses Controls, PropEdits, lq_propedits,
   lq_button,lq_progressbar, lq_trackbar, lq_edit, lq_memo,
   lq_listbox, //lq_combobox,
   lq_menu,
-  lq_canvas_designer
+  lq_canvas_designer,
+  Graphics
   ;
 
 procedure Register;
@@ -146,6 +147,7 @@ end;}
 
 procedure TlqMediator.Paint;
 var Bmp : TBitmap;
+  LCanvas : TCanvas;
 
   procedure PaintFormGrid(AWidget: TlqWidget);
   var x, y : integer;
@@ -156,7 +158,7 @@ var Bmp : TBitmap;
     for y := 0 to (Awidget.Height -1) div gy do
       for x := 0 to (Awidget.Width -1) div gx do
       begin
-        {LCLForm}BMP.Canvas.Pixels[x *gx, y *gy] := clBlack;
+        LCanvas.Pixels[x *gx, y *gy] := clBlack;
       end;
   end;
 
@@ -171,7 +173,7 @@ var Bmp : TBitmap;
     if [csLoading, csDestroying] * AWidget.ComponentState <> [] then
        exit;
     //with LCLForm.Canvas do
-    With Bmp.Canvas do
+    With LCanvas do
     begin
       // fill background
       Brush.Style:=bsSolid;
@@ -214,18 +216,18 @@ var Bmp : TBitmap;
       bmp.SaveToFile('c:\'+AWidget.Name+'.bmp' );
       bmp.Free;}
 ///      AWidget.Canvas.PaintTo({LCLForm.Canvas.}Handle, 0,0, AWidget.Width, AWidget.Height);
-      Bmp.Canvas.Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
+      Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
 
       //AWidget.Canvas.EndDraw;
-
+      Pen.Color:=clGreen;
       if csDesigning in AWidget.ComponentState then  TextOut(5,2,'design');
       self.GetClientArea(Awidget, r, p );
       //r:= Rect(0,0, AWidget.Width, AWidget.Height);
       Pen.Style:=psDot;
       Pen.Color:=clRed;
       //Rectangle(r);
-      Bmp.Canvas.MoveTo(r.TopLeft);
-      bmp.canvas.LineTo(r.BottomRight);
+      MoveTo(r.TopLeft);
+      LineTo(r.BottomRight);
 
       if AWidget is TlqForm then
          PaintFormGrid(AWidget);
@@ -264,8 +266,14 @@ var Bmp : TBitmap;
   end;
 
 begin
+  {.$define LBuffered__Paint}
+
+{$ifdef LBuffered__Paint}
   Bmp := TBitmap.Create;
+  Bmp.Monochrome:=False;
+  Bmp.Transparent:=False;
   Bmp.SetSize(LCLForm.Width, LCLForm.Height);
+  LCanvas := bmp.Canvas;
   //Bmp.BeginUpdate;
   //FlpForm.show();//allocate windowhandle
   PaintWidget(FlpForm);
@@ -276,6 +284,12 @@ begin
   //lclForm.Canvas.Pen.Color:= clRed;
   //LCLForm.Canvas.TextOut(10,10, format('W=%d, H=%d',[bmp.Width, bmp.Height]));
   Bmp.Free;
+
+{$else}
+  LCanvas := LClForm.Canvas;
+  PaintWidget(FlpForm);
+{$endif}
+
 
 //  m_pgfForm.Invalidate;
   inherited Paint;

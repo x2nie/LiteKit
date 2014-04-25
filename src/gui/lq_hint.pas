@@ -95,7 +95,7 @@ implementation
 
 
 type
-  TlqHintShadow = class(TlqBaseForm)
+  TlqHintShadow = class(TlqForm)
   public
     constructor Create(AOwner: TComponent); override;
   end;
@@ -250,7 +250,7 @@ end;
 
 constructor TlqHintShadow.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited CreateNew(AOwner);
   Name := 'F_Shadow';
   WindowPosition := wpUser;
   WindowType := wtPopup;

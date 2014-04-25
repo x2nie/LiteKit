@@ -128,7 +128,7 @@ begin
   FVFDWidgets.Add(awc);
 end;
 
-{$I icons.}
+{$I icons.inc}
 
 procedure LoadIcons;
 begin

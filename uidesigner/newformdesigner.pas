@@ -178,7 +178,7 @@ uses
 
 
 // Anchor images
-{$I anchors.}
+{$I anchors.inc}
 
 
 {@VFD_NEWFORM_IMPL}
@@ -274,7 +274,7 @@ begin
   frm := TfrmAbout.Create(nil);
   try
     frm.lblVersion.Text := Format(frm.lblVersion.Text, [program_version]);
-    frm.lblCompiled.Text := Format(frm.lblCompiled.Text, [ {$I %%}date + ' ' + {$I %%}]);
+    frm.lblCompiled.Text := Format(frm.lblCompiled.Text, [ {$I %date%} + ' ' + {$I %time%}]);
     frm.ShowModal;
   finally
     frm.Free;
@@ -939,7 +939,7 @@ end;
 
 constructor TfrmMain.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited CreateNew(AOwner);
   OnShow := @FormShow;
 end;
 

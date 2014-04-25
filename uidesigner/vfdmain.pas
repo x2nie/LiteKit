@@ -36,7 +36,7 @@ uses
   newformdesigner;
 
 const
-  program_version = FPGUI_VERSION;
+  program_version = LITEKIT_VERSION;
 
 type
 
@@ -326,7 +326,7 @@ begin
   frmMain.WindowTitle := 'LiteKit Designer v' + program_version;
   frmMain.Show;
 
-  frmProperties := TfrmProperties.Create(nil);
+  frmProperties := TfrmProperties.CreateNew(nil);
   frmProperties.Show;
 end;
 

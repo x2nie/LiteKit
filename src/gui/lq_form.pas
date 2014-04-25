@@ -42,6 +42,8 @@ type
        var AHandled: Boolean): Boolean of object;
 
 
+  { TlqBaseForm }
+
   TlqBaseForm = class(TlqWidget)
   private
     FFullScreen: boolean;
@@ -81,7 +83,6 @@ type
     property    ModalResult: TlqModalResult read FModalResult write FModalResult;
     property    FullScreen: boolean read FFullScreen write FFullScreen default False;
     property    WindowPosition: TWindowPosition read FWindowPosition write FWindowPosition default wpAuto;
-    property    WindowTitle: string read FWindowTitle write SetWindowTitle;
     { -- events -- }
     property    OnActivate: TNotifyEvent read FOnActivate write FOnActivate;
     property    OnClose: TFormCloseEvent read FOnClose write FOnClose;
@@ -109,6 +110,7 @@ type
     function    ShowModal: TlqModalResult;
     procedure   Close;
     function    CloseQuery: boolean; virtual;
+    property    WindowTitle: string read FWindowTitle write SetWindowTitle;
   end;
   
   
@@ -117,6 +119,7 @@ type
   TlqForm = class(TlqBaseForm)
   public
     constructor Create(AOwner: TComponent); override;
+    constructor CreateNew(AOwner: TComponent); virtual;
   published
     {property    Left;
     property    Top;
@@ -204,16 +207,22 @@ end;
 
 constructor TlqForm.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
-  {$ifdef STREAMEDFORM}
-  //InitInheritedComponent (Self , TlqForm);
-  //if (ClassType<>TlqForm) and ([csDesignInstance, csDesigning]*ComponentState=[]) then
-  begin
-    if not InitInheritedComponent(Self, TlqForm) then
-      //raise EResNotFound.CreateFmt(rsResourceNotFound, [ClassName]);
-  end
-  {$endif}
+  CreateNew(AOwner);
+    {$ifdef STREAMEDFORM}
+    //InitInheritedComponent (Self , TlqForm);
+    //if (ClassType<>TlqForm) and ([csDesignInstance, csDesigning]*ComponentState=[]) then
+    begin
+      if not InitInheritedComponent(Self, TlqForm) then
+        //raise EResNotFound.CreateFmt(rsResourceNotFound, [ClassName]);
+    end
+    {$endif}
 end;
+
+constructor TlqForm.CreateNew(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+end;
+
 
 { TlqBaseForm }
 
@@ -327,7 +336,6 @@ begin
   FDNDEnabled      := False;
   FWidth := 320;
   FHeight := 240;
-
 end;
 
 destructor TlqBaseForm.Destroy;

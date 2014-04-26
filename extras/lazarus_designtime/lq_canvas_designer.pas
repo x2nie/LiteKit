@@ -276,14 +276,15 @@ begin
     FBufferBitmap.setsize(FDrawWindow.Width, FDrawWindow.Height);
     FBufferBitmap.BeginUpdate(True);
 
-    Canvas.Brush.Color:= clBlack;
-    Canvas.Brush.Style:= bsSolid;
-    Canvas.FillRect(10,10,30,30);
 
     FColor           := lqColorToWin(clText1);
     FLineStyle       := lsSolid;
     FLineWidth       := 1;
     FBackgroundColor := lqColorToWin(clBoxColor);
+    Canvas.Brush.Color:= FBackgroundColor;
+    Canvas.Brush.Style:= bsSolid;
+    Canvas.Clear;
+    //Canvas.FillRect(10,10,30,30);
   end;
 
   FDrawing := True;
@@ -395,9 +396,12 @@ begin
 end;
 
 procedure TlqLazCanvas.DoClearClipRect;
+var R : TlqRect;
 begin
   //SelectClipRgn(Fgc, 0);
   //FClipRectSet := False;
+  self.GetWinRect(R);
+  self.DoSetClipRect(R);
 end;
 
 procedure TlqLazCanvas.DoDrawLine(x1, y1, x2, y2: TlqCoord);
@@ -503,13 +507,16 @@ begin
 end;
 
 procedure TlqLazCanvas.DoSetClipRect(const ARect: TlqRect);
+var R : TRect;
 begin
-  {FClipRectSet := True;
+//FClipRectSet := True;
   FClipRect    := ARect;
-  DeleteObject(FClipRegion);
+  {DeleteObject(FClipRegion);
   FClipRegion  := CreateRectRgn(ARect.Left, ARect.Top, ARect.Left+ARect.Width, ARect.Top+ARect.Height);
   SelectClipRgn(Fgc, FClipRegion);}
-
+  R := Rect(ARect.Left, ARect.Top,
+    ARect.Left+ARect.Width -1, ARect.Top+ARect.Height -1);
+  Canvas.ClipRect := R;
 end;
 
 procedure TlqLazCanvas.DoSetColor(cl: TlqColor);

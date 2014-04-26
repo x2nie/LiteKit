@@ -58,7 +58,7 @@ uses
 
 constructor TBorderLessForm.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited CreateNew(AOwner);
   Include(FWindowAttributes, waBorderLess);  // borderless and steals focus like a normal form
 end;
 

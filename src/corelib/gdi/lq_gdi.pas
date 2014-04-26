@@ -354,7 +354,8 @@ const
   CS_OWNDC = 0;
   WS_OVERLAPPEDWINDOW = WS_VISIBLE;
   WS_POPUPWINDOW = 0;
-  WS_EX_APPWINDOW = 0;
+  ///WS_EX_APPWINDOW = 0;
+  WS_EX_APPWINDOW = $40000; //lcltype.pp #944
 
 
 // From Lazarus wince\winext.pas:

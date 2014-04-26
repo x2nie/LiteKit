@@ -52,7 +52,7 @@ implementation
 uses Controls, PropEdits, lq_propedits,
   lq_button,lq_progressbar, lq_trackbar, lq_edit, lq_memo,
   lq_listbox, //lq_combobox,
-  lq_menu,
+  lq_menu, lq_panel,
   lq_canvas_designer,
   Graphics
   ;
@@ -64,7 +64,7 @@ begin
   TlpProgressbar, TlpTrackbar, //TlpCombobox
   TlpMenuBar, TlpPopupMenu
   ]); *)
-  RegisterComponents('Standard',[TlqButton,TlqMenuBar, TlqPopupMenu]);
+  RegisterComponents('Standard',[TlqButton,TlqMenuBar, TlqPopupMenu, TlqEdit, TlqPanel, TlqGroupBox]);
 
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Caption', TStringMultilinePropertyEditor);
   RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Text', TStringMultilinePropertyEditor);

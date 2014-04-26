@@ -69,7 +69,6 @@ type
     procedure   SetPasswordMode(const AValue: boolean);
     function    GetFontDesc: string;
     procedure   SetFontDesc(const AValue: string);
-    procedure   SetText(const AValue: string);
     procedure   SetSideMargin(const AValue: integer);
     procedure   SetHeightMargin(const AValue: integer);
     procedure   DefaultPopupCut(Sender: TObject);
@@ -94,6 +93,7 @@ type
     FVisibleText: TlqString;
     FVisSelStartPx: integer;
     FVisSelEndPx: integer;
+    procedure   SetText(const AValue: string); override;
     function    GetMarginAdjustment: integer; virtual;
     procedure   DrawSelection; virtual;
     procedure   DoOnChange; virtual;
@@ -122,7 +122,7 @@ type
     property    PasswordMode: Boolean read FPasswordMode write SetPasswordMode default False;
     property    PopupMenu: TlqPopupMenu read FPopupMenu write FPopupMenu;
     property    ReadOnly: Boolean read FReadOnly write SetReadOnly default False;
-    property    Text: String read FText write SetText;
+    //property    Text: String read FText write SetText;
     property    OnChange: TNotifyEvent read FOnChange write FOnChange;
   public
     constructor Create(AOwner: TComponent); override;
@@ -1161,7 +1161,7 @@ begin
   if prevval <> Text then
     DoOnChange;
 
-  RePaint;
+  invalidate;
 end;
 
 procedure TlqBaseEdit.SetSideMargin(const AValue: integer);

@@ -121,8 +121,8 @@ type
     procedure   SetAlignment(const AValue: TAlignment);
     function    GetLayout: TLayout;
     procedure   SetLayout(const AValue: TLayout);
-    function    GetText: string;
-    procedure   SetText(const AValue: string);
+    //function    GetText: string;
+    //procedure   SetText(const AValue: string);
     function    GetLineSpace: integer;
     procedure   SetLineSpace(const AValue: integer);
     function    GetMargin: integer;
@@ -161,7 +161,7 @@ type
     property    ParentShowHint;
     property    ShowHint;
     property    Style;
-    property    Text: string read GetText write SetText;
+    property    Text;//: string read GetText write SetText;
     property    TextColor;
     property    Top;
     property    Width;
@@ -188,8 +188,8 @@ type
     //FText: string;
     function    GetAlignment: TAlignment;
     procedure   SetAlignment(const AValue: TAlignment);
-    function    GetText: string;
-    procedure   SetText(const AValue: string);
+    //function    GetText: string;
+    //procedure   SetText(const AValue: string);
     function    GetFontDesc: string;
     procedure   SetFontDesc(const AValue: string);
     function    GetMargin: integer;
@@ -221,7 +221,7 @@ type
     property    ParentShowHint;
     property    ShowHint;
     property    Style;
-    property    Text: string read GetText write SetText;
+    property    Text;//: string read GetText write SetText;
     property    TextColor;
     property    Top;
     property    Width;
@@ -664,19 +664,19 @@ begin
   end;
 end;
 
-function TlqPanel.GetText: string;
+{function TlqPanel.GetText: string;
 begin
   Result := FText;
-end;
+end;}
 
-procedure TlqPanel.SetText(const AValue: string);
+{procedure TlqPanel.SetText(const AValue: string);
 begin
   if FText <> AValue then
   begin
     FText := AValue;
     Repaint;
   end;
-end;
+end;}
 
 function TlqPanel.GetFontDesc: string;
 begin
@@ -804,7 +804,7 @@ end;
 constructor TlqPanel.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
-  FText             := 'Panel';
+  //FText             := 'Panel';
   FFont             := lqGetFont('#Label1');
   FPanelStyle       := bsRaised;
   FWidth            := 80;
@@ -818,7 +818,7 @@ end;
 
 destructor TlqPanel.Destroy;
 begin
-  FText := '';
+  //FText := '';
   FFont.Free;
   inherited Destroy;
 end;
@@ -847,19 +847,19 @@ begin
   end;
 end;
 
-function TlqGroupBox.GetText: string;
+{function TlqGroupBox.GetText: string;
 begin
   Result := FText;
-end;
+end;}
 
-procedure TlqGroupBox.SetText(const AValue: string);
+{procedure TlqGroupBox.SetText(const AValue: string);
 begin
   if FText <> AValue then
   begin
     FText := AValue;
     Repaint;
   end;
-end;
+end; }
 
 function TlqGroupBox.GetFontDesc: string;
 begin
@@ -1050,7 +1050,7 @@ end;
 constructor TlqGroupBox.Create(Aowner: TComponent);
 begin
   inherited Create(AOwner);
-  FText             := 'Group box';
+  //FText             := 'Group box';
   FFont             := lqGetFont('#Label1');
   FPanelStyle       := bsRaised;
   FWidth            := 80;

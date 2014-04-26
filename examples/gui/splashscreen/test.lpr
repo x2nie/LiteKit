@@ -15,7 +15,7 @@ var
 begin
   lqApplication.Initialize;
   Randomize;
-  frm := TMainForm.Create(nil);
+  frm := TMainForm.CreateNew(nil);
 
   // This is needed otherwise Splashscreen becomes main form. Rules are, the
   // first form displayed is the main form.

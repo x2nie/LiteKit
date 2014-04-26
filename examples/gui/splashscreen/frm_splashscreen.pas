@@ -59,7 +59,7 @@ end;
 
 constructor TSplashForm.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited CreateNew(AOwner);
   WindowType := wtPopup;  // borderless but doesn't steal focus
   WindowAttributes := WindowAttributes + [waStayOnTop]; // well, it lets the window stay on top. :)
 

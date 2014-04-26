@@ -256,6 +256,7 @@ type
     FHintPos: TPoint;
     FOnKeyPress: TKeyPressEvent;
     FStartDragDistance: integer;
+    FTitle: string;
     procedure   SetHintPause(const AValue: Integer);
     procedure   SetupLocalizationStrings;
     procedure   InternalMsgFreeMe(var msg: TlqMessageRec); message LQM_FREEME;
@@ -299,6 +300,7 @@ type
     property    ShowHint: boolean read FShowHint write SetShowHint default True;
     property    StartDragDistance: integer read FStartDragDistance write SetStartDragDistance default 5;
     property    StopOnException: Boolean read FStopOnException write FStopOnException;
+    property    Title : string read FTitle write FTitle;//currently not used
     property    OnException: TExceptionEvent read FOnException write FOnException;
     property    OnKeyPress: TKeyPressEvent read FOnKeyPress write FOnKeyPress;
   end;
@@ -374,6 +376,7 @@ var
 
 // Application & Clipboard singletons
 function  lqApplication: TlqApplication;
+function  Application: TlqApplication;
 function  lqClipboard: TlqClipboard;
 
 
@@ -1130,6 +1133,10 @@ begin
   result := uApplication;
 end;
 
+function Application: TlqApplication;
+begin
+  result := lqApplication;
+end;
 
 function lqClipboard: TlqClipboard;
 begin

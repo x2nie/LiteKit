@@ -125,7 +125,7 @@ var
 begin
   Result:=inherited InitProject(AProject);
 
-  MainFile:=AProject.CreateProjectFile('project1.dpr');
+  MainFile:=AProject.CreateProjectFile('project1.lpr');
   MainFile.IsPartOfProject:=true;
   AProject.AddFile(MainFile,false);
   AProject.MainFileID:=0;

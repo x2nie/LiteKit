@@ -667,12 +667,13 @@ begin
   r.SetRect(0, 0, Width, Height);
   if AllowDown then
   begin
-    if FDown and (not FClickOnPush) and FAllowAllUp then
+    if FDown and FAllowAllUp then
     begin
       FDown := False;
       RePaint;
       lqApplication.ProcessMessages;
-      if PtInRect(r, Point(x, y)) and FOnClickPending then
+
+      if (not FClickOnPush) and PtInRect(r, Point(x, y)) and FOnClickPending then
         Click;
     end;
   end
@@ -843,7 +844,15 @@ end;
 
 procedure TlqBaseButton.SetAllowDown(const Value: Boolean);
 begin
-  GroupIndex := 1;
+  if value then
+  begin
+    if GroupIndex = 0 then
+      GroupIndex := 1;
+  end
+  else
+  begin
+    GroupIndex := 0;
+  end;
 end;
 
 procedure TlqBaseButton.SetAllowAllUp(const Value: boolean);

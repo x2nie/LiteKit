@@ -323,7 +323,7 @@ begin
   Result:=(Parent is TlqWidget) //and ( wsAcceptsChildren in TlqWidget(Parent).WidgetStyle)
     and Child.InheritsFrom(TlqComponent)
     //or (not Child.InheritsFrom(TControl))
-    //and (TlqWidget(Parent).AcceptChildsAtDesignTime);
+    and TlqWidget(Parent).IsContainer;
 end;
 
 {$IfDef OiImageIndex}

@@ -95,7 +95,7 @@ type
     property    OnShow: TNotifyEvent read FOnShow write FOnShow;
   protected
     {designer need}
-    procedure SetName(const NewName: TComponentName); override;
+    procedure   SetName(const NewName: TComponentName); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -621,6 +621,7 @@ begin
   Text := LText; //restore
   if ChangeText then WindowTitle := NewName;
 end;
+
 
 end.
 

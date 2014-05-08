@@ -462,7 +462,7 @@ begin
 
   FOneClickMove := True;
 
-  FForm               := TDesignedForm.Create(nil);
+  FForm               := TDesignedForm.CreateNew(nil);
   FForm.FormDesigner  := self;
   FForm.Name          := maindsgn.NewFormName;
   FForm.WindowTitle   := FForm.Name;

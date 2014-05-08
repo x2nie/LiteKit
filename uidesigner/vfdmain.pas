@@ -296,7 +296,7 @@ var
     end;
   end;
 begin
-  nfrm := TNewFormForm.Create(nil);
+  nfrm := TNewFormForm.CreateNew(nil);
   try
     if nfrm.ShowModal = mrOK then
     begin

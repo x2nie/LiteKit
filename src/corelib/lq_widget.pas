@@ -923,22 +923,17 @@ end;
 procedure TlqWidget.HandleShow;
 var
   n: integer;
-  c: TComponent;
+  //c: TComponent;
 begin
   FOnScreen := True;
   AllocateWindowHandle;
   DoSetWindowVisible(FVisible);
-
-  for n := 0 to ComponentCount - 1 do
+  
+  for n := 0 to self.ChildrenCount -1 do
   begin
-    c := Components[n];
-    if (c is TlqWidget) and (TlqWidget(c).Parent = self) then
-    begin
-      if not (c is TlqPopupMenu) then  // these should not be created yet
-      begin
-        TlqWidget(c).HandleShow;
-      end;
-    end;
+    //c := Components[n];
+    //if not (c is TlqPopupMenu) then  // these should not be created yet
+    Children[n].HandleShow();
   end;
 end;
 
@@ -954,12 +949,11 @@ var
   n: integer;
   c: TComponent;
 begin
-  for n := 0 to ComponentCount - 1 do
+  for n := 0 to self.ChildrenCount -1 do
   begin
-    c := Components[n];
-    if (c is TlqWidget) and (TlqWidget(c).Parent = self) then
-      TlqWidget(c).HandleHide;
+    Children[n].HandleHide();
   end;
+  
   FOnScreen := False;
 
   if HasHandle then

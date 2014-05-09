@@ -119,6 +119,7 @@ const
   LQM_FREEME      = 19;
   LQM_DROPENTER   = 20;
   LQM_DROPEXIT    = 21;
+  LQM_INVALIDATE  = 27;
   LQM_USER        = 50000;
   LQM_KILLME      = MaxInt;
 
@@ -191,6 +192,7 @@ type
     Param1: Integer;
     Param2: Integer;
     Param3: Integer;
+    Param4: Integer;
   end;
 
 

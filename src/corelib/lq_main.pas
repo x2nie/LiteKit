@@ -161,12 +161,21 @@ type
   end;
 
 
-  TlqImages = class
+  { TlqImages }
+
+  TlqImages = class(TlqComponent)
   private
     FImages: TStringList;
+  protected
+    //designer
+    procedure DefineProperties(Filer: TFiler); override;
   public
-    constructor Create;
+    constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
+    procedure WriteData(AStream: TStream); virtual;
+    procedure ReadData(AStream: TStream); virtual;
+
+    function    Count: integer;
     function    AddImage(const imgid: string; img: TlqImage): boolean;
     function    DeleteImage(const imgid: string; freeimg: boolean): boolean;
     function    GetImage(const imgid: string): TlqImage;
@@ -503,6 +512,9 @@ var
   uDebugText: ^Text;
   uDebugTextAllocated: Boolean;
   uDebugIndent: integer;
+
+const
+  LQ_IMGLIST_SIG = 'lq01';
 
 type
 
@@ -1608,7 +1620,7 @@ begin
   lqStyle := lqStyleManager.Style;
 
   lqCaret      := TlqCaret.Create;
-  lqImages     := TlqImages.Create;
+  lqImages     := TlqImages.Create(self);
 
   lqCreateStandardImages;
 
@@ -2507,8 +2519,24 @@ end;
 
 { TlqImages }
 
-constructor TlqImages.Create;
+procedure TlqImages.DefineProperties(Filer: TFiler);
+
+  function DoWrite: Boolean;
+  begin
+    if (Filer.Ancestor <> nil) and (Filer.Ancestor is TlqImages) then
+      Result :=  not Equals(Filer.Ancestor)
+    else
+      Result := Count > 0;
+  end;
+
 begin
+  inherited DefineProperties(Filer);
+  Filer.DefineBinaryProperty('Bitmap', @ReadData, @WriteData, DoWrite);
+end;
+
+constructor TlqImages.Create(AOwner: TComponent);
+begin
+  inherited;
   FImages := TStringList.Create;
 end;
 
@@ -2525,6 +2553,22 @@ begin
   end;
   FImages.Free;
   inherited Destroy;
+end;
+
+procedure TlqImages.WriteData(AStream: TStream);
+begin
+  AStream.Write(LQ_IMGLIST_SIG,4);
+
+end;
+
+procedure TlqImages.ReadData(AStream: TStream);
+begin
+
+end;
+
+function TlqImages.Count: integer;
+begin
+  result := FImages.Count;
 end;
 
 function TlqImages.AddImage(const imgid: string; img: TlqImage): boolean;

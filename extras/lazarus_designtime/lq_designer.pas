@@ -50,9 +50,6 @@ procedure Register;
 
 implementation
 uses Controls, PropEdits, lq_propedits,
-  lq_button,lq_progressbar, lq_trackbar, lq_edit, lq_memo,
-  lq_listbox, //lq_combobox,
-  lq_menu, lq_panel, lq_tab,
   lq_canvas_designer,
   Graphics
   ;
@@ -60,19 +57,6 @@ uses Controls, PropEdits, lq_propedits,
 procedure Register;
 begin
   FormEditingHook.RegisterDesignerMediator(TlqMediator);
-  (*RegisterComponents('Standard',[TlpTImer, TlpButton, TlpMemo, TlpEdit, TlpListBox,
-  TlpProgressbar, TlpTrackbar, //TlpCombobox
-  TlpMenuBar, TlpPopupMenu
-  ]); *)
-  RegisterComponents('Standard',[TlqButton,TlqMenuBar, TlqPopupMenu, TlqEdit,
-     TlqPanel, TlqGroupBox,
-     TlqPageControl, TlqTabSheet]);
-
-  RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Caption', TStringMultilinePropertyEditor);
-  RegisterPropertyEditor(TypeInfo(widestring), TlqWidget, 'Text', TStringMultilinePropertyEditor);
-///  RegisterPropertyEditor(TypeInfo(lq_main.TCursor), TlqWidget, 'Cursor', TCursorPropertyEditor);
-  RegisterPropertyEditor(TypeInfo(string), TlqWidget, 'FontDesc', TFontDescPropertyEditor);
-
   lq_main.LQU_PREVENTWND := true;
   lq_main.DefaultCanvasClass := lq_canvas_designer.TlqLazCanvas;
   lqApplication.Initialize;

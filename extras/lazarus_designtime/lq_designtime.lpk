@@ -20,7 +20,7 @@
     <Description Value="LiteKit integration to Lazarus IDE"/>
     <License Value="LGLP 2.1 with linking exception"/>
     <Version Minor="1"/>
-    <Files Count="3">
+    <Files Count="4">
       <Item1>
         <Filename Value="lq_descriptors.pas"/>
         <HasRegisterProc Value="True"/>
@@ -35,6 +35,11 @@
         <Filename Value="lq_canvas_designer.pas"/>
         <UnitName Value="lq_canvas_designer"/>
       </Item3>
+      <Item4>
+        <Filename Value="lq_dsgn_reg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="lq_dsgn_reg"/>
+      </Item4>
     </Files>
     <Type Value="DesignTime"/>
     <RequiredPkgs Count="3">

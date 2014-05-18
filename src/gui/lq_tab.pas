@@ -64,6 +64,7 @@ type
   protected
     procedure   HandlePaint; override;
     procedure   SetName(const NewName: TComponentName); override;
+    procedure   SetParent(const AValue: TlqWidget); override;    
   public
     constructor Create(AOwner: TComponent); override;
     constructor CreateWithTitle(AOwner: TComponent; const AText: TlqString = ''); virtual;
@@ -140,7 +141,7 @@ type
     procedure   OrderSheets; // currently using bubblesort
     procedure   RePaintTitles; virtual;
     procedure   HandlePaint; override;
-    procedure   HandleShow; override;
+    //procedure   HandleShow; override;
     procedure   HandleLMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleRMouseUp(x, y: integer; shiftstate: TShiftState); override;
     procedure   HandleKeyPress(var keycode: word; var shiftstate: TShiftState; var consumed: boolean); override;
@@ -280,20 +281,32 @@ procedure TlqTabSheet.AfterConstruction;
 begin
   if (Owner <> nil) and (Owner is TlqPageControl) then
   begin
-    FPageControl:=TlqPageControl(Owner);
-    FPageControl.InsertPage(self, True);
+    PageControl:=TlqPageControl(Owner);
   end;
   inherited AfterConstruction;
 end;
 
 procedure TlqTabSheet.SetPageControl(APageControl: TlqPageControl);
 begin
+  if FPageControl = APageControl then
+    Exit;
+  if FPageControl <> nil then
+    FPageControl.RemovePage(self);
+
+
   FPageControl := APageControl;
   if APageControl <> nil then
-    FPageControl.InsertPage(Self);
+    FPageControl.InsertPage(Self,True);
 end;
 
   
+procedure TlqTabSheet.SetParent(const AValue: TlqWidget);
+begin
+  inherited;
+  if AValue is TlqPageControl then
+    PageControl := TlqPageControl(AValue);
+end;
+
 { TlqPageControl }
 
 function TlqPageControl.GetActivePageIndex: integer;
@@ -810,9 +823,9 @@ var
   lTxtFlags: TlqTextFlags;
   ActivePageVisible: Boolean;
 begin
-  if not HasHandle then
+{  if not HasHandle then
     Exit; //==>
-    
+}
   if PageCount = 0 then
     Exit; //==>
 
@@ -1095,7 +1108,7 @@ procedure TlqPageControl.HandlePaint;
 begin
   if SortPages then
     OrderSheets;
-  Canvas.ClearClipRect;
+  //Canvas.ClearClipRect;
   Canvas.Clear(FBackgroundColor);
   
   // To make it more visible in the UI Designer
@@ -1112,12 +1125,6 @@ begin
   RePaintTitles;
 end;
 
-procedure TlqPageControl.HandleShow;
-begin
-  inherited HandleShow;
-  FLeftButton.Visible := False;
-  FRightButton.Visible := False;
-end;
 
 procedure TlqPageControl.HandleLMouseUp(x, y: integer; shiftstate: TShiftState);
 var
@@ -1230,23 +1237,28 @@ begin
   FSortPages        := False;
 
   FLeftButton := TlqButton.Create(self);
+  FLeftButton.Parent    := self;
   FLeftButton.Text      := '<';
   FLeftButton.Height    := 20;
   FLeftButton.Width     := 20;
   FLeftButton.OnClick   := @LeftButtonClick;
+  FLeftButton.Visible   := False;
 
   FRightButton := TlqButton.Create(self);
+  FRightButton.Parent   := self;
   FRightButton.Text     := '>';
   FRightButton.Height   := 20;
   FRightButton.Width    := 20;
   FRightButton.OnClick  := @RightButtonClick;
+  FRightButton.Visible  := False;
+
 end;
 
 destructor TlqPageControl.Destroy;
 var i: integer;
 begin
   FOnChange := nil;
-  for i:=0 to FPages.Count-1 do
+  for i:= FPages.Count-1 downto 0 do
     TlqTabSheet(FPages[i]).PageControl:=nil;
   FPages.Free;
   ActiveWidget := nil;

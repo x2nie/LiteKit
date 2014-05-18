@@ -577,7 +577,7 @@ end;
 
 constructor TlqBaseDialog.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited CreateNew(AOwner);
   Width     := 500;
   Height    := 400;
   MinWidth  := 300;

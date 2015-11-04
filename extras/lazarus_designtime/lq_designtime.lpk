@@ -3,6 +3,7 @@
   <Package Version="4">
     <PathDelim Value="\"/>
     <Name Value="lq_designtime"/>
+    <Type Value="DesignTime"/>
     <Author Value="x2nie"/>
     <CompilerOptions>
       <Version Value="11"/>
@@ -10,12 +11,11 @@
       <SearchPaths>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
-      <Other>
-        <CompilerMessages>
-          <MsgFileName Value=""/>
-        </CompilerMessages>
-        <CompilerPath Value="$(CompPath)"/>
-      </Other>
+      <CodeGeneration>
+        <Optimizations>
+          <OptimizationLevel Value="0"/>
+        </Optimizations>
+      </CodeGeneration>
     </CompilerOptions>
     <Description Value="LiteKit integration to Lazarus IDE"/>
     <License Value="LGLP 2.1 with linking exception"/>
@@ -41,7 +41,6 @@
         <UnitName Value="lq_dsgn_reg"/>
       </Item4>
     </Files>
-    <Type Value="DesignTime"/>
     <RequiredPkgs Count="3">
       <Item1>
         <PackageName Value="lq_runtime"/>

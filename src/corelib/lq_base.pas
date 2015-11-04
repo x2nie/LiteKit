@@ -1381,6 +1381,8 @@ begin
   FMouseCursorIsDirty := False;
   FPosIsDirty := True;
   FSizeIsDirty := True;
+  FLeft := 0;
+  FTop := 0;
   FMaxWidth := 0;
   FMaxHeight := 0;
   FDragActive := False;

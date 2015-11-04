@@ -354,8 +354,8 @@ const
   CS_OWNDC = 0;
   WS_OVERLAPPEDWINDOW = WS_VISIBLE;
   WS_POPUPWINDOW = 0;
-  ///WS_EX_APPWINDOW = 0;
-  WS_EX_APPWINDOW = $40000; //lcltype.pp #944
+  WS_EX_APPWINDOW = 0;
+  //WS_EX_APPWINDOW = $40000; //lcltype.pp #944
 
 
 // From Lazarus wince\winext.pas:
@@ -1715,8 +1715,8 @@ var
   wname: string;
 {$ENDIF}
   mid: dword;
-  rwidth: integer;
-  rheight: integer;
+  rwidth: Longint;
+  rheight: Longint;
   r: TRect;
 begin
   if FWinHandle > 0 then
@@ -2511,7 +2511,7 @@ begin
 
   if TlqGDIImage(img).MaskHandle > 0 then
     MaskBlt(Fgc, x, y, w, h, tmpdc, xi, yi, TlqGDIImage(img).MaskHandle, xi, yi, MakeRop4(rop, DSTCOPY))
-  else
+  else //lq_gdi.pas(2513,104) Error: range check error while evaluating constants
     BitBlt(Fgc, x, y, w, h, tmpdc, xi, yi, rop);
 
   DeleteDC(tmpdc);

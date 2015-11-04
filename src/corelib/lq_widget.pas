@@ -19,7 +19,7 @@ unit lq_widget;
 
 {$mode objfpc}{$H+}
 
-{.$Define DEBUG}
+{$Define DEBUG}
 {.$Define CStackDebug}
 
 interface
@@ -562,6 +562,8 @@ begin
   writeln('TlqWidget.Destroy [', Classname, '.', Name, ']');
   {$ENDIF}
   HandleHide;
+  if Parent <> nil then
+    Parent := nil;
   if Owner <> nil then
     if (Owner is TlqWidget) and (TlqWidget(Owner).ActiveWidget = self) then
       TlqWidget(Owner).ActiveWidget := nil;
@@ -949,6 +951,7 @@ var
   n: integer;
   c: TComponent;
 begin
+  writeln(self.ClassName+ '.HandleHide '+self.Name);
   for n := 0 to self.ChildrenCount -1 do
   begin
     Children[n].HandleHide();

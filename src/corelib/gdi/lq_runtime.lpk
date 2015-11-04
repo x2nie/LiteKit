@@ -15,24 +15,35 @@
       </SearchPaths>
       <Parsing>
         <SyntaxOptions>
+          <IncludeAssertionCode Value="True"/>
           <AllowLabel Value="False"/>
           <CPPInline Value="False"/>
         </SyntaxOptions>
       </Parsing>
       <CodeGeneration>
+        <SmartLinkUnit Value="True"/>
+        <Checks>
+          <IOChecks Value="True"/>
+          <StackChecks Value="True"/>
+        </Checks>
         <Optimizations>
           <OptimizationLevel Value="0"/>
         </Optimizations>
       </CodeGeneration>
+      <Linking>
+        <Debugging>
+          <UseHeaptrc Value="True"/>
+          <UseValgrind Value="True"/>
+        </Debugging>
+      </Linking>
       <Other>
         <CustomOptions Value="-dAggCanvasX"/>
-        <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
     <Description Value="LiteKit runtime package"/>
     <License Value="LGPL 2 with static linking exception."/>
     <Version Major="1"/>
-    <Files Count="98">
+    <Files Count="93">
       <Item1>
         <Filename Value="..\stdimages.inc"/>
         <Type Value="Include"/>
@@ -398,33 +409,13 @@
         <UnitName Value="lq_imgfmt_png"/>
       </Item91>
       <Item92>
-        <Filename Value="..\..\reportengine\u_command.pas"/>
-        <UnitName Value="U_Command"/>
-      </Item92>
-      <Item93>
-        <Filename Value="..\..\reportengine\u_pdf.pas"/>
-        <UnitName Value="U_Pdf"/>
-      </Item93>
-      <Item94>
-        <Filename Value="..\..\reportengine\u_report.pas"/>
-        <UnitName Value="U_Report"/>
-      </Item94>
-      <Item95>
-        <Filename Value="..\..\reportengine\u_reportimages.pas"/>
-        <UnitName Value="U_ReportImages"/>
-      </Item95>
-      <Item96>
-        <Filename Value="..\..\reportengine\u_visu.pas"/>
-        <UnitName Value="U_Visu"/>
-      </Item96>
-      <Item97>
         <Filename Value="..\..\gui\lq_trayicon.pas"/>
         <UnitName Value="lq_trayicon"/>
-      </Item97>
-      <Item98>
+      </Item92>
+      <Item93>
         <Filename Value="..\render\software\Agg2D.pas"/>
         <UnitName Value="Agg2D"/>
-      </Item98>
+      </Item93>
     </Files>
     <LazDoc Paths="..\..\..\docs\xml\corelib;..\..\..\docs\xml\corelib\x11;..\..\..\docs\xml\corelib\gdi;..\..\..\docs\xml\gui"/>
     <RequiredPkgs Count="1">

@@ -1310,7 +1310,7 @@ begin
     TNamedFontItem(lqNamedFonts.Items[i]).Free;
   lqNamedFonts.Free;
 
-  lqImages.Free;
+  //lqImages.Free;
   lqStyleManager.FreeStyleInstance;
   lqStyle := nil;
   lqCaret.Free;

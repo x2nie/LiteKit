@@ -33,9 +33,7 @@ type
     function ParentAcceptsChild(Parent: TComponent;
                 Child: TComponentClass): boolean; override;
   public
-    {$IfDef OiImageIndex}
-    procedure OiNodeGetImageIndex(APersistent: TPersistent; var AIndex: integer); override;
-    {$endif}
+    procedure GetObjInspNodeImageIndex(APersistent: TPersistent; var AIndex: integer); override;
   public
     // needed by TlqWidget
     constructor Create(AOwner: TComponent); override;
@@ -312,8 +310,8 @@ begin
     and TlqWidget(Parent).IsContainer;
 end;
 
-{$IfDef OiImageIndex}
-procedure TlqMediator.OiNodeGetImageIndex(APersistent: TPersistent;
+
+procedure TlqMediator.GetObjInspNodeImageIndex(APersistent: TPersistent;
   var AIndex: integer);
 begin
   if Assigned(APersistent) then
@@ -336,7 +334,7 @@ begin
          AIndex := 2;
     end;
 end;
-{$endif}
+
 
 constructor TlqMediator.Create(AOwner: TComponent);
 begin

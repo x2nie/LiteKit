@@ -1,21 +1,21 @@
 { This file was automatically created by Lazarus. Do not edit!
-This source is only used to compile and install the package.
+  This source is only used to compile and install the package.
  }
 
-unit lqui_ide;
+unit fpgui_ide;
 
 interface
 
 uses
-  LiteKitLazIDEIntf, LazarusPackageIntf;
+  fpGUILazIDEIntf, LazarusPackageIntf;
 
 implementation
 
 procedure Register;
 begin
-  RegisterUnit('LiteKitLazIDEIntf',@LiteKitLazIDEIntf.Register);
+  RegisterUnit('fpGUILazIDEIntf', @fpGUILazIDEIntf.Register);
 end;
 
 initialization
-  RegisterPackage('fpgui_ide',@Register);
+  RegisterPackage('fpgui_ide', @Register);
 end.

@@ -19,7 +19,7 @@ unit lq_widget;
 
 {$mode objfpc}{$H+}
 
-{$Define DEBUG}
+{.$Define DEBUG}
 {.$Define CStackDebug}
 
 interface
@@ -951,7 +951,7 @@ var
   n: integer;
   c: TComponent;
 begin
-  writeln(self.ClassName+ '.HandleHide '+self.Name);
+  {$IFDEF DEBUG} writeln(self.ClassName+ '.HandleHide '+self.Name);{$ENDIF}
   for n := 0 to self.ChildrenCount -1 do
   begin
     Children[n].HandleHide();

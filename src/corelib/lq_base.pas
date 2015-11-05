@@ -32,7 +32,8 @@ uses
   SysUtils,
   lq_impl,
   syncobjs, // TCriticalSection usage
-  variants, contnrs;
+  variants,
+  contnrs;
 
 type
   TlqCoord       = integer;     // we might use floating point coordinates in the future...

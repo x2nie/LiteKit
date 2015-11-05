@@ -6,16 +6,23 @@ unit lq_designer;
 {.$Define OiImageIndex}
 interface
 
+
 uses
-  LCLProc, LCLType, Classes, SysUtils, FormEditingIntf, LCLIntf, //Graphics,
-  ProjectIntf, lq_base, lq_main, lq_widget, lq_form, {hd_edit, hd_memo}
-  LResources;
+  //LCLProc, LCLType, Classes, SysUtils, LCLIntf, //Graphics,
+  ///ProjectIntf,
+  lq_base, lq_main, lq_widget, lq_form, lq_tab, {hd_edit, hd_memo}
+  Math, Classes, SysUtils, LCLProc, LCLIntf, LCLType, TypInfo, types, Forms, Controls,
+  LCLClasses, ProjectIntf,
+  LResources,
+  FormEditingIntf;
+
+
 
 type
 
   { TlqMediator }
 
-  TlqMediator = class(TDesignerMediator)
+  TlqMediator = class(TDesignerMediator, IlqWidgetDesigner)
   private
     FlpForm: TlqForm;
   public
@@ -32,9 +39,12 @@ type
     function ComponentIsIcon(AComponent: TComponent): boolean; override;
     function ParentAcceptsChild(Parent: TComponent;
                 Child: TComponentClass): boolean; override;
-  public
+
+  //public
+    procedure InvalidateRect(Sender: TObject);
     procedure GetObjInspNodeImageIndex(APersistent: TPersistent; var AIndex: integer); override;
-  public
+    procedure MouseDown(Button: TMouseButton; Shift: TShiftState; p: TPoint; var Handled: boolean); override;
+  //public
     // needed by TlqWidget
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -47,7 +57,8 @@ type
 procedure Register;
 
 implementation
-uses Controls, PropEdits, lq_propedits,
+uses //Controls,
+  PropEdits, lq_propedits,
   lq_canvas_designer,
   Graphics
   ;
@@ -69,6 +80,8 @@ end;
 type
     TlqWidgetAccess = class(TlqWidget)
     end;
+    TlqPageControlAccess = class(TlqPageControl)
+    end;
 
 class function TlqMediator.CreateMediator(TheOwner, aForm: TComponent
   ): TDesignerMediator;
@@ -89,6 +102,7 @@ begin
   Result:=inherited CreateMediator(TheOwner, aForm);
   Mediator:=TlqMediator(Result);
   Mediator.FlpForm:=aForm as TlqForm;
+  Mediator.FlpForm.Designer:=Mediator;
   //Mediator.m_pgfForm.show();//allocate windowhandle
 
   //Mediator.m_pgfForm.FormDesigner:=Mediator;
@@ -202,7 +216,7 @@ var Bmp : TBitmap;
       bmp.SaveToFile('c:\'+AWidget.Name+'.bmp' );
       bmp.Free;}
 ///      AWidget.Canvas.PaintTo({LCLForm.Canvas.}Handle, 0,0, AWidget.Width, AWidget.Height);
-      Draw(0,0, TlqLazCanvas(AWidget.Canvas).Bitmap);
+      Draw(0,0, TlqLazCanvas(TlqCanvasBase(AWidget.Canvas)).Bitmap);
 
       //AWidget.Canvas.EndDraw;
       //Pen.Color:=clGreen;
@@ -227,7 +241,7 @@ var Bmp : TBitmap;
         SaveHandleState;
         // clip client area
         //MoveWindowOrgEx(Handle,AWidget.BorderLeft,AWidget.BorderTop);
-        MoveWindowOrgEx(Handle,0,0);
+        MoveWindowOrg(Handle,0,0);
         //if IntersectClipRect(Handle, 0, 0, AWidget.Width-AWidget.BorderLeft-AWidget.BorderRight,
         //                     AWidget.Height-AWidget.BorderTop-AWidget.BorderBottom)<>NullRegion
         //then
@@ -240,7 +254,7 @@ var Bmp : TBitmap;
             //Child:=TlqWidget(AWidget.Components[i]);
             Child:=AWidget.Children[i];
             // clip child area
-            MoveWindowOrgEx(Handle,Child.Left,Child.Top);
+            MoveWindowOrg(Handle,Child.Left,Child.Top);
             if IntersectClipRect(Handle,0,0,Child.Width,Child.Height)<>NullRegion then
               PaintWidget(Child);
             RestoreHandleState;
@@ -308,6 +322,41 @@ begin
     and Child.InheritsFrom(TlqComponent)
     //or (not Child.InheritsFrom(TControl))
     and TlqWidget(Parent).IsContainer;
+end;
+
+procedure TlqMediator.MouseDown(Button: TMouseButton; Shift: TShiftState;
+  p: TPoint; var Handled: boolean);
+var
+  c : TComponent;
+begin
+  c := ComponentAtPos(p, TlqWidget, [dmcapfOnlyVisible,dmcapfOnlySelectable]);
+  {if c is TlqPageControl then
+  begin
+    TlqPageControlAccess(c).HandleLMouseUp(p.x, p.y, []); //todo: change to client to parent coordinate
+  end;}
+  if c <> nil then
+     self.FlpForm.WindowTitle:= c.ClassName
+  else
+    self.FlpForm.WindowTitle:= 'nil mouse down!';
+
+end;
+
+procedure TlqMediator.InvalidateRect(Sender: TObject);
+var
+  wg : TlqWidget;
+  ARect : TRect;
+begin
+  //wg := TlqWidget(Sender);
+  if (LCLForm=nil) or (not LCLForm.HandleAllocated) then
+    exit;
+
+  with self.FlpForm.GetClientRect do begin
+    ARect.Left:= left;
+    arect.Top := Top;
+    Arect.Right:=Right;
+    ARect.Bottom:=Bottom;
+  end;
+  LCLIntf.InvalidateRect(LCLForm.Handle,@ARect,False);
 end;
 
 

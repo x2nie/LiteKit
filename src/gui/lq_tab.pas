@@ -197,8 +197,8 @@ end;
 
 function TlqTabSheet.GetPageControl: TlqPageControl;
 begin
-  if Owner is TlqPageControl then
-    Result := TlqPageControl(Owner)
+  if Parent is TlqPageControl then
+    Result := TlqPageControl(Parent)
   else
     Result := nil;
 end;
@@ -356,7 +356,7 @@ begin
   begin
      i:=FPages.IndexOf(APage);
      FPages.Remove(APage);
-    APage.PageControl:=nil;
+    APage.FPageControl:=nil;
     APage.Visible:=false;
     if i = ActivePageIndex then
     begin	    
@@ -373,7 +373,7 @@ begin
   else
   begin
     FPages.Remove(APage);
-    APage.PageControl := nil;
+    APage.FPageControl := nil;
     APage.Visible := False;
     ActivePage := nil;
   end;

@@ -8,7 +8,7 @@ interface
 
 uses
   lq_descriptors, lq_designer, lq_canvas_designer, lq_dsgn_reg, 
-  LazarusPackageIntf;
+  lq_designer_menu, LazarusPackageIntf;
 
 implementation
 
@@ -17,6 +17,7 @@ begin
   RegisterUnit('lq_descriptors', @lq_descriptors.Register);
   RegisterUnit('lq_designer', @lq_designer.Register);
   RegisterUnit('lq_dsgn_reg', @lq_dsgn_reg.Register);
+  RegisterUnit('lq_designer_menu', @lq_designer_menu.Register);
 end;
 
 initialization

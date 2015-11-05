@@ -38,6 +38,11 @@ type
   TlqDragEnterEvent = procedure(Sender, Source: TObject; AMimeList: TStringList; var AMimeChoice: TlqString; var ADropAction: TlqDropAction; var Accept: Boolean) of object;
   TlqDragDropEvent = procedure(Sender, Source: TObject; X, Y: integer; AData: variant) of object;
 
+  { proxy designer for TMediatorDesigner }
+
+  IlqWidgetDesigner = interface(IUnknown)
+    procedure InvalidateRect(Sender: TObject);
+  end;
 
   { TlqWidget }
 
@@ -45,6 +50,7 @@ type
   private
     FAcceptDrops: boolean;
     FAlignRect: TlqRect;
+    FDesigner: IlqWidgetDesigner;
     FOnClick: TNotifyEvent;
     FOnDoubleClick: TMouseButtonEvent;
     FOnDragDrop: TlqDragDropEvent;
@@ -66,6 +72,7 @@ type
     FDragStartPos: TlqPoint;
     alist: TList;
     function    GetChildrenWidget(Index: integer): TlqWidget;
+    function GetDesigner: IlqWidgetDesigner;
     procedure   SetActiveWidget(const AValue: TlqWidget);
     function    IsShowHintStored: boolean;
     procedure   SetFormDesigner(const AValue: TObject);
@@ -177,7 +184,8 @@ type
     function    HasParent: Boolean; override;
     function    GetParentComponent: TComponent; override;
     property    Children[Index: integer]: TlqWidget read GetChildrenWidget; //GetChildren has been reserved
-    property    Parent: TlqWidget read FParent write SetParent;           
+    property    Parent: TlqWidget read FParent write SetParent;
+    property    Designer : IlqWidgetDesigner read GetDesigner write FDesigner;
   public
     constructor Create(AOwner: TComponent); override;
     destructor  Destroy; override;
@@ -327,6 +335,14 @@ end;
 function TlqWidget.GetChildrenWidget(Index: integer): TlqWidget;
 begin
   Result:=TlqWidget(FChilds[Index]);
+end;
+
+function TlqWidget.GetDesigner: IlqWidgetDesigner;
+begin
+  if HasParent then
+     result := Parent.Designer
+  else
+    result := FDesigner;
 end;
 
 procedure TlqWidget.SetAcceptDrops(const AValue: boolean);
@@ -1594,6 +1610,8 @@ begin
   if [csLoading, csDestroying] * self.ComponentState <> [] then
      exit;
   RePaint;
+  if Designer <> nil then
+     Designer.InvalidateRect(self);
 end;
 
 

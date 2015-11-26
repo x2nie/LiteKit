@@ -395,7 +395,7 @@ begin
   ActiveWidget := AValue;
   if AValue <> nil then
     FActivePageIndex := FPages.IndexOf(AValue);
-  RePaint;
+  Invalidate;
   DoPageChange(FActivePage);
 end;
 

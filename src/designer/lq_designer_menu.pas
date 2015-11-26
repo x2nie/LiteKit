@@ -26,7 +26,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, ComCtrls, lq_menu, ComponentEditors, //LazarusIDEStrConsts,
+  StdCtrls, ComCtrls, Menus, lq_menu, ComponentEditors, //LazarusIDEStrConsts,
   PropEdits;
 
 type
@@ -37,7 +37,10 @@ type
 
   TlqMainMenuEditorForm = class(TForm)
     Edit1: TEdit;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
     Panel1: TPanel;
+    PopupMenu1: TPopupMenu;
     Tree_menus: TTreeView;
     procedure FormCreate(Sender: TObject);
     procedure OnPersistentDeleting(APersistent: TPersistent);
